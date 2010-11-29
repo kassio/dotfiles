@@ -1,0 +1,4 @@
+require 'autotest/growl'
+require 'autotest/timestamp'
+require 'autotest/restart'
+require 'autotest/autoupdate'
