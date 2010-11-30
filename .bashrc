@@ -44,7 +44,7 @@ export MYSQL_PS1='\d\$ '
  alias h='history'
  alias hg='h | grep -i '
 # Limpar ambiente latex
- alias limpatex='rm -rf *log *aux *nav *out *toc *snm'
+ alias limpatex='rm -rf *log *aux *nav *out *toc *snm *vrb'
 # Ruby e Rails
  alias rvmd='rvm --default'
  alias r='rails'
