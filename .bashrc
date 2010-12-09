@@ -13,6 +13,8 @@ force_color_prompt=yes
 export PS1='$(__git_ps1 "(%s)")\[\033[01;34m\]\W\[\033[00m\]\[\e[032m\]\$\[\e[0m\] '
 # Visualização do Console do Mysql
 export MYSQL_PS1='\d\$ '
+# Editor padrao para algumas aplicações
+export EDITOR='vim'
 # Permissão de Novos arquivos
  umask 027
 # Comandos uteis
