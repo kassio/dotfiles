@@ -1,0 +1,24 @@
+# Potwiki - Kássio Borges
+# Home: HomePage
+# Wiki: RebootMachineWhenEverythingIsHanging
+#================================================
+
+<alt> + <print screen/sys rq> + <R> – <S> – <E> – <I> – <U> – <B>
+
+If the machine is hanging and the only help would be the power button, this key-combination will help to reboot your machine (more or less) gracefully.
+
+R – gives back control of the keyboard
+
+S – issues a sync
+
+E – sends all processes but init the term signal
+
+I – sends all processes but init the kill signal
+
+U – mounts all filesystem ro to prevent a fsck at reboot
+
+B – reboots the system
+
+Save your file before trying this out, this will reboot your machine without warning!
+
+http://en.wikipedia.org/wiki/Magic_SysRq_key

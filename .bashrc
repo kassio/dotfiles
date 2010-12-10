@@ -34,6 +34,7 @@ export EDITOR='vim'
  alias atualiza='sudo sh -c "aptitude update; sudo aptitude safe-upgrade"'
 # Vim com plugin
  alias vimt='vim +NERDTree'
+ alias wiki='vim +"call PotwikiHome()"'
  alias g='gvim'
 # Greps
  alias grep='grep --color=auto'
