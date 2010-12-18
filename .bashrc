@@ -1,7 +1,7 @@
 # Meus diretórios e variaveis uteis
-user=kassioborges
+user=kassio
 export home=/home/$user
-export docs=$home/Documentos/Dropbox
+export docs=$home/Dropbox
 export uteis=$home/uteis
 export palestrar=$docs/Palestrar
 export conheci=$home/Conhecimentos
@@ -31,7 +31,7 @@ export EDITOR='vim'
 # Reduzindo digitação
  alias sd='sudo'
 # Atualização do Sistema
- alias atualiza='sudo sh -c "aptitude update; sudo aptitude safe-upgrade"'
+ alias atualiza='sudo sh -c "aptitude update; aptitude safe-upgrade"'
 # Vim com plugin
  alias vimt='vim +NERDTree'
  alias wiki='vim +"call PotwikiHome()"'
@@ -126,7 +126,7 @@ export EDITOR='vim'
 
  # Ambiente de desenvolvimento rails
  function dr(){
-	 cd "$dev/www/rails/$1"
+	 cd "$dev/$1"
  }
  _dr()
  {
@@ -145,7 +145,7 @@ export EDITOR='vim'
 		 lastword=""
 	 fi
 
-	 flist=$( command find $dev/www/rails/$lastword \
+	 flist=$( command find $dev/$lastword \
 		 -maxdepth 1 -mindepth 1 -type d -name "${new}*" \
 		 -printf "%f\n" 2>/dev/null )
 
@@ -212,6 +212,7 @@ shopt -s histappend
 shopt -s checkwinsize
 # Facilita copia de arquivos ocultos
 shopt -s dotglob
+shopt -s extglob
 # Autocomplete 
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
