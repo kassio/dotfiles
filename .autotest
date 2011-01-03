@@ -1,9 +1,9 @@
 # ~.autotest
 require 'autotest_notification'
 SPEAKING = false
-DOOM_EDITION = false
+DOOM_EDITION = true
 BUUF = false
-PENDING = false
+PENDING = true
 STICKY = false
 SUCCESS_SOUND = ''
 FAILURE_SOUND = ''
