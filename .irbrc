@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'utility_belt'
+#require 'utility_belt'
 
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_READLINE] = true
