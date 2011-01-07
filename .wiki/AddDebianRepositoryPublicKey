@@ -1,0 +1,6 @@
+# Potwiki - Kássio Borges
+# Home: HomePage
+# Wiki: AddDebianRepositoryPublicKey
+#================================================
+
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <key id> 
