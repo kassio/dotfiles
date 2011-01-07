@@ -1,5 +1,5 @@
 # Meus diretórios e variaveis uteis
-user=kassio
+user=kassioborges
 export home=/home/$user
 export docs=$home/Dropbox
 export uteis=$home/uteis
