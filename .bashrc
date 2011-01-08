@@ -1,12 +1,12 @@
-# Meus diretórios e variaveis uteis
+# Meus diretórios e variaveis useful
 user=kassioborges
 export home=/home/$user
 export docs=$home/Dropbox
-export uteis=$home/uteis
+export useful=$home/Useful
 export palestrar=$docs/Palestrar
 export conheci=$home/Conhecimentos
 export facul=$docs/Faculdade/ufg/2010/02
-export dev=$home/dev
+export dev=$home/Dev
 # Forçar a colorização do terminal
 force_color_prompt=yes
 # Visualisação do Console
@@ -17,7 +17,7 @@ export MYSQL_PS1='\d\$ '
 export EDITOR='vim'
 # Permissão de Novos arquivos
  umask 027
-# Comandos uteis
+# Comandos useful
  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 # Ls colorido e outro falicitadores de listagem arquivos
  alias ls='ls --color=auto'
@@ -58,11 +58,11 @@ export EDITOR='vim'
  alias databr='date +"%A, %d de %B de %Y"'
  alias dev="cd $dev"
  alias www="cd $dev/www"
- # Uteis
- function uteis(){
-	 cd "$uteis/$1"
+ # useful
+ function useful(){
+	 cd "$useful/$1"
  }
- _uteis()
+ _useful()
  {
 	 local cur prev opts flist lastword new
 	 COMPREPLY=()
@@ -79,7 +79,7 @@ export EDITOR='vim'
 		 lastword=""
 	 fi
 
-	 flist=$( command find $uteis/$lastword \
+	 flist=$( command find $useful/$lastword \
 		 -maxdepth 1 -mindepth 1 -type d -name "${new}*" \
 		 -printf "%f\n" 2>/dev/null )
 
@@ -89,7 +89,7 @@ export EDITOR='vim'
 		 -S/ -W "${flist}" -- ${cur##*/}) )
 	 return 0
  }
- complete -F _uteis -o nospace uteis
+ complete -F _useful -o nospace useful
 
  # Ambiente de desenvolvimento rails
  function facul(){
