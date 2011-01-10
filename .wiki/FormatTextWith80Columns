@@ -1,0 +1,11 @@
+# Potwiki - Kássio Borges
+# Home: HomePage
+# Wiki: FormatTextWith80Columns
+#================================================
+
+set no filetype
+  :set ft=
+set column size
+  :set tw=80
+format
+  :normal gggqG
