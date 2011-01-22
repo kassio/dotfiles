@@ -1,6 +1,5 @@
 [global_config]
   enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
-  window_state = maximise
   handle_size = 1
 [keybindings]
   switch_to_tab_10 = <Alt>0
@@ -30,4 +29,6 @@
     [[[window0]]]
       type = Window
       parent = ""
+      size = 1250, 670
+      position = 80:50
 [plugins]
