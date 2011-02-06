@@ -1,7 +1,8 @@
 # Potwiki - Kássio Borges
 # Home: HomePage
-# Wiki: VimStuffs
+# Wiki: SpecialCharacters
 #================================================
 
-FormatTextWith80Columns
-SpecialCharacters
+To show table with special characters just
+
+:digraphs
