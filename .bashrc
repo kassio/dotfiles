@@ -11,6 +11,12 @@ export dev=$home/Dev
 force_color_prompt=yes
 # Visualisação do Console
 export PS1='$(__git_ps1 "(%s)")\[\033[01;34m\]\W\[\033[00m\]\[\e[032m\]\$\[\e[0m\] '
+# git
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export GIT_PS1_SHOWTRACKEDFILES=true
+alias "gitl"="git log --oneline --decorate"
+alias "gits"="git status -s -b"
 # Visualização do Console do Mysql
 export MYSQL_PS1='\d\$ '
 # Editor padrao para algumas aplicações
