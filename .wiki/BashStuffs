@@ -1,0 +1,16 @@
+# Potwiki - Kássio Borges
+# Home: HomePage
+# Wiki: BashStuffs
+#================================================
+
+Excluding some files on commands
+
+$ ls
+teste1   teste2  teste4  teste6  teste8
+teste10  teste3  teste5  teste7  teste9
+
+$ ls *[8,9]
+teste8  teste9
+
+$ ls *[!8,9]
+teste1  teste10  teste2  teste3  teste4  teste5  teste6  teste7
