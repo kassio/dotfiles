@@ -1,0 +1,17 @@
+[use]
+	name = Kássio Borges
+	email = kassioborgesm@gmail.com
+
+[core]
+	excludesfile = ~/.gitignore
+	editor = vim
+[help]
+	format = web
+	browser = gc
+	autocorrect = 1
+[browser "gc"]
+	cmd = google-chrome %s
+[push]
+	default = current
+[branch]
+	autosetuprebase = always

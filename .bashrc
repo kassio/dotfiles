@@ -14,7 +14,8 @@ export PS1='$(__git_ps1 "(%s)")\[\033[01;34m\]\W\[\033[00m\]\[\e[032m\]\$\[\e[0m
 # git
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWSTASHSTATE=true
-export GIT_PS1_SHOWTRACKEDFILES=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWUPSTREAM=auto
 alias "gitl"="git log --oneline --decorate"
 alias "gits"="git status -s -b"
 # Visualização do Console do Mysql
