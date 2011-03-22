@@ -15,3 +15,13 @@
 	default = current
 [branch]
 	autosetuprebase = always
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+	grep = auto
+	ui = auto
+	pager = 1
+[color "decorate"]
+	branch = 1
