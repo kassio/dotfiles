@@ -5,7 +5,7 @@ export docs=$home/Dropbox
 export useful=$home/Useful
 export palestrar=$docs/Palestrar
 export conheci=$home/Conhecimentos
-export facul=$docs/Faculdade/2011/summer
+export facul=$docs/Faculdade/2011/01
 export dev=$home/Dev
 # Forçar a colorização do terminal
 force_color_prompt=yes
