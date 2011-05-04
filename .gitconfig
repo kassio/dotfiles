@@ -25,3 +25,6 @@
 	pager = 1
 [color "decorate"]
 	branch = 1
+[difftool]
+	tool = vimdiff
+	prompt = false
