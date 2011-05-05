@@ -47,6 +47,7 @@ export EDITOR='vim'
  alias grep='grep --color=auto'
  alias egrep='egrep --color=auto'
  alias fgrep='fgrep --color=auto'
+ export GREP_OPTIONS="--exclude-dir=\.svn"
 # Processos
  alias psu="ps ax -u $USER -o pid,%cpu,%mem,bsdtime,command"
  alias psg='psu | grep -i '

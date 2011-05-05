@@ -1,5 +1,6 @@
 [global_config]
   enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  window_state = maximise
   handle_size = 1
   tab_position = left
 [keybindings]
@@ -17,11 +18,13 @@
   switch_to_tab_9 = <Alt>9
 [profiles]
   [[default]]
+    palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
     background_darkness = 0.92
     background_type = transparent
-    scrollback_infinite = True
+    foreground_color = "#f5f5f5"
     show_titlebar = False
-    foreground_color = "#ffffff"
+    background_color = "#121212"
+    scrollback_infinite = True
 [layouts]
   [[default]]
     [[[child1]]]

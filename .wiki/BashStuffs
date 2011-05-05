@@ -3,7 +3,7 @@
 # Wiki: BashStuffs
 #================================================
 
-Excluding some files on commands
+## Excluding some files on commands
 
 $ ls
 teste1   teste2  teste4  teste6  teste8
@@ -14,3 +14,7 @@ teste8  teste9
 
 $ ls *[!8,9]
 teste1  teste10  teste2  teste3  teste4  teste5  teste6  teste7
+
+## Something change kernel params to up user watches
+## tail -f file problem
+# sysctl -w fs.inotify.max_user_watches=16384
