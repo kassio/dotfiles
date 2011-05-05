@@ -18,6 +18,8 @@ export GIT_PS1_SHOWUNTRACKEDFILES=true
 export GIT_PS1_SHOWUPSTREAM=auto
 alias "gitl"="git log --oneline --decorate"
 alias "gits"="git status -s -b"
+# svn rails
+. ~/.bash_aliases
 # Visualização do Console do Mysql
 export MYSQL_PS1='\d\$ '
 # Editor padrao para algumas aplicações
@@ -238,3 +240,4 @@ complete -A user       su mail finger
 #rvm
  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
  [[ -r "$HOME/.rvm/scriptscompletion" ]] && source "$HOME/.rvm/scripts/completion"
+

@@ -1,5 +1,5 @@
 [user]
-	name = Kássio Borges
+	name = Kássio Borges de Melo
 	email = kassioborgesm@gmail.com
 
 [core]
@@ -25,3 +25,6 @@
 	pager = 1
 [color "decorate"]
 	branch = 1
+[difftool]
+	tool = vimdiff
+	prompt = false
