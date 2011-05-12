@@ -1,9 +1,7 @@
 require 'rubygems'
 begin
   # load wirble
-  %x{gem install 'wirble' --no-ri --no-rdoc} unless Gem.available?('wirble')
-  Gem.refresh 
-  require 'wirble'
+  require Gem.all_load_paths.grep(/wirble/).first + '/wirble'
   # start wirble (with color)
   Wirble.init
   Wirble.colorize
@@ -19,7 +17,8 @@ end
 ARGV.concat ["--readline", "--prompt-mode", "simple"]
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_READLINE] = true
-IRB.conf[:LOAD_MODULES] = [] unless IRB.conf.key?(:LOAD_MODULES)
+IRB.conf[:VERBOSE] = true
+IRB.conf[:PROMPT_MODE] = :SIMPLE
 
 class Object
   def local_methods
