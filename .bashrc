@@ -6,7 +6,7 @@ export useful=$home/Useful
 export palestrar=$docs/Palestrar
 export conheci=$home/Conhecimentos
 export facul=$docs/Faculdade/2011/01
-export dev=$docs/Dev
+export dev=$docs/Development
 
 # Forçar a colorização do terminal
 force_color_prompt=yes

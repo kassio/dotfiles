@@ -1,7 +1,7 @@
 [global_config]
   window_state = maximise
   handle_size = 1
-  tab_position = bottom
+  tab_position = left
 [keybindings]
   switch_to_tab_4 = <Alt>4
   switch_to_tab_5 = <Alt>5
