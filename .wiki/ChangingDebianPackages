@@ -1,0 +1,13 @@
+# Potwiki - Kássio Borges
+# Home: HomePage
+# Wiki: ChangingDebianPackages
+#================================================
+
+Extract
+mkdir -p extract/DEBIAN
+dpkg-deb -x nautilus-dropbox_0.6.7_i386.deb extract/
+dpkg-deb -e nautilus-dropbox_0.6.7_i386.deb extract/DEBIAN/
+
+Rebuild
+mkdir build
+dpkg-deb -b extract/ build/

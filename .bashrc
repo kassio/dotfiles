@@ -3,9 +3,9 @@ user=kassioborges
 export home=/home/$user
 export docs=$home/Dropbox
 export useful=$home/Useful
-export palestrar=$docs/Palestrar
-export conheci=$home/Conhecimentos
-export facul=$docs/Faculdade/2011/01
+export lecture=$docs/Lectures
+export know=$home/Knowledge
+export college=$docs/College/2011/02
 export dev=$docs/Development
 
 # Forçar a colorização do terminal
@@ -160,11 +160,11 @@ _useful()
 complete -F _useful -o nospace useful
 
 # Ambiente de desenvolvimento rails
-function facul(){
- cd "$facul/$1"
+function college(){
+ cd "$college/$1"
 }
 
-_facul()
+_college()
 {
  local cur prev opts flist lastword new
  COMPREPLY=()
@@ -181,7 +181,7 @@ _facul()
    lastword=""
  fi
 
- flist=$( command find $facul/$lastword \
+ flist=$( command find $college/$lastword \
    -maxdepth 1 -mindepth 1 -type d -name "${new}*" \
    -printf "%f\n" 2>/dev/null )
 
@@ -191,7 +191,7 @@ _facul()
    -S/ -W "${flist}" -- ${cur##*/}) )
  return 0
 }
-complete -F _facul -o nospace facul 
+complete -F _college -o nospace college 
 
 # Ambiente de desenvolvimento rails
 function dr(){

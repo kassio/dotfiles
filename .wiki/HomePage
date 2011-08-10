@@ -6,5 +6,6 @@
 BashStuffs
 RebootMachineWhenEverythingIsHanging
 AddDebianRepositoryPublicKey
+ChangingDebianPackages
 ResetingMysqlRootPassword
 VimStuffs
