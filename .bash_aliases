@@ -1,8 +1,8 @@
 # svn
-alias svnup="svn up; rake db:migrate 2&>/dev/null; rake db:seed 2&>/dev/null"
+alias rsvnu="svn up; rake db:migrate 2&>/dev/null; rake db:seed 2&>/dev/null; bundle 2&>/dev/null"
 
 # git
-alias "gitl"="git log --oneline --decorate"
+alias "gitl"="git log --oneline --decorate=full"
 alias "gits"="git status -s -b"
 
 # Ls colorido e outro falicitadores de listagem arquivos
@@ -26,11 +26,10 @@ alias wiki='vim +"call PotwikiHome()"'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
-export GREP_OPTIONS="--exclude-dir=\.svn"
+export GREP_OPTIONS=" --exclude-dir=\.svn"
 
 # Processos
-alias psu="ps ax -u $USER -o pid,%cpu,%mem,bsdtime,command"
-alias psg='psu | grep -i '
+alias psg='ps aux | grep -i '
 
 # Historico de comandos
 alias h='history'
@@ -42,7 +41,5 @@ alias limpatex='rm -rf *log *aux *nav *out *toc *snm *vrb'
 alias rvmd='rvm --default'
 alias r='rails'
 
-# Locais
-alias github="cd $github"
-alias palestrar="cd $palestrar"
-alias conheci="cd $conheci"
+# Key
+alias addkey="sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys "

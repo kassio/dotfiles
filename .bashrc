@@ -1,9 +1,12 @@
+# alias
+. ~/.bash_aliases
+
 # Meus diretórios e variaveis useful
 user=kassioborges
 export home=/home/$user
 export docs=$home/Dropbox
 export useful=$home/Useful
-export lecture=$docs/Lectures
+export lectures=$docs/Lectures
 export know=$home/Knowledge
 export college=$docs/College/2011/02
 export dev=$docs/Development
@@ -28,49 +31,6 @@ export EDITOR='vim'
 
 # Permissão de Novos arquivos
  umask 027
-
-# Load Colors
- test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-
-# Altera titulo do terminal
-function xtitle(){
-    case "$TERM" in
-        *term | rxvt)
-            echo -n -e "\033]0;$*\007" ;;
-        *)  
-            ;;
-    esac
-}
-
-# Função para mudar o titulo da janela com qnd executa o 'man'
-function man(){
-		xtitle The \'$(basename $1|tr -d .[:digit:])\' manual
-		command man "$1"
-    xtitle Terminal
-}
-
-function upservices(){
-	for serv in "$@"; do
-		sudo service $serv start	
-	done
-}
-
-function downservices(){
-	for serv in "$@"; do
-		sudo service $serv stop
-	done
-}
-
-# Aucomplete do upservices e downservices
-_servicecomplete(){
-		COMPREPLY=($(compgen -W "` rcconf -l | awk '{print $1}'`" -- ${COMP_WORDS[COMP_CWORD]}))
-}
-
-complete -o default -o nospace -F _servicecomplete upservices
-complete -o default -o nospace -F _servicecomplete downservices
-
-# Atalho para mudar o titulo da janela quando executa o htop
- alias htop="xtitle Htop; htop; xtitle Terminal"
 
 # Auto-correção ao executar cd
 shopt -s cdspell
@@ -107,23 +67,6 @@ complete -A enabled    builtin
 complete -A alias      alias unalias
 complete -A function   function
 complete -A user       su mail finger
-
-export COMP_WORDBREAKS=${COMP_WORDBREAKS/\:/}
-
-_rakecomplete() {
-  COMPREPLY=($(compgen -W "`rake -s -T 2>/dev/null | awk '{{print $2}}'`" -- ${COMP_WORDS[COMP_CWORD]}))
-  return 0
-}
-
-_capcomplete() {
-  COMPREPLY=($(compgen -W "`cap  -T  2>/dev/null| awk '{{ if ( $3 ~ /\#/ ) print $2}}'`" -- ${COMP_WORDS[COMP_CWORD]}))
-  return 0
-}
-
-_thorcomplete() {
-  COMPREPLY=($(compgen -W "`THOR_COLUMNS=1000 thor -T 2>/dev/null| awk '{{ if ( $2 ~ /./ ) print $2}}'`" -- ${COMP_WORDS[COMP_CWORD]}))
-  return 0
-}
 
 # useful
 function useful(){
@@ -235,5 +178,3 @@ complete -o default -o nospace -F _thorcomplete thor
  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
  [[ -r "$HOME/.rvm/scriptscompletion" ]] && source "$HOME/.rvm/scripts/completion"
 
-# alias
-. ~/.bash_aliases
