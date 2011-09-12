@@ -20,7 +20,7 @@ alias ..='cd ..'
 alias atualiza='sudo sh -c "aptitude update; aptitude safe-upgrade"'
 
 # Vim com plugin
-alias wiki='vim +"call PotwikiHome()"'
+alias wiki="vim -c 'call PotwikiHome()'"
 
 # Greps
 alias grep='grep --color=auto'
