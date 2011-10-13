@@ -43,6 +43,11 @@ HISTCONTROL=ignoreboth
 HISTFILESIZE=10000000000
 HISTSIZE=1000000
 
+# Melhoria na busca no histórico
+# desativando o stop = ctrl ^S
+stty -ixon
+
+
 # Apenda historicos do usuario
 shopt -s histappend
 
