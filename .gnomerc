@@ -1,4 +1,0 @@
-export WINDOW_MANAGER=/usr/bin/compiz
-# Multitouch mouse configs
-synclient TapButton1=1 TapButton2=2 TapButton3=3 ClickFinger1=1 ClickFinger2=2 ClickFinger3=3 VertTwoFingerScroll=1 HorizTwoFingerScroll=2
-
