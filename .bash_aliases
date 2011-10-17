@@ -26,7 +26,7 @@ alias wiki="vim -c 'call PotwikiHome()'"
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
-export GREP_OPTIONS=" --exclude-dir=\.svn"
+export GREP_OPTIONS=" --exclude-dir=\.svn --exclude *swp,*swo"
 
 # Processos
 alias psg='ps aux | grep -i '

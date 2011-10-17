@@ -1,12 +1,10 @@
 require 'rubygems'
 begin
-  # load wirble
-  require 'wirble'
-  # start wirble (with color)
-  Wirble.init
-  Wirble.colorize
-rescue LoadError => err
-  warn "Couldn't load Wirble: #{err}"
+  require "pry"
+  Pry.start
+  exit
+rescue LoadError => e
+  warn "=> Unable to load pry"
 end
 
 ARGV.concat ["--readline", "--prompt-mode", "simple"]
@@ -15,3 +13,4 @@ IRB.conf[:USE_READLINE] = true
 IRB.conf[:PROMPT_MODE] = :SIMPLE
 
 puts 'Loaded ~/.irbrc'
+
