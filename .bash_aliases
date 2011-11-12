@@ -40,7 +40,7 @@ alias limpatex='rm -rf *log *aux *nav *out *toc *snm *vrb'
 # Ruby e Rails
 alias rvmd='rvm --default'
 alias r='rails'
-alias bx='bundle exec rake'
+alias bx='bundle exec '
 
 # Key
 alias addkey="sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys "

@@ -15,7 +15,7 @@ export dev=$docs/Development
 force_color_prompt=yes
 
 # Visualisação do Console
-export PS1='$(__git_ps1 "(%s)")\[\033[01;34m\]\W\[\033[00m\]\[\e[032m\]\$\[\e[0m\] '
+export PS1='$(__git_ps1 "(\[\e[1;33m\]%s\[\e[0m\])")\[\033[01;34m\]\W\[\033[00m\]\[\e[032m\]\$\[\e[0m\] '
 
 # git
 export GIT_PS1_SHOWDIRTYSTATE=true
@@ -30,7 +30,7 @@ export MYSQL_PS1='\d\$ '
 export EDITOR='vim'
 
 # Permissão de Novos arquivos
- umask 027
+umask 027
 
 # Auto-correção ao executar cd
 shopt -s cdspell
@@ -58,9 +58,7 @@ shopt -s dotglob
 shopt -s extglob
 
 # Autocomplete 
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-fi
+. /etc/bash_completion
 
 # Melhorias no autocomplete
 set show-all-if-ambiguous on
@@ -74,103 +72,103 @@ complete -A user       su mail finger
 
 # useful
 function useful(){
- cd "$useful/$1"
+cd "$useful/$1"
 }
 
 _useful()
 {
- local cur prev opts flist lastword new
- COMPREPLY=()
- cur="${COMP_WORDS[COMP_CWORD]}"
- prev="${COMP_WORDS[COMP_CWORD-1]}"
- lastword="${COMP_WORDS[@]: -1}"
+  local cur prev opts flist lastword new
+  COMPREPLY=()
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  prev="${COMP_WORDS[COMP_CWORD-1]}"
+  lastword="${COMP_WORDS[@]: -1}"
 
- if [[ $lastword =~ / ]]
- then
-   new="${lastword##*/}"      # get the part after the slash
-   lastword="${lastword%/*}"  # and the part before it
- else
-   new="${lastword}"
-   lastword=""
- fi
+  if [[ $lastword =~ / ]]
+  then
+    new="${lastword##*/}"      # get the part after the slash
+    lastword="${lastword%/*}"  # and the part before it
+  else
+    new="${lastword}"
+    lastword=""
+  fi
 
- flist=$( command find $useful/$lastword \
-   -maxdepth 1 -mindepth 1 -type d -name "${new}*" \
-   -printf "%f\n" 2>/dev/null )
+  flist=$( command find $useful/$lastword \
+    -maxdepth 1 -mindepth 1 -type d -name "${new}*" \
+    -printf "%f\n" 2>/dev/null )
 
- # if we've built up a path, prefix it to 
- #   the proposed completions: ${var:+val}
- COMPREPLY=( $(compgen ${lastword:+-P"${lastword}/"} \
-   -S/ -W "${flist}" -- ${cur##*/}) )
- return 0
+  # if we've built up a path, prefix it to 
+  #   the proposed completions: ${var:+val}
+  COMPREPLY=( $(compgen ${lastword:+-P"${lastword}/"} \
+    -S/ -W "${flist}" -- ${cur##*/}) )
+  return 0
 }
 complete -F _useful -o nospace useful
 
 # Ambiente de desenvolvimento rails
 function college(){
- cd "$college/$1"
+cd "$college/$1"
 }
 
 _college()
 {
- local cur prev opts flist lastword new
- COMPREPLY=()
- cur="${COMP_WORDS[COMP_CWORD]}"
- prev="${COMP_WORDS[COMP_CWORD-1]}"
- lastword="${COMP_WORDS[@]: -1}"
+  local cur prev opts flist lastword new
+  COMPREPLY=()
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  prev="${COMP_WORDS[COMP_CWORD-1]}"
+  lastword="${COMP_WORDS[@]: -1}"
 
- if [[ $lastword =~ / ]]
- then
-   new="${lastword##*/}"      # get the part after the slash
-   lastword="${lastword%/*}"  # and the part before it
- else
-   new="${lastword}"
-   lastword=""
- fi
+  if [[ $lastword =~ / ]]
+  then
+    new="${lastword##*/}"      # get the part after the slash
+    lastword="${lastword%/*}"  # and the part before it
+  else
+    new="${lastword}"
+    lastword=""
+  fi
 
- flist=$( command find $college/$lastword \
-   -maxdepth 1 -mindepth 1 -type d -name "${new}*" \
-   -printf "%f\n" 2>/dev/null )
+  flist=$( command find $college/$lastword \
+    -maxdepth 1 -mindepth 1 -type d -name "${new}*" \
+    -printf "%f\n" 2>/dev/null )
 
- # if we've built up a path, prefix it to 
- #   the proposed completions: ${var:+val}
- COMPREPLY=( $(compgen ${lastword:+-P"${lastword}/"} \
-   -S/ -W "${flist}" -- ${cur##*/}) )
- return 0
+  # if we've built up a path, prefix it to 
+  #   the proposed completions: ${var:+val}
+  COMPREPLY=( $(compgen ${lastword:+-P"${lastword}/"} \
+    -S/ -W "${flist}" -- ${cur##*/}) )
+  return 0
 }
 complete -F _college -o nospace college 
 
 # Ambiente de desenvolvimento rails
 function dr(){
- cd "$dev/$1"
+cd "$dev/$1"
 }
 
 _dr()
 {
- local cur prev opts flist lastword new
- COMPREPLY=()
- cur="${COMP_WORDS[COMP_CWORD]}"
- prev="${COMP_WORDS[COMP_CWORD-1]}"
- lastword="${COMP_WORDS[@]: -1}"
+  local cur prev opts flist lastword new
+  COMPREPLY=()
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  prev="${COMP_WORDS[COMP_CWORD-1]}"
+  lastword="${COMP_WORDS[@]: -1}"
 
- if [[ $lastword =~ / ]]
- then
-   new="${lastword##*/}"      # get the part after the slash
-   lastword="${lastword%/*}"  # and the part before it
- else
-   new="${lastword}"
-   lastword=""
- fi
+  if [[ $lastword =~ / ]]
+  then
+    new="${lastword##*/}"      # get the part after the slash
+    lastword="${lastword%/*}"  # and the part before it
+  else
+    new="${lastword}"
+    lastword=""
+  fi
 
- flist=$( command find $dev/$lastword \
-   -maxdepth 1 -mindepth 1 -type d -name "${new}*" \
-   -printf "%f\n" 2>/dev/null )
+  flist=$( command find $dev/$lastword \
+    -maxdepth 1 -mindepth 1 -type d -name "${new}*" \
+    -printf "%f\n" 2>/dev/null )
 
- # if we've built up a path, prefix it to 
- #   the proposed completions: ${var:+val}
- COMPREPLY=( $(compgen ${lastword:+-P"${lastword}/"} \
-   -S/ -W "${flist}" -- ${cur##*/}) )
- return 0
+  # if we've built up a path, prefix it to 
+  #   the proposed completions: ${var:+val}
+  COMPREPLY=( $(compgen ${lastword:+-P"${lastword}/"} \
+    -S/ -W "${flist}" -- ${cur##*/}) )
+  return 0
 }
 complete -F _dr -o nospace dr
 
@@ -179,9 +177,8 @@ complete -o default -o nospace -F _capcomplete cap
 complete -o default -o nospace -F _thorcomplete thor
 
 #rvm
- [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
- [[ -r "$HOME/.rvm/scriptscompletion" ]] && source "$HOME/.rvm/scripts/completion"
-
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+[[ -r "$HOME/.rvm/scriptscompletion" ]] && source "$HOME/.rvm/scripts/completion"
 
 # Colorify less
 export LESS_TERMCAP_mb=$'\E[01;31m'
