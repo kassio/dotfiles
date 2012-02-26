@@ -9,7 +9,7 @@ export useful=$home/Useful
 export lectures=$docs/Lectures
 export know=$home/Knowledge
 export college=$docs/College/2011/02
-export dev=$docs/Development
+export dev=$home/Development
 
 # Forçar a colorização do terminal
 force_color_prompt=yes
@@ -35,6 +35,9 @@ umask 027
 # Auto-correção ao executar cd
 shopt -s cdspell
 
+# Navegar em diretórios utilizando variaveis de ambiente
+shopt -s cdable_vars
+
 # Melhorias no histórico
 HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 HISTCONTROL=ignoreboth
@@ -52,10 +55,6 @@ shopt -s histappend
 
 # Verifica o tamanho das janelas para adaptar o tamanho das linhas de comando
 shopt -s checkwinsize
-
-# Facilita copia de arquivos ocultos
-shopt -s dotglob
-shopt -s extglob
 
 # Autocomplete 
 . /etc/bash_completion
@@ -176,10 +175,6 @@ complete -o default -o nospace -F _rakecomplete rake
 complete -o default -o nospace -F _capcomplete cap
 complete -o default -o nospace -F _thorcomplete thor
 
-#rvm
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-[[ -r "$HOME/.rvm/scriptscompletion" ]] && source "$HOME/.rvm/scripts/completion"
-
 # Colorify less
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;37m'
@@ -188,3 +183,7 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
+
+# rbenv
+export PATH="$home/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
