@@ -1,3 +1,4 @@
+[[ $- != *i* ]] && return
 # alias
 . ~/.bash_aliases
 
@@ -13,6 +14,7 @@ export dev=$home/Development
 
 # Forçar a colorização do terminal
 force_color_prompt=yes
+export TERM=screen-256color
 
 # Visualisação do Console
 export PS1='$(__git_ps1 "(\[\e[1;33m\]%s\[\e[0m\])")\[\033[01;34m\]\W\[\033[00m\]\[\e[032m\]\$\[\e[0m\] '
@@ -187,3 +189,6 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 # rbenv
 export PATH="$home/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+# tmux
+[[ $TERM != "screen" ]] && tmux 2&>/dev/null && exit
