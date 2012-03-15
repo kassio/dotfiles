@@ -191,4 +191,4 @@ export PATH="$home/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # tmux
-[[ $TERM != "screen" ]] && tmux 2&>/dev/null && exit
+[ -z $TMUX ] && tmux && exit
