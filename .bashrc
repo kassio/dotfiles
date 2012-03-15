@@ -9,7 +9,7 @@ export docs=$home/Dropbox
 export useful=$home/Useful
 export lectures=$docs/Lectures
 export know=$home/Knowledge
-export college=$docs/College/2011/02
+export college=$docs/College/2012
 export dev=$home/Development
 
 # Forçar a colorização do terminal
