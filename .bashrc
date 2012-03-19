@@ -189,6 +189,3 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 # rbenv
 export PATH="$home/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
-
-# tmux
-[ -z $TMUX ] && tmux && exit
