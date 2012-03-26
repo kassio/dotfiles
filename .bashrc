@@ -17,7 +17,11 @@ force_color_prompt=yes
 export TERM=screen-256color
 
 # Visualisação do Console
-export PS1='$(__git_ps1 "(\[\e[1;33m\]%s\[\e[0m\])")\[\033[01;34m\]\W\[\033[00m\]\[\e[032m\]\$\[\e[0m\] '
+if [[ ${EUID} == 0 ]] ; then
+  export PS1='$(__git_ps1 "(\[\e[1;33m\]%s\[\e[0m\])")\[\033[01;34m\]\W\[\033[01;31m\]\$\[\e[0m\] '
+else
+  export PS1='$(__git_ps1 "(\[\e[1;33m\]%s\[\e[0m\])")\[\033[01;34m\]\W\[\033[00m\]\[\e[032m\]\$\[\e[0m\] '
+fi
 
 # git
 export GIT_PS1_SHOWDIRTYSTATE=true
