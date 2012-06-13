@@ -6,7 +6,7 @@ alias "gitl"="git log --oneline --decorate=full"
 alias "gits"="git status -s -b"
 
 # Ls colorido e outro falicitadores de listagem arquivos
-alias ls='ls --color=auto'
+alias ls='ls -G'
 alias ll='ls -lh'
 alias l='ls -A'
 alias la='ls -lhA'
@@ -23,10 +23,9 @@ alias atualiza='sudo sh -c "aptitude update; aptitude safe-upgrade"'
 alias wiki="vim -c 'call PotwikiHome()'"
 
 # Greps
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
-export GREP_OPTIONS=" --exclude-dir=\.svn --exclude *swp,*swo"
+alias grep='grep --colour=auto'
+alias egrep='egrep --colour=auto'
+alias fgrep='fgrep --colour=auto'
 
 # Processos
 alias psg='ps aux | grep -i '
@@ -48,3 +47,6 @@ alias addkey="sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys "
 # Xoom
 alias mount_xoom="sudo mtpfs /media/xoom -o allow_other"
 alias umount_xoom="sudo fusermount -u /media/xoom"
+
+# mvim
+alias vim='mvim -v'
