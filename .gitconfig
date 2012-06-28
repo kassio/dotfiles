@@ -10,11 +10,9 @@
 	browser = gc
 	autocorrect = 1
 [browser "gc"]
-	cmd = google-chrome %s
+	cmd = open -a Google-chrome %s
 [push]
 	default = current
-[branch]
-	autosetuprebase = always
 [color]
 	branch = auto
 	diff = auto
