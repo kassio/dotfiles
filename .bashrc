@@ -10,9 +10,18 @@ export dev=$home/Development
 force_color_prompt=yes
 export TERM=screen-256color
 
+# git
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWUPSTREAM=auto
+
+# Visualização do Console do Mysql
+export MYSQL_PS1='\d\$ '
+
 # Visualisação do Console
-BLUE='\[\e[01;34m\]'
-RED='\[\e[01;31m\]'
+BLUE='\[\e[1;34m\]'
+RED='\[\e[1;31m\]'
 YELLOW='\e[1;33m'
 WHITE='\[\e[0m\]'
 GREEN='\[\e[1;32m\]'
@@ -22,14 +31,22 @@ else
   export PS1='$(__git_ps1 "$YELLOW(%s)")'$BLUE'\W'$GREEN'\$'$WHITE' '
 fi
 
-# git
-export GIT_PS1_SHOWDIRTYSTATE=true
-export GIT_PS1_SHOWSTASHSTATE=true
-export GIT_PS1_SHOWUNTRACKEDFILES=true
-export GIT_PS1_SHOWUPSTREAM=auto
+# rbenv
+export PATH="$home/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
-# Visualização do Console do Mysql
-export MYSQL_PS1='\d\$ '
+source ~/.rbenv/completions/rbenv.bash
+
+# prompt with ruby version
+__rbenv_ps1 () {
+  rbenv_ruby_version=`rbenv version | sed -e 's/-.*//'`
+  printf $rbenv_ruby_version
+}
+
+ORANGE='\[\e[33m\]'
+if [ `which rbenv` ]; then
+  export PS1=$ORANGE'[$(__rbenv_ps1)]'$PS1
+fi
 
 # Editor padrao para algumas aplicações
 export EDITOR='vim'
@@ -96,7 +113,3 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
-
-# rbenv
-export PATH="$home/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
