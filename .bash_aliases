@@ -47,6 +47,3 @@ alias addkey="sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys "
 # Xoom
 alias mount_xoom="sudo mtpfs /media/xoom -o allow_other"
 alias umount_xoom="sudo fusermount -u /media/xoom"
-
-# mvim
-alias vim='mvim -v'
