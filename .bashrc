@@ -5,6 +5,7 @@
 user=kassio
 export home=/Users/$user
 export dev=$home/Development
+export autoseg_projects=$home/Development/AutoSeg/Projects
 
 # Forçar a colorização do terminal
 force_color_prompt=yes
@@ -104,6 +105,15 @@ _dp() {
   COMPREPLY=( $( compgen -S/ -d $dev/$cur | cut -b $((${#dev}+2))- ) )
 }
 complete -o nospace -F _dp dp
+
+asp() { cd $autoseg_projects/$1; }
+
+_asp() {
+  local cur
+  cur=${COMP_WORDS[COMP_CWORD]}
+  COMPREPLY=( $( compgen -S/ -d $autoseg_projects/$cur | cut -b $((${#autoseg_projects}+2))- ) )
+}
+complete -o nospace -F _asp asp
 
 # Colorify less
 export LESS_TERMCAP_mb=$'\E[01;31m'
