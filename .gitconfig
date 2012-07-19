@@ -1,28 +1,34 @@
 [user]
-	name = Kássio Borges de Melo
-	email = kassioborgesm@gmail.com
-
+  name = Kássio Borges
+  email = kassioborgesm@gmail.com
 [core]
-	excludesfile = ~/.gitignore
-	editor = vim
+  excludesfile = ~/.gitignore
+  editor = vim
 [help]
-	format = web
-	browser = gc
-	autocorrect = 1
+  format = web
+  browser = gc
+  autocorrect = 1
 [browser "gc"]
-	cmd = open -a Google-chrome %s
+  cmd = open -a Google-chrome %s
 [push]
-	default = current
+  default = current
 [color]
-	branch = auto
-	diff = auto
-	interactive = auto
-	status = auto
-	grep = auto
-	ui = auto
-	pager = 1
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+  grep = auto
+  ui = auto
+  pager = 1
 [color "decorate"]
-	branch = 1
+  branch = 1
 [difftool]
-	tool = vimdiff
-	prompt = false
+  tool = vimdiff
+  prompt = false
+[format]
+  pretty = oneline
+[alias]
+  l = log --oneline --decorate=full
+  s = status -s -b
+  tl = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Creset - %Cgreen%cr%Creset - %s%Creset' --abbrev-commit
+  tree = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Creset - %Cgreen%cr%Creset - %s%Creset' --abbrev-commit --graph
