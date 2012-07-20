@@ -6,10 +6,10 @@
   editor = vim
 [help]
   format = web
-  browser = gc
+  browser = GC
   autocorrect = 1
-[browser "gc"]
-  cmd = open -a Google-chrome %s
+[browser "GC"]
+  cmd = open
 [push]
   default = current
 [color]
