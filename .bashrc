@@ -17,26 +17,11 @@ export GIT_PS1_SHOWSTASHSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
 export GIT_PS1_SHOWUPSTREAM=auto
 
-# Visualização do Console do Mysql
-export MYSQL_PS1='\d\$ '
-
-# Visualisação do Console
-BLUE='\[\e[1;34m\]'
-RED='\[\e[1;31m\]'
-YELLOW='\e[1;33m'
-WHITE='\[\e[0m\]'
-GREEN='\[\e[1;32m\]'
-if [[ ${EUID} == 0 ]] ; then
-  export PS1='$(__git_ps1 "$YELLOW(%s)")'$BLUE'\W'$RED'\$'$WHITE' '
-else
-  export PS1='$(__git_ps1 "$YELLOW(%s)")'$BLUE'\W'$GREEN'\$'$WHITE' '
-fi
-
 # rbenv
 export PATH="$home/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
-source ~/.rbenv/completions/rbenv.bash
+source "$home/.rbenv/completions/rbenv.bash"
 
 # prompt with ruby version
 __rbenv_ps1 () {
@@ -45,9 +30,18 @@ __rbenv_ps1 () {
   printf $rbenv_ruby_version"("$rbenv_ruby_arch")"
 }
 
+# Visualisação do Console
+BLUE='\[\e[1;34m\]'
+RED='\[\e[1;31m\]'
+YELLOW='\e[1;33m'
+WHITE='\[\e[0m\]'
+GREEN='\[\e[1;32m\]'
 LIGHT_BLUE='\[\e[1;36m\]'
-if [ `which rbenv` ]; then
-  export PS1=$LIGHT_BLUE'[$(__rbenv_ps1)]'$PS1
+
+if [[ `which rbenv` && ${EUID} != 0 ]]; then
+  export PS1=$LIGHT_BLUE'[ruby $(__rbenv_ps1)] $(__git_ps1 "$YELLOW(%s)")'$BLUE' \W'$GREEN' \$'$WHITE'\n'
+else
+  export PS1=$BLUE' \W'$RED' \$'$WHITE'\n'
 fi
 
 # Editor padrao para algumas aplicações
@@ -77,8 +71,8 @@ shopt -s histappend
 # desativando o stop = ctrl ^S
 stty -ixon
 
-# Verifica o tamanho das janelas para adaptar o tamanho das linhas de comando
-shopt -s checkwinsize
+## Verifica o tamanho das janelas para adaptar o tamanho das linhas de comando
+#shopt -s checkwinsize
 
 # Autocomplete 
 if [ -f `brew --prefix`/etc/bash_completion ]; then
@@ -124,3 +118,7 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
+
+# Visualização do Console do Mysql
+export MYSQL_PS1='\d\$ '
+

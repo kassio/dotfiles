@@ -3,7 +3,7 @@
   email = kassioborgesm@gmail.com
 [core]
   excludesfile = ~/.gitignore
-  editor = vim
+  editor = `which vim`
 [help]
   format = web
   browser = GC
@@ -13,12 +13,12 @@
 [push]
   default = current
 [color]
-  branch = auto
-  diff = auto
-  interactive = auto
-  status = auto
-  grep = auto
-  ui = auto
+  branch = 1
+  diff = 1
+  interactive = 1
+  status = 1
+  grep = 1
+  ui = 1
   pager = 1
 [color "decorate"]
   branch = 1
@@ -28,7 +28,15 @@
 [format]
   pretty = oneline
 [alias]
+  co = checkout
+  st = status
+  s = status -sb
   l = log --oneline --decorate=full
-  s = status -s -b
+  today = log --stat --since=1.day --graph --pretty=oneline --abbrev-commit --date=relative
   tl = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Creset - %Cgreen%cr%Creset - %s%Creset' --abbrev-commit
   tree = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Creset - %Cgreen%cr%Creset - %s%Creset' --abbrev-commit --graph
+# Github
+[url "git://github.com/"]# Read-only
+  insteadOf = gh:
+[url "git@github.com:"]# With write access
+  insteadOf = wgh:
