@@ -38,11 +38,12 @@ WHITE='\[\e[0m\]'
 GREEN='\[\e[1;32m\]'
 LIGHT_BLUE='\[\e[1;36m\]'
 
-if [[ `which rbenv` && ${EUID} != 0 ]]; then
-  export PS1=$LIGHT_BLUE'[ruby $(__rbenv_ps1)] $(__git_ps1 "$YELLOW(%s)")'$BLUE' \W'$GREEN' \$'$WHITE'\n'
-else
-  export PS1=$BLUE' \W'$RED' \$'$WHITE'\n'
-fi
+ruby_ps1=$([[ `which rbenv` ]] && echo "$LIGHT_BLUE[ruby $(__rbenv_ps1)]" || echo "")
+git_ps1=$([[ `which git` ]] && echo '$(__git_ps1 "$YELLOW(%s)")' || echo "")
+pwd_ps1=$BLUE'\W'
+prompt_ps1=$([[ ${EUID} == 0 ]] && echo $RED || echo $GREEN)'\$'
+
+export PS1="$ruby_ps1 $git_ps1 $pwd_ps1 \n$prompt_ps1 $WHITE"
 
 # Editor padrao para algumas aplicações
 export EDITOR='vim'
