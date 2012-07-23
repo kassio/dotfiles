@@ -25,7 +25,7 @@ source "$home/.rbenv/completions/rbenv.bash"
 
 # prompt with ruby version
 __rbenv_ps1 () {
-  rbenv_ruby_version=`rbenv version | sed -e 's/\ .*//'`
+  rbenv_ruby_version=`rbenv version-name`
   rbenv_ruby_arch=`ruby -e 'puts "#{[""].pack("p").size*8}bits"'`
   printf $rbenv_ruby_version"("$rbenv_ruby_arch")"
 }
