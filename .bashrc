@@ -5,7 +5,7 @@
 user=kassio
 export home=/Users/$user
 export dev=$home/Development
-export autoseg_projects=$home/Development/AutoSeg/Projects
+export asp=$home/Development/AutoSeg/Projects
 
 # Forçar a colorização do terminal
 force_color_prompt=yes
@@ -24,10 +24,10 @@ eval "$(rbenv init -)"
 source "$home/.rbenv/completions/rbenv.bash"
 
 # prompt with ruby version
-__rbenv_ps1 () {
+rbv () {
   rbenv_ruby_version=`rbenv version-name`
   rbenv_ruby_arch=`ruby -e 'puts "#{[""].pack("p").size*8}bits"'`
-  printf $rbenv_ruby_version"("$rbenv_ruby_arch")"
+  printf $rbenv_ruby_version"("$rbenv_ruby_arch")\n"
 }
 
 # Visualisação do Console
@@ -36,14 +36,12 @@ RED='\[\e[1;31m\]'
 YELLOW='\e[1;33m'
 WHITE='\[\e[0m\]'
 GREEN='\[\e[1;32m\]'
-LIGHT_BLUE='\[\e[1;36m\]'
 
-ruby_ps1=$([[ `which rbenv` ]] && echo "$LIGHT_BLUE[ruby $(__rbenv_ps1)]" || echo "")
 git_ps1=$([[ `which git` ]] && echo '$(__git_ps1 "$YELLOW(%s)")' || echo "")
-pwd_ps1=$BLUE'\W'
-prompt_ps1=$([[ ${EUID} == 0 ]] && echo $RED || echo $GREEN)'\$'
+pwd_ps1="$BLUE\W"
+prompt_ps1="$([[ ${EUID} == 0 ]] && echo $RED || echo $GREEN)\$"
 
-export PS1="\n$ruby_ps1 $git_ps1 $pwd_ps1 \n$prompt_ps1 $WHITE"
+export PS1="$git_ps1$pwd_ps1$prompt_ps1$WHITE "
 
 # Editor padrao para algumas aplicações
 export EDITOR='vim'
@@ -102,12 +100,12 @@ _dp() {
 }
 complete -o nospace -F _dp dp
 
-asp() { cd $autoseg_projects/$1; }
+asp() { cd $asp/$1; }
 
 _asp() {
   local cur
   cur=${COMP_WORDS[COMP_CWORD]}
-  COMPREPLY=( $( compgen -S/ -d $autoseg_projects/$cur | cut -b $((${#autoseg_projects}+2))- ) )
+  COMPREPLY=( $( compgen -S/ -d $asp/$cur | cut -b $((${#asp}+2))- ) )
 }
 complete -o nospace -F _asp asp
 
