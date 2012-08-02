@@ -1,0 +1,2 @@
+"\C-x\C-b": shell-backward-word
+"\C-x\C-f": shell-forward-word

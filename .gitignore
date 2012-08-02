@@ -4,3 +4,5 @@
 .directory
 *.dir
 .DS_Store
+.rbenv-version
+.svn

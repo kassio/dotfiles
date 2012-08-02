@@ -17,6 +17,14 @@ export GIT_PS1_SHOWSTASHSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
 export GIT_PS1_SHOWUPSTREAM=auto
 
+function gitDiffBranch() {
+  if [ $# -ne 2 ]; then
+    echo 'Usage: gitDiffBranch first_branch second_branch'
+    return
+  fi
+  git log --format='%an' $1..$2 | sort | sed 's/\([^ ]*\ [^ ]*\).*/\1/' | uniq -c | sort -r
+}
+
 # rbenv
 export PATH="$home/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
@@ -39,7 +47,7 @@ GREEN='\[\e[1;32m\]'
 
 git_ps1=$([[ `which git` ]] && echo '$(__git_ps1 "$YELLOW(%s)")' || echo "")
 pwd_ps1="$BLUE\W"
-prompt_ps1="$([[ ${EUID} == 0 ]] && echo $RED || echo $GREEN)\$"
+prompt_ps1="$([[ ${EUID} == 0 ]] && echo $RED'#' || echo $GREEN'$')"
 
 export PS1="$git_ps1$pwd_ps1$prompt_ps1$WHITE "
 
@@ -66,12 +74,8 @@ HISTSIZE=1000000
 # Apenda historicos do usuario
 shopt -s histappend
 
-# Melhoria na busca no histórico
-# desativando o stop = ctrl ^S
-stty -ixon
-
 ## Verifica o tamanho das janelas para adaptar o tamanho das linhas de comando
-#shopt -s checkwinsize
+shopt -s checkwinsize
 
 # Autocomplete 
 if [ -f `brew --prefix`/etc/bash_completion ]; then
@@ -109,6 +113,14 @@ _asp() {
 }
 complete -o nospace -F _asp asp
 
+export COMP_WORDBREAKS=${COMP_WORDBREAKS/\:/}
+
+_rakecomplete() {
+  COMPREPLY=($(compgen -W "`rake -s -T | awk '{{print $2}}'`" -- ${COMP_WORDS[COMP_CWORD]}))
+  return 0
+}
+complete -o default -o nospace -F _rakecomplete rake
+
 # Colorify less
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;37m'
@@ -120,4 +132,3 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 
 # Visualização do Console do Mysql
 export MYSQL_PS1='\d\$ '
-

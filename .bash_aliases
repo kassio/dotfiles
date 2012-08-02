@@ -1,6 +1,7 @@
 # git
 alias "gitl"="git l"
 alias "gits"="git s"
+alias "gitc"="git log --format='%an' master..fiat | sort | sed 's/\([^ ]*\ [^ ]*\).*/\1/' | uniq -c | sort -r"
 
 # Ls colorido e outro falicitadores de listagem arquivos
 alias ls='ls -G'
@@ -36,3 +37,11 @@ alias limpatex='rm -rf *log *aux *nav *out *toc *snm *vrb'
 # Ruby e Rails
 alias r='rails'
 alias be='bundle exec '
+
+# Vagrant
+alias vu='vagrant up'
+alias vh='vagrant halt'
+alias vr='vagrant reload'
+alias vs='vagrant ssh'
+
+
