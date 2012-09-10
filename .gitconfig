@@ -25,16 +25,15 @@
 [difftool]
   tool = vimdiff
   prompt = false
-[format]
-  pretty = oneline
 [alias]
+  b = branch
   co = checkout
   st = status
   s = status -sb
   l = log --oneline --decorate=full
   today = log --stat --since=1.day --graph --pretty=oneline --abbrev-commit --date=relative
-  tl = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Creset - %Cgreen%cr%Creset - %s%Creset' --abbrev-commit
-  tree = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Creset - %Cgreen%cr%Creset - %s%Creset' --abbrev-commit --graph
+  tl = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset %s%Creset - %Cblue%d%Creset'
+  tree = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset - %s%Creset' --graph
 # Github
 [url "git://github.com/"]# Read-only
   insteadOf = gh:

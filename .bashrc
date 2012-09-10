@@ -17,22 +17,12 @@ export GIT_PS1_SHOWSTASHSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
 export GIT_PS1_SHOWUPSTREAM=auto
 
-function gitDiffBranch() {
-  if [ $# -ne 2 ]; then
-    echo 'Usage: gitDiffBranch first_branch second_branch'
-    return
-  fi
-  git log --format='%an' $1..$2 | sort | sed 's/\([^ ]*\ [^ ]*\).*/\1/' | uniq -c | sort -r
-}
-
 # rbenv
-export PATH="$home/.rbenv/bin:$PATH"
+export PATH="$home/.rbenv/bin:/usr/local/sbin:$PATH"
 eval "$(rbenv init -)"
 
-source "$home/.rbenv/completions/rbenv.bash"
-
 # prompt with ruby version
-rbv () {
+rbv() {
   rbenv_ruby_version=`rbenv version-name`
   rbenv_ruby_arch=`ruby -e 'puts "#{[""].pack("p").size*8}bits"'`
   printf $rbenv_ruby_version"("$rbenv_ruby_arch")\n"
@@ -63,6 +53,9 @@ shopt -s cdspell
 # Navegar em diretórios utilizando variaveis de ambiente
 shopt -s cdable_vars
 
+# Make ** works beautiful, works to any nested directory.
+shopt -s globstar
+
 # Melhorias no histórico
 HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 HISTCONTROL=ignoreboth
@@ -78,9 +71,14 @@ shopt -s histappend
 shopt -s checkwinsize
 
 # Autocomplete 
-if [ -f `brew --prefix`/etc/bash_completion ]; then
+[ -f `brew --prefix`/etc/bash_completion ] &&
   . `brew --prefix`/etc/bash_completion
-fi
+
+[ -f "$home/.rbenv/completions/rbenv.bash" ] &&
+  . "$home/.rbenv/completions/rbenv.bash"
+
+[ -f "/usr/local/etc/bash_completion.d/password-store" ] &&
+  . "/usr/local/etc/bash_completion.d/password-store" 
 
 # Melhorias no autocomplete
 set show-all-if-ambiguous on
@@ -132,3 +130,6 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 
 # Visualização do Console do Mysql
 export MYSQL_PS1='\d\$ '
+
+# Force custom bin first
+export PATH=$(echo $PATH | sed 's/\/usr\/bin://'):/usr/bin
