@@ -3,7 +3,7 @@
 
 # Meus diretórios e variaveis useful
 user=kassio
-export home=/Users/$user
+export home=$( [ -d '/Users' ] && echo "/Users" || echo "/home" )"/"$user
 export dev=$home/Development
 export asp=$home/Development/AutoSeg/Projects
 
@@ -71,7 +71,7 @@ shopt -s histappend
 shopt -s checkwinsize
 
 # Autocomplete 
-[ -f `brew --prefix`/etc/bash_completion ] &&
+[[ `which brew` && -f `brew --prefix`/etc/bash_completion ]] &&
   . `brew --prefix`/etc/bash_completion
 
 [ -f "$home/.rbenv/completions/rbenv.bash" ] &&
