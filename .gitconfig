@@ -22,8 +22,10 @@
   pager = 1
 [color "decorate"]
   branch = 1
+[mergetool]
+  tool = opendiff
 [difftool]
-  tool = vimdiff
+  tool = opendiff
   prompt = false
 [alias]
   b = branch
