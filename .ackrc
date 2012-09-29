@@ -22,4 +22,3 @@ css=sass,scss
 --ignore-dir=vendor/bundle
 --ignore-dir=tmp
 --ignore-dir=dumps
---ignore-dir=spec/acceptance/cliente/support/dump.sql
