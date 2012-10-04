@@ -70,15 +70,18 @@ shopt -s histappend
 ## Verifica o tamanho das janelas para adaptar o tamanho das linhas de comando
 shopt -s checkwinsize
 
-# Autocomplete 
+# Autocomplete
 [[ `which brew` && -f `brew --prefix`/etc/bash_completion ]] &&
   . `brew --prefix`/etc/bash_completion
+
+[ -f /etc/bash_completion ] &&
+  . /etc/bash_completion
 
 [ -f "$home/.rbenv/completions/rbenv.bash" ] &&
   . "$home/.rbenv/completions/rbenv.bash"
 
 [ -f "/usr/local/etc/bash_completion.d/password-store" ] &&
-  . "/usr/local/etc/bash_completion.d/password-store" 
+  . "/usr/local/etc/bash_completion.d/password-store"
 
 # Melhorias no autocomplete
 set show-all-if-ambiguous on
