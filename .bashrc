@@ -4,8 +4,8 @@
 # Meus diretórios e variaveis useful
 user=kassio
 export home=$( [ -d '/Users' ] && echo "/Users" || echo "/home" )"/"$user
-export dev=$home/Development
-export asp=$home/Development/AutoSeg/Projects
+export projects=$home/Projects
+export asp=$projects/AutoSeg/Projects
 
 # Forçar a colorização do terminal
 force_color_prompt=yes
@@ -71,7 +71,7 @@ shopt -s histappend
 shopt -s checkwinsize
 
 # Autocomplete
-[[ `which brew` && -f `brew --prefix`/etc/bash_completion ]] &&
+[[ `which brew` && -f "`brew --prefix`/etc/bash_completion" ]] &&
   . `brew --prefix`/etc/bash_completion
 
 [ -f /etc/bash_completion ] &&
@@ -80,8 +80,8 @@ shopt -s checkwinsize
 [ -f "$home/.rbenv/completions/rbenv.bash" ] &&
   . "$home/.rbenv/completions/rbenv.bash"
 
-[ -f "/usr/local/etc/bash_completion.d/password-store" ] &&
-  . "/usr/local/etc/bash_completion.d/password-store"
+[ -f "`brew --prefix`/etc/bash_completion.d/password-store" ] &&
+  . "`brew --prefix`/etc/bash_completion.d/password-store"
 
 # Melhorias no autocomplete
 set show-all-if-ambiguous on
@@ -96,14 +96,14 @@ complete -o default -o nospace -F _rakecomplete rake
 complete -o default -o nospace -F _capcomplete cap
 complete -o default -o nospace -F _thorcomplete thor
 
-dp() { cd $dev/$1; }
+pro() { cd $projects/$1; }
 
-_dp() {
+_pro() {
   local cur
   cur=${COMP_WORDS[COMP_CWORD]}
-  COMPREPLY=( $( compgen -S/ -d $dev/$cur | cut -b $((${#dev}+2))- ) )
+  COMPREPLY=( $( compgen -S/ -d $projects/$cur | cut -b $((${#projects}+2))- ) )
 }
-complete -o nospace -F _dp dp
+complete -o nospace -F _pro pro
 
 asp() { cd $asp/$1; }
 
