@@ -80,7 +80,7 @@ shopt -s checkwinsize
 [ -f "$home/.rbenv/completions/rbenv.bash" ] &&
   . "$home/.rbenv/completions/rbenv.bash"
 
-[ -f "`brew --prefix`/etc/bash_completion.d/password-store" ] &&
+[[ `which brew` && -f "`brew --prefix`/etc/bash_completion.d/password-store" ]] &&
   . "`brew --prefix`/etc/bash_completion.d/password-store"
 
 # Melhorias no autocomplete
