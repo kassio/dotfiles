@@ -1,3 +1,3 @@
-"\C-x\C-b": shell-backward-word
-"\C-x\C-f": shell-forward-word
-"\C-\M-d": shell-kill-word
+"\ew": shell-backward-word
+"\ee": shell-forward-word
+"\e\C-d": shell-kill-word

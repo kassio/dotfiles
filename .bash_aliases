@@ -1,3 +1,4 @@
+# vi : set=sh :
 # git
 alias "gitl"="git l"
 alias "gits"="git s"
@@ -25,7 +26,13 @@ alias egrep='egrep --colour=auto'
 alias fgrep='fgrep --colour=auto'
 
 # Processos
-alias psg='ps aux | grep -i '
+psg() {
+  ps aux | grep -i $@ | grep -v grep
+}
+
+killer() {
+  kill -9 $(psg $@ | awk '{print $2}')
+}
 
 # Historico de comandos
 alias h='history'
