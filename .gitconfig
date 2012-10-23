@@ -1,5 +1,5 @@
 [user]
-  name = Kássio Borges
+	name = Kássio Borges
   email = kassioborgesm@gmail.com
 [core]
   excludesfile = ~/.gitignore
