@@ -1,14 +1,11 @@
 # vi : set=sh :
 # git
-alias "gitl"="git l"
-alias "gits"="git s"
+alias g="git"
+alias gitl="git l"
+alias gits="git s"
 
 # Ls colorido e outro falicitadores de listagem arquivos
-if [[ $(uname) == 'Linux' ]]; then
-  LS_COMMON="--color=auto"
-elif [[ $(uname) == 'Darwin' ]]; then
-  LS_COMMON="-G"
-fi
+[[ $(uname) == 'Darwin' ]] && LS_COMMON="-G" || LS_COMMON="--color=auto"
 alias ls="ls $LS_COMMON"
 alias ll='ls -lh'
 alias l='ls -A'
