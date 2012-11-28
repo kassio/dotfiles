@@ -44,15 +44,6 @@ export PS1="$git_ps1$pwd_ps1$prompt_ps1$WHITE "
 # Editor padrao para algumas aplicações
 export EDITOR='vim'
 
-# Permissão de Novos arquivos
-umask 027
-
-# Auto-correção ao executar cd
-shopt -s cdspell
-
-# Navegar em diretórios utilizando variaveis de ambiente
-shopt -s cdable_vars
-
 # Make ** works beautiful, works to any nested directory.
 shopt -s globstar
 
@@ -67,24 +58,13 @@ HISTSIZE=1000000
 # Apenda historicos do usuario
 shopt -s histappend
 
-## Verifica o tamanho das janelas para adaptar o tamanho das linhas de comando
-shopt -s checkwinsize
-
 # Autocomplete
-[[ `which brew` && -f "`brew --prefix`/etc/bash_completion" ]] &&
-  . `brew --prefix`/etc/bash_completion
-
-[ -f /etc/bash_completion ] &&
-  . /etc/bash_completion
-
-[ -f "$home/.rbenv/completions/rbenv.bash" ] &&
-  . "$home/.rbenv/completions/rbenv.bash"
-
-[[ `which brew` && -f "`brew --prefix`/etc/bash_completion.d/password-store" ]] &&
-  . "`brew --prefix`/etc/bash_completion.d/password-store"
+. `brew --prefix`/etc/bash_completion 2&>/dev/null
+. /etc/bash_completion 2&>/dev/null
+. "$home/.rbenv/completions/rbenv.bash" 2&>/dev/null
+. "`brew --prefix`/etc/bash_completion.d/password-store" 2&>/dev/null
 
 # Melhorias no autocomplete
-set show-all-if-ambiguous on
 complete -A hostname   rsh rcp telnet rlogin r ftp ping disk
 complete -A export     printenv
 complete -A variable   export local readonly unset
@@ -113,14 +93,6 @@ _asp() {
   COMPREPLY=( $( compgen -S/ -d $asp/$cur | cut -b $((${#asp}+2))- ) )
 }
 complete -o nospace -F _asp asp
-
-export COMP_WORDBREAKS=${COMP_WORDBREAKS/\:/}
-
-_rakecomplete() {
-  COMPREPLY=($(compgen -W "`rake -s -T | awk '{{print $2}}'`" -- ${COMP_WORDS[COMP_CWORD]}))
-  return 0
-}
-complete -o default -o nospace -F _rakecomplete rake
 
 # Colorify less
 export LESS_TERMCAP_mb=$'\E[01;31m'

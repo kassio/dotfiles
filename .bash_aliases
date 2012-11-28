@@ -4,7 +4,12 @@ alias "gitl"="git l"
 alias "gits"="git s"
 
 # Ls colorido e outro falicitadores de listagem arquivos
-alias ls='ls -G'
+if [[ $(uname) == 'Linux' ]]; then
+  LS_COMMON="--color=auto"
+elif [[ $(uname) == 'Darwin' ]]; then
+  LS_COMMON="-G"
+fi
+alias ls="ls $LS_COMMON"
 alias ll='ls -lh'
 alias l='ls -A'
 alias la='ls -lhA'
