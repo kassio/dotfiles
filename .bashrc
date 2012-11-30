@@ -2,7 +2,7 @@
 . ~/.bash_aliases
 
 # Meus diretórios e variaveis useful
-user=kassio
+user=kassioborges
 export home=$( [ -d '/Users' ] && echo "/Users" || echo "/home" )"/"$user
 export projects=$home/Projects
 export asp=$projects/AutoSeg/Projects
@@ -18,15 +18,20 @@ export GIT_PS1_SHOWUNTRACKEDFILES=true
 export GIT_PS1_SHOWUPSTREAM=auto
 
 # rbenv
-export PATH="$home/.rbenv/bin:/usr/local/sbin:$PATH"
-eval "$(rbenv init -)"
+if [[ `which rbenv` ]]; then
+  export PATH="$home/.rbenv/bin:/usr/local/sbin:$PATH"
+  eval "$(rbenv init -)"
 
-# prompt with ruby version
-rbv() {
-  rbenv_ruby_version=`rbenv version-name`
-  rbenv_ruby_arch=`ruby -e 'puts "#{[""].pack("p").size*8}bits"'`
-  printf $rbenv_ruby_version"("$rbenv_ruby_arch")\n"
-}
+  # rbenv autocomplete
+  . "$home/.rbenv/completions/rbenv.bash"
+
+  # prompt with ruby version and arch
+  rbv() {
+    rbenv_ruby_version=`rbenv version-name`
+    rbenv_ruby_arch=`ruby -e 'puts "#{[""].pack("p").size*8}bits"'`
+    printf $rbenv_ruby_version"("$rbenv_ruby_arch")\n"
+  }
+fi
 
 # Visualisação do Console
 BLUE='\[\e[1;34m\]'
@@ -61,17 +66,14 @@ shopt -s histappend
 # Autocomplete
 if [[ -n `which brew` ]]; then
   [ -f `brew --prefix`/etc/bash_completion ] &&
-  . `brew --prefix`/etc/bash_completion
+    . `brew --prefix`/etc/bash_completion
 
   [ -f "`brew --prefix`/etc/bash_completion.d/password-store" ] &&
-  . "`brew --prefix`/etc/bash_completion.d/password-store"
+    . "`brew --prefix`/etc/bash_completion.d/password-store"
 fi
 
 [ -f /etc/bash_completion ] &&
-. /etc/bash_completion
-
-[ -f "$home/.rbenv/completions/rbenv.bash" ] &&
-. "$home/.rbenv/completions/rbenv.bash"
+  . /etc/bash_completion
 
 # Melhorias no autocomplete
 complete -A hostname   rsh rcp telnet rlogin r ftp ping disk
