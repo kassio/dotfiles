@@ -59,10 +59,17 @@ HISTSIZE=1000000
 shopt -s histappend
 
 # Autocomplete
-. `brew --prefix`/etc/bash_completion 2&>/dev/null
-. /etc/bash_completion 2&>/dev/null
-. "$home/.rbenv/completions/rbenv.bash" 2&>/dev/null
-. "`brew --prefix`/etc/bash_completion.d/password-store" 2&>/dev/null
+[[ `which brew` && -f `brew --prefix`/etc/bash_completion ]] &&
+. `brew --prefix`/etc/bash_completion
+
+[[ -f /etc/bash_completion ]] &&
+. /etc/bash_completion
+
+[[ -f "`brew --prefix`/etc/bash_completion.d/password-store" ]] &&
+. "`brew --prefix`/etc/bash_completion.d/password-store"
+
+[[ "$home/.rbenv/completions/rbenv.bash" ]] &&
+. "$home/.rbenv/completions/rbenv.bash"
 
 # Melhorias no autocomplete
 complete -A hostname   rsh rcp telnet rlogin r ftp ping disk
