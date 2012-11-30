@@ -59,16 +59,18 @@ HISTSIZE=1000000
 shopt -s histappend
 
 # Autocomplete
-[[ `which brew` && -f `brew --prefix`/etc/bash_completion ]] &&
-. `brew --prefix`/etc/bash_completion
+if [[ -n `which brew` ]]; then
+  [ -f `brew --prefix`/etc/bash_completion ] &&
+  . `brew --prefix`/etc/bash_completion
 
-[[ -f /etc/bash_completion ]] &&
+  [ -f "`brew --prefix`/etc/bash_completion.d/password-store" ] &&
+  . "`brew --prefix`/etc/bash_completion.d/password-store"
+fi
+
+[ -f /etc/bash_completion ] &&
 . /etc/bash_completion
 
-[[ -f "`brew --prefix`/etc/bash_completion.d/password-store" ]] &&
-. "`brew --prefix`/etc/bash_completion.d/password-store"
-
-[[ "$home/.rbenv/completions/rbenv.bash" ]] &&
+[ -f "$home/.rbenv/completions/rbenv.bash" ] &&
 . "$home/.rbenv/completions/rbenv.bash"
 
 # Melhorias no autocomplete
