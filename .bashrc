@@ -68,8 +68,10 @@ if [[ -n `which brew` ]]; then
   [ -f `brew --prefix`/etc/bash_completion ] &&
     . `brew --prefix`/etc/bash_completion
 
-  [ -f "`brew --prefix`/etc/bash_completion.d/password-store" ] &&
+  if [ -f "`brew --prefix`/etc/bash_completion.d/password-store" ]; then
+    export PASSWORD_STORE_DIR="$home/Dropbox/.password-store"
     . "`brew --prefix`/etc/bash_completion.d/password-store"
+  fi
 fi
 
 [ -f /etc/bash_completion ] &&
