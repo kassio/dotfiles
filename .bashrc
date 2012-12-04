@@ -2,8 +2,9 @@
 . ~/.bash_aliases
 
 # Meus diretórios e variaveis useful
-user=kassioborges
-export home=$( [ -d '/Users' ] && echo "/Users" || echo "/home" )"/"$user
+user=`cat .main_user`
+[[ $(uname) == 'Darwin' ]] && home="/Users" || home="/home"
+export home="$home/$user"
 export projects=$home/Projects
 export asp=$projects/AutoSeg/Projects
 
@@ -18,7 +19,7 @@ export GIT_PS1_SHOWUNTRACKEDFILES=true
 export GIT_PS1_SHOWUPSTREAM=auto
 
 # rbenv
-if [[ `which rbenv` ]]; then
+if [ -d "$home/.rbenv" ]; then
   export PATH="$home/.rbenv/bin:/usr/local/sbin:$PATH"
   eval "$(rbenv init -)"
 
