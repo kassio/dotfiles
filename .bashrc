@@ -2,7 +2,7 @@
 . ~/.bash_aliases
 
 # Meus diretórios e variaveis useful
-user=`cat .main_user`
+user=`cat $HOME/.main_user`
 [[ $(uname) == 'Darwin' ]] && home="/Users" || home="/home"
 export home="$home/$user"
 export projects=$home/Projects
