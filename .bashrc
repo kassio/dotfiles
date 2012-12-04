@@ -44,8 +44,9 @@ GREEN='\[\e[1;32m\]'
 git_ps1=$([[ `which git` ]] && echo '$(__git_ps1 "$YELLOW(%s)")' || echo "")
 pwd_ps1="$BLUE\W"
 prompt_ps1="$([[ ${EUID} == 0 ]] && echo $RED'#' || echo $GREEN'$')"
+[ -f ".user_ps1" ] && user_ps1=`cat .user_ps1`
 
-export PS1="$git_ps1$pwd_ps1$prompt_ps1$WHITE "
+export PS1="$user_ps1$git_ps1$pwd_ps1$prompt_ps1$WHITE "
 
 # Editor padrao para algumas aplicações
 export EDITOR='vim'
