@@ -1,4 +1,3 @@
-# vi : set=sh :
 # git
 alias g="git"
 alias gitl="git l"
@@ -17,7 +16,8 @@ alias lta='ls -lthA'
 alias ..='cd ..'
 
 # Atualização do Sistema
-alias atualiza='brew update && brew upgrade'
+[[ $(uname) == 'Darwin' ]] &&
+  alias atualiza='brew update && brew upgrade'
 
 # Vim com plugin
 alias wiki="vim -c 'call PotwikiHome()'"
@@ -52,3 +52,5 @@ alias vh='vagrant halt'
 alias vr='vagrant reload'
 alias vs='vagrant ssh'
 alias vus='vagrant up && vagrant ssh'
+
+# vim:ft=sh:

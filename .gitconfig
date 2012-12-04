@@ -29,6 +29,7 @@
   prompt = false
 [alias]
   b = branch
+  ci = commit
   co = checkout
   st = status
   s = status -sb
