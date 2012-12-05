@@ -66,7 +66,7 @@ HISTSIZE=1000000
 shopt -s histappend
 
 # Autocomplete
-if [[ -n `which brew 2&>/dev/null` ]]; then
+if [[ -n `which brew 2>/dev/null` ]]; then
   [ -f `brew --prefix`/etc/bash_completion ] &&
     . `brew --prefix`/etc/bash_completion
 
