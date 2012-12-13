@@ -1,9 +1,10 @@
 [user]
-	name = Kássio Borges
+  name = Kássio Borges
   email = kassioborgesm@gmail.com
 [core]
   excludesfile = ~/.gitignore
   editor = `which vim`
+  whitespace = trailing-space,space-before-tab,indent-with-non-tab
 [help]
   format = web
   browser = GC
@@ -13,13 +14,13 @@
 [push]
   default = current
 [color]
-  branch = 1
-  diff = 1
-  interactive = 1
-  status = 1
-  grep = 1
-  ui = 1
-  pager = 1
+  branch = true
+  diff = true
+  interactive = true
+  status = true
+  grep = true
+  ui = true
+  pager = true
 [color "decorate"]
   branch = 1
 [mergetool]
@@ -42,3 +43,5 @@
   insteadOf = gh:
 [url "git@github.com:"]# With write access
   insteadOf = wgh:
+[color "diff"]
+  whitespace = red
