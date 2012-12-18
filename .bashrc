@@ -123,3 +123,6 @@ export MYSQL_PS1='\d\$ '
 
 # Force custom bin first
 export PATH=$(echo $PATH | sed 's/\/usr\/bin://'):/usr/bin
+
+export LC_ALL="en_US.UTF-8"
+export LANG="en_US.UTF-8"
