@@ -6,7 +6,7 @@ user=`cat $HOME/.main_user`
 [[ $(uname) == 'Darwin' ]] && home="/Users" || home="/home"
 export home="$home/$user"
 export projects=$home/Projects
-export asp=$projects/AutoSeg/Projects
+export asp=$home/AutoSeg/Projects
 
 # Forçar a colorização do terminal
 export TERM=screen-256color
@@ -15,7 +15,7 @@ export TERM=screen-256color
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWSTASHSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
-export GIT_PS1_SHOWUPSTREAM=auto
+export GIT_PS1_SHOWUPSTREAM=true
 
 # rbenv
 if [ -d "$home/.rbenv" ]; then
@@ -57,6 +57,9 @@ export EDITOR='vim'
 # Make ** works beautiful, works to any nested directory.
 shopt -s globstar
 
+# Make ctrl-s works to incremental search, like ctrl-r to reverse
+stty -ixon
+
 # Melhorias no histórico
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 export HISTCONTROL=ignoreboth
@@ -70,12 +73,14 @@ shopt -s histappend
 
 # Autocomplete
 if [[ -n `which brew 2>/dev/null` ]]; then
-  [ -e `brew --prefix`/etc/bash_completion ] &&
-    source `brew --prefix`/etc/bash_completion
+  if [ -f `brew --prefix`/etc/bash_completion ]; then
+    source `brew --prefix`/etc/bash_completion;
+    source `brew --prefix`/Library/Contributions/brew_bash_completion.sh;
+  fi
 
   if [ -e "`brew --prefix`/etc/bash_completion.d/password-store" ]; then
-    export PASSWORD_STORE_DIR="$home/Dropbox/.password-store"
-    source "`brew --prefix`/etc/bash_completion.d/password-store"
+    export PASSWORD_STORE_DIR="$home/Dropbox/.password-store";
+    source "`brew --prefix`/etc/bash_completion.d/password-store";
   fi
 fi
 
