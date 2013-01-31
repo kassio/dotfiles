@@ -41,12 +41,16 @@ YELLOW='\e[1;33m'
 WHITE='\[\e[0m\]'
 GREEN='\[\e[1;32m\]'
 
-git_ps1=$([[ `which git` ]] && echo '$(__git_ps1 "$YELLOW(%s)")' || echo "")
-pwd_ps1="$BLUE\W"
-prompt_ps1="$([[ ${EUID} == 0 ]] && echo $RED'#' || echo $GREEN'$')"
-[ -f ".user_ps1" -o -h ".user_ps1" ] && user_ps1=`cat .user_ps1`
+build_ps1() {
+  local git_ps1=$([[ `which git` ]] && echo '$(__git_ps1 "$YELLOW(%s)")' || echo "")
+  local pwd_ps1="$BLUE\W"
+  local prompt_ps1="$([[ ${EUID} == 0 ]] && echo $RED'#' || echo $GREEN'$')"
+  [ -e "$home/.user_ps1" ] && user_ps1=`cat $home/.user_ps1`
 
-export PS1="$user_ps1$git_ps1$pwd_ps1$prompt_ps1$WHITE "
+  export PS1="$user_ps1$git_ps1$pwd_ps1$prompt_ps1$WHITE "
+}
+
+build_ps1
 
 # Editor padrao para algumas aplicações
 export EDITOR='vim'
@@ -55,28 +59,28 @@ export EDITOR='vim'
 shopt -s globstar
 
 # Melhorias no histórico
-HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
-HISTCONTROL=ignoreboth
+export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
+export HISTCONTROL=ignoreboth
 
 # Tamanho do historico
-HISTFILESIZE=10000000000
-HISTSIZE=1000000
+export HISTFILESIZE=10000000000
+export HISTSIZE=1000000
 
 # Apenda historicos do usuario
 shopt -s histappend
 
 # Autocomplete
 if [[ -n `which brew 2>/dev/null` ]]; then
-  [ -f `brew --prefix`/etc/bash_completion ] &&
+  [ -e `brew --prefix`/etc/bash_completion ] &&
     . `brew --prefix`/etc/bash_completion
 
-  if [ -f "`brew --prefix`/etc/bash_completion.d/password-store" ]; then
+  if [ -e "`brew --prefix`/etc/bash_completion.d/password-store" ]; then
     export PASSWORD_STORE_DIR="$home/Dropbox/.password-store"
     . "`brew --prefix`/etc/bash_completion.d/password-store"
   fi
 fi
 
-[ -f /etc/bash_completion ] &&
+[ -e /etc/bash_completion ] &&
   . /etc/bash_completion
 
 # Melhorias no autocomplete
@@ -122,7 +126,9 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 export MYSQL_PS1='\d\$ '
 
 # Force custom bin first
-export PATH=$(echo $PATH | sed 's/\/usr\/bin://'):/usr/bin
+export PATH=${PATH/\/usr\/bin:/}:/usr/bin
 
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
+
+[ -e "$home/.env" ] && source $home/.env
