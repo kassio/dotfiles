@@ -1,5 +1,5 @@
 # alias
-. ~/.bash_aliases
+source ~/.bash_aliases
 
 # Meus diretórios e variaveis useful
 user=`cat $HOME/.main_user`
@@ -9,7 +9,6 @@ export projects=$home/Projects
 export asp=$projects/AutoSeg/Projects
 
 # Forçar a colorização do terminal
-force_color_prompt=yes
 export TERM=screen-256color
 
 # git
@@ -24,7 +23,7 @@ if [ -d "$home/.rbenv" ]; then
   eval "$(rbenv init -)"
 
   # rbenv autocomplete
-  . "$home/.rbenv/completions/rbenv.bash"
+  source "$home/.rbenv/completions/rbenv.bash"
 
   # prompt with ruby version and arch
   rbv() {
@@ -72,16 +71,15 @@ shopt -s histappend
 # Autocomplete
 if [[ -n `which brew 2>/dev/null` ]]; then
   [ -e `brew --prefix`/etc/bash_completion ] &&
-    . `brew --prefix`/etc/bash_completion
+    source `brew --prefix`/etc/bash_completion
 
   if [ -e "`brew --prefix`/etc/bash_completion.d/password-store" ]; then
     export PASSWORD_STORE_DIR="$home/Dropbox/.password-store"
-    . "`brew --prefix`/etc/bash_completion.d/password-store"
+    source "`brew --prefix`/etc/bash_completion.d/password-store"
   fi
 fi
 
-[ -e /etc/bash_completion ] &&
-  . /etc/bash_completion
+[ -e /etc/bash_completion ] && source /etc/bash_completion
 
 # Melhorias no autocomplete
 complete -A hostname   rsh rcp telnet rlogin r ftp ping disk
