@@ -23,9 +23,7 @@ alias ..='cd ..'
 alias wiki="vim -c 'call PotwikiHome()'"
 
 # Greps
-alias grep='grep --colour=auto'
-alias egrep='egrep --colour=auto'
-alias fgrep='fgrep --colour=auto'
+export GREP_OPTIONS="--color=auto"
 
 # Processos
 psg() {
@@ -52,5 +50,19 @@ alias vh='vagrant halt'
 alias vr='vagrant reload'
 alias vs='vagrant ssh'
 alias vus='vagrant up && vagrant ssh'
+
+loop_this() {
+  local params=($(echo "$@"))
+  local count=${params[0]}
+  local command=${params[@]:1};
+
+  for((i = 0; i < $count; )); do
+    echo ">> Build $((++i))";
+    echo ">> $command";
+    $command
+    [[ $? != 0 ]] && break;
+    echo "";
+  done;
+}
 
 # vim:ft=sh:
