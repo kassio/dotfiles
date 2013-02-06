@@ -11,12 +11,6 @@ export asp=$home/AutoSeg/Projects
 # Forçar a colorização do terminal
 export TERM=screen-256color
 
-# git
-export GIT_PS1_SHOWDIRTYSTATE=true
-export GIT_PS1_SHOWSTASHSTATE=true
-export GIT_PS1_SHOWUNTRACKEDFILES=true
-export GIT_PS1_SHOWUPSTREAM=true
-
 # rbenv
 if [ -d "$home/.rbenv" ]; then
   export PATH="$home/.rbenv/bin:/usr/local/sbin:$PATH"
@@ -33,6 +27,11 @@ if [ -d "$home/.rbenv" ]; then
   }
 fi
 
+# git
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWUPSTREAM=true
 
 build_ps1() {
   local blue="$(tput setaf 21)"
