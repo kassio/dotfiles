@@ -33,20 +33,20 @@ if [ -d "$home/.rbenv" ]; then
   }
 fi
 
-# Visualisação do Console
-BLUE='\[\e[1;34m\]'
-RED='\[\e[1;31m\]'
-YELLOW='\e[1;33m'
-WHITE='\[\e[0m\]'
-GREEN='\[\e[1;32m\]'
 
 build_ps1() {
-  local git_ps1=$([[ `which git` ]] && echo '$(__git_ps1 "$YELLOW(%s)")' || echo "")
-  local pwd_ps1="$BLUE\W"
-  local prompt_ps1="$([[ ${EUID} == 0 ]] && echo $RED'#' || echo $GREEN'$')"
+  local blue="$(tput setaf 21)"
+  local red="$(tput setaf 160)"
+  local yellow="$(tput setaf 11)"
+  local white="$(tput setaf 7)"
+  local green="$(tput setaf 46)"
+
+  local git_ps1=$([[ `which git` ]] && echo "$yellow"'$(__git_ps1 "(%s)")' || echo "")
+  local pwd_ps1="$blue\W"
+  local prompt_ps1="$([[ ${EUID} == 0 ]] && echo $red'#' || echo $green'$')"
   [ -e "$home/.user_ps1" ] && user_ps1=`cat $home/.user_ps1`
 
-  export PS1="$user_ps1$git_ps1$pwd_ps1$prompt_ps1$WHITE "
+  export PS1="$user_ps1$git_ps1$pwd_ps1$prompt_ps1$white "
 }
 
 build_ps1
