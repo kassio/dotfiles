@@ -1,14 +1,12 @@
-# alias
+# load my functions and aliases
 source ~/.bash_aliases
 
-# Meus diretórios e variaveis useful
 user=`cat $HOME/.main_user`
 [[ $(uname) == 'Darwin' ]] && home="/Users" || home="/home"
 export home="$home/$user"
 export projects=$home/Projects
 export asp=$home/AutoSeg/Projects
 
-# Forçar a colorização do terminal
 export TERM=screen-256color
 
 # rbenv
@@ -50,7 +48,7 @@ build_ps1() {
 
 build_ps1
 
-# Editor padrao para algumas aplicações
+# Default editor
 export EDITOR='vim'
 
 # Make ** works beautiful, works to any nested directory.
@@ -59,15 +57,13 @@ shopt -s globstar
 # Make ctrl-s works to incremental search, like ctrl-r to reverse
 stty -ixon
 
-# Melhorias no histórico
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 export HISTCONTROL=ignoreboth
 
-# Tamanho do historico
 export HISTFILESIZE=10000000000
 export HISTSIZE=1000000
 
-# Apenda historicos do usuario
+# Append user history
 shopt -s histappend
 
 # Autocomplete
@@ -85,7 +81,6 @@ fi
 
 [ -e /etc/bash_completion ] && source /etc/bash_completion
 
-# Melhorias no autocomplete
 complete -A hostname   rsh rcp telnet rlogin r ftp ping disk
 complete -A export     printenv
 complete -A variable   export local readonly unset
@@ -96,6 +91,7 @@ complete -A user       su mail finger
 complete -o default -o nospace -F _rakecomplete rake
 complete -o default -o nospace -F _capcomplete cap
 complete -o default -o nospace -F _thorcomplete thor
+
 
 pro() { cd $projects/$1; }
 
@@ -124,7 +120,6 @@ export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-# Visualização do Console do Mysql
 export MYSQL_PS1='\d\$ '
 
 # Force custom bin first
