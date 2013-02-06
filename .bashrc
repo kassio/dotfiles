@@ -129,3 +129,5 @@ export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
 [ -e "$home/.env" ] && source $home/.env
+
+# vim:ft=sh:
