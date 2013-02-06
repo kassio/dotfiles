@@ -9,8 +9,6 @@ alias ls="ls $LS_COMMON"
 alias ll='ls -lh'
 alias l='ls -A'
 alias la='ls -lhA'
-alias lt='ls -tA'
-alias lta='ls -lthA'
 
 # Facilitador de navegação
 alias ..='cd ..'
