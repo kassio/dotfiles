@@ -11,11 +11,9 @@ export TERM=screen-256color
 
 # rbenv
 if [ -d "$home/.rbenv" ]; then
+  # rbenv autocomplete
   export PATH="$home/.rbenv/bin:/usr/local/sbin:$PATH"
   eval "$(rbenv init -)"
-
-  # rbenv autocomplete
-  source "$home/.rbenv/completions/rbenv.bash"
 
   # prompt with ruby version and arch
   rbv() {
@@ -46,13 +44,13 @@ build_ps1() {
   export PS1="$user_ps1$git_ps1$pwd_ps1$prompt_ps1$white "
 }
 
-build_ps1
+#build_ps1
 
 # Default editor
 export EDITOR='vim'
 
 # Make ** works beautiful, works to any nested directory.
-shopt -s globstar
+#shopt -s globstar
 
 # Make ctrl-s works to incremental search, like ctrl-r to reverse
 stty -ixon
@@ -64,52 +62,51 @@ export HISTFILESIZE=10000000000
 export HISTSIZE=1000000
 
 # Append user history
-shopt -s histappend
+#shopt -s histappend
 
 # Autocomplete
-if [[ -n `which brew 2>/dev/null` ]]; then
-  if [ -f `brew --prefix`/etc/bash_completion ]; then
-    source `brew --prefix`/etc/bash_completion;
-    source `brew --prefix`/Library/Contributions/brew_bash_completion.sh;
-  fi
+#if [[ -n `which brew 2>/dev/null` ]]; then
+  #if [ -f `brew --prefix`/etc/bash_completion ]; then
+    #source `brew --prefix`/etc/bash_completion;
+    #source `brew --prefix`/Library/Contributions/brew_bash_completion.sh;
+  #fi
 
-  if [ -e "`brew --prefix`/etc/bash_completion.d/password-store" ]; then
-    export PASSWORD_STORE_DIR="$home/Dropbox/.password-store";
-    source "`brew --prefix`/etc/bash_completion.d/password-store";
-  fi
-fi
+  #if [ -e "`brew --prefix`/etc/bash_completion.d/password-store" ]; then
+    #export PASSWORD_STORE_DIR="$home/Dropbox/.password-store";
+    #source "`brew --prefix`/etc/bash_completion.d/password-store";
+  #fi
+#fi
 
-[ -e /etc/bash_completion ] && source /etc/bash_completion
+#[ -e /etc/bash_completion ] && source /etc/bash_completion
 
-complete -A hostname   rsh rcp telnet rlogin r ftp ping disk
-complete -A export     printenv
-complete -A variable   export local readonly unset
-complete -A enabled    builtin
-complete -A alias      alias unalias
-complete -A function   function
-complete -A user       su mail finger
-complete -o default -o nospace -F _rakecomplete rake
-complete -o default -o nospace -F _capcomplete cap
-complete -o default -o nospace -F _thorcomplete thor
+#complete -A hostname   rsh rcp telnet rlogin r ftp ping disk
+#complete -A export     printenv
+#complete -A variable   export local readonly unset
+#complete -A enabled    builtin
+#complete -A alias      alias unalias
+#complete -A function   function
+#complete -A user       su mail finger
+#complete -o default -o nospace -F _rakecomplete rake
+#complete -o default -o nospace -F _capcomplete cap
+#complete -o default -o nospace -F _thorcomplete thor
 
+#pro() { cd $projects/$1; }
 
-pro() { cd $projects/$1; }
+#_pro() {
+  #local cur
+  #cur=${COMP_WORDS[COMP_CWORD]}
+  #COMPREPLY=( $( compgen -S/ -d $projects/$cur | cut -b $((${#projects}+2))- ) )
+#}
+#complete -o nospace -F _pro pro
 
-_pro() {
-  local cur
-  cur=${COMP_WORDS[COMP_CWORD]}
-  COMPREPLY=( $( compgen -S/ -d $projects/$cur | cut -b $((${#projects}+2))- ) )
-}
-complete -o nospace -F _pro pro
+#asp() { cd $asp/$1; }
 
-asp() { cd $asp/$1; }
-
-_asp() {
-  local cur
-  cur=${COMP_WORDS[COMP_CWORD]}
-  COMPREPLY=( $( compgen -S/ -d $asp/$cur | cut -b $((${#asp}+2))- ) )
-}
-complete -o nospace -F _asp asp
+#_asp() {
+  #local cur
+  #cur=${COMP_WORDS[COMP_CWORD]}
+  #COMPREPLY=( $( compgen -S/ -d $asp/$cur | cut -b $((${#asp}+2))- ) )
+#}
+#complete -o nospace -F _asp asp
 
 # Colorify less
 export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -123,7 +120,7 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 export MYSQL_PS1='\d\$ '
 
 # Force custom bin first
-export PATH=${PATH/\/usr\/bin:/}:/usr/bin
+export PATH=${PATH/"/usr/bin:"/}:/usr/bin
 
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"

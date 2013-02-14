@@ -50,7 +50,7 @@ loop_this() {
   local count=${params[0]}
   local command=${params[@]:1};
 
-  for((i = 0; i < $count; )); do
+  for ((i = 0; i < $count; )); do
     echo ">> Build $((++i))";
     echo ">> $command";
     $command
