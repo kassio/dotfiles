@@ -32,7 +32,7 @@ export GIT_PS1_SHOWUNTRACKEDFILES=true
 export GIT_PS1_SHOWUPSTREAM=true
 
 build_ps1() {
-  local blue="$(tput setaf 21)"
+  local blue="$(tput setaf 12)"
   local red="$(tput setaf 160)"
   local yellow="$(tput setaf 11)"
   local white="$(tput setaf 7)"
