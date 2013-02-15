@@ -5,6 +5,14 @@ plugins=(git git-extras rbenv rails rails3 vagrant brew zsh-syntax-highlighting)
 ZSH=$HOME/.dotfiles/oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
+# improve ls colors
+export CLICOLOR=1;
+export LSCOLORS=exfxcxdxbxegedabagacad;
+# colors on autocomplete
+autoload -Uz compinit
+compinit
+zstyle ':completion:*' list-colors 'exfxcxdxbxegedabagacad'
+
 ZSH_THEME_GIT_PROMPT_ADDED="+"
 ZSH_THEME_GIT_PROMPT_AHEAD=" >"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
