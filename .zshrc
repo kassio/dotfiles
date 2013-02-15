@@ -1,11 +1,9 @@
-export home="$home/$user"
-export projects=$home/Projects
-export asp=$home/AutoSeg/Projects
-source ~/.bashrc
+source ~/.dotfiles/my_env
 
-ZSH=$HOME/.oh-my-zsh
+plugins=(git git-extras rbenv rails rails3 vagrant brew zsh-syntax-highlighting)
+
+ZSH=$HOME/.dotfiles/oh-my-zsh
 source $ZSH/oh-my-zsh.sh
-plugins=(git git-extras zsh-syntax-highlighting rbenv rails rails3 vagrant brew)
 
 ZSH_THEME_GIT_PROMPT_ADDED="+"
 ZSH_THEME_GIT_PROMPT_AHEAD=" >"
@@ -38,6 +36,10 @@ export RPS1="${return_code}"
 }
 
 build_ps1
+
+pro() { cd $projects/$1;  }
+_pro() { _files -W $projects -/; }
+compdef _pro pro
 
 asp() { cd $asp/$1;  }
 _asp() { _files -W $asp -/; }
