@@ -14,7 +14,7 @@ compinit
 zstyle ':completion:*' list-colors 'exfxcxdxbxegedabagacad'
 
 ZSH_THEME_GIT_PROMPT_ADDED="+"
-ZSH_THEME_GIT_PROMPT_AHEAD=" >"
+ZSH_THEME_GIT_PROMPT_AHEAD=">"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_DELETED="!"
 ZSH_THEME_GIT_PROMPT_DIRTY="*"
