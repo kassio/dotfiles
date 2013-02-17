@@ -1,3 +1,5 @@
+source ~/.dotfiles/my_env
+
 # git
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWSTASHSTATE=true
@@ -21,20 +23,8 @@ build_ps1() {
 
 build_ps1
 
-# Default editor
-export EDITOR='vim'
-
 # Make ** works beautiful, works to any nested directory.
 shopt -s globstar
-
-# Make ctrl-s works to incremental search, like ctrl-r to reverse
-stty -ixon
-
-export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
-export HISTCONTROL=ignoreboth
-
-export HISTFILESIZE=10000000000
-export HISTSIZE=1000000
 
 # Append user history
 shopt -s histappend
@@ -82,23 +72,6 @@ _asp() {
   COMPREPLY=( $( compgen -S/ -d $asp/$cur | cut -b $((${#asp}+2))- ) )
 }
 complete -o nospace -F _asp asp
-
-# Colorify less
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;37m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;44;33m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;32m'
-
-export MYSQL_PS1='\d\$ '
-
-# Force custom bin first
-export PATH=${PATH/"/usr/bin:"/}:/usr/bin
-
-export LC_ALL="en_US.UTF-8"
-export LANG="en_US.UTF-8"
 
 [ -e "$home/.env" ] && source $home/.env
 

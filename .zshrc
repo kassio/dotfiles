@@ -1,9 +1,9 @@
+source ~/.dotfiles/my_env
+
 plugins=(git rbenv rails vagrant brew zsh-syntax-highlighting)
 
 ZSH=$HOME/.dotfiles/oh-my-zsh
 source $ZSH/oh-my-zsh.sh
-
-source ~/.dotfiles/my_env
 
 ###############################################################################
 
@@ -11,7 +11,7 @@ source ~/.dotfiles/my_env
 unsetopt automenu
 setopt autolist
 
-# not correct me!!
+# do not correct me!!
 unsetopt correct_all
 
 # I like default grep color
