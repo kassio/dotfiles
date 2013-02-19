@@ -48,6 +48,8 @@ export MYSQL_PS1='\d\$ '
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
+[ -e "$(which pass)" ] && export PASSWORD_STORE_DIR="$home/Dropbox/.password-store";
+
 [ -e "$home/.env" ] && source $home/.env
 
 # vim:ft=sh:

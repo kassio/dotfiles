@@ -37,7 +37,6 @@ if [[ -n `which brew 2>/dev/null` ]]; then
   fi
 
   if [ -e "`brew --prefix`/etc/bash_completion.d/password-store" ]; then
-    export PASSWORD_STORE_DIR="$home/Dropbox/.password-store";
     source "`brew --prefix`/etc/bash_completion.d/password-store";
   fi
 fi
