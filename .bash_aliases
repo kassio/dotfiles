@@ -17,6 +17,7 @@ alias ..='cd ..'
 
 
 alias wiki="vim -c 'call PotwikiHome()'"
+alias atualiza_vim="vim +BundleUpdate +quit"
 
 
 export GREP_OPTIONS="--color=auto"
