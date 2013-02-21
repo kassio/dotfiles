@@ -2,7 +2,6 @@ alias g="git"
 alias gitl="git l"
 alias gits="git s"
 
-
 [[ $(uname) == 'Darwin' ]] && LS_COMMON="-G" || LS_COMMON="--color=auto"
 alias ls="ls $LS_COMMON"
 alias ll='ls -lh'
@@ -11,17 +10,13 @@ alias la='ls -lhA'
 
 alias ..='cd ..'
 
-
 [[ $(uname) == 'Darwin' ]] &&
   alias atualiza='brew update && brew upgrade'
-
 
 alias wiki="vim -c 'call PotwikiHome()'"
 alias atualiza_vim="vim +BundleUpdate +quit"
 
-
 export GREP_OPTIONS="--color=auto"
-
 
 psg() {
   ps aux | grep -i $@ | grep -v grep
@@ -31,20 +26,16 @@ killer() {
   kill -9 $(psg $@ | awk '{print $2}')
 }
 
-
 alias h='history'
-
 
 alias r='rails'
 alias be='bundle exec '
-
 
 alias vu='vagrant up'
 alias vh='vagrant halt'
 alias vr='vagrant reload'
 alias vs='vagrant ssh'
 alias vus='vagrant up && vagrant ssh'
-
 
 loop_this() {
   local params=($(echo "$@"))
@@ -59,5 +50,7 @@ loop_this() {
     echo "";
   done;
 }
+
+export PATH="$PATH:~/.dotfiles/bin"
 
 # vim:ft=sh:
