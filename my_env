@@ -52,4 +52,6 @@ export LANG="en_US.UTF-8"
 
 [ -e "$home/.env" ] && source $home/.env
 
+export PATH="$PATH:$home/.dotfiles/bin"
+
 # vim:ft=sh:
