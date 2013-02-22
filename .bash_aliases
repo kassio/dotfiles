@@ -14,7 +14,7 @@ alias ..='cd ..'
   alias atualiza='brew update && brew upgrade'
 
 alias wiki="vim -c 'call PotwikiHome()'"
-alias atualiza_vim="vim +BundleUpdate +quit"
+alias atualiza_vim="vim +BundleUpdate +'normal u'"
 
 export GREP_OPTIONS="--color=auto"
 
@@ -50,7 +50,5 @@ loop_this() {
     echo "";
   done;
 }
-
-export PATH="$PATH:~/.dotfiles/bin"
 
 # vim:ft=sh:
