@@ -1,12 +1,12 @@
-# load my functions and aliases
-source ~/.bash_aliases
-
 export home=$([[ $(uname) == 'Darwin' ]] && echo "/Users" || echo "/home")
 export user=`cat $HOME/.main_user`
 export home="$home/$user"
 export projects=$home/Projects
 export asp=$home/AutoSeg/Projects
 export TERM=screen-256color
+
+# load my functions and aliases
+source $home/.dotfiles/bash_aliases
 
 # rbenv
 if [ -d "$home/.rbenv" ]; then

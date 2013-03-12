@@ -1,0 +1,8 @@
+cp $HOME/.dotfiles/main_user.tpl $HOME/.main_user
+
+for f in bashrc zshrc gitignore gitconfig irbrc gemrc profile; do
+  file_path="$HOME/.dotfiles/$f"
+  ln -sf $file_path $HOME/.$f
+done
+
+[ -e $HOME/.zshrc ] && source $HOME/.zshrc >/dev/null 2>&1
