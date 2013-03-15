@@ -22,6 +22,10 @@ if [ -d "$home/.rbenv" ]; then
   }
 fi
 
+### Added by the Heroku Toolbelt
+_heroku_bin_path="/usr/local/heroku/bin"
+[ -d $_heroku_bin_path ] && export PATH="$_heroku_bin_path:$PATH"
+
 # Default editor
 export EDITOR='vim'
 
