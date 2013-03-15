@@ -49,8 +49,9 @@ build_ps1 () {
   local current_dir="$FG[012]%3~";
   local git_branch='$(git_prompt_info)';
   local sign=$([ $UID -eq 0 ] && echo '$FG[160]#' || echo '$FG[046]$');
+  local user_custom=$(cat $home/.user_ps1)
 
-  export PROMPT="${current_dir}${git_branch}${sign}%{$reset_color%} "
+  export PROMPT="${user_custom}${current_dir}${git_branch}${sign}%{$reset_color%} "
   export RPS1="${return_code}"
 }; build_ps1
 
