@@ -6,7 +6,7 @@ export asp=$home/AutoSeg/Projects
 export TERM=screen-256color
 
 # load my functions and aliases
-source $home/.dotfiles/bash_aliases
+source $home/.dotfiles/aliases
 
 # rbenv
 if [ -d "$home/.rbenv" ]; then
