@@ -8,6 +8,7 @@ source ~/.dotfiles/my_env
 
 # do not correct me!!
 unsetopt correct_all
+unsetopt correct
 
 # I like default grep color
 export GREP_COLOR=""
