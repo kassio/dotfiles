@@ -34,8 +34,8 @@ alias be='bundle exec '
 alias vu='vagrant up'
 alias vh='vagrant halt'
 alias vr='vagrant reload'
-alias vs='vagrant ssh'
-alias vus='vagrant up && vagrant ssh'
+alias vs='DISPLAY=:1 vagrant ssh'
+alias vus='vu && vs'
 
 loop_this() {
   local params=($(echo "$@"))
