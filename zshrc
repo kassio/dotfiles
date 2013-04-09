@@ -1,10 +1,16 @@
-plugins=(git rbenv rails vagrant brew zsh-syntax-highlighting)
+DOTFILES=$HOME/.dotfiles
+ZSH=$DOTFILES/oh-my-zsh
+export DISABLE_AUTO_TITLE=true # fix command echo in some terminal emmulators
 
-ZSH=$HOME/.dotfiles/oh-my-zsh
+plugins=(git rbenv rails vagrant brew)
 source $ZSH/oh-my-zsh.sh
 
-source ~/.dotfiles/my_env
-###############################################################################
+for plugin in `ls $DOTFILES/zsh-plugins`; do
+  source $DOTFILES/zsh-plugins/$plugin/*plugin.zsh
+done
+
+source $DOTFILES/my_env
+source $DOTFILES/zprompt
 
 # do not correct me!!
 unsetopt correct_all
@@ -24,35 +30,6 @@ zstyle ':completion:*' list-colors $LSCOLORS
 
 # easy regexp on list files
 setopt extendedglob
-
-ZSH_THEME_GIT_PROMPT_AHEAD=">"
-ZSH_THEME_GIT_PROMPT_BEHIND="<"
-ZSH_THEME_GIT_PROMPT_ADDED="+"
-ZSH_THEME_GIT_PROMPT_DELETED="!"
-ZSH_THEME_GIT_PROMPT_DIRTY="*"
-ZSH_THEME_GIT_PROMPT_MODIFIED="*"
-ZSH_THEME_GIT_PROMPT_STASHED="$"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
-ZSH_THEME_GIT_PROMPT_UNMERGED="§"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%%"
-ZSH_THEME_GIT_PROMPT_PREFIX="$FG[011]("
-ZSH_THEME_GIT_PROMPT_SUFFIX=")%{$reset_color%}"
-
-git_prompt_info () {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  GIT_STATUS=$(git_prompt_status)
-  [[ -n $GIT_STATUS ]] && GIT_STATUS=" $GIT_STATUS"
-  echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$GIT_STATUS$ZSH_THEME_GIT_PROMPT_SUFFIX"
-}
-
-build_ps1 () {
-  local current_dir="$FG[012]%3~";
-  local git_branch='$(git_prompt_info)';
-  local sign=$([ $UID -eq 0 ] && echo '$FG[160]#' || echo '$FG[046]$');
-  local user_custom=$([ -e $home/.user_ps1 ] && cat $home/.user_ps1);
-
-  export PROMPT="${user_custom}${current_dir}${git_branch}${sign}%{$reset_color%} "
-}; build_ps1
 
 # autocomplete to my projects
 pro() { cd $projects/$1;  }
