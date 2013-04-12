@@ -2,7 +2,7 @@ export DOTFILES=$HOME/.dotfiles
 export OZSH=$DOTFILES/oh-my-zsh
 export DISABLE_AUTO_TITLE=true # fix command echo in some terminal emmulators
 
-plugins=(git rbenv rails vagrant brew)
+plugins=(git rbenv rails3 rails vagrant brew vundle colored-man heroku)
 source $OZSH/oh-my-zsh.sh
 
 for plugin in `ls $DOTFILES/zsh-plugins`; do
