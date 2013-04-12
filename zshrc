@@ -1,15 +1,16 @@
-DOTFILES=$HOME/.dotfiles
-ZSH=$DOTFILES/oh-my-zsh
+export DOTFILES=$HOME/.dotfiles
+export OZSH=$DOTFILES/oh-my-zsh
 export DISABLE_AUTO_TITLE=true # fix command echo in some terminal emmulators
 
 plugins=(git rbenv rails vagrant brew)
-source $ZSH/oh-my-zsh.sh
+source $OZSH/oh-my-zsh.sh
 
 for plugin in `ls $DOTFILES/zsh-plugins`; do
   source $DOTFILES/zsh-plugins/$plugin/*plugin.zsh
 done
 
 source $DOTFILES/my_env
+source $DOTFILES/aliases
 source $DOTFILES/zprompt
 
 # do not correct me!!
@@ -39,3 +40,5 @@ compdef _pro pro
 asp() { cd $asp/$1;  }
 _asp() { _files -W $asp -/; }
 compdef _asp asp
+
+# vim:ft=zsh:

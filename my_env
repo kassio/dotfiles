@@ -3,10 +3,6 @@ export user=`cat $HOME/.main_user`
 export home="$home/$user"
 export projects=$home/Projects
 export asp=$home/AutoSeg/Projects
-export TERM=screen-256color
-
-# load my functions and aliases
-source $home/.dotfiles/aliases
 
 # rbenv
 if [ -d "$home/.rbenv" ]; then
@@ -32,6 +28,7 @@ export EDITOR='vim'
 # Make ctrl-s works to incremental search, like ctrl-r to reverse
 stty -ixon
 
+# History
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 export HISTCONTROL=ignoreboth
 
@@ -48,14 +45,14 @@ export LESS_TERMCAP_ue=$(printf '\e[0m') # leave underline mode
 export LESS_TERMCAP_us=$(printf '\e[04;36m') # enter underline mode - cyan
 export LESS=-r
 
-
+# mysql prompt
 export MYSQL_PS1='\d\$ '
 
+# my lang
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
+# local env
 [ -e "$home/.env" ] && source $home/.env
-
-export PATH="$PATH:$home/.dotfiles/bin"
 
 # vim:ft=sh:
