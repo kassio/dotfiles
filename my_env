@@ -4,6 +4,9 @@ export home="$home/$user"
 export projects=$home/Projects
 export asp=$home/AutoSeg/Projects
 
+# local bin
+export PATH="$PATH:./bin:./b"
+
 # rbenv
 if [ -d "$home/.rbenv" ]; then
   # rbenv autocomplete
