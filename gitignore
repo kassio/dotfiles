@@ -8,5 +8,5 @@
 .rbenv-version
 .svn
 .env
-b/
+bbin/
 .sass-cache
