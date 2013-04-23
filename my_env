@@ -8,6 +8,9 @@ export asp=$home/AutoSeg/Projects
 export BUNDLER_BINSTUBS="./bbin:../bbin"
 export PATH="$BUNDLER_BINSTUBS:$PATH"
 
+# rails 4 bin
+export PATH="./bin:$PATH"
+
 # rbenv
 if [ -d "$home/.rbenv" ]; then
   # rbenv autocomplete
