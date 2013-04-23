@@ -6,7 +6,7 @@ export asp=$home/AutoSeg/Projects
 
 # rails bundler bin
 export BUNDLER_BINSTUBS="./bbin:../bbin"
-export PATH="./bbin:../bbin:$PATH"
+export PATH="$BUNDLER_BINSTUBS:$PATH"
 
 # rbenv
 if [ -d "$home/.rbenv" ]; then
