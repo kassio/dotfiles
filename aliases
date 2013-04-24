@@ -29,7 +29,6 @@ killer() {
 alias h='history'
 
 alias r='rails'
-alias be='bundle exec '
 
 alias vu='vagrant up'
 alias vh='vagrant halt'
