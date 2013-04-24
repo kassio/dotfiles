@@ -4,12 +4,13 @@ export home="$home/$user"
 export projects=$home/Projects
 export asp=$home/AutoSeg/Projects
 
-# rails bundler bin
-export BUNDLER_BINSTUBS="./bbin:../bbin"
-export PATH="$BUNDLER_BINSTUBS:$PATH"
-
 # rails 4 bin
 export PATH="./bin:$PATH"
+
+# rails bundler bin
+export BUNDLE_BIN="vendor/bundle/bin"
+export BUNDLE_BIN="$BUNDLE_BIN:../$BUNDLE_BIN"
+export PATH="$BUNDLE_BIN:$PATH"
 
 # rbenv
 if [ -d "$home/.rbenv" ]; then

@@ -8,5 +8,6 @@
 .rbenv-version
 .svn
 .env
-bbin/
+vendor/bundle
+vendor/ruby
 .sass-cache
