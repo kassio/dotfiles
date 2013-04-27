@@ -2,6 +2,8 @@ alias g="git"
 alias gitl="git l"
 alias gits="git s"
 
+alias vi="vim"
+
 [[ $(uname) == 'Darwin' ]] && LS_COMMON="-G" || LS_COMMON="--color=auto"
 alias ls="ls $LS_COMMON"
 alias ll='ls -lh'
