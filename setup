@@ -1,6 +1,6 @@
 cp $HOME/.dotfiles/main_user.tpl $HOME/.main_user
 
-for f in bashrc zshrc gitignore gitconfig irbrc gemrc bundle profile; do
+for f in bashrc zshrc gitignore gitconfig irbrc gemrc profile; do
   file_path="$HOME/.dotfiles/$f"
   ln -sf $file_path $HOME/.$f
 done
