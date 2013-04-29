@@ -1,4 +1,5 @@
 source ~/.dotfiles/my_env
+source ~/.dotfiles/aliases
 
 # git
 export GIT_PS1_SHOWDIRTYSTATE=true
@@ -7,18 +8,18 @@ export GIT_PS1_SHOWUNTRACKEDFILES=true
 export GIT_PS1_SHOWUPSTREAM=true
 
 build_ps1() {
-  local blue="$(tput setaf 12)"
-  local red="$(tput setaf 160)"
-  local yellow="$(tput setaf 11)"
-  local white="$(tput setaf 7)"
-  local green="$(tput setaf 46)"
+  local blue='\[\e[0;34m\]'
+  local red='\[\e[0;31m\]'
+  local yellow='\[\e[01;33m\]'
+  local reset='\[\e[00m\]'
+  local green='\[\e[0;32m\]'
 
-  local git_ps1=$([[ `which git` ]] && echo "$yellow"'$(__git_ps1 "(%s)")' || echo "")
-  local pwd_ps1="$blue\W"
+  local git_ps1=$([[ `which __git_ps1` ]] && echo "$yellow"'$(__git_ps1 "(%s)")' || echo "")
+  local pwd_ps1="$blue\w"
   local prompt_ps1="$([[ ${EUID} == 0 ]] && echo $red'#' || echo $green'$')"
   [ -e "$home/.user_ps1" ] && user_ps1=`cat $home/.user_ps1`
 
-  export PS1="$user_ps1$git_ps1$pwd_ps1$prompt_ps1$white "
+  export PS1="\n$user_ps1$git_ps1$pwd_ps1\n$prompt_ps1$reset "
 }
 
 build_ps1
