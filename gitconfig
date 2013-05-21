@@ -23,11 +23,6 @@
   pager = true
 [color "decorate"]
   branch = 1
-[mergetool]
-  tool = opendiff
-[difftool]
-  tool = opendiff
-  prompt = false
 [alias]
   b = branch
   ci = commit
@@ -38,10 +33,5 @@
   today = log --stat --since=1.day --graph --pretty=oneline --abbrev-commit --date=relative
   tl = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset %s%Creset - %Cblue%d%Creset'
   tree = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset - %s%Creset' --graph
-# Github
-[url "git://github.com/"]# Read-only
-  insteadOf = gh:
-[url "git@github.com:"]# With write access
-  insteadOf = wgh:
 [color "diff"]
   whitespace = red
