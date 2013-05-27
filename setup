@@ -1,4 +1,4 @@
-cp $HOME/.dotfiles/main_user.tpl $HOME/.main_user
+[ ! -e $HOME/.main_user ] && cp $HOME/.dotfiles/main_user.tpl $HOME/.main_user
 
 for f in bashrc zshrc gitignore gitconfig irbrc gemrc profile; do
   file_path="$HOME/.dotfiles/$f"
