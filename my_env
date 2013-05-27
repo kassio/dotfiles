@@ -2,7 +2,7 @@ export home=$([[ $(uname) == 'Darwin' ]] && echo "/Users" || echo "/home")
 export user=`cat $HOME/.main_user`
 export home="$home/$user"
 export projects=$home/Projects
-export asp=$projects/AutoSeg
+export asp=$home/AutoSeg
 
 # rails bundler bin
 export PATH="./bin:$PATH"
