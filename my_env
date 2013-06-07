@@ -33,6 +33,11 @@ export EDITOR='vim'
 # Make ctrl-s works to incremental search, like ctrl-r to reverse
 stty -ixon
 
+# improve ls colors
+export CLICOLOR=1;
+export LSCOLORS="exgxfxdxcxdxdxhbgbecgc";
+export LS_COLORS="di=34:ln=36:so=35:pi=33:ex=32:bd=33:cd=33:su=37;41:sg=36;41:tw=34;42:ow=36;42:";
+
 # History
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 export HISTCONTROL=ignoreboth

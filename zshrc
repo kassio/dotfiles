@@ -20,11 +20,6 @@ unsetopt correct
 # I like default grep color
 export GREP_COLOR=""
 
-# improve ls colors
-export CLICOLOR=1;
-export LSCOLORS=exgxfxdxcxegedabagehbh;
-export LS_COLORS="di=34;:ln=36;:so=35;:pi=33;:ex=32;:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=34;47:ow=31;47:"
-
 # colors on autocomplete
 autoload -Uz compinit
 compinit
