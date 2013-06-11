@@ -1,6 +1,10 @@
 alias g="git"
-alias gitl="git l"
-alias gits="git s"
+unalias gp
+alias gp="git pull"
+unalias gl
+alias gl="git log"
+alias gps="git push"
+
 
 alias vi="vim"
 
