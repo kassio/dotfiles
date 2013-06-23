@@ -1,10 +1,11 @@
 alias g="git"
-unalias gp
-alias gp="git pull"
-unalias gl
-alias gl="git log"
-alias gps="git push"
-
+alias gs="g s"
+alias ga="g add"
+alias gc="g ci -v"
+alias gd="g diff"
+alias gp="g pull"
+alias gl="g l"
+alias gps="g push"
 
 alias vi="vim"
 
@@ -20,7 +21,6 @@ alias ..='cd ..'
   alias upgrade='brew update && brew upgrade'
 
 alias wiki="vim -c 'call PotwikiHome()'"
-alias upgrade_vim="vim +BundleUpdate +'normal u'"
 
 export GREP_OPTIONS="--color=auto"
 
