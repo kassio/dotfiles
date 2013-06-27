@@ -8,12 +8,12 @@ build_ps1() {
   local reset='\[\e[00m\]'
   local green='\[\e[0;32m\]'
 
-  local git_ps1="$yellow"$([[ `which __git_ps1` ]] && echo '$(__git_ps1 "(%s)")')
+  local git_ps1=$yellow'$(__git_ps1 "(%s)")'
   local pwd_ps1="$blue\w"
   local prompt_ps1="$([[ ${EUID} == 0 ]] && echo $red'#' || echo $green'$')"
-  local user_ps1=$([ -e "$home/.user_ps1" ] && cat $home/.user_ps1)
+  local user_ps1=$([ -e "$home/.user_ps1" ] && echo "`cat $home/.user_ps1` ")
 
-  export PS1="\n$user_ps1$git_ps1$pwd_ps1\n$prompt_ps1$reset "
+  export PS1="\n$user_ps1$pwd_ps1$git_ps1\n$prompt_ps1$reset "
 }
 
 build_ps1
