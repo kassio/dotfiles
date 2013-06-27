@@ -20,8 +20,6 @@ alias ..='cd ..'
 [[ $(uname) == 'Darwin' ]] &&
   alias upgrade='brew update && brew upgrade'
 
-alias wiki="vim -c 'call PotwikiHome()'"
-
 export GREP_OPTIONS="--color=auto"
 
 psg() {
