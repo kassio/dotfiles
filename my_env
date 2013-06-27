@@ -62,6 +62,12 @@ export MYSQL_PS1='\d\$ '
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
+# git stuff for prompt
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWUPSTREAM=true
+
 # local env
 [ -e "$home/.env" ] && source $home/.env
 

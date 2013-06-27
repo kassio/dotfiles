@@ -1,12 +1,6 @@
 source ~/.dotfiles/my_env
 source ~/.dotfiles/aliases
 
-# git
-export GIT_PS1_SHOWDIRTYSTATE=true
-export GIT_PS1_SHOWSTASHSTATE=true
-export GIT_PS1_SHOWUNTRACKEDFILES=true
-export GIT_PS1_SHOWUPSTREAM=true
-
 build_ps1() {
   local blue='\[\e[0;34m\]'
   local red='\[\e[0;31m\]'
