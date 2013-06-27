@@ -1,32 +1,19 @@
-ZSH_THEME_GIT_PROMPT_AHEAD=">"
-ZSH_THEME_GIT_PROMPT_BEHIND="<"
-ZSH_THEME_GIT_PROMPT_ADDED="+"
-ZSH_THEME_GIT_PROMPT_DELETED="!"
-ZSH_THEME_GIT_PROMPT_DIRTY="*"
-ZSH_THEME_GIT_PROMPT_MODIFIED="*"
-ZSH_THEME_GIT_PROMPT_STASHED="$"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
-ZSH_THEME_GIT_PROMPT_UNMERGED="§"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%%"
-ZSH_THEME_GIT_PROMPT_PREFIX="$FG[011]("
-ZSH_THEME_GIT_PROMPT_SUFFIX=")%{$reset_color%}"
-
-git_prompt_info () {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  GIT_STATUS=$(git_prompt_status)
-  [[ -n $GIT_STATUS ]] && GIT_STATUS=" $GIT_STATUS"
-  echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$GIT_STATUS$ZSH_THEME_GIT_PROMPT_SUFFIX"
-}
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWUPSTREAM=true
+GIT_PROMPT_PREFIX="$FG[011]"
+GIT_PROMPT_SUFFIX="%{$reset_color%}"
 
 build_ps1 () {
   local return_code="%(?..$FG[160]%? ↵)%{$reset_color%}";
   local current_dir="$FG[027]%~";
-  local git_branch='$(git_prompt_info)';
+  local git_ps1=$GIT_PROMPT_PREFIX"$(__git_ps1)"$GIT_PROMPT_SUFFIX;
   local sign=$([ $UID -eq 0 ] && echo '$FG[160]#' || echo '$FG[046]$');
   local user_custom=$(cat $home/.user_ps1 2>/dev/null) ;
 
   export PROMPT="
-${user_custom}${current_dir}${git_branch}
+${user_custom}${current_dir}${git_ps1}
 ${sign}%{$reset_color%} "
   export RPS1="${return_code}"
 }; build_ps1
