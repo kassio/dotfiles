@@ -26,7 +26,7 @@ shopt -s histappend
 
 # Autocomplete
 if [[ -n `which brew 2>/dev/null` ]]; then
-  if [ -f `brew --prefix`/etc/bash_completion ]; then
+  if [ -e `brew --prefix`/etc/bash_completion ]; then
     source `brew --prefix`/etc/bash_completion;
     source `brew --prefix`/Library/Contributions/brew_bash_completion.sh;
   fi
