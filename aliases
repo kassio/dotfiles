@@ -6,6 +6,7 @@ alias gd="g diff"
 alias gp="g pull"
 alias gl="g l"
 alias gps="g push"
+alias gclean="g clean"
 
 alias vi="vim"
 
