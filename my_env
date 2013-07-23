@@ -5,8 +5,6 @@ export projects=$home/Projects
 export asp=$home/AutoSeg
 
 # rails bundler bin
-export PATH="./bin:$PATH"
-export BUNDLE_BIN="vendor/bundle/bin"
 export PATH="$BUNDLE_BIN:../$BUNDLE_BIN:$PATH"
 
 # rbenv
