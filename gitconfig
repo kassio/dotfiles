@@ -11,22 +11,11 @@
   default = current
 [color]
   branch = true
-  diff = true
-  interactive = true
-  status = true
-  grep = true
-  ui = true
-  pager = true
-[color "decorate"]
-  branch = true
-[color "diff"]
-  whitespace = red reverse
-  meta = yellow bold
-  frag = magenta bold
-[color "branch"]
-  current = yellow reverse
-  local = yellow
-  remote = green
+  diff = auto
+  interactive = auto
+  status = auto
+  grep = auto
+  ui = auto
 [pager]
   diff = false
 [alias]
@@ -35,7 +24,8 @@
   co = checkout
   st = status
   s = status -sb
-  l = log --oneline --decorate=full
+  l = !git --no-pager log --oneline --decorate=full -20
+  lp = log --oneline --decorate=full
   today = log --stat --since=1.day --graph --pretty=oneline --abbrev-commit --date=relative
   tl = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset %s%Creset - %Cblue%d%Creset'
   tree = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset - %s%Creset' --graph

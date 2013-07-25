@@ -38,3 +38,5 @@ _asp() { _files -W $asp -/; }
 compdef _asp asp
 
 # vim:ft=zsh:
+
+asdf     
