@@ -9,7 +9,6 @@ export PATH="$BUNDLE_BIN:../$BUNDLE_BIN:$PATH"
 
 # rbenv
 if [ -d "$home/.rbenv" ]; then
-  # rbenv autocomplete
   export PATH="$home/.rbenv/bin:/usr/local/sbin:$PATH"
   eval "$(rbenv init -)"
 

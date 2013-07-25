@@ -28,7 +28,7 @@ psg() {
 }
 
 killer() {
-  kill -9 $(psg $@ | awk '{print $2}')
+  sudo kill -9 $(psg $@ | awk '{print $2}')
 }
 
 alias h='history'
