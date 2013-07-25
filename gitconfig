@@ -18,9 +18,19 @@
   ui = true
   pager = true
 [color "decorate"]
-  branch = 1
+  branch = true
 [color "diff"]
-  whitespace = red
+  whitespace = red reverse
+  meta = yellow bold
+  frag = magenta bold
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
 [pager]
   diff = false
 [alias]
