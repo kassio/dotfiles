@@ -1,16 +1,12 @@
 [user]
-  name = Kássio Borges
+  name = Kassio Borges
   email = kassioborgesm@gmail.com
 [core]
   excludesfile = ~/.gitignore
   editor = `which vim`
   whitespace = trailing-space,space-before-tab,indent-with-non-tab
 [help]
-  format = web
-  browser = GC
   autocorrect = 1
-[browser "GC"]
-  cmd = open
 [push]
   default = current
 [color]
@@ -23,6 +19,10 @@
   pager = true
 [color "decorate"]
   branch = 1
+[color "diff"]
+  whitespace = red
+[pager]
+  diff = false
 [alias]
   b = branch
   ci = commit
@@ -33,5 +33,3 @@
   today = log --stat --since=1.day --graph --pretty=oneline --abbrev-commit --date=relative
   tl = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset %s%Creset - %Cblue%d%Creset'
   tree = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset - %s%Creset' --graph
-[color "diff"]
-  whitespace = red
