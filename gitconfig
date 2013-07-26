@@ -16,12 +16,11 @@
   status = auto
   grep = auto
   ui = auto
-[pager]
-  diff = false
 [alias]
   b = branch
   ci = commit
   co = checkout
+  d = !git --no-pager diff
   st = status
   s = status -sb
   l = !git --no-pager log --oneline --decorate=full -20
