@@ -21,6 +21,7 @@
   ci = commit
   co = checkout
   d = !git --no-pager diff
+  dp = diff
   st = status
   s = status -sb
   l = !git --no-pager log --oneline --decorate=full -20
