@@ -5,11 +5,12 @@ export projects=$home/Projects
 export asp=$home/AutoSeg
 
 # rails bundler bin
-export BUNDLE_BIN='bin'
-export PATH="$BUNDLE_BIN:../$BUNDLE_BIN:$PATH"
+export BUNDLE_BIN_PATH='bin'
+export PATH="$BUNDLE_BIN_PATH:../$BUNDLE_BIN_PATH:$PATH"
 
 # rbenv
-if [ -d "$home/.rbenv" ]; then
+if [ -d "$home/.rbenv" ]
+then
   export PATH="$home/.rbenv/bin:/usr/local/sbin:$PATH"
   eval "$(rbenv init -)"
 
@@ -23,7 +24,10 @@ fi
 
 ### Added by the Heroku Toolbelt
 _heroku_bin_path="/usr/local/heroku/bin"
-[ -d $_heroku_bin_path ] && export PATH="$_heroku_bin_path:$PATH"
+if [[ -d $_heroku_bin_path ]]
+then
+  export PATH="$_heroku_bin_path:$PATH"
+fi
 
 # Default editor
 export EDITOR='vim'
@@ -67,6 +71,9 @@ export GIT_PS1_SHOWUNTRACKEDFILES=true
 export GIT_PS1_SHOWUPSTREAM=true
 
 # local env
-[ -e "$home/.env" ] && source $home/.env
+if [[ -e "$home/.env" ]]
+then
+  source $home/.env
+fi
 
 # vim:ft=sh:

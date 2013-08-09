@@ -25,18 +25,24 @@ shopt -s globstar
 shopt -s histappend
 
 # Autocomplete
-if [[ -n `which brew 2>/dev/null` ]]; then
-  if [ -e `brew --prefix`/etc/bash_completion ]; then
+if [[ -n `which brew 2>/dev/null` ]]
+then
+  if [ -e `brew --prefix`/etc/bash_completion ]
+  then
     source `brew --prefix`/etc/bash_completion;
     source `brew --prefix`/Library/Contributions/brew_bash_completion.sh;
   fi
 
-  if [ -e "`brew --prefix`/etc/bash_completion.d/password-store" ]; then
+  if [ -e "`brew --prefix`/etc/bash_completion.d/password-store" ]
+  then
     source "`brew --prefix`/etc/bash_completion.d/password-store";
   fi
 fi
 
-[ -e /etc/bash_completion ] && source /etc/bash_completion
+if [[ -e /etc/bash_completion ]]
+then
+  source /etc/bash_completion
+fi
 
 complete -A hostname   rsh rcp telnet rlogin r ftp ping disk
 complete -A export     printenv
@@ -50,7 +56,6 @@ complete -o default -o nospace -F _capcomplete cap
 complete -o default -o nospace -F _thorcomplete thor
 
 pro() { cd $projects/$1; }
-
 _pro() {
   local cur
   cur=${COMP_WORDS[COMP_CWORD]}
@@ -59,7 +64,6 @@ _pro() {
 complete -o nospace -F _pro pro
 
 asp() { cd $asp/$1; }
-
 _asp() {
   local cur
   cur=${COMP_WORDS[COMP_CWORD]}
@@ -67,6 +71,9 @@ _asp() {
 }
 complete -o nospace -F _asp asp
 
-[ -e "$home/.env" ] && source $home/.env
+if [[ -e "$home/.env" ]]
+then
+  source $home/.env
+fi
 
 # vim:ft=sh:

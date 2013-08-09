@@ -5,7 +5,8 @@ export DISABLE_AUTO_TITLE=true # fix command echo in some terminal emmulators
 plugins=(gitfast rbenv vagrant brew vundle colored-man heroku)
 source $ZSH/oh-my-zsh.sh
 
-for plugin in `ls $DOTFILES/zsh-plugins`; do
+for plugin in `ls $DOTFILES/zsh-plugins`
+do
   source $DOTFILES/zsh-plugins/$plugin/*plugin.zsh
 done
 

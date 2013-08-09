@@ -1,8 +1,17 @@
-[ ! -e $HOME/.main_user ] && cp $HOME/.dotfiles/main_user.tpl $HOME/.main_user
+#!/bin/bash
 
-for f in bashrc zshrc gitignore gitconfig irbrc gemrc profile; do
+if [[ ! -e $HOME/.main_user ]]
+then
+  cp $HOME/.dotfiles/main_user.tpl $HOME/.main_user
+fi
+
+for f in bashrc zshrc gitignore gitconfig irbrc gemrc profile
+do
   file_path="$HOME/.dotfiles/$f"
   ln -sf $file_path $HOME/.$f
 done
 
-[ -e $HOME/.zshrc ] && source $HOME/.zshrc >/dev/null 2>&1
+if [[ -e $HOME/.zshrc ]]
+then
+  source $HOME/.zshrc >/dev/null 2>&1
+fi

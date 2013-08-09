@@ -9,6 +9,4 @@ IRB.conf[:PROMPT_MODE] = :SIMPLE
 IRB.conf[:SAVE_HISTORY] = 1000
 IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
 
-if defined?(ActiveRecord)
-  ActiveRecord::Base.logger = Logger.new(STDOUT)
-end
+ActiveRecord::Base.logger = Logger.new(STDOUT) if defined?(ActiveRecord)
