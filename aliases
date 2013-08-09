@@ -1,19 +1,12 @@
-alias g="git"
-alias gs="g s"
-alias ga="g add"
-alias gc="g ci -v"
-alias gd="g d"
-alias gdp="g dp"
-alias gp="g pull"
-alias gl="g l"
-alias glp="g lp"
-alias gtl="g tl"
-alias gps="g push"
-alias gclean="g clean"
-
 alias vi="vim"
 
-[[ $(uname) == 'Darwin' ]] && LS_COMMON="-G" || LS_COMMON="--color=auto"
+if [[ $(uname) == 'Darwin' ]]
+then
+  LS_COMMON="-G"
+else
+  LS_COMMON="--color=auto"
+fi
+
 alias ls="ls $LS_COMMON"
 alias ll='ls -lh'
 alias l='ls -A'
@@ -21,8 +14,10 @@ alias la='ls -lhA'
 
 alias ..='cd ..'
 
-[[ $(uname) == 'Darwin' ]] &&
+if [[ $(uname) == 'Darwin' ]]
+then
   alias upgrade='brew update && brew upgrade'
+fi
 
 export GREP_OPTIONS="--color=auto"
 
@@ -44,12 +39,33 @@ alias vr='vagrant reload'
 alias vs='DISPLAY=:1 vagrant ssh'
 alias vus='vu && vs'
 
+alias g="git"
+alias gs="g s"
+alias ga="g add"
+alias gc="g ci -v"
+alias gd="g d"
+alias gdp="g dp"
+alias gp="g pull"
+alias gl="g l"
+alias glp="g lp"
+alias gtl="g tl"
+alias gps="g push"
+alias gclean="g clean"
+
+bundle_bin_for() {
+  for gem in "$@"
+  do
+    bundle binstubs $gem --force
+  done
+}
+
 loop_this() {
   local params=($(echo "$@"))
   local count=${params[0]}
   local command=${params[@]:1};
 
-  for ((i = 0; i < $count; )); do
+  for ((i = 0; i < $count; ))
+  do
     echo ">> Build $((++i))";
     echo ">> $command";
     $command
