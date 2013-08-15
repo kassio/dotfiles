@@ -5,7 +5,7 @@
 .directory
 *.dir
 .DS_Store
-.rbenv-version
+.ruby-version
 .svn
 .env
 vendor/bundle
