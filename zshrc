@@ -10,6 +10,12 @@ do
   source $DOTFILES/zsh-plugins/$plugin/*plugin.zsh
 done
 
+# Fix to use tmux, rbenv and zsh
+if [ -x /usr/libexec/path_helper ]; then
+  PATH=""
+  eval `/usr/libexec/path_helper -s`
+fi
+
 source $DOTFILES/my_env
 source $DOTFILES/aliases
 source $DOTFILES/zprompt
