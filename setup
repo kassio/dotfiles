@@ -5,7 +5,7 @@ then
   cp $HOME/.dotfiles/main_user.tpl $HOME/.main_user
 fi
 
-for f in bashrc zshrc gitignore gitconfig irbrc gemrc profile
+for f in bashrc zshrc gitignore gitconfig irbrc gemrc profile tmux.conf
 do
   file_path="$HOME/.dotfiles/$f"
   ln -sf $file_path $HOME/.$f
