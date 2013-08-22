@@ -5,3 +5,5 @@ then
     . "$HOME/.bashrc"
   fi
 fi
+
+# vim:ft=sh:

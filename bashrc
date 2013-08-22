@@ -14,9 +14,7 @@ build_ps1() {
   local user_ps1=$([ -e "$home/.user_ps1" ] && echo "`cat $home/.user_ps1` ")
 
   export PS1="\n$user_ps1$pwd_ps1$git_ps1\n$prompt_ps1$reset "
-}
-
-build_ps1
+}; build_ps1
 
 # Make ** works beautiful, works to any nested directory.
 shopt -s globstar
