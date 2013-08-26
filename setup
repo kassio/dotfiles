@@ -1,17 +1,24 @@
 #!/bin/bash
 
+cd $HOME
+
+link_files() {
+  local file_path="$HOME/.dotfiles"
+
+  for f in bashrc zshrc gitignore gitconfig irbrc gemrc profile tmux.conf
+  do
+    ln -sf "$file_path/$f" $HOME/.$f
+  done
+}; link_files
+
 if [[ ! -e $HOME/.main_user ]]
 then
-  cp $HOME/.dotfiles/main_user.tpl $HOME/.main_user
+  echo `whoami` > $HOME/.main_user
 fi
-
-for f in bashrc zshrc gitignore gitconfig irbrc gemrc profile tmux.conf
-do
-  file_path="$HOME/.dotfiles/$f"
-  ln -sf $file_path $HOME/.$f
-done
 
 if [[ -e $HOME/.zshrc ]]
 then
   source $HOME/.zshrc >/dev/null 2>&1
 fi
+
+cd $HOME
