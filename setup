@@ -5,7 +5,7 @@ cd $HOME
 link_files() {
   local file_path="$HOME/.dotfiles"
 
-  for f in bashrc zshrc gitignore gitconfig irbrc gemrc profile tmux.conf
+  for f in bashrc zshrc gitignore gitconfig irbrc gemrc profile tmux.conf ctags
   do
     ln -sf "$file_path/$f" $HOME/.$f
   done

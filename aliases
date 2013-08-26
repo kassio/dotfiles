@@ -71,4 +71,8 @@ loop_this() {
   done;
 }
 
+alias retag='ctags *'
+
+alias reload='source ~/.zshrc'
+
 # vim:ft=sh:
