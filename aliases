@@ -35,7 +35,6 @@ alias vr='vagrant reload'
 alias vs='DISPLAY=:1 vagrant ssh'
 alias vus='vu && vs'
 
-unalias g
 g() {
   if [[ $# > 0 ]]
   then
@@ -43,6 +42,10 @@ g() {
   else
     git s
   fi
+}
+
+gcm() {
+  git commit -m "$@"
 }
 
 alias ga="g add"
