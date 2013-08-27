@@ -14,7 +14,8 @@ done
 source "$DOTFILES/oh-my-zsh/plugins/gitfast/git-prompt.sh"
 
 # Fix to use tmux, rbenv and zsh
-if [ -x /usr/libexec/path_helper ]; then
+if [ -x /usr/libexec/path_helper ]
+then
   PATH=""
   eval `/usr/libexec/path_helper -s`
 fi

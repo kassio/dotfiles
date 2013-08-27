@@ -62,16 +62,16 @@ alias gcl="g clean"
 function loop_this {
   local params=($(echo "$@"))
   local count=${params[0]}
-  local command=${params[@]:1};
+  local command=${params[@]:1}
 
   for ((i = 0; i < $count; ))
   do
-    echo ">> Build $((++i))";
-    echo ">> $command";
+    echo ">> Build $((++i))"
+    echo ">> $command"
     $command
-    [[ $? != 0 ]] && break;
-    echo "";
-  done;
+    [[ $? != 0 ]] && break
+    echo ""
+  done
 }
 
 alias retag='ctags *'
