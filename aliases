@@ -17,11 +17,11 @@ alias ..='cd ..'
 
 export GREP_OPTIONS="--color=auto"
 
-psg() {
+function psg {
   ps aux | grep -i $@ | grep -v grep
 }
 
-killer() {
+function killer {
   sudo kill -9 $(psg $@ | awk '{print $2}')
 }
 
@@ -35,7 +35,7 @@ alias vr='vagrant reload'
 alias vs='DISPLAY=:1 vagrant ssh'
 alias vus='vu && vs'
 
-g() {
+function g {
   if [[ $# > 0 ]]
   then
     git $@
@@ -44,8 +44,8 @@ g() {
   fi
 }
 
-gcm() {
-  git commit -m "$@"
+function gcm {
+  git commit -m "$*"
 }
 
 alias ga="g add"
@@ -59,7 +59,7 @@ alias gtl="g tl"
 alias gps="g push"
 alias gcl="g clean"
 
-loop_this() {
+function loop_this {
   local params=($(echo "$@"))
   local count=${params[0]}
   local command=${params[@]:1};
