@@ -35,6 +35,7 @@ alias vr='vagrant reload'
 alias vs='DISPLAY=:1 vagrant ssh'
 alias vus='vu && vs'
 
+unalias g
 function g {
   if [[ $# > 0 ]]
   then
@@ -44,20 +45,26 @@ function g {
   fi
 }
 
+unalias gcm
 function gcm {
   git commit -m "$*"
 }
 
 alias ga="g add"
+alias gb="g b"
 alias gc="g ci -v"
+alias gcl="g clean"
+alias gco="g co"
 alias gd="g d"
 alias gdp="g dp"
-alias gp="g pull"
 alias gl="g l"
 alias glp="g lp"
-alias gtl="g tl"
+alias gm="g m"
+alias gp="g pull"
 alias gps="g push"
-alias gcl="g clean"
+alias gtl="g tl"
+unalias gclean
+alias gclean="g clean -fd"
 
 function loop_this {
   local params=($(echo "$@"))

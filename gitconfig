@@ -22,10 +22,11 @@
   co = checkout
   d = !git --no-pager diff
   dp = diff
-  st = status
-  s = status -sb
   l = !git --no-pager log --oneline --decorate=full -20
   lp = log --oneline --decorate=full
-  today = log --stat --since=1.day --graph --pretty=oneline --abbrev-commit --date=relative
+  m = merge
+  s = status -sb
+  st = status
   tl = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset %s%Creset - %Cblue%d%Creset'
+  today = log --stat --since=1.day --graph --pretty=oneline --abbrev-commit --date=relative
   tree = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset - %s%Creset' --graph

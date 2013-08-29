@@ -2,16 +2,13 @@ export DOTFILES=$HOME/.dotfiles
 export ZSH=$DOTFILES/oh-my-zsh
 export DISABLE_AUTO_TITLE=true # fix command echo in some terminal emmulators
 
-plugins=(rbenv brew vundle heroku)
+plugins=(gitfast rbenv brew vundle heroku)
 source $ZSH/oh-my-zsh.sh
 
 for plugin in `ls $DOTFILES/zsh-plugins`
 do
   source $DOTFILES/zsh-plugins/$plugin/*plugin.zsh
 done
-
-# git prompt
-source "$DOTFILES/oh-my-zsh/plugins/gitfast/git-prompt.sh"
 
 # Fix to use tmux, rbenv and zsh
 if [ -x /usr/libexec/path_helper ]
