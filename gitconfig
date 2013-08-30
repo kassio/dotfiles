@@ -17,6 +17,7 @@
   grep = auto
   ui = auto
 [alias]
+  autoseg = config user.email \"kassio.borges@autoseg.com\"
   b = branch
   ci = commit
   co = checkout
@@ -30,3 +31,5 @@
   tl = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset %s%Creset - %Cblue%d%Creset'
   today = log --stat --since=1.day --graph --pretty=oneline --abbrev-commit --date=relative
   tree = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset - %s%Creset' --graph
+
+# vim:ft=sh:
