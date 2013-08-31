@@ -18,6 +18,7 @@
   ui = auto
 [alias]
   autoseg = config user.email \"kassio.borges@autoseg.com\"
+  personal = config user.email \"kassioborgesm@gmail.com\"
   b = branch
   ci = commit
   co = checkout
