@@ -20,16 +20,16 @@
   autoseg = config user.email \"kassio.borges@autoseg.com\"
   personal = config user.email \"kassioborgesm@gmail.com\"
   b = branch
-  ci = commit
+  ci = commit -v
+  cl = clean
   co = checkout
   d = !git --no-pager diff
   dp = diff
-  l = !git --no-pager log --oneline --decorate=full -20
-  lp = log --oneline --decorate=full
+  l = !git --no-pager log -20 --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset %s%Creset -%Cblue%d%Creset'
+  lp = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset %s%Creset -%Cblue%d%Creset'
   m = merge
   s = status -sb
   st = status
-  tl = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset %s%Creset - %Cblue%d%Creset'
   today = log --stat --since=1.day --graph --pretty=oneline --abbrev-commit --date=relative
   tree = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset - %s%Creset' --graph
 
