@@ -3,15 +3,15 @@ alias vi="vim"
 if [[ $(uname) == 'Darwin' ]]
 then
   alias upgrade='brew update && brew upgrade'
-  LS_COMMON="-G"
+  LS_COMMON="-G -th"
 else
-  LS_COMMON="--color=auto"
+  LS_COMMON="--color=auto -th"
 fi
 
 alias ls="ls $LS_COMMON"
-alias ll='ls -lh'
 alias l='ls -A'
-alias la='ls -lhA'
+alias ll='ls -l'
+alias la='ls -lA'
 
 alias ..='cd ..'
 
