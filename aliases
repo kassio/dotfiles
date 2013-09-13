@@ -67,7 +67,7 @@ function loop_this {
   done
 }
 
-alias retag='ctags *'
+alias retag='ctags --tag-relative -Rf.git/tags.$$ --exclude=.git --languages=-javascript,sql'
 
 alias reload='source ~/.zshrc'
 
