@@ -4,6 +4,8 @@ export home="$home/$user"
 export projects=$home/Projects
 export asp=$home/AutoSeg
 
+export PATH="$PATH:$home/.dotfiles/bin"
+
 # rails bundler bin
 export BUNDLE_BIN_PATH='bin'
 export PATH="$BUNDLE_BIN_PATH:../$BUNDLE_BIN_PATH:$PATH"

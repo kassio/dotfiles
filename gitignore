@@ -12,3 +12,5 @@ vendor/bundle
 vendor/ruby
 .sass-cache
 tags
+gems.tags
+config/gems.tags
