@@ -28,6 +28,8 @@ function killer {
 alias h='history'
 
 alias r='rails'
+alias REP='RAILS_ENV=production'
+alias RET='RAILS_ENV=test'
 
 alias vu='vagrant up'
 alias vh='vagrant halt'
