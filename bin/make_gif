@@ -1,0 +1,34 @@
+#!/bin/bash
+
+if [[ "$1" == "-h" || "$1" == "--help" ]]
+then
+cat <<-EOF
+Usage:
+make_gif [filename] [resolution]
+
+filename
+  default: out.gif
+
+resolution in widthxheight format
+  default: 300x300
+
+EOF
+
+exit
+fi
+
+out_file="${1:-out}"
+resolution="${2:-300x300}"
+
+if la *.jpg &>/dev/null 2>&1
+then
+  time convert +dither -layers Optimize \
+    -resize $resolution\> *.jpg  GIF:- | \
+    gifsicle --colors 256 \
+    --delay=10 \
+    --loop \
+    --optimize=3 \
+    --multifile - > "$out_file.gif"
+else
+  echo 'No jpg files here'
+fi
