@@ -48,11 +48,13 @@ alias gdp="g dp"
 alias gl="g l"
 alias glp="g lp"
 alias gm="g m"
-alias gs="g s"
 alias gp="g pull"
 alias gps="g push"
-alias gt="g tree"
+alias gs="g s"
+alias gsub="git submodule"
+alias gt="g tag"
 alias gtoday="g today"
+alias gtree="g tree"
 
 function loop_this {
   local params=($(echo "$@"))
