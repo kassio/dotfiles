@@ -1,7 +1,7 @@
 --follow
+--nosql
 --ignore-dir=log
 --ignore-dir=tmp
 --ignore-dir=public/assets
---nosql
 --ignore-file=match:tags
 --ignore-file=match:gem.tags
