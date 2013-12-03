@@ -3,7 +3,7 @@ alias vi="vim"
 if [[ $(uname) == 'Darwin' ]]
 then
   alias upgrade='brew update && brew upgrade'
-  LS_COMMON="-G -th"
+  LS_COMMON="-G -h"
 else
   LS_COMMON="--color=auto -th"
 fi
@@ -46,6 +46,7 @@ alias gco="g co"
 alias gd="g d"
 alias gdp="g dp"
 alias gf="g f"
+alias gfix="gc --amend --no-edit"
 alias gl="g l"
 alias glp="g lp"
 alias gm="g m"
