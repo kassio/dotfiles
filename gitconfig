@@ -5,10 +5,16 @@
   excludesfile = ~/.gitignore
   editor = `which vim`
   whitespace = trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol
-[help]
-  autocorrect = 1
+[init]
+  templatedir = ~/.dotfiles/git_template
 [push]
   default = current
+[pull]
+  rebase = true
+[merge]
+  ff = false
+[help]
+  autocorrect = 1
 [color]
   branch = true
   diff = auto
@@ -34,7 +40,5 @@
   t = tag
   today = log --stat --since=1.day --graph --pretty=oneline --abbrev-commit --date=relative
   tree = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset - %s%Creset' --graph
-[init]
-  templatedir = ~/.dotfiles/git_template
 
 # vim:ft=sh:
