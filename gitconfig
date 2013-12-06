@@ -11,8 +11,6 @@
   default = current
 [pull]
   rebase = true
-[merge]
-  ff = false
 [help]
   autocorrect = 1
 [color]
