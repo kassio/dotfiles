@@ -4,3 +4,7 @@
     cd ~/.dotfiles
     ./setup
     source ~/.zshrc
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/kassio/dotfiles/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
