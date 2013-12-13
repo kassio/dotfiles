@@ -34,8 +34,7 @@ alias RT='RAILS_ENV=test'
 alias vu='vagrant up'
 alias vh='vagrant halt'
 alias vr='vagrant reload'
-alias vs='DISPLAY=:1 vagrant ssh'
-alias vus='vu && vs'
+alias vs='vu && DISPLAY=:1 vagrant ssh'
 
 alias g="git"
 alias ga="g add"
@@ -53,6 +52,7 @@ alias gm="g m"
 alias gp="g pull"
 alias gps="g push"
 alias gs="g s"
+alias gst="g stash"
 alias gsub="git submodule"
 alias gt="g tag"
 alias gtoday="g today"
