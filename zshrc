@@ -1,6 +1,7 @@
 export DOTFILES=$HOME/.dotfiles; source $DOTFILES/my_env
 export ZSH=$DOTFILES/oh-my-zsh
 export DISABLE_AUTO_TITLE=true # fix command echo in some terminal emmulators
+export PATH="$PATH:/usr/local/bin"
 
 plugins=(rbenv brew vundle heroku)
 source $ZSH/oh-my-zsh.sh
