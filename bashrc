@@ -16,31 +16,21 @@ build_ps1() {
   export PS1="$user_ps1$pwd_ps1$git_ps1\n$prompt_ps1$reset "
 }; build_ps1
 
+# Autocomplete
+if [[ -e `brew --prefix`/etc/bash_completion ]]
+then
+  source `brew --prefix`/etc/bash_completion;
+  source `brew --prefix`/Library/Contributions/brew_bash_completion.sh;
+elif [[ -e /etc/bash_completion ]]
+then
+  source /etc/bash_completion
+fi
+
 # Make ** works beautiful, works to any nested directory.
 shopt -s globstar
 
 # Append user history
 shopt -s histappend
-
-# Autocomplete
-if [[ -n `which brew 2>/dev/null` ]]
-then
-  if [ -e `brew --prefix`/etc/bash_completion ]
-  then
-    source `brew --prefix`/etc/bash_completion;
-    source `brew --prefix`/Library/Contributions/brew_bash_completion.sh;
-  fi
-
-  if [ -e "`brew --prefix`/etc/bash_completion.d/password-store" ]
-  then
-    source "`brew --prefix`/etc/bash_completion.d/password-store";
-  fi
-fi
-
-if [[ -e /etc/bash_completion ]]
-then
-  source /etc/bash_completion
-fi
 
 complete -A hostname   rsh rcp telnet rlogin r ftp ping disk
 complete -A export     printenv
