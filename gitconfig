@@ -1,6 +1,5 @@
 [user]
   name = Kassio Borges
-  email = kassioborgesm@gmail.com
 [core]
   excludesfile = ~/.gitignore
   editor = `which vim`
@@ -21,8 +20,8 @@
   grep = auto
   ui = auto
 [alias]
-  autoseg = config user.email \"kassio.borges@autoseg.com\"
-  personal = config user.email \"kassioborgesm@gmail.com\"
+  autoseg = config user.email "kassio.borges@autoseg.com"
+  personal = config user.email "kassioborgesm@gmail.com"
   b = branch
   ci = commit -v
   cl = clean
