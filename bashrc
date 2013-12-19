@@ -16,15 +16,19 @@ build_ps1() {
 }; build_ps1
 
 # Autocomplete
-brew_prefix="`brew --prefix`"
-if [[ -e $brew_prefix/etc/bash_completion ]]
-then
-  source $brew_prefix/etc/bash_completion
-  source $brew_prefix/Library/Contributions/brew_bash_completion.sh
-elif [[ -e /etc/bash_completion ]]
-then
-  source /etc/bash_completion
-fi
+load_bash_completion() {
+  local brew_prefix="`which brew --prefix`"
+  local prefix=${brew_prefix:-/usr/local}
+
+  if [[ -e $prefix/etc/bash_completion ]]
+  then
+    source $prefix/etc/bash_completion
+    source $prefix/Library/Contributions/brew_bash_completion.sh
+  elif [[ -e /etc/bash_completion ]]
+  then
+    source /etc/bash_completion
+  fi
+}; load_bash_completion
 
 # Make ** works beautiful, works to any nested directory.
 shopt -s globstar
