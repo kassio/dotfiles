@@ -1,3 +1,5 @@
+source $DOTFILES/aliases
+
 export home=$([[ $(uname) == 'Darwin' ]] && echo "/Users" || echo "/home")
 export user=`cat $HOME/.main_user`
 export home="$home/$user"
@@ -77,7 +79,7 @@ then
   source $home/.env
 fi
 
-export PATH="$PATH:$home/.dotfiles/bin"
+export PATH="$PATH:$DOTFILES/bin"
 
 # rails bundler bin
 export PATH="../bin:./bin:$PATH"

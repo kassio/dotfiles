@@ -1,4 +1,4 @@
-export DOTFILES=$HOME/.dotfiles
+export DOTFILES=$HOME/.dotfiles; source $DOTFILES/my_env
 export ZSH=$DOTFILES/oh-my-zsh
 export DISABLE_AUTO_TITLE=true # fix command echo in some terminal emmulators
 
@@ -10,6 +10,14 @@ do
   source $DOTFILES/zsh-plugins/$plugin/*plugin.zsh
 done
 
+source $DOTFILES/zprompt
+
+brew_completion="`brew --prefix`/Library/Contributions/brew_zsh_completion.sh"
+if [[ -e $brew_completion ]]
+then
+  source $brew_completion
+fi
+
 # Fix to use tmux, rbenv and zsh
 if [ -x /usr/libexec/path_helper ]
 then
@@ -17,9 +25,6 @@ then
   eval `/usr/libexec/path_helper -s`
 fi
 
-source $DOTFILES/my_env
-source $DOTFILES/aliases
-source $DOTFILES/zprompt
 
 # do not correct me!!
 unsetopt correct_all

@@ -13,9 +13,10 @@ alias l='ls -A'
 alias ll='ls -l'
 alias la='ls -lA'
 
-alias ..='cd ..'
-
 export GREP_OPTIONS="--color=auto"
+
+alias ..='cd ..'
+alias ...='cd ../..'
 
 function psg {
   ps aux | grep -i $@ | grep -v grep
@@ -87,7 +88,5 @@ alias pg_start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/ser
 alias pg_stop='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log stop'
 
 alias retag='ctags --tag-relative -R --exclude=.git --languages=-javascript,sql'
-
-alias reload='source ~/.zshrc'
 
 # vim:ft=sh:

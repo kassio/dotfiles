@@ -1,5 +1,4 @@
-source ~/.dotfiles/my_env
-source ~/.dotfiles/aliases
+export DOTFILES=$HOME/.dotfiles; source $DOTFILES/my_env
 
 build_ps1() {
   local blue='\[\e[0;34m\]'
@@ -17,10 +16,11 @@ build_ps1() {
 }; build_ps1
 
 # Autocomplete
-if [[ -e `brew --prefix`/etc/bash_completion ]]
+brew_prefix="`brew --prefix`"
+if [[ -e $brew_prefix/etc/bash_completion ]]
 then
-  source `brew --prefix`/etc/bash_completion;
-  source `brew --prefix`/Library/Contributions/brew_bash_completion.sh;
+  source $brew_prefix/etc/bash_completion
+  source $brew_prefix/Library/Contributions/brew_bash_completion.sh
 elif [[ -e /etc/bash_completion ]]
 then
   source /etc/bash_completion

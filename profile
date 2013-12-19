@@ -1,9 +1,6 @@
-if [ -n "$BASH_VERSION" ]
+if [ -n "$BASH_VERSION" -a -f "$HOME/.bashrc" ]
 then
-  if [ -f "$HOME/.bashrc" ]
-  then
-    . "$HOME/.bashrc"
-  fi
+  . "$HOME/.bashrc"
 fi
 
 # vim:ft=sh:
