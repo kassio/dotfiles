@@ -2,7 +2,7 @@ export DOTFILES=$HOME/.dotfiles
 export ZSH=$DOTFILES/oh-my-zsh
 export DISABLE_AUTO_TITLE=true # fix command echo in some terminal emmulators
 
-plugins=(gitfast rbenv brew vundle heroku)
+plugins=(rbenv brew vundle heroku)
 source $ZSH/oh-my-zsh.sh
 
 for plugin in `ls $DOTFILES/zsh-plugins`

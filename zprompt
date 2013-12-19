@@ -1,7 +1,24 @@
-build_ps1 () {
+function use_git_ps1 {
+  local git_prompt_file="`brew --prefix`/etc/bash_completion.d/git-prompt.sh"
+  if [[ -e $git_prompt_file ]]
+  then
+    source $git_prompt_file
+    return 0
+  else
+    return 1
+  fi
+}
+
+function build_ps1 {
+  if use_git_ps1
+  then
+    local git_ps1='$FG[011]$(__git_ps1 "(%s)")%{$reset_color%}'
+  else
+    local git_ps1=''
+  fi
+
   local return_code="%(?..$FG[160]%? ↵)%{$reset_color%}";
   local current_dir="$FG[027]%~";
-  local git_ps1='$FG[011]$(__git_ps1 "(%s)")%{$reset_color%}';
   local sign=$([ $UID -eq 0 ] && echo '$FG[160]#' || echo '$FG[046]$');
   local user_custom=$(cat $home/.user_ps1 2>/dev/null) ;
 
