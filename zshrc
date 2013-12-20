@@ -1,4 +1,4 @@
-export DOTFILES=$HOME/.dotfiles; source $DOTFILES/my_env
+export DOTFILES=$HOME/.dotfiles
 export ZSH=$DOTFILES/oh-my-zsh
 export DISABLE_AUTO_TITLE=true # fix command echo in some terminal emmulators
 export PATH="$PATH:/usr/local/bin"
@@ -11,9 +11,13 @@ do
   source $DOTFILES/zsh-plugins/$plugin/*plugin.zsh
 done
 
+source $DOTFILES/my_env
+source $DOTFILES/aliases
 source $DOTFILES/zprompt
 
-brew_completion="`brew --prefix`/Library/Contributions/brew_zsh_completion.sh"
+brew_prefix=`which brew --prefix`
+prefix=${brew_prefix:-/usr/local}
+brew_completion="$prefix/Library/Contributions/brew_zsh_completion.sh"
 if [[ -e $brew_completion ]]
 then
   source $brew_completion

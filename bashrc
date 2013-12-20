@@ -1,4 +1,6 @@
-export DOTFILES=$HOME/.dotfiles; source $DOTFILES/my_env
+export DOTFILES=$HOME/.dotfiles
+source $DOTFILES/my_env
+source $DOTFILES/aliases
 
 build_ps1() {
   local blue='\[\e[0;34m\]'
