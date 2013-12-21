@@ -1,7 +1,13 @@
+# Fix to use tmux, rbenv and zsh
+if [ -x /usr/libexec/path_helper ]
+then
+  PATH=""
+  eval `/usr/libexec/path_helper -s`
+fi
+
 export DOTFILES=$HOME/.dotfiles
 export ZSH=$DOTFILES/oh-my-zsh
 export DISABLE_AUTO_TITLE=true # fix command echo in some terminal emmulators
-export PATH="$PATH:/usr/local/bin"
 
 plugins=(rbenv brew vundle heroku)
 source $ZSH/oh-my-zsh.sh
@@ -22,14 +28,6 @@ if [[ -e $brew_completion ]]
 then
   source $brew_completion
 fi
-
-# Fix to use tmux, rbenv and zsh
-if [ -x /usr/libexec/path_helper ]
-then
-  PATH=""
-  eval `/usr/libexec/path_helper -s`
-fi
-
 
 # do not correct me!!
 unsetopt correct_all
