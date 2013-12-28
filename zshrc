@@ -44,6 +44,9 @@ zstyle ':completion:*' list-colors $LSCOLORS
 # easy regexp on list files
 setopt extendedglob
 
+# don't blow up with comments
+setopt interactive_comments
+
 # autocomplete to my projects
 pro() { cd $projects/$1;  }
 _pro() { _files -W $projects -/; }
