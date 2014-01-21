@@ -2,7 +2,7 @@ alias vi="vim"
 
 if [[ $(uname) == 'Darwin' ]]
 then
-  alias upgrade='brew update && brew upgrade'
+  alias upgrade='brew update && brew upgrade && brew cleanup -s --force'
   LS_COMMON="-G -h"
 else
   LS_COMMON="--color=auto -th"
