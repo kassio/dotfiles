@@ -1,0 +1,26 @@
+#!/bin/bash
+
+brewfile="$HOME/.dotfiles/Brewfile"
+
+mv $brewfile "/tmp/Brewfile.$$.bkp"
+
+touch $brewfile
+echo "### Taps" >> $brewfile
+brew tap | while read f
+do
+  echo "tap $f" >> $brewfile
+done
+
+echo "### Apps" >> $brewfile
+brew list | while read f
+do
+  version=$(brew list --versions $f | cut -f2 -d' ')
+  options=$(cat /usr/local/Cellar/$f/$version/INSTALL_RECEIPT.json 2>/dev/null | egrep -Eo '"used_options":\[[^]]*\],' | sed 's/.*\[\(.*\)\],/\1/p')
+  head=$([[ "$version" == "HEAD" ]] && echo "--HEAD" || echo "")
+  cmd="install $f $options ${head:+--HEAD}"
+
+  echo ${cmd%%' '} >> $brewfile
+done
+
+echo "### Verify" >> $brewfile
+echo "doctor" >> $brewfile
