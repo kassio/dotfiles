@@ -1,10 +1,9 @@
-# brew tap | while read f; do echo "tap $f" >> Brewfile; done
+### Taps
 tap homebrew/dupes
 tap homebrew/versions
 tap mitchty/entr
 tap phinze/cask
-
-#  brew list | while read f; do echo "install $f" >> Brewfile; done
+### Apps
 install ack
 install apple-gcc42
 install autoconf
@@ -16,7 +15,9 @@ install cscope
 install ctags
 install entr
 install erlang-r16
+install faac
 install fcgi
+install ffmpeg
 install freetype
 install gdbm
 install gifsicle
@@ -26,6 +27,7 @@ install graphviz
 install imagemagick
 install imagesnap
 install jpeg
+install lame
 install libevent
 install libpng
 install libtool
@@ -35,6 +37,7 @@ install markdown
 install mercurial
 install mysql
 install node
+install openssl
 install ossp-uuid
 install pcre
 install phantomjs
@@ -47,11 +50,16 @@ install redis
 install rename
 install scala
 install sqlite
+install texi2html
 install tmux
 install tree
-install vim --HEAD --override-system-vim
+install vim --HEAD
 install watch
 install wget
+install x264
+install xvid
+install yasm
+install youtube-dl
 install zsh
-
+### Verify
 doctor
