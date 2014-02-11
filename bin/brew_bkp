@@ -12,12 +12,12 @@ do
 done
 
 echo "### Apps" >> $brewfile
-brew list | while read f
+brew leaves | while read f
 do
   version=$(brew list --versions $f | cut -f2 -d' ')
   options=$(cat /usr/local/Cellar/$f/$version/INSTALL_RECEIPT.json 2>/dev/null | egrep -Eo '"used_options":\[[^]]*\],' | sed 's/.*\[\(.*\)\],/\1/p')
   head=$([[ "$version" == "HEAD" ]] && echo "--HEAD" || echo "")
-  cmd="install $f $options ${head:+--HEAD}"
+  cmd="install $f $options $head"
 
   echo ${cmd%%' '} >> $brewfile
 done
