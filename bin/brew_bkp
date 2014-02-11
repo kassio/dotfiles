@@ -5,22 +5,22 @@ brewfile="$HOME/.dotfiles/Brewfile"
 mv $brewfile "/tmp/Brewfile.$$.bkp"
 
 touch $brewfile
-echo "### Taps" >> $brewfile
-brew tap | while read f
+echo -e "\n### Taps" >> $brewfile
+brew tap | while read t
 do
-  echo "tap $f" >> $brewfile
+  echo "tap $t" >> $brewfile
 done
 
-echo "### Apps" >> $brewfile
-brew leaves | while read f
+echo -e "\n### Apps" >> $brewfile
+brew leaves | while read app
 do
-  version=$(brew list --versions $f | cut -f2 -d' ')
-  options=$(cat /usr/local/Cellar/$f/$version/INSTALL_RECEIPT.json 2>/dev/null | egrep -Eo '"used_options":\[[^]]*\],' | sed 's/.*\[\(.*\)\],/\1/p')
+  version=$(brew list --versions $app | cut -f2 -d' ')
+  options=$(cat /usr/local/Cellar/$app/$version/INSTALL_RECEIPT.json 2>/dev/null | egrep -Eo '"used_options":\[[^]]*\],' | sed 's/.*\[\(.*\)\],/\1/p')
   head=$([[ "$version" == "HEAD" ]] && echo "--HEAD" || echo "")
-  cmd="install $f $options $head"
+  cmd="install $app $options $head"
 
   echo ${cmd%%' '} >> $brewfile
 done
 
-echo "### Verify" >> $brewfile
+echo -e "\n### Verify" >> $brewfile
 echo "doctor" >> $brewfile
