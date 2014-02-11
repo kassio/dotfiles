@@ -10,3 +10,8 @@ Install
       cd ~/.dotfiles
       ./setup
       source ~/.zshrc
+
+Setup PATH on OSX
+-----------------
+
+      Edit `/etc/paths` put `/usr/local/bin` at the top of the file
