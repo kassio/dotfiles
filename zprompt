@@ -1,4 +1,10 @@
-git_promp_file="`brew --prefix`/etc/bash_completion.d/git-prompt.sh"
+if [[ -z `which brew` ]]
+then
+  git_promp_file="`brew --prefix`/etc/bash_completion.d/git-prompt.sh"
+else
+  git_promp_file="/etc/bash_completion.d/git-prompt"
+fi
+
 if [[ -e "$git_promp_file" ]]
 then
   source $git_promp_file
