@@ -1,14 +1,7 @@
-if [[ -z `which brew` ]]
-then
-  git_promp_file="`brew --prefix`/etc/bash_completion.d/git-prompt.sh"
-else
-  git_promp_file="/etc/bash_completion.d/git-prompt"
-fi
-
-if [[ -e "$git_promp_file" ]]
-then
-  source $git_promp_file
-fi
+# mac
+source "`brew --prefix`/etc/bash_completion.d/git-prompt.sh" 2>/dev/null
+# linux
+source "/etc/bash_completion.d/git-prompt" 2>/dev/null
 
 function build_ps1 {
   local return_code="%(?..$FG[160]%? ↵)%{$reset_color%}";
