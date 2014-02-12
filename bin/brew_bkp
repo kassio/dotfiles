@@ -5,7 +5,7 @@ brewfile="$HOME/.dotfiles/Brewfile"
 mv $brewfile "/tmp/Brewfile.$$.bkp"
 
 touch $brewfile
-echo -e "\n### Taps" >> $brewfile
+echo -e "### Taps" >> $brewfile
 brew tap | while read t
 do
   echo "tap $t" >> $brewfile
