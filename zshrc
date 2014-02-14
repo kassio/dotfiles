@@ -47,10 +47,9 @@ setopt extendedglob
 # don't blow up with comments
 setopt interactive_comments
 
-# autocomplete to my projects
-pro() { cd $projects/$1;  }
-_pro() { _files -W $projects -/; }
-compdef _pro pro
+src() { cd $src/$1;  }
+_src() { _files -W $src -/; }
+compdef _src src
 
 asp() { cd $asp/$1;  }
 _asp() { _files -W $asp -/; }

@@ -49,21 +49,13 @@ complete -o default -o nospace -F _rakecomplete rake
 complete -o default -o nospace -F _capcomplete cap
 complete -o default -o nospace -F _thorcomplete thor
 
-pro() { cd $projects/$1; }
-_pro() {
+src() { cd $src/$1; }
+_src() {
   local cur
   cur=${COMP_WORDS[COMP_CWORD]}
-  COMPREPLY=( $( compgen -S/ -d $projects/$cur | cut -b $((${#projects}+2))- ) )
+  COMPREPLY=( $( compgen -S/ -d $src/$cur | cut -b $((${#src}+2))- ) )
 }
-complete -o nospace -F _pro pro
-
-asp() { cd $asp/$1; }
-_asp() {
-  local cur
-  cur=${COMP_WORDS[COMP_CWORD]}
-  COMPREPLY=( $( compgen -S/ -d $asp/$cur | cut -b $((${#asp}+2))- ) )
-}
-complete -o nospace -F _asp asp
+complete -o nospace -F _src src
 
 if [[ -e "$home/.env" ]]
 then

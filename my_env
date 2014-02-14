@@ -1,8 +1,7 @@
 export home=$([[ $(uname) == 'Darwin' ]] && echo "/Users" || echo "/home")
 export user=`cat $HOME/.main_user`
 export home="$home/$user"
-export projects=$home/Projects
-export asp=$home/AutoSeg
+export src=$home/src
 
 # rbenv
 if [ -d "$home/.rbenv" ]
