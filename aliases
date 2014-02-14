@@ -9,7 +9,6 @@ else
 fi
 
 alias vpu='vim +NeoBundleUpdate! +qall'
-alias upgrade_vim='brew uninstall vim && brew install vim --HEAD --override-system-vi'
 
 alias ls="ls $LS_COMMON"
 alias l='ls -A'

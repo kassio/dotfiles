@@ -1,4 +1,7 @@
 ### Taps
+tap homebrew/dupes
+tap homebrew/versions
+tap mitchty/entr
 tap phinze/cask
 
 ### Apps
