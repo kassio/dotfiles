@@ -3,18 +3,20 @@ source "`brew --prefix`/etc/bash_completion.d/git-prompt.sh" 2>/dev/null
 # linux
 source "/etc/bash_completion.d/git-prompt" 2>/dev/null
 
-function build_ps1 {
-  local return_code="%(?..$FG[160]%? ↵)%{$reset_color%}";
+build_prompt() {
   local current_dir="$FG[027]%~";
   local git_ps1='$FG[011]$(__git_ps1 "(%s)")%{$reset_color%}'
   local tmux_info="${TMUX_PANE:+$FG[196][${TMUX_PANE#\%}]}"
   local sign=$([ $UID -eq 0 ] && echo '$FG[160]#' || echo '$FG[046]$');
-  local user_custom=$(cat $home/.user_ps1 2>/dev/null) ;
 
   export PROMPT=\
-"${tmux_info}${user_custom}${current_dir}${git_ps1}
+"${tmux_info}${current_dir}${git_ps1}
 ${sign}%{$reset_color%} "
+}; build_prompt
+
+build_rps1() {
+  local return_code="%(?..$FG[160]%? ↵)%{$reset_color%}";
   export RPS1="${return_code}"
-}; build_ps1
+}; build_rps1
 
 # vim:ft=zsh:

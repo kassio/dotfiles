@@ -14,11 +14,6 @@ link_files() {
   done
 }; link_files
 
-if [[ ! -e $HOME/.main_user ]]
-then
-  echo `whoami` > $HOME/.main_user
-fi
-
 if [[ -e $HOME/.zshrc ]]
 then
   source $HOME/.zshrc >/dev/null 2>&1

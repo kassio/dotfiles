@@ -1,12 +1,9 @@
-export home=$([[ $(uname) == 'Darwin' ]] && echo "/Users" || echo "/home")
-export user=`cat $HOME/.main_user`
-export home="$home/$user"
-export src=$home/src
+export src="$HOME/src"
 
 # rbenv
-if [ -d "$home/.rbenv" ]
+if [ -d "$HOME/.rbenv" ]
 then
-  export PATH="$home/.rbenv/bin:/usr/local/sbin:$PATH"
+  export PATH="$HOME/.rbenv/bin:/usr/local/sbin:$PATH"
   eval "$(rbenv init -)"
 
   # prompt with ruby version and arch
@@ -71,9 +68,9 @@ export GIT_PS1_SHOWUNTRACKEDFILES=true
 export GIT_PS1_SHOWUPSTREAM=true
 
 # local env
-if [[ -e "$home/.env" ]]
+if [[ -e "$HOME/.env" ]]
 then
-  source $home/.env
+  source $HOME/.env
 fi
 
 export PATH="$PATH:$DOTFILES/bin"

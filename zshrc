@@ -17,10 +17,6 @@ do
   source $DOTFILES/zsh-plugins/$plugin/*plugin.zsh
 done
 
-source $DOTFILES/my_env
-source $DOTFILES/aliases
-source $DOTFILES/zprompt
-
 brew_prefix=`which brew --prefix`
 prefix=${brew_prefix:-/usr/local}
 brew_completion="$prefix/Library/Contributions/brew_zsh_completion.sh"
@@ -47,12 +43,12 @@ setopt extendedglob
 # don't blow up with comments
 setopt interactive_comments
 
+source $DOTFILES/my_env
+source $DOTFILES/aliases
+source $DOTFILES/zprompt
+
 src() { cd $src/$1;  }
 _src() { _files -W $src -/; }
 compdef _src src
-
-asp() { cd $asp/$1;  }
-_asp() { _files -W $asp -/; }
-compdef _asp asp
 
 # vim:ft=zsh:

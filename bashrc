@@ -12,9 +12,8 @@ build_ps1() {
   local git_ps1=$yellow'$(__git_ps1 "(%s)")'
   local pwd_ps1="$blue\w"
   local prompt_ps1="$([[ ${EUID} == 0 ]] && echo $red'#' || echo $green'$')"
-  local user_ps1=$([ -e "$home/.user_ps1" ] && echo "`cat $home/.user_ps1` ")
 
-  export PS1="$user_ps1$pwd_ps1$git_ps1\n$prompt_ps1$reset "
+  export PS1="$pwd_ps1$git_ps1\n$prompt_ps1$reset "
 }; build_ps1
 
 # Autocomplete
@@ -22,14 +21,9 @@ load_bash_completion() {
   local brew_prefix="`which brew --prefix`"
   local prefix=${brew_prefix:-/usr/local}
 
-  if [[ -e $prefix/etc/bash_completion ]]
-  then
-    source $prefix/etc/bash_completion
-    source $prefix/Library/Contributions/brew_bash_completion.sh
-  elif [[ -e /etc/bash_completion ]]
-  then
-    source /etc/bash_completion
-  fi
+  source "/etc/bash_completion" 2>/dev/null
+  source "$prefix/etc/bash_completion" 2>/dev/null
+  source "$prefix/Library/Contributions/brew_bash_completion.sh" 2>/dev/null
 }; load_bash_completion
 
 # Make ** works beautiful, works to any nested directory.
@@ -56,10 +50,5 @@ _src() {
   COMPREPLY=( $( compgen -S/ -d $src/$cur | cut -b $((${#src}+2))- ) )
 }
 complete -o nospace -F _src src
-
-if [[ -e "$home/.env" ]]
-then
-  source $home/.env
-fi
 
 # vim:ft=sh:
