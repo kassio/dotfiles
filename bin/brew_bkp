@@ -15,7 +15,7 @@ echo -e "\n### Apps" >> $brewfile
 brew leaves | while read app
 do
   version=$(brew list --versions $app | cut -f2 -d' ')
-  options=$(cat /usr/local/Cellar/$app/$version/INSTALL_RECEIPT.json 2>/dev/null | egrep -Eo '"used_options":\[[^]]*\],' | sed 's/.*\[\(.*\)\],/\1/p')
+  options=$(cat /usr/local/Cellar/$app/$version/INSTALL_RECEIPT.json 2>/dev/null | egrep -Eo '"used_options":\[[^]]*\],' | sed 's/.*\[\(.*\)\],/\1/')
   head=$([[ "$version" == "HEAD" ]] && echo "--HEAD" || echo "")
   cmd="install $app $options $head"
 

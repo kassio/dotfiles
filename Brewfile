@@ -23,7 +23,7 @@ install reattach-to-user-namespace
 install rename
 install tmux
 install tree
-install vim
+install vim "--with-lua"
 install watch
 install wget
 install youtube-dl
