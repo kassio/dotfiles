@@ -88,6 +88,4 @@ function ql {
   fi
 }
 
-alias retag='ctags --tag-relative -R --exclude=.git --languages=-javascript,sql'
-
 # vim:ft=sh:
