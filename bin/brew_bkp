@@ -6,16 +6,20 @@ mv $brewfile "/tmp/Brewfile.$$.bkp"
 
 touch $brewfile
 echo -e "### Taps" >> $brewfile
-brew tap | while read t
+brew tap | sort | while read t
 do
   echo "tap $t" >> $brewfile
 done
 
 echo -e "\n### Apps" >> $brewfile
-brew leaves | while read app
+brew leaves | sort | while read app
 do
   version=$(brew list --versions $app | cut -f2 -d' ')
-  options=$(cat /usr/local/Cellar/$app/$version/INSTALL_RECEIPT.json 2>/dev/null | egrep -Eo '"used_options":\[[^]]*\],' | sed 's/.*\[\(.*\)\],/\1/')
+  options=$(cat /usr/local/Cellar/$app/$version/INSTALL_RECEIPT.json 2>/dev/null)
+  options=$(echo $options | egrep -Eo '"used_options":\[[^]]*\],')
+  options=$(echo $options | sed 's/.*\[\(.*\)\],/\1/')
+  options=$(echo $options | sed 's/,/\ /g')
+  options=$(echo $options | sed 's/["'"'"']/\ /g')
   head=$([[ "$version" == "HEAD" ]] && echo "--HEAD" || echo "")
   cmd="install $app $options $head"
 

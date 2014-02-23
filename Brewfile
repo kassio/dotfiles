@@ -17,13 +17,14 @@ install imagemagick
 install libxml2
 install macvim
 install markdown
+install mercurial
 install mysql
 install postgresql
 install reattach-to-user-namespace
 install rename
 install tmux
 install tree
-install vim "--with-lua"
+install vim --override-system-vi --with-lua --HEAD
 install watch
 install wget
 install youtube-dl
