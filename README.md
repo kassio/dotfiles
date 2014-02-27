@@ -15,3 +15,8 @@ Setup PATH on OSX
 -----------------
 
       Edit `/etc/paths` put `/usr/local/bin` at the top of the file
+
+Setup zsh on OSX
+----------------
+
+      Edit `/etc/shells` add `/usr/local/bin/zsh`
