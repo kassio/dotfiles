@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-ctags --tag-relative -R --exclude=.git --languages=-javascript,sql

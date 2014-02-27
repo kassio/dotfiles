@@ -6,3 +6,4 @@
 --exclude=log
 --exclude=tmp
 --languages=-SQL
+--languages=-javascript
