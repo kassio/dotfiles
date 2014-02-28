@@ -1,5 +1,5 @@
 # mac
-source "`brew --prefix`/etc/bash_completion.d/git-prompt.sh" 2>/dev/null
+source "`brew --prefix 2>/dev/null`/etc/bash_completion.d/git-prompt.sh" 2>/dev/null
 # linux
 source "/etc/bash_completion.d/git-prompt" 2>/dev/null
 
