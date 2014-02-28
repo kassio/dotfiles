@@ -8,7 +8,7 @@ else
   LS_COMMON="--color=auto -th"
 fi
 
-alias vpu='vim +NeoBundleUpdate! +qall'
+alias vpu='vim +NeoBundleClean! +NeoBundleUpdate! +qall'
 
 alias ls="ls $LS_COMMON"
 alias l='ls -A'
