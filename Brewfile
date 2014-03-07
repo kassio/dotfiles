@@ -10,7 +10,7 @@ install bash
 install bash-completion
 install ctags
 install ffmpeg
-install git
+install git --with-pcre
 install gource
 install graphviz
 install imagemagick

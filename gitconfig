@@ -10,6 +10,9 @@
   default = current
 [pull]
   rebase = true
+[grep]
+  extendRegexp = true
+  lineNumber = true
 [help]
   autocorrect = 1
 [color]
@@ -29,6 +32,7 @@
   d = !git --no-pager diff
   dp = diff
   f = fetch
+  g = grep --break --heading
   l = !git --no-pager log -20 --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset %s%Creset -%Cblue%d%Creset'
   lp = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cd)%Creset %s%Creset -%Cblue%d%Creset' --date=short
   m = merge
