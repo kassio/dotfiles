@@ -43,6 +43,7 @@ alias vsu='vagrant suspend'
 alias g="git"
 alias ga="g add"
 alias gb="g b"
+alias gbdall="git remote | xargs -n1 git remote prune"
 alias gc="g ci"
 alias gclean="g clean"
 alias gco="g co"
