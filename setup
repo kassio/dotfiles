@@ -14,9 +14,19 @@ link_files() {
   done
 }; link_files
 
-if [[ -e $HOME/.zshrc ]]
+if [[ -e "$HOME/.zshrc" ]]
 then
-  source $HOME/.zshrc >/dev/null 2>&1
+  source $HOME/.zshrc &>/dev/null
+fi
+
+if [[ ! -d "$HOME/.rbenv" ]]
+then
+  cd $HOME
+  git clone git://github.com/sstephenson/rbenv.git .rbenv
+
+  mkdir -p $HOME/.rbenv/plugins
+  cd $HOME/.rbenv/plugins
+  git clone git://github.com/sstephenson/ruby-build.git
 fi
 
 cd $HOME
