@@ -80,14 +80,4 @@ function loop_this {
   done
 }
 
-function ql {
-  if [[ -n `which qlmanage 2>/dev/null` ]]
-  then
-    echo "$@"
-    qlmanage -p "$@" &>/dev/null
-  else
-    echo "qlmanage not found"
-  fi
-}
-
 # vim:ft=sh:
