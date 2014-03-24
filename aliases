@@ -35,8 +35,8 @@ alias RP='RAILS_ENV=production'
 alias RT='RAILS_ENV=test'
 
 alias vu='vagrant up'
+alias vus='vu && DISPLAY=:1 vagrant ssh'
 alias vh='vagrant halt'
-alias vs='vu && DISPLAY=:1 vagrant ssh'
 alias vr='vagrant reload && vs'
 alias vsu='vagrant suspend'
 
