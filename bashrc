@@ -1,6 +1,4 @@
 export DOTFILES=$HOME/.dotfiles
-source $DOTFILES/my_env
-source $DOTFILES/aliases
 
 build_ps1() {
   local blue='\[\e[0;34m\]'
@@ -50,5 +48,8 @@ _src() {
   COMPREPLY=( $( compgen -S/ -d $src/$cur | cut -b $((${#src}+2))- ) )
 }
 complete -o nospace -F _src src
+
+source $DOTFILES/my_env
+source $DOTFILES/aliases
 
 # vim:ft=sh:

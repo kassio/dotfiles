@@ -43,12 +43,12 @@ setopt extendedglob
 # don't blow up with comments
 setopt interactive_comments
 
-source $DOTFILES/my_env
-source $DOTFILES/aliases
-source $DOTFILES/zprompt
-
 src() { cd $src/$1;  }
 _src() { _files -W $src -/; }
 compdef _src src
+
+source $DOTFILES/my_env
+source $DOTFILES/aliases
+source $DOTFILES/zprompt
 
 # vim:ft=zsh:
