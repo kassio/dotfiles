@@ -25,7 +25,7 @@ function psg {
 }
 
 function killer {
-  sudo kill -9 $(psg $@ | awk '{print $2}')
+  kill -9 $(psg $@ | awk '{print $2}')
 }
 
 alias h='history'
