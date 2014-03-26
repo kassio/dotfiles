@@ -67,6 +67,8 @@ export GIT_PS1_SHOWSTASHSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
 export GIT_PS1_SHOWUPSTREAM=true
 
+export CDPATH="$CDPATH:$HOME:$HOME/.vim:$HOME/.vim/bundle:$src"
+
 # local env
 if [[ -e "$HOME/.env" ]]
 then
