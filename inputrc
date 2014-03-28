@@ -1,3 +1,0 @@
-"\ea": shell-backward-word
-"\ee": shell-forward-word
-"\e\C-d": shell-kill-word
