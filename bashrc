@@ -41,6 +41,9 @@ complete -o default -o nospace -F _rakecomplete rake
 complete -o default -o nospace -F _capcomplete cap
 complete -o default -o nospace -F _thorcomplete thor
 
+source $DOTFILES/my_env
+source $DOTFILES/aliases
+
 src() { cd $src/$1; }
 _src() {
   local cur
@@ -48,8 +51,5 @@ _src() {
   COMPREPLY=( $( compgen -S/ -d $src/$cur | cut -b $((${#src}+2))- ) )
 }
 complete -o nospace -F _src src
-
-source $DOTFILES/my_env
-source $DOTFILES/aliases
 
 # vim:ft=sh:

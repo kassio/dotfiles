@@ -14,11 +14,6 @@ then
   }
 fi
 
-# Optimize ruby garbage collector
-RUBY_HEAP_MIN_SLOTS=600000
-RUBY_GC_MALLOC_LIMIT=59000000
-RUBY_HEAP_FREE_MIN=100000
-
 ### Added by the Heroku Toolbelt
 _heroku_bin_path="/usr/local/heroku/bin"
 if [[ -d $_heroku_bin_path ]]
