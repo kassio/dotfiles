@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+params=($(echo "$@"))
+count=${params[0]}
+cmd=${params[@]:1}
+
+for ((i = 0; i < $count; ))
+do
+  echo ">> Build $((++i))"
+  echo ">> $cmd"
+  $cmd
+  [[ $? != 0 ]] && break
+  echo ""
+done

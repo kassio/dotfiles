@@ -58,21 +58,6 @@ alias gt="g tag"
 alias gtoday="g today"
 alias gtree="g tree"
 
-function loop_this {
-  local params=($(echo "$@"))
-  local count=${params[0]}
-  local command=${params[@]:1}
-
-  for ((i = 0; i < $count; ))
-  do
-    echo ">> Build $((++i))"
-    echo ">> $command"
-    $command
-    [[ $? != 0 ]] && break
-    echo ""
-  done
-}
-
 function psg {
   ps aux | grep -i $@ | grep -v grep
 }
