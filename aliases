@@ -1,5 +1,3 @@
-alias vi="vim"
-
 if [[ $(uname) == 'Darwin' ]]
 then
   alias upgrade='brew update && brew upgrade && brew cleanup -s --force'
@@ -8,6 +6,10 @@ else
   LS_COMMON="--color=auto -th"
 fi
 
+export GREP_OPTIONS="--color=auto"
+
+alias vi="vim"
+
 alias vpu='vim +NeoBundleClean! +NeoBundleUpdate! +qall'
 
 alias ls="ls $LS_COMMON"
@@ -15,18 +17,8 @@ alias l='ls -A'
 alias ll='ls -l'
 alias la='ls -lA'
 
-export GREP_OPTIONS="--color=auto"
-
 alias ..='cd ..'
 alias ...='cd ../..'
-
-function psg {
-  ps aux | grep -i $@ | grep -v grep
-}
-
-function killer {
-  kill -9 $(psg $@ | awk '{print $2}')
-}
 
 alias h='history'
 
@@ -79,6 +71,14 @@ function loop_this {
     [[ $? != 0 ]] && break
     echo ""
   done
+}
+
+function psg {
+  ps aux | grep -i $@ | grep -v grep
+}
+
+function killer {
+  kill -9 $(psg $@ | awk '{print $2}')
 }
 
 # vim:ft=sh:
