@@ -3,12 +3,22 @@
 params=($(echo "$@"))
 count=${params[0]}
 cmd=${params[@]:1}
+error_count=0
 
 for ((i = 0; i < $count; ))
 do
   echo ">> Build $((++i))"
   echo ">> $cmd"
   $cmd
-  [[ $? != 0 ]] && break
+  if [[ $? != 0 ]]
+  then
+    error_count=$(($error_count + 1))
+    if [[ "$DONT_STOP" = "" ]]
+    then
+      break
+    fi
+  fi
   echo ""
 done
+
+echo -e "\nBuilds: $count\nErrors: $error_count\n"
