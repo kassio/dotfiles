@@ -42,7 +42,6 @@ complete -o default -o nospace -F _capcomplete cap
 complete -o default -o nospace -F _thorcomplete thor
 
 source $DOTFILES/my_env
-source $DOTFILES/aliases
 
 src() { cd $src/$1; }
 _src() {

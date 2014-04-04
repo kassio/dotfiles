@@ -44,7 +44,6 @@ setopt extendedglob
 setopt interactive_comments
 
 source $DOTFILES/my_env
-source $DOTFILES/aliases
 source $DOTFILES/zprompt
 
 src() { cd $src/$1;  }
