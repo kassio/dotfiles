@@ -6,7 +6,7 @@ link_files() {
   local file_path="$HOME/.dotfiles"
 
   for f in \
-    bashrc zshrc gitignore \
+    bashrc zshrc zshenv gitignore \
     gitconfig irbrc gemrc hushlogin \
     profile tmux.conf ctags ackrc
   do
@@ -28,5 +28,7 @@ then
   cd $HOME/.rbenv/plugins
   git clone git://github.com/sstephenson/ruby-build.git
 fi
+
+sudo mv /etc/{zshenv,zshrc}
 
 cd $HOME
