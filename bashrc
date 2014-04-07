@@ -9,9 +9,10 @@ build_ps1() {
 
   local git_ps1=$yellow'$(__git_ps1 "(%s)")'
   local pwd_ps1="$blue\w"
+  local tmux_info="${TMUX_PANE:+$red[${TMUX_PANE#\%}]}"
   local prompt_ps1="$([[ ${EUID} == 0 ]] && echo $red'#' || echo $green'$')"
 
-  export PS1="$pwd_ps1$git_ps1\n$prompt_ps1$reset "
+  export PS1="$tmux_info$pwd_ps1$git_ps1\n$prompt_ps1$reset "
 }; build_ps1
 
 # Autocomplete
