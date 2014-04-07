@@ -51,4 +51,6 @@ _src() {
 }
 complete -o nospace -F _src src
 
+export PROMPT_COMMAND=__tmux_runner_status
+
 # vim:ft=sh:

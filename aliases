@@ -66,4 +66,8 @@ function killer {
   kill -9 $(psg $@ | awk '{print $2}')
 }
 
+function __tmux_runner_status {
+  (echo $? > ${TMUX_RUNNER_RESULT_FILE:-/dev/null}) 2>/dev/null
+}
+
 # vim:ft=sh:
