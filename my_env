@@ -75,7 +75,10 @@ export PATH="$PATH:$DOTFILES/bin"
 # rails bundler bin
 export PATH="../bin:./bin:$PATH"
 
-export JAVA_HOME=$(/usr/libexec/java_home)
+if [[ -e /usr/libexec/java_home ]]
+then
+  export JAVA_HOME=$(/usr/libexec/java_home)
+fi
 export EC2_HOME=/usr/local/ec2/ec2-api-tools-1.6.13.0/
 export PATH=$PATH:$EC2_HOME/bin
 
