@@ -8,9 +8,11 @@ fi
 
 export GREP_OPTIONS="--color=auto"
 
-alias vi="vim"
+alias vi='vim'
+alias nv='nvim'
 
 alias vpu='vim +NeoBundleClean! +NeoBundleUpdate! +qall'
+alias nvpu='vim +NeoBundleClean! +NeoBundleUpdate! +qall'
 
 alias ls="ls $LS_COMMON"
 alias l='ls -A'
@@ -27,7 +29,7 @@ alias RP='RAILS_ENV=production'
 alias RT='RAILS_ENV=test'
 
 alias vu='vagrant up'
-alias vus='vu && DISPLAY=:1 vagrant ssh'
+alias vus='vu && vagrant ssh'
 alias vh='vagrant halt'
 alias vr='vagrant reload && vs'
 alias vsu='vagrant suspend'
@@ -66,8 +68,20 @@ function killer {
   kill -9 $(psg $@ | awk '{print $2}')
 }
 
+export TMUX_RUNNER_DIR="~/.tmux_runner"
 function __tmux_runner_status {
-  (echo $? > ${TMUX_RUNNER_RESULT_FILE:-/dev/null}) 2>/dev/null
+  local last_status=$?
+  if [ -n "$TMUX" ]
+  then
+    [ ! -d $TMUX_RUNNER_DIR ] && mkdir -p $TMUX_RUNNER_DIR
+
+    local session=${TMUX##*,}
+    local window=$(tmux list-windows -t $session &>/dev/null | grep -e '^\w:' | cut -f1 -d':')
+    local pane=$(tmux list-panes -t $session:$window &>/dev/null | cut -f1 -d':')
+    local file=$TMUX_RUNNER_DIR/result.$session${window:-0}${pane:-0}
+
+    echo $last_status > $file
+  fi
 }
 
 # vim:ft=sh:
