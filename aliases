@@ -68,7 +68,7 @@ function killer {
   kill -9 $(psg $@ | awk '{print $2}')
 }
 
-export TMUX_RUNNER_DIR="~/.tmux_runner"
+export TMUX_RUNNER_DIR="$HOME/.tmux_runner"
 function __tmux_runner_status {
   local last_status=$?
   if [ -n "$TMUX" ]
