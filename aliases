@@ -68,16 +68,30 @@ function killer {
   kill -9 $(psg $@ | awk '{print $2}')
 }
 
+function tmux_notifier {
+  if [[ $(uname) == 'Darwin' ]]
+  then
+    `which terminal-notifier` -group 'TMUX' -message $1 &>/dev/null
+  else
+    `which notify-send` $1 &>/dev/null
+  fi
+}
+
 function __tmux_notify_status {
   local last_status=$?
+  local last_command="$(fc -ln -1)"
   if [ -n "$TMUX" ]
   then
-    if [ $last_status -eq 0 ]
-    then
-      notify-send 'BUILD' 'SUCCESS'
-    else
-      notify-send 'BUILD' 'FAILED'
-    fi
+    case $last_command in
+      *ruby*|*rake*|*rspec*)
+        if [ $last_status -eq 0 ]
+        then
+          tmux_notifier 'TMUX - SUCCESS :)'
+        else
+          tmux_notifier 'TMUX - FAILED :('
+        fi
+        ;;
+    esac
   fi
 }
 
