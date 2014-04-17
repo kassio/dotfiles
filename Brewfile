@@ -11,15 +11,15 @@ install brew-cask
 install ctags
 install erlang
 install git
-install gnupg
 install heroku-toolbelt
+install highlight
 install macvim
 install markdown
 install mercurial
 install mysql
 install node
-install openconnect
 install postgresql
+install python
 install reattach-to-user-namespace
 install rename
 install terminal-notifier
@@ -28,7 +28,6 @@ install tree
 install vim --override-system-vi --HEAD
 install watch
 install wget
-install wxmac
 install zsh
 
 ### Verify
