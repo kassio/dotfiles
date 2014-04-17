@@ -68,19 +68,16 @@ function killer {
   kill -9 $(psg $@ | awk '{print $2}')
 }
 
-export TMUX_RUNNER_DIR="$HOME/.tmux_runner"
-function __tmux_runner_status {
+function __tmux_notify_status {
   local last_status=$?
   if [ -n "$TMUX" ]
   then
-    [ ! -d $TMUX_RUNNER_DIR ] && mkdir -p $TMUX_RUNNER_DIR
-
-    local session=${TMUX##*,}
-    local window=$(tmux list-windows -t $session &>/dev/null | grep -e '^\w:' | cut -f1 -d':')
-    local pane=$(tmux list-panes -t $session:$window &>/dev/null | cut -f1 -d':')
-    local file=$TMUX_RUNNER_DIR/result.$session${window:-0}${pane:-0}
-
-    echo $last_status > $file
+    if [ $last_status -eq 0 ]
+    then
+      notify-send 'BUILD' 'SUCCESS'
+    else
+      notify-send 'BUILD' 'FAILED'
+    fi
   fi
 }
 

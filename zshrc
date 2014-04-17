@@ -50,6 +50,6 @@ src() { cd $src/$1;  }
 _src() { _files -W $src -/; }
 compdef _src src
 
-precmd_functions=(__tmux_runner_status)
+precmd_functions=(__tmux_notify_status)
 
 # vim:ft=zsh:

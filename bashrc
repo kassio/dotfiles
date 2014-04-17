@@ -52,6 +52,6 @@ _src() {
 }
 complete -o nospace -F _src src
 
-export PROMPT_COMMAND=__tmux_runner_status
+export PROMPT_COMMAND=__tmux_notify_status
 
 # vim:ft=sh:
