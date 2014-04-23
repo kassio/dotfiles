@@ -23,8 +23,8 @@
   grep = auto
   ui = auto
 [alias]
-  autoseg = config --local user.email "kassio.borges@autoseg.com"
-  personal = config --local user.email "kassioborgesm@gmail.com"
+  autoseg = !git config --local --replace-all user.name 'Kassio Borges' && git config --local user.email "kassio.borges@autoseg.com"
+  personal = !git config --local --replace-all user.name 'Kassio Borges' && git config --local user.email "kassioborgesm@gmail.com"
   b = branch
   ci = commit -v
   cl = clean
