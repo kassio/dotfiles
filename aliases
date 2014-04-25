@@ -80,19 +80,16 @@ function tmux_notifier {
 function __tmux_notify_status {
   local last_status=$?
   local last_command="$(fc -ln -1)"
-  if [ -n "$TMUX" ]
-  then
-    case $last_command in
-      ruby*|rake*|rspec*)
-        if [ $last_status -eq 0 ]
-        then
-          tmux_notifier 'TMUX - SUCCESS :)'
-        else
-          tmux_notifier 'TMUX - FAILED :('
-        fi
-        ;;
-    esac
-  fi
+  case $last_command in
+    ruby*|rake*|rspec*)
+      if [ $last_status -eq 0 ]
+      then
+        tmux_notifier 'SUCCESS :)'
+      else
+        tmux_notifier 'FAILED :('
+      fi
+      ;;
+  esac
 }
 
 # vim:ft=sh:
