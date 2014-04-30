@@ -1,19 +1,18 @@
 export DOTFILES=$HOME/.dotfiles
 
-build_ps1() {
+__build_prompt() {
   local blue='\[\e[0;34m\]'
   local red='\[\e[0;31m\]'
   local yellow='\[\e[01;33m\]'
   local reset='\[\e[00m\]'
   local green='\[\e[0;32m\]'
 
-  local git_ps1=$yellow'$(__git_ps1 "(%s)")'
   local pwd_ps1="$blue\w"
   local tmux_info="${TMUX_PANE:+$red[${TMUX_PANE#\%}]}"
-  local prompt_ps1="$([[ ${EUID} == 0 ]] && echo $red'#' || echo $green'$')"
 
-  export PS1="$tmux_info$pwd_ps1$git_ps1\n$prompt_ps1$reset "
-}; build_ps1
+  __git_ps1 "$tmux_info$pwd_ps1$reset" "\\
+\n$green\$$reset "
+};
 
 # Autocomplete
 load_bash_completion() {
@@ -52,6 +51,10 @@ _src() {
 }
 complete -o nospace -F _src src
 
-export PROMPT_COMMAND=__tmux_notify_status
+__prompt_command() {
+  __tmux_notify_status
+  __build_prompt
+}
+export PROMPT_COMMAND=__prompt_command
 
 # vim:ft=sh:

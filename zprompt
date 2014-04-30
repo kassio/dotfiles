@@ -1,17 +1,14 @@
-build_prompt() {
-  local current_dir="$FG[027]%~";
-  local git_ps1='$FG[011]$(__git_ps1 "(%s)")%{$reset_color%}'
-  local tmux_info="${TMUX_PANE:+$FG[196][${TMUX_PANE#\%}]}"
-  local sign=$([ $UID -eq 0 ] && echo '$FG[160]#' || echo '$FG[046]$');
+__build_prompt() {
+  local tmux_info="${TMUX_PANE:+$FG[196][${TMUX_PANE#\%}]}";
+  local current_dir="$FG[027]%~"
 
-  export PROMPT=\
-"${tmux_info}${current_dir}${git_ps1}
-${sign}%{$reset_color%} "
-}; build_prompt
+  __git_ps1 "${tmux_info}${current_dir}%{$reset_color%}" "%s
+$FG[046]$ "
+}
 
-build_rps1() {
+__build_rprompt() {
   local return_code="%(?..$FG[160]%? ↵)%{$reset_color%}";
   export RPS1="${return_code}"
-}; build_rps1
+}; __build_rprompt
 
 # vim:ft=zsh:

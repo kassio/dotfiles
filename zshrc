@@ -47,6 +47,6 @@ src() { cd $src/$1;  }
 _src() { _files -W $src -/; }
 compdef _src src
 
-precmd_functions=(__tmux_notify_status)
+precmd_functions=(__build_prompt __tmux_notify_status)
 
 # vim:ft=zsh:
