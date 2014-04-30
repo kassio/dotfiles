@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # http://snippets.freerobby.com/post/491644841/remove-merged-branches-in-git
 function rmb {
   current_branch=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
@@ -30,3 +32,5 @@ function rmb {
     fi
   fi
 }
+
+rmb
