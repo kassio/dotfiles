@@ -12,10 +12,7 @@ export DISABLE_AUTO_TITLE=true # fix command echo in some terminal emmulators
 plugins=(rbenv brew heroku)
 source $ZSH/oh-my-zsh.sh
 
-for plugin in `ls $DOTFILES/zsh-plugins`
-do
-  source $DOTFILES/zsh-plugins/$plugin/*plugin.zsh
-done
+source $DOTFILES/lib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 brew_prefix=`which brew --prefix`
 prefix=${brew_prefix:-/usr/local}

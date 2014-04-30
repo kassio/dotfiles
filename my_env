@@ -57,6 +57,7 @@ export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
 # git stuff for prompt
+source $DOTFILES/lib/git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWSTASHSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
@@ -65,17 +66,12 @@ export GIT_PS1_SHOWUPSTREAM=verbose
 
 export CDPATH="$CDPATH:$HOME:$HOME/.vim:$HOME/.vim/bundle:$src"
 
-# local env
-if [[ -e "$HOME/.env" ]]
-then
-  source $HOME/.env
-fi
-
 export PATH="$PATH:$DOTFILES/bin"
 
 # rails bundler bin
 export PATH="../bin:./bin:$PATH"
 
+# EC2 stuff
 if [[ -e /usr/libexec/java_home ]]
 then
   export JAVA_HOME=$(/usr/libexec/java_home)
@@ -84,5 +80,12 @@ export EC2_HOME=/usr/local/ec2/ec2-api-tools-1.6.13.0/
 export PATH=$PATH:$EC2_HOME/bin
 
 source $DOTFILES/aliases
+
+# local env
+if [[ -e "$HOME/.env" ]]
+then
+  source $HOME/.env
+fi
+
 
 # vim:ft=sh:

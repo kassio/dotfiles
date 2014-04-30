@@ -29,6 +29,14 @@ then
   git clone git://github.com/sstephenson/ruby-build.git
 fi
 
-sudo mv /etc/{zshenv,zshrc}
+if [[ -e "/etc/zshenv" ]]
+then
+  sudo mv /etc/{zshenv,zshrc}
+fi
+
+# load/update git-prompt.sh
+curl \
+  https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh \
+  > $HOME/.dotfiles/lib/git-prompt.sh
 
 cd $HOME
