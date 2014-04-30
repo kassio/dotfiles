@@ -11,7 +11,6 @@ export DISABLE_AUTO_TITLE=true # fix command echo in some terminal emmulators
 
 plugins=(rbenv brew heroku)
 source $ZSH/oh-my-zsh.sh
-
 source $DOTFILES/lib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 brew_prefix=`which brew --prefix`
@@ -40,17 +39,25 @@ setopt extendedglob
 # don't blow up with comments
 setopt interactive_comments
 
-source $DOTFILES/my_env
-source $DOTFILES/zprompt
+__build_prompt() {
+  local tmux_info="${TMUX_PANE:+$FG[196][${TMUX_PANE#\%}]}";
+  local current_dir="$FG[027]%~"
 
-src() { cd $src/$1;  }
-_src() { _files -W $src -/; }
-compdef _src src
+  __git_ps1 "${tmux_info}${current_dir}%{$reset_color%}" "%s
+$FG[046]$ "
+}
+
+__build_rprompt() {
+  local return_code="%(?..$FG[160]%? ↵)%{$reset_color%}";
+  export RPS1="${return_code}"
+}; __build_rprompt
 
 __prompt_command() {
   __tmux_notify_status
   __build_prompt
 }
 precmd_functions=(__prompt_command)
+
+source $DOTFILES/my_env
 
 # vim:ft=zsh:

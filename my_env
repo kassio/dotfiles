@@ -88,5 +88,4 @@ then
   source $HOME/.env
 fi
 
-
 # vim:ft=sh:

@@ -41,20 +41,12 @@ complete -o default -o nospace -F _rakecomplete rake
 complete -o default -o nospace -F _capcomplete cap
 complete -o default -o nospace -F _thorcomplete thor
 
-source $DOTFILES/my_env
-
-src() { cd $src/$1; }
-_src() {
-  local cur
-  cur=${COMP_WORDS[COMP_CWORD]}
-  COMPREPLY=( $( compgen -S/ -d $src/$cur | cut -b $((${#src}+2))- ) )
-}
-complete -o nospace -F _src src
-
 __prompt_command() {
   __tmux_notify_status
   __build_prompt
 }
 export PROMPT_COMMAND=__prompt_command
+
+source $DOTFILES/my_env
 
 # vim:ft=sh:
