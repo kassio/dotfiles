@@ -60,7 +60,7 @@ export LANG="en_US.UTF-8"
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWSTASHSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
-export GIT_PS1_SHOWUPSTREAM=true
+export GIT_PS1_SHOWUPSTREAM=verbose
 
 export CDPATH="$CDPATH:$HOME:$HOME/.vim:$HOME/.vim/bundle:$src"
 

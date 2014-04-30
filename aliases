@@ -35,7 +35,7 @@ alias vr='vagrant reload && vs'
 alias vsu='vagrant suspend'
 
 alias g="git"
-alias ga="g add"
+alias ga="g add -A"
 alias gb="g b"
 alias gbdall="git remote | xargs -n1 git remote prune"
 alias gc="g ci"

@@ -23,8 +23,8 @@
   grep = auto
   ui = auto
 [alias]
-  autoseg = !git config --local --replace-all user.name 'Kassio Borges' && git config --local user.email "kassio.borges@autoseg.com"
-  personal = !git config --local --replace-all user.name 'Kassio Borges' && git config --local user.email "kassioborgesm@gmail.com"
+  work = !git config --local --replace-all user.name 'Kassio Borges' && git config --local user.email "kassio.borges@autoseg.com"
+  home = !git config --local --replace-all user.name 'Kassio Borges' && git config --local user.email "kassioborgesm@gmail.com"
   b = branch
   ci = commit -v
   cl = clean
@@ -41,5 +41,8 @@
   t = tag
   today = log --stat --since=1.day --graph --pretty=oneline --abbrev-commit --date=relative
   tree = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset - %s%Creset' --graph
+  shorten = !sh -c 'curl -i http://git.io -F url=https://github.com/$1 -F code=$2' -
+  last-tag = describe --tags
+  rank = shortlog -sn
 
 # vim:ft=sh:
