@@ -472,7 +472,7 @@ __git_ps1 ()
 		__git_ps1_branch_name=$b
 		# note that the $ is escaped -- the variable will be
 		# expanded later (when it's time to draw the prompt)
-		b="\${__git_ps1_branch_name}"
+		b="${__git_ps1_branch_name}"
 	fi
 
 	local f="$w$i$s$u"
