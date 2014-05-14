@@ -40,14 +40,14 @@ setopt interactive_comments
 
 __build_prompt() {
   local tmux_info="${TMUX_PANE:+$FG[196][${TMUX_PANE#\%}]}";
-  local current_dir="$FG[027]%~"
+  local current_dir="$FG[004]%~"
 
-  __git_ps1 "${tmux_info}${current_dir} %F{green}(" "%F{green})
-$FG[046]$%{$reset_color%} " "%s"
+  __git_ps1 "${tmux_info}${current_dir} %f" "
+$FG[002]$%f " "(%s)"
 }
 
 __build_rprompt() {
-  local return_code="%(?..$FG[160]%? ↵)%{$reset_color%}";
+  local return_code="%(?..$FG[160]%? ↵)%f";
   export RPS1="${return_code}"
 }; __build_rprompt
 

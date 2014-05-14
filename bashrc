@@ -7,11 +7,11 @@ __build_prompt() {
   local reset='\[\e[00m\]'
   local green='\[\e[0;32m\]'
 
-  local pwd_ps1="$blue\w"
+  local current_dir="$blue\w"
   local tmux_info="${TMUX_PANE:+$red[${TMUX_PANE#\%}]}"
 
-  __git_ps1 "$tmux_info$pwd_ps1 $green(" "$green)
-\$$reset_color " "%s"
+  __git_ps1 "$tmux_info$current_dir $reset" "
+$green\$$reset " "(%s)"
 };
 
 # Autocomplete
