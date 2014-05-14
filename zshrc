@@ -43,7 +43,7 @@ __build_prompt() {
   local current_dir="$FG[027]%~"
 
   __git_ps1 "${tmux_info}${current_dir} %F{green}(" "%F{green})
-$FG[046]$ " "%s"
+$FG[046]$%{$reset_color%} " "%s"
 }
 
 __build_rprompt() {

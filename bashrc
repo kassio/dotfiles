@@ -11,7 +11,7 @@ __build_prompt() {
   local tmux_info="${TMUX_PANE:+$red[${TMUX_PANE#\%}]}"
 
   __git_ps1 "$tmux_info$pwd_ps1 $green(" "$green)
-\$ " "%s"
+\$$reset_color " "%s"
 };
 
 # Autocomplete
