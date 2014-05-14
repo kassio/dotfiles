@@ -42,7 +42,7 @@ __build_prompt() {
   local tmux_info="${TMUX_PANE:+$FG[196][${TMUX_PANE#\%}]}";
   local current_dir="$FG[027]%~"
 
-  __git_ps1 "${tmux_info}${current_dir}$FG[003](" "$FG[003])%{$reset_color%}
+  __git_ps1 "${tmux_info}${current_dir} %F{green}(" "%F{green})
 $FG[046]$ " "%s"
 }
 

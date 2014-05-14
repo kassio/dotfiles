@@ -10,8 +10,8 @@ __build_prompt() {
   local pwd_ps1="$blue\w"
   local tmux_info="${TMUX_PANE:+$red[${TMUX_PANE#\%}]}"
 
-  __git_ps1 "$tmux_info$pwd_ps1$reset" "\\
-\n$green\$$reset "
+  __git_ps1 "$tmux_info$pwd_ps1 $green(" "$green)
+\$ " "%s"
 };
 
 # Autocomplete
