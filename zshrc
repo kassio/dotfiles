@@ -6,13 +6,11 @@ then
 fi
 
 export DOTFILES=$HOME/.dotfiles
-export ZSH=$DOTFILES/oh-my-zsh
 export DISABLE_AUTO_TITLE=true # fix command echo in some terminal emmulators
 export DISABLE_AUTO_UPDATE=true
 
-plugins=(rbenv brew heroku)
-source $ZSH/oh-my-zsh.sh
 source $DOTFILES/lib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $DOTFILES/lib/spectrum.zsh
 
 brew_prefix=`which brew --prefix`
 prefix=${brew_prefix:-/usr/local}
