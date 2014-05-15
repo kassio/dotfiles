@@ -23,7 +23,7 @@
   grep = auto
   ui = auto
 [alias]
-  work = !git config --local --replace-all user.name 'Kassio Borges' && git config --local user.email "kassio.borges@autoseg.com"
+  work = !git config --local --replace-all user.name 'Kassio Borges' && git config --local user.email "kassio.borges@plataformatec.com.br"
   home = !git config --local --replace-all user.name 'Kassio Borges' && git config --local user.email "kassioborgesm@gmail.com"
   b = branch
   ci = commit -v
