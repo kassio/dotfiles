@@ -31,7 +31,7 @@ alias RT='RAILS_ENV=test'
 alias vu='vagrant up'
 alias vus='vu && vagrant ssh'
 alias vh='vagrant halt'
-alias vr='vagrant reload && vs'
+alias vr='vagrant reload && vus'
 alias vsu='vagrant suspend'
 
 alias g="git"
