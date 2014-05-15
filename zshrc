@@ -20,6 +20,15 @@ then
   source $brew_completion
 fi
 
+## Completions
+autoload -U compinit
+compinit -C
+
+## case-insensitive (all),partial-word and then substring completion
+zstyle ':completion:*' matcher-list \
+  'm:{a-zA-Z}={A-Za-z}' \
+  'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
 # do not correct me!!
 unsetopt correct_all
 unsetopt correct
