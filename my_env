@@ -1,18 +1,10 @@
 export src="$HOME/src"
 
-# rbenv
-if [ -d "$HOME/.rbenv" ]
-then
-  export PATH="$HOME/.rbenv/bin:/usr/local/sbin:$PATH"
-  eval "$(rbenv init - --no-rehash)"
-
-  # prompt with ruby version and arch
-  rbv() {
-    rbenv_ruby_version=`rbenv version-name`
-    rbenv_ruby_arch=`ruby -e 'puts "#{[""].pack("p").size*8}bits"'`
-    printf $rbenv_ruby_version"("$rbenv_ruby_arch")\n"
-  }
-fi
+rbv() {
+  rbenv_ruby_version=`rbenv version-name`
+  rbenv_ruby_arch=`ruby -e 'puts "#{[""].pack("p").size*8}bits"'`
+  printf $rbenv_ruby_version"("$rbenv_ruby_arch")\n"
+}
 
 ### Added by the Heroku Toolbelt
 _heroku_bin_path="/usr/local/heroku/bin"
