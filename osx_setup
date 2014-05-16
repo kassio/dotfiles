@@ -1,0 +1,50 @@
+## quicklook
+# Text selection on quicklook
+defaults write com.apple.finder QLEnableTextSelection -bool true && killall Finder
+
+## dock
+# faster animations on expose
+defaults write com.apple.dock expose-animation-duration -float 0.1
+# Autohide dock
+defaults write com.apple.dock autohide -bool TRUE
+# Dock on righ
+defaults write com.apple.dock orientation left
+
+## dashboard
+# Disable dashboard
+defaults write com.apple.dashboard mcx-disabled -boolean true
+
+## finder
+# Use Finders list view as the default view mode
+defaults write com.apple.finder FXPreferredViewStyle Nlsv
+# Disable the warning when changing a file extension
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+# Show all filename extensions in Finder
+defaults write -g AppleShowAllExtensions -bool true
+# Expand save dialogs
+defaults write -g NSNavPanelExpandedStateForSaveMode -bool TRUE
+
+## keyboard
+# Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
+defaults write -g AppleKeyboardUIMode -int 3
+# Turn on key repeat
+defaults write -g ApplePressAndHoldEnabled -bool false
+
+## trackpad
+# Enable tap to click (Trackpad)
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+
+## security
+# Require password immediately after sleep or screen saver begins
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+# Kill affected applications
+for app in Finder Dock SystemUIServer; do killall "$app" >/dev/null 2>&1; done
+
+# Faster shutdown
+sudo defaults write /System/Library/LaunchDaemons/com.apple.coreservices.appleevents ExitTimeOut -int 1
+sudo defaults write /System/Library/LaunchDaemons/com.apple.securityd ExitTimeOut -int 1
+sudo defaults write /System/Library/LaunchDaemons/com.apple.mDNSResponder ExitTimeOut -int 1
+sudo defaults write /System/Library/LaunchDaemons/com.apple.diskarbitrationd ExitTimeOut -int 1
+sudo defaults write /System/Library/LaunchAgents/com.apple.coreservices.appleid.authentication ExitTimeOut -int 1

@@ -19,20 +19,12 @@ then
   source $HOME/.zshrc &>/dev/null
 fi
 
-if [[ ! -d "$HOME/.rbenv" ]]
-then
-  cd $HOME
-  git clone git://github.com/sstephenson/rbenv.git .rbenv
-
-  mkdir -p $HOME/.rbenv/plugins
-  cd $HOME/.rbenv/plugins
-  git clone git://github.com/sstephenson/ruby-build.git
-fi
-
 if [[ -e "/etc/zshenv" ]]
 then
   sudo mv /etc/{zshenv,zshrc}
 fi
+
+$HOME/.dotfiles/osx_setup
 
 # load/update git-prompt.sh
 curl \
