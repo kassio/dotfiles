@@ -3,4 +3,4 @@ then
   . "$HOME/.bashrc"
 fi
 
-# vim:ft=sh:
+source /opt/boxen/env.sh
