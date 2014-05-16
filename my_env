@@ -72,6 +72,8 @@ fi
 export EC2_HOME=/usr/local/ec2/ec2-api-tools-1.6.13.0/
 export PATH=$PATH:$EC2_HOME/bin
 
+export HOMEBREW_PREFIX=$(brew --prefix)
+
 source $DOTFILES/aliases
 
 # local env
