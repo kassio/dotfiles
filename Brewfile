@@ -9,7 +9,6 @@ install bash
 install bash-completion
 install brew-cask
 install ctags
-install erlang
 install git
 install heroku-toolbelt
 install highlight
