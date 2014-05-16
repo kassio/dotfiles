@@ -57,7 +57,7 @@ export GIT_PS1_SHOWCOLORHINTS=true
 export GIT_PS1_DESCRIBE_STYLE=branch
 export GIT_PS1_SHOWUPSTREAM=verbose
 
-export CDPATH="$CDPATH:$HOME:$HOME/.vim:$HOME/.vim/bundle:$src"
+export CDPATH="$CDPATH:$HOME:$src:$src/private"
 
 export PATH="$PATH:$DOTFILES/bin"
 
@@ -75,6 +75,9 @@ export PATH=$PATH:$EC2_HOME/bin
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 
 source $DOTFILES/aliases
+
+# boxen-env
+source /opt/boxen/env.sh
 
 # local env
 if [[ -e "$HOME/.env" ]]
