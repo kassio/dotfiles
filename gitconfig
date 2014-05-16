@@ -7,7 +7,7 @@
 [init]
   templatedir = ~/.dotfiles/git_template
 [push]
-  default = simple
+  default = current
 [pull]
   rebase = true
 [grep]
