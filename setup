@@ -24,7 +24,10 @@ then
   sudo mv /etc/{zshenv,zshrc}
 fi
 
-$HOME/.dotfiles/osx_setup
+if [[ $(uname) == 'Darwin' ]]
+then
+  $HOME/.dotfiles/osx_setup
+fi
 
 # load/update git-prompt.sh
 curl \
