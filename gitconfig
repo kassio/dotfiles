@@ -3,7 +3,7 @@
 [core]
   excludesfile = /Users/kassioborges/.gitignore
   editor = `which vim`
-  whitespace = trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol
+  whitespace = trailing-space,space-before-tab,cr-at-eol
 [init]
   templatedir = ~/.dotfiles/git_template
 [push]
