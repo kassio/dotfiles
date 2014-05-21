@@ -77,7 +77,10 @@ export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 source $DOTFILES/aliases
 
 # boxen-env
-source /opt/boxen/env.sh
+if [[ -e /opt/boxen/env.sh ]]
+then
+  source /opt/boxen/env.sh
+fi
 
 # local env
 if [[ -e "$HOME/.env" ]]
