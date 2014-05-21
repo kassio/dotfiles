@@ -7,7 +7,7 @@ link_files() {
 
   for f in \
     bashrc zshrc zshenv gitignore \
-    gitconfig irbrc gemrc hushlogin \
+    gitconfig rspec irbrc gemrc hushlogin \
     profile tmux.conf ctags ackrc
   do
     ln -sf "$file_path/$f" $HOME/.$f
