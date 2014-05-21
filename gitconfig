@@ -1,7 +1,7 @@
 [user]
   name = Kassio Borges
 [core]
-  excludesfile = /Users/kassioborges/.gitignore
+  excludesfile = ~/.gitignore
   editor = `which vim`
   whitespace = trailing-space,space-before-tab,cr-at-eol
 [init]
