@@ -9,10 +9,6 @@ fi
 export GREP_OPTIONS="--color=auto"
 
 alias vi='vim'
-alias nv='nvim'
-
-alias vpu='vim +NeoBundleClean! +NeoBundleUpdate! +qall'
-alias nvpu='vim +NeoBundleClean! +NeoBundleUpdate! +qall'
 
 alias ls="ls $LS_COMMON"
 alias l='ls -A'
