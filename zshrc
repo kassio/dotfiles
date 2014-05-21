@@ -9,6 +9,9 @@ export DOTFILES=$HOME/.dotfiles
 export DISABLE_AUTO_TITLE=true # fix command echo in some terminal emmulators
 export DISABLE_AUTO_UPDATE=true
 
+# Fix the \eb \ef and others.
+export WORDCHARS=''
+
 source $DOTFILES/lib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $DOTFILES/lib/spectrum.zsh
 
