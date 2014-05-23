@@ -24,7 +24,6 @@ install rename
 install terminal-notifier
 install tmux
 install tree
-install vim --override-system-vi --HEAD
 install watch
 install wget
 install zsh
