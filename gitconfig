@@ -30,18 +30,15 @@
   work = !git config --local --replace-all user.name 'Kassio Borges' && git config --local user.email "kassio.borges@plataformatec.com.br"
   home = !git config --local --replace-all user.name 'Kassio Borges' && git config --local user.email "kassioborgesm@gmail.com"
   b = branch
-  ci = commit -v
-  cl = clean
+  c = commit -v
   co = checkout
   d = !git --no-pager diff
   dp = diff
   f = fetch
-  g = grep --break --heading
   l = !git --no-pager log -20 --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset %s%Creset -%Cblue%d%Creset'
   lp = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cd)%Creset %s%Creset -%Cblue%d%Creset' --date=short
   m = merge
   s = status -sb
-  st = status
   t = tag
   today = log --stat --since=1.day --graph --pretty=oneline --abbrev-commit --date=relative
   tree = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset - %s%Creset' --graph
