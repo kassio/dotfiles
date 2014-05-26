@@ -1,6 +1,4 @@
-## quicklook
-# Text selection on quicklook
-defaults write com.apple.finder QLEnableTextSelection -bool true && killall Finder
+#!/usr/bin/env bash
 
 ## dock
 # faster animations on expose
@@ -21,8 +19,18 @@ defaults write com.apple.finder FXPreferredViewStyle Nlsv
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 # Show all filename extensions in Finder
 defaults write -g AppleShowAllExtensions -bool true
+# Show path bar
+defaults write com.apple.finder ShowPathbar -bool true
 # Expand save dialogs
 defaults write -g NSNavPanelExpandedStateForSaveMode -bool TRUE
+# Increase window resize speed for Cocoa applications
+defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
+# Disable window animations and Get Info animations
+defaults write com.apple.finder DisableAllAnimations -bool true
+# Disable the warning before emptying the Trash
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+# Text selection on quicklook
+defaults write com.apple.finder QLEnableTextSelection -bool true && killall Finder
 
 ## keyboard
 # Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
@@ -31,7 +39,7 @@ defaults write -g AppleKeyboardUIMode -int 3
 defaults write -g ApplePressAndHoldEnabled -bool false
 
 ## trackpad
-# Enable tap to click (Trackpad)
+# Enable tap to click
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 
 ## security
@@ -41,6 +49,11 @@ defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Kill affected applications
 for app in Finder Dock SystemUIServer; do killall "$app" >/dev/null 2>&1; done
+
+sudo chflags nohidden ~/Library
+sudo chflags -h nohidden /tmp
+sudo chflags nohidden /usr
+sudo chflags nohidden /opt
 
 # Faster shutdown
 sudo defaults write /System/Library/LaunchDaemons/com.apple.coreservices.appleevents ExitTimeOut -int 1
