@@ -1,5 +1,12 @@
 export src="$HOME/src"
 
+# rbenv
+if [ -d "$HOME/.rbenv" ]
+then
+  export PATH="$HOME/.rbenv/bin:/usr/local/sbin:$PATH"
+  eval "$(rbenv init - --no-rehash)"
+fi
+
 rbv() {
   rbenv_ruby_version=`rbenv version-name`
   rbenv_ruby_arch=`ruby -e 'puts "#{[""].pack("p").size*8}bits"'`
