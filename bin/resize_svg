@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Resize all svg files from current directory to given value, making a bkp of
+# the original file. The given value will be used as pixel.
+#
+# Dependes of librsvg.
+ls *svg | while read original_file
+do
+  noext_file=${original_file%%.svg}
+  bkpfile=$noext_file.svg.bkp
+  mv $original_file $bkpfile
+  rsvg-convert -w $1 -a -f svg -o $original_file $bkpfile
+  sed -e "s/$1pt/$1px/g" -i "" *.svg
+done
