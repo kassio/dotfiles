@@ -42,7 +42,7 @@ complete -o default -o nospace -F _capcomplete cap
 complete -o default -o nospace -F _thorcomplete thor
 
 __prompt_command() {
-  __tmux_notify_status
+  __notify_tests_status
   __build_prompt
 }
 export PROMPT_COMMAND=__prompt_command

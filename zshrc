@@ -72,7 +72,7 @@ __build_rprompt() {
 }; __build_rprompt
 
 __prompt_command() {
-  __tmux_notify_status
+  __notify_tests_status
   __build_prompt
 }
 precmd_functions=(__prompt_command)
