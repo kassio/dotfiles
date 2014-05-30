@@ -37,6 +37,8 @@ defaults write com.apple.finder QLEnableTextSelection -bool true && killall Find
 defaults write -g AppleKeyboardUIMode -int 3
 # Turn on key repeat
 defaults write -g ApplePressAndHoldEnabled -bool false
+# Enable auto replacement
+defaults write -g WebAutomaticTextReplacementEnabled -bool true
 
 ## trackpad
 # Enable tap to click
