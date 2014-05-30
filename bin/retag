@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require 'bundler'
+
+system('rm -rf gems.tags tags &>/dev/null')
+
+begin
+  gems_paths = Bundler.load.specs.map(&:full_gem_path)
+  system("ctags -f gems.tags #{gems_paths.join(' ')} 2>/dev/null")
+rescue
+  nil
+ensure
+  system('ctags -f tags 2>/dev/null')
+end
