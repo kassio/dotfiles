@@ -81,7 +81,7 @@ export PATH=$PATH:$EC2_HOME/bin
 
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 
-source $DOTFILES/aliases
+source $DOTFILES/lib/aliases
 
 # boxen-env
 if [[ -e /opt/boxen/env.sh ]]

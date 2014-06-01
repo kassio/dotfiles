@@ -31,7 +31,7 @@ alias vr='vagrant reload && vus'
 alias vsu='vagrant suspend'
 
 alias g="git"
-alias ga="g add -A"
+alias ga="g add"
 alias gb="g b"
 alias gbdall="git remote | xargs -n1 git remote prune"
 alias gc="g c"
@@ -54,13 +54,11 @@ alias gra="gr --abort"
 alias gs="g s"
 alias gsub="git submodule"
 alias gt="g tag"
+alias gtl="gt --list --sort=version:refname"
 alias gtoday="g today"
 alias gtree="g tree"
 
-function psg {
-  ps aux | grep -i $@ | grep -v grep
-}
-
+alias psg="ps aux | grep -v grep | grep -i"
 function killer {
   kill -9 $(psg $@ | awk '{print $2}')
 }

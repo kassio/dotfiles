@@ -7,16 +7,10 @@ Install
 -------
 
       git clone https://github.com/kassio/dotfiles.git ~/.dotfiles --recursive
-      cd ~/.dotfiles
-      ./setup
+      ~/.dotfiles/bin/setup_env
       source ~/.zshrc
 
 Setup PATH on OSX
 -----------------
 
       Edit `/etc/paths` put `/usr/local/bin` at the top of the file
-
-Setup zsh on OSX
-----------------
-
-      Edit `/etc/shells` add `/usr/local/bin/zsh`

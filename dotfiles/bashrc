@@ -47,6 +47,6 @@ __prompt_command() {
 }
 export PROMPT_COMMAND=__prompt_command
 
-source $DOTFILES/my_env
+source $DOTFILES/lib/my_env
 
 # vim:ft=sh:

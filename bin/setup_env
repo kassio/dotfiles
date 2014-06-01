@@ -3,12 +3,9 @@
 cd $HOME
 
 link_files() {
-  local file_path="$HOME/.dotfiles"
+  local file_path="$HOME/.dotfiles/dotfiles"
 
-  for f in \
-    bashrc zshrc zshenv gitignore \
-    gitconfig rspec irbrc gemrc hushlogin \
-    profile tmux.conf ctags ackrc
+  for f in `ls -1 $file_path`
   do
     ln -sf "$file_path/$f" $HOME/.$f
   done
@@ -19,14 +16,20 @@ then
   source $HOME/.zshrc &>/dev/null
 fi
 
-if [[ -e "/etc/zshenv" ]]
-then
-  sudo mv /etc/{zshenv,zshrc}
-fi
-
 if [[ $(uname) == 'Darwin' ]]
 then
-  $HOME/.dotfiles/osx_setup
+  $HOME/.dotfiles/bin/setup_osx
+
+  zsh_path=$(which zsh)
+  if [ -z "$(grep $zsh_path /etc/shells)"]
+  then
+    echo $zsh_path | sudo tee -a /etc/shells
+  fi
+
+  if [[ -e "/etc/zshenv" ]]
+  then
+    sudo mv /etc/{zshenv,zshrc}
+  fi
 fi
 
 # load/update git-prompt.sh
