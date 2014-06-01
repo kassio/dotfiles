@@ -7,12 +7,6 @@ then
   eval "$(rbenv init - --no-rehash)"
 fi
 
-rbv() {
-  rbenv_ruby_version=`rbenv version-name`
-  rbenv_ruby_arch=`ruby -e 'puts "#{[""].pack("p").size*8}bits"'`
-  printf $rbenv_ruby_version"("$rbenv_ruby_arch")\n"
-}
-
 ### Added by the Heroku Toolbelt
 _heroku_bin_path="/usr/local/heroku/bin"
 if [[ -d $_heroku_bin_path ]]

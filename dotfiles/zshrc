@@ -6,8 +6,6 @@ then
 fi
 
 export DOTFILES=$HOME/.dotfiles
-export DISABLE_AUTO_TITLE=true # fix command echo in some terminal emmulators
-export DISABLE_AUTO_UPDATE=true
 
 # Fix the \eb \ef and others.
 export WORDCHARS=''
@@ -43,9 +41,6 @@ HISTSIZE=1200                  # lines of history to maintain memory
 SAVEHIST=1000                  # lines of history to maintain in history file.
 setopt HIST_EXPIRE_DUPS_FIRST  # allow dups, but expire old ones when I hit HISTSIZE
 setopt EXTENDED_HISTORY        # save timestamp and runtime information
-
-# I like default grep color
-export GREP_COLOR=""
 
 # colors on autocomplete
 autoload -Uz compinit

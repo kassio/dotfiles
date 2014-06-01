@@ -59,6 +59,13 @@ alias gtoday="g today"
 alias gtree="g tree"
 
 alias psg="ps aux | grep -v grep | grep -i"
+
+rbv() {
+  rbenv_ruby_version=`rbenv version-name`
+  rbenv_ruby_arch=`ruby -e 'puts "#{[""].pack("p").size*8}bits"'`
+  printf $rbenv_ruby_version"("$rbenv_ruby_arch")\n"
+}
+
 function killer {
   kill -9 $(psg $@ | awk '{print $2}')
 }
