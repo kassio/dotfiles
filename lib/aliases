@@ -72,9 +72,9 @@ function killer {
 
 function __notify_tests_status {
   local last_status=$?
-  local last_command="$(fc -ln -1)"
+  local last_command="$((fc -ln -0 || fc -ln -1) 2>/dev/null)"
 
-  function tmux_notifier {
+  function notifier {
     if [[ $(uname) == 'Darwin' ]]
     then
       `which terminal-notifier` -group 'TMUX' -message $1 &>/dev/null
@@ -87,9 +87,9 @@ function __notify_tests_status {
     *spec*|*test*)
       if [ $last_status -eq 0 ]
       then
-        tmux_notifier 'SUCCESS :)'
+        notifier 'SUCCESS :)'
       else
-        tmux_notifier 'FAILED :('
+        notifier 'FAILED :('
       fi
       ;;
   esac
