@@ -21,6 +21,9 @@ then
   source $brew_completion
 fi
 
+# Use emacs key bindings
+bindkey -e
+
 ## Completions
 autoload -U compinit
 compinit -C
