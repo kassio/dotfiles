@@ -11,15 +11,10 @@ install brew-cask
 install ctags
 install git
 install heroku-toolbelt
-install highlight
 install macvim
 install markdown
 install mercurial
-install mysql
-install node
-install postgresql
 install python
-install reattach-to-user-namespace
 install rename
 install terminal-notifier
 install tmux
