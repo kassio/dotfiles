@@ -21,7 +21,7 @@ then
   $HOME/.dotfiles/bin/setup_osx
 
   zsh_path=$(which zsh)
-  if [ -z "$(grep $zsh_path /etc/shells)"]
+  if [ -z "$(grep $zsh_path /etc/shells)" ]
   then
     echo $zsh_path | sudo tee -a /etc/shells
   fi
