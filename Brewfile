@@ -9,9 +9,7 @@ install bash
 install bash-completion
 install brew-cask
 install ctags
-install git
 install heroku-toolbelt
-install macvim
 install markdown
 install mercurial
 install python
