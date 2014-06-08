@@ -1,5 +1,5 @@
 __custom_prompt_command() {
-  __prompt_command
+  __build_prompt # my function to build prompt :)
   export PS1="\[\e[0;31m\]β $PS1" # bashrc
   export PS1="$FG[196]β $PS1" # zsh
 }
