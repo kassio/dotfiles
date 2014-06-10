@@ -1,5 +1,6 @@
 #!/bin/bash
 
+old_path="$PWD"
 cd $HOME
 
 link_files() {
@@ -11,30 +12,35 @@ link_files() {
   done
 }; link_files
 
-if [[ -e "$HOME/.zshrc" ]]
-then
-  source $HOME/.zshrc &>/dev/null
-fi
+osx_setup() {
+  if [ "Darwin" == "$(uname)" ]
+  then
+    $HOME/.dotfiles/bin/setup_osx
+  fi
+}; osx_setup
 
-if [[ $(uname) == 'Darwin' ]]
-then
-  $HOME/.dotfiles/bin/setup_osx
+zsh_setup() {
+  local zsh_path=$(which zsh)
 
-  zsh_path=$(which zsh)
   if [ -z "$(grep $zsh_path /etc/shells)" ]
   then
     echo $zsh_path | sudo tee -a /etc/shells
   fi
 
-  if [[ -e "/etc/zshenv" ]]
+  if [ -e "/etc/zshenv" ]
   then
     sudo mv /etc/{zshenv,zshrc}
   fi
-fi
+}; zsh_setup
 
 # load/update git-prompt.sh
 curl \
   https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh \
   > $HOME/.dotfiles/lib/git-prompt.sh
 
-cd $HOME
+if [ -e "$HOME/.zshrc" ]
+then
+  source $HOME/.zshrc &>/dev/null
+fi
+
+cd $old_path
