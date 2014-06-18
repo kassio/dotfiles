@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+function __notify_tests_status {
+  trap "{ return -1 }" SIGINT
+
+  local last_status=$?
+  local last_command="$((fc -ln -0 || fc -ln -1) 2>/dev/null)"
+
+  function notifier {
+    if [[ $(uname) == 'Darwin' ]]
+    then
+      `which terminal-notifier` -group 'TMUX' -message $1 &>/dev/null
+    else
+      `which notify-send` $1 &>/dev/null
+    fi
+  }
+
+  case $last_command in
+    *spec*|*test*)
+      if [ $last_status -eq 0 ]
+      then
+        notifier 'SUCCESS :)'
+      else
+        notifier 'FAILED :('
+      fi
+      ;;
+  esac
+
+  return $last_status
+}
