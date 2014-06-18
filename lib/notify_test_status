@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 function __notify_tests_status {
-  trap "{ return -1 }" SIGINT
-
   local last_status=$?
   local last_command="$((fc -ln -0 || fc -ln -1) 2>/dev/null)"
+
+  trap "{ return -1 }" SIGINT
 
   function notifier {
     if [[ $(uname) == 'Darwin' ]]
