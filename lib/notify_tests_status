@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 
+export __DEFINING_NOTIFY_TESTS=1
+
 function __notify_tests_status {
   local last_status=$?
   local last_command_id="$(echo `fc -l -1` | cut -d' ' -f 1)"
   local last_command="$((fc -ln -0 || fc -ln -1) 2>/dev/null)"
 
-  if [ "$__LAST_COMMAND_ID" -eq $last_command_id ]
+  if [ "$__LAST_COMMAND_ID" -eq $last_command_id -o -n "$__DEFINING_NOTIFY_TESTS" ]
   then
+    unset __DEFINING_NOTIFY_TESTS
     return $last_status
   fi
 
