@@ -2,9 +2,17 @@
 
 function __notify_tests_status {
   local last_status=$?
+  local last_command_id="$(echo `fc -l -1` | cut -d' ' -f 1)"
   local last_command="$((fc -ln -0 || fc -ln -1) 2>/dev/null)"
 
-  trap "{ return -1 }" SIGINT
+  if [ "$__LAST_COMMAND_ID" -eq $last_command_id ]
+  then
+    return $last_status
+  fi
+
+  export __LAST_COMMAND_ID="$last_command_id"
+
+  trap "{ return $last_status }" SIGINT
 
   function notifier {
     if [[ $(uname) == 'Darwin' ]]
@@ -16,7 +24,9 @@ function __notify_tests_status {
   }
 
   case $last_command in
-    *spec*|*test*)
+    *notify_tests_status*)
+      ;;
+    *rspec*|*test*)
       if [ $last_status -eq 0 ]
       then
         notifier 'SUCCESS :)'
