@@ -57,11 +57,14 @@ setopt extendedglob
 setopt interactive_comments
 
 __build_prompt() {
-  local tmux_info="${TMUX_PANE:+$FG[196][${TMUX_PANE#\%}]}";
-  local current_dir="$FG[004]%~"
-
-  __git_ps1 "${tmux_info}${current_dir} %f" "
+  if [ -z "$TMUX_PANE" ]
+  then
+  __git_ps1 "$FG[004]%~ %f" "
 $FG[002]$%f " "(%s)"
+  else
+    local tmux_info="${TMUX_PANE:+$FG[196][${TMUX_PANE#\%}]}";
+    export PS1="${tmux_info}$FG[004]%1~$FG[002]$%f "
+  fi
 }
 
 __build_rprompt() {
