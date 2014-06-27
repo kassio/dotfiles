@@ -63,7 +63,7 @@ __build_prompt() {
 $FG[002]$%f " "(%s)"
   else
     local tmux_info="${TMUX_PANE:+$FG[196][${TMUX_PANE#\%}]}";
-    export PS1="${tmux_info}$FG[004]%1~$FG[002]$%f "
+    export PS1="${tmux_info}$FG[004]%1~%f$(__git_ps1)$FG[002]$ "
   fi
 }
 
