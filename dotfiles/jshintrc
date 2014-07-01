@@ -1,0 +1,25 @@
+{
+    "maxerr"        : 200,
+    "camelcase"     : true,
+    "curly"         : true,
+    "indent"        : 2,
+    "quotmark"      : "single",
+
+    "undef"         : true,
+    "unused"        : true,
+    "strict"        : false,
+    "maxparams"     : false,
+    "maxdepth"      : true,
+    "maxstatements" : false,
+    "maxcomplexity" : false,
+    "maxlen"        : 120,
+
+    "debug"         : false,
+
+    "browser"       : true,
+    "devel"         : false,
+    "jquery"        : true,
+
+    "globals"       : { "wire": true }
+
+}
