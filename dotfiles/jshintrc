@@ -1,25 +1,26 @@
 {
-    "maxerr"        : 200,
-    "camelcase"     : true,
-    "curly"         : true,
-    "indent"        : 2,
-    "quotmark"      : "single",
-
-    "undef"         : true,
-    "unused"        : true,
-    "strict"        : false,
-    "maxparams"     : false,
-    "maxdepth"      : true,
-    "maxstatements" : false,
-    "maxcomplexity" : false,
-    "maxlen"        : 120,
-
-    "debug"         : false,
-
-    "browser"       : true,
-    "devel"         : false,
-    "jquery"        : true,
-
-    "globals"       : { "wire": true }
-
+  "browser": true,
+  "camelcase": true,
+  "curly": true,
+  "debug": false,
+  "devel": false,
+  "immed": true,
+  "indent": 2,
+  "jquery": true,
+  "latedef": true,
+  "maxcomplexity": false,
+  "maxdepth": true,
+  "maxerr": 200,
+  "maxlen": 120,
+  "maxparams": false,
+  "maxstatements": false,
+  "newcap": true,
+  "noarg": true,
+  "noempty": true,
+  "nonew": true,
+  "predef": ["wire", "Modernizr", "page"],
+  "quotmark": "single",
+  "strict": false,
+  "undef": true,
+  "unused": true
 }
