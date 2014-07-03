@@ -24,11 +24,11 @@ alias r='rails'
 alias RP='RAILS_ENV=production'
 alias RT='RAILS_ENV=test'
 
-alias vu='vagrant up'
-alias vus='vu && vagrant ssh'
-alias vh='vagrant halt'
-alias vr='vagrant reload && vus'
-alias vsu='vagrant suspend'
+alias v='vagrant'
+alias vu='v up'
+alias vus='vu && v ssh'
+alias vh='v halt'
+alias vr='v reload && vus'
 
 alias g="git"
 alias ga="g add -A"
