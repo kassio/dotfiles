@@ -16,7 +16,7 @@ $green\$$reset " "(%s)"
 
 # Autocomplete
 load_bash_completion() {
-  local brew_prefix="`which brew --prefix`"
+  local brew_prefix="`which brew --prefix 2>/dev/null`"
   local prefix=${brew_prefix:-/usr/local}
 
   source "/etc/bash_completion" 2>/dev/null

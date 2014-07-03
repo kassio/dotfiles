@@ -1,4 +1,6 @@
-if [[ $(uname) == 'Darwin' ]]
+#!/usr/bin/env bash
+
+if [[ "Darwin" == "$(uname)" ]]
 then
   alias upgrade='brew update && brew upgrade'
   LS_COMMON="-G -h"

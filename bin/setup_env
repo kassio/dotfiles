@@ -13,7 +13,7 @@ link_files() {
 }; link_files
 
 osx_setup() {
-  if [ "Darwin" == "$(uname)" ]
+  if [[ "Darwin" == "$(uname)" ]]
   then
     $HOME/.dotfiles/bin/setup_osx
   fi
@@ -41,6 +41,8 @@ curl \
 if [ -e "$HOME/.zshrc" ]
 then
   source $HOME/.zshrc &>/dev/null
+else
+  source $HOME/.bashrc &>/dev/null
 fi
 
 cd $old_path
