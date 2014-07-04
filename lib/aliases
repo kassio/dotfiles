@@ -63,14 +63,15 @@ alias gtree="g tree"
 
 alias psg="ps aux | grep -v grep | grep -i"
 
+# Kills all the process with the given name.
+function killer {
+  kill -9 $(psg $@ | awk '{print $2}')
+}
+
+# Prints the ruby version and which architecture(32bits or 64bits) it was
+# compiled.
 rbv() {
   rbenv_ruby_version=`rbenv version-name`
   rbenv_ruby_arch=`ruby -e 'puts "#{[""].pack("p").size*8}bits"'`
   printf $rbenv_ruby_version"("$rbenv_ruby_arch")\n"
 }
-
-function killer {
-  kill -9 $(psg $@ | awk '{print $2}')
-}
-
-# vim:ft=sh:
