@@ -47,10 +47,6 @@ export LESS=-r
 # mysql prompt
 export MYSQL_PS1='\d\$ '
 
-# my lang
-export LC_ALL="en_US.UTF-8"
-export LANG="en_US.UTF-8"
-
 # git stuff for prompt
 source $DOTFILES/lib/git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=true
