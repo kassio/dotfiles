@@ -27,6 +27,8 @@ alias RD='RAILS_ENV=development'
 alias RT='RAILS_ENV=test'
 alias RP='RAILS_ENV=production'
 
+alias D='DEBUG=1'
+
 alias v='vagrant'
 alias vu='v up'
 alias vus='vu && v ssh'
