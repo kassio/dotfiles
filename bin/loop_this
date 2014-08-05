@@ -29,7 +29,7 @@ error_count=0
 
 report() {
   echo -e "\n\nkilled: << Build $build_count (failed: $error_count) >>\n\n"
-  exit 1
+  exit $error_count
 }; trap report SIGINT SIGTERM
 
 while [ $build_count -lt $size ]
@@ -49,3 +49,4 @@ do
 done
 
 echo -e "\nBuilds: $size (failed: $error_count)\n"
+exit $error_count
