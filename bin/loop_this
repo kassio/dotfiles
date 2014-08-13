@@ -48,5 +48,5 @@ do
   echo ""
 done
 
-echo -e "\nBuilds: $size (failed: $error_count)\n"
+echo -e "\nBuilds: $build_count (failed: $error_count)\n"
 exit $error_count
