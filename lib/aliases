@@ -64,7 +64,8 @@ alias gtl="gt --list --sort=version:refname"
 alias gtoday="g today"
 alias gtree="g tree"
 
-alias psg="ps aux | grep -v grep | grep -i"
+alias grep="grep -v grep | \\grep -i"
+alias psg="ps aux | grep "
 
 # Kills all the process with the given name.
 function killer {
