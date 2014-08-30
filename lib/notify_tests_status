@@ -2,12 +2,22 @@
 
 export __DEFINING_NOTIFY_TESTS=1
 
+trim() {
+  local var="$@"
+  var="$(echo $var | sed -e 's/\s\{2,\}/\ /g')"
+  var="${var#"${var%%[![:space:]]*}"}"   # remove leading whitespace characters
+  var="${var%"${var##*[![:space:]]}"}"   # remove trailing whitespace characters
+  echo -n "$var"
+}
+
 function __notify_tests_status {
   local last_status=$?
-  local last_command_id="$(printf "%s" "`fc -l -1`" | cut -d' ' -f 2)"
-  local last_command="$((fc -ln -0 || fc -ln -1) 2>/dev/null)"
+  local last_fc="$(fc -l -1)"
+  local last_fc="$(trim $last_fc)"
+  local last_command_id="$(echo $last_fc | cut -d' ' -f 1)"
+  local last_command="$(echo $last_fc | cut -d' ' -f 2-)"
 
-  if [ "$__LAST_COMMAND_ID" -eq $last_command_id -o -n "$__DEFINING_NOTIFY_TESTS" ]
+  if [ "$__LAST_COMMAND_ID" -eq "$last_command_id" -o -n "$__DEFINING_NOTIFY_TESTS" ]
   then
     unset __DEFINING_NOTIFY_TESTS
     return $last_status
@@ -29,7 +39,7 @@ function __notify_tests_status {
   case $last_command in
     *notify_tests_status*)
       ;;
-    *rspec*|*test*)
+    *spec*|*test*)
       if [ $last_status -eq 0 ]
       then
         notifier 'SUCCESS :)'
