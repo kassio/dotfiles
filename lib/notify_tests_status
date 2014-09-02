@@ -2,20 +2,11 @@
 
 export __DEFINING_NOTIFY_TESTS=1
 
-trim() {
-  local var="$@"
-  var="$(echo $var | sed -e 's/\s\{2,\}/\ /g')"
-  var="${var#"${var%%[![:space:]]*}"}"   # remove leading whitespace characters
-  var="${var%"${var##*[![:space:]]}"}"   # remove trailing whitespace characters
-  echo -n "$var"
-}
-
 function __notify_tests_status {
   local last_status=$?
-  local last_fc="$(fc -l -1)"
-  local last_fc="$(trim $last_fc)"
-  local last_command_id="$(echo $last_fc | cut -d' ' -f 1)"
-  local last_command="$(echo $last_fc | cut -d' ' -f 2-)"
+  local last_fc="$(fc -l -1 | tr -s ' ')"
+  local last_command_id="$(echo $last_fc | cut -d' ' -f 2)"
+  local last_command="$(echo $last_fc | cut -d' ' -f 3-)"
 
   if [ "$__LAST_COMMAND_ID" -eq "$last_command_id" -o -n "$__DEFINING_NOTIFY_TESTS" ]
   then
