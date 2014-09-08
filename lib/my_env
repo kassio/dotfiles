@@ -61,7 +61,7 @@ export GIT_PS1_SHOWCOLORHINTS=true
 export GIT_PS1_DESCRIBE_STYLE=branch
 export GIT_PS1_SHOWUPSTREAM=verbose
 
-export CDPATH="$CDPATH:$HOME:$src:$src/private"
+export CDPATH="$CDPATH:$HOME:$src"
 
 export PATH="$PATH:$DOTFILES/bin"
 
