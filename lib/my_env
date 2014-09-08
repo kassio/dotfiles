@@ -66,7 +66,7 @@ export CDPATH="$CDPATH:$HOME:$src:$src/private"
 export PATH="$PATH:$DOTFILES/bin"
 
 # rails bundler bin
-export PATH="../bin:./bin:$PATH"
+export PATH="./bin:$PATH"
 
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 
