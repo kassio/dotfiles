@@ -11,6 +11,7 @@ install brew-cask
 install ctags
 install git
 install heroku-toolbelt
+install highlight
 install htop-osx
 install markdown
 install mercurial
