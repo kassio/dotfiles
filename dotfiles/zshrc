@@ -24,6 +24,11 @@ fi
 # Use emacs key bindings
 bindkey -e
 
+# c-x c-e edit command line in $EDITOR
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
+
 ## Completions
 autoload -U compinit
 compinit -C
