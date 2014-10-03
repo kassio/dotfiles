@@ -22,6 +22,8 @@ alias ...='cd ../..'
 
 alias h='history'
 
+alias sudo='A=`alias` sudo env '
+
 alias r='rails'
 alias RD='RAILS_ENV=development'
 alias RT='RAILS_ENV=test'
