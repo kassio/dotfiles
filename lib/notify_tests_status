@@ -15,7 +15,7 @@ function __notify_tests_status {
   local last_command_id="$(echo $last_fc | cut -d' ' -f 2)"
   local last_command="$(echo $last_fc | cut -d' ' -f 3-)"
 
-  if [ "$__LAST_COMMAND_ID" -ne "$last_command_id" ]
+  if [ "$__LAST_COMMAND_ID" != "$last_command_id" ]
   then
     export __LAST_COMMAND_ID="$last_command_id"
     trap "{ return $last_status }" SIGINT
