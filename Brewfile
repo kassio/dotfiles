@@ -8,7 +8,7 @@ install ack
 install bash
 install bash-completion
 install brew-cask
-install ctags
+install ctags --HEAD
 install git
 install heroku-toolbelt
 install highlight
