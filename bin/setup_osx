@@ -57,9 +57,6 @@ sudo chflags -h nohidden /tmp
 sudo chflags nohidden /usr
 sudo chflags nohidden /opt
 
-# Fix the PATH used inside the vim.
-sudo chmod -x /usr/libexec/path_helper
-
 # Faster shutdown
 sudo defaults write /System/Library/LaunchDaemons/com.apple.coreservices.appleevents ExitTimeOut -int 1
 sudo defaults write /System/Library/LaunchDaemons/com.apple.securityd ExitTimeOut -int 1
