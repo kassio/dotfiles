@@ -22,10 +22,12 @@
 ###############################################################################
 
 params=($(echo "$@"))
-cmd=${params[@]:1}
+cmd="${params[@]:1}"
 size=${params[0]}
 build_count=0
 error_count=0
+
+cmd=$(echo $cmd | sed "s/'/'\\''/g")
 
 report() {
   echo -e "\n\nkilled: << Build $build_count (failed: $error_count) >>\n\n"
