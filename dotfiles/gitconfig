@@ -36,7 +36,8 @@
   dp = diff
   f = fetch
   l = !git --no-pager log -20 --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset %s%Creset -%Cblue%d%Creset'
-  log-me = !GIT_USERNAME=$(git config user.name) && git --no-pager lp --author="\"$GIT_USERNAME\""
+  lme = !GIT_USERNAME=$(git config user.name) && git --no-pager lp --author="\"$GIT_USERNAME\""
+  lpme = !GIT_USERNAME=$(git config user.name) && git lp --author="\"$GIT_USERNAME\""
   lp = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cd)%Creset %s%Creset -%Cblue%d%Creset' --date=short
   m = merge
   s = status -sb
