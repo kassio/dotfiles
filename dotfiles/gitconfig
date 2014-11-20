@@ -35,7 +35,7 @@
   d = !git --no-pager diff
   dp = diff
   f = fetch
-  l = !git --no-pager log -20 --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset %s%Creset -%Cblue%d%Creset'
+  l = !git --no-pager log -20 --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cd)%Creset %s%Creset -%Cblue%d%Creset' --date=short
   lme = !GIT_USERNAME=$(git config user.name) && git --no-pager lp --author="\"$GIT_USERNAME\""
   lpme = !GIT_USERNAME=$(git config user.name) && git lp --author="\"$GIT_USERNAME\""
   lp = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cd)%Creset %s%Creset -%Cblue%d%Creset' --date=short
@@ -43,7 +43,7 @@
   s = status -sb
   t = tag
   today = log --stat --since=1.day --graph --pretty=oneline --abbrev-commit --date=relative
-  tree = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset - %s%Creset' --graph
+  tree = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cd)%Creset - %s%Creset' --graph --date=short
   shorten = !sh -c 'curl -i http://git.io -F url=https://github.com/$1 -F code=$2' -
   last-tag = describe --tags
   rank = shortlog -sn
