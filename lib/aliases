@@ -3,6 +3,7 @@
 if [[ "Darwin" == "$(uname)" ]]
 then
   alias upgrade='brew update && brew upgrade'
+  alias dhcp_renew="sudo ipconfig set en0 BOOTP && sudo ipconfig set en0 DHCP"
   LS_COMMON="-G -h"
 else
   LS_COMMON="--color=auto -th"
