@@ -1,7 +1,0 @@
-#!/usr/bin/env ruby
-
-require 'bundler'
-
-system('rm -rf tags &>/dev/null')
-system('retag_gems 2>/dev/null')
-system('ctags -f tags 2>/dev/null')
