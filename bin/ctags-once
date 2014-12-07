@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+lock_file="/tmp/.ctags.lock"
+
+if [ ! -e $lock_file ]
+then
+  echo > $lock_file
+  ctags
+  rm $lock_file
+fi
