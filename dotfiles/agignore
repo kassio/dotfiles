@@ -1,0 +1,11 @@
+*swp
+*swo
+*~
+*tmp
+.DS_Store
+.ruby-version
+.svn
+.env
+.sass-cache
+tags
+gems.tags
