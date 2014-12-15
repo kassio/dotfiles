@@ -18,6 +18,7 @@ install mercurial
 install mysql
 install postgresql
 install python
+install reattach-to-user-namespace
 install rename
 install terminal-notifier
 install the_silver_searcher
