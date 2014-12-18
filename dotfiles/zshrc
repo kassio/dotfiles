@@ -62,7 +62,7 @@ autoload -Uz compinit
 compinit -C
 
 # colors on autocomplete
-zstyle ':completion:*' list-colors $LS_COLORS
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # case-insensitive (all),partial-word and then substring completion
 zstyle ':completion:*' matcher-list \
@@ -75,8 +75,8 @@ unsetopt correct
 
 ## History
 HISTFILE=$HOME/.zhistory
-HISTSIZE=12000
-SAVEHIST=10000
+HISTSIZE=120000
+SAVEHIST=100000
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.
 setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
 setopt SHARE_HISTORY             # Share history between all sessions.

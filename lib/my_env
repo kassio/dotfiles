@@ -24,15 +24,7 @@ stty -ixon
 
 # improve ls colors
 export CLICOLOR=1
-export LSCOLORS="exgxfxdxcxdxdxhbgbecgc"
-export LS_COLORS="di=34:ln=36:so=35:pi=33:ex=32:bd=33:cd=33:su=37;41:sg=36;41:tw=34;42:ow=36;42:"
-
-# History
-export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
-export HISTCONTROL=ignoreboth
-
-export HISTFILESIZE=10000000000
-export HISTSIZE=1000000
+export LS_COLORS="di=34;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=31;47:su=37;41:sg=0;46:tw=37;42:ow=37;43:"
 
 # Colorify less
 export LESS_TERMCAP_mb=$(printf '\e[01;31m') # enter blinking mode - red
