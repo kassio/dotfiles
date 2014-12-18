@@ -7,70 +7,6 @@ fi
 
 export DOTFILES=$HOME/.dotfiles
 
-# Fix the \eb \ef and others.
-export WORDCHARS=''
-
-source $DOTFILES/lib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $DOTFILES/lib/spectrum.zsh
-
-brew_prefix=`which brew --prefix`
-prefix=${brew_prefix:-/usr/local}
-brew_completion="$prefix/Library/Contributions/brew_zsh_completion.sh"
-if [[ -e $brew_completion ]]
-then
-  source $brew_completion
-fi
-
-# Use emacs key bindings
-bindkey -e
-
-# c-x c-e edit command line in $EDITOR
-autoload -U edit-command-line
-zle -N edit-command-line
-bindkey '\C-x\C-e' edit-command-line
-
-## Completions
-autoload -U compinit
-compinit -C
-
-## case-insensitive (all),partial-word and then substring completion
-zstyle ':completion:*' matcher-list \
-  'm:{a-zA-Z}={A-Za-z}' \
-  'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-
-# do not correct me!!
-unsetopt correct_all
-unsetopt correct
-
-## History
-HISTFILE=$HOME/.zhistory
-HISTSIZE=12000
-SAVEHIST=10000
-setopt BANG_HIST                 # Treat the '!' character specially during expansion.
-setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
-setopt SHARE_HISTORY             # Share history between all sessions.
-setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
-setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
-setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
-setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
-setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
-setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
-setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
-setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
-setopt HIST_NO_STORE
-unsetopt EXTENDED_HISTORY
-
-# colors on autocomplete
-autoload -Uz compinit
-compinit
-zstyle ':completion:*' list-colors $LSCOLORS
-
-# easy regexp on list files
-setopt extendedglob
-
-# don't blow up with comments
-setopt interactive_comments
-
 __build_prompt() {
   if [ -z "$TMUX_PANE" ]
   then
@@ -94,5 +30,77 @@ __prompt_command() {
 precmd_functions=(__prompt_command)
 
 source $DOTFILES/lib/my_env
+
+# Fix the \eb \ef and others.
+export WORDCHARS=''
+
+source $DOTFILES/lib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $DOTFILES/lib/spectrum.zsh
+
+brew_prefix=`which brew --prefix`
+prefix=${brew_prefix:-/usr/local}
+brew_completion="$prefix/Library/Contributions/brew_zsh_completion.sh"
+if [[ -e $brew_completion ]]
+then
+  source $brew_completion
+fi
+
+## Binds
+# Use emacs key bindings
+bindkey -e
+
+# Del
+bindkey '\e[3~'   delete-char
+
+# c-x c-e edit command line in $EDITOR
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
+
+## Completions
+autoload -Uz compinit
+compinit -C
+
+# colors on autocomplete
+zstyle ':completion:*' list-colors $LS_COLORS
+
+# case-insensitive (all),partial-word and then substring completion
+zstyle ':completion:*' matcher-list \
+  'm:{a-zA-Z}={A-Za-z}' \
+  'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+# do not correct me!!
+unsetopt correct_all
+unsetopt correct
+
+## History
+HISTFILE=$HOME/.zhistory
+HISTSIZE=12000
+SAVEHIST=10000
+setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+unsetopt HIST_IGNORE_SPACE       # Ignore space prefixed commands
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+setopt HIST_NO_STORE
+unsetopt EXTENDED_HISTORY
+
+## Extra
+# ask for confirmation for `rm *' or `rm path/*'
+setopt rm_star_silent
+# easy regexp on list files
+setopt extendedglob
+# include dotfiles in globbing
+setopt glob_dots
+# must use >| to truncate existing files
+unsetopt clobber
+# don't blow up with comments
+setopt interactive_comments
 
 # vim:ft=zsh:
