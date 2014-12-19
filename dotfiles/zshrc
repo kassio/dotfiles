@@ -18,11 +18,6 @@ $FG[002]$%f " "(%s)"
   fi
 }
 
-__build_rprompt() {
-  local return_code="%(?..$FG[160]%? ↵)%f";
-  export RPS1="${return_code}"
-}; __build_rprompt
-
 __prompt_command() {
   __notify_tests_status
   __build_prompt
