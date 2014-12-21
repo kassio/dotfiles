@@ -8,8 +8,6 @@ defaults write com.apple.dock autohide -bool TRUE
 defaults write com.apple.dock autohide-delay -float 0
 # Dock on righ
 defaults write com.apple.dock orientation left
-# Dark dock
-defaults write NSGlobalDomain AppleInterfaceStyle Dark
 
 ## dashboard
 # Disable dashboard
@@ -60,8 +58,6 @@ for app in Finder Dock SystemUIServer; do killall "$app" >/dev/null 2>&1; done
 
 sudo chflags nohidden ~/Library
 sudo chflags -h nohidden /tmp
-sudo chflags nohidden /usr
-sudo chflags nohidden /opt
 
 # Faster shutdown
 sudo defaults write /System/Library/LaunchDaemons/com.apple.coreservices.appleevents ExitTimeOut -int 1
