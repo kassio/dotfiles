@@ -2,7 +2,5 @@
 
 require 'bundler'
 
-system('rm -rf tags &>/dev/null')
-system('rm -rf gems.tags &>/dev/null')
-system('ctags 2>/dev/null')
-system('ctags-gems 2>/dev/null')
+system('rm -rf tags tags.gems &>/dev/null')
+system('ctags 2>/dev/null & ctags-gems 2>/dev/null')

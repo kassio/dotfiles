@@ -1,5 +1,6 @@
 --recurse=yes
 --tag-relative=yes
+--fields=fiKmnSzt
 --exclude=.git
 --exclude=.svn
 --exclude=.hg
