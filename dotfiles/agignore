@@ -8,4 +8,6 @@
 .env
 .sass-cache
 tags
-gems.tags
+tags.gems
+log/*
+tmp/*
