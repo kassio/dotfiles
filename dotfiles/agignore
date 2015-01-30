@@ -5,6 +5,7 @@
 .DS_Store
 .ruby-version
 .svn
+.git
 .env
 .sass-cache
 tags
