@@ -23,7 +23,7 @@ function __notify_tests_status {
     case $last_command in
       *notify_tests_status*)
         ;;
-      *spec*|*test*)
+      spec*|rspec*|rake\ test*|ruby*test*)
         if [ $last_status -eq 0 ]
         then
           notifier 'SUCCESS :)'
