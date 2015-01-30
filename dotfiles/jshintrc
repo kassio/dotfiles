@@ -19,7 +19,7 @@
   "noempty": true,
   "nonew": true,
   "predef": ["wire", "Modernizr", "page"],
-  "quotmark": "single",
+  "quotmark": false,
   "strict": false,
   "undef": true,
   "unused": true
