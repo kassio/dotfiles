@@ -8,13 +8,20 @@ fi
 export DOTFILES=$HOME/.dotfiles
 
 __build_prompt() {
+  if [[ $? = 0 ]]
+  then
+    local prompt_color="002"
+  else
+    local prompt_color="001"
+  fi
+
   if [ -z "$TMUX_PANE" ]
   then
   __git_ps1 "$FG[004]%~ %f" "
-$FG[002]$%f " "(%s)"
+$FG[$prompt_color]$%f " "(%s)"
   else
     local tmux_info="${TMUX_PANE:+$FG[196][${TMUX_PANE#\%}]}";
-    export PS1="${tmux_info}$FG[004]%1~%f$(__git_ps1)$FG[002]$ "
+    export PS1="${tmux_info}$FG[004]%1~%f$(__git_ps1)$FG[$prompt_color]$ "
   fi
 }
 
