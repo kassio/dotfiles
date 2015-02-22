@@ -1,18 +1,8 @@
 #!/usr/bin/env bash
 
-if [[ "Darwin" == "$(uname)" ]]
-then
-  alias upgrade='brew update && brew upgrade'
-  alias dhcp_renew="sudo ipconfig set en0 BOOTP && sudo ipconfig set en0 DHCP"
-  LS_COMMON="-G -h"
-else
-  LS_COMMON="--color=auto -th"
-fi
-
-export GREP_OPTIONS="--color=auto"
-
 alias vi='vim'
 
+LS_COMMON="-G -h"
 alias ls="ls $LS_COMMON"
 alias l='ls -A'
 alias ll='ls -l'
@@ -21,16 +11,12 @@ alias la='ls -lA'
 alias ..='cd ..'
 alias ...='cd ../..'
 
-alias h='history'
-
 alias sudo='A=`alias` sudo env '
 
 alias r='rails'
 alias RD='RAILS_ENV=development'
 alias RT='RAILS_ENV=test'
 alias RP='RAILS_ENV=production'
-
-alias D='DEBUG=1'
 
 alias v='vagrant'
 alias vu='v up'
@@ -69,7 +55,9 @@ alias gtl="gt --list --sort=version:refname"
 alias gtoday="g today"
 alias gtree="g tree"
 
+export GREP_OPTIONS="--color=auto"
 alias grep="grep -v grep | \\grep -i"
+
 alias psg="ps aux | grep "
 
 # Kills all the process with the given name.
