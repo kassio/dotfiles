@@ -60,6 +60,10 @@ alias grep="grep -v grep | \\grep -i"
 
 alias psg="ps aux | grep "
 
+function 'simple-http' {
+  python -m SimpleHTTPServer ${1:-8080}
+}
+
 # Kills all the process with the given name.
 function killer {
   kill -9 $(psg $@ | awk '{print $2}')
