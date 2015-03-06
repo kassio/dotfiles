@@ -30,6 +30,7 @@
   work = !git config --local --replace-all user.name 'Kassio Borges' && git config --local user.email "kassio.borges@plataformatec.com.br"
   home = !git config --local --replace-all user.name 'Kassio Borges' && git config --local user.email "kassioborgesm@gmail.com"
   b = branch
+  bD = !git checkout master; git fetch --all -p; git branch -vv | grep gone | awk '{ print $1 }' | xargs -n 1 git branch -D; git checkout -
   c = commit -v
   co = checkout
   d = !git --no-pager diff
