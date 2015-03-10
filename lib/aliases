@@ -61,7 +61,7 @@ alias grep="grep -v grep | \\grep -i"
 
 alias psg="ps aux | grep "
 
-function 'simple-http' {
+function simple-http {
   python -m SimpleHTTPServer ${1:-8080}
 }
 
