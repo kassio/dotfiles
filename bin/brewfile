@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-### Taps
 brew tap homebrew/dupes
 brew tap mitchty/entr
 brew tap phinze/cask
 
-### Apps
+brew update
+
 brew install ack
 brew install bash
 brew install bash-completion
@@ -14,7 +14,6 @@ brew install ctags --HEAD
 brew install git
 brew install heroku-toolbelt
 brew install highlight
-brew install htop-osx
 brew install markdown
 brew install mercurial
 brew install python
@@ -24,9 +23,9 @@ brew install terminal-notifier
 brew install the_silver_searcher
 brew install tmux
 brew install tree
+brew install vim --override-system-vi --with-lua --HEAD
 brew install watch
 brew install wget
 brew install zsh
 
-### Verify
 brew doctor
