@@ -16,6 +16,7 @@ alias sudo='A=`alias` sudo env '
 alias r='rails'
 alias RD='RAILS_ENV=development'
 alias RT='RAILS_ENV=test'
+alias RS='RAILS_ENV=staging'
 alias RP='RAILS_ENV=production'
 
 alias v='vagrant'
