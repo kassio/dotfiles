@@ -18,6 +18,7 @@ alias RD='RAILS_ENV=development'
 alias RT='RAILS_ENV=test'
 alias RS='RAILS_ENV=staging'
 alias RP='RAILS_ENV=production'
+alias DS='DISABLE_SPRING=1'
 
 alias v='vagrant'
 alias vu='v up'
