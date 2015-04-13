@@ -6,6 +6,7 @@
 --exclude=.hg
 --exclude=log
 --exclude=tmp
+--exclude=vendor/bundle
 --languages=-SQL
 
 --langdef=Elixir
