@@ -12,6 +12,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 
 alias sudo='A=`alias` sudo env '
+alias hr="clear; printf '=%.0s' {1..80}; echo"
 
 alias r='rails'
 alias RD='RAILS_ENV=development'
