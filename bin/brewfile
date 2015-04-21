@@ -3,6 +3,7 @@
 brew tap homebrew/dupes
 brew tap mitchty/entr
 brew tap phinze/cask
+brew tap kopischke/ctags
 
 brew update
 
@@ -10,7 +11,7 @@ brew install ack
 brew install bash
 brew install bash-completion
 brew install brew-cask
-brew install ctags --HEAD
+brew install ctags-fishman --HEAD
 brew install git
 brew install heroku-toolbelt
 brew install highlight
