@@ -1,6 +1,7 @@
 --recurse=yes
 --tag-relative=yes
 --fields=fiKmnSzt
+--extra=+f+q
 --exclude=.git
 --exclude=.svn
 --exclude=.hg
@@ -8,6 +9,8 @@
 --exclude=tmp
 --exclude=vendor/bundle
 --languages=-SQL
+
+--regex-ruby=/^[ \t]*class[ \t]+((::)?([A-Z][a-zA-Z0-9_]*))+/\3/c,class,constant (class ...)/
 
 --langdef=Elixir
 --langmap=Elixir:.ex.exs
