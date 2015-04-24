@@ -2,7 +2,7 @@
   name = Kassio Borges
 [core]
   excludesfile = ~/.gitignore
-  editor = `which nvim`
+  editor = `which vi`
   whitespace = trailing-space,space-before-tab,cr-at-eol
 [init]
   templatedir = ~/.dotfiles/git_template

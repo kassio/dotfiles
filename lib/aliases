@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-alias vi='vim'
+alias vi='nvim'
 
 LS_COMMON="-G -h"
 alias ls="ls $LS_COMMON"
@@ -20,13 +20,9 @@ alias RD='RAILS_ENV=development'
 alias RT='RAILS_ENV=test'
 alias RS='RAILS_ENV=staging'
 alias RP='RAILS_ENV=production'
+alias s='spring'
 alias DS='DISABLE_SPRING=1'
-
-alias v='vagrant'
-alias vu='v up'
-alias vus='vu && v ssh'
-alias vh='v halt'
-alias vr='v reload && vus'
+alias be='bundle exec'
 
 alias g="git"
 alias ga="g add -A"
