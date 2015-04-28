@@ -33,10 +33,7 @@ zsh_setup() {
   fi
 }; zsh_setup
 
-# load/update git-prompt.sh
-curl \
-  https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh \
-  > $HOME/.dotfiles/lib/git-prompt.sh
+update-git-prompt
 
 if [ -e "$HOME/.zshrc" ]
 then
