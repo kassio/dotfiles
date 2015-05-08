@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-alias vi='nvim'
+alias vi='echo use "nv"'
+alias nv='nvim'
 
 LS_COMMON="-G -h"
 alias ls="ls $LS_COMMON"
