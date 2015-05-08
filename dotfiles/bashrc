@@ -30,6 +30,7 @@ shopt -s globstar
 # Append user history
 shopt -s histappend
 
+bind "set completion-ignore-case on"
 complete -A hostname   rsh rcp telnet rlogin r ftp ping disk
 complete -A export     printenv
 complete -A variable   export local readonly unset
