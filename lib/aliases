@@ -63,6 +63,8 @@ alias grep="grep -v grep | \\grep -i"
 
 alias psg="ps aux | grep "
 
+alias pg_start="postgres -D /usr/local/var/postgres >/dev/null &"
+
 function simple-http {
   python -m SimpleHTTPServer ${1:-8080}
 }
