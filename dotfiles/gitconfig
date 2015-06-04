@@ -36,11 +36,19 @@
   d = !git --no-pager diff
   dp = diff
   f = fetch
+  fix = commit --amend --no-edit --reset-author
   l = !git --no-pager log -20 --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cd)%Creset %s%Creset -%Cblue%d%Creset' --date=short
   lme = !GIT_USERNAME=$(git config user.name) && git --no-pager lp --author="\"$GIT_USERNAME\""
   lpme = !GIT_USERNAME=$(git config user.name) && git lp --author="\"$GIT_USERNAME\""
   lp = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cd)%Creset %s%Creset -%Cblue%d%Creset' --date=short
   m = merge
+  ma = merte --abort
+  p = pull
+  ps = push
+  r = rebase
+  ra = rebase --abort
+  rc = rebase --continue
+  rs = rebase --skip
   s = status -sb
   t = tag
   today = log --stat --since=1.day --graph --pretty=oneline --abbrev-commit --date=relative
