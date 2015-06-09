@@ -12,5 +12,5 @@ vendor/bundle
 vendor/ruby
 .sass-cache
 tags
-tags.gems
+tags.*
 *darwin*
