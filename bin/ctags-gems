@@ -5,4 +5,4 @@ require 'bundler'
 system('rm -rf tags.gems &>/dev/null')
 
 gems_paths = Bundler.load.specs.map(&:full_gem_path)
-system("ctags -f tags.gems #{gems_paths.join(' ')} 2>/dev/null")
+system("ctags -R --append=no --languages=ruby --tag-relative=yes -f tags.gems #{gems_paths.join(' ')} 2>/dev/null")
