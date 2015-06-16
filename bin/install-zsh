@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+zsh_path=$(which zsh)
+
+if [ -z "$(grep $zsh_path /etc/shells)" ]
+then
+  echo $zsh_path | sudo tee -a /etc/shells
+fi
+
+if [ -e "/etc/zshenv" ]
+then
+  sudo mv /etc/{zshenv,zshrc}
+fi

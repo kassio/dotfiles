@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+if [[ "Darwin" == "$(uname)" ]]
+then
+  ## dock
+  # faster animations on expose
+  defaults write com.apple.dock expose-animation-duration -float 0.1
+  defaults write -g NSWindowResizeTime -float 0.003
+  # Autohide dock
+  defaults write com.apple.dock autohide -bool TRUE
+  defaults write com.apple.dock autohide-delay -float 0
+  # Dock on righ
+  defaults write com.apple.dock orientation left
+
+  ## dashboard
+  # Disable dashboard
+  defaults write com.apple.dashboard mcx-disabled -boolean true
+
+  ## finder
+  # Use Finders list view as the default view mode
+  defaults write com.apple.finder FXPreferredViewStyle Nlsv
+  # Disable the warning when changing a file extension
+  defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+  # Show all filename extensions in Finder
+  defaults write -g AppleShowAllExtensions -bool true
+  # Show path bar
+  defaults write com.apple.finder ShowPathbar -bool true
+  # Expand save dialogs
+  defaults write -g NSNavPanelExpandedStateForSaveMode -bool TRUE
+  # Increase window resize speed for Cocoa applications
+  defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
+  # Disable window animations and Get Info animations
+  defaults write com.apple.finder DisableAllAnimations -bool true
+  # Disable the warning before emptying the Trash
+  defaults write com.apple.finder WarnOnEmptyTrash -bool false
+  # Text selection on quicklook
+  defaults write com.apple.finder QLEnableTextSelection -bool true && killall Finder
+
+  ## keyboard
+  # Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
+  defaults write -g AppleKeyboardUIMode -int 3
+  # Turn on key repeat
+  defaults write -g ApplePressAndHoldEnabled -bool false
+  # Enable auto replacement
+  defaults write -g WebAutomaticTextReplacementEnabled -bool true
+
+  ## trackpad
+  # Enable tap to click
+  defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+
+  ## security
+  # Require password immediately after sleep or screen saver begins
+  defaults write com.apple.screensaver askForPassword -int 1
+  defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+  # Fix the PATH in vim.
+  sudo sed -i '' -e 's/^/#/' /etc/zshenv
+
+  # Kill affected applications
+  for app in Finder Dock SystemUIServer; do killall "$app" >/dev/null 2>&1; done
+
+  sudo chflags nohidden ~/Library
+  sudo chflags -h nohidden /tmp
+
+  # Faster shutdown
+  sudo defaults write /System/Library/LaunchDaemons/com.apple.coreservices.appleevents ExitTimeOut -int 1
+  sudo defaults write /System/Library/LaunchDaemons/com.apple.securityd ExitTimeOut -int 1
+  sudo defaults write /System/Library/LaunchDaemons/com.apple.mDNSResponder ExitTimeOut -int 1
+  sudo defaults write /System/Library/LaunchDaemons/com.apple.diskarbitrationd ExitTimeOut -int 1
+  sudo defaults write /System/Library/LaunchAgents/com.apple.coreservices.appleid.authentication ExitTimeOut -int 1
+fi

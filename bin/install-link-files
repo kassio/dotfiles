@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+file_path="$HOME/.dotfiles/dotfiles"
+
+for f in `ls -1 $file_path`
+do
+  ln -sf "$file_path/$f" $HOME/.$f
+done
