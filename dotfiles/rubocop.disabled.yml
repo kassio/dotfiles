@@ -1,5 +1,10 @@
 # These are all the cops that are disabled in the default configuration.
 
+Style/GuardClause:
+  Description: 'Check for conditionals that can be replaced with guard clauses'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-nested-conditionals'
+  Enabled: false
+
 Style/Documentation:
   Description: 'Document classes and non-namespace modules.'
   Enabled: false

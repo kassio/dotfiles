@@ -267,11 +267,6 @@ Style/GlobalVars:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#instance-vars'
   Enabled: true
 
-Style/GuardClause:
-  Description: 'Check for conditionals that can be replaced with guard clauses'
-  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-nested-conditionals'
-  Enabled: true
-
 Style/HashSyntax:
   Description: >-
                  Prefer Ruby 1.9 hash syntax { a: 1, b: 2 } over 1.8 syntax
