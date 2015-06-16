@@ -36,6 +36,7 @@ Style/SignalException:
   Enabled: false
 
 Style/BlockDelimiters:
+  EnforcedStyle: semantic
   Exclude:
     - spec/**/*_spec.rb
 
