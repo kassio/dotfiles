@@ -42,7 +42,7 @@
   lpme = !GIT_USERNAME=$(git config user.name) && git lp --author="\"$GIT_USERNAME\""
   lp = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cd)%Creset %s%Creset -%Cblue%d%Creset' --date=short
   m = merge
-  ma = merte --abort
+  ma = merge --abort
   p = pull
   ps = push
   r = rebase
