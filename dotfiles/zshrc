@@ -25,11 +25,7 @@ $FG[$prompt_color]$%f " "(%s)"
   fi
 }
 
-__prompt_command() {
-  __notify_tests_status
-  __build_prompt
-}
-precmd_functions=(__prompt_command)
+precmd_functions=(__build_prompt)
 
 source $DOTFILES/lib/my_env
 

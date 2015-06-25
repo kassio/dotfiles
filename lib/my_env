@@ -63,7 +63,6 @@ export PATH="./bin:$PATH"
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 
 source $DOTFILES/lib/aliases
-source $DOTFILES/lib/notify_tests_status
 
 # boxen-env
 if [ -e /opt/boxen/env.sh ]

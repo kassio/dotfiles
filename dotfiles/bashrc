@@ -48,11 +48,7 @@ export HISTCONTROL=ignoreboth
 export HISTFILESIZE=10000000000
 export HISTSIZE=1000000
 
-__prompt_command() {
-  __notify_tests_status
-  __build_prompt
-}
-export PROMPT_COMMAND=__prompt_command
+export PROMPT_COMMAND=__build_prompt
 
 source $DOTFILES/lib/my_env
 
