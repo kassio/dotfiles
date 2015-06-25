@@ -65,8 +65,6 @@ alias psg="ps aux | grep "
 
 alias pg_start="postgres -D /usr/local/var/postgres >/dev/null &"
 
-alias 'docker-start'='docker-setup && $(/usr/local/bin/boot2docker shellinit)'
-
 function simple-http {
   python -m SimpleHTTPServer ${1:-8080}
 }
