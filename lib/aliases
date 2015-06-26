@@ -65,6 +65,8 @@ alias psg="ps aux | grep "
 
 alias pg_start="postgres -D /usr/local/var/postgres >/dev/null &"
 
+alias set_wifi_dns="sudo networksetup -setdnsservers Wi-Fi"
+
 function simple-http {
   python -m SimpleHTTPServer ${1:-8080}
 }
