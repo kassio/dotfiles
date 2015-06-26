@@ -3,15 +3,18 @@ export DOTFILES=$HOME/.dotfiles
 __build_prompt() {
   local blue='\[\e[0;34m\]'
   local red='\[\e[0;31m\]'
-  local yellow='\[\e[01;33m\]'
   local reset='\[\e[00m\]'
   local green='\[\e[0;32m\]'
 
-  local current_dir="$blue\w"
-  local tmux_info="${TMUX_PANE:+$red[${TMUX_PANE#\%}]}"
+  if [[ $? = 0 ]]
+  then
+    local prompt_color=$green
+  else
+    local prompt_color=$red
+  fi
 
-  __git_ps1 "$tmux_info$current_dir $reset" "
-$green\$$reset " "(%s)"
+  __git_ps1 "$blue\w $reset" "
+$prompt_color\$$reset " "(%s)"
 };
 
 # Autocomplete

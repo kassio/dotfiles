@@ -1,4 +1,4 @@
-# Fix to use tmux, rbenv and zsh
+# Fix PATH
 if [ -x /usr/libexec/path_helper ]
 then
   PATH=""
@@ -15,14 +15,8 @@ __build_prompt() {
     local prompt_color="001"
   fi
 
-  if [ -n "$TMUX_PANE" ]
-  then
-    local tmux_info="${TMUX_PANE:+$FG[196][${TMUX_PANE#\%}]}";
-    export PS1="${tmux_info}$FG[004]%1~%f$(__git_ps1)$FG[$prompt_color]$ "
-  else
   __git_ps1 "$FG[004]%~ %f" "
 $FG[$prompt_color]$%f " "(%s)"
-  fi
 }
 
 precmd_functions=(__build_prompt)

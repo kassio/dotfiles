@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-export src="$HOME/src"
-
 # rbenv
 if [ -d "$HOME/.rbenv" ]
 then
@@ -24,7 +22,6 @@ stty -ixon
 
 # improve ls colors
 export CLICOLOR=1
-export LS_COLORS="di=34;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=31;47:su=37;41:sg=0;46:tw=37;42:ow=37;43:"
 
 # Colorify less
 export LESS_TERMCAP_mb=$(printf '\e[01;31m') # enter blinking mode - red
@@ -53,14 +50,9 @@ export GIT_PS1_SHOWCOLORHINTS=true
 export GIT_PS1_DESCRIBE_STYLE=branch
 export GIT_PS1_SHOWUPSTREAM=verbose
 
-export CDPATH=".:$HOME:$src"
-
-export PATH="$PATH:$DOTFILES/bin"
-
-# rails bundler bin
-export PATH="./bin:$PATH"
-
+export CDPATH=".:$HOME:$HOME/src"
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
+export PATH="./bin:$PATH:$DOTFILES/bin"
 
 source $DOTFILES/lib/aliases
 
