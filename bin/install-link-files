@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-file_path="$HOME/.dotfiles/dotfiles"
-
-for f in `ls -1 $file_path`
+for f in $HOME/.dotfiles/dotfiles/*
 do
-  ln -sf "$file_path/$f" $HOME/.$f
+  ln -sf $f $HOME/.${f##*/}
 done
