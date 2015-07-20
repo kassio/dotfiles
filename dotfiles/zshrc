@@ -7,6 +7,21 @@ fi
 
 export DOTFILES=$HOME/.dotfiles
 source $DOTFILES/lib/boxen # prepare some env variables (high priority)
+
+export CDPATH=".:$HOME:$HOME/src"
+export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
+export PATH="./bin:$PATH:$DOTFILES/bin"
+# Default editor
+export EDITOR='vim'
+# improve ls colors
+export CLICOLOR=1
+# mysql prompt
+export MYSQL_PS1='\d\$ '
+# my lang
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+export LANG="en_US.UTF-8"
+
 source $DOTFILES/lib/rbenv
 source $DOTFILES/lib/heroku
 source $DOTFILES/lib/aliases
@@ -23,17 +38,12 @@ __build_prompt() {
     local prompt_color="001"
   fi
 
-  __git_ps1 "$FG[004]%~ %f" "
+  __git_ps1 "$FG[004]%~%f" "
 $FG[$prompt_color]$%f "
 };
 precmd_functions=(__build_prompt)
 
-# Fix the \eb \ef and others.
-export WORDCHARS=''
-
-brew_prefix=`which brew --prefix`
-prefix=${brew_prefix:-/usr/local}
-brew_completion="$prefix/Library/Contributions/brew_zsh_completion.sh"
+brew_completion="${HOMEBREW_PREFIX:-/usr/local}/Library/Contributions/brew_zsh_completion.sh"
 if [[ -e $brew_completion ]]
 then
   source $brew_completion
@@ -55,6 +65,9 @@ bindkey '\C-x\C-e' edit-command-line
 autoload -Uz compinit
 compinit -C
 
+# Fix the \eb \ef and others.
+export WORDCHARS=''
+
 # colors on autocomplete
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
@@ -62,6 +75,12 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' matcher-list \
   'm:{a-zA-Z}={A-Za-z}' \
   'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+unsetopt menu_complete   # do not autoselect the first completion entry
+unsetopt flowcontrol
+setopt auto_menu         # show completion menu on succesive tab press
+setopt complete_in_word
+setopt always_to_end
 
 # do not correct me!!
 unsetopt correct_all
@@ -96,5 +115,11 @@ setopt glob_dots
 unsetopt clobber
 # don't blow up with comments
 setopt interactive_comments
+
+# local env
+if [ -e "$HOME/.env" ]
+then
+  source $HOME/.env
+fi
 
 # vim:ft=zsh:
