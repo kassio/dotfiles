@@ -1,4 +1,30 @@
+#!/usr/bin/env bash
+
 export DOTFILES=$HOME/.dotfiles
+source $DOTFILES/lib/boxen # prepare some env variables (high priority)
+
+export CDPATH=".:$HOME:$HOME/src"
+export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
+export PATH="./bin:$PATH:$DOTFILES/bin"
+
+# Default editor
+export EDITOR='vim'
+# improve ls colors
+export CLICOLOR=1
+# mysql prompt
+export MYSQL_PS1='\d\$ '
+# my lang
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+export LANG="en_US.UTF-8"
+
+source $DOTFILES/lib/rbenv
+source $DOTFILES/lib/heroku
+source $DOTFILES/lib/aliases
+source $DOTFILES/lib/completion
+source $DOTFILES/lib/history
+source $DOTFILES/lib/git
+source $DOTFILES/lib/less
 
 __build_prompt() {
   local last_status=$?
@@ -14,27 +40,31 @@ __build_prompt() {
     local prompt_color=$red
   fi
 
-  __git_ps1 "$blue\w $reset" "
-$prompt_color\$$reset " "(%s)"
+  __git_ps1 "$blue\w$reset" "\\n$prompt_color\$$reset "
 };
+export PROMPT_COMMAND=__build_prompt
 
 # Autocomplete
 load_bash_completion() {
-  local brew_prefix="`which brew --prefix 2>/dev/null`"
-  local prefix=${brew_prefix:-/usr/local}
+  local prefix=${HOMEBREW_PREFIX:-/usr/local}
+  local brew_bash_completion="$prefix/etc/bash_completion"
 
-  source "/etc/bash_completion" 2>/dev/null
-  source "$prefix/etc/bash_completion" 2>/dev/null
-  source "$prefix/Library/Contributions/brew_bash_completion.sh" 2>/dev/null
+  if [ -e $brew_bash_completion ]
+  then
+    source $brew_bash_completion
+    source "$prefix/Library/Contributions/brew_bash_completion.sh"
+  else
+    source "/etc/bash_completion"
+  fi
 }; load_bash_completion
 
 # Make ** works beautiful, works to any nested directory.
 shopt -s globstar
-
-# Append user history
-shopt -s histappend
+# Enable dot files/folder on autocomplete
+shopt -s dotglob
 
 bind "set completion-ignore-case on"
+bind "set show-all-if-ambiguous on"
 complete -A hostname   rsh rcp telnet rlogin r ftp ping disk
 complete -A export     printenv
 complete -A variable   export local readonly unset
@@ -46,14 +76,20 @@ complete -o default -o nospace -F _rakecomplete rake
 complete -o default -o nospace -F _capcomplete cap
 complete -o default -o nospace -F _thorcomplete thor
 
+# Append user history
+shopt -s histappend
+
 # History
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 export HISTCONTROL=ignoreboth
 export HISTFILESIZE=10000000000
 export HISTSIZE=1000000
 
-export PROMPT_COMMAND=__build_prompt
+# Make ctrl-s works to incremental search, like ctrl-r to reverse
+stty -ixon
 
-source $DOTFILES/lib/my_env
-
-# vim:ft=sh:
+# local env
+if [ -e "$HOME/.env" ]
+then
+  source $HOME/.env
+fi

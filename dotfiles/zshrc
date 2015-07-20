@@ -6,6 +6,14 @@ then
 fi
 
 export DOTFILES=$HOME/.dotfiles
+source $DOTFILES/lib/boxen # prepare some env variables (high priority)
+source $DOTFILES/lib/rbenv
+source $DOTFILES/lib/heroku
+source $DOTFILES/lib/aliases
+source $DOTFILES/lib/git
+source $DOTFILES/lib/less
+source $DOTFILES/lib/spectrum.zsh
+source $DOTFILES/lib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 __build_prompt() {
   if [[ $? = 0 ]]
@@ -16,18 +24,12 @@ __build_prompt() {
   fi
 
   __git_ps1 "$FG[004]%~ %f" "
-$FG[$prompt_color]$%f " "(%s)"
-}
-
+$FG[$prompt_color]$%f "
+};
 precmd_functions=(__build_prompt)
-
-source $DOTFILES/lib/my_env
 
 # Fix the \eb \ef and others.
 export WORDCHARS=''
-
-source $DOTFILES/lib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $DOTFILES/lib/spectrum.zsh
 
 brew_prefix=`which brew --prefix`
 prefix=${brew_prefix:-/usr/local}

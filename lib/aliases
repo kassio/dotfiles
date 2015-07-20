@@ -6,24 +6,24 @@ alias nv='nvim'
 
 LS_COMMON="-G -h"
 alias ls="ls $LS_COMMON"
-alias l='ls -A'
 alias ll='ls -l'
 alias la='ls -lA'
 
 alias ..='cd ..'
 alias ...='cd ../..'
+alias ....='cd ../../..'
 
 alias sudo='A=`alias` sudo env '
-alias clear='reset;echo -e "\033c\e[3J"'
-alias hr="clear; printf '-%.0s' {1..80}"
 
 alias r='rails'
 alias RD='RAILS_ENV=development'
 alias RT='RAILS_ENV=test'
 alias RS='RAILS_ENV=staging'
 alias RP='RAILS_ENV=production'
+
 alias s='spring'
 alias DS='DISABLE_SPRING=1'
+
 alias be='bundle exec'
 
 alias g="git"
@@ -67,25 +67,7 @@ alias grep="grep -v grep | \\grep -i"
 
 alias psg="ps aux | grep "
 
-alias pg_start="postgres -D /usr/local/var/postgres >/dev/null &"
-
-alias set_wifi_dns="sudo networksetup -setdnsservers Wi-Fi"
-
-alias docker-start="source ~/.dotfiles/lib/docker.sh"
-
-function simple-http {
-  python -m SimpleHTTPServer ${1:-8080}
-}
-
 # Kills all the process with the given name.
 function killer {
   kill -9 $(psg $@ | awk '{print $2}')
-}
-
-# Prints the ruby version and which architecture(32bits or 64bits) it was
-# compiled.
-rbv() {
-  rbenv_ruby_version=`rbenv version-name`
-  rbenv_ruby_arch=`ruby -e 'puts "#{[""].pack("p").size*8}bits"'`
-  printf $rbenv_ruby_version"("$rbenv_ruby_arch")\n"
 }
