@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+curl \
+  https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/lib/spectrum.zsh \
+  > $HOME/.dotfiles/lib/spectrum.zsh
