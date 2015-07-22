@@ -39,7 +39,7 @@ __build_prompt() {
   fi
 
   __git_ps1 "$FG[004]%~%f" "
-$FG[$prompt_color]$%f "
+$FG[$prompt_color]$%f %{$FX[reset]%}"
 };
 precmd_functions=(__build_prompt)
 
