@@ -87,9 +87,9 @@ unsetopt correct_all
 unsetopt correct
 
 ## History
-HISTFILE=$HOME/.zhistory
-HISTSIZE=120000
-SAVEHIST=100000
+export HISTFILE=$HOME/.zhistory
+export HISTSIZE=120000
+export SAVEHIST=100000
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.
 setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
 setopt SHARE_HISTORY             # Share history between all sessions.
