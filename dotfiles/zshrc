@@ -98,21 +98,17 @@ setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
 setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
-unsetopt HIST_IGNORE_SPACE       # Ignore space prefixed commands
 setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
-setopt HIST_NO_STORE
+setopt HIST_NO_STORE             # Don't save history command on history
+unsetopt HIST_IGNORE_SPACE       # Ignore space prefixed commands
 unsetopt EXTENDED_HISTORY
 
 ## Extra
-# ask for confirmation for `rm *' or `rm path/*'
-setopt rm_star_silent
-# easy regexp on list files
+# easy regexp on list files (**)
 setopt extendedglob
 # include dotfiles in globbing
 setopt glob_dots
-# must use >| to truncate existing files
-unsetopt clobber
 # don't blow up with comments
 setopt interactive_comments
 
