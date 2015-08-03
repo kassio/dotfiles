@@ -33,7 +33,7 @@
   bd = branch -d
   bD = branch -D
   c = commit -v
-  ca = commit --amend
+  ca = commit -v --amend
   co = checkout
   d = !git --no-pager diff
   dp = diff
