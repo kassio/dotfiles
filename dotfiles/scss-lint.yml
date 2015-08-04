@@ -189,6 +189,7 @@ linters:
       - flex-order
       - flex-pack
       - flex-align
+      - flex-grow
       - table-layout
       - empty-cells
       - caption-side
