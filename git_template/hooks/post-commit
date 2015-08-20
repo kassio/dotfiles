@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-ctags
-rm $HOME/.nvim_data/ctrlp/${PWD//\//%}.* 2>/dev/null

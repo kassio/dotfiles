@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
 
+echo 'Updating tags'
 ctags
+
+echo 'Removing ctrlp cache'
 rm $HOME/.nvim_data/ctrlp/${PWD//\//%}.* 2>/dev/null

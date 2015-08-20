@@ -4,8 +4,6 @@
   excludesfile = ~/.gitignore
   editor = `which nvim`
   whitespace = trailing-space,space-before-tab,cr-at-eol
-[init]
-  templatedir = ~/.dotfiles/git_template
 [push]
   default = current
 [pull]

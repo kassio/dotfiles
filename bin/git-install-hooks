@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+for hook in update post-commit post-rebase
+do
+  file=".git/hooks/$hook"
+  if [ -z "$(ag git-local-hook $file 2>/dev/null)" ]
+  then
+    if [ -e $file ]
+    then
+      echo 'git-local-hook' >> $file
+    else
+      echo 'git-local-hook' > $file
+    fi
+
+    chmod +x $file
+  fi
+done
