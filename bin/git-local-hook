@@ -6,4 +6,7 @@ ctags
 echo 'Removing ctrlp cache'
 rm $HOME/.nvim_data/ctrlp/${PWD//\//%}.* 2>/dev/null
 
+echo 'Stop spring'
+bin/spring stop &>/dev/null
+
 echo ''

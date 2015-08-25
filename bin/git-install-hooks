@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-for hook in update post-commit post-rebase
+for hook in update post-commit post-rebase post-checkout
 do
   file=".git/hooks/$hook"
   if [ -z "$(ag git-local-hook $file 2>/dev/null)" ]
