@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-echo "updating ctags" & ctags || rm -f tags && ctags
-
 ctrlp_cache_file="$HOME/.nvim_data/ctrlp/${PWD//\//%}.txt"
 if [[ -e $ctrlp_cache_file ]]
 then
-  echo "removing ctrlp cache" & rm 2>/dev/null
+  (echo "removing ctrlp cache" & rm 2>/dev/null) &
 fi
 
 if [[ -x "bin/spring" ]]
 then
-  echo "stopping spring" & bin/spring stop &>/dev/null
+  (echo "stopping spring" & bin/spring stop &>/dev/null) &
 fi
+
+(echo "updating ctags" & ctags || rm -f tags && ctags) &
