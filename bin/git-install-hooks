@@ -2,16 +2,17 @@
 
 for hook in update post-commit post-rebase post-checkout
 do
-  file=".git/hooks/$hook"
-  if [ -z "$(ag git-local-hook $file 2>/dev/null)" ]
+  hook_file=".git/hooks/$hook"
+  if [[ -e $hook_file ]]
   then
-    if [ -e $file ]
+    if [[ -z "$(ag git-local-hook $hook_file 2>/dev/null)" ]]
     then
-      echo 'git-local-hook' >> $file
-    else
-      echo 'git-local-hook' > $file
+      echo "Updating hook in $hook_file"
+      echo "git-local-hook" >> $hook_file
     fi
-
-    chmod +x $file
+  else
+    echo "Installing hook in $hook_file"
+    echo "git-local-hook" > $hook_file
+    chmod +x $hook_file
   fi
 done
