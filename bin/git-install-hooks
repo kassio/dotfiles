@@ -12,7 +12,8 @@ do
     fi
   else
     echo "Installing hook in $hook_file"
-    echo "git-local-hook" > $hook_file
+    echo "#!/usr/bin/env bash" > $hook_file
+    echo "git-local-hook" >> $hook_file
     chmod +x $hook_file
   fi
 done

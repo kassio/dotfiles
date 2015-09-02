@@ -3,7 +3,7 @@
 ctrlp_cache_file="$HOME/.nvim_data/ctrlp/${PWD//\//%}.txt"
 if [[ -e $ctrlp_cache_file ]]
 then
-  rm 2>/dev/null &
+  rm $ctrlp_cache_file 2>/dev/null &
 fi
 
 if [[ -x "bin/spring" ]]
