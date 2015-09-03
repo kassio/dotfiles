@@ -43,12 +43,6 @@ $FG[$prompt_color]$%f %{$FX[reset]%}"
 };
 precmd_functions=(__build_prompt)
 
-brew_completion="${HOMEBREW_PREFIX:-/usr/local}/Library/Contributions/brew_zsh_completion.sh"
-if [[ -e $brew_completion ]]
-then
-  source $brew_completion
-fi
-
 ## Binds
 # Use emacs key bindings
 bindkey -e
@@ -62,6 +56,12 @@ zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
 
 ## Completions
+brew_completion="${HOMEBREW_PREFIX:-/usr/local}/Library/Contributions/brew_zsh_completion.sh"
+if [[ -e $brew_completion ]]
+then
+  source $brew_completion
+fi
+
 autoload -Uz compinit
 compinit -C
 
@@ -81,6 +81,11 @@ unsetopt flowcontrol
 setopt auto_menu         # show completion menu on succesive tab press
 setopt complete_in_word
 setopt always_to_end
+
+for key in '!' '$' '@' '/'; do
+  bindkey "\e$key" _bash_complete-word
+  bindkey "^X$key" _bash_list-choices
+done
 
 # do not correct me!!
 unsetopt correct_all
