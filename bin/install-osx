@@ -2,10 +2,6 @@
 
 if [[ "Darwin" == "$(uname)" ]]
 then
-  # Install patched font
-  mkdir -p $HOME/Library/Fonts
-  cp "$HOME/.dotfiles/lib/Droid Sans Mono for Powerline Plus Nerd File Types.otf" $HOME/Library/Fonts
-
   ## dock
   # faster animations on expose
   defaults write com.apple.dock expose-animation-duration -float 0.1
