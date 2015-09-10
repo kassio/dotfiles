@@ -12,7 +12,7 @@ export CDPATH=".:$HOME:$HOME/src"
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 export PATH="./bin:$PATH:$DOTFILES/bin"
 # Default editor
-export EDITOR='vim'
+export EDITOR='nvim'
 # improve ls colors
 export CLICOLOR=1
 # mysql prompt
