@@ -21,9 +21,11 @@
 #     DONT_STOP=1 loop_this 10 rspec
 ###############################################################################
 
-params=($(echo "$@"))
-cmd="${params[@]:1}"
-size=${params[0]}
+size=$1
+shift
+cmd="$1"
+shift
+params="$@"
 build_count=0
 error_count=0
 
