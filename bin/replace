@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# Find and replace by a given list of files.
+#
+# replace foo bar **/*.rb
+
+find_this="$1"
+shift
+replace_with="$1"
+shift
+echo "Replacing '$find_this' by '$replace_with'"
+
+ag -l --nocolor "$find_this" $* | xargs sed -i "" -e "s/$find_this/$replace_with/g"
