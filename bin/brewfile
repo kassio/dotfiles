@@ -1,28 +1,50 @@
 #!/usr/bin/env bash
 
 brew tap homebrew/dupes
-brew tap mitchty/entr
 brew tap kopischke/ctags
+brew tap mitchty/entr
+brew tap neovim/neovim
+brew tap phinze/cask
 
 brew update
 
+brew install ack
+brew install autoconf
+brew install automake
 brew install bash
 brew install bash-completion
+brew install boost
 brew install brew-cask
+brew install cmake
 brew install ctags-fishman --HEAD
+brew install gdbm
+brew install gettext
 brew install git
 brew install heroku-toolbelt
 brew install highlight
+brew install libevent
+brew install libtool
+brew install libyaml
+brew install lua
 brew install markdown
-brew install mercurial
+brew install neovim
+brew install node
+brew install openssl
+brew install pcre
+brew install pkg-config
+brew install postgresql
 brew install python
+brew install readline
 brew install rename
+brew install ruby
+brew install sqlite
 brew install terminal-notifier
 brew install the_silver_searcher
 brew install tree
 brew install vim --override-system-vi --with-lua --HEAD
 brew install watch
 brew install wget
+brew install xz
 brew install zsh
 
 brew doctor
