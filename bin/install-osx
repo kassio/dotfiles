@@ -9,7 +9,7 @@ then
   # Autohide dock
   defaults write com.apple.dock autohide -bool TRUE
   defaults write com.apple.dock autohide-delay -float 0
-  # Dock on righ
+  # Dock on left
   defaults write com.apple.dock orientation left
 
   ## dashboard
