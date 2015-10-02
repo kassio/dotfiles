@@ -66,3 +66,5 @@ then
   sudo defaults write /System/Library/LaunchDaemons/com.apple.diskarbitrationd ExitTimeOut -int 1
   sudo defaults write /System/Library/LaunchAgents/com.apple.coreservices.appleid.authentication ExitTimeOut -int 1
 fi
+
+echo "You'll need to install xcode command-line tools, run the following: xcode-select --install"
