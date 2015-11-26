@@ -23,9 +23,7 @@
 
 size=$1
 shift
-cmd="$1"
-shift
-params="$@"
+cmd="$@"
 build_count=0
 error_count=0
 
