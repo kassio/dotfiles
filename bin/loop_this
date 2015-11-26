@@ -34,7 +34,7 @@ report() {
   exit $error_count
 }; trap report SIGINT SIGTERM
 
-while [ $build_count -lt $size ]
+while [ $build_count -le $size ]
 do
   echo ">> Build $((++build_count)) (failed: $error_count)"
   echo ">> $cmd"
