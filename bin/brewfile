@@ -17,6 +17,7 @@ brew install boost
 brew install brew-cask
 brew install cmake
 brew install ctags-fishman --HEAD
+brew install elixir --HEAD
 brew install gdbm
 brew install gettext
 brew install git
@@ -27,7 +28,7 @@ brew install libtool
 brew install libyaml
 brew install lua
 brew install markdown
-brew install neovim
+brew install neovim --HEAD
 brew install node
 brew install openssl
 brew install pcre
