@@ -57,3 +57,5 @@
   shorten = !sh -c 'curl -i http://git.io -F url=https://github.com/$1 -F code=$2' -
   last-tag = describe --tags
   rank = shortlog -sn
+[rerere]
+  enabled = true
