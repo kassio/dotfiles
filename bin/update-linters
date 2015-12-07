@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [ "$(gem search -i scss_lint)" == "false" ]
+then
+  gem install scss_lint
+else
+  gem update scss_lint
+fi
+
+npm install -g eslint
