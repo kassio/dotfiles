@@ -1,10 +1,15 @@
 #!/usr/bin/env bash
 
-if [ "$(gem search -i scss_lint)" == "false" ]
-then
-  gem install scss_lint
-else
-  gem update scss_lint
-fi
+function install_or_update_gem() {
+  if [ "$(gem search -i $1)" == "false" ]
+  then
+    gem install $1
+  else
+    gem update $1
+  fi
+}
+
+install_or_update_gem scss_lint
+install_or_update_gem rubocop
 
 npm install -g eslint
