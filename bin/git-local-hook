@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-ctrlp_cache_file="$HOME/.config/nvim/tmp/ctrlp/${PWD//\//%}.txt"
-if [[ -e $ctrlp_cache_file ]]
-then
-  rm $ctrlp_cache_file 2>/dev/null &
-fi
-
 if [[ -x "bin/spring" ]]
 then
   bin/spring stop &>/dev/null &
