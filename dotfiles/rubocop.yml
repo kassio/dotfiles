@@ -52,7 +52,7 @@ Style/GuardClause:
   Enabled: false
 
 Style/SpaceInsideHashLiteralBraces:
-  Enabled: false
+  Enabled: true
 
 Style/IndentHash:
   Enabled: false
