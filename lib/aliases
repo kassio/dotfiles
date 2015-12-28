@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-alias vi='echo use "n"'
-alias n='nvim'
-alias nv='nvim'
+alias n='NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim'
 
 LS_COMMON="-G -h"
 alias ls="ls $LS_COMMON"
