@@ -8,7 +8,7 @@ fi
 export DOTFILES=$HOME/.dotfiles
 source $DOTFILES/lib/boxen # prepare some env variables (high priority)
 
-export CDPATH=".:$HOME:$HOME/src:$HOME/.config"
+export CDPATH=".:$HOME:$HOME/.config:$HOME/src"
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 export PATH="./bin:$DOTFILES/bin:$PATH"
 # Default editor
