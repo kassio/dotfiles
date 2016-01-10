@@ -22,6 +22,8 @@ alias DS='DISABLE_SPRING=1'
 
 alias be='bundle exec'
 
+alias iexm='iex -S mix'
+
 alias g="git"
 alias ga="g add -A"
 alias gb="g b"
