@@ -7,7 +7,7 @@ Install
 -------
 
       git clone https://github.com/kassio/dotfiles.git ~/.dotfiles --recursive
-      ~/.dotfiles/bin/setup_env
+      ~/.dotfiles/bin/install-dotfiles
       source ~/.zshrc
 
 Setup PATH on OSX
