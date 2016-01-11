@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 brew tap homebrew/dupes
-brew tap kopischke/ctags
+brew tap universal-ctags/universal-ctags
 brew tap mitchty/entr
 brew tap neovim/neovim
 brew tap phinze/cask
@@ -16,7 +16,7 @@ brew install bash-completion
 brew install boost
 brew install brew-cask
 brew install cmake
-brew install ctags-fishman --HEAD
+brew install --HEAD universal-ctags
 brew install elixir --HEAD
 brew install gdbm
 brew install gettext
