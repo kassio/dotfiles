@@ -40,13 +40,12 @@ brew install readline
 brew install rename
 brew install ruby
 brew install sqlite
-brew install terminal-notifier
 brew install the_silver_searcher
 brew install tree
 brew install vim --override-system-vi --with-lua --HEAD
 brew install watch
 brew install wget
 brew install xz
-brew install zsh
+brew install zsh --without-etcdir
 
 brew doctor
