@@ -21,8 +21,6 @@ export LANG="en_US.UTF-8"
 source $DOTFILES/lib/rbenv
 source $DOTFILES/lib/heroku
 source $DOTFILES/lib/aliases
-source $DOTFILES/lib/completion
-source $DOTFILES/lib/history
 source $DOTFILES/lib/git
 source $DOTFILES/lib/less
 
