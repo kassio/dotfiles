@@ -14,3 +14,8 @@ Setup PATH on OSX
 -----------------
 
       Edit `/etc/paths` put `/usr/local/bin` at the top of the file
+
+Iterm colors
+------------
+
+[oceanic next](https://github.com/mhartington/oceanic-next-iterm)
