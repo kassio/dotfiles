@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+initdb --auth=trust -U $USER /usr/local/var/postgres
+brew services start postgres
