@@ -6,11 +6,15 @@ then
 fi
 
 export DOTFILES=$HOME/.dotfiles
-source $DOTFILES/lib/boxen # prepare some env variables (high priority)
 
 export CDPATH=".:$HOME:$HOME/.config:$HOME/src"
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 export PATH="./bin:$DOTFILES/bin:$PATH"
+
+# rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
 # Default editor
 export EDITOR='nvim'
 # improve ls colors

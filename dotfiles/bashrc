@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 
 export DOTFILES=$HOME/.dotfiles
-source $DOTFILES/lib/boxen # prepare some env variables (high priority)
 
 export CDPATH=".:$HOME:$HOME/src"
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 export PATH="./bin:$PATH:$DOTFILES/bin"
+
+# rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
 # Default editor
 export EDITOR='vim'
