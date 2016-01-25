@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-# rbenv
-if [ -d "$HOME/.rbenv" ]
-then
-  export PATH="$HOME/.rbenv/bin:/usr/local/sbin:$PATH"
-  eval "$(rbenv init - --no-rehash)"
-fi

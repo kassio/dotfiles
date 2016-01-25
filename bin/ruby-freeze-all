@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+files=$(find app spec lib -name "*.rb" -type f)
+
+sed_src='1i \
+# frozen_string_literal: true\
+\
+'
+
+for file in $files; do
+  sed -i "" -e "$sed_src" "$file"
+done
