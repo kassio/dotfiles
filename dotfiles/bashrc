@@ -8,8 +8,12 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # personal paths
-export CDPATH=".:$HOME:$HOME/src"
-export PATH="./bin:$PATH:$DOTFILES/bin"
+export PATH="./bin:$DOTFILES/bin:$PATH"
+export CDPATH=".:$HOME:$HOME/.config:$HOME/src"
+for project in `ls -d ~/src/private/*/`; do
+  export CDPATH="$CDPATH:$project"
+done
+export CDPATH="$CDPATH:~/src/private"
 
 # Default editor
 export EDITOR='vim'
