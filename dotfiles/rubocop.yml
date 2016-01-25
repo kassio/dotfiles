@@ -6,77 +6,90 @@ AllCops:
     - 'config/**/*'
     - 'script/**/*'
 
-Style/ExtraSpacing:
-  Enabled: true
+  RunRailsCops: true
 
-Style/SymbolArray:
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+Style/CaseIndentation:
+  IndentWhenRelativeTo: end
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/IndentHash:
+  Enabled: false
+
+Style/CollectionMethods:
   Enabled: true
+  PreferredMethods:
+      inject: 'inject'
 
 Style/Documentation:
   Enabled: false
 
-Metrics/ClassLength:
-  Enabled: false
-
-Metrics/ModuleLength:
-  Enabled: false
-
-Metrics/LineLength:
-  Enabled: false
-
-Metrics/MethodLength:
-  Enabled: false
-
-Style/RaiseArgs:
-  Enabled: false
-
-Style/IfUnlessModifier:
-  Enabled: false
-
-Style/SignalException:
-  Enabled: false
-
 Style/BlockDelimiters:
-  Enabled: false
+  Exclude:
+    - spec/**/*_spec.rb
 
 Style/BracesAroundHashParameters:
   Exclude:
     - spec/**/*_spec.rb
 
-Style/AlignParameters:
-  EnforcedStyle: with_fixed_indentation
-
-Metrics/AbcSize:
-  Enabled: false
-
 Style/GuardClause:
   Enabled: false
 
+Style/IfUnlessModifier:
+  Enabled: false
+
 Style/SpaceInsideHashLiteralBraces:
-  Enabled: true
-
-Style/IndentHash:
-  Enabled: false
-
-Style/AlignHash:
-  Enabled: false
-  EnforcedHashRocketStyle: table
-  EnforcedColonStyle: table
-
-Style/NumericLiterals:
-  Enabled: false
-
-Style/LineEndConcatenation:
-  Enabled: false
-
-Style/AsciiComments:
-  Enabled: false
-
-Style/AndOr:
-  Enabled: false
-
-Lint/AssignmentInCondition:
   Enabled: false
 
 Style/Lambda:
   Enabled: false
+
+Style/RaiseArgs:
+  Enabled: false
+
+Style/SignalException:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 20
+
+Metrics/ClassLength:
+  Max: 100
+
+Metrics/ModuleLength:
+  Max: 100
+
+Metrics/LineLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 15
+
+Style/SingleLineBlockParams:
+  Enabled: false
+
+Lint/EndAlignment:
+  AlignWith: variable
+
+Style/FormatString:
+  Enabled: false
+
+Style/MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+Style/WordArray:
+  Enabled: false
+
+Style/RedundantSelf:
+  Enabled: false
+
+Style/AlignHash:
+  Enabled: true
+  EnforcedLastArgumentHashStyle: always_ignore
+
+Style/TrivialAccessors:
+  AllowPredicates: true
