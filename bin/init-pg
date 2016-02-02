@@ -2,3 +2,4 @@
 
 initdb --auth=trust -U $USER /usr/local/var/postgres
 brew services start postgres
+createuser postgres -D -s # also creates the postgres user.
