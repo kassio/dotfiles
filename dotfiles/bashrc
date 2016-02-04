@@ -28,8 +28,16 @@ export LANG="en_US.UTF-8"
 
 source $DOTFILES/lib/heroku
 source $DOTFILES/lib/aliases
-source $DOTFILES/lib/git
 source $DOTFILES/lib/less
+
+source "$(brew --prefix)/etc/bash_completion"
+
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWCOLORHINTS=true
+export GIT_PS1_DESCRIBE_STYLE=branch
+export GIT_PS1_SHOWUPSTREAM=verbose
 
 __build_prompt() {
   local last_status=$?

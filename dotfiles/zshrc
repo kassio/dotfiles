@@ -33,10 +33,22 @@ export LANG="en_US.UTF-8"
 
 source $DOTFILES/lib/heroku
 source $DOTFILES/lib/aliases
-source $DOTFILES/lib/git
 source $DOTFILES/lib/less
 source $DOTFILES/lib/spectrum.zsh
 source $DOTFILES/lib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+autoload -Uz compinit
+compinit -C
+autoload bashcompinit
+bashcompinit
+source "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh"
+
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWCOLORHINTS=true
+export GIT_PS1_DESCRIBE_STYLE=branch
+export GIT_PS1_SHOWUPSTREAM=verbose
 
 __build_prompt() {
   if [[ $? = 0 ]]
@@ -69,9 +81,6 @@ if [[ -e $brew_completion ]]
 then
   source $brew_completion
 fi
-
-autoload -Uz compinit
-compinit -C
 
 # Fix the \eb \ef and others.
 export WORDCHARS=''
