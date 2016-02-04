@@ -1,19 +1,24 @@
 #!/usr/bin/env bash
 
+global_hook="git-global-hook"
+hooks_path=".git/hooks"
+
+rm $hooks_path/*sample
+
 for hook in update post-commit post-rebase post-checkout
 do
-  hook_file=".git/hooks/$hook"
+  hook_file="$hooks_path/$hook"
   if [[ -e $hook_file ]]
   then
-    if [[ -z "$(ag git-local-hook $hook_file 2>/dev/null)" ]]
+    if [[ -z "$(ag $global_hook $hook_file 2>/dev/null)" ]]
     then
       echo "Updating hook in $hook_file"
-      echo "git-local-hook" >> $hook_file
+      echo "$global_hook" >> $hook_file
     fi
   else
     echo "Installing hook in $hook_file"
     echo "#!/usr/bin/env bash" > $hook_file
-    echo "git-local-hook" >> $hook_file
+    echo "$global_hook" >> $hook_file
     chmod +x $hook_file
   fi
 done

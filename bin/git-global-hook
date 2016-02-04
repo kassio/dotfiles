@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo 'running global hook'
+
 if [[ -x "bin/spring" ]]
 then
   bin/spring stop &>/dev/null &
