@@ -47,5 +47,6 @@ brew install watch
 brew install wget
 brew install xz
 brew install zsh --without-etcdir
+brew install zsh-syntax-highlighting
 
 brew doctor

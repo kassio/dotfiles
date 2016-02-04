@@ -35,7 +35,8 @@ source $DOTFILES/lib/heroku
 source $DOTFILES/lib/aliases
 source $DOTFILES/lib/less
 source $DOTFILES/lib/spectrum.zsh
-source $DOTFILES/lib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 autoload -Uz compinit
 compinit -C
