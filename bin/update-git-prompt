@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-curl \
-  https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh \
-  > $HOME/.dotfiles/lib/git-prompt.sh
