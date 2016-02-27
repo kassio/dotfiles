@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+if [ $# -eq 0 -o "$1" = "-h" -o "$1" = "--help" ]
+then
+  help="
+    usage: loop-this [-h|--help] <number> <command>\n\n
+      number          number of times that the command will be executed\n
+      command         the command that will be executed\n\n
+      -h, --help      show this help message\n\n
+
+    By default the loop will stop when the <command> fails,\n
+    if you want to change this behaviour you can use\n
+    the \$DONT_STOP env variable\n\n
+    Example:\n\n
+      # will execute the ls command 5 times.\n
+      loop-this 5 ls\n\n
+      # will execute the rspec 10 times, even if the command return something\n
+      # different from 0.\n
+      DONT_STOP=1 loop-this 10 rspec\n\n"
+  echo -e $help
+  exit 0
+fi
+
+size=$1
+shift
+cmd="$@"
+build_count=0
+error_count=0
+
+cmd=$(echo $cmd | sed "s/'/'\\''/g")
+
+report() {
+  echo -e "\n\nkilled: << Build $build_count (failed: $error_count) >>\n\n"
+  exit $error_count
+}; trap report SIGINT SIGTERM
+
+while [ $build_count -lt $size ]
+do
+  echo ">> Build $((++build_count)) (failed: $error_count)"
+  echo ">> $cmd"
+  $cmd
+  if [[ $? != 0 ]]
+  then
+    error_count=$(($error_count + 1))
+    if [[ "$DONT_STOP" = "" ]]
+    then
+      break
+    fi
+  fi
+  echo ""
+done
+
+echo -e "\nBuilds: $build_count (failed: $error_count)\n"
+exit $error_count
