@@ -16,7 +16,7 @@ done
 export CDPATH="$CDPATH:~/src/private"
 
 # Default editor
-export EDITOR='vim'
+export EDITOR="nvim"
 # improve ls colors
 export CLICOLOR=1
 # mysql prompt
