@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-alias nvim='NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim'
+alias n='NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim'
 
 LS_COMMON="-G -h"
 alias ls="ls $LS_COMMON"
@@ -68,13 +68,4 @@ alias psg="ps aux | grep "
 # Kills all the process with the given name.
 function killer {
   kill -9 $(psg $@ | awk '{print $2}')
-}
-
-function n {
-  if [ -e /tmp/nvimsocket ]
-  then
-    nvr $@
-  else
-    nvim $@
-  fi
 }
