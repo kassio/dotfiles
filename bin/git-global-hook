@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
-echo 'running global hook'
 
 if [[ -x "bin/spring" ]]
 then
+  echo 'stopping spring'
   bin/spring stop &>/dev/null &
 fi
 
+echo 'retagging'
 (ctags || rm -f tags && ctags) &
