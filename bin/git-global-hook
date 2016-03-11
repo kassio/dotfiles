@@ -4,7 +4,7 @@
 if [[ -x "bin/spring" ]]
 then
   echo 'stopping spring'
-  bin/spring stop &>/dev/null &
+  (bin/spring stop &>/dev/null) &
 fi
 
 echo 'retagging'
