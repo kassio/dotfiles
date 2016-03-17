@@ -8,4 +8,4 @@ then
 fi
 
 echo 'retagging'
-(ctags || rm -f tags && ctags) &
+(ctags &>/dev/null || rm -f tags && ctags) &
