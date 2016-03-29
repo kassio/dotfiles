@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+old_IFS=$IFS
+IFS=$'\n'
+locked=""
+updated=""
+not_updated=""
+
+for __line__ in $(bundle outdated | egrep "\* ")
+do
+  __dependency__=$(echo $__line__ | awk '{ print $2 }')
+  case $__line__ in
+    *requested*)
+      locked+="$__dependency__\n"
+      ;;
+    *)
+      update-gem $__dependency__
+
+      if [ $? -eq 0 ]
+      then
+        updated+="$__dependency__\n"
+      else
+        git checkout Gemfile*
+        not_updated+="$__dependency__\n"
+      fi
+      ;;
+  esac
+done
+
+echo -e "Gems locked on Gemfile:\n"
+echo -e $locked
+echo "------------------------------"
+echo -e "Updated:\n"
+echo -e $updated
+echo "------------------------------"
+echo -e "\n\nNot Updated:\n"
+echo -e $not_updated
+
+IFS=$old_IFS
