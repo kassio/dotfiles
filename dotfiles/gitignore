@@ -14,3 +14,4 @@ vendor/ruby
 tags
 tags.*
 *darwin*
+.env.local

@@ -36,7 +36,7 @@
   d = !git --no-pager diff
   dp = diff
   f = fetch
-  fix = commit --amend --no-edit --reset-author
+  fix = commit --amend --no-edit
   l = !git --no-pager lp -20
   lme = !GIT_USERNAME=$(git config user.name) && git --no-pager lp --author="\"$GIT_USERNAME\""
   lpme = !GIT_USERNAME=$(git config user.name) && git lp --author="\"$GIT_USERNAME\""
