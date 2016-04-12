@@ -14,7 +14,7 @@ do
       locked+="$__dependency__\n"
       ;;
     *)
-      update-gem $__dependency__
+      DISABLE_SPRING=1 update-gem $__dependency__
 
       if [ $? -eq 0 ]
       then
