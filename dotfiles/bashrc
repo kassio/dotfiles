@@ -1,43 +1,9 @@
 #!/usr/bin/env bash
 
 export DOTFILES=$HOME/.dotfiles
-export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
-
-# rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
-# personal paths
-export PATH="./bin:$DOTFILES/bin:$PATH"
-export CDPATH=".:$HOME:$HOME/.config:$HOME/src"
-for project in $(find ~/src/private -type d -depth 1 2>/dev/null); do
-  export CDPATH="$CDPATH:$project"
-done
-export CDPATH="$CDPATH:~/src/private"
-
-# Default editor
-export EDITOR="nvim"
-# improve ls colors
-export CLICOLOR=1
-# mysql prompt
-export MYSQL_PS1='\d\$ '
-# my lang
-export LC_ALL="en_US.UTF-8"
-export LC_CTYPE="en_US.UTF-8"
-export LANG="en_US.UTF-8"
-
-source $DOTFILES/lib/heroku
-source $DOTFILES/lib/aliases
-source $DOTFILES/lib/less
+source "$DOTFILES/lib/env"
 
 source "$(brew --prefix)/etc/bash_completion"
-
-export GIT_PS1_SHOWDIRTYSTATE=true
-export GIT_PS1_SHOWSTASHSTATE=true
-export GIT_PS1_SHOWUNTRACKEDFILES=true
-export GIT_PS1_SHOWCOLORHINTS=true
-export GIT_PS1_DESCRIBE_STYLE=branch
-export GIT_PS1_SHOWUPSTREAM=verbose
 
 __build_prompt() {
   local last_status=$?
@@ -100,9 +66,3 @@ export HISTSIZE=1000000
 
 # Make ctrl-s works to incremental search, like ctrl-r to reverse
 stty -ixon
-
-# local env
-if [ -e "$HOME/.env" ]
-then
-  source $HOME/.env
-fi
