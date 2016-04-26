@@ -5,6 +5,7 @@ brew tap universal-ctags/universal-ctags
 brew tap mitchty/entr
 brew tap neovim/neovim
 brew tap phinze/cask
+brew tap homebrew/services
 
 brew update
 
