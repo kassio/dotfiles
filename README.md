@@ -13,7 +13,15 @@ Install
 Setup PATH on OSX
 -----------------
 
-      Edit `/etc/paths` put `/usr/local/bin` at the top of the file
+      Edit `/etc/paths` to look like:
+      ```
+      /usr/local/bin
+      /usr/bin
+      /bin
+      /usr/local/sbin
+      /usr/sbin
+      /sbin
+      ```
 
 Iterm colors
 ------------

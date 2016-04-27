@@ -6,7 +6,7 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # personal paths
-export PATH="./bin:$DOTFILES/bin:$PATH:$HOMEBREW_PREFIX/sbin"
+export PATH="./bin:$DOTFILES/bin:$PATH"
 export CDPATH=".:$HOME:$HOME/.config:$HOME/src"
 for project in $(find ~/src/private -type d -depth 1 2>/dev/null); do
   export CDPATH="$CDPATH:$project"
