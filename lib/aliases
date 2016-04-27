@@ -12,6 +12,8 @@ alias ...='cd ../..'
 
 alias sudo='A=`alias` sudo env '
 
+alias brews='brew services'
+
 alias r='rails'
 alias RD='RAILS_ENV=development'
 alias RT='RAILS_ENV=test'
