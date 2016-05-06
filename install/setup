@@ -12,7 +12,7 @@ $HOME/.dotfiles/install/rbenv
 
 source $HOME/.dotfiles/lib/env
 
-if [ -z $(ag $HOMEBREW_PREFIX /etc/shells) ]
+if [ -z "$(ag "$HOMEBREW_PREFIX" /etc/shells)" ]
 then
   echo $(type -p zsh) | sudo tee -a /etc/shells
   echo $(type -p bash) | sudo tee -a /etc/shells
@@ -20,7 +20,7 @@ fi
 
 chsh -s $(type -p zsh)
 
-if [ -z $(ag $HOMEBREW_PREFIX /etc/paths) ]
+if [ -z "$(ag "$HOMEBREW_PREFIX" /etc/paths)" ]
 then
   echo "$HOMEBREW_PREFIX/bin" | sudo tee -a /etc/paths
   echo "$HOMEBREW_PREFIX/sbin" | sudo tee -a /etc/paths
