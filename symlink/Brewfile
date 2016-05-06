@@ -1,0 +1,80 @@
+tap 'homebrew/dupes'
+tap 'universal-ctags/universal-ctags'
+tap 'neovim/neovim'
+tap 'homebrew/services'
+
+brew 'ack'
+brew 'autoconf'
+brew 'automake'
+brew 'bash'
+brew 'bash-completion'
+brew 'boost'
+brew 'cmake'
+brew 'elixir', args: ['--HEAD']
+brew 'gdbm'
+brew 'gettext'
+brew 'git'
+brew 'heroku-toolbelt'
+brew 'highlight'
+brew 'libevent'
+brew 'libtool'
+brew 'libyaml'
+brew 'lua'
+brew 'markdown'
+brew 'mas'
+brew 'neovim', args: ['--HEAD']
+brew 'node'
+brew 'openssl'
+brew 'pcre'
+brew 'pkg-config'
+brew 'postgresql'
+brew 'python'
+brew 'python3'
+brew 'readline'
+brew 'rename'
+brew 'ruby'
+brew 'sqlite'
+brew 'the_silver_searcher'
+brew 'tree'
+brew 'universal-ctags', args: ['--HEAD']
+brew 'vim', args: ['--override-system-vi', '--with-lua', '--HEAD']
+brew 'watch'
+brew 'wget'
+brew 'xz'
+brew 'zsh', args: ['--without-etcdir']
+brew 'zsh-completions'
+brew 'zsh-syntax-highlighting'
+
+cask 'atom'
+cask 'bartender'
+cask 'dash'
+cask 'dropbox'
+cask 'firefox'
+cask 'flux'
+cask 'google-chrome'
+cask 'google-drive'
+cask 'imageoptim'
+cask 'iterm2-nightly'
+cask 'itsycal'
+cask 'licecap'
+cask 'magicprefs'
+cask 'skype'
+cask 'spectacle'
+cask 'spotify'
+cask 'utorrent'
+cask 'vlc'
+cask 'xmind'
+
+mas '1Password', id: 443987910
+mas 'Caffeine', id: 411246225
+mas 'Color Picker' , id: 641027709
+mas 'Deckset', id: 847496013
+mas 'Fluid Browser', id: 1077036385
+mas 'Keyboard Pilot', id: 402670023
+mas 'Keynote', id: 409183694
+mas 'Numbers', id: 409203825
+mas 'Pages', id: 409201541
+mas 'Skitch', id: 425955336
+mas 'The Unarchiver', id: 425424353
+mas 'Twitter', id: 409789998
+mas 'Wunderlist', id: 410628904

@@ -86,11 +86,4 @@ for app in Finder Dock SystemUIServer; do killall "$app" >/dev/null 2>&1; done
 sudo chflags nohidden ~/Library
 sudo chflags -h nohidden /tmp
 
-# Faster shutdown
-sudo defaults write /System/Library/LaunchDaemons/com.apple.coreservices.appleevents ExitTimeOut -int 1
-sudo defaults write /System/Library/LaunchDaemons/com.apple.securityd ExitTimeOut -int 1
-sudo defaults write /System/Library/LaunchDaemons/com.apple.mDNSResponder ExitTimeOut -int 1
-sudo defaults write /System/Library/LaunchDaemons/com.apple.diskarbitrationd ExitTimeOut -int 1
-sudo defaults write /System/Library/LaunchAgents/com.apple.coreservices.appleid.authentication ExitTimeOut -int 1
-
-echo "You'll need to install xcode command-line tools, run the following: xcode-select --install"
+# echo "You'll need to install xcode command-line tools, run the following: xcode-select --install"

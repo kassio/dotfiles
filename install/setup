@@ -3,9 +3,9 @@
 old_path="$PWD"
 cd $HOME
 
-$HOME/.dotfiles/bin/install-link-files
-$HOME/.dotfiles/bin/install-osx
-$HOME/.dotfiles/bin/update-git-prompt
+$HOME/.dotfiles/install/link-files
+$HOME/.dotfiles/install/osx
+$HOME/.dotfiles/install/rbenv
 
 if [ -e "$HOME/.bashrc" ]
 then

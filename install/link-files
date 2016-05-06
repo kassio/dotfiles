@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-for f in $HOME/.dotfiles/dotfiles/*
+for f in $HOME/.dotfiles/symlink/*
 do
   ln -sf $f $HOME/.${f##*/}
 done
