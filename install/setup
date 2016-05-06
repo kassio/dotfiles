@@ -3,13 +3,29 @@
 old_path="$PWD"
 cd $HOME
 
+curl "https://raw.githubusercontent.com/mikemcquaid/strap/master/bin/strap.sh" > /tmp/strap.sh
+bash /tmp/strap.sh
+
 $HOME/.dotfiles/install/link-files
 $HOME/.dotfiles/install/osx
 $HOME/.dotfiles/install/rbenv
 
-if [ -e "$HOME/.bashrc" ]
+source $HOME/.dotfiles/lib/env
+
+if [ -z $(ag $HOMEBREW_PREFIX /etc/shells) ]
 then
-  source $HOME/.bashrc &>/dev/null
+  echo $(type -p zsh) | sudo tee -a /etc/shells
+  echo $(type -p bash) | sudo tee -a /etc/shells
 fi
+
+chsh -s $(type -p zsh)
+
+if [ -z $(ag $HOMEBREW_PREFIX /etc/paths) ]
+then
+  echo "$HOMEBREW_PREFIX/bin" | sudo tee -a /etc/paths
+  echo "$HOMEBREW_PREFIX/sbin" | sudo tee -a /etc/paths
+fi
+
+source $HOME/.zshrc &>/dev/null
 
 cd $old_path
