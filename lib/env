@@ -2,7 +2,6 @@ export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 export HOMEBREW_NO_ANALYTICS=1
 
 # personal paths
-export PATH="./bin:$DOTFILES/bin:$PATH"
 export CDPATH=".:$HOME:$HOME/.config:$HOME/src"
 for project in $(find ~/src/private -type d -depth 1 2>/dev/null); do
   export CDPATH="$CDPATH:$project"
@@ -11,6 +10,9 @@ export CDPATH="$CDPATH:~/src/private"
 
 # rbenv
 eval "$(rbenv init -)"
+
+# my bin, and project bin
+export PATH="./bin:$DOTFILES/bin:$PATH"
 
 # Default editor
 export EDITOR="nvim"
