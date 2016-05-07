@@ -10,7 +10,6 @@ bash /tmp/strap.sh
 
 $HOME/.dotfiles/install/link-files
 $HOME/.dotfiles/install/osx
-$HOME/.dotfiles/install/rbenv
 
 source $HOME/.dotfiles/lib/env
 
