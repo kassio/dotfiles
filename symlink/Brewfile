@@ -37,6 +37,7 @@ brew 'universal-ctags', args: ['--HEAD']
 brew 'vim', args: ['--override-system-vi', '--with-lua', '--HEAD']
 brew 'watch'
 brew 'wget'
+brew 'xz' # for nokogiri
 brew 'zsh', args: ['--without-etcdir']
 brew 'zsh-completions'
 brew 'zsh-syntax-highlighting'
