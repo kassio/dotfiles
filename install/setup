@@ -3,30 +3,48 @@
 old_path="$PWD"
 cd $HOME
 
-git clone https://github.com/chriskempson/base16-shell.git $HOME/.config/base16-shell
+# Intall Homebrew
+/usr/bin/ruby -e \
+  "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-curl "https://raw.githubusercontent.com/mikemcquaid/strap/master/bin/strap.sh" > /tmp/strap.sh
-bash /tmp/strap.sh
+# Install all my packages
+brew bundle --global
 
-$HOME/.dotfiles/install/link-files
+# Create linked files
+for f in $HOME/.dotfiles/symlink/*
+do
+  ln -sf $f $HOME/.${f##*/}
+done
+
+# Customize OSX
 $HOME/.dotfiles/install/osx
 
+# Customize the shell default ANSI colors
+mkdir -p "$HOME/.config"
+git clone \
+  https://github.com/chriskempson/base16-shell.git \
+  "$HOME/.config/base16-shell"
+
+# Load some of my env
 source $HOME/.dotfiles/lib/env
 
+# Setup customized shells
 if [ -z "$(ag "$HOMEBREW_PREFIX" /etc/shells)" ]
 then
   echo $(type -p zsh) | sudo tee -a /etc/shells
   echo $(type -p bash) | sudo tee -a /etc/shells
 fi
 
+# Change my shell to zsh
 chsh -s $(type -p zsh)
 
+# Customize my paths
 if [ -z "$(ag "$HOMEBREW_PREFIX" /etc/paths)" ]
 then
   echo "$HOMEBREW_PREFIX/bin" | sudo tee -a /etc/paths
   echo "$HOMEBREW_PREFIX/sbin" | sudo tee -a /etc/paths
 fi
 
-source $HOME/.zshrc &>/dev/null
+echo 'Done'
 
 cd $old_path

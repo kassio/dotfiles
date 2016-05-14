@@ -1,8 +1,11 @@
 tap 'caskroom/cask'
 tap 'caskroom/versions'
+tap 'homebrew/core'
 tap 'homebrew/dupes'
-tap 'universal-ctags/universal-ctags'
+tap 'homebrew/services'
+tap 'homebrew/versions'
 tap 'neovim/neovim'
+tap 'universal-ctags/universal-ctags'
 
 brew 'ack'
 brew 'bash'

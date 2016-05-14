@@ -79,11 +79,21 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 # Require password immediately after sleep or screen saver begins
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
+# Disable java on safari
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles -bool false
+# Enabling full-disk encryption on next reboot
+if [[ $(fdesetup status -quiet) != "FileVault is On." ]]
+then
+  sudo fdesetup enable -user "$USER" | tee ~/Desktop/"FileVault Recovery Key.txt"
+fi
 
 # Kill affected applications
 for app in Finder Dock SystemUIServer; do killall "$app" >/dev/null 2>&1; done
 
-sudo chflags nohidden ~/Library
-sudo chflags -h nohidden /tmp
+# Doesn't work on El captain:
+# sudo chflags -h nohidden /tmp
 
-# echo "You'll need to install xcode command-line tools, run the following: xcode-select --install"
+# Xcode
+sudo xcodebuild -license
+xcode-select --install
