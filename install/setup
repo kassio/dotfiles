@@ -7,14 +7,6 @@ cd $HOME
 /usr/bin/ruby -e \
   "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-# Setup MAS (Mac AppStore)
-brew install mas
-mas signout \
-  && mas signin \
-    $(read -p "App Store Login: " MAS_LOGIN && echo $MAS_LOGIN) \
-    $(read -s -p "App Store Password: " MAS_PASSWORD && echo $MAS_PASSWORD && echo) \
-  || echo "Mac App Store login failed"
-
 # Install all my packages
 brew bundle --global
 

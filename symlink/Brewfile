@@ -21,7 +21,6 @@ brew 'libtool'
 brew 'libyaml'
 brew 'lua'
 brew 'markdown'
-brew 'mas'
 brew 'neovim', args: ['--HEAD']
 brew 'node'
 brew 'openssl'
@@ -64,17 +63,3 @@ cask 'spotify'
 cask 'utorrent'
 cask 'vlc'
 cask 'xmind'
-
-mas '1Password', id: 443987910
-mas 'Caffeine', id: 411246225
-mas 'Color Picker' , id: 641027709
-mas 'Deckset', id: 847496013
-mas 'Fluid Browser', id: 1077036385
-mas 'Keyboard Pilot', id: 402670023
-mas 'Keynote', id: 409183694
-mas 'Numbers', id: 409203825
-mas 'Pages', id: 409201541
-mas 'Skitch', id: 425955336
-mas 'The Unarchiver', id: 425424353
-mas 'Twitter', id: 409789998
-mas 'Wunderlist', id: 410628904
