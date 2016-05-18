@@ -7,9 +7,6 @@ cd $HOME
 /usr/bin/ruby -e \
   "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-# Install all my packages
-brew bundle --global
-
 # Create linked files
 for f in $HOME/.dotfiles/symlink/*
 do
@@ -21,6 +18,9 @@ $HOME/.dotfiles/install/osx
 
 # Load some of my env
 source $HOME/.dotfiles/lib/env
+
+# Install all my packages
+brew bundle --global
 
 # Setup customized shells
 if [ -z "$(ag "$HOMEBREW_PREFIX" /etc/shells)" ]
