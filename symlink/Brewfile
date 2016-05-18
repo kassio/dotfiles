@@ -44,6 +44,7 @@ brew 'zsh', args: ['--without-etcdir']
 brew 'zsh-completions'
 brew 'zsh-syntax-highlighting'
 
+cask 'alfred'
 cask 'atom'
 cask 'bartender'
 cask 'dash'
