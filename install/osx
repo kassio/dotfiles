@@ -83,10 +83,7 @@ defaults write com.apple.screensaver askForPasswordDelay -int 0
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles -bool false
 # Enabling full-disk encryption on next reboot
-if [[ $(fdesetup status -quiet) != "FileVault is On." ]]
-then
-  sudo fdesetup enable -user "$USER" | tee ~/Desktop/"FileVault Recovery Key.txt"
-fi
+# sudo fdesetup enable -user "$USER" | tee ~/Desktop/"FileVault Recovery Key.txt"
 
 # Kill affected applications
 for app in Finder Dock SystemUIServer; do killall "$app" >/dev/null 2>&1; done
