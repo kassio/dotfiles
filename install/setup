@@ -2,10 +2,14 @@
 
 old_path="$PWD"
 cd $HOME
+RUBY_VERSION="2.3.1"
 
-# Intall Homebrew
+# Install Homebrew
 /usr/bin/ruby -e \
   "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+# Customize OSX
+$HOME/.dotfiles/install/osx
 
 # Create linked files
 for f in $HOME/.dotfiles/symlink/*
@@ -13,14 +17,22 @@ do
   ln -sf $f $HOME/.${f##*/}
 done
 
-# Customize OSX
-$HOME/.dotfiles/install/osx
-
 # Load some of my env
 source $HOME/.dotfiles/lib/env
 
 # Install all my packages
 brew bundle --global
+
+# Install ruby
+rbenv install $RUBY_VERSION
+rbenv global $RUBY_VERSION
+
+# Install linters
+update-linters
+
+# Init postgres
+brew services start --all
+init-pg
 
 # Setup customized shells
 if [ -z "$(ag "$HOMEBREW_PREFIX" /etc/shells)" ]
@@ -39,6 +51,6 @@ then
   echo "$HOMEBREW_PREFIX/sbin" | sudo tee -a /etc/paths
 fi
 
-echo 'Done'
+echo 'Restart the shell! :)'
 
 cd $old_path
