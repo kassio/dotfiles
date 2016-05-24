@@ -4,6 +4,9 @@ old_path="$PWD"
 cd $HOME
 RUBY_VERSION="2.3.1"
 
+# Prepare my dev folder
+mkdir -p $HOME/src
+
 # Install Homebrew
 /usr/bin/ruby -e \
   "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
