@@ -10,7 +10,7 @@ tap 'universal-ctags/universal-ctags'
 brew 'ack'
 brew 'bash'
 brew 'bash-completion'
-brew 'elixir', args: ['--HEAD']
+brew 'elixir', args: ['HEAD']
 brew 'gdbm'
 brew 'git'
 brew 'grep'
@@ -21,7 +21,7 @@ brew 'libtool'
 brew 'libyaml'
 brew 'lua'
 brew 'markdown'
-brew 'neovim', args: ['--HEAD']
+brew 'neovim', args: ['HEAD']
 brew 'node'
 brew 'openssl'
 brew 'postgresql'
@@ -35,12 +35,12 @@ brew 'ruby-build'
 brew 'sqlite'
 brew 'the_silver_searcher'
 brew 'tree'
-brew 'universal-ctags'
-brew 'vim', args: ['--override-system-vi', '--with-lua', '--HEAD']
+brew 'universal-ctags', args: ['HEAD']
+brew 'vim', args: ['override-system-vi', 'with-lua', 'HEAD']
 brew 'watch'
 brew 'wget'
 brew 'xz' # for nokogiri
-brew 'zsh', args: ['--without-etcdir']
+brew 'zsh', args: ['without-etcdir']
 brew 'zsh-completions'
 brew 'zsh-syntax-highlighting'
 
