@@ -21,6 +21,10 @@ fi
 # Install all my packages
 brew bundle --global
 
+# Neovim dependencies
+pip install neovim -q
+pip3 install neovim-remote -q
+
 # Init postgres
 brew services start --all
 init-pg
