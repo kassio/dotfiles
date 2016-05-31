@@ -11,8 +11,19 @@ mkdir -p $HOME/src
 /usr/bin/ruby -e \
   "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-# Customize OSX
-$HOME/.dotfiles/install/osx
+# Customize my paths
+if [ -z "$(ag "$HOMEBREW_PREFIX" /etc/paths)" ]
+then
+  echo "$HOMEBREW_PREFIX/bin" | sudo tee -a /etc/paths
+  echo "$HOMEBREW_PREFIX/sbin" | sudo tee -a /etc/paths
+fi
+
+# Install all my packages
+brew bundle --global
+
+# Init postgres
+brew services start --all
+init-pg
 
 # Create linked files
 for f in $HOME/.dotfiles/symlink/*
@@ -23,19 +34,12 @@ done
 # Load some of my env
 source $HOME/.dotfiles/lib/env
 
-# Install all my packages
-brew bundle --global
-
 # Install ruby
 rbenv install $RUBY_VERSION
 rbenv global $RUBY_VERSION
 
 # Install linters
 update-linters
-
-# Init postgres
-brew services start --all
-init-pg
 
 # Setup customized shells
 if [ -z "$(ag "$HOMEBREW_PREFIX" /etc/shells)" ]
@@ -47,12 +51,8 @@ fi
 # Change my shell to zsh
 chsh -s $(type -p zsh)
 
-# Customize my paths
-if [ -z "$(ag "$HOMEBREW_PREFIX" /etc/paths)" ]
-then
-  echo "$HOMEBREW_PREFIX/bin" | sudo tee -a /etc/paths
-  echo "$HOMEBREW_PREFIX/sbin" | sudo tee -a /etc/paths
-fi
+# Customize OSX
+$HOME/.dotfiles/install/osx
 
 echo 'Restart the shell! :)'
 
