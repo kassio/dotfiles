@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+alias upgrade="(brew update && brew upgrade); \
+  ( \
+    brew reinstall vim --override-system-vi --with-lua --HEAD & \
+    brew reinstall neovim --ignore-dependencies --HEAD \
+  )"
+
 alias v='vim'
 alias n='nvim'
 
