@@ -36,7 +36,7 @@ brew 'sqlite'
 brew 'the_silver_searcher'
 brew 'tree'
 brew 'universal-ctags', args: ['HEAD']
-brew 'vim', args: ['override-system-vi', 'with-lua', 'HEAD']
+brew 'vim', args: ['with-override-system-vi', 'with-lua', 'HEAD']
 brew 'watch'
 brew 'wget'
 brew 'xz' # for nokogiri

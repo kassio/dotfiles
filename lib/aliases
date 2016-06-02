@@ -2,7 +2,7 @@
 
 alias upgrade="(brew update && brew upgrade); \
   ( \
-    brew reinstall vim --override-system-vi --with-lua --HEAD & \
+    brew reinstall vim --with-override-system-vi --with-lua --HEAD & \
     brew reinstall neovim --ignore-dependencies --HEAD \
   )"
 
