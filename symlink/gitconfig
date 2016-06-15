@@ -33,14 +33,14 @@
   c = commit -v
   ca = commit -v --amend
   co = checkout
-  d = !git --no-pager diff
-  dp = diff
+  d = !git --no-pager diff --compaction-heuristic
+  dp = diff --compaction-heuristic
   f = fetch
   fix = commit --amend --no-edit
   l = !git --no-pager lp -20
   lme = !GIT_USERNAME=$(git config user.name) && git --no-pager lp --author="\"$GIT_USERNAME\""
   lpme = !GIT_USERNAME=$(git config user.name) && git lp --author="\"$GIT_USERNAME\""
-  lp = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cd)%Creset %s%Creset -%Cblue%d%Creset' --date=short
+  lp = log --compaction-heuristic --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cd)%Creset %s%Creset -%Cblue%d%Creset' --date=short
   m = merge
   ma = merge --abort
   p = pull
