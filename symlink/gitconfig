@@ -25,7 +25,7 @@
 [merge]
   ff = false
 [alias]
-  work = !git config --local --replace-all user.name 'Kassio Borges' && git config --local user.email "kassio.borges@plataformatec.com.br"
+  work = !git config --local --replace-all user.name 'Kassio Borges' && git config --local user.email "kborges@zendesk.com"
   home = !git config --local --replace-all user.name 'Kassio Borges' && git config --local user.email "kassioborgesm@gmail.com"
   b = branch
   bd = branch -d
