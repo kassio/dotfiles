@@ -11,12 +11,20 @@ mkdir -p $HOME/src
 /usr/bin/ruby -e \
   "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+hombrew_prefix=${HOMEBREW_PREFIX:-/usr/local}
+
 # Customize my paths
-if [ -z "$(ag "$HOMEBREW_PREFIX" /etc/paths)" ]
+if [ -z "$(ag "$homebrew_prefix" /etc/paths)" ]
 then
-  echo "$HOMEBREW_PREFIX/bin" | sudo tee -a /etc/paths
-  echo "$HOMEBREW_PREFIX/sbin" | sudo tee -a /etc/paths
+  echo "$homebrew_prefix/bin" | sudo tee -a /etc/paths
+  echo "$homebrew_prefix/sbin" | sudo tee -a /etc/paths
 fi
+
+# Create linked files
+for f in $HOME/.dotfiles/symlink/*
+do
+  ln -sf $f $HOME/.${f##*/}
+done
 
 # Install all my packages
 brew bundle --global
@@ -29,12 +37,6 @@ pip3 install neovim-remote -q
 brew services start --all
 init-pg
 
-# Create linked files
-for f in $HOME/.dotfiles/symlink/*
-do
-  ln -sf $f $HOME/.${f##*/}
-done
-
 # Load some of my env
 source $HOME/.dotfiles/lib/env
 
@@ -46,7 +48,7 @@ rbenv global $RUBY_VERSION
 update-linters
 
 # Setup customized shells
-if [ -z "$(ag "$HOMEBREW_PREFIX" /etc/shells)" ]
+if [ -z "$(ag "$homebrew_prefix" /etc/shells)" ]
 then
   echo $(type -p zsh) | sudo tee -a /etc/shells
   echo $(type -p bash) | sudo tee -a /etc/shells
