@@ -1,12 +1,8 @@
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 export HOMEBREW_NO_ANALYTICS=1
 
-# personal paths
-export CDPATH=".:$HOME:$HOME/.config:$HOME/src"
-for project in $(find ~/src/private -type d -depth 1 2>/dev/null); do
-  export CDPATH="$CDPATH:$project"
-done
-export CDPATH="$CDPATH:~/src/private"
+# personal cd paths
+export CDPATH=".:$HOME:$HOME/.config"
 
 # rbenv
 eval "$(rbenv init -)"
