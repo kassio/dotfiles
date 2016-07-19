@@ -21,7 +21,7 @@
   grep = auto
   ui = auto
 [credential]
-  helper = /opt/boxen/bin/boxen-git-credential
+  helper = osxkeychain
 [merge]
   ff = false
 [alias]
