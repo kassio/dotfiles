@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Fix PATH
 if [ -x /usr/libexec/path_helper ]
 then
@@ -104,4 +106,5 @@ setopt glob_dots
 # don't blow up with comments
 setopt interactive_comments
 
-# vim:ft=zsh:
+# Load zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

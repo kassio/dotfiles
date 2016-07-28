@@ -66,3 +66,6 @@ export HISTSIZE=1000000
 
 # Make ctrl-s works to incremental search, like ctrl-r to reverse
 stty -ixon
+
+# Load zsh
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
