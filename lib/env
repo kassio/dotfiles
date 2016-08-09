@@ -10,6 +10,8 @@ eval "$(rbenv init -)"
 # my bin, and project bin
 export PATH="./bin:$DOTFILES/bin:$PATH"
 
+# remote neovim socket
+export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 # Default editor
 export EDITOR="nvim"
 # improve ls colors
