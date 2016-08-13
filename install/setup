@@ -4,14 +4,20 @@ old_path="$PWD"
 cd $HOME
 RUBY_VERSION="2.3.1"
 
-# Prepare my dev folder
-mkdir -p $HOME/src
+# Create linked files
+for f in $HOME/.dotfiles/symlink/*
+do
+  ln -sf $f $HOME/.${f##*/}
+done
 
 # Install Homebrew
 /usr/bin/ruby -e \
   "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 hombrew_prefix=${HOMEBREW_PREFIX:-/usr/local}
+
+# Install the basic
+brew bundle --file="$HOME/.dotfiles/install/Brewfile"
 
 # Customize my paths
 if [ -z "$(ag "$homebrew_prefix" /etc/paths)" ]
@@ -20,19 +26,15 @@ then
   echo "$homebrew_prefix/sbin" | sudo tee -a /etc/paths
 fi
 
-# Create linked files
-for f in $HOME/.dotfiles/symlink/*
-do
-  ln -sf $f $HOME/.${f##*/}
-done
-
 # Copy ssh/config to the right place
 mkdir -p $HOME/.ssh
 cp $HOME/.dotfiles/lib/ssh_config $HOME/.ssh/config
 chmod -R 700 $HOME/.ssh
 
-# Install all my packages
-brew bundle --global
+# neovim configs
+git clone git://github.com/kassio/nvimfiles.git ~/.config/nvim
+ln -sf ~/.config/nvim ~/.vim
+nvim +PlugInstall +qall
 
 # Neovim dependencies
 pip install neovim -q
@@ -64,6 +66,9 @@ chsh -s $(type -p zsh)
 
 # Customize OSX
 $HOME/.dotfiles/install/osx
+
+# Installing all my stuff
+brew bundle --global
 
 echo 'Restart the shell! :)'
 

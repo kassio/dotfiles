@@ -1,0 +1,14 @@
+brew 'bash'
+brew 'bash-completion'
+brew 'git'
+brew 'rbenv'
+brew 'rename'
+brew 'ruby'
+brew 'ruby-build'
+brew 'the_silver_searcher'
+brew 'tree'
+brew 'vim', args: ['with-override-system-vi', 'with-lua', 'HEAD']
+brew 'wget'
+brew 'zsh', args: ['without-etcdir']
+brew 'zsh-completions'
+brew 'zsh-syntax-highlighting'
