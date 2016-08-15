@@ -11,5 +11,6 @@ function install_or_update_gem() {
 
 install_or_update_gem scss_lint
 install_or_update_gem rubocop
+install_or_update_gem pre-commit
 
 npm install -g eslint
