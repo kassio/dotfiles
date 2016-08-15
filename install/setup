@@ -32,7 +32,7 @@ cp $HOME/.dotfiles/lib/ssh_config $HOME/.ssh/config
 chmod -R 700 $HOME/.ssh
 
 # neovim configs
-git clone git://github.com/kassio/nvimfiles.git ~/.config/nvim
+git clone https://github.com/kassio/nvimfiles.git ~/.config/nvim
 ln -sf ~/.config/nvim ~/.vim
 nvim +PlugInstall +qall
 
