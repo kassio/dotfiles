@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 
-alias upgrade="brew update && brew upgrade --fetch-HEAD"
-
 alias v='vim'
 alias n='nvim'
 
-LS_COMMON="-G -h"
-alias ls="ls $LS_COMMON"
+alias ls="ls -G -h"
 alias ll='ls -l'
 alias la='ls -lA'
 
@@ -65,14 +62,3 @@ alias gt="g tag"
 alias gtl="gt --list --sort=version:refname"
 alias gtoday="g today"
 alias gtree="g tree"
-
-export GREP_OPTIONS="--color=auto -i"
-
-function psg {
-  ps aux | grep $@ | grep -v "grep"
-}
-
-# Kills all the process with the given name.
-function killer {
-  kill -9 $(psg $@ | awk '{print $2}')
-}
