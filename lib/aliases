@@ -37,6 +37,7 @@ alias gbD="g bD"
 alias gc="g c"
 alias gca="g ca"
 alias gclean="g clean"
+alias gclone="g clone"
 alias gco="g co"
 alias gd="g d"
 alias gdc="gd --cached"
@@ -53,6 +54,7 @@ alias gp="g pull"
 alias gps="g push"
 alias gr="g r"
 alias gra="g ra"
+alias gremote="g remote"
 alias grc="g rc"
 alias gri="g ri"
 alias grs="g rs"
@@ -64,10 +66,11 @@ alias gtl="gt --list --sort=version:refname"
 alias gtoday="g today"
 alias gtree="g tree"
 
-export GREP_OPTIONS="--color=auto"
-alias grep="grep -v grep | \\grep -i"
+export GREP_OPTIONS="--color=auto -i"
 
-alias psg="ps aux | grep "
+function psg {
+  ps aux | grep $@ | grep -v "grep"
+}
 
 # Kills all the process with the given name.
 function killer {
