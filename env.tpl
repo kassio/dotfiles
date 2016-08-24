@@ -1,3 +1,4 @@
+# vim:ft=sh:
 __custom_prompt_command() {
   __build_prompt # my function to build prompt :)
   export PS1="\[\e[0;31m\]β $PS1" # bashrc
@@ -18,4 +19,5 @@ private_projects="$projects_path/private"
 for project in $(find $private_projects -type d -depth 1 2>/dev/null); do
   export CDPATH="$CDPATH:$project"
 done
+export CDPATH="$CDPATH:$private_projects"
 export CDPATH="$CDPATH:$projects_path"
