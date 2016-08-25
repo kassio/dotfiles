@@ -10,6 +10,15 @@ do
   ln -sf $f $HOME/.${f##*/}
 done
 
+# Copy ssh/config to the right place
+mkdir -p $HOME/.ssh
+cp $HOME/.dotfiles/lib/ssh_config $HOME/.ssh/config
+chmod -R 700 $HOME/.ssh
+
+# Copy docker config to the right place
+mkdir -p $HOME/.docker
+ln -sf $HOME/.dotfiles/lib/docker_config.json $HOME/.docker/config.json
+
 # Install Homebrew
 /usr/bin/ruby -e \
   "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -25,11 +34,6 @@ then
   echo "$homebrew_prefix/bin" | sudo tee -a /etc/paths
   echo "$homebrew_prefix/sbin" | sudo tee -a /etc/paths
 fi
-
-# Copy ssh/config to the right place
-mkdir -p $HOME/.ssh
-cp $HOME/.dotfiles/lib/ssh_config $HOME/.ssh/config
-chmod -R 700 $HOME/.ssh
 
 # neovim configs
 git clone https://github.com/kassio/nvimfiles.git ~/.config/nvim
