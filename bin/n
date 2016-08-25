@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-if [ -z $@ ]
-then
-  nvim
-else
-  nvr --remote-tab-silent $@
-fi
