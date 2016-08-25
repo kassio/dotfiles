@@ -45,4 +45,18 @@ then
   source $HOME/.env
 fi
 
+# iterm2 badge manipulation
+"set-badge"() {
+  if [ -n "$1" ]
+  then
+    iterm2_set_user_var badge "$@"
+  else
+    iterm2_set_user_var badge "$(basename $PWD)"
+  fi
+}
+
+"unset-badge"() {
+  iterm2_set_user_var badge ""
+}
+
 # vim:ft=sh:
