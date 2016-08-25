@@ -5,6 +5,9 @@ source "$DOTFILES/lib/env"
 
 source "$(brew --prefix)/etc/bash_completion"
 
+# Load iterm2 integrations
+source $HOME/.iterm2_shell_integration.zsh
+
 __build_prompt() {
   local last_status=$?
   local blue='\[\e[0;34m\]'
@@ -21,7 +24,11 @@ __build_prompt() {
 
   __git_ps1 "$blue\w$reset" "\\n$prompt_color\$$reset "
 };
-export PROMPT_COMMAND=__build_prompt
+__precmd() {
+  __build_prompt
+  iterm_after_cmd_executes
+}
+export PROMPT_COMMAND=__precmd
 
 # Autocomplete
 load_bash_completion() {

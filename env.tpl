@@ -1,11 +1,11 @@
 # vim:ft=sh:
-__custom_prompt_command() {
-  __build_prompt # my function to build prompt :)
+__custom_precmd() {
+  __precmd # my precmd function
   export PS1="\[\e[0;31m\]β $PS1" # bashrc
   export PS1="$FG[196]β $PS1" # zsh
 }
-export PROMPT_COMMAND=__custom_prompt_command #bashrc
-precmd_functions=(__custom_prompt_command) #zsh
+export PROMPT_COMMAND=__custom_precmd #bashrc
+precmd_functions=(__custom_precmd) #zsh
 
 export $custom="$src/custom"
 

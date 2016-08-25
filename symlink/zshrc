@@ -14,6 +14,9 @@ source $DOTFILES/lib/spectrum.zsh
 
 source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
+# Load iterm2 integrations
+source $HOME/.iterm2_shell_integration.zsh
+
 autoload -Uz compinit
 compinit -C
 autoload bashcompinit
@@ -31,6 +34,10 @@ __build_prompt() {
   __git_ps1 "$FG[004]%~%f" "
 $FG[$prompt_color]$%f %{$FX[reset]%}"
 };
+__precmd() {
+  __build_prompt
+  iterm_after_cmd_executes
+}
 precmd_functions=(__build_prompt)
 
 ## Binds
