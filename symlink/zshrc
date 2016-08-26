@@ -35,10 +35,10 @@ __build_prompt() {
 $FG[$prompt_color]$%f %{$FX[reset]%}"
 };
 __precmd() {
+  iterm2_after_cmd_executes
   __build_prompt
-  iterm_after_cmd_executes
-}
-precmd_functions=(__build_prompt)
+};
+precmd_functions=(__precmd)
 
 ## Binds
 # Use emacs key bindings
