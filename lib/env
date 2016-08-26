@@ -46,7 +46,7 @@ then
 fi
 
 # iterm2 badge manipulation
-"set-badge"() {
+function set-badge() {
   if [ -n "$1" ]
   then
     iterm2_set_user_var badge "$@"
@@ -55,7 +55,7 @@ fi
   fi
 }
 
-"unset-badge"() {
+function unset-badge() {
   iterm2_set_user_var badge ""
 }
 

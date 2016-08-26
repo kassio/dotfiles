@@ -1,11 +1,23 @@
 # vim:ft=sh:
+# Adding a custom precmd
+# First create your __custom_precmd function:
 __custom_precmd() {
   __precmd # my precmd function
   export PS1="\[\e[0;31m\]β $PS1" # bashrc
   export PS1="$FG[196]β $PS1" # zsh
 }
-export PROMPT_COMMAND=__custom_precmd #bashrc
-precmd_functions=(__custom_precmd) #zsh
+
+# To load it in bash:
+if [ -z "$PROMPT_COMMAND" ]
+then
+  PROMPT_COMMAND="__custom_precmd";
+else
+  PROMPT_COMMAND="$(echo -n ${PROMPT_COMMAND/%; *$//}); __custom_precmd";
+fi
+
+# To load it in zsh:
+[[ -z $precmd_functions ]] && precmd_functions=()
+precmd_functions=($precmd_functions __custom_precmd)
 
 export $custom="$src/custom"
 

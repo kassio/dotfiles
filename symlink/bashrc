@@ -6,9 +6,9 @@ source "$DOTFILES/lib/env"
 source "$(brew --prefix)/etc/bash_completion"
 
 # Load iterm2 integrations
-source $HOME/.iterm2_shell_integration.zsh
+ITERM_SHELL_INTEGRATION_INSTALLED="" source $HOME/.iterm2_shell_integration.bash
 
-__build_prompt() {
+__precmd() {
   local last_status=$?
   local blue='\[\e[0;34m\]'
   local red='\[\e[0;31m\]'
@@ -24,24 +24,22 @@ __build_prompt() {
 
   __git_ps1 "$blue\w$reset" "\\n$prompt_color\$$reset "
 };
-__precmd() {
-  iterm2_after_cmd_executes
-  __build_prompt
-}
-export PROMPT_COMMAND=__precmd
+if [ -z "$PROMPT_COMMAND" ]
+then
+  PROMPT_COMMAND="__precmd";
+else
+  PROMPT_COMMAND="$(echo -n ${PROMPT_COMMAND/%; *$//}); __precmd";
+fi
 
 # Autocomplete
 load_bash_completion() {
   local prefix=${HOMEBREW_PREFIX:-/usr/local}
   local brew_bash_completion="$prefix/etc/bash_completion"
+  local brew_bash_completion_contributions="$prefix/Library/Contributions/brew_bash_completion.sh"
 
-  if [ -e $brew_bash_completion ]
-  then
-    source $brew_bash_completion
-    source "$prefix/Library/Contributions/brew_bash_completion.sh"
-  else
-    source "/etc/bash_completion"
-  fi
+  [ -e "/etc/bash_completion" ] && source /etc/bash_completion
+  [ -e $brew_bash_completion ] && source $brew_bash_completion
+  [ -e $brew_bash_completion_contributions ] && source $brew_bash_completion_contributions
 }; load_bash_completion
 
 # Make ** works beautiful, works to any nested directory.

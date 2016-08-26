@@ -15,7 +15,7 @@ source $DOTFILES/lib/spectrum.zsh
 source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # Load iterm2 integrations
-source $HOME/.iterm2_shell_integration.zsh
+ITERM_SHELL_INTEGRATION_INSTALLED="" source $HOME/.iterm2_shell_integration.zsh
 
 autoload -Uz compinit
 compinit -C
@@ -23,7 +23,7 @@ autoload bashcompinit
 bashcompinit
 source "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh"
 
-__build_prompt() {
+__precmd() {
   if [[ $? = 0 ]]
   then
     local prompt_color="002"
@@ -34,11 +34,9 @@ __build_prompt() {
   __git_ps1 "$FG[004]%~%f" "
 $FG[$prompt_color]$%f %{$FX[reset]%}"
 };
-__precmd() {
-  iterm2_after_cmd_executes
-  __build_prompt
-};
-precmd_functions=(__precmd)
+
+[[ -z $precmd_functions ]] && precmd_functions=()
+precmd_functions=($precmd_functions __precmd)
 
 ## Binds
 # Use emacs key bindings
