@@ -20,7 +20,7 @@ autoload bashcompinit
 bashcompinit
 source "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh"
 
-__precmd() {
+precmd() {
   if [[ $? = 0 ]]
   then
     local prompt_color="002"
@@ -31,9 +31,6 @@ __precmd() {
   __git_ps1 "$FG[004]%~%f" "
 $FG[$prompt_color]$%f %{$FX[reset]%}"
 };
-
-[[ -z $precmd_functions ]] && precmd_functions=()
-precmd_functions=($precmd_functions __precmd)
 
 # Load iterm2 integrations
 ITERM_SHELL_INTEGRATION_INSTALLED="" source $HOME/.iterm2_shell_integration.zsh

@@ -5,7 +5,7 @@ source "$DOTFILES/lib/env"
 
 source "$(brew --prefix)/etc/bash_completion"
 
-__precmd() {
+precmd() {
   local last_status=$?
   local blue='\[\e[0;34m\]'
   local red='\[\e[0;31m\]'
@@ -21,12 +21,7 @@ __precmd() {
 
   __git_ps1 "$blue\w$reset" "\\n$prompt_color\$$reset "
 };
-if [ -z "$PROMPT_COMMAND" ]
-then
-  PROMPT_COMMAND="__precmd";
-else
-  PROMPT_COMMAND="$(echo -n ${PROMPT_COMMAND/%; *$//}); __precmd";
-fi
+PROMPT_COMMAND="precmd";
 
 # Load iterm2 integrations
 ITERM_SHELL_INTEGRATION_INSTALLED="" source $HOME/.iterm2_shell_integration.bash
