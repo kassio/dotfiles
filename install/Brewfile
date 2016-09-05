@@ -10,5 +10,3 @@ brew 'tree'
 brew 'vim', args: ['with-override-system-vi', 'with-lua', 'HEAD']
 brew 'wget'
 brew 'zsh', args: ['without-etcdir']
-brew 'zsh-completions'
-brew 'zsh-syntax-highlighting'
