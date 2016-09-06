@@ -1,8 +1,10 @@
 [user]
   name = Kassio Borges
+[credential]
+  helper = osxkeychain
 [core]
   excludesfile = ~/.gitignore
-  editor = `which nvim`
+  editor = `which $EDITOR`
   whitespace = trailing-space,space-before-tab,cr-at-eol
 [push]
   default = current
@@ -20,10 +22,13 @@
   status = auto
   grep = auto
   ui = auto
-[credential]
-  helper = osxkeychain
+[color "diff"]
+  old = red dim
+  new = green italic bold
 [merge]
   ff = false
+[diff]
+  compactionHeuristic = true
 [alias]
   work = !git config --local --replace-all user.name 'Kassio Borges' && git config --local user.email "kborges@zendesk.com"
   home = !git config --local --replace-all user.name 'Kassio Borges' && git config --local user.email "kassioborgesm@gmail.com"
