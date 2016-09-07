@@ -6,18 +6,8 @@ __custom_precmd() {
   export PS1="\[\e[0;31m\]β $PS1" # bashrc
   export PS1="$FG[196]β $PS1" # zsh
 }
-
-# To load it in bash:
-if [ -z "$PROMPT_COMMAND" ]
-then
-  PROMPT_COMMAND="__custom_precmd";
-else
-  PROMPT_COMMAND="$(echo -n ${PROMPT_COMMAND/%; *$//}); __custom_precmd";
-fi
-
-# To load it in zsh:
-[[ -z $precmd_functions ]] && precmd_functions=()
-precmd_functions=($precmd_functions __custom_precmd)
+PROMPT_COMMAND="prompt_cmd; __custom_precmd"; # bash
+precmd_functions=(prompt_cmd __custom_precmd) # zsh
 
 export $custom="$src/custom"
 

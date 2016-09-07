@@ -8,7 +8,6 @@ then
 fi
 
 export DOTFILES=$HOME/.dotfiles
-source "$DOTFILES/lib/env"
 
 source $DOTFILES/lib/spectrum.zsh
 
@@ -20,17 +19,24 @@ autoload bashcompinit
 bashcompinit
 source "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh"
 
-precmd() {
-  if [[ $? = 0 ]]
+prompt_cmd() {
+  local last_status=$?
+  local blue="$FG[004]"
+  local red="$FG[001]"
+  local green="$FG[002]"
+  local reset="$FX[reset]"
+
+  if [[ $last_status = 0 ]]
   then
-    local prompt_color="002"
+    local prompt_color=$green
   else
-    local prompt_color="001"
+    local prompt_color=$red
   fi
 
-  __git_ps1 "$FG[004]%~%f" "
-$FG[$prompt_color]$%f %{$FX[reset]%}"
-};
+  __git_ps1 "$blue%~%f" "
+$prompt_color$%f %{$reset%}"
+}
+precmd() { prompt_cmd; }
 
 # Load iterm2 integrations
 ITERM_SHELL_INTEGRATION_INSTALLED="" source $HOME/.iterm2_shell_integration.zsh
@@ -110,3 +116,6 @@ setopt interactive_comments
 
 # Load zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# My env customization (this line must be the very last on this file)
+source "$DOTFILES/lib/env"
