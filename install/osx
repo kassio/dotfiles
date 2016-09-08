@@ -6,11 +6,9 @@ sudo nvram SystemAudioVolume=" "
 ## dock
 # faster animations on expose
 defaults write com.apple.dock expose-animation-duration -float 0.1
-defaults write -g NSWindowResizeTime -float 0.003
+defaults write -g NSWindowResizeTime -float 0.002
 # Autohide dock
 defaults write com.apple.dock autohide -bool TRUE
-# Dock on left
-defaults write com.apple.dock orientation left
 
 ## dashboard
 # Disable dashboard

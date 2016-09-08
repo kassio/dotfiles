@@ -4,11 +4,22 @@ old_path="$PWD"
 cd $HOME
 RUBY_VERSION="2.3.1"
 
+# Install Homebrew
+/usr/bin/ruby -e \
+  "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+hombrew_prefix=${HOMEBREW_PREFIX:-/usr/local}
+
+# Install the basic
+brew bundle --file="$HOME/.dotfiles/install/Brewfile"
+
 # Create linked files
 for f in $HOME/.dotfiles/symlink/*
 do
   ln -sf $f $HOME/.${f##*/}
 done
+
+# Load some of my env
+source $HOME/.dotfiles/lib/env
 
 # Copy ssh/config to the right place
 mkdir -p $HOME/.ssh
@@ -18,45 +29,6 @@ chmod -R 700 $HOME/.ssh
 # Copy docker config to the right place
 mkdir -p $HOME/.docker
 ln -sf $HOME/.dotfiles/lib/docker_config.json $HOME/.docker/config.json
-
-# Install Homebrew
-/usr/bin/ruby -e \
-  "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-hombrew_prefix=${HOMEBREW_PREFIX:-/usr/local}
-
-# Install the basic
-brew bundle --file="$HOME/.dotfiles/install/Brewfile"
-
-# Customize my paths
-if [ -z "$(ag "$homebrew_prefix" /etc/paths)" ]
-then
-  echo "$homebrew_prefix/bin" | sudo tee -a /etc/paths
-  echo "$homebrew_prefix/sbin" | sudo tee -a /etc/paths
-fi
-
-# neovim configs
-git clone https://github.com/kassio/nvimfiles.git ~/.config/nvim
-ln -sf ~/.config/nvim ~/.vim
-nvim +PlugInstall +qall
-
-# Neovim dependencies
-pip install neovim -q
-pip3 install neovim-remote -q
-
-# Init postgres
-brew services start --all
-init-pg
-
-# Load some of my env
-source $HOME/.dotfiles/lib/env
-
-# Install ruby
-rbenv install $RUBY_VERSION
-rbenv global $RUBY_VERSION
-
-# Install linters
-update-linters
 
 # Setup customized shells
 if [ -z "$(ag "$homebrew_prefix" /etc/shells)" ]
@@ -68,15 +40,44 @@ fi
 # Change my shell to zsh
 chsh -s $(type -p zsh)
 
+# Customize my paths
+if [ -z "$(ag "$homebrew_prefix" /etc/paths)" ]
+then
+  echo "$homebrew_prefix/bin" | sudo tee -a /etc/paths
+  echo "$homebrew_prefix/sbin" | sudo tee -a /etc/paths
+fi
+
+# Install ruby
+rbenv install $RUBY_VERSION
+rbenv global $RUBY_VERSION
+
+# Install linters
+update-linters
+
+# install iterm2 integration
+curl -L https://iterm2.com/misc/bash_startup.in -o ~/.iterm2_shell_integration.bash
+curl -L https://iterm2.com/misc/zsh_startup.in -o ~/.iterm2_shell_integration.zsh
+
 # Customize OSX
 $HOME/.dotfiles/install/osx
 
 # Installing all my stuff
 brew bundle --global
 
-# install iterm2 integration
-curl -L https://iterm2.com/misc/bash_startup.in -o ~/.iterm2_shell_integration.bash
-curl -L https://iterm2.com/misc/zsh_startup.in -o ~/.iterm2_shell_integration.zsh
+# Init postgres
+brew services start --all
+init-pg
+
+# Neovim dependencies
+pip install neovim -q
+pip3 install neovim-remote -q
+gem install neovim
+gem install rcodetools
+
+# Config vim/neovim
+git clone https://github.com/kassio/nvimfiles.git ~/.config/nvim
+ln -sf ~/.config/nvim ~/.vim
+vim +PlugInstall +qall
 
 echo 'Restart the shell! :)'
 
