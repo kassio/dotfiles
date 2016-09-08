@@ -1,5 +1,6 @@
 [user]
   name = Kassio Borges
+  useConfigOnly = true
 [credential]
   helper = osxkeychain
 [core]
