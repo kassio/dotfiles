@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-global_hook="git-global-hook"
+global_hook="git-hook-global"
 hooks_path=".git/hooks"
 
 rm $hooks_path/*sample
