@@ -64,6 +64,9 @@ $HOME/.dotfiles/install/osx
 # Installing all my stuff
 brew bundle --global
 
+# Hide skitch from dock
+defaults write /Applications/Skitch.app/Contents/Info LSUIElement 1
+
 # Init postgres
 brew services start --all
 init-pg
