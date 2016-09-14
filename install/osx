@@ -6,6 +6,9 @@ sudo nvram SystemAudioVolume=" "
 # Disable Resume system-wide
 defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
 
+# Disable user interface sounds
+defaults write com.apple.systemsound "com.apple.sound.uiaudio.enabled" -int 0
+
 ## dock
 # faster animations on expose
 defaults write com.apple.dock expose-animation-duration -float 0.1
