@@ -56,10 +56,6 @@ defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
 # Set Home as the default location for new Finder windows
 defaults write com.apple.finder NewWindowTarget -string "PfLo"
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}"
-# Enable snap-to-grid for icons on the desktop and in other icon views
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plis
 # Prevent Photos from opening automatically when devices are plugged in
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
