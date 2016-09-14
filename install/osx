@@ -3,20 +3,29 @@
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
 
+# Disable Resume system-wide
+defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
+
 ## dock
 # faster animations on expose
 defaults write com.apple.dock expose-animation-duration -float 0.1
-defaults write -g NSWindowResizeTime -float 0.002
+defaults write -g NSWindowResizeTime -float 0.001
 # Autohide dock
-defaults write com.apple.dock autohide -bool TRUE
-
-## dashboard
+defaults write com.apple.dock autohide -bool true
+# Set dock default size
+defaults write com.apple.dock tilesize -int 56
+# Minimize windows into their application’s icon
+defaults write com.apple.dock minimize-to-application -bool true
+# Wipe all (default) app icons from the Dock
+defaults write com.apple.dock persistent-apps -array
 # Disable dashboard
 defaults write com.apple.dashboard mcx-disabled -boolean true
+# Don’t automatically rearrange Spaces based on most recent use
+defaults write com.apple.dock mru-spaces -bool false
 
 ## finder
 # Use Finders list view as the default view mode
-defaults write com.apple.finder FXPreferredViewStyle Nlsv
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 # Disable the warning when changing a file extension
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 # Show all filename extensions in Finder
@@ -28,6 +37,9 @@ defaults write com.apple.finder ShowStatusBar -bool true
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+# Expand print panel by default
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 # Increase window resize speed for Cocoa applications
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 # Disable window animations and Get Info animations
@@ -36,6 +48,17 @@ defaults write com.apple.finder DisableAllAnimations -bool true
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
 # When performing a search, search the current folder by default
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+# Set sidebar icon size to medium
+defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
+# Set Home as the default location for new Finder windows
+defaults write com.apple.finder NewWindowTarget -string "PfLo"
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}"
+# Enable snap-to-grid for icons on the desktop and in other icon views
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plis
+# Prevent Photos from opening automatically when devices are plugged in
+defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 ## keyboard
 # Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
@@ -60,6 +83,14 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightC
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
+# Set language and text formats
+# Note: if you’re in the US, replace `EUR` with `USD`, `Centimeters` with
+# `Inches`, `en_GB` with `en_US`, and `true` with `false`.
+defaults write NSGlobalDomain AppleLanguages -array "en"
+defaults write NSGlobalDomain AppleLocale -string "en_GB@currency=EUR"
+defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
+defaults write NSGlobalDomain AppleMetricUnits -bool true
+
 ## Safari & WebKit                                                             #
 # Show the full URL in the address bar (note: this still hides the scheme)
 # Privacy: don’t send search queries to Apple
@@ -72,6 +103,11 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 defaults write com.apple.Safari IncludeDevelopMenu -bool true
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+# Show the full URL in the address bar (note: this still hides the scheme)
+defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
+# Disable AutoFill
+defaults write com.apple.Safari AutoFillPasswords -bool false
+defaults write com.apple.Safari AutoFillCreditCardData -bool false
 
 ## security
 # Require password immediately after sleep or screen saver begins
