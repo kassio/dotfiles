@@ -125,5 +125,5 @@ for app in Finder Dock SystemUIServer; do killall "$app" >/dev/null 2>&1; done
 # sudo chflags -h nohidden /tmp
 
 # Xcode
-sudo xcodebuild -license
-xcode-select --install
+# sudo xcodebuild -license
+# xcode-select --install
