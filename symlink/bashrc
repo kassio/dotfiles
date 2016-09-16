@@ -23,9 +23,6 @@ $prompt_color\$$reset "
 }
 PROMPT_COMMAND="prompt_cmd"
 
-# Load iterm2 integrations
-ITERM_SHELL_INTEGRATION_INSTALLED="" source $HOME/.iterm2_shell_integration.bash
-
 # Autocomplete
 load_bash_completion() {
   local prefix=${HOMEBREW_PREFIX:-/usr/local}

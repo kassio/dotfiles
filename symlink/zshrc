@@ -38,9 +38,6 @@ $prompt_color$%f %{$reset%}"
 }
 precmd() { prompt_cmd; }
 
-# Load iterm2 integrations
-ITERM_SHELL_INTEGRATION_INSTALLED="" source $HOME/.iterm2_shell_integration.zsh
-
 ## Binds
 # Use emacs key bindings
 bindkey -e

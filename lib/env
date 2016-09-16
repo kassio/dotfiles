@@ -47,6 +47,13 @@ fi
 
 # iterm2 badge manipulation
 function set-badge() {
+  if [[ $(echo $0) =~ "bash" ]]
+  then
+    ITERM_SHELL_INTEGRATION_INSTALLED="" source $HOME/.iterm2_shell_integration.bash
+  else
+    ITERM_SHELL_INTEGRATION_INSTALLED="" source $HOME/.iterm2_shell_integration.zsh
+  fi
+
   if [ -n "$1" ]
   then
     iterm2_set_user_var badge "$@"
