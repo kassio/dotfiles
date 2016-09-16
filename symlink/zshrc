@@ -17,7 +17,7 @@ autoload -Uz compinit
 compinit -C
 autoload bashcompinit
 bashcompinit
-source "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh"
+source $DOTFILES/lib/my-git-prompt.sh
 
 prompt_cmd() {
   local last_status=$?
@@ -36,7 +36,7 @@ prompt_cmd() {
   __git_ps1 "$blue%~%f" "
 $prompt_color$%f %{$reset%}"
 }
-precmd() { prompt_cmd; }
+precmd_functions=(prompt_cmd) # zsh
 
 ## Binds
 # Use emacs key bindings

@@ -7,7 +7,6 @@
   excludesfile = ~/.gitignore
   editor = `which $EDITOR`
   whitespace = trailing-space,space-before-tab,cr-at-eol
-  preloadindex = true
 [push]
   default = current
 [pull]
@@ -66,5 +65,3 @@
   rank = shortlog -sn
 [rerere]
   enabled = true
-[gc]
-  auto = 256

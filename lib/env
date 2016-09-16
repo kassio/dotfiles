@@ -45,15 +45,18 @@ then
   source $HOME/.env
 fi
 
-# iterm2 badge manipulation
-function set-badge() {
+function __load_iterm2_integration() {
   if [[ $(echo $0) =~ "bash" ]]
   then
     ITERM_SHELL_INTEGRATION_INSTALLED="" source $HOME/.iterm2_shell_integration.bash
   else
     ITERM_SHELL_INTEGRATION_INSTALLED="" source $HOME/.iterm2_shell_integration.zsh
   fi
+}
 
+# iterm2 badge manipulation
+function set-badge() {
+  [ -z "$ITERM_SHELL_INTEGRATION_INSTALLED" ] && __load_iterm2_integration
   if [ -n "$1" ]
   then
     iterm2_set_user_var badge "$@"
@@ -63,6 +66,7 @@ function set-badge() {
 }
 
 function unset-badge() {
+  [ -z "$ITERM_SHELL_INTEGRATION_INSTALLED" ] && __load_iterm2_integration
   iterm2_set_user_var badge ""
 }
 
