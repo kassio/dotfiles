@@ -3,7 +3,6 @@
 export DOTFILES=$HOME/.dotfiles
 
 source "$(brew --prefix)/etc/bash_completion"
-source "$DOTFILES/lib/my-git-prompt.sh"
 
 function prompt_cmd {
   local last_status=$?

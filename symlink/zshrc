@@ -17,7 +17,7 @@ autoload -Uz compinit
 compinit -C
 autoload bashcompinit
 bashcompinit
-source $DOTFILES/lib/my-git-prompt.sh
+source "$(brew --prefix)/etc/bash_completion.d/git-prompt.sh"
 
 prompt_cmd() {
   local last_status=$?
