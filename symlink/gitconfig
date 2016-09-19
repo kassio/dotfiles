@@ -31,8 +31,8 @@
 [diff]
   compactionHeuristic = true
 [alias]
-  work = !git config --local --replace-all user.name 'Kassio Borges' && git config --local user.email "kborges@zendesk.com"
-  home = !git config --local --replace-all user.name 'Kassio Borges' && git config --local user.email "kassioborgesm@gmail.com"
+  work = !git config --local --replace-all user.name "Kassio Borges" && git config --local user.email "kborges@zendesk.com"
+  home = !git config --local --replace-all user.name "Kassio Borges" && git config --local user.email "kassioborgesm@gmail.com"
   b = branch
   bd = branch -d
   bD = branch -D
