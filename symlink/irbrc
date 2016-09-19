@@ -2,7 +2,7 @@ require 'rubygems'
 require 'irb/completion'
 require 'irb/ext/save-history'
 
-ARGV.concat ["--readline", "--prompt-mode", "simple"]
+ARGV.concat ['--readline', '--prompt-mode', 'simple']
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_READLINE] = true
 IRB.conf[:PROMPT_MODE] = :SIMPLE
