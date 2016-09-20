@@ -48,26 +48,38 @@ fi
 function __load_iterm2_integration() {
   if [[ $(echo $0) =~ "bash" ]]
   then
-    ITERM_SHELL_INTEGRATION_INSTALLED="" source $HOME/.iterm2_shell_integration.bash
+    if [ -f $HOME/.iterm2_shell_integration.bash ]
+    then
+      ITERM_SHELL_INTEGRATION_INSTALLED="" source $HOME/.iterm2_shell_integration.bash
+    elif [ -f $HOME/.iterm2_shell_integration.zsh ]
+    then
+      ITERM_SHELL_INTEGRATION_INSTALLED="" source $HOME/.iterm2_shell_integration.zsh
+    else
+      return -1
+    fi
   else
-    ITERM_SHELL_INTEGRATION_INSTALLED="" source $HOME/.iterm2_shell_integration.zsh
+    return -1
   fi
 }
 
 # iterm2 badge manipulation
 function set-badge() {
-  __load_iterm2_integration
-  if [ -n "$1" ]
+  if [[ $(__load_iterm2_integration) ]]
   then
-    iterm2_set_user_var badge "$@"
-  else
-    iterm2_set_user_var badge "$(basename $PWD)"
+    if [ -n "$1" ]
+    then
+      iterm2_set_user_var badge "$@"
+    else
+      iterm2_set_user_var badge "$(basename $PWD)"
+    fi
   fi
 }
 
 function unset-badge() {
-  __load_iterm2_integration
-  iterm2_set_user_var badge ""
+  if [[ $(__load_iterm2_integration) ]]
+  then
+    iterm2_set_user_var badge ""
+  fi
 }
 
 # vim:ft=sh:
