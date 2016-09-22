@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Neovim dependencies
+pip install neovim -q
+pip3 install neovim-remote -q
+gem install neovim
+gem install rcodetools
+
+# Config vim/neovim
+git clone https://github.com/kassio/nvimfiles.git ~/.config/nvim
+ln -sf ~/.config/nvim ~/.vim
+vim +PlugInstall +qall

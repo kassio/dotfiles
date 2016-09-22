@@ -1,51 +1,17 @@
 #!/usr/bin/env bash
 
-old_path="$PWD"
 cd $HOME
 RUBY_VERSION="2.3.1"
 
-# Install Homebrew
-/usr/bin/ruby -e \
-  "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-hombrew_prefix=${HOMEBREW_PREFIX:-/usr/local}
-
-# Install the basic
-brew bundle --file="$HOME/.dotfiles/install/Brewfile"
-
-# Create linked files
-for f in $HOME/.dotfiles/symlink/*
-do
-  ln -sf $f $HOME/.${f##*/}
-done
+$0/basic-packages
+$0/link-rcfiles
+$0/init-ssh-config
 
 # Load some of my env
 source $HOME/.dotfiles/lib/env
 
-# Copy ssh/config to the right place
-mkdir -p $HOME/.ssh
-cp $HOME/.dotfiles/lib/ssh_config $HOME/.ssh/config
-chmod -R 700 $HOME/.ssh
-
-# Copy docker config to the right place
-mkdir -p $HOME/.docker
-ln -sf $HOME/.dotfiles/lib/docker_config.json $HOME/.docker/config.json
-
-# Setup customized shells
-if [ -z "$(ag "$homebrew_prefix" /etc/shells)" ]
-then
-  echo $(type -p zsh) | sudo tee -a /etc/shells
-  echo $(type -p bash) | sudo tee -a /etc/shells
-fi
-
 # Change my shell to zsh
-chsh -s $(type -p zsh)
-
-# Customize my paths
-if [ -z "$(ag "$homebrew_prefix" /etc/paths)" ]
-then
-  echo "$homebrew_prefix/bin" | sudo tee -a /etc/paths
-  echo "$homebrew_prefix/sbin" | sudo tee -a /etc/paths
-fi
+chsh -s $(type -ap zsh | grep $(brew --prefix))
 
 # Install ruby
 rbenv install $RUBY_VERSION
@@ -62,29 +28,13 @@ curl -L https://iterm2.com/misc/zsh_startup.in -o ~/.iterm2_shell_integration.zs
 brew bundle --global
 
 # Customize OSX
-$HOME/.dotfiles/install/osx
+$0/osx
 
 # Twitter app show the app window when clicking the menu bar icon
 defaults write com.twitter.twitter-mac MenuItemBehavior -int 1
-
-# Hide skitch from dock
-defaults write /Applications/Skitch.app/Contents/Info LSUIElement 1
 
 # Init postgres
 brew services start --all
 init-pg
 
-# Neovim dependencies
-pip install neovim -q
-pip3 install neovim-remote -q
-gem install neovim
-gem install rcodetools
-
-# Config vim/neovim
-git clone https://github.com/kassio/nvimfiles.git ~/.config/nvim
-ln -sf ~/.config/nvim ~/.vim
-vim +PlugInstall +qall
-
-echo 'Restart the shell! :)'
-
-cd $old_path
+exit 0

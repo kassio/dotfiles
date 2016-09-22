@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# Copy ssh/config to the right place
+mkdir -p $HOME/.ssh
+cp $HOME/.dotfiles/lib/ssh_config $HOME/.ssh/config
+chmod -R 700 $HOME/.ssh

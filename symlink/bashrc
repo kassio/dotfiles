@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+# Fix PATH
+if [ -x /usr/libexec/path_helper ]
+then
+  PATH=""
+  eval `/usr/libexec/path_helper -s`
+fi
+
 export DOTFILES=$HOME/.dotfiles
 
 source "$(brew --prefix)/etc/bash_completion"
