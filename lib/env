@@ -45,11 +45,13 @@ then
   source $HOME/.env
 fi
 
+export __ITERM_SHELL_INTEGRATION_LOADED=
 function __load_iterm2_integration() {
   iterm_integration_script="$HOME/.iterm2_shell_integration.${ZSH_NAME:-bash}"
   if [ -f $iterm_integration_script ]
   then
-    ITERM_SHELL_INTEGRATION_INSTALLED="" source $iterm_integration_script
+    ITERM_SHELL_INTEGRATION_INSTALLED="" source $iterm_integration_script \
+      export __ITERM_SHELL_INTEGRATION_LOADED=true
   else
     return -1
   fi
@@ -58,21 +60,20 @@ function __load_iterm2_integration() {
 export __USER_BADGE=""
 # iterm2 badge manipulation
 function set-badge() {
-  if [[ $(__load_iterm2_integration) ]]
-  then
-    if [ -n "$1" ]
-    then
-      export __USER_BADGE="$@"
-    else
-      export __USER_BADGE="$(basename $PWD)"
-    fi
+  [ -z $ITERM_SHELL_INTEGRATION_INSTALLED ] && __load_iterm2_integration
 
-    iterm2_set_user_var badge "$__USER_BADGE"
+  if [ -n "$1" ]
+  then
+    export __USER_BADGE="$@"
+  else
+    export __USER_BADGE="$(basename $PWD)"
   fi
+
+  iterm2_set_user_var badge "$__USER_BADGE"
 }
 
 function unset-badge() {
-  if [[ -n "$__USER_BADGE" ]] && [[ $(__load_iterm2_integration) ]]
+  if [ -n "$__USER_BADGE" ]
   then
     iterm2_set_user_var badge ""
   fi
