@@ -51,7 +51,7 @@ function __load_iterm2_integration() {
   if [ -f $iterm_integration_script ]
   then
     ITERM_SHELL_INTEGRATION_INSTALLED="" source $iterm_integration_script \
-      export __ITERM_SHELL_INTEGRATION_LOADED=true
+      && export __ITERM_SHELL_INTEGRATION_LOADED=true
   else
     return -1
   fi
