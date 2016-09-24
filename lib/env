@@ -60,7 +60,7 @@ function __load_iterm2_integration() {
 export __USER_BADGE=""
 # iterm2 badge manipulation
 function set-badge() {
-  [ -z $ITERM_SHELL_INTEGRATION_INSTALLED ] && __load_iterm2_integration
+  [ -z $__ITERM_SHELL_INTEGRATION_LOADED ] && __load_iterm2_integration
 
   if [ -n "$1" ]
   then
