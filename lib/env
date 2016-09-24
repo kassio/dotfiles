@@ -69,13 +69,13 @@ function set-badge() {
     export __USER_BADGE="$(basename $PWD)"
   fi
 
-  iterm2_set_user_var badge "$__USER_BADGE"
+  iterm2_set_user_var badge "$__USER_BADGE" 2>/dev/null
 }
 
 function unset-badge() {
   if [ -n "$__USER_BADGE" ]
   then
-    iterm2_set_user_var badge ""
+    iterm2_set_user_var badge "" 2>/dev/null
   fi
 }
 
