@@ -63,3 +63,6 @@ alias gt="g tag"
 alias gtl="gt --list --sort=version:refname"
 alias gtoday="g today"
 alias gtree="g tree"
+
+alias ctop="htop -s PERCENT_CPU"
+alias mtop="htop -s PERCENT_MEM"
