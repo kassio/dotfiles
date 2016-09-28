@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# Reset in case getopts has been used previously in the shell.
+OPTIND=1
+quiet=0
+while getopts "q" opt; do
+  case "$opt" in
+    q)
+      quiet=1
+      ;;
+  esac
+done
+
+if [ $quiet -eq 1 ]
+then
+  exec &>/dev/null
+fi
+
+git checkout master && git fetch && git pull && git checkout -
