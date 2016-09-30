@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 if [[ -x "bin/spring" ]]
 then
   echo 'stopping spring'

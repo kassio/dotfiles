@@ -1,23 +1,28 @@
 #!/usr/bin/env bash
 
-if [ $# -eq 0 -o "$1" = "-h" -o "$1" = "--help" ]
-then
-  help="
-    usage: loop-this [-h|--help] <number> <command>\n\n
-      number          number of times that the command will be executed\n
-      command         the command that will be executed\n\n
-      -h, --help      show this help message\n\n
+function show_help {
+  echo -e "usage: loop-this [-h|--help] <number> <command>
+  number          number of times that the command will be executed
+  command         the command that will be executed
+  -h, --help      show this help message
 
-    By default the loop will stop when the <command> fails,\n
-    if you want to change this behaviour you can use\n
-    the \$DONT_STOP env variable\n\n
-    Example:\n\n
-      # will execute the ls command 5 times.\n
-      loop-this 5 ls\n\n
-      # will execute the rspec 10 times, even if the command return something\n
-      # different from 0.\n
-      DONT_STOP=1 loop-this 10 rspec\n\n"
-  echo -e $help
+
+  By default the loop will stop when the <command> fails,
+  if you want to change this behaviour you can use
+    the \$DONT_STOP env variable
+
+    Example:
+
+    # will execute the ls command 5 times.
+    loop-this 5 ls
+    # will execute the rspec 10 times, even if the command return something
+    # different from 0.
+    DONT_STOP=1 loop-this 10 rspec"
+}
+
+if [ $# -eq 0 ] || [ "$1" == "-h" ] || [ "$1" == "--help" ]
+then
+  show_help
   exit 0
 fi
 
@@ -30,7 +35,7 @@ error_count=0
 cmd=$(echo $cmd | sed "s/'/'\\''/g")
 
 report() {
-  echo -e "\n\nkilled: << Build $build_count (failed: $error_count) >>\n\n"
+  echo -e "\nkilled: << Build $build_count (failed: $error_count) >>\n"
   exit $error_count
 }; trap report SIGINT SIGTERM
 
