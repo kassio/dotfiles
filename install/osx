@@ -118,6 +118,10 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 # Enabling full-disk encryption on next reboot
 # sudo fdesetup enable -user "$USER" | tee ~/Desktop/"FileVault Recovery Key.txt"
 
+# Custom keyboard shortcuts
+defaults write com.apple.finder NSUserKeyEquivalents '{ "Merge All Windows" = "@~^m"; }'
+defaults write com.apple.Preview NSUserKeyEquivalents '{ "Adjust Size..." = "@~^i"; }'
+
 # Kill affected applications
 for app in Finder Dock SystemUIServer; do killall "$app" >/dev/null 2>&1; done
 
