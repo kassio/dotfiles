@@ -2,9 +2,9 @@
 
 if [[ -x "bin/spring" ]]
 then
-  echo 'stopping spring'
+  echo "stopping spring"
   (bin/spring stop &>/dev/null) &
 fi
 
-echo 'retagging'
+echo "retagging"
 (ctags &>/dev/null || rm -f tags && ctags &>/dev/null) &
