@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+curl \
+  https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/imgcat \
+  > $HOME/.dotfiles/lib/imgcat
