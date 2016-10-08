@@ -2,7 +2,6 @@
 # Adding a custom precmd
 # First create your __custom_precmd function:
 __custom_precmd() {
-  __precmd # my precmd function
   export PS1="\[\e[0;31m\]β $PS1" # bashrc
   export PS1="$FG[196]β $PS1" # zsh
 }
