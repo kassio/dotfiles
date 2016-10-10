@@ -1,7 +1,4 @@
-#!/usr/bin/env ruby
-# frozen_string_literal: true
+#!/usr/bin/env bash
 
-require 'bundler'
-
-system('rm -rf tags tags.gems &>/dev/null')
-system('ctags 2>/dev/null & ctags-gems 2>/dev/null')
+rm -rf tags tags.gems &>/dev/null
+(ctags & ctags-gems) 2>/dev/null
