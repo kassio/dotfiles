@@ -79,6 +79,4 @@ function unset-badge() {
   fi
 }
 
-n(){ `which nvim` || `which vim` }
-
 # vim:ft=sh:
