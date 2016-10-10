@@ -1,6 +1,7 @@
 brew 'bash'
 brew 'bash-completion'
 brew 'git'
+brew 'readline'
 brew 'rbenv'
 brew 'ruby'
 brew 'ruby-build'
