@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 alias v='vim'
-alias n='nvim'
+n() { nvim $@ || vim $@ || vi $@ }
 
 alias ls="ls -G -h"
 alias ll='ls -l'
