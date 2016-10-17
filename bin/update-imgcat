@@ -2,4 +2,4 @@
 
 curl \
   https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/imgcat \
-  > $HOME/.dotfiles/lib/imgcat
+  > $HOME/.dotfiles/bin/imgcat
