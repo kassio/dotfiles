@@ -13,8 +13,6 @@
 --languages=-javascript
 --languages=-css
 
---regex-ruby=/^[ \t]*class[ \t]+((::)?([A-Z][a-zA-Z0-9_]*))*(::)?([A-Z][a-zA-Z0-9_]*)/\5/c,class,constant (class ...)/
-
 --langdef=Elixir
 --langmap=Elixir:.ex.exs
 --regex-Elixir=/^[ \t]*def(p?)[ \t]+([a-z_][a-zA-Z0-9_?!]*)/\2/f,functions,functions (def ...)/
