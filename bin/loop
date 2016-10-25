@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+
+function show_help {
+  echo -e "usage: loop [OPTIONS] <command>
+  command         the command that will be executed
+  OPTIONS:
+    -h, --help      show this help message
+    -f, --failfast  fails as soon as the <command> fails, does not fail fast by default
+    -c, --clear     clear the console before the <command> runs, does not clear by default
+    -t, --times     how many times <command> will run, -1 means forever, by default -1.
+    -w, --wait      how long will wait to run <command> again, does not wait by default
+"
+}
+
+function report {
+  echo -e "
+KILLED
+running '${cmd}' for the ${build_count} time.
+failed ${error_count} times
+"
+  exit ${error_count}
+}; trap report SIGINT SIGTERM
+
+# options
+failfast=${LOOP_FAILFAST:-false}
+clear=${LOOP_CLEAR:-false}
+times=${LOOP_TIMES:--1}
+wait=${LOOP_WAIT:-0}
+
+while true
+do
+  case $1 in
+    -h|--help)
+      show_help
+      exit 0
+      ;;
+    -f|--failfast)
+      shift
+      failfast=true
+      ;;
+    -c|--clear)
+      shift
+      clear=true
+      ;;
+    -t|--times)
+      shift
+      times=$1
+      shift
+      ;;
+    -w|--wait)
+      shift
+      wait=$1
+      shift
+      ;;
+    *)
+      cmd="$@"
+      break
+      ;;
+  esac
+done
+
+cmd=$(echo "${cmd}" | sed "s/'/'\\''/g")
+
+if [ -z "${cmd}" ]
+then
+  show_help
+  exit 1
+fi
+
+build_count=0
+error_count=0
+while [ ${build_count} -lt ${times} ] || [ ${times} -eq -1 ]
+do
+  $((++build_count)) 2>/dev/null
+  [ ${clear} = true ] && clear
+  eval "${cmd}" 2>/dev/null
+
+  if [[ $? != 0 ]]
+  then
+    $((++error_count)) 2>/dev/null
+    if [[ "${failfast}" = true ]]
+    then
+      break
+    fi
+  fi
+  [ ${wait} -gt 0 ] && sleep ${wait}
+done
+
+[ ${error_count} -gt 0 ] && echo "failed: $error_count"
+exit $error_count
