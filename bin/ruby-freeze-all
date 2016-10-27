@@ -7,6 +7,6 @@ sed_src='1i \
 \
 '
 
-for file in $files; do
-  sed -i "" -e "$sed_src" "$file"
+for file in ${files}; do
+  sed -i "" -e "${sed_src}" "${file}"
 done

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd $HOME
+cd ${HOME}
 RUBY_VERSION="2.3.1"
 
 $0/basic-packages
@@ -8,21 +8,21 @@ $0/link-rcfiles
 $0/init-ssh-config
 
 # Load some of my env
-source $HOME/.dotfiles/lib/env
+source ${HOME}/.dotfiles/lib/env
 
 # Change my shell to zsh
 chsh -s $(type -ap zsh | grep $(brew --prefix))
 
 # Install ruby
-rbenv install $RUBY_VERSION
-rbenv global $RUBY_VERSION
+rbenv install ${RUBY_VERSION}
+rbenv global ${RUBY_VERSION}
 
 # Install linters
 update-linters
 
 # install iterm2 integration
-curl -L https://iterm2.com/misc/bash_startup.in -o ~/.iterm2_shell_integration.bash
-curl -L https://iterm2.com/misc/zsh_startup.in -o ~/.iterm2_shell_integration.zsh
+curl -L https://iterm2.com/misc/bash_startup.in -o ${HOME}/.iterm2_shell_integration.bash
+curl -L https://iterm2.com/misc/zsh_startup.in -o ${HOME}/.iterm2_shell_integration.zsh
 
 # Installing all my stuff
 brew bundle --global

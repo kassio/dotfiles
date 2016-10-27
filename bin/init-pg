@@ -5,4 +5,4 @@ rm -rf /usr/local/var/postgres
 initdb --auth=trust -U postgres /usr/local/var/postgres
 brew services start postgresql
 sleep 1;
-createuser $USER -D -s -l -U postgres
+createuser ${USER} -D -s -l -U postgres

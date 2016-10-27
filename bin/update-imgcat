@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 curl \
-  https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/imgcat \
-  > $HOME/.dotfiles/bin/imgcat
+  -L https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/imgcat \
+  -o ${HOME}/.dotfiles/bin/imgcat
