@@ -36,9 +36,6 @@ export GIT_PS1_SHOWCOLORHINTS=true
 export GIT_PS1_DESCRIBE_STYLE=branch
 export GIT_PS1_SHOWUPSTREAM=verbose
 
-BASE16_SHELL="$HOME/.config/base16-shell/base16-ocean.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-
 # local env
 if [ -e "$HOME/.env" ]
 then
@@ -78,5 +75,8 @@ function unset-badge() {
     iterm2_set_user_var badge "" 2>/dev/null
   fi
 }
+
+export RG_OPTIONS="--pretty --no-ignore --hidden --follow --glob \"!.git/*\""
+export FZF_DEFAULT_COMMAND="rg $RG_OPTIONS --files"
 
 # vim:ft=sh:
