@@ -121,6 +121,7 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 # Custom keyboard shortcuts
 defaults write com.apple.finder NSUserKeyEquivalents '{ "Merge All Windows" = "@~^m"; }'
 defaults write com.apple.Preview NSUserKeyEquivalents '{ "Adjust Size..." = "@~^i"; }'
+defaults write org.videolan.vlc NSUserKeyEquivalents '{ "Float on Top" = "@~o"; }'
 
 # Kill affected applications
 for app in Finder Dock SystemUIServer; do killall "$app" >/dev/null 2>&1; done
