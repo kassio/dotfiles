@@ -9,3 +9,4 @@ brew 'the_silver_searcher'
 brew 'zsh', args: ['without-etcdir']
 brew 'zsh-completions'
 brew 'zsh-syntax-highlighting'
+brew 'zsh-autosuggestions'
