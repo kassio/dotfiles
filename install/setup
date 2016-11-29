@@ -4,6 +4,13 @@ cd ${HOME}
 RUBY_VERSION="2.3.1"
 install_dir=$(basename $0)
 
+# Check for software updates
+softwareupdate -ia
+
+# Install XCode
+xcode-select --install
+sudo xcodebuild -license accept
+
 $install_dir/basic-packages
 $install_dir/link-rcfiles
 $install_dir/init-ssh-config
