@@ -31,6 +31,10 @@ brew bundle --global
 # Customize OSX
 $install_dir/osx
 
+# Use key backspace instead of ^H
+infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
+tic $TERM.ti
+
 # Twitter app show the app window when clicking the menu bar icon
 defaults write com.twitter.twitter-mac MenuItemBehavior -int 1
 
