@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+ping -c 5 google.com
+
+while [ $? -ne 0 ]
+do
+  clear
+  ping -c 5 google.com
+  sleep 0.5
+done
