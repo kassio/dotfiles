@@ -119,10 +119,10 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 # sudo fdesetup enable -user "$USER" | tee ~/Desktop/"FileVault Recovery Key.txt"
 
 # Custom keyboard shortcuts
-defaults write com.apple.finder NSUserKeyEquivalents '{ "Merge All Windows" = "@~^m"; }'
-defaults write com.apple.Preview NSUserKeyEquivalents '{ "Adjust Size..." = "@~^i"; }'
-defaults write org.videolan.vlc NSUserKeyEquivalents '{ "Float on Top" = "@~o"; }'
-defaults write Whatsapp NSUserKeyEquivalents '{ "Archive Chat" = "@$e"; }'
+defaults write com.apple.finder NSUserKeyEquivalents '{ "Merge All Windows" = "@~^m"; }' # cmd-opt-ctrl-m
+defaults write com.apple.Preview NSUserKeyEquivalents '{ "Adjust Size..." = "@~^i"; }' # cmd-opt-ctrl-i
+defaults write org.videolan.vlc NSUserKeyEquivalents '{ "Float on Top" = "@~o"; }' # cmd-opt-o
+defaults write Whatsapp NSUserKeyEquivalents '{ "Archive Chat" = "@$e"; }' # cmd-shift-e
 
 # Kill affected applications
 for app in Finder Dock SystemUIServer; do killall "$app" >/dev/null 2>&1; done
