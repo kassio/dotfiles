@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
-cd ${HOME}
-RUBY_VERSION="2.3.3"
-install_dir=$(basename $0)
+# Get script dir
+pushd $(dirname $0) >/dev/null
+install_dir="${PWD}"
+popd >/dev/null
+
+pushd ${HOME} >/dev/null
 
 # Check for software updates
 softwareupdate -ia
@@ -22,8 +25,7 @@ source ${HOME}/.dotfiles/lib/env
 chsh -s $(type -ap zsh | grep $(brew --prefix))
 
 # Install ruby
-rbenv install ${RUBY_VERSION}
-rbenv global ${RUBY_VERSION}
+$install_dir/ruby
 
 # Install linters
 update-linters
@@ -48,5 +50,6 @@ defaults write com.twitter.twitter-mac MenuItemBehavior -int 1
 # Init postgres
 brew services start --all
 init-pg
+popd >/dev/null
 
 exit 0
