@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
 # Get script dir
-pushd $(dirname $0) >/dev/null
-install_dir="${PWD}"
-popd >/dev/null
+install_dir="${HOME}/.dotfiles/install"
 
 pushd ${HOME} >/dev/null
 
@@ -15,7 +13,7 @@ xcode-select --install
 sudo xcodebuild -license accept
 
 $install_dir/basic-packages
-$install_dir/link-rcfiles
+$install_dir/rcfiles
 $install_dir/init-ssh-config
 
 # Load some of my env

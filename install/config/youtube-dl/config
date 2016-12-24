@@ -1,0 +1,2 @@
+--no-mtime
+-o ~/Documents/view/%(playlist_title)s/%(title)s.%(ext)s

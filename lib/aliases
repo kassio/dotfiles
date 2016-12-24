@@ -66,3 +66,5 @@ alias gtree="g tree"
 
 alias ctop="htop -s PERCENT_CPU"
 alias mtop="htop -s PERCENT_MEM"
+
+alias ydl="youtube-dl"
