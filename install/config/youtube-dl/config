@@ -1,2 +1,2 @@
 --no-mtime
--o ~/Documents/view/%(playlist_title)s/%(playlist_index)s-%(title)s.%(ext)s
+-o ~/Documents/view/%(playlist_title)s/%(playlist_index)s %(title)s.%(ext)s
