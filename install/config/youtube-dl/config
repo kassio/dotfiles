@@ -1,2 +1,3 @@
 --no-mtime
+--default-search "ytsearch"
 -o ~/Documents/view/%(playlist_title)s/%(playlist_index)s %(title)s.%(ext)s
