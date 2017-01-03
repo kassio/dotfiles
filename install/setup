@@ -3,7 +3,7 @@
 # Get script dir
 install_dir="${HOME}/.dotfiles/install"
 
-pushd ${HOME} >/dev/null
+pushd ${HOME} > /dev/null && trap 'popd > /dev/null' EXIT HUP INT QUIT TERM
 
 # Check for software updates
 softwareupdate -ia
@@ -12,9 +12,9 @@ softwareupdate -ia
 xcode-select --install
 sudo xcodebuild -license accept
 
-$install_dir/basic-packages
-$install_dir/rcfiles
-$install_dir/init-ssh-config
+${install_dir}/basic-packages
+${install_dir}/rcfiles
+${install_dir}/init-ssh-config
 
 # Load some of my env
 source ${HOME}/.dotfiles/lib/env
@@ -23,7 +23,7 @@ source ${HOME}/.dotfiles/lib/env
 chsh -s $(type -ap zsh | grep $(brew --prefix))
 
 # Install ruby
-$install_dir/ruby
+${install_dir}/ruby
 
 # Install linters
 update-linters
@@ -36,11 +36,11 @@ curl -L https://iterm2.com/misc/zsh_startup.in -o ${HOME}/.iterm2_shell_integrat
 brew bundle --global
 
 # Customize OSX
-$install_dir/osx
+${install_dir}/osx
 
 # Use key backspace instead of ^H
-infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
-tic $TERM.ti
+infocmp ${TERM} | sed 's/kbs=^[hH]/kbs=\\177/' > ${TERM}.ti
+tic ${TERM}.ti
 
 # Twitter app show the app window when clicking the menu bar icon
 defaults write com.twitter.twitter-mac MenuItemBehavior -int 1
@@ -48,6 +48,5 @@ defaults write com.twitter.twitter-mac MenuItemBehavior -int 1
 # Init postgres
 brew services start --all
 init-pg
-popd >/dev/null
 
 exit 0
