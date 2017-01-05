@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+URL="$1"
+shift
+BASE_PATH="$HOME/Movies"
+
+case $URL in
+  *list*)
+    youtube-dl -o "$BASE_PATH/%(playlist_title)s/%(playlist_index)s %(title)s.%(id)s.%(ext)s" $URL $@
+    ;;
+  *)
+    youtube-dl -o "$BASE_PATH/%(title)s.%(id)s.%(ext)s" $URL $@
+    ;;
+esac
