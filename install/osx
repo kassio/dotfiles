@@ -130,7 +130,3 @@ for app in Finder Dock SystemUIServer; do killall "$app" >/dev/null 2>&1; done
 
 # Doesn't work on El captain:
 # sudo chflags -h nohidden /tmp
-
-# Xcode
-# sudo xcodebuild -license
-# xcode-select --install
