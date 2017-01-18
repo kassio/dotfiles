@@ -74,6 +74,7 @@ brew 'homebrew/dupes/grep'
 brew 'neovim/neovim/neovim', args: ['HEAD']
 brew 'universal-ctags/universal-ctags/universal-ctags', args: ['HEAD']
 
+cask '1password-beta'
 cask 'alfred'
 cask 'atom'
 cask 'bartender'
