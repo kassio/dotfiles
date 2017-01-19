@@ -1,24 +1,13 @@
 #!/usr/bin/env bash
 
-function all_rubies_do() {
-  for rb in `rbenv versions --bare`
-  do
-    export RBENV_VERSION=${rb}
-    echo "with ruby: $(rbenv version-name)"
-    eval "$@"
-  done
-
-  unset RBENV_VERSION
-}
-
 function install_or_update_gem() {
   if [ "$(gem search -i $1)" == "false" ]
   then
     echo "Installing $1"
-    all_rubies_do gem install $1 --quiet
+    for_all_rubies gem install $1 --quiet
   else
     echo "Updating $1"
-    all_rubies_do gem update $1 --quiet
+    for_all_rubies gem update $1 --quiet
   fi
 }
 

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+for rb in `rbenv versions --bare`
+do
+  export RBENV_VERSION=${rb}
+  echo "with ruby: $(rbenv version-name)"
+  eval "$@"
+done
+
+unset RBENV_VERSION
