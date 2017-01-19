@@ -122,6 +122,7 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 # Custom keyboard shortcuts
 defaults write com.apple.finder NSUserKeyEquivalents '{ "Merge All Windows" = "@~^m"; }' # cmd-opt-ctrl-m
 defaults write com.apple.Preview NSUserKeyEquivalents '{ "Adjust Size..." = "@~^i"; }' # cmd-opt-ctrl-i
+defaults write com.apple.Preview NSUserKeyEquivalents '{ "Export..." = "@~e"; }' # cmd-opt-e
 defaults write org.videolan.vlc NSUserKeyEquivalents '{ "Float on Top" = "@~o"; }' # cmd-opt-o
 defaults write Whatsapp NSUserKeyEquivalents '{ "Archive Chat" = "@$e"; }' # cmd-shift-e
 
