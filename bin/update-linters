@@ -11,7 +11,7 @@ function install_or_update_gem() {
   fi
 }
 
-all_rubies_do gem update --system
+for_all_rubies gem update --system
 install_or_update_gem scss_lint
 install_or_update_gem rubocop
 install_or_update_gem pre-commit
