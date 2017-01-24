@@ -120,11 +120,32 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 # sudo fdesetup enable -user "$USER" | tee ~/Desktop/"FileVault Recovery Key.txt"
 
 # Custom keyboard shortcuts
-defaults write com.apple.finder NSUserKeyEquivalents '{ "Merge All Windows" = "@~^m"; }' # cmd-opt-ctrl-m
-defaults write com.apple.Preview NSUserKeyEquivalents '{ "Adjust Size..." = "@~^i"; }' # cmd-opt-ctrl-i
-defaults write com.apple.Preview NSUserKeyEquivalents '{ "Export..." = "@~e"; }' # cmd-opt-e
-defaults write org.videolan.vlc NSUserKeyEquivalents '{ "Float on Top" = "@~o"; }' # cmd-opt-o
-defaults write Whatsapp NSUserKeyEquivalents '{ "Archive Chat" = "@$e"; }' # cmd-shift-e
+
+# Finder
+# * "Merge All Windows" - cmd-opt-ctrl-m
+defaults write com.apple.finder NSUserKeyEquivalents '{
+  "Merge All Windows" = "@~^m";
+}'
+
+# Preview
+# * "Adjust Size..." - cmd-opt-ctrl-i
+# * "Export" - cmd-opt-e
+defaults write com.apple.Preview NSUserKeyEquivalents '{
+  "Adjust Size..." = "@~^i";
+  "Export..." = "@~e";
+}'
+
+# VLC
+# * "Float on Top" - cmd-opt-o
+defaults write org.videolan.vlc NSUserKeyEquivalents '{
+  "Float on Top" = "@~o";
+}'
+
+# WhatsApp
+# * "Archive Chat" - cmd-shift-e
+defaults write Whatsapp NSUserKeyEquivalents '{
+  "Archive Chat" = "@$e";
+}'
 
 # Kill affected applications
 for app in Finder Dock SystemUIServer; do killall "$app" >/dev/null 2>&1; done
