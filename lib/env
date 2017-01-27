@@ -76,7 +76,8 @@ function unset-badge() {
   fi
 }
 
-export RG_OPTIONS="--pretty --no-ignore --hidden --follow --glob \"!.git/*\""
+export RG_GLOB="--glob \"!.git/*\" --glob \"!node_modules/*\" --glob \"!tmp/*\""
+export RG_OPTIONS="--pretty --no-ignore --hidden --follow $RG_GLOB"
 export FZF_DEFAULT_COMMAND="rg $RG_OPTIONS --files"
 
 # vim:ft=sh:
