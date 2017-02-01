@@ -30,7 +30,7 @@ brew 'erlang'
 brew 'gettext'
 brew 'pcre'
 brew 'git'
-brew 'elixir', args: ['HEAD']
+brew 'elixir'
 brew 'gdbm'
 brew 'libyaml'
 brew 'ruby'
