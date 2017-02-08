@@ -18,8 +18,7 @@ eval $(/usr/libexec/path_helper -s)
 brew bundle --file="${HOME}/.dotfiles/install/Brewfile"
 
 # Setup default gems
-echo "bundler" > ${HOME}/.rbenv/default-gems
-echo "neovim" >> ${HOME}/.rbenv/default-gems
+ln -sf ${HOME}/.dotfiles/install/default-gems ${HOME}/.rbenv/default-gems
 
 # Make custom shells available
 [[ $(grep "${homebrew_prefix}/bin/bash" /etc/shells) ]] || \
