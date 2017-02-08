@@ -7,4 +7,4 @@ then
 fi
 
 echo "retagging"
-(ctags &>/dev/null || rm -f tags && ctags &>/dev/null) &
+(ripper-tags -R &>/dev/null || rm -f tags && ripper-tags -R &>/dev/null) &
