@@ -12,8 +12,6 @@ export PATH="./bin:$DOTFILES/bin:$PATH"
 
 # always use colors and case insensitive on `grep`
 export GREP_OPTIONS="--color=auto -i"
-# remote neovim socket
-export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 # Default editor
 export EDITOR="nvim"
 # improve ls colors
