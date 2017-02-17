@@ -6,7 +6,7 @@ brew 'rbenv'
 brew 'rbenv-default-gems'
 brew 'ruby'
 brew 'ruby-build'
-brew 'the_silver_searcher'
+brew 'ripgrep'
 brew 'zsh', args: ['without-etcdir']
 brew 'zsh-completions'
 brew 'zsh-syntax-highlighting'

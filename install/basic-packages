@@ -15,10 +15,10 @@ echo "${homebrew_prefix}/sbin" | sudo tee -a /etc/paths.d/homebrew
 eval $(/usr/libexec/path_helper -s)
 
 # Install the basic
-brew bundle --file="${HOME}/.dotfiles/install/Brewfile"
+brew bundle --file="${INSTALLER}/Brewfile"
 
 # Setup default gems
-ln -sf ${HOME}/.dotfiles/install/default-gems ${HOME}/.rbenv/default-gems
+ln -sf ${INSTALLER}/default-gems ${HOME}/.rbenv/default-gems
 
 # Make custom shells available
 [[ $(grep "${homebrew_prefix}/bin/bash" /etc/shells) ]] || \

@@ -9,8 +9,8 @@ done
 
 docker_dir="${HOME}/.docker"
 mkdir -p ${docker_dir}
-ln -sf ${HOME}/.dotfiles/install/docker/config.json ${docker_dir}/config.json
+ln -sf ${INSTALLER}/docker/config.json ${docker_dir}/config.json
 
 ydl_dir="${HOME}/.config/youtube-dl"
 mkdir -p ${ydl_dir}
-ln -sf ${HOME}/.dotfiles/install/config/youtube-dl/config ${ydl_dir}/config
+ln -sf ${INSTALLER}/config/youtube-dl/config ${ydl_dir}/config
