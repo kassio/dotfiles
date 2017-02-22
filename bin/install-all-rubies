@@ -11,5 +11,5 @@ rubies=$(cat $1/*/.ruby-version | sort -u)
 
 for version in $rubies
 do
-  rbenv install $version
+  rbenv install --skip-existing $version
 done
