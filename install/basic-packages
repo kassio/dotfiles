@@ -6,6 +6,3 @@
 
 # Install the basic
 brew bundle --file="${INSTALLER}/Brewfile"
-
-# Setup default gems
-ln -sf ${INSTALLER}/default-gems ${HOME}/.rbenv/default-gems

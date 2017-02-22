@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Setup default gems
+ln -sf ${INSTALLER}/default-gems ${HOME}/.rbenv/default-gems
+
 RUBY_VERSION="$(rbenv install -l | grep "^\s*\d\.\d\.\d$" | tail -1 | tr -d ' ')"
 
 rbenv install ${RUBY_VERSION}
