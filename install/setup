@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-
-export DOTFILES="${HOME}/.dotfiles"
-export INSTALLER="${DOTFILES}/install"
+source "$(dirname $0)/global"
 
 pushd ${HOME} > /dev/null && trap 'popd > /dev/null' EXIT HUP INT QUIT TERM
 
