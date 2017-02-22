@@ -1,6 +1,6 @@
 [user]
   name = Kassio Borges
-  useConfigOnly = true
+  email = kassioborgesm@gmail.com
 [credential]
   helper = osxkeychain
 [core]
