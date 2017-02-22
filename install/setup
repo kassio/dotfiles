@@ -14,14 +14,12 @@ xcode-select --install
 sudo xcodebuild -license accept
 
 ${INSTALLER}/basic-packages
+${INSTALLER}/setup-shell
 ${INSTALLER}/rcfiles
 ${INSTALLER}/init-ssh-config
 
 # Load some of my env
 source ${DOTFILES}/lib/env
-
-# Change my shell to zsh
-chsh -s $(type -ap zsh | grep $(brew --prefix))
 
 # Install ruby
 ${INSTALLER}/ruby

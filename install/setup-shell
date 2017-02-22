@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+export homebrew_prefix=${HOMEBREW_PREFIX:-/usr/local}
+
+# Customize my paths
+cat /etc/paths | sudo tee /etc/paths.d/system
+echo "" | sudo tee /etc/paths
+echo "${homebrew_prefix}/bin" | sudo tee /etc/paths.d/homebrew
+echo "${homebrew_prefix}/sbin" | sudo tee -a /etc/paths.d/homebrew
+
+# reset $PATH
+eval $(/usr/libexec/path_helper -s)
+
+# Make custom shells available
+[[ $(grep "${homebrew_prefix}/bin/bash" /etc/shells) ]] || \
+  echo "${homebrew_prefix}/bin/bash" | sudo tee -a /etc/shells
+[[ $(grep "${homebrew_prefix}/bin/zsh" /etc/shells) ]] || \
+  echo "${homebrew_prefix}/bin/zsh" | sudo tee -a /etc/shells
+
+# Change my shell to zsh
+chsh -s $(type -ap zsh | grep $(brew --prefix))
