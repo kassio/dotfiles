@@ -27,6 +27,7 @@ source $DOTFILES/lib/heroku
 source $DOTFILES/lib/aliases
 source $DOTFILES/lib/less
 
+export GIT_CONFIG="${HOME}/.gitconfig"
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWSTASHSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true

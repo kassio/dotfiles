@@ -1,0 +1,64 @@
+[credential]
+  helper = osxkeychain
+[core]
+  excludesfile = ~/.gitignore
+  editor = `which $EDITOR`
+  whitespace = trailing-space,space-before-tab,cr-at-eol
+[push]
+  default = current
+[pull]
+  rebase = true
+[grep]
+  extendRegexp = true
+  lineNumber = true
+[help]
+  autocorrect = 1
+[color]
+  branch = true
+  diff = auto
+  interactive = auto
+  status = auto
+  grep = auto
+  ui = auto
+[color "diff"]
+  old = red dim
+  new = green bold
+[merge]
+  ff = false
+[diff]
+  compactionHeuristic = true
+[alias]
+  work = !git config --local --replace-all user.name "Kassio\\ Borges" && git config --local user.email "kborges@zendesk.com"
+  home = !git config --local --replace-all user.name "Kassio\\ Borges" && git config --local user.email "kassioborgesm@gmail.com"
+  b = branch
+  bd = branch -d
+  bD = branch -D
+  br = branch -r
+  c = commit -v
+  ca = commit -v --amend
+  co = checkout
+  d = !git --no-pager diff --compaction-heuristic
+  dp = diff --compaction-heuristic
+  f = fetch
+  fix = commit --amend --no-edit
+  l = !git --no-pager lp -20
+  lme = !GIT_USERNAME="$(git config user.name)" && git --no-pager lp --author="\"$GIT_USERNAME\""
+  lpme = !GIT_USERNAME="$(git config user.name)" && git lp --author="\"$GIT_USERNAME\""
+  lp = log --compaction-heuristic --pretty=format:'%C(red dim)%h%Creset %C(yellow dim)%an%C(green) %cd%C(reset)%C(white) %s%Creset -%C(blue dim)%d%Creset' --date=format:'%Y%m%d %R'
+  m = merge
+  ma = merge --abort
+  p = pull
+  ps = push
+  r = rebase
+  ra = rebase --abort
+  rc = rebase --continue
+  ri = rebase -i
+  rs = rebase --skip
+  s = status -sb
+  t = tag
+  today = !git --no-pager l --stat --since=1.day --date=relative
+  tree = !git lp --graph
+  last-tag = describe --tags
+  rank = shortlog -sn
+[rerere]
+  enabled = true
