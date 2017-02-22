@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-if [ "$1" != "" ]
+if [ "$1" == "" ]
 then
   echo "Usage: "
   echo "install-all-rubies path"
   exit -1
 fi
 
-rubies=$(cat $1/.ruby-version | sort -u)
+rubies=$(cat $1/*/.ruby-version | sort -u)
 
 for version in $rubies
 do
