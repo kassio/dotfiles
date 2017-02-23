@@ -14,35 +14,25 @@ sudo xcodebuild -license accept
 ${INSTALLER}/basic-packages
 ${INSTALLER}/setup-shell
 ${INSTALLER}/rcfiles
-
-# Load some of my env
 source ${DOTFILES}/lib/env
-
-# Install ruby
 ${INSTALLER}/ruby
 
-# Install linters
-update-linters
+# Installing all my stuff
+update-linters & brew bundle --global
+
+# Init postgres
+brew services start --all
+init-pg
 
 # install iterm2 integration
 curl -L https://iterm2.com/misc/bash_startup.in -o ${HOME}/.iterm2_shell_integration.bash
 curl -L https://iterm2.com/misc/zsh_startup.in -o ${HOME}/.iterm2_shell_integration.zsh
 
-# Installing all my stuff
-brew bundle --global
+# Use key backspace instead of ^H
+infocmp ${TERM} | sed 's/kbs=^[hH]/kbs=\\177/' > /tmp/${TERM}.ti
+tic /tmp/${TERM}.ti
 
 # Customize OSX
 ${INSTALLER}/osx
-
-# Use key backspace instead of ^H
-infocmp ${TERM} | sed 's/kbs=^[hH]/kbs=\\177/' > ${TERM}.ti
-tic ${TERM}.ti
-
-# Twitter app show the app window when clicking the menu bar icon
-defaults write com.twitter.twitter-mac MenuItemBehavior -int 1
-
-# Init postgres
-brew services start --all
-init-pg
 
 exit 0

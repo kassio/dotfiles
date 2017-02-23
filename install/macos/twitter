@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# Twitter app show the app window when clicking the menu bar icon
+defaults write com.twitter.twitter-mac MenuItemBehavior -int 1

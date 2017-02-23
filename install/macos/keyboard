@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+# Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
+defaults write -g AppleKeyboardUIMode -int 3
+# Turn on key repeat (Disable hold modifier)
+defaults write -g ApplePressAndHoldEnabled -int 0
+# Enable auto replacement
+defaults write -g WebAutomaticTextReplacementEnabled -int 1
+# Disable auto-correct
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -int 0
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write NSGlobalDomain KeyRepeat -int 2
+
+# Custom shortcuts
+
+# Finder
+# * "Merge All Windows" - cmd-opt-ctrl-m
+defaults write com.apple.finder NSUserKeyEquivalents '{
+  "Merge All Windows" = "@~^m";
+}'
+
+# Preview
+# * "Adjust Size..." - cmd-opt-ctrl-i
+# * "Export" - cmd-opt-e
+defaults write com.apple.Preview NSUserKeyEquivalents '{
+  "Adjust Size..." = "@~^i";
+  "Export..." = "@~e";
+}'
+
+# VLC
+# * "Float on Top" - cmd-opt-o
+defaults write org.videolan.vlc NSUserKeyEquivalents '{
+  "Float on Top" = "@~o";
+}'
+
+# WhatsApp
+# * "Archive Chat" - cmd-shift-e
+defaults write Whatsapp NSUserKeyEquivalents '{
+  "Archive Chat" = "@$e";
+}'

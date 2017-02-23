@@ -1,154 +1,24 @@
 #!/usr/bin/env bash
 
+source "$(dirname $0)/global"
+
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
 
 # Disable Resume system-wide
-defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
+defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -int 0
 
-# Disable user interface sounds
-defaults write com.apple.systemsound "com.apple.sound.uiaudio.enabled" -int 0
+for s in ${INSTALLER}/macos/*
+do
+  exec $s
+done
 
-## dock
-# faster animations on expose
-defaults write com.apple.dock expose-animation-duration -float 0.1
-defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
-# Autohide dock
-defaults write com.apple.dock autohide -bool true
-defaults write com.apple.dock autohide-delay -float 1
-# Set dock default size
-defaults write com.apple.dock tilesize -int 56
-# Minimize windows into their application’s icon
-defaults write com.apple.dock minimize-to-application -bool true
-# Wipe all (default) app icons from the Dock
-defaults write com.apple.dock persistent-apps -array
-# Disable dashboard
-defaults write com.apple.dashboard mcx-disabled -boolean true
-# Don’t automatically rearrange Spaces based on most recent use
-defaults write com.apple.dock mru-spaces -bool false
-
-## finder
-# Use Finders list view as the default view mode
-defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
-# Disable the warning when changing a file extension
-defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-# Show all filename extensions in Finder
-defaults write -g AppleShowAllExtensions -bool true
-# Show path bar
-defaults write com.apple.finder ShowPathbar -bool true
-# Show status bar
-defaults write com.apple.finder ShowStatusBar -bool true
-# Expand save panel by default
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
-# Expand print panel by default
-defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
-defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
-# Increase window resize speed for Cocoa applications
-defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
-# Disable window animations and Get Info animations
-defaults write com.apple.finder DisableAllAnimations -bool true
-# Disable the warning before emptying the Trash
-defaults write com.apple.finder WarnOnEmptyTrash -bool false
-# When performing a search, search the current folder by default
-defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
-# Set sidebar icon size to medium
-defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
-# Set Home as the default location for new Finder windows
-defaults write com.apple.finder NewWindowTarget -string "PfLo"
-defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}"
-# Prevent Photos from opening automatically when devices are plugged in
-defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
-
-## keyboard
-# Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
-defaults write -g AppleKeyboardUIMode -int 3
-# Turn on key repeat (Disable hold modifier)
-defaults write -g ApplePressAndHoldEnabled -bool false
-# Enable auto replacement
-defaults write -g WebAutomaticTextReplacementEnabled -bool true
-# Disable auto-correct
-defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-
-## trackpad
-# Enable tap to click
-# Trackpad: enable tap to click for this user and for the login screen
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-
-# Trackpad: map bottom right corner to right-click
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
-
-# Set language and text formats
-# Note: if you’re in the US, replace `EUR` with `USD`, `Centimeters` with
-# `Inches`, `en_GB` with `en_US`, and `true` with `false`.
-defaults write NSGlobalDomain AppleLanguages -array "en"
-defaults write NSGlobalDomain AppleLocale -string "en_GB@currency=EUR"
-defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
-defaults write NSGlobalDomain AppleMetricUnits -bool true
-
-## Safari & WebKit                                                             #
-# Show the full URL in the address bar (note: this still hides the scheme)
-# Privacy: don’t send search queries to Apple
-defaults write com.apple.Safari UniversalSearchEnabled -bool false
-defaults write com.apple.Safari SuppressSearchSuggestions -bool true
-# Press Tab to highlight each item on a web page
-defaults write com.apple.Safari WebKitTabToLinksPreferenceKey -bool true
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true
-# Enable the Develop menu and the Web Inspector in Safari
-defaults write com.apple.Safari IncludeDevelopMenu -bool true
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
-# Show the full URL in the address bar (note: this still hides the scheme)
-defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
-# Disable AutoFill
-defaults write com.apple.Safari AutoFillPasswords -bool false
-defaults write com.apple.Safari AutoFillCreditCardData -bool false
-
-## security
-# Require password immediately after sleep or screen saver begins
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
-# Disable java on safari
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles -bool false
-# Enabling full-disk encryption on next reboot
-# sudo fdesetup enable -user "$USER" | tee ~/Desktop/"FileVault Recovery Key.txt"
-
-# Custom keyboard shortcuts
-
-# Finder
-# * "Merge All Windows" - cmd-opt-ctrl-m
-defaults write com.apple.finder NSUserKeyEquivalents '{
-  "Merge All Windows" = "@~^m";
-}'
-
-# Preview
-# * "Adjust Size..." - cmd-opt-ctrl-i
-# * "Export" - cmd-opt-e
-defaults write com.apple.Preview NSUserKeyEquivalents '{
-  "Adjust Size..." = "@~^i";
-  "Export..." = "@~e";
-}'
-
-# VLC
-# * "Float on Top" - cmd-opt-o
-defaults write org.videolan.vlc NSUserKeyEquivalents '{
-  "Float on Top" = "@~o";
-}'
-
-# WhatsApp
-# * "Archive Chat" - cmd-shift-e
-defaults write Whatsapp NSUserKeyEquivalents '{
-  "Archive Chat" = "@$e";
-}'
 
 # Kill affected applications
-for app in Finder Dock SystemUIServer; do killall "$app" >/dev/null 2>&1; done
+for app in Finder Dock SystemUIServer
+do
+  killall "$app" >/dev/null 2>&1
+done
 
 # Doesn't work on El captain:
 # sudo chflags -h nohidden /tmp
