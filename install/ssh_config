@@ -1,5 +1,6 @@
 Host *
   UseKeychain yes
+  ForwardAgent yes
 
 Host github.com
   Hostname github.com

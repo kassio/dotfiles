@@ -15,3 +15,8 @@ ln -sf ${INSTALLER}/docker/config.json ${docker_dir}/config.json
 ydl_dir="${HOME}/.config/youtube-dl"
 mkdir -p ${ydl_dir}
 ln -sf ${INSTALLER}/config/youtube-dl/config ${ydl_dir}/config
+
+# Copy ssh/config to the right place
+mkdir -p ${HOME}/.ssh
+cp ${INSTALLER}/ssh_config ${HOME}/.ssh/config
+chmod -R 700 ${HOME}/.ssh

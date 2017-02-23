@@ -14,7 +14,6 @@ sudo xcodebuild -license accept
 ${INSTALLER}/basic-packages
 ${INSTALLER}/setup-shell
 ${INSTALLER}/rcfiles
-${INSTALLER}/init-ssh-config
 
 # Load some of my env
 source ${DOTFILES}/lib/env
