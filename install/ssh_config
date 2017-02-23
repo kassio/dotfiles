@@ -1,6 +1,7 @@
 Host *
   UseKeychain yes
-  ForwardAgent yes
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/id_rsa
 
 Host github.com
   Hostname github.com
