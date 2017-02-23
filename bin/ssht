@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ "$*" == "" ]
+then
+  echo "Usage: ssht server1 server2"
+  exit -1
+fi
+
+ssh $1 -t ssh $2
