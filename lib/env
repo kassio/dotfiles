@@ -10,8 +10,6 @@ eval "$(rbenv init -)"
 # my bin, and project bin
 export PATH="./bin:$DOTFILES/bin:$PATH"
 
-# always use colors and case insensitive on `grep`
-export GREP_OPTIONS="--color=auto -i"
 # Default editor
 export EDITOR="nvim"
 # improve ls colors
