@@ -1,8 +1,10 @@
 --quiet
 --recurse=yes
 --tag-relative=yes
+
 --fields=NFPafiKlmnStzrZE
 --extras=+f+q
+
 --exclude=.git
 --exclude=.svn
 --exclude=.hg
@@ -10,6 +12,8 @@
 --exclude=tmp
 --exclude=vendor/bundle
 --exclude=vendor/cache*
+
 --languages=-SQL
 --languages=-javascript
+--languages=-json
 --languages=-css
