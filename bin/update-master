@@ -5,4 +5,6 @@ then
   exec &>/dev/null
 fi
 
-git checkout master && git fetch origin && git pull origin master && git checkout -
+git checkout master
+git fetch --prune && git pull origin master
+git checkout -
