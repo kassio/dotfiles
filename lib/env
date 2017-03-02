@@ -80,5 +80,6 @@ export IGNORE_VENDOR_CACHE="--glob \"!vendor/cache/*\""
 export RG_GLOB="$IGNORE_GIT $IGNORE_NODE $IGNORE_TMP $IGNORE_VENDOR_CACHE"
 export RG_OPTIONS="--pretty --no-ignore --hidden --follow $RG_GLOB"
 export FZF_DEFAULT_COMMAND="rg $RG_OPTIONS --files"
+export FZF_DEFAULT_OPTS='--reverse'
 
 # vim:ft=sh:
