@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-ctags || (rm tags &>/dev/null && ctags)
-ctags-gems || (rm tags.gems &>/dev/null && ctags-gems)
+ctags &>/dev/null || (rm tags &>/dev/null && ctags)
+ctags-gems &>/dev/null || (rm tags.gems &>/dev/null && ctags-gems)
