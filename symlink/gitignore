@@ -4,7 +4,8 @@
 *~
 tags
 tags.*
-.vsession
+._v-session
+._v-undo
 *.dir
 *darwin*
 .directory
