@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
+# Vim <3
 alias v='vim'
 n() { nvim $@ || vim $@ || vi $@ }
 
+# System
 alias ls="ls -G -h"
 alias ll='ls -l'
 alias la='ls -lA'
-
-alias grep="grep --color=auto -i"
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -16,6 +16,17 @@ alias sudo='A=`alias` sudo env '
 
 alias brews='brew services'
 
+# Searching
+alias grep="grep --color=auto -i"
+
+alias rg="rg --smart-case"
+alias s="rg"
+
+# Process
+alias ctop="htop -s PERCENT_CPU"
+alias mtop="htop -s PERCENT_MEM"
+
+# Ruby and Rails
 alias r='rails'
 alias RD='RAILS_ENV=development'
 alias RT='RAILS_ENV=test'
@@ -26,8 +37,7 @@ alias DS='DISABLE_SPRING=1'
 
 alias be='bundle exec'
 
-alias iexm='iex -S mix'
-
+# Git
 alias g="git"
 alias ga="g add -A"
 alias gb="g b"
@@ -69,8 +79,3 @@ alias gt="g tag"
 alias gtl="gt --list --sort=version:refname"
 alias gtoday="g today"
 alias gtree="g tree"
-
-alias ctop="htop -s PERCENT_CPU"
-alias mtop="htop -s PERCENT_MEM"
-
-alias rg="rg --smart-case"
