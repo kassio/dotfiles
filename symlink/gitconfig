@@ -62,6 +62,6 @@
   last-tag = describe --tags
   rank = shortlog -sn
 [tag]
-  sort = creatordate
+  sort = -creatordate
 [rerere]
   enabled = true
