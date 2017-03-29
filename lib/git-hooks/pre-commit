@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+local_hook="${PWD}/.git/hooks/$(basename $0)"
+
 if [[ -x "bin/spring" ]]
 then
   echo "stopping spring"
@@ -7,4 +9,10 @@ then
 fi
 
 echo "retagging"
-(ctags &>/dev/null || (rm -f tags && ctags &>/dev/null)) &
+retag &
+
+if [[ -e "${local_hook}" ]]
+then
+  ${local_hook}
+  exit $?
+fi
