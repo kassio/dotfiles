@@ -61,5 +61,7 @@
   tree = !git lp --graph
   last-tag = describe --tags
   rank = shortlog -sn
+[tag]
+  sort = creatordate
 [rerere]
   enabled = true
