@@ -46,7 +46,7 @@
   l = !git --no-pager lp -20
   lme = !GIT_USERNAME="$(git config user.name)" && git --no-pager lp --author="\"$GIT_USERNAME\""
   lpme = !GIT_USERNAME="$(git config user.name)" && git lp --author="\"$GIT_USERNAME\""
-  lp = log --pretty=format:'%C(red dim)%h%Creset %C(yellow dim)%an%C(green) %cd%C(reset)%C(white) %s%Creset -%C(blue dim)%d%Creset' --date=format:'%Y%m%d %R'
+  lp = log --pretty=format:'%C(red dim)%h%Creset %C(yellow dim)%an%C(green) %cd%C(reset)%C(white) %s%Creset -%C(blue dim)%d%Creset'
   m = merge
   ma = merge --abort
   p = pull
@@ -58,11 +58,14 @@
   rs = rebase --skip
   s = status -sb
   t = tag
-  today = !git --no-pager l --stat --since=1.day --date=relative
+  tl = !git describe --tags $(git rev-list --tags --max-count=10)
+  today = !git --no-pager l --since=today.midnight
   tree = !git lp --graph
-  last-tag = describe --tags
+  last-tag = !git describe --tags $(git rev-list --tags --max-count=1)
   rank = shortlog -sn
 [tag]
-  sort = -creatordate
+  sort = creatordate
 [rerere]
   enabled = true
+[log]
+  date = format-local:"%F %R"
