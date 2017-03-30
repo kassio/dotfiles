@@ -4,8 +4,7 @@
 *~
 tags
 tags.*
-._v-session
-._v-undo
+._vim
 *.dir
 *darwin*
 .directory
