@@ -5,10 +5,10 @@ Host *
 
 Host github.com
   Hostname github.com
-  IdentityFile ~/.ssh/github_id_rsa
+  IdentityFile ~/.ssh/git_id_rsa
   IdentitiesOnly yes
 
 Host bitbucket.org
   Hostname bitbucket.org
-  IdentityFile ~/.ssh/github_id_rsa
+  IdentityFile ~/.ssh/git_id_rsa
   IdentitiesOnly yes
