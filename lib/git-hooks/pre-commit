@@ -1,18 +1,32 @@
 #!/usr/bin/env bash
 
-local_hook="${PWD}/.git/hooks/$(basename $0)"
+function local-hook() {
+  local hook="${PWD}/.git/hooks/$(basename $0)"
 
-if [[ -x "bin/spring" ]]
-then
-  echo "stopping spring"
-  (bin/spring stop &>/dev/null) &
-fi
+  if [[ -e "${hook}" ]]
+  then
+    ${hook}
+    exit $?
+  fi
+}
 
-echo "retagging"
-retag &
+function global-hook() {
+  if [[ -x "bin/spring" ]]
+  then
+    echo "stopping spring"
+    (bin/spring stop &>/dev/null) &
+  fi
 
-if [[ -e "${local_hook}" ]]
-then
-  ${local_hook}
-  exit $?
-fi
+  echo "retagging"
+  retag &
+}
+
+case ${PWD} in
+  /usr/local/*)
+    local-hook
+    ;;
+  *)
+    global-hook
+    local-hook
+    ;;
+esac
