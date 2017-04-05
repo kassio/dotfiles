@@ -92,7 +92,7 @@ brew 'zsh', args: ['without-etcdir']
 brew 'zsh-autosuggestions'
 brew 'zsh-completions'
 brew 'zsh-syntax-highlighting'
-brew 'homebrew/dupes/grep'
+brew 'grep'
 brew 'neovim/neovim/neovim', args: ['HEAD']
 brew 'universal-ctags/universal-ctags/universal-ctags', args: ['HEAD']
 cask '1password-beta'
