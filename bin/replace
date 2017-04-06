@@ -4,7 +4,7 @@ function print-help() {
   echo 'USAGE: replace <search pattern> <new pattern> <files>'
 }
 
-if [ "$1" = "-h" -o "$1" = "--help" -o $# -lt 3 ]
+if [ $# -lt 3 ]
 then
   print-help
   exit 0
@@ -16,4 +16,5 @@ replace_with="$1"
 shift
 echo "Replacing '${find_this}' by '${replace_with}' in '$*'"
 
-ag -l --nocolor "${find_this}" $* | xargs -I files sed -i "" -e "s/${find_this}/${replace_with}/g" files
+ag -l --nocolor "${find_this}" $* \
+  | xargs -I files sed -i "" -e "s/${find_this}/${replace_with}/g" files
