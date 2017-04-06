@@ -1,13 +1,19 @@
-#!/bin/bash
-#
-# Find and replace by a given list of files.
-#
-# replace foo bar **/*.rb
+#!/usr/bin/env bash
+
+function print-help() {
+  echo 'USAGE: replace <search pattern> <new pattern> <files>'
+}
+
+if [ "$1" = "-h" -o "$1" = "--help" -o $# -lt 3 ]
+then
+  print-help
+  exit 0
+fi
 
 find_this="$1"
 shift
 replace_with="$1"
 shift
-echo "Replacing '${find_this}' by '${replace_with}'"
+echo "Replacing '${find_this}' by '${replace_with}' in '$*'"
 
-ag -l --nocolor "${find_this}" $* | xargs sed -i "" -e "s/${find_this}/${replace_with}/g"
+ag -l --nocolor "${find_this}" $* | xargs -I files sed -i "" -e "s/${find_this}/${replace_with}/g" files
