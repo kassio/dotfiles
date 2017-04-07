@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
-versions="system\n$(rbenv versions --bare)"
-for rb in $versions
+OIFS=$IFS
+IFS='\n'
+versions=($(rbenv versions --bare))
+IFS=$OIFS
+versions+=("system")
+
+for rb in ${versions[@]}
 do
   export RBENV_VERSION=${rb}
   echo "with ruby: $(rbenv version-name)"
