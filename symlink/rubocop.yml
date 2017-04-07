@@ -1,5 +1,4 @@
 AllCops:
-  TargetRubyVersion: 2.3
   Exclude:
     - 'bin/**/*'
     - 'db/**/*'
@@ -13,7 +12,7 @@ Style/AlignParameters:
   EnforcedStyle: with_fixed_indentation
 
 Style/CaseIndentation:
-  IndentWhenRelativeTo: end
+  EnforcedStyle: end
 
 Style/AsciiComments:
   Enabled: false
@@ -74,7 +73,7 @@ Style/SingleLineBlockParams:
   Enabled: false
 
 Lint/EndAlignment:
-  AlignWith: variable
+  EnforcedStyleAlignWith: variable
 
 Style/FormatString:
   Enabled: false
