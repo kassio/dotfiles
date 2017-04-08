@@ -1,7 +1,14 @@
-tags
-tags.gems
+*swo
+*swp
+*~
+.DS_Store
 ._vim/*
 .git/*
+.sass-cache
 node_modules/*
+tags
+tags.gems
 tmp/*
+vendor/bundle/*
 vendor/cache/*
+vendor/ruby/*
