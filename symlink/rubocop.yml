@@ -1,5 +1,6 @@
 AllCops:
   Exclude:
+    - '._vim/**/*'
     - 'bin/**/*'
     - 'db/**/*'
     - 'config/**/*'

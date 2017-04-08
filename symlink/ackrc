@@ -2,6 +2,7 @@
 --smart-case
 --follow
 --nosql
+--ignore-dir=._vim
 --ignore-dir=log
 --ignore-dir=tmp
 --ignore-dir=public/assets

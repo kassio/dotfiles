@@ -5,6 +5,7 @@
 --fields=NFPafiKlmnStzrZE
 --extras=+f+q
 
+--exclude=._vim
 --exclude=.git
 --exclude=.svn
 --exclude=.hg

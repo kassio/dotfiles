@@ -73,7 +73,7 @@ function unset-badge() {
   fi
 }
 
-export IGNORE_VIM="--glob \"!._v-*\""
+export IGNORE_VIM="--glob \"!._vim*\""
 export IGNORE_GIT="--glob \"!.git/*\""
 export IGNORE_NODE="--glob \"!node_modules/*\""
 export IGNORE_TMP="--glob \"!tmp/*\""

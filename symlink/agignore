@@ -13,3 +13,4 @@ tags
 tags.gems
 log/*
 tmp/*
+._vim/*
