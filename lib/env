@@ -73,13 +73,7 @@ function unset-badge() {
   fi
 }
 
-export IGNORE_VIM="--glob \"!._vim*\""
-export IGNORE_GIT="--glob \"!.git/*\""
-export IGNORE_NODE="--glob \"!node_modules/*\""
-export IGNORE_TMP="--glob \"!tmp/*\""
-export IGNORE_VENDOR_CACHE="--glob \"!vendor/cache/*\""
-export RG_GLOB="$IGNORE_GIT $IGNORE_NODE $IGNORE_TMP $IGNORE_VENDOR_CACHE $IGNORE_VIM"
-export RG_OPTIONS="--pretty --no-ignore --hidden --follow $RG_GLOB"
+export RG_OPTIONS="--pretty --no-ignore --hidden --follow"
 export FZF_DEFAULT_COMMAND="rg $RG_OPTIONS --files"
 export FZF_DEFAULT_OPTS='--reverse'
 

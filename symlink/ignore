@@ -1,0 +1,7 @@
+tags
+tags.gems
+._vim/*
+.git/*
+node_modules/*
+tmp/*
+vendor/cache/*
