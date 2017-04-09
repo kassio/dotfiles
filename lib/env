@@ -73,8 +73,7 @@ function unset-badge() {
   fi
 }
 
-export RG_OPTIONS="--pretty --no-ignore --hidden --follow"
-export FZF_DEFAULT_COMMAND="rg $RG_OPTIONS --files"
-export FZF_DEFAULT_OPTS='--reverse'
+export FZF_DEFAULT_COMMAND="rg --pretty --no-ignore-vcs --hidden --follow --files"
+export FZF_DEFAULT_OPTS="--reverse"
 
 # vim:ft=sh:
