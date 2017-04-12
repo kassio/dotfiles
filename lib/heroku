@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 ### Added by the Heroku Toolbelt
-_heroku_bin_path="/usr/local/heroku/bin"
-if [[ -d $_heroku_bin_path ]]
+heroku_bin_path="/usr/local/heroku/bin"
+if [[ -d ${heroku_bin_path} ]]
 then
-  export PATH="$_heroku_bin_path:$PATH"
+  export PATH="${heroku_bin_path}:${PATH}"
 fi

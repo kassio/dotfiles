@@ -32,9 +32,6 @@
   work = !git config --local --replace-all user.name "Kassio\\ Borges" && git config --local user.email "kborges@zendesk.com"
   home = !git config --local --replace-all user.name "Kassio\\ Borges" && git config --local user.email "kassioborgesm@gmail.com"
   b = branch
-  bd = branch -d
-  bD = branch -D
-  br = branch -r
   c = commit -v
   ca = commit -v --amend
   co = checkout
@@ -48,14 +45,9 @@
   lpme = !GIT_USERNAME="$(git config user.name)" && git lp --author="\"$GIT_USERNAME\""
   lp = log --pretty=format:'%C(red dim)%h%Creset %C(yellow dim)%an%C(green) %cd%C(reset)%C(white) %s%Creset -%C(blue dim)%d%Creset'
   m = merge
-  ma = merge --abort
   p = pull
   ps = push
   r = rebase
-  ra = rebase --abort
-  rc = rebase --continue
-  ri = rebase -i
-  rs = rebase --skip
   s = status -sb
   t = tag
   tl = !git describe --tags $(git rev-list --tags --max-count=10)
