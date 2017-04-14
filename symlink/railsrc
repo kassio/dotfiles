@@ -1,2 +1,4 @@
 --skip-bundle
 --skip-keeps
+--skip-git
+--quiet
