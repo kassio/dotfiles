@@ -22,7 +22,7 @@ function global-hook() {
 }
 
 case ${PWD} in
-  /usr/local/*)
+  /usr/local/*|*Caches/Homebrew*)
     local-hook
     ;;
   *)
