@@ -69,4 +69,6 @@ function unset-badge() {
 export FZF_DEFAULT_COMMAND="rg --pretty --no-ignore-vcs --hidden --follow --files --color never"
 export FZF_DEFAULT_OPTS="--reverse"
 
+ssh-add -A 2>/dev/null;
+
 # vim:ft=sh:
