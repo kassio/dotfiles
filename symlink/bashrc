@@ -12,7 +12,7 @@ export DOTFILES=$HOME/.dotfiles
 source "$(brew --prefix)/etc/bash_completion"
 
 function prompt_cmd {
-  echo -ne "\e]1;${PWD}\a"
+  echo -ne "\e]1;${PWD/${HOME}/\$HOME}\a"
   local last_status=$?
   local blue='\[\e[0;34m\]'
   local red='\[\e[0;31m\]'

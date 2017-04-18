@@ -84,7 +84,7 @@ setopt interactive_comments
 fpath=(/usr/local/share/zsh-completions ${fpath})
 
 prompt_cmd() {
-  echo -ne "\e]1;${PWD}\a"
+  echo -ne "\e]1;${PWD/${HOME}/\$HOME}\a"
   local last_status=$?
   local blue="$FG[004]"
   local red="$FG[001]"
