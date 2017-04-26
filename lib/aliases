@@ -6,7 +6,7 @@ n() { nvim $@ || vim $@ || vi $@ }
 
 # System
 alias ls="ls -G -h"
-alias ll="ls -l"
+alias l="ls -l"
 alias la="ls -lA"
 
 alias ..="cd .."
