@@ -38,3 +38,9 @@ defaults write org.videolan.vlc NSUserKeyEquivalents '{
 defaults write Whatsapp NSUserKeyEquivalents '{
   "Archive Chat" = "@$e";
 }'
+
+# Keynote
+# * "Rehearse Slideshow" - cmd-opt-x
+defaults write com.apple.iWork.Keynote NSUserKeyEquivalents '{
+  "Rehearse Slideshow" = "@~x";
+}'
