@@ -14,19 +14,18 @@ sudo xcodebuild -license accept
 ${INSTALLER}/basic-packages
 ${INSTALLER}/setup-shell
 ${INSTALLER}/rcfiles
-source ${DOTFILES}/lib/env
 ${INSTALLER}/ruby
+source ${DOTFILES}/lib/env
 
 # Installing all my stuff
-update-linters & brew bundle --global
+brew bundle --global
 
 # Init postgres
 brew services start --all
 init-pg
 
 # install iterm2 integration
-curl -L https://iterm2.com/misc/bash_startup.in -o ${HOME}/.iterm2_shell_integration.bash
-curl -L https://iterm2.com/misc/zsh_startup.in -o ${HOME}/.iterm2_shell_integration.zsh
+update-iterm2-integrations
 
 # Use key backspace instead of ^H
 infocmp ${TERM} | sed 's/kbs=^[hH]/kbs=\\177/' > /tmp/${TERM}.ti
