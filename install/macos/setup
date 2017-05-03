@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$(dirname $0)/global"
+source "$(dirname $0)/../global"
 
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
