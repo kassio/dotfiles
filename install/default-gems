@@ -1,3 +1,9 @@
 bundler
-neovim
+
 rubocop
+scss_lint
+
+webpacker
+
+neovim
+rcodetools
