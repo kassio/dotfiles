@@ -2,7 +2,6 @@
 
 # Vim <3
 alias v="vim"
-n() { nvim $@ || vim $@ || vi $@ }
 
 # System
 alias ls="ls -G -h"
@@ -11,8 +10,6 @@ alias la="ls -lA"
 
 alias ..="cd .."
 alias ...="cd ../.."
-
-alias sudo="A=`alias` sudo env "
 
 alias brews="brew services"
 
@@ -73,3 +70,5 @@ alias grs="g r --skip"
 alias gs="g s"
 alias gt="g tag"
 alias gtl="gt --list"
+
+alias sudo="A=`alias &>/dev/null` sudo env -- "
