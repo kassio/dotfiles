@@ -3,20 +3,22 @@
 source "$(dirname $0)/global"
 
 # Create linked files
-for f in ${HOME}/.dotfiles/symlink/*
+for f in ${HOME}/.dotfiles/rcfiles/*
 do
   ln -sf ${f} ${HOME}/.${f##*/}
 done
 
+# Docker
 docker_dir="${HOME}/.docker"
 mkdir -p ${docker_dir}
 ln -sf ${INSTALLER}/docker/config.json ${docker_dir}/config.json
 
+# youtube-d
 ydl_dir="${HOME}/.config/youtube-dl"
 mkdir -p ${ydl_dir}
 ln -sf ${INSTALLER}/config/youtube-dl/config ${ydl_dir}/config
 
-# Copy ssh/config to the right place
+# ssh
 mkdir -p ${HOME}/.ssh
 cp ${INSTALLER}/ssh_config ${HOME}/.ssh/config
 chmod -R 700 ${HOME}/.ssh
