@@ -22,3 +22,8 @@ ln -sf ${INSTALLER}/config/youtube-dl/config ${ydl_dir}/config
 mkdir -p ${HOME}/.ssh
 cp ${INSTALLER}/ssh_config ${HOME}/.ssh/config
 chmod -R 700 ${HOME}/.ssh
+
+# Xcode
+xcode_dir="${HOME}/Library/Developer/Xcode"
+mkdir -p ${xcode_dir}
+ln -sf ${INSTALLER}/xcode/UserData ${xcode_dir}/UserData
