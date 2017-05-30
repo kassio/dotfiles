@@ -33,5 +33,8 @@
     "eqeqeq": 2,
     "comma-style": [2, "last"],
     "semi": [2, "always"]
-  }
+  },
+  "plugins": [
+    "react"
+  ]
 }
