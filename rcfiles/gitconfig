@@ -54,6 +54,7 @@
   today = !git --no-pager l --since=today.midnight
   tree = !git lp --graph
   last-tag = !git describe --tags $(git rev-list --tags --max-count=1)
+  show-last-tag = !git show $(git last-tag)
   rank = shortlog -sn
 [tag]
   sort = creatordate
