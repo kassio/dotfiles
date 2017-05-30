@@ -31,8 +31,7 @@
     "no-extra-semi": 2,
     "no-underscore-dangle": 0,
     "eqeqeq": 2,
-    "comma-style": [2, "last"],
-    "semi": [2, "always"]
+    "comma-style": [2, "last"]
   },
   "plugins": [
     "react"
