@@ -1,3 +1,4 @@
+--skip-coffee
 --skip-bundle
 --skip-keeps
 --quiet
