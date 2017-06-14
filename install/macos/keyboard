@@ -19,6 +19,13 @@ defaults write com.apple.finder NSUserKeyEquivalents '{
   "Merge All Windows" = "@~^m";
 }'
 
+# Notes
+# * Hide/Show Folders (sidebar) - cmd-shift-s
+defaults write com.apple.Notes NSUserKeyEquivalents '{
+    "Hide Folders" = "@$s";
+    "Show Folders" = "@$s";
+}'
+
 # Preview
 # * "Adjust Size..." - cmd-opt-ctrl-i
 # * "Export" - cmd-opt-e
