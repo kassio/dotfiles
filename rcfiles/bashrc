@@ -73,7 +73,12 @@ export HISTSIZE=1000000
 stty -ixon
 
 # Load zsh
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+fzf_path="${HOMEBREW_PREFIX}/opt/fzf"
+if [ -d "${fzf_path}" ]
+then
+  source "${fzf_path}/shell/completion.bash"
+  source "${fzf_path}/shell/key-bindings.bash"
+fi
 
 # My env customization (this line must be the very last on this file)
 source "$DOTFILES/lib/env"

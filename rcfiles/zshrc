@@ -114,9 +114,11 @@ source "${DOTFILES}/lib/env"
 
 # Libraries loading
 
-if [ -f "${HOME}/.fzf.zsh" ]
+fzf_path="${HOMEBREW_PREFIX}/opt/fzf"
+if [ -d "${fzf_path}" ]
 then
-  source "${HOME}/.fzf.zsh"
+  source "${fzf_path}/shell/completion.zsh"
+  source "${fzf_path}/shell/key-bindings.zsh"
 fi
 
 source "${DOTFILES}/lib/spectrum.zsh"
