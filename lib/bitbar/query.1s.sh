@@ -24,7 +24,7 @@ then
     -e "${query}" \
     2>/dev/null)
 
-  echo ${result:-FAIL}
+  echo "${result:-FAIL} | size=12"
   echo "---"
   echo "MYSQL_URL: ${MYSQL_URL}"
   echo "query: ${query}"
