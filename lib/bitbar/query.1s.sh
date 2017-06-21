@@ -25,7 +25,7 @@ then
     2>/dev/null)
   result="$(echo ${result:-FAIL} | tr '\n' ' ')"
 
-  echo "${result}"
+  echo "${result} | size=12"
   echo "---"
   echo "MYSQL_URL: ${MYSQL_URL}"
   echo "query: ${query}"
