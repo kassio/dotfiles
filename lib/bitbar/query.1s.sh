@@ -23,8 +23,9 @@ then
     --database="${database}" \
     -e "${query}" \
     2>/dev/null)
+  result="$(echo ${result:-FAIL} | tr '\n' ' ')"
 
-  echo "${result:-FAIL} | size=12"
+  echo "${result}"
   echo "---"
   echo "MYSQL_URL: ${MYSQL_URL}"
   echo "query: ${query}"
