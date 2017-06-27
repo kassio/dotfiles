@@ -1,13 +1,9 @@
 #!/usr/bin/env bash
 
-# Neovim dependencies
-pip install neovim -q
-pip3 install neovim-remote -q
-gem install neovim
-gem install rcodetools
-
 # Config vim/neovim
-rm -rf ~/.config/nvim &>/dev/null
-git clone https://github.com/kassio/nvimfiles.git ~/.config/nvim
-ln -sf ~/.config/nvim ~/.vim
-nvim --noplugins +PlugInstall +qall
+rm -rf ${HOME}/.config/nvim ${HOME}/.vim &>/dev/null
+git clone https://github.com/kassio/nvimfiles.git ${HOME}/.config/nvim
+ln -sf ${HOME}/.config/nvim ${HOME}/.vim
+
+${HOME}/.config/nvim/bin/setup
+${HOME}/.config/nvim/bin/setup
