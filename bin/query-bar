@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+${HOME}/.dotfiles/lib/bitbar/query.1s.sh | sed 's/|.*//'
