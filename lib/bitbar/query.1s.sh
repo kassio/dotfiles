@@ -1,32 +1,43 @@
 #!/usr/bin/env bash
 
-# ${HOME}/.query example:
-# # Connection
-# user="root"
-# password="root"
-# host="127.0.0.1"
-# port="3306"
-# database="store"
-# MYSQL_URL="mysql://${user}:${password}@${host}:${port}/${database}"
+# active=1
 #
-# # Query
-# query="select count(*) USERS from users"
+# _query() {
+#   result=$(/usr/local/bin/mysql \
+#     --host="127.0.0.1" \
+#     --user="root" \
+#     --password="root" \
+#     --database="dbtest" \
+#     -e "${1}" \
+#     2>/dev/null)
+#
+#   echo ${result}
+# }
+#
+# main() {
+#   _query \
+#     "SELECT count(*) AS VIEWS \
+#      FROM rules \
+#      WHERE type = 'View'" | tr "\n" " "
+# }
+#
+# others() {
+#   _query \
+#     "SELECT \
+#      table_name as NAME, \
+#      table_rows as ROWS\
+#      FROM information_schema.tables \
+#      WHERE table_schema = 'zendesk_test' \
+#      ORDER BY table_rows desc \
+#      LIMIT 20" | column -t
+# }
 
+IFS="  "
 source ${HOME}/.query
 
-if [ -n "${query}" ]
+if [ -n "${active}" ]
 then
-  result=$(/usr/local/bin/mysql \
-    --host="${host}" \
-    --user="${user}" \
-    --password="${password}" \
-    --database="${database}" \
-    -e "${query}" \
-    2>/dev/null)
-  result="$(echo ${result:-FAIL} | tr '\n' ' ')"
-
-  echo "${result} | size=12"
+  echo "$(main) | size=12"
   echo "---"
-  echo "MYSQL_URL: ${MYSQL_URL}"
-  echo "query: ${query}"
+  echo "$(others | sed -e 's/$/| size=12 font=Monaco/')"
 fi
