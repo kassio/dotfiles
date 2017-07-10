@@ -28,29 +28,28 @@ source ${DOTFILES}/lib/aliases
 source ${DOTFILES}/lib/less
 source ${DOTFILES}/lib/git
 
+__title() {
+  echo -ne "\e]1;${PWD/${HOME}/\$HOME}\a"
+}
+
+precmd_functions=(__ps1 __title)
+export PROMPT_COMMAND="__ps1; __title"
+
 # local env
 if [ -e "$HOME/.env" ]
 then
   source $HOME/.env
 fi
 
-export __ITERM_SHELL_INTEGRATION_LOADED=
-function __load_iterm2_integration() {
-  iterm_integration_script="$HOME/.iterm2_shell_integration.${ZSH_NAME:-bash}"
-  if [ -f $iterm_integration_script ]
-  then
-    ITERM_SHELL_INTEGRATION_INSTALLED="" source $iterm_integration_script \
-      && export __ITERM_SHELL_INTEGRATION_LOADED=true
-  else
-    return -1
-  fi
-}
+iterm_integration_script="$HOME/.iterm2_shell_integration.${ZSH_NAME:-bash}"
+if [ -f $iterm_integration_script ]
+then
+  source $iterm_integration_script
+fi
 
 export __USER_BADGE=""
 # iterm2 badge manipulation
 function set-badge() {
-  [ -z $__ITERM_SHELL_INTEGRATION_LOADED ] && __load_iterm2_integration
-
   if [ -n "$1" ]
   then
     export __USER_BADGE="$@"

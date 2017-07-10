@@ -83,15 +83,14 @@ setopt interactive_comments
 ## Completions
 fpath=(/usr/local/share/zsh-completions ${fpath})
 
-prompt_cmd() {
-  echo -ne "\e]1;${PWD/${HOME}/\$HOME}\a"
-  local last_status=$?
+function __ps1() {
+  local last_status="$?"
   local blue="$FG[004]"
   local red="$FG[001]"
   local green="$FG[002]"
   local reset="$FX[reset]"
 
-  if [[ ${last_status} = 0 ]]
+  if [ ${last_status} -eq 0 ]
   then
     local prompt_color=${green}
   else
@@ -101,7 +100,6 @@ prompt_cmd() {
   __git_ps1 "${blue}%~%f" "
 ${prompt_color}$%f %{${reset}%}"
 }
-precmd_functions=(prompt_cmd) # zsh
 
 brew_completion="${HOMEBREW_PREFIX}/Library/Contributions/brew_zsh_completion.sh"
 if [[ -e ${brew_completion} ]]
