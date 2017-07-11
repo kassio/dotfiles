@@ -35,7 +35,7 @@
 IFS="  "
 source ${HOME}/.query
 
-if [ -n "${active}" ]
+if [ ${active} -ne 0 ]
 then
   echo "$(main) | size=12"
   echo "---"
