@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 
-exec &>/dev/null
+_retag() {
+  ctags || (rm tags && ctags)
+  ctags-gems || (rm tags.gems && ctags-gems)
+}
 
-ctags || (rm tags && ctags)
-ctags-gems || (rm tags.gems && ctags-gems)
+case $1 in
+  -v|--verbose)
+    _retag
+    ;;
+  *)
+    exec &>/dev/null
+    _retag
+    ;;
+esac
