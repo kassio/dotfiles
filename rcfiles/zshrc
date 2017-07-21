@@ -54,6 +54,11 @@ done
 unsetopt correct_all
 unsetopt correct
 
+# Do not show % on partial lines ends
+setopt PROMPT_CR
+setopt PROMPT_SP
+export PROMPT_EOL_MARK=""
+
 ## History
 export HISTFILE=${HOME}/.zhistory
 export HISTSIZE=120000
