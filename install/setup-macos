@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-source "$(dirname $0)/../global"
+source "$(dirname $0)/global"
+macos_path="${INSTALLER}/macos"
 
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
@@ -8,9 +9,9 @@ sudo nvram SystemAudioVolume=" "
 # Disable Resume system-wide
 defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -int 0
 
-for s in ${INSTALLER}/macos/*
+for s in $(ls -1 ${macos_path})
 do
-  exec $s
+  bash ${macos_path}/$s
 done
 
 # Kill affected applications

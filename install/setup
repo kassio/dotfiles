@@ -4,13 +4,7 @@ source "$(dirname $0)/global"
 
 pushd ${HOME} > /dev/null && trap 'popd > /dev/null' EXIT HUP INT QUIT TERM
 
-# Check for software updates
-softwareupdate -ia
-
-# Install XCode
-xcode-select --install
-sudo xcodebuild -license accept
-
+${INSTALLER}/setup-xcode
 ${INSTALLER}/basic-packages
 ${INSTALLER}/setup-shell
 ${INSTALLER}/rcfiles
@@ -22,7 +16,7 @@ brew bundle --global
 
 # Init postgres
 brew services start --all
-init-pg
+pg-init
 
 # install iterm2 integration
 update-iterm2-integrations
@@ -32,6 +26,6 @@ infocmp ${TERM} | sed 's/kbs=^[hH]/kbs=\\177/' > /tmp/${TERM}.ti
 tic /tmp/${TERM}.ti
 
 # Customize OSX
-${INSTALLER}/macos/setup
+${INSTALLER}/setup-macos
 
 exit 0

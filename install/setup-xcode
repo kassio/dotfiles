@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# Check for software updates
+softwareupdate -ia
+
+# Install XCode
+xcode-select --install
+sudo xcodebuild -license accept
