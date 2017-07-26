@@ -67,7 +67,7 @@ function unset-badge() {
   fi
 }
 
-export FZF_DEFAULT_COMMAND="rg --pretty --no-ignore-vcs --hidden --follow --files --color never"
+export FZF_DEFAULT_COMMAND="ag --skip-vcs-ignores --hidden --follow --nocolor -l"
 export FZF_DEFAULT_OPTS="--reverse --tiebreak=begin,length,index"
 
 ssh-add -A 2>/dev/null;

@@ -16,9 +16,6 @@ alias brews="brew services"
 # Searching
 alias grep="grep --color=auto -i"
 
-alias rg="rg --smart-case"
-alias s="rg"
-
 # Process
 alias ctop="htop -s PERCENT_CPU"
 alias mtop="htop -s PERCENT_MEM"
