@@ -32,6 +32,13 @@
 #      LIMIT 20" | column -t
 # }
 
+source="${HOME}/.query"
+
+if [ ! -f "${source}" ]
+then
+  exit 0
+fi
+
 IFS="  "
 source ${HOME}/.query
 
