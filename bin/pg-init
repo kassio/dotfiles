@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 
-brew services stop postgresql
-rm -rf /usr/local/var/postgres
+echo '>>> Stop postgres'
+brew services stop postgresql &>/dev/null
+echo '>>> Remove all postgres data'
+rm -rf /usr/local/var/postgres &>/dev/null
+echo '>>> Init DB'
 initdb --auth=trust -U postgres /usr/local/var/postgres
-brew services start postgresql
+echo '>>> Restart postgres'
+brew services start postgresql &>/dev/null
 sleep 1;
+echo ">>> Create postgres user ${USER}"
 createuser ${USER} -D -s -l -U postgres
