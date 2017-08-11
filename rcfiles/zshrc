@@ -89,6 +89,7 @@ setopt interactive_comments
 fpath=(/usr/local/share/zsh-completions ${fpath})
 
 function __ps1() {
+  local emoji="🥓 "
   local last_status="$?"
   local blue="$FG[004]"
   local red="$FG[001]"
@@ -102,7 +103,7 @@ function __ps1() {
     local prompt_color=${red}
   fi
 
-  __git_ps1 "${blue}%~%f" "
+  __git_ps1 "${emoji} ${blue}%~%f" "
 ${prompt_color}$%f %{${reset}%}"
 }
 

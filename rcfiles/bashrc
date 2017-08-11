@@ -12,6 +12,7 @@ export DOTFILES=$HOME/.dotfiles
 source "$(brew --prefix)/etc/bash_completion"
 
 __ps1() {
+  local emoji="🥓 "
   local last_status="$?"
   local blue='\[\e[0;34m\]'
   local red='\[\e[0;31m\]'
@@ -25,7 +26,7 @@ __ps1() {
     local prompt_color=${red}
   fi
 
-  __git_ps1 "${blue}\w${reset}" "
+  __git_ps1 "${emoji} ${blue}\w${reset}" "
 ${prompt_color}\$${reset} "
 }
 
