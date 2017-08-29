@@ -66,6 +66,6 @@ alias gri="g r -i"
 alias grs="g r --skip"
 alias gs="g s"
 alias gt="g tag"
-alias gtl="gt --list"
+alias gtl="g tl"
 
 alias sudo="A=`alias &>/dev/null` sudo env -- "
