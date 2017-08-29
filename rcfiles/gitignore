@@ -16,3 +16,4 @@ tags
 tags.*
 vendor/bundle
 vendor/ruby
+.byebug_history
