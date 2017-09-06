@@ -2,13 +2,13 @@ export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 export HOMEBREW_NO_ANALYTICS=1
 
 # personal cd paths
-export CDPATH=".:$HOME:$HOME/.config"
+export CDPATH=".:${HOME}:${HOME}/.config"
 
 # rbenv
 eval "$(rbenv init -)"
 
 # my bin, and project bin
-export PATH="./bin:$DOTFILES/bin:$PATH"
+export PATH="./bin:${DOTFILES}/bin:${PATH}"
 
 # Default editor
 export EDITOR="nvim"
@@ -36,15 +36,21 @@ precmd_functions=(__ps1 __title)
 export PROMPT_COMMAND="__ps1; __title"
 
 # local env
-if [ -e "$HOME/.env" ]
+if [ -e "${HOME}/.env" ]
 then
-  source $HOME/.env
+  source ${HOME}/.env
 fi
 
-iterm_integration_script="$HOME/.iterm2_shell_integration.${ZSH_NAME:-bash}"
-if [ -f $iterm_integration_script ]
+iterm_integration_script="${HOME}/.iterm2_shell_integration.${ZSH_NAME:-bash}"
+if [ -f ${iterm_integration_script} ]
 then
-  source $iterm_integration_script
+  source ${iterm_integration_script}
+fi
+
+# added by travis gem
+if [ -f "${HOME}/.travis/travis.sh" ]
+then
+  source "${HOME}/.travis/travis.sh"
 fi
 
 export __USER_BADGE=""
@@ -57,11 +63,11 @@ function set-badge() {
     export __USER_BADGE="$(basename $PWD)"
   fi
 
-  iterm2_set_user_var badge "$__USER_BADGE" 2>/dev/null
+  iterm2_set_user_var badge "${__USER_BADGE}" 2>/dev/null
 }
 
 function unset-badge() {
-  if [ -n "$__USER_BADGE" ]
+  if [ -n "${__USER_BADGE}" ]
   then
     iterm2_set_user_var badge "" 2>/dev/null
   fi
