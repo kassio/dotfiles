@@ -38,11 +38,11 @@ zstyle ':completion:*' matcher-list \
   'm:{a-zA-Z}={A-Za-z}' \
   'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
-unsetopt menu_complete   # do not autoselect the first completion entry
-unsetopt flowcontrol
-setopt auto_menu         # show completion menu on succesive tab press
-setopt complete_in_word
-setopt always_to_end
+unsetopt MENU_COMPLETE   # do not autoselect the first completion entry
+unsetopt FLOWCONTROL
+setopt AUTO_MENU         # show completion menu on succesive tab press
+setopt COMPLETE_IN_WORD
+setopt ALWAYS_TO_END
 skip_global_compinit=1
 
 for key in '!' '$' '@' '/'; do
@@ -51,8 +51,8 @@ for key in '!' '$' '@' '/'; do
 done
 
 # do not correct me!!
-unsetopt correct_all
-unsetopt correct
+unsetopt CORRECT_ALL
+unsetopt CORRECT
 
 # Do not show % on partial lines ends
 setopt PROMPT_CR
@@ -79,11 +79,11 @@ unsetopt EXTENDED_HISTORY
 
 ## Extra
 # easy regexp on list files (**)
-setopt extendedglob
+setopt EXTENDEDGLOB
 # include dotfiles in globbing
-setopt glob_dots
+setopt GLOB_DOTS
 # don't blow up with comments
-setopt interactive_comments
+setopt INTERACTIVE_COMMENTS
 
 ## Completions
 fpath=(/usr/local/share/zsh-completions ${fpath})
