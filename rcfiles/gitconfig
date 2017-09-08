@@ -26,8 +26,16 @@
 [color "diff"]
   old = red dim
   new = green bold
+[diff]
+  tool = nvim
+[difftool]
+  prompt = false
 [merge]
   ff = false
+  tool = nvim
+  conflictstyle = diff3
+[mergetool]
+  prompt = false
 [alias]
   work = !git config --local --replace-all user.name "Kassio\\ Borges" && git config --local user.email "kborges@zendesk.com"
   home = !git config --local --replace-all user.name "Kassio\\ Borges" && git config --local user.email "kassioborgesm@gmail.com"
@@ -38,6 +46,7 @@
   cp = cherry-pick
   d = !git --no-pager diff
   dp = diff
+  dt = difftool
   f = fetch
   fix = commit --amend --no-edit
   l = !git --no-pager lp -20
@@ -45,6 +54,7 @@
   lpme = !GIT_USERNAME="$(git config user.name)" && git lp --author="\"$GIT_USERNAME\""
   lp = log --pretty=format:'%C(red dim)%h %C(green)%cd %C(yellow)%an %C(reset)%C(white)%s %C(blue)%d'
   m = merge
+  mt = mergetool
   p = pull
   ps = push
   r = rebase
