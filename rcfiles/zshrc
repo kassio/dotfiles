@@ -98,8 +98,12 @@ function __ps1() {
     local prompt_color="%F{red}"
   fi
 
-  __git_ps1 "%F{blue}%~%f" "
+  local part1="%F{blue}%~%f"
+  local part2="
 ${prompt_color}$%f "
+  local part3="$(print -P " %F{yellow}(%f%%s%F{yellow})")"
+
+  __git_ps1 ${part1} ${part2} ${part3}
 }
 
 brew_completion="${HOMEBREW_PREFIX}/Library/Contributions/brew_zsh_completion.sh"
