@@ -15,6 +15,8 @@ compinit -C
 autoload bashcompinit
 bashcompinit
 
+autoload -U colors && colors
+
 ## Binds
 # Use emacs key bindings
 bindkey -e
@@ -89,21 +91,15 @@ setopt INTERACTIVE_COMMENTS
 fpath=(/usr/local/share/zsh-completions ${fpath})
 
 function __ps1() {
-  local last_status="$?"
-  local blue="$FG[004]"
-  local red="$FG[001]"
-  local green="$FG[002]"
-  local reset="$FX[reset]"
-
-  if [ ${last_status} -eq 0 ]
+  if [ "$?" -eq 0 ]
   then
-    local prompt_color=${green}
+    local prompt_color="%F{green}"
   else
-    local prompt_color=${red}
+    local prompt_color="%F{red}"
   fi
 
-  __git_ps1 "${blue}%~%f" "
-${prompt_color}$%f %{${reset}%}"
+  __git_ps1 "%F{blue}%~%f" "
+${prompt_color}$%f "
 }
 
 brew_completion="${HOMEBREW_PREFIX}/Library/Contributions/brew_zsh_completion.sh"
@@ -124,7 +120,6 @@ then
   source "${fzf_path}/shell/key-bindings.zsh"
 fi
 
-source "${DOTFILES}/lib/spectrum.zsh"
 source "${HOMEBREW_PREFIX}/etc/bash_completion.d/git-prompt.sh"
 source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
