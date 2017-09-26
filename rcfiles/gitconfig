@@ -27,15 +27,19 @@
   old = red dim
   new = green bold
 [diff]
-  tool = nvim
+  tool = vimdiff
 [difftool]
   prompt = false
+[difftool "vimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [merge]
   ff = false
-  tool = nvim
   conflictstyle = diff3
+  tool = vimdiff
 [mergetool]
   prompt = false
+[mergetool "vimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [alias]
   work = !git config --local --replace-all user.name "Kassio\\ Borges" && git config --local user.email "kborges@zendesk.com"
   home = !git config --local --replace-all user.name "Kassio\\ Borges" && git config --local user.email "kassioborgesm@gmail.com"
