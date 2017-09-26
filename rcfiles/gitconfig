@@ -71,6 +71,7 @@
   show-last-tag = !git show $(git last-tag)
   rank = shortlog -sn
   rf = reflog --pretty=format:'%C(red dim)%h %C(green)%cd %C(yellow)%an %C(reset)%C(white)%s %C(blue)%d'
+  rfme = !GIT_USERNAME="$(git config user.name)" && git rf --author="\"$GIT_USERNAME\""
 [tag]
   sort = creatordate
 [rerere]
