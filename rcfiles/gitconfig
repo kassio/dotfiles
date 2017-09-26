@@ -70,6 +70,7 @@
   last-tag = !git describe --tags $(git rev-list --tags --max-count=1)
   show-last-tag = !git show $(git last-tag)
   rank = shortlog -sn
+  rf = reflog --pretty=format:'%C(red dim)%h %C(green)%cd %C(yellow)%an %C(reset)%C(white)%s %C(blue)%d'
 [tag]
   sort = creatordate
 [rerere]
