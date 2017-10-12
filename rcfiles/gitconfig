@@ -64,10 +64,10 @@
   r = rebase
   s = status -sb
   t = tag
-  tl = !git tag --list --sort='-authordate' --format '%(color:blue)%(align:10,right)%(refname:lstrip=2)%(end) %(color:red dim)%(objectname:short) %(color:green dim)%(authordate:format-local:%F %R) %(color:yellow dim)%(authorname)' | head -n 30
+  tla = !git tag --list --sort='-authordate' --format '%(color:blue)%(align:10,right)%(refname:lstrip=2)%(end) %(color:red dim)%(objectname:short) %(color:green dim)%(authordate:format-local:%F %R) %(color:yellow dim)%(authorname)'
+  tl = "!f() { git tla | head -n ${1:-30}; };f"
   today = !git --no-pager l --since=today.midnight
   tree = !git lp --graph
-  last-tag = !git describe --tags $(git rev-list --tags --max-count=1)
   show-last-tag = !git show $(git last-tag)
   rank = shortlog -sn
   rf = reflog --pretty=format:'%C(red dim)%h %C(green)%cd %C(yellow)%an %C(reset)%C(white)%s %C(blue)%d'

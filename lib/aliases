@@ -70,5 +70,6 @@ alias grf="g rf"
 alias gs="g s"
 alias gt="g tag"
 alias gtl="g tl"
+alias gtla="g tla"
 
 alias sudo="A=`alias &>/dev/null` sudo env -- "
