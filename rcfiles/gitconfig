@@ -69,6 +69,7 @@
   today = !git --no-pager l --since=today.midnight
   tree = !git lp --graph
   show-last-tag = !git show $(git last-tag)
+  sync-tags = !git fetch --prune origin "+refs/tags/*:refs/tags/*"
   rank = shortlog -sn
   rf = reflog --pretty=format:'%C(red dim)%h %C(green)%cd %C(yellow)%an %C(reset)%C(white)%s %C(blue)%d'
   rfme = !GIT_USERNAME="$(git config user.name)" && git rf --author="\"$GIT_USERNAME\""
