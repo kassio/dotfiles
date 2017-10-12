@@ -64,7 +64,7 @@
   r = rebase
   s = status -sb
   t = tag
-  tl = !git tag --list --sort='-authordate' --format '%(color:red dim)%(objectname:short) %(color:green dim)%(authordate:format-local:%F %R) %(color:yellow dim)%(authorname) %(color:blue)%(refname:lstrip=2)' | head -n 30
+  tl = !git tag --list --sort='-authordate' --format '%(color:blue)%(align:10,right)%(refname:lstrip=2)%(end) %(color:red dim)%(objectname:short) %(color:green dim)%(authordate:format-local:%F %R) %(color:yellow dim)%(authorname)' | head -n 30
   today = !git --no-pager l --since=today.midnight
   tree = !git lp --graph
   last-tag = !git describe --tags $(git rev-list --tags --max-count=1)
