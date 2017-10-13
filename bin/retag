@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
 
+_bundle() {
+  if [ -e 'Gemfile' ]
+  then
+    echo 'Gemfile found, bundling first'
+    bundle
+  fi
+}
+
 _retag() {
+  _bundle
   ctags || (rm tags && ctags)
   ctags-gems || (rm tags.gems && ctags-gems)
 }
