@@ -8,6 +8,8 @@ alias ls="ls -G -h"
 alias l="ls -l"
 alias la="ls -lA"
 
+alias watch="watch --color"
+
 alias ..="cd .."
 alias ...="cd ../.."
 
