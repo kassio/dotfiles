@@ -44,6 +44,7 @@
   work = !git config --local --replace-all user.name "Kassio\\ Borges" && git config --local user.email "kborges@zendesk.com"
   home = !git config --local --replace-all user.name "Kassio\\ Borges" && git config --local user.email "kassioborgesm@gmail.com"
   b = branch
+  bc = branch --all --contains
   c = commit -v
   ca = commit -v --amend
   co = checkout
