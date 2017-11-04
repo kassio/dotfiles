@@ -78,4 +78,8 @@ export FZF_DEFAULT_OPTS="--reverse --tiebreak=begin,length,index"
 
 ssh-add -A 2>/dev/null;
 
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
 # vim:ft=sh:
