@@ -6,4 +6,3 @@ git clone https://github.com/kassio/nvimfiles.git ${HOME}/.config/nvim
 ln -sf ${HOME}/.config/nvim ${HOME}/.vim
 
 ${HOME}/.config/nvim/bin/setup
-${HOME}/.config/nvim/bin/setup

@@ -7,5 +7,5 @@ ln -sf ${INSTALLER}/default-gems ${HOME}/.rbenv/default-gems
 
 RUBY_VERSION="$(rbenv install -l | grep "^\s*\d\.\d\.\d$" | tail -1 | tr -d ' ')"
 
-rbenv install ${RUBY_VERSION}
+rbenv install --skip-existing ${RUBY_VERSION}
 rbenv global ${RUBY_VERSION}

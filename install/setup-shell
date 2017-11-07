@@ -3,8 +3,13 @@
 export homebrew_prefix=${HOMEBREW_PREFIX:-/usr/local}
 
 # Customize my paths
-cat /etc/paths | sudo tee /etc/paths.d/system
-echo "" | sudo tee /etc/paths
+if [ -f "/etc/paths.original" ]
+then
+  sudo mv /etc/paths{.original,}
+fi
+
+sudo cp /etc/paths /etc/paths.d/system
+sudo mv /etc/paths{,.original}
 echo "${homebrew_prefix}/bin" | sudo tee /etc/paths.d/homebrew
 echo "${homebrew_prefix}/sbin" | sudo tee -a /etc/paths.d/homebrew
 
@@ -12,6 +17,11 @@ echo "${homebrew_prefix}/sbin" | sudo tee -a /etc/paths.d/homebrew
 eval $(/usr/libexec/path_helper -s)
 
 # Make custom shells available
+if [ -f "/etc/shells.original" ]
+then
+  sudo mv /etc/shells{.original,}
+fi
+sudo cp /etc/shells{,.original}
 [[ $(grep "${homebrew_prefix}/bin/bash" /etc/shells) ]] || \
   echo "${homebrew_prefix}/bin/bash" | sudo tee -a /etc/shells
 [[ $(grep "${homebrew_prefix}/bin/zsh" /etc/shells) ]] || \

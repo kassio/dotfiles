@@ -5,10 +5,10 @@ source "$(dirname $0)/global"
 pushd ${HOME} > /dev/null && trap 'popd > /dev/null' EXIT HUP INT QUIT TERM
 
 ${INSTALLER}/setup-xcode
-${INSTALLER}/basic-packages
+${INSTALLER}/setup-basic-packages
 ${INSTALLER}/setup-shell
-${INSTALLER}/rcfiles
-${INSTALLER}/ruby
+${INSTALLER}/setup-rcfiles
+${INSTALLER}/setup-ruby
 source ${DOTFILES}/lib/env
 
 # Installing all my stuff
