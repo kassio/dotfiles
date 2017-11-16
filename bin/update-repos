@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+function update-repo() {
+  local OK=" 👌 "
+  local NOK=" 👎 "
+
+  function fetch-master() {
+    local icon=" 🔅 "
+    local path="$(basename ${PWD})"
+    echo -n "${icon} fetching master on $path"
+
+    update-master -q
+    result_status
+  }
+
+  function rebase() {
+    local branch=$(git symbolic-ref --short HEAD)
+    local icon=" ➡️  "
+
+    if [ "${branch}" != "master" ]
+    then
+      echo -ne "\n   ${icon} Rebasing '${branch}' on master"
+      git rebase master &>/dev/null
+      result_status
+    fi
+  }
+
+  function result_status() {
+    local status=$?
+
+    [ ${status} -eq 0 ] && echo -n "${OK}" || echo -n "${NOK}"
+
+    return ${status}
+  }
+
+  fetch-master && rebase
+  echo -ne "\n"
+}
+
+export -f update-repo
+
+pushd "${PWD}" > /dev/null && trap 'popd &> /dev/null' EXIT HUP INT QUIT TERM
+
+for-each-repo update-repo
+
+unset -f update-repo

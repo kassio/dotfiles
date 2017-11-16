@@ -4,6 +4,9 @@ export HOMEBREW_NO_ANALYTICS=1
 # personal cd paths
 export CDPATH=".:${HOME}:${HOME}/.config"
 
+# personal repo paths
+export REPOS="${HOME}/.config/nvim:${HOME}/.dotfiles"
+
 # rbenv
 eval "$(rbenv init -)"
 
