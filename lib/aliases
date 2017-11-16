@@ -75,6 +75,4 @@ alias gt="g tag"
 alias gtl="g tl"
 alias gtla="g tla"
 
-alias sudo="A=`alias &>/dev/null` sudo env -- "
-
 alias rn="react-native"

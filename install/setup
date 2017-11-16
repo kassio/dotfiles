@@ -2,6 +2,9 @@
 
 source "$(dirname $0)/global"
 
+# Ask for superpowers upfront
+sudo -v
+
 pushd ${HOME} > /dev/null && trap 'popd > /dev/null' EXIT HUP INT QUIT TERM
 
 ${INSTALLER}/setup-xcode
