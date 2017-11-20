@@ -13,3 +13,4 @@ node_modules
 vendor/bundle/*
 vendor/cache/*
 vendor/ruby/*
+node_modules/*
