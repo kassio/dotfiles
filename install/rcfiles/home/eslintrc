@@ -15,9 +15,6 @@
   "globals": {
     "$": true
   },
-  "ecmaFeatures": {
-    "modules": true
-  },
   "rules": {
     "quotes": [2, "single"],
     "comma-dangle": [2, "only-multiline"],
