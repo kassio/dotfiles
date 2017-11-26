@@ -38,6 +38,9 @@ __title() {
 precmd_functions=(__ps1 __title)
 export PROMPT_COMMAND="__ps1; __title"
 
+# set console tab size to 2 spaces
+tabs -2
+
 # local env
 if [ -e "${HOME}/.env" ]
 then
