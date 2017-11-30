@@ -51,7 +51,7 @@ brew "libxslt"
 brew "markdown"
 brew "msgpack"
 brew "mysql", restart_service: true
-brew "neovim", args: ["HEAD"]
+brew "neovim"
 brew "nvm"
 brew "phantomjs"
 brew "sqlite"
