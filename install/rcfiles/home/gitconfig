@@ -60,7 +60,6 @@
   lp = log --pretty=format:'%C(red dim)%h %C(green)%cd %C(yellow)%an %C(reset)%C(white)%s %C(blue)%d'
   m = merge
   mt = mergetool
-  n = "!f() { git checkout -b kassio/$1; };f"
   p = pull
   ps = push
   r = rebase
