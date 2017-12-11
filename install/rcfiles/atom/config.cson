@@ -14,5 +14,7 @@
   "tree-view":
     alwaysOpenExisting: true
     hideIgnoredNames: true
+    hideVcsIgnoredFiles: true
+    showOnRightSide: true
   welcome:
     showOnStartup: false
