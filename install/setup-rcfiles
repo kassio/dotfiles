@@ -8,9 +8,16 @@ do
   ln -sf ${f} ${HOME}/.${f##*/}
 done
 
+mkdir -p ${HOME}/.config
 for f in ${INSTALLER}/rcfiles/home-config/*
 do
   ln -sf ${f} ${HOME}/.config/${f##*/}
+done
+
+mkdir -p ${HOME}/.atom
+for f in ${INSTALLER}/rcfiles/atom/*
+do
+  ln -sf ${f} ${HOME}/.atom/${f##*/}
 done
 
 # ssh

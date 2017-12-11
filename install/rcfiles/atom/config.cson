@@ -1,0 +1,18 @@
+"*":
+  core:
+    audioBeep: false
+    projectHome: "/Users/kborges/src"
+    restorePreviousWindowsOnStart: "no"
+    telemetryConsent: "no"
+    titleBar: "custom"
+  editor:
+    showIndentGuide: true
+    showInvisibles: true
+    zoomFontWhenCtrlScrolling: true
+  "exception-reporting":
+    userId: "493f793d-5b09-4e7c-9e28-c8935d373e22"
+  "tree-view":
+    alwaysOpenExisting: true
+    hideIgnoredNames: true
+  welcome:
+    showOnStartup: false

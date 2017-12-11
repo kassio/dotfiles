@@ -1,0 +1,4 @@
+'.source.js, .source.jsx, .source.ts, .source.tsx':
+  'console.log':
+    'prefix': 'log'
+    'body': 'console.log(${1:"crashing})$2'
