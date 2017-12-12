@@ -1,4 +1,6 @@
 "*":
+  autosave:
+    enabled: true
   core:
     audioBeep: false
     projectHome: "/Users/kborges/src"
