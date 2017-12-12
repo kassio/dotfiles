@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 
+echo '>> Apple upgrade'
 softwareupdate -ia
+
+echo '>> brew upgrade'
 brew update
 brew upgrade --fetch-HEAD
 brew cleanup
+
+echo '>> atom packages upgrade'
+apm ls --installed --enabled --bare | sed 's/@.*//' > ${HOME}/.dotfiles/install/atom-packages
+apm upgrade
