@@ -11,3 +11,6 @@ brew cleanup
 echo '>> atom packages upgrade'
 apm ls --installed --enabled --bare | sed 's/@.*//' > ${HOME}/.dotfiles/install/atom-packages
 apm upgrade
+
+echo '>> neovim/vim packages upgrade'
+${HOME}/.config/nvim/bin/pack
