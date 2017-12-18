@@ -3,6 +3,7 @@
     enabled: true
   core:
     audioBeep: false
+    excludeVcsIgnoredPaths: false
     projectHome: "/Users/kborges/src"
     restorePreviousWindowsOnStart: "no"
     telemetryConsent: "no"
@@ -13,6 +14,8 @@
     zoomFontWhenCtrlScrolling: true
   "exception-reporting":
     userId: "493f793d-5b09-4e7c-9e28-c8935d373e22"
+  "fuzzy-finder":
+    searchAllPanes: true
   "tree-view":
     alwaysOpenExisting: true
     hideIgnoredNames: true
