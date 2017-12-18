@@ -7,7 +7,7 @@ function update-repo() {
   function fetch-master() {
     local icon=" 🔅 "
     local path="$(basename ${PWD})"
-    echo -n "${icon} fetching master on $path"
+    echo -n "${icon} fetching master on ${PWD}"
 
     update-master -q
     result_status
