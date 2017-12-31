@@ -1,1 +1,1 @@
-/Users/kborges/.dotfiles/install/rcfiles/files/ctags.d
+/Users/kborges/.dotfiles/install/rcfiles/home/ctags.d
