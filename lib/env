@@ -1,6 +1,9 @@
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 export HOMEBREW_NO_ANALYTICS=1
 
+# Coding path
+export PROJECTS="${HOME}/src"
+
 # personal cd paths
 export CDPATH=".:${HOME}:${HOME}/.config"
 
