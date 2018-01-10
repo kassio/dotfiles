@@ -4,9 +4,6 @@ export HOMEBREW_NO_ANALYTICS=1
 # Coding path
 export PROJECTS="${HOME}/src"
 
-# personal cd paths
-export CDPATH=".:${HOME}:${HOME}/.config:${PROJECTS}"
-
 # personal repo paths
 export REPOS="${HOME}/.config/nvim:${HOME}/.dotfiles"
 
@@ -49,6 +46,10 @@ if [ -e "${HOME}/.env" ]
 then
   source ${HOME}/.env
 fi
+
+# personal cd paths
+# Loaded after custom env to ensure that the PROJECTS is the last CDPATH
+export CDPATH=".:${HOME}:${HOME}/.config:${PROJECTS}"
 
 iterm_integration_script="${HOME}/.iterm2_shell_integration.${ZSH_NAME:-bash}"
 if [ -f ${iterm_integration_script} ]
