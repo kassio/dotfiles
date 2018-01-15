@@ -1,16 +1,27 @@
 #!/usr/bin/env bash
 
-echo '>> Apple upgrade'
+puts() {
+  local color='\e[0;36m'
+  local reset='\e[00m'
+  printf "${color}$*${reset}\n"
+}
+
+puts ">> updating repositories"
+update-repos
+
+puts "\n>> Apple upgrade"
 softwareupdate -ia
 
-echo '>> brew upgrade'
+puts "\n>> brew upgrade"
 brew update
 brew upgrade --fetch-HEAD
 brew cleanup
 
-echo '>> atom packages upgrade'
+puts "\n>> atom packages upgrade"
 apm ls --installed --enabled --bare | sed 's/@.*//' > ${HOME}/.dotfiles/install/atom-packages
 apm upgrade
 
-echo '>> neovim/vim packages upgrade'
+puts "\n>> neovim/vim packages upgrade"
 ${HOME}/.config/nvim/bin/pack
+
+echo
