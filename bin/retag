@@ -1,25 +1,61 @@
 #!/usr/bin/env bash
 
-_bundle() {
+retag-gems() {
   if [ -e 'Gemfile' ]
   then
     echo 'Gemfile found, bundling first'
     bundle
+    ctags-gems || (rm tags.gems && ctags-gems)
   fi
 }
 
-_retag() {
-  _bundle
+retag() {
   ctags || (rm tags && ctags)
-  ctags-gems || (rm tags.gems && ctags-gems)
 }
 
-case $1 in
-  -v|--verbose)
-    _retag
-    ;;
-  *)
-    exec &>/dev/null
-    _retag
-    ;;
-esac
+print-help() {
+  echo -e "usage: retag [-g|--gems] [--no-gems] [-v|--verbose] [-h|--help]
+  Regenerate the ctags file for the current project.
+  Options:
+  -g, --gems      if a Gemfile exists, bundle and generate ctags file for the gems [DEFAULT]
+  -no--gems       even a Gemfile exists, do not bundle/generate ctags file for the gems
+  -v, --verbose   show what's going on
+  -h, --help      show this help message
+"
+}
+
+gems=true
+verbose=false
+
+for option in $@
+do
+  case $option in
+    --no-gems)
+      gems=false
+      ;;
+    -g|--gems)
+      gems=true
+      ;;
+    -v|--verbose)
+      verbose=true
+      ;;
+    -h|--help)
+      print-help
+      exit 0
+      ;;
+  esac
+done
+
+if [ "$verbose" != true ]
+then
+  echo 'not verbosing'
+  exec &>/dev/null
+fi
+
+if [ "$gems" = true ]
+then
+  echo 'bundling'
+  retag-gems
+fi
+
+retag
