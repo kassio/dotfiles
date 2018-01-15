@@ -5,7 +5,15 @@ source "$(dirname $0)/global"
 # Create linked files
 for f in ${INSTALLER}/rcfiles/home/*
 do
-  ln -sf ${f} ${HOME}/.${f##*/}
+  target=${HOME}/.${f##*/}
+  if [ -L ${target} ]
+  then
+    rm -rf $target
+  elif [ -f ${target} ]
+  then
+    echo "${target} already exists and is not a link"
+  fi
+  ln -sf ${f} $target
 done
 
 mkdir -p ${HOME}/.config
