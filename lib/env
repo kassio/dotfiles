@@ -1,6 +1,9 @@
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 export HOMEBREW_NO_ANALYTICS=1
 
+# Personal CDPATHs
+export CDPATH=".:${HOME}:${HOME}/.config"
+
 # Coding path
 export PROJECTS="${HOME}/src"
 
@@ -47,9 +50,8 @@ then
   source ${HOME}/.env
 fi
 
-# personal cd paths
-# Loaded after custom env to ensure that the PROJECTS is the last CDPATH
-export CDPATH=".:${HOME}:${HOME}/.config:${PROJECTS}"
+# Ensure the PROJECTS is the last CDPATH
+export CDPATH="${CDPATH}:${PROJECTS}"
 
 iterm_integration_script="${HOME}/.iterm2_shell_integration.${ZSH_NAME:-bash}"
 if [ -f ${iterm_integration_script} ]
