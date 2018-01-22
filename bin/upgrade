@@ -6,7 +6,7 @@ title() {
   local reset='\e[00m'
   local bullet="${yellow}▸ "
 
-  printf "${bullet}${blue}$*${reset}\n"
+  printf "${bullet}${blue}$*${reset}\n" >&3 | tee -a ${LOGFILE}
 }
 
 print-help() {
@@ -23,13 +23,14 @@ print-help() {
 "
 }
 
+LOGFILE="/tmp/upgrade.log"
 apple=true
 git=true
-verbose=true
+verbose=false
 
 for option in $@
 do
-  case $option in
+  case ${option} in
     -a|--apple)
       apple=true
       ;;
@@ -55,18 +56,20 @@ do
   esac
 done
 
-if [ "$verbose" != true ]
+exec 3>/dev/stdout
+if [ "${verbose}" != true ]
 then
-  exec &>/dev/null
+  exec 1>>${LOGFILE}
+  exec 2>&1
 fi
 
-if [ "$git" = true ]
+if [ "${git}" = true ]
 then
   title "updating repositories"
   update-repos
 fi
 
-if [ "$apple" = true ]
+if [ "${apple}" = true ]
 then
   title "Apple upgrade"
   softwareupdate -ia
