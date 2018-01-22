@@ -10,7 +10,7 @@ title() {
 }
 
 print-help() {
-  echo -e "usage: upgrade [-g|--git] [--no-git] [-h|--help]
+  echo -e "USAGE: upgrade [options]
   Upgrade your system
   Options:
   -a, --apple      Update apple softwareupdate;

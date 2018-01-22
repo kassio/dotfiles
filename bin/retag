@@ -14,11 +14,11 @@ retag() {
 }
 
 print-help() {
-  echo -e "usage: retag [-g|--gems] [--no-gems] [-v|--verbose] [-h|--help]
+  echo -e "USAGE: retag [options]
   Regenerate the ctags file for the current project.
   Options:
   -g, --gems      if a Gemfile exists, bundle and generate ctags file for the gems [DEFAULT]
-  -no--gems       even a Gemfile exists, do not bundle/generate ctags file for the gems
+  -G, -no-gems    even a Gemfile exists, do not bundle/generate ctags file for the gems
   -v, --verbose   show what's going on
   -h, --help      show this help message
 "
@@ -30,7 +30,7 @@ verbose=false
 for option in $@
 do
   case $option in
-    --no-gems)
+    -G|--no-gems)
       gems=false
       ;;
     -g|--gems)
