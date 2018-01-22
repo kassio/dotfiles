@@ -4,7 +4,7 @@ title() {
   local blue='\e[0;36m'
   local yellow='\e[0;93m'
   local reset='\e[00m'
-  local bullet="${yellow} ▶  "
+  local bullet="${yellow} ▸ "
 
   printf "${bullet}${blue}$*${reset}\n"
 }
