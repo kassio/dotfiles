@@ -4,7 +4,7 @@ title() {
   local blue='\e[0;36m'
   local yellow='\e[0;93m'
   local reset='\e[00m'
-  local bullet="${yellow} ▸ "
+  local bullet="${yellow}▸ "
 
   printf "${bullet}${blue}$*${reset}\n"
 }
@@ -13,22 +13,40 @@ print-help() {
   echo -e "usage: upgrade [-g|--git] [--no-git] [-h|--help]
   Upgrade your system
   Options:
-  -g, --git      Update your git repositories in the \$REPOS, default.
-  -G -no--git    Do not update your git repositories
-  -h, --help     show this help message
+  -a, --apple      Update apple softwareupdate;
+  -A, --no-apple   Do not update apple softwareupdate;
+  -g, --git        Update your git repositories in the \$REPOS, default;
+  -G -no--git      Do not update your git repositories;
+  -v, --verbose    Show what's going on;
+  -q, --quiet      Do not show what's going on;
+  -h, --help       Show this help message;
 "
 }
 
+apple=true
 git=true
+verbose=true
 
 for option in $@
 do
   case $option in
+    -a|--apple)
+      apple=true
+      ;;
+    -A|--no-apple)
+      apple=false
+      ;;
     -G|--no-git)
       git=false
       ;;
     -g|--git)
       git=true
+      ;;
+    -q|--quiet)
+      verbose=false
+      ;;
+    -v|--verbose)
+      verbose=true
       ;;
     -h|--help)
       print-help
@@ -37,14 +55,22 @@ do
   esac
 done
 
-if [ "$git" == true ]
+if [ "$verbose" != true ]
+then
+  exec &>/dev/null
+fi
+
+if [ "$git" = true ]
 then
   title "updating repositories"
   update-repos
 fi
 
-title "Apple upgrade"
-softwareupdate -ia
+if [ "$apple" = true ]
+then
+  title "Apple upgrade"
+  softwareupdate -ia
+fi
 
 title "brew upgrade"
 brew update
@@ -53,7 +79,7 @@ brew cleanup
 
 title "atom packages upgrade"
 apm ls --installed --enabled --bare | sed 's/@.*//' > ${HOME}/.dotfiles/install/atom-packages
-apm upgrade
+yes | apm upgrade
 
 title "neovim/vim packages upgrade"
 ${HOME}/.config/nvim/bin/pack

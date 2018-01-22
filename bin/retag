@@ -48,7 +48,6 @@ done
 
 if [ "$verbose" != true ]
 then
-  echo 'not verbosing'
   exec &>/dev/null
 fi
 
