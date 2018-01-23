@@ -1,3 +1,12 @@
 {
-  "detachKeys": "ctrl-q,ctrl-q"
+	"auths": {},
+	"detachKeys": "ctrl-q,ctrl-q",
+	"credHelpers": {
+		"appengine.gcr.io": "gcr",
+		"asia.gcr.io": "gcr",
+		"eu.gcr.io": "gcr",
+		"gcr.io": "gcr",
+		"k8s.gcr.io": "gcr",
+		"us.gcr.io": "gcr"
+	}
 }
