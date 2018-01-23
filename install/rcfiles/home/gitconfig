@@ -40,6 +40,10 @@
   prompt = false
 [mergetool "vimdiff"]
   cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[log]
+  date = format-local:"%F %R"
+[pretty]
+  log = %C(red dim)%h %C(green)%cd %C(yellow)%an %C(reset)%C(white)%s %C(blue)%d
 [alias]
   work = !git config --local --replace-all user.name "Kassio\\ Borges" && git config --local user.email "kborges@zendesk.com"
   home = !git config --local --replace-all user.name "Kassio\\ Borges" && git config --local user.email "kassioborgesm@gmail.com"
@@ -55,9 +59,10 @@
   f = fetch
   fix = commit --amend --no-edit
   l = !git --no-pager lp -20
+  last-tag = !git describe --tags $(git rev-list --tags --max-count=1)
   lme = !GIT_USERNAME="$(git config user.name)" && git --no-pager lp --author="\"$GIT_USERNAME\""
   lpme = !GIT_USERNAME="$(git config user.name)" && git lp --author="\"$GIT_USERNAME\""
-  lp = log --pretty=format:'%C(red dim)%h %C(green)%cd %C(yellow)%an %C(reset)%C(white)%s %C(blue)%d'
+  lp = log --pretty=log
   m = merge
   mt = mergetool
   p = pull
@@ -67,16 +72,14 @@
   t = tag
   tag-sync = !git fetch --prune origin "+refs/tags/*:refs/tags/*"
   tla = !git tag --list --sort='-authordate' --format '%(color:blue)%(align:10,right)%(refname:lstrip=2)%(end) %(color:red dim)%(objectname:short) %(color:green dim)%(authordate:format-local:%F %R) %(color:yellow dim)%(authorname)'
-  tl = "!f() { git tla | head -n ${1:-30}; };f"
+  tl = "!f() { git --no-pager tla | head -n ${1:-30}; };f"
   today = !git --no-pager l --since=today.midnight
   tree = !git lp --graph
   show-last-tag = !git show $(git last-tag)
   rank = shortlog -sn
-  rf = reflog --pretty=format:'%C(red dim)%h %C(green)%cd %C(yellow)%an %C(reset)%C(white)%s %C(blue)%d'
+  rf = reflog --pretty=log
   rfme = !GIT_USERNAME="$(git config user.name)" && git rf --author="\"$GIT_USERNAME\""
 [tag]
   sort = creatordate
 [rerere]
   enabled = true
-[log]
-  date = format-local:"%F %R"
