@@ -19,13 +19,3 @@ for app in Finder Dock SystemUIServer
 do
   killall "$app" >/dev/null 2>&1
 done
-
-# Enable fingerprint with sudo
-replacement='2i \
-auth       sufficient     pam_tid.so\
-'
-sudo mv /etc/pam.d/sudo{,.original}
-sed -e "${replacement}" /etc/pam.d/sudo.original | sudo tee /etc/pam.d/sudo
-
-# Doesn't work on El captain:
-# sudo chflags -h nohidden /tmp

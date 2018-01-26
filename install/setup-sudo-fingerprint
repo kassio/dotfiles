@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# Enable fingerprint with sudo
+replacement='2i \
+auth       sufficient     pam_tid.so\
+'
+sudo mv /etc/pam.d/sudo{,.original}
+sed -e "${replacement}" /etc/pam.d/sudo.original | sudo tee /etc/pam.d/sudo

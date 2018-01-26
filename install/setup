@@ -29,5 +29,6 @@ tic /tmp/${TERM}.ti
 
 # Customize OSX
 ${INSTALLER}/setup-macos
+${INSTALLER}/setup-sudo-fingerprint
 
 exit 0
