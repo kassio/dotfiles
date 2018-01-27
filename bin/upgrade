@@ -6,7 +6,7 @@ title() {
   local reset='\e[00m'
   local bullet="${yellow}▸ "
 
-  printf "${bullet}${blue}$*${reset}\n" >&3 | tee -a ${LOGFILE}
+  printf "${bullet}${blue}$*${reset}\n" | tee -a ${LOGFILE} >&3
 }
 
 print-help() {
