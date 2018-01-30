@@ -24,6 +24,7 @@ print-help() {
 "
 }
 
+LOGFILE="/tmp/$(date +"%Y%m%d%H%M%S")-${PWD//\//_}.retag"
 gems=true
 verbose=false
 
@@ -46,10 +47,14 @@ do
   esac
 done
 
-if [ "$verbose" != true ]
+exec 3>/dev/stdout
+if [ "${verbose}" = true ]
 then
-  exec &>/dev/null
+  exec > >(tee -a ${LOGFILE}) 2>&1
+else
+  exec >${LOGFILE} 2>&1
 fi
+
 
 if [ "$gems" = true ]
 then
