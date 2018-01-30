@@ -1,28 +1,5 @@
 #!/usr/bin/env bash
 
-title() {
-  local blue='\e[0;36m'
-  local yellow='\e[0;93m'
-  local reset='\e[00m'
-  local bullet="${yellow}▸ "
-
-  printf "${bullet}${blue}$*${reset}\n" | tee -a ${LOGFILE} >&3
-}
-
-print-help() {
-  echo -e "USAGE: upgrade [options]
-  Upgrade your system
-  Options:
-  -a, --apple      Update apple softwareupdate;
-  -A, --no-apple   Do not update apple softwareupdate;
-  -g, --git        Update your git repositories in the \$REPOS, default;
-  -G -no--git      Do not update your git repositories;
-  -v, --verbose    Show what's going on;
-  -q, --quiet      Do not show what's going on;
-  -h, --help       Show this help message;
-"
-}
-
 LOGFILE="/tmp/upgrade.log"
 apple=true
 git=true
@@ -56,12 +33,38 @@ do
   esac
 done
 
+echo "--- $(date +"%Y-%m-%d %H:%M:%S") ---" >${LOGFILE}
+
 exec 3>/dev/stdout
-if [ "${verbose}" != true ]
+if [ "${verbose}" = true ]
 then
-  exec 1>>${LOGFILE}
-  exec 2>&1
+  exec > >(tee -a ${LOGFILE}) 2>&1
+else
+  exec >${LOGFILE} 2>&1
 fi
+
+title() {
+  local blue='\e[0;36m'
+  local yellow='\e[0;93m'
+  local reset='\e[00m'
+  local bullet="${yellow}▸ "
+
+  printf "${bullet}${blue}$*${reset}\n" | tee -a ${LOGFILE} >&3
+}
+
+print-help() {
+  echo -e "USAGE: upgrade [options]
+  Upgrade your system
+  Options:
+  -a, --apple      Update apple softwareupdate;
+  -A, --no-apple   Do not update apple softwareupdate;
+  -g, --git        Update your git repositories in the \$REPOS, default;
+  -G, --no-git    Do not update your git repositories;
+  -v, --verbose    Show what's going on;
+  -q, --quiet      Do not show what's going on;
+  -h, --help       Show this help message;
+"
+}
 
 if [ "${git}" = true ]
 then
@@ -81,7 +84,10 @@ brew upgrade --fetch-HEAD
 brew cleanup
 
 title "atom packages upgrade"
-apm ls --installed --enabled --bare | sed 's/@.*//' > ${HOME}/.dotfiles/install/atom-packages
+apm ls \
+  --installed --enabled --bare \
+  | sed 's/@.*//' > ${HOME}/.dotfiles/install/atom-packages
+
 yes | apm upgrade
 
 title "neovim/vim packages upgrade"
