@@ -23,6 +23,8 @@ bindkey -e
 
 # Del
 bindkey '\e[3~'   delete-char
+# Ctrl+u deletes from cursor position to line beginning
+bindkey \^U       backward-kill-line
 
 # c-x c-e edit command line in ${EDITOR}
 autoload -U edit-command-line
