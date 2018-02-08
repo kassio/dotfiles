@@ -5,7 +5,7 @@ export HOMEBREW_NO_ANALYTICS=1
 export CDPATH=".:${HOME}:${HOME}/.config"
 
 # Coding path
-export PROJECTS="${HOME}/src"
+export PROJECTS="${HOME}/Code"
 
 # personal repo paths
 export REPOS="${HOME}/.config/nvim:${HOME}/.dotfiles"

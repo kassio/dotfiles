@@ -1,5 +1,8 @@
 [user]
   name = Kassio Borges
+  email = kassioborgesm@gmail.com
+[includeIf "gitdir:~/Code/zendesk/"]
+  path = ~/Code/zendesk/.gitconfig
 [credential]
   helper = osxkeychain
 [core]
@@ -45,8 +48,6 @@
 [pretty]
   log = %C(red dim)%h %C(green)%cd %C(yellow)%an %C(reset)%C(white)%s %C(blue)%d
 [alias]
-  work = !git config --local --replace-all user.name "Kassio\\ Borges" && git config --local user.email "kborges@zendesk.com"
-  home = !git config --local --replace-all user.name "Kassio\\ Borges" && git config --local user.email "kassioborgesm@gmail.com"
   b = branch
   bc = branch --all --contains
   c = commit -v
@@ -60,9 +61,9 @@
   fix = commit --amend --no-edit
   l = !git --no-pager lp -20
   last-tag = !git describe --tags $(git rev-list --tags --max-count=1)
-  lme = !GIT_USERNAME="$(git config user.name)" && git --no-pager lp --author="\"$GIT_USERNAME\""
-  lpme = !GIT_USERNAME="$(git config user.name)" && git lp --author="\"$GIT_USERNAME\""
-  lp = log --pretty=log
+  lme = !git l --author="\"$(git config user.name)\""
+  lp = !git log --pretty=log
+  lpme = !git lp --author="\"$(git config user.name)\""
   m = merge
   mt = mergetool
   p = pull
@@ -78,7 +79,7 @@
   show-last-tag = !git show $(git last-tag)
   rank = shortlog -sn
   rf = reflog --pretty=log
-  rfme = !GIT_USERNAME="$(git config user.name)" && git rf --author="\"$GIT_USERNAME\""
+  rfme = !git rf --author="\"$(git config user.name)\""
 [tag]
   sort = creatordate
 [rerere]
