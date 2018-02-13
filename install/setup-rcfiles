@@ -22,6 +22,9 @@ do
   ln -sf ${f} ${HOME}/.config/${f##*/}
 done
 
+mkdir -p ${HOME}/.docker
+cp ${INSTALLER}/rcfiles/home-docker/config.json ${HOME}/.docker/config.json
+
 mkdir -p ${HOME}/.atom
 for f in ${INSTALLER}/rcfiles/atom/*
 do
