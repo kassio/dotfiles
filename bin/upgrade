@@ -3,7 +3,7 @@
 LOGFILE="/tmp/upgrade.log"
 apple=true
 git=true
-verbose=false
+verbose=true
 
 for option in $@
 do
@@ -56,11 +56,11 @@ print-help() {
   echo -e "USAGE: upgrade [options]
   Upgrade your system
   Options:
-  -a, --apple      Update apple softwareupdate;
+  -a, --apple      Update apple softwareupdate [default];
   -A, --no-apple   Do not update apple softwareupdate;
-  -g, --git        Update your git repositories in the \$REPOS, default;
+  -g, --git        Update your git repositories in the \$REPOS, default [default];
   -G, --no-git    Do not update your git repositories;
-  -v, --verbose    Show what's going on;
+  -v, --verbose    Show what's going on [default];
   -q, --quiet      Do not show what's going on;
   -h, --help       Show this help message;
 "
