@@ -4,12 +4,20 @@
 defaults write -g AppleKeyboardUIMode -int 3
 # Turn on key repeat (Disable hold modifier)
 defaults write -g ApplePressAndHoldEnabled -int 0
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write NSGlobalDomain KeyRepeat -int 0.02
 # Enable auto replacement
 defaults write -g WebAutomaticTextReplacementEnabled -int 1
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -int 0
-defaults write NSGlobalDomain InitialKeyRepeat -int 15
-defaults write NSGlobalDomain KeyRepeat -int 2
+
+# Layout
+defaults write -g com.apple.HIToolbox '{
+  AppleCurrentKeyboardLayoutInputSourceID = "com.apple.keylayout.US";
+  AppleEnabledInputSources = ();
+  AppleInputSourceHistory = ();
+  AppleSelectedInputSources = ();
+}'
 
 # Custom shortcuts
 
@@ -57,3 +65,7 @@ defaults write org.videolan.vlc NSUserKeyEquivalents '{
 defaults write Whatsapp NSUserKeyEquivalents '{
   "Archive Chat" = "@$e";
 }'
+
+# Force global keyboard config to follow the 'local'
+sudo cp ~/Library/Preferences/com.apple.HIToolbox.plist \
+  /Library/Preferences/com.apple.HIToolbox.plist
