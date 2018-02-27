@@ -49,8 +49,9 @@
 [pretty]
   log = %C(red dim)%h %C(green)%cd %C(yellow)%an %C(reset)%C(white)%s %C(blue)%d
 [alias]
-  b = branch
-  bc = branch --all --contains
+  b = !git --no-pager branch
+  bp = branch
+  bc = b --all --contains
   c = commit -v
   ca = commit -v --amend
   co = checkout
