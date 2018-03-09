@@ -7,7 +7,6 @@
   helper = osxkeychain
 [core]
   excludesfile = ~/.gitignore
-  hooksPath = ~/.dotfiles/lib/git-hooks
   editor = `which $EDITOR`
   whitespace = trailing-space,space-before-tab,cr-at-eol
   ignorecase = false
