@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
 function update-repo() {
+  trap 'exit -1' EXIT HUP INT QUIT TERM
+
   local OK=" 👌 "
-  local NOK=" 👎 "
+  local NOK=" 🚫 "
 
   function fetch-master() {
     local icon=" 🔅 "

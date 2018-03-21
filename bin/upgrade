@@ -66,31 +66,36 @@ print-help() {
 "
 }
 
-if [ "${git}" = true ]
-then
-  title "updating repositories"
-  update-repos
-fi
+_upgrade() {
+  trap 'exit -1' EXIT HUP INT QUIT TERM
 
-if [ "${apple}" = true ]
-then
-  title "Apple upgrade"
-  softwareupdate -ia
-fi
+  if [ "${git}" = true ]
+  then
+    title "updating repositories"
+    update-repos
+  fi
 
-title "brew upgrade"
-brew update
-brew upgrade --fetch-HEAD
-brew cleanup
+  if [ "${apple}" = true ]
+  then
+    title "Apple upgrade"
+    softwareupdate -ia
+  fi
 
-title "atom packages upgrade"
-apm ls \
-  --installed --enabled --bare \
-  | sed 's/@.*//' > ${HOME}/.dotfiles/install/atom-packages
+  title "brew upgrade"
+  brew update
+  brew upgrade --fetch-HEAD
+  brew cleanup
 
-yes | apm upgrade
+  title "atom packages upgrade"
+  apm ls \
+    --installed --enabled --bare \
+    | sed 's/@.*//' > ${HOME}/.dotfiles/install/atom-packages
 
-title "neovim/vim packages upgrade"
-${HOME}/.config/nvim/bin/pack
+  yes | apm upgrade
 
+  title "neovim/vim packages upgrade"
+  ${HOME}/.config/nvim/bin/pack
+}
+
+_upgrade
 echo
