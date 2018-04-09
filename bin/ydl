@@ -3,6 +3,7 @@
 URL="$1"
 shift
 DIR="${HOME}/Movies"
+PATH="${PATH}:/usr/local/bin"
 
 case ${URL} in
   *list*)
