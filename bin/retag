@@ -27,6 +27,7 @@ print-help() {
 LOGFILE="/tmp/$(date +"%Y%m%d%H%M%S")-${PWD//\//_}.retag"
 gems=true
 verbose=false
+quiet=false
 
 for option in $@
 do
@@ -40,6 +41,9 @@ do
     -v|--verbose)
       verbose=true
       ;;
+    -q|--quiet)
+      quiet=true
+      ;;
     -h|--help)
       print-help
       exit 0
@@ -52,7 +56,12 @@ if [ "${verbose}" = true ]
 then
   exec > >(tee -a ${LOGFILE}) 2>&1
 else
-  exec >${LOGFILE} 2>&1
+  exec >${LOGFILE}
+
+  if [ "${quiet}" = true ]
+  then
+    exec 2>&1
+  fi
 fi
 
 
