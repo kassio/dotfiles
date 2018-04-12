@@ -51,6 +51,7 @@
   b = !git --no-pager branch
   bp = branch
   bc = b --all --contains
+  bfd = "!f() { git branch -D $1 && git push origin :$1; }; f"
   c = commit -v
   ca = commit -v --amend
   co = checkout
