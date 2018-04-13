@@ -25,12 +25,6 @@ done
 mkdir -p ${HOME}/.docker
 cp ${INSTALLER}/rcfiles/home-docker/config.json ${HOME}/.docker/config.json
 
-mkdir -p ${HOME}/.atom
-for f in ${INSTALLER}/rcfiles/atom/*
-do
-  ln -sf ${f} ${HOME}/.atom/${f##*/}
-done
-
 # ssh
 # These configs needs to be copied because they are completed for Zendesk
 # softwares.
