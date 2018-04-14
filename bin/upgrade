@@ -87,10 +87,6 @@ _upgrade() {
   brew cleanup
 
   title "atom packages upgrade"
-  apm ls \
-    --installed --enabled --bare \
-    | sed 's/@.*//' > ${HOME}/.dotfiles/install/atom-packages
-
   yes | apm upgrade
 
   title "neovim/vim packages upgrade"
