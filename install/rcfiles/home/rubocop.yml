@@ -86,6 +86,9 @@ Style/MultilineMethodCallIndentation:
 Style/MultilineOperationIndentation:
   EnforcedStyle: indented
 
+Style/NumericLiterals:
+  Enabled: false
+
 Metrics/LineLength:
   Enabled: false
 
