@@ -30,7 +30,12 @@ function update-repo() {
   function result_status() {
     local status=$?
 
-    [ ${status} -eq 0 ] && echo -n "${OK}" || echo -n "${NOK}"
+    if [ ${status} -eq 0 ]
+    then
+      echo -n "${OK}"
+    else
+      echo -n "${NOK}"
+    fi
 
     return ${status}
   }
