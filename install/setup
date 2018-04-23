@@ -17,9 +17,6 @@ source ${DOTFILES}/lib/env
 # Installing all my stuff
 brew bundle --global
 
-# Config atom
-apm install --packages-file ${INSTALLER}/atom-packages
-
 # install iterm2 integration
 update-iterm2-integrations
 

@@ -86,9 +86,6 @@ _upgrade() {
   brew upgrade --fetch-HEAD
   brew cleanup
 
-  title "atom packages upgrade"
-  yes | apm upgrade
-
   title "neovim/vim packages upgrade"
   ${HOME}/.config/nvim/bin/pack
 }
