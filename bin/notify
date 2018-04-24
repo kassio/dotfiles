@@ -1,3 +1,20 @@
 #!/usr/bin/env bash
 
-osascript -e "display notification \"$*\" with title \"Notifying\""
+title="Notifying"
+message=""
+
+while true; do
+  case "$1" in
+    -t | --title)
+      shift
+      title=$1
+      ;;
+    * )
+      message="$*"
+      break
+      ;;
+  esac
+done
+
+
+osascript -e "display notification \"${message}\" with title \"${title}\""
