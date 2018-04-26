@@ -16,13 +16,14 @@ function update-repo() {
   }
 
   function rebase() {
+    local master=$(cat .git/custom-master 2>/dev/null || echo 'master')
     local branch=$(git symbolic-ref --short HEAD)
     local icon=" ➡️  "
 
-    if [ "${branch}" != "master" ]
+    if [ "${branch}" != "${master}" ]
     then
-      echo -ne "\n   ${icon} Rebasing '${branch}' on master"
-      git rebase master &>/dev/null
+      echo -ne "\n   ${icon} Rebasing '${branch}' on '${master}'"
+      git rebase ${master} &>/dev/null
       result_status
     fi
   }
