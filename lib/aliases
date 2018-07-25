@@ -77,7 +77,7 @@ alias gri="g r -i"
 alias grs="g r --skip"
 alias grf="g rf"
 alias gs="g s"
-alias gt="g tag"
+alias gt="g t"
 alias gtl="g tl"
 alias gtla="g tla"
 

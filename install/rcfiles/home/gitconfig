@@ -72,7 +72,7 @@
   ps = push
   r = rebase
   s = status -sb
-  t = tag
+  t = !git --no-pager tag
   tag-sync = !git fetch --prune origin "+refs/tags/*:refs/tags/*"
   tla = !git tag --list --sort='-authordate' --format '%(color:blue)%(align:10,right)%(refname:lstrip=2)%(end) %(color:red dim)%(objectname:short) %(color:green dim)%(authordate:format-local:%F %R) %(color:yellow dim)%(authorname)'
   tl = "!f() { git --no-pager tla | head -n ${1:-30}; };f"
