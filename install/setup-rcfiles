@@ -8,12 +8,12 @@ do
   target=${HOME}/.${f##*/}
   if [ -L ${target} ]
   then
-    rm -rf $target
+    rm -rf ${target}
   elif [ -f ${target} ]
   then
     echo "${target} already exists and is not a link"
   fi
-  ln -sf ${f} $target
+  ln -sf ${f} ${target}
 done
 
 mkdir -p ${HOME}/.config

@@ -28,4 +28,9 @@ tic /tmp/${TERM}.ti
 ${INSTALLER}/setup-macos
 ${INSTALLER}/setup-sudo-fingerprint
 
+if [ -f ${HOME}/Dropbox/dotfiles/custom-setup ]
+then
+  ${HOME}/Dropbox/dotfiles/custom-setup
+fi
+
 exit 0
