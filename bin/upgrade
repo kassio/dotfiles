@@ -5,6 +5,20 @@ apple=true
 git=true
 verbose=true
 
+print-help() {
+  echo -e "USAGE: upgrade [options]
+  Upgrade your system
+  Options:
+  -a, --apple      Update apple softwareupdate [default];
+  -A, --no-apple   Do not update apple softwareupdate;
+  -g, --git        Update your git repositories in the \$REPOS, default [default];
+  -G, --no-git    Do not update your git repositories;
+  -v, --verbose    Show what's going on [default];
+  -q, --quiet      Do not show what's going on;
+  -h, --help       Show this help message;
+"
+}
+
 for option in $@
 do
   case ${option} in
@@ -50,20 +64,6 @@ title() {
   local bullet="${yellow}▸ "
 
   printf "${bullet}${blue}$*${reset}\n" | tee -a ${LOGFILE} >&3
-}
-
-print-help() {
-  echo -e "USAGE: upgrade [options]
-  Upgrade your system
-  Options:
-  -a, --apple      Update apple softwareupdate [default];
-  -A, --no-apple   Do not update apple softwareupdate;
-  -g, --git        Update your git repositories in the \$REPOS, default [default];
-  -G, --no-git    Do not update your git repositories;
-  -v, --verbose    Show what's going on [default];
-  -q, --quiet      Do not show what's going on;
-  -h, --help       Show this help message;
-"
 }
 
 _upgrade() {
