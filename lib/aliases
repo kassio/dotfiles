@@ -35,6 +35,8 @@ alias DS="DISABLE_SPRING=1"
 
 alias be="bundle exec"
 
+alias diff="diff-so-fancy"
+
 # Git
 alias g="git"
 alias ga="g add -A"
