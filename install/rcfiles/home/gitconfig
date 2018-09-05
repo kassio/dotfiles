@@ -10,6 +10,7 @@
   editor = `which $EDITOR`
   whitespace = trailing-space,space-before-tab,cr-at-eol
   ignorecase = false
+  pager = diff-so-fancy | less --tabs=4 -RFX
 [push]
   default = current
 [pull]
@@ -47,9 +48,6 @@
   date = format-local:"%F %R"
 [pretty]
   log = %C(red dim)%h %C(green)%cd %C(yellow)%an %C(reset)%C(white)%s %C(blue)%d
-[pager]
-  diff = diff-so-fancy | less --tabs=1,5 -RFX
-  show = diff-so-fancy | less --tabs=1,5 -RFX
 [alias]
   b = !git --no-pager branch
   bp = branch
