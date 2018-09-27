@@ -6,5 +6,7 @@
     "editor.minimap.enabled": false,
     "editor.minimap.maxColumn": 100,
     "explorer.confirmDragAndDrop": false,
-    "javascript.updateImportsOnFileMove.enabled": "always"
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true
 }
