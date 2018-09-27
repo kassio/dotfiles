@@ -1,0 +1,10 @@
+{
+    "workbench.statusBar.feedback.visible": false,
+    "workbench.startupEditor": "newUntitledFile",
+    "window.zoomLevel": 1,
+    "editor.fontFamily": "Monaco, 'Courier New', monospace",
+    "editor.minimap.enabled": false,
+    "editor.minimap.maxColumn": 100,
+    "explorer.confirmDragAndDrop": false,
+    "javascript.updateImportsOnFileMove.enabled": "always"
+}

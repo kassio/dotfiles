@@ -31,3 +31,11 @@ cp ${INSTALLER}/rcfiles/home-docker/config.json ${HOME}/.docker/config.json
 mkdir -p ${HOME}/.ssh
 cp ${INSTALLER}/ssh_config ${HOME}/.ssh/config
 chmod -R 700 ${HOME}/.ssh
+
+# VSCode
+vscode_dir="${HOME}/Library/Application Support/Code/User"
+mkdir -p ${vscode_dir}
+for f in ${INSTALLER}/rcfiles/vscode/*
+do
+  ln -sf ${f} "${vscode_dir}/${f##*/}"
+done
