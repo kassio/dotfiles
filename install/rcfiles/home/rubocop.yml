@@ -1,6 +1,5 @@
 AllCops:
   Exclude:
-    - '._vim/**/*'
     - 'bin/**/*'
     - 'db/**/*'
     - 'config/**/*'
@@ -9,11 +8,11 @@ AllCops:
 Rails:
   Enabled: true
 
-Lint/EndAlignment:
-  EnforcedStyleAlignWith: variable
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
 
-Style/StringLiterals:
-  Enabled: false
+Style/CaseIndentation:
+  IndentWhenRelativeTo: end
 
 Style/AsciiComments:
   Enabled: false
@@ -21,8 +20,21 @@ Style/AsciiComments:
 Style/IndentHash:
   Enabled: false
 
+Style/CollectionMethods:
+  Enabled: true
+  PreferredMethods:
+      inject: 'inject'
+
 Style/Documentation:
   Enabled: false
+
+Style/BlockDelimiters:
+  Exclude:
+    - spec/**/*_spec.rb
+
+Style/BracesAroundHashParameters:
+  Exclude:
+    - spec/**/*_spec.rb
 
 Style/GuardClause:
   Enabled: false
@@ -42,11 +54,35 @@ Style/RaiseArgs:
 Style/SignalException:
   Enabled: false
 
+Metrics/AbcSize:
+  Max: 20
+
+Metrics/ClassLength:
+  Max: 100
+
+Metrics/ModuleLength:
+  Max: 100
+
+Metrics/LineLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 15
+
 Style/SingleLineBlockParams:
   Enabled: false
 
+Lint/EndAlignment:
+  AlignWith: variable
+
 Style/FormatString:
   Enabled: false
+
+Style/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Style/MultilineOperationIndentation:
+  EnforcedStyle: indented
 
 Style/WordArray:
   Enabled: false
@@ -60,46 +96,3 @@ Style/AlignHash:
 
 Style/TrivialAccessors:
   AllowPredicates: true
-
-Style/CollectionMethods:
-  Enabled: true
-  PreferredMethods:
-      inject: 'inject'
-
-Style/AlignParameters:
-  EnforcedStyle: with_fixed_indentation
-
-Style/CaseIndentation:
-  EnforcedStyle: end
-
-Style/BlockDelimiters:
-  Exclude:
-    - spec/**/*_spec.rb
-
-Style/BracesAroundHashParameters:
-  Exclude:
-    - spec/**/*_spec.rb
-
-Style/MultilineMethodCallIndentation:
-  EnforcedStyle: indented
-
-Style/MultilineOperationIndentation:
-  EnforcedStyle: indented
-
-Style/NumericLiterals:
-  Enabled: false
-
-Metrics/LineLength:
-  Enabled: false
-
-Metrics/AbcSize:
-  Max: 20
-
-Metrics/ClassLength:
-  Max: 100
-
-Metrics/ModuleLength:
-  Max: 100
-
-Metrics/MethodLength:
-  Max: 15
