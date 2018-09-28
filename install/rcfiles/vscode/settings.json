@@ -1,7 +1,7 @@
 {
     "workbench.statusBar.feedback.visible": false,
     "workbench.startupEditor": "newUntitledFile",
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 0,
     "editor.fontFamily": "Monaco, 'Courier New', monospace",
     "editor.minimap.enabled": false,
     "editor.minimap.maxColumn": 100,
