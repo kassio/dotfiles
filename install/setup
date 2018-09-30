@@ -11,6 +11,7 @@ ${INSTALLER}/setup-xcode
 ${INSTALLER}/setup-basic-packages
 ${INSTALLER}/setup-shell
 ${INSTALLER}/setup-rcfiles
+${INSTALLER}/setup-vscode
 ${INSTALLER}/setup-ruby
 source ${DOTFILES}/lib/env
 

@@ -8,5 +8,17 @@
         "key": "ctrl+`",
         "command": "workbench.action.terminal.focus",
         "when": "!terminalFocus"
+    },
+    {
+        "key": "shift+cmd+w",
+        "command": "-workbench.action.closeWindow"
+    },
+    {
+        "key": "shift+cmd+w",
+        "command": "workbench.action.closeAllEditors"
+    },
+    {
+        "key": "cmd+k cmd+w",
+        "command": "-workbench.action.closeAllEditors"
     }
 ]

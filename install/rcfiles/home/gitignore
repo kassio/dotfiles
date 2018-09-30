@@ -20,4 +20,3 @@ vendor/ruby
 .ignore
 
 ALEPreviewWindow
-.vscode

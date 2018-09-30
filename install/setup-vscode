@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+source "$(dirname $0)/global"
+
+# VSCode
+vscode_dir="${HOME}/Library/Application Support/Code/User"
+mkdir -p ${vscode_dir}
+for f in ${INSTALLER}/rcfiles/vscode/*
+do
+  ln -snf ${f} "${vscode_dir}/${f##*/}"
+done
