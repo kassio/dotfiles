@@ -87,3 +87,5 @@
   sort = creatordate
 [rerere]
   enabled = true
+[remote "origin"]
+  prune = true
