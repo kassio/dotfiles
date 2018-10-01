@@ -19,7 +19,7 @@
     "editor.formatOnSave": true,
     "editor.formatOnType": true,
     "workbench.sideBar.location": "right",
-    "workbench.activityBar.visible": true,
+    "workbench.activityBar.visible": false,
     "editor.fontSize": 15,
     "window.newWindowDimensions": "maximized",
     "window.restoreWindows": "all",
