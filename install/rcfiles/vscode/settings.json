@@ -16,7 +16,6 @@
     "files.autoSave": "onFocusChange",
     "editor.glyphMargin": false,
     "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
     "editor.formatOnType": true,
     "workbench.sideBar.location": "right",
     "workbench.activityBar.visible": false,
