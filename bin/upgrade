@@ -65,6 +65,7 @@ title() {
 
   printf "${bullet}${blue}$*${reset}\n" | tee -a ${LOGFILE} >&3
 }
+export -f title
 
 _upgrade() {
   trap 'exit -1' EXIT HUP INT QUIT TERM
@@ -88,7 +89,15 @@ _upgrade() {
 
   title "neovim/vim packages upgrade"
   ${HOME}/.config/nvim/bin/pack
+
+  if type custom-upgrade &>/dev/null
+  then
+    title "custom upgrade"
+    custom-upgrade
+  fi
 }
 
 _upgrade
+
+unset -f title
 echo
