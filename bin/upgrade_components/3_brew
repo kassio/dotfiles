@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+if [ "$1" = "--help" ]
+then
+  echo "- brew: Upgrade all your brews (and clean them up)"
+  exit
+fi
+
+title "brew upgrade"
+brew update
+brew upgrade --fetch-HEAD
+brew cleanup

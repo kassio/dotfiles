@@ -1,61 +1,29 @@
 #!/usr/bin/env bash
 
-LOGFILE="/tmp/upgrade.log"
-apple=true
-git=true
-verbose=true
+components_path="${HOME}/.dotfiles/bin/upgrade_components"
 
-print-help() {
-  echo -e "USAGE: upgrade [options]
-  Upgrade your system
+
+case "$1" in
+  --help|-h)
+    echo -e "USAGE: upgrade [options]
+    Upgrade your system components
+
   Options:
-  -a, --apple      Update apple softwareupdate [default];
-  -A, --no-apple   Do not update apple softwareupdate;
-  -g, --git        Update your git repositories in the \$REPOS, default [default];
-  -G, --no-git    Do not update your git repositories;
-  -v, --verbose    Show what's going on [default];
-  -q, --quiet      Do not show what's going on;
-  -h, --help       Show this help message;
-"
-}
+    --[component]
+      Will upgrade only the given component
 
-for option in $@
-do
-  case ${option} in
-    -a|--apple)
-      apple=true
-      ;;
-    -A|--no-apple)
-      apple=false
-      ;;
-    -G|--no-git)
-      git=false
-      ;;
-    -g|--git)
-      git=true
-      ;;
-    -q|--quiet)
-      verbose=false
-      ;;
-    -v|--verbose)
-      verbose=true
-      ;;
-    -h|--help)
-      print-help
-      exit 0
-      ;;
-  esac
-done
+    --no-[component]
+      Will skip the component and upgrade all the others.
+      This option may be used more than once.
 
-echo "--- $(date +"%Y-%m-%d %H:%M:%S") ---" >${LOGFILE}
-
-exec 3>/dev/stdout
-if [ "${verbose}" = true ]
-then
-  exec > >(tee -a ${LOGFILE}) 2>&1
-else
-  exec >${LOGFILE} 2>&1
-fi
+  Components:"
+    for component in $(ls -1 "${components_path}/")
+    do
+      echo -e "\t\t$(${components_path}/${component} --help)"
+    done
+    exit 0
+    ;;
+esac
 
 title() {
   local blue='\e[0;36m'
@@ -63,41 +31,47 @@ title() {
   local reset='\e[00m'
   local bullet="${yellow}▸ "
 
-  printf "${bullet}${blue}$*${reset}\n" | tee -a ${LOGFILE} >&3
+  printf "${bullet}${blue}$*${reset}\n"
 }
 export -f title
 
-_upgrade() {
-  trap 'exit -1' EXIT HUP INT QUIT TERM
-
-  if [ "${git}" = true ]
-  then
-    title "updating repositories"
-    update-repos
-  fi
-
-  if [ "${apple}" = true ]
-  then
-    title "Apple upgrade"
-    softwareupdate -ia
-  fi
-
-  title "brew upgrade"
-  brew update
-  brew upgrade --fetch-HEAD
-  brew cleanup
-
-  title "neovim/vim packages upgrade"
-  ${HOME}/.config/nvim/bin/pack
-
-  if type custom-upgrade &>/dev/null
-  then
-    title "custom upgrade"
-    custom-upgrade
-  fi
+_exit() {
+  unset -f title
+  exit "$1"
 }
 
-_upgrade
+_upgrade() {
+  trap '_exit -1' HUP INT QUIT TERM
 
-unset -f title
+  local only_param="${1#--}"
+  if [ -n "${only_param}" ]
+  then
+    local only=$(find ${components_path} -name "*${only_param}")
+    if [ -n "${only}" ]
+    then
+      "${only}"
+      _exit 0
+    fi
+  fi
+
+  for component in $(ls -1 "${components_path}/")
+  do
+    name=$(echo ${component} | sed -E "s/[[:digit:]]+_//")
+
+    case "$*" in
+      *"--no-${name}"*)
+        continue
+        ;;
+      *)
+        "${components_path}/${component}"
+        ;;
+    esac
+  done
+}
+
+
+_upgrade $@
+
 echo
+
+_exit 0

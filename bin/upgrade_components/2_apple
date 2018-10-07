@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [ "$1" = "--help" ]
+then
+  echo "- apple: Upgrade apple stuff (softwareupdate)"
+  exit
+fi
+
+title "Apple upgrade"
+softwareupdate -ia

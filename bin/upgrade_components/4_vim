@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if [ "$1" = "--help" ]
+then
+  echo "- vim: Upgrade your vim/neovim packages"
+  exit
+fi
+
+title "neovim/vim packages upgrade"
+${HOME}/.config/nvim/bin/pack
+echo

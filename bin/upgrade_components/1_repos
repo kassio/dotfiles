@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [ "$1" = "--help" ]
+then
+  echo "- repos: Upgrade you repositories (\$REPOS)"
+  exit
+fi
+
+title "updating repositories"
+update-repos
