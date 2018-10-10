@@ -20,5 +20,9 @@
     {
         "key": "cmd+k cmd+w",
         "command": "-workbench.action.closeAllEditors"
+    },
+    {
+        "key": "cmd+k cmd+t",
+        "command": "workbench.action.tasks.runTask"
     }
 ]

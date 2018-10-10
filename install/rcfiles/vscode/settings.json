@@ -23,5 +23,9 @@
     "window.newWindowDimensions": "maximized",
     "window.restoreWindows": "all",
     "workbench.colorTheme": "Material Theme Darker",
-    "workbench.iconTheme": "eq-material-theme-icons-darker"
+    "workbench.iconTheme": "eq-material-theme-icons-darker",
+    "gitlens.defaultDateFormat": "YYYYMMDD HH:mm",
+    "gitlens.defaultDateStyle": "absolute",
+    "gitlens.gitExplorer.enabled": false,
+    "gitlens.historyExplorer.enabled": false
 }
