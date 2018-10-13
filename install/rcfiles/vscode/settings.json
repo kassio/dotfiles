@@ -27,5 +27,8 @@
     "gitlens.defaultDateFormat": "YYYYMMDD HH:mm",
     "gitlens.defaultDateStyle": "absolute",
     "gitlens.gitExplorer.enabled": false,
-    "gitlens.historyExplorer.enabled": false
+    "gitlens.historyExplorer.enabled": false,
+    "gitlens.currentLine.enabled": false,
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.codeLens.enabled": false
 }
