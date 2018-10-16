@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-source "$(dirname $0)/global"
-
-# VSCode
-ln -snf \
-  "${INSTALLER}/rcfiles/vscode/" \
-  "${HOME}/Library/Application Support/Code/User"
