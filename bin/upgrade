@@ -2,7 +2,6 @@
 
 components_path="${HOME}/.dotfiles/bin/upgrade_components"
 
-
 case "$1" in
   --help|-h)
     echo -e "USAGE: upgrade [options]
