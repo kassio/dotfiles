@@ -84,3 +84,5 @@ alias gtl="g tl"
 alias gtla="g tla"
 
 alias rn="react-native"
+
+alias c="code"
