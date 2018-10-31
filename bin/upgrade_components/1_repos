@@ -2,7 +2,7 @@
 
 if [ "$1" = "--help" ]
 then
-  echo "- repos: Upgrade you repositories (\$REPOS)"
+  echo "- repos: Upgrade your repositories (\$REPOS)"
   exit
 fi
 
