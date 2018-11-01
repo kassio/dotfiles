@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+case "$1" in
+  -h|--help)
+    echo "Usage: joinstr separator list"
+    exit
+    ;;
+esac
+
+IFS="$1"
+
+shift
+
+echo "$*"
