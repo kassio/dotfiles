@@ -11,4 +11,4 @@ branch=$(git symbolic-ref --short HEAD)
 trap "git checkout ${branch} &>/dev/null" EXIT HUP INT QUIT TERM
 
 git checkout ${master} &>/dev/null
-git fetch --prune && git pull
+git fetch --prune -P --tags && git pull
