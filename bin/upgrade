@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 components_path="${HOME}/.dotfiles/bin/upgrade_components"
+timestamp_file="${HOME}/.config/.last-upgrade"
 
 case "$1" in
   --help|-h)
@@ -36,11 +37,21 @@ export -f title
 
 _exit() {
   unset -f title
+  echo "$(date -j '+%d %b %Y %H:%M')" > "${timestamp_file}"
   exit "$1"
+}
+
+_last_upgrade() {
+  if [ -f "${timestamp_file}" ]
+  then
+    title "Last upgrade was on $(cat ${timestamp_file}).\n"
+  fi
 }
 
 _upgrade() {
   trap '_exit -1' HUP INT QUIT TERM
+
+  _last_upgrade
 
   local only_param="${1#--}"
   if [ -n "${only_param}" ]
@@ -66,6 +77,8 @@ _upgrade() {
         ;;
     esac
   done
+
+  _exit 0
 }
 
 
