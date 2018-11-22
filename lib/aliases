@@ -35,6 +35,9 @@ alias DS="DISABLE_SPRING=1"
 
 alias be="bundle exec"
 
+# Elixir/Mix
+alias MT="MIX_ENV=test"
+
 alias dsf="diff-so-fancy"
 
 # Git
