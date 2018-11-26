@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
 
-function print-help() {
-  echo 'USAGE: replace <search pattern> <new pattern> <files>'
-}
-
 if [ $# -lt 3 ]
 then
-  print-help
+  echo 'USAGE: replace <search pattern> <new pattern> <files>'
   exit 0
 fi
 
