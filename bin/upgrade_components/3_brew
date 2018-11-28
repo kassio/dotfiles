@@ -10,3 +10,4 @@ title "brew upgrade"
 brew update
 brew upgrade --fetch-HEAD
 brew cleanup
+brew bundle check --global --verbose
