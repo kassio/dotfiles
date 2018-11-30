@@ -37,6 +37,7 @@ alias be="bundle exec"
 
 # Elixir/Mix
 alias MT="MIX_ENV=test"
+alias iexm="iex -S mix"
 
 alias dsf="diff-so-fancy"
 
