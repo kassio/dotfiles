@@ -44,7 +44,7 @@ _exit() {
 _last_upgrade() {
   if [ -f "${timestamp_file}" ]
   then
-    title "Last upgrade was on $(cat ${timestamp_file}).\n"
+    title "Last upgrade was done on $(cat ${timestamp_file}).\n"
   fi
 }
 
