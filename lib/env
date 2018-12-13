@@ -1,15 +1,6 @@
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 export HOMEBREW_NO_ANALYTICS=1
 
-# Personal CDPATHs
-export CDPATH=".:${HOME}:${HOME}/.config"
-
-# Coding path
-export PROJECTS="${HOME}/Code"
-
-# personal repo paths
-export REPOS="${HOME}/.config/nvim:${HOME}/.dotfiles"
-
 # rbenv
 eval "$(rbenv init -)"
 
@@ -42,6 +33,20 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 # IEX
 export ERL_AFLAGS="-kernel shell_history enabled"
 
+
+# personal repo paths
+export REPOS="${HOME}/.config/nvim:${HOME}/.dotfiles"
+
+# Coding path
+export PROJECTS_PATH="${HOME}/src"
+export PROJECTS="$(joinstr : `ls -d1 ${PROJECTS_PATH}/*/`)"
+export REPOS="${REPOS}:${PROJECTS}"
+
+# Personal CDPATHs
+export CDPATH=".:${HOME}:${HOME}/.config"
+
+# Ensure the PROJECTS_PATH is the last CDPATH
+export CDPATH="${CDPATH}:${PROJECTS_PATH}"
 
 # set console tab size to 2 spaces
 tabs -2
@@ -97,8 +102,5 @@ function unset-badge() {
 }
 
 ssh-add -A 2>/dev/null;
-
-# Ensure the PROJECTS is the last CDPATH
-export CDPATH="${CDPATH}:${PROJECTS}"
 
 # vim:ft=sh:
