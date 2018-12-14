@@ -87,5 +87,6 @@
   sort = creatordate
 [rerere]
   enabled = true
+  autoupdate = true
 [remote "origin"]
   prune = true
