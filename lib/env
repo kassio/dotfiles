@@ -33,7 +33,6 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 # IEX
 export ERL_AFLAGS="-kernel shell_history enabled"
 
-
 # personal repo paths
 export REPOS="${HOME}/.config/nvim:${HOME}/.dotfiles"
 
@@ -43,10 +42,7 @@ export PROJECTS="$(joinstr : `ls -d1 ${PROJECTS_PATH}/*/`)"
 export REPOS="${REPOS}:${PROJECTS}"
 
 # Personal CDPATHs
-export CDPATH=".:${HOME}:${HOME}/.config"
-
-# Ensure the PROJECTS_PATH is the last CDPATH
-export CDPATH="${CDPATH}:${PROJECTS_PATH}"
+export CDPATH=".:${HOME}:${PROJECTS_PATH}:${HOME}/.config"
 
 # set console tab size to 2 spaces
 tabs -2
