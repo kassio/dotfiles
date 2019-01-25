@@ -21,3 +21,6 @@ vendor/ruby
 
 ALEPreviewWindow
 .vscode
+
+# Zendesk project name
+.zproject_name

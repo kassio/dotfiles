@@ -129,3 +129,6 @@ fi
 source "${HOMEBREW_PREFIX}/etc/bash_completion.d/git-prompt.sh"
 source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# BEGIN DOCKER-IMAGES
+source /Users/kborges/Code/zendesk/docker-images/dockmaster/zdi.sh
+# END DOCKER-IMAGES
