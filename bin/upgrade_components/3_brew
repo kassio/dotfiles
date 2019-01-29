@@ -10,5 +10,5 @@ title "brew upgrade"
 brew update
 brew upgrade --fetch-HEAD
 brew cask upgrade --greedy
-brew cleanup
+brew cleanup --prune 7
 brew bundle check --global --verbose
