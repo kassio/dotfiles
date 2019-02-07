@@ -9,6 +9,6 @@ fi
 title "brew upgrade"
 brew update
 brew upgrade --fetch-HEAD
-brew cask upgrade --greedy
+brew cask upgrade
 brew cleanup --prune 7
 brew bundle check --global --verbose
