@@ -6,3 +6,10 @@ if [[ -d ${heroku_bin_path} ]]
 then
   export PATH="${heroku_bin_path}:${PATH}"
 fi
+
+# heroku autocomplete setup
+HEROKU_AC_ZSH_SETUP_PATH=${HOME}/Library/Caches/heroku/autocomplete/zsh_setup
+if [ -f ${HEROKU_AC_ZSH_SETUP_PATH} ]
+then
+  source ${HEROKU_AC_ZSH_SETUP_PATH}
+fi
