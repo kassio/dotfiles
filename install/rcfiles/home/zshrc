@@ -108,16 +108,15 @@ ${prompt_color}$%f "
   __git_ps1 ${part1} ${part2} ${part3}
 }
 
-brew_completion="${HOMEBREW_PREFIX}/Library/Contributions/brew_zsh_completion.sh"
-if [[ -e ${brew_completion} ]]
-then
-  source ${brew_completion}
+# brew completions
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 
 # My env customization (this line must be the very last on this file)
 source "${DOTFILES}/lib/env"
 
-# Libraries loading
+# Libraries loading <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 fzf_path="${HOMEBREW_PREFIX}/opt/fzf"
 if [ -d "${fzf_path}" ]
@@ -129,6 +128,3 @@ fi
 source "${HOMEBREW_PREFIX}/etc/bash_completion.d/git-prompt.sh"
 source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-# BEGIN DOCKER-IMAGES
-source /Users/kborges/Code/zendesk/docker-images/dockmaster/zdi.sh
-# END DOCKER-IMAGES
