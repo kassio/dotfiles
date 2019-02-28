@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+title "Setup my shell configurations"
+
 export homebrew_prefix=${HOMEBREW_PREFIX:-/usr/local}
 
 # Customize my paths

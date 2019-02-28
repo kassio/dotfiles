@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+title "Enable fingerprint for sudo"
+
 # Enable fingerprint with sudo
 replacement='2i \
 auth       sufficient     pam_tid.so\

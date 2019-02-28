@@ -13,17 +13,16 @@ ${INSTALLER}/setup-shell
 ${INSTALLER}/setup-rcfiles
 ${INSTALLER}/setup-vscode
 ${INSTALLER}/setup-ruby
+${INSTALLER}/setup-backspace
 source ${DOTFILES}/lib/env
 
 # Installing all my stuff
+title "Install all the brews"
 brew bundle --global
 
 # install iterm2 integration
+title "Install the iterm2 integrations"
 update-iterm2-integrations
-
-# Use key backspace instead of ^H
-infocmp ${TERM} | sed 's/kbs=^[hH]/kbs=\\177/' > /tmp/${TERM}.ti
-tic /tmp/${TERM}.ti
 
 # Customize OSX
 ${INSTALLER}/setup-macos

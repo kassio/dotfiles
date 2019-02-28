@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+title "Setup xcode"
+
 # Check for software updates
 softwareupdate -ia
 xcode-select --install

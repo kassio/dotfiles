@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+title "Setup my rcfiles/configs"
+
 source "$(dirname $0)/global"
 
 # Create linked files

@@ -2,6 +2,8 @@
 
 source "$(dirname $0)/global"
 
+title "Install basic packages"
+
 # Install Homebrew
 /usr/bin/ruby -e \
   "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"

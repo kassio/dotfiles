@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+title "Setup MacOS configurations"
+
 source "$(dirname $0)/global"
 macos_path="${INSTALLER}/macos"
 

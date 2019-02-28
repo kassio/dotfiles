@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+title "Setup nvim with my configuration"
+
 # Config vim/neovim
 rm -rf ${HOME}/.config/nvim ${HOME}/.vim &>/dev/null
 git clone https://github.com/kassio/nvimfiles.git ${HOME}/.config/nvim

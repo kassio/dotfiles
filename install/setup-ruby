@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+title "Setup ruby"
+
 source "$(dirname $0)/global"
 
 # Setup default gems
