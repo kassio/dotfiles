@@ -4,10 +4,10 @@ brew "git"
 brew "rbenv"
 brew "rbenv-default-gems"
 brew "readline"
-brew "ruby"
+brew "ruby", link: true
 brew "ruby-build"
 brew "the_silver_searcher"
-brew "zsh", args: ["without-etcdir"]
+brew "zsh"
 brew "zsh-autosuggestions"
 brew "zsh-completions"
 brew "zsh-syntax-highlighting"
