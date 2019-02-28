@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+path="$(dirname $0)"
+
+for service in "${path}/*.workflow"
+do
+  cp -R ${service} ~/Library/Services
+done
