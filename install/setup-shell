@@ -28,4 +28,4 @@ sudo cp /etc/shells{,.original}
   echo "${homebrew_prefix}/bin/zsh" | sudo tee -a /etc/shells
 
 # Change my shell to zsh
-chsh -s $(type -ap zsh | grep $(brew --prefix))
+chsh -s $(type -ap zsh | grep ${homebrew_prefix})
