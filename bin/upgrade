@@ -25,18 +25,7 @@ case "$1" in
     ;;
 esac
 
-title() {
-  local blue='\e[0;36m'
-  local yellow='\e[0;93m'
-  local reset='\e[00m'
-  local bullet="${yellow}▸ "
-
-  printf "${bullet}${blue}$*${reset}\n"
-}
-export -f title
-
 _exit() {
-  unset -f title
   echo "$(date -j '+%d %b %Y %H:%M')" > "${timestamp_file}"
   exit "$1"
 }

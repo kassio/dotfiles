@@ -52,12 +52,12 @@ source ${DOTFILES}/lib/aliases
 source ${DOTFILES}/lib/less
 source ${DOTFILES}/lib/git
 
-__title() {
+__window_title() {
   echo -ne "\e]1;${PWD/${HOME}/\$HOME}\a"
 }
 
-precmd_functions=(__ps1 __title)
-export PROMPT_COMMAND="__ps1; __title"
+precmd_functions=(__ps1 __window_title)
+export PROMPT_COMMAND="__ps1; __window_title"
 
 # local env
 if [ -e "${HOME}/.env" ]
