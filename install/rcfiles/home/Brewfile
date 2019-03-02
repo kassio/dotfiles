@@ -49,7 +49,7 @@ brew "nvm"
 brew "oniguruma"
 brew "openssl"
 brew "postgresql", restart_service: true
-brew "python"
+brew "python3"
 brew "rbenv"
 brew "rbenv-default-gems"
 brew "readline"
