@@ -11,10 +11,12 @@ sudo nvram SystemAudioVolume=" "
 # Disable Resume system-wide
 defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -int 0
 
-for s in $(ls -1 ${macos_path})
+for script in $(find ${macos_path} -type f -d 1)
 do
-  bash ${macos_path}/$s
+  bash ${script}
 done
+
+${macos_path}/services/install
 
 # Kill affected applications
 for app in Finder Dock SystemUIServer
