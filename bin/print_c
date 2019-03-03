@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+function show_help {
+  echo -e "usage: print_c [-c|--color|-h|--help] message
+  OPTIONS:
+  -h, --help  print this message
+  -c, --color choose the color of the message
+  Available colors:
+  "
+
+  for i in {1..256}
+  do
+    printf "\e[38;5;${i}m$(printf '%03d' ${i}) "
+    [ "$((${i} % 16))" = 0 ] && echo
+  done
+
+  echo
+}
+
+declare -A colors
+
+reset='\e[00m'
+color=""
+underline=""
+bold=""
+
+function print_c {
+  case $1 in
+    -h|--help)
+      show_help
+      exit 0
+      ;;
+    -c|--color)
+      shift
+      local color="\e[38;5;$1m"
+      shift
+
+      print_c $@
+      ;;
+    -u|--underline)
+      shift
+      local underline='\e[4m'
+
+      print_c $@
+      ;;
+    -b|--bold)
+      shift
+      local bold='\e[1m'
+
+      print_c $@
+      ;;
+    *)
+      _print $@
+      ;;
+  esac
+}
+
+function _print {
+  echo -en "${bold}${underline}${color}$@${reset}"
+}
+
+print_c $@

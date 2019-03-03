@@ -1,12 +1,22 @@
 #!/usr/bin/env bash
 
-title() {
-  local blue='\e[0;36m'
-  local yellow='\e[0;93m'
-  local reset='\e[00m'
-  local bullet="${yellow}▸ "
+function title {
+  local bullet="▸ "
 
-  printf "${bullet}${blue}$*${reset}\n"
+  case $1 in
+    -c|--color)
+      shift
+      local color=$1
+      shift
+      ;;
+    *)
+      local color="74"
+      ;;
+  esac
+
+  local msg="$@"
+
+  printf "$(print_c -c 3 ${bullet}) $(print_c -b -c ${color} $*)\n"
 }
 
 title $@

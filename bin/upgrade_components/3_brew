@@ -18,3 +18,6 @@ brew bundle check --global --verbose
 
 title "Outdated Brew casks"
 brew cask outdated
+
+title --color 160 "Brew not listed in the global Brewfile"
+brew cask outdated
