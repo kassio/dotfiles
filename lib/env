@@ -38,7 +38,11 @@ export REPOS="${HOME}/.config/nvim:${HOME}/.dotfiles"
 
 # Coding path
 export PROJECTS_PATH="${HOME}/src"
-export PROJECTS="$(joinstr : `find ${PROJECTS_PATH} -type d -d 1 2>/dev/null`)"
+project_list=
+export PROJECTS="$(joinstr : $( \
+  cd ${PROJECTS_PATH}; \
+  find . -maxdepth 1 -type d -exec bash -c "cd '{}' && pwd" \; \
+  ))"
 export REPOS="${REPOS}:${PROJECTS}"
 
 # Personal CDPATHs
