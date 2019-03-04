@@ -20,4 +20,4 @@ title "Outdated Brew casks"
 brew cask outdated
 
 title --color 220 "Brew not listed in the global Brewfile"
-brew cask outdated
+brew bundle cleanup --global

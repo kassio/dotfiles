@@ -97,6 +97,7 @@ cask "spectacle"
 cask "spotify"
 cask "the-unarchiver"
 cask "visual-studio-code"
+cask "vlc"
 cask "whatsapp"
 mas "Amphetamine", id: 937984704
 mas "Fluid Browser", id: 1077036385
