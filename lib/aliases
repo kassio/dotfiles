@@ -87,6 +87,6 @@ alias gt="g t"
 alias gtl="g tl"
 alias gtla="g tla"
 
-alias rn="react-native"
+alias j="jekyll"
 
 alias c="code"
