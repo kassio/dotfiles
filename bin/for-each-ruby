@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 OIFS=$IFS
 IFS='\n'
 versions=($(rbenv versions --bare))
@@ -10,7 +12,12 @@ for rb in ${versions[@]}
 do
   export RBENV_VERSION=${rb}
   echo "with ruby: $(rbenv version-name)"
-  eval "$@"
+
+  if ! eval "$@"
+  then
+    echo "$@ failed for ${rb}"
+    continue
+  fi
 done
 
 unset RBENV_VERSION
