@@ -10,14 +10,26 @@ title "Brew upgrade"
 brew update
 brew upgrade --fetch-HEAD
 
-title "Cleaning up old brews"
-brew cleanup --prune 7
-
 title "Global Brewfile"
-brew bundle check --global --verbose
+brew bundle check --global --all
 
-title "Outdated Brew casks"
-brew cask outdated
+cleaned=$(brew cleanup --prune 7)
+if [ -n "${cleaned}" ]
+then
+  title "Cleaning up old brews"
+  echo ${cleaned}
+fi
 
-title --color 220 "Brew not listed in the global Brewfile"
-brew bundle cleanup --global
+outdated=$(brew cask outdated)
+if [ -n "${outdated}" ]
+then
+  title "Outdated Brew casks"
+  echo ${outdated}
+fi
+
+unlisted=$(brew bundle cleanup --global)
+if [ -n "${unlisted_brews}" ]
+then
+  title --color 220 "Brew not listed in the global Brewfile"
+  echo ${unlisted}
+fi
