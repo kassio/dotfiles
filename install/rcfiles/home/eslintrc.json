@@ -13,13 +13,8 @@
     "es6": true,
     "jest": true
   },
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended"
-  ],
-  "plugins": [
-    "react"
-  ],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "plugins": ["react"],
   "rules": {
     "arrow-body-style": ["error", "as-needed"],
     "camelcase": "error",
@@ -27,8 +22,8 @@
     "comma-style": ["error", "last"],
     "dot-location": ["error", "property"],
     "eqeqeq": "error",
-    "indent": ["error", 2, {"VariableDeclarator": 2, "SwitchCase": 1}],
-    "keyword-spacing": ["error", {"after": true}],
+    "indent": ["error", 2, { "VariableDeclarator": 2, "SwitchCase": 1 }],
+    "keyword-spacing": ["error", { "after": true }],
     "no-console": "warn",
     "no-debugger": "error",
     "no-eq-null": "error",
@@ -52,7 +47,10 @@
     "prefer-destructuring": "error",
     "prefer-rest-params": "error",
     "prefer-template": "error",
-    "space-before-function-paren": ["error", {"anonymous": "always", "named": "never", "asyncArrow": "always"}],
+    "space-before-function-paren": [
+      "error",
+      { "anonymous": "always", "named": "never", "asyncArrow": "always" }
+    ],
     "space-in-brackets": "never",
     "template-curly-spacing": "error"
   }
