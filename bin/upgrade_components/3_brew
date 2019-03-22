@@ -11,7 +11,7 @@ brew update
 brew upgrade --fetch-HEAD
 
 title "Global Brewfile"
-brew bundle check --global --all
+brew bundle check --global --all --verbose
 
 cleaned=$(brew cleanup --prune 7)
 if [ -n "${cleaned}" ]
