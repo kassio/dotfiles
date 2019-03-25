@@ -8,4 +8,4 @@
 --ignore-dir=public/assets
 --ignore-dir=coverage
 --ignore-file=match:tags
---ignore-file=match:gem.tags
+--ignore-file=match:tags.gems
