@@ -1,54 +1,92 @@
 #!/usr/bin/env bash
 
-function update-repo() {
+pushd "${PWD}" > /dev/null && trap 'popd &> /dev/null' EXIT HUP INT QUIT TERM
+
+OK=" 👌 "
+ERROR=" 🚫 "
+SUN=" 🔅 "
+ARROW=" ➡️  "
+
+function print() {
+  echo -ne "$1" >&3
+}
+
+function sun() {
+  print "${SUN} $1"
+}
+
+function arrow() {
+  print "\t\t${ARROW} $1"
+}
+
+function status() {
+  if [ $? -eq 0 ]
+  then
+    print " ${OK}\n"
+  else
+    print " ${ERROR}\n"
+  fi
+}
+
+function sync() {
   trap 'exit -1' EXIT HUP INT QUIT TERM
 
-  local OK=" 👌 "
-  local NOK=" 🚫 "
+  local remote="$1"
+  local path="$2"
 
-  function fetch-master() {
-    local icon=" 🔅 "
-    local path="$(basename ${PWD})"
-    echo -n "${icon} fetching master on ${PWD}"
+  function update() {
+    fetch && rebase
+  }
 
-    update-master -q
-    result_status
+  function fetch() {
+    master=$(cat .git/custom-master || echo 'master')
+    branch=$(git symbolic-ref --short HEAD)
+
+    git checkout ${master}
+    git fetch --prune --prune-tags --tags --recurse-submodules
+    git pull
+    status
+    git checkout ${branch}
   }
 
   function rebase() {
-    local master=$(cat .git/custom-master 2>/dev/null || echo 'master')
-    local branch=$(git symbolic-ref --short HEAD)
-    local icon=" ➡️  "
-
     if [ "${branch}" != "${master}" ]
     then
-      echo -ne "\n   ${icon} Rebasing '${branch}' on '${master}'"
-      git rebase ${master} &>/dev/null
-      result_status
+      arrow "Rebasing '${branch}' on '${master}'"
+      git rebase ${master}
+      status
     fi
   }
 
-  function result_status() {
-    local status=$?
-
-    if [ ${status} -eq 0 ]
-    then
-      echo -n "${OK}"
-    else
-      echo -n "${NOK}"
-    fi
-
-    return ${status}
+  function clone() {
+    echo "${SUN} Cloning ${remote} to ${path}"
+    git clone ${remote} ${path} --recurse-submodules
+    status
   }
 
-  fetch-master && rebase
-  echo -ne "\n"
+  if [ -d ${path} ]
+  then
+    pushd ${path}
+    sun "Updating ${path}"
+    update
+    popd
+  else
+    sun "Cloning ${remote} to ${path}"
+    clone
+  fi
 }
 
-export -f update-repo
+# Only print when redirecting to &3
+exec 3>/dev/stdout
+exec 1>/dev/null
+exec 2>/dev/null
 
-pushd "${PWD}" > /dev/null && trap 'popd &> /dev/null' EXIT HUP INT QUIT TERM
+REPOS="${HOME}/.repos"
 
-for-each-repo update-repo
+for repo in $(cat ${REPOS} ${PRIVATE_REPOS})
+do
+  remote=${repo%|*}
+  path=$(echo -n ${repo#*|} | sed "s#\$HOME#$HOME#")
 
-unset -f update-repo
+  sync ${remote} ${path}
+done

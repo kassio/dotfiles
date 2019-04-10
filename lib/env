@@ -63,11 +63,7 @@ __window_title() {
 precmd_functions=(__ps1 __window_title)
 export PROMPT_COMMAND="__ps1; __window_title"
 
-# local env
-if [ -e "${HOME}/.env" ]
-then
-  source ${HOME}/.env
-fi
+source ${HOME}/.dotfiles/private/env
 
 iterm_integration_script="${HOME}/.iterm2_shell_integration.${ZSH_NAME:-bash}"
 if [ -f ${iterm_integration_script} ]
