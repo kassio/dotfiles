@@ -1,3 +1,4 @@
+tap "caskroom/cask"
 tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask"
@@ -7,6 +8,7 @@ tap "homebrew/core"
 tap "homebrew/services"
 tap "neovim/neovim"
 tap "universal-ctags/universal-ctags"
+brew "asdf"
 brew "bash"
 brew "bash-completion"
 brew "bat"
@@ -16,12 +18,13 @@ brew "doxygen"
 brew "elixir"
 brew "exercism"
 brew "fontconfig"
+brew "forego"
 brew "freetype"
 brew "fx"
 brew "fzf"
 brew "gd"
-brew "gettext"
 brew "git"
+brew "git-hooks"
 brew "go"
 brew "graphviz"
 brew "grep"
@@ -43,18 +46,17 @@ brew "markdown"
 brew "mas"
 brew "msgpack"
 brew "mysql@5.7", restart_service: true, link: true
-brew "neovim"
+brew "neovim", args: ["HEAD"]
 brew "node"
 brew "nvm"
 brew "oniguruma"
-brew "openssl"
 brew "postgresql", restart_service: true
-brew "python3"
+brew "python"
 brew "rbenv"
 brew "rbenv-default-gems"
 brew "readline"
 brew "rename"
-brew "ruby", link: true
+brew "ruby"
 brew "ruby-build"
 brew "the_silver_searcher"
 brew "tmate"
@@ -70,7 +72,6 @@ brew "zsh"
 brew "zsh-autosuggestions"
 brew "zsh-completions"
 brew "zsh-syntax-highlighting"
-cask "1password"
 cask "alfred"
 cask "appcleaner"
 cask "bartender"
@@ -101,8 +102,8 @@ cask "the-unarchiver"
 cask "visual-studio-code"
 cask "vlc"
 cask "whatsapp"
-mas "Amphetamine", id: 937984704
-mas "Fluid Browser", id: 1077036385
-mas "Notability", id: 736189492
-mas "Todoist", id: 585829637
-mas "Xcode", id: 497799835
+cask "zoomus"
+mas "com.apple.dt.Xcode", id: 497799835
+mas "com.gingerlabs.NotabilityMac", id: 736189492
+mas "com.if.Amphetamine", id: 937984704
+mas "com.inovize.fluid", id: 1077036385
