@@ -10,4 +10,4 @@ echo '>>> Restart postgres'
 brew services start postgresql &>/dev/null
 sleep 1;
 echo ">>> Create postgres user ${USER}"
-createuser -D -s -l -U postgres ${USER}
+createuser --no-createdb --superuser --login --username=postgres ${USER}
