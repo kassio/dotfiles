@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-title "Setup my rcfiles/configs"
-
 source "$(dirname $0)/global"
+
+title "Setup my rcfiles/configs"
 
 # Create linked files
 for f in ${INSTALLER}/rcfiles/home/*

@@ -4,14 +4,14 @@ set -e
 
 OIFS=$IFS
 IFS='\n'
-versions=($(rbenv versions --bare))
+versions=($(asdf list ruby))
+previous=$(asdf current ruby)
 IFS=$OIFS
-versions+=("system")
 
 for rb in ${versions[@]}
 do
-  export RBENV_VERSION=${rb}
-  echo "with ruby: $(rbenv version-name)"
+  asdf shell ruby ${rb}
+  echo "with ruby: $(asdf current ruby)"
 
   if ! eval "$@"
   then
@@ -20,4 +20,4 @@ do
   fi
 done
 
-unset RBENV_VERSION
+asdf shell ruby ${previous}

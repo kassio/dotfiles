@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
+source "$(dirname $0)/global"
+
 title "Setup MacOS configurations"
 
-source "$(dirname $0)/global"
 macos_path="${INSTALLER}/macos"
 
 # Disable the sound effects on boot

@@ -52,8 +52,6 @@ brew "nvm"
 brew "oniguruma"
 brew "postgresql", restart_service: true
 brew "python"
-brew "rbenv"
-brew "rbenv-default-gems"
 brew "readline"
 brew "rename"
 brew "ruby"

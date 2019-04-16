@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source "$(dirname $0)/global"
+
 title "Setup nvim with my configuration"
 
 # Config vim/neovim

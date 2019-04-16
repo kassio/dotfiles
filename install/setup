@@ -12,7 +12,7 @@ ${INSTALLER}/setup-basic-packages
 ${INSTALLER}/setup-shell
 ${INSTALLER}/setup-rcfiles
 ${INSTALLER}/setup-vscode
-${INSTALLER}/setup-ruby
+${INSTALLER}/setup-asdf
 ${INSTALLER}/setup-backspace
 source ${DOTFILES}/lib/env
 

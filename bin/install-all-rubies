@@ -9,7 +9,7 @@ fi
 
 rubies=$(cat $1/*/.ruby-version | sort -u)
 
-for version in $rubies
+for version in ${rubies}
 do
-  rbenv install --skip-existing $version
+  asdf install ruby ${version}
 done

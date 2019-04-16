@@ -1,8 +1,6 @@
 brew "bash"
 brew "bash-completion"
 brew "git"
-brew "rbenv"
-brew "rbenv-default-gems"
 brew "readline"
 brew "ruby", link: true
 brew "ruby-build"

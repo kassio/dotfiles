@@ -1,9 +1,6 @@
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 export HOMEBREW_NO_ANALYTICS=1
 
-# rbenv
-eval "$(rbenv init -)"
-
 # my bin, and project bin
 export PATH="./bin:${DOTFILES}/bin:${PATH}"
 
