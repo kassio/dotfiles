@@ -20,3 +20,5 @@ node_modules/*
 
 deps/*
 _build/*
+
+.elixir_ls
