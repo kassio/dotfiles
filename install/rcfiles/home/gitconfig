@@ -1,8 +1,8 @@
 [user]
   name = Kassio Borges
   email = kassioborgesm@gmail.com
-[includeIf "gitdir/i:~/Code/zendesk/**"]
-  path = ~/Code/zendesk/dotfiles/gitconfig
+[includeIf "gitdir/i:~/src/telnyx/**"]
+  path = ~/.dotfiles/private/telnyx-gitconfig
 [credential]
   helper = osxkeychain
 [core]
