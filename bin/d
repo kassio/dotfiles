@@ -28,7 +28,6 @@ case $@ in
     docker ps -q | xargs -IC docker stop C
     ;;
   *)
-    echo "ERROR: command unknown '$*'"
-    exit -1
+    docker $@
     ;;
 esac
