@@ -1,21 +1,27 @@
 #!/usr/bin/env bash
 
-docker_inspect() {
+docker_ps() {
   local id="$1"
   local name='{{.Name}}'
   local status='{{if .State.Running}} Running {{else}} Stopped {{end}}'
   local ips='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
   local target_ports='{{range $t := $target}} -> {{$t.HostPort}},{{end}}'
   local ports='{{range $origin, $target := .NetworkSettings.Ports}} {{$origin}}'$target_ports'{{end}}'
-
   local format="$name##$id##$status##$ips##$ports"
 
-  docker inspect --format="$format" $id \
+  docker ps -q \
+    | xargs -Icontainer docker inspect --format="$format" $@ container \
     | sed -e "s#^/##" \
-    | sed -e "s#,\$##"
+    | sed -e "s#,\$##" \
+    | column -t -s'##' \
+    | sort
 }
 
-for container in $(docker ps -q)
-do
-  docker_inspect $container $@
-done | column -t -s'##' | sort
+case $@ in
+  log|logs|l)
+    docker ps --format "{{.ID}}" | xargs -IC docker logs -f C
+    ;;
+  ps)
+    docker_ps
+    ;;
+esac
