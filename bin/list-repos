@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+for repo in $(ls -1d $1/*/)
+do
+  if [ -d "${repo}/.git" ]
+  then
+    cd ${repo}
+    target=$(pwd)
+    remote=$(git remote get-url --push origin)
+    echo "${remote}|${target/${HOME}/\$HOME}"
+    cd - &>/dev/null
+  fi
+done
