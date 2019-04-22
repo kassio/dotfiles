@@ -38,42 +38,42 @@ function sync() {
     fetch && rebase
   }
 
-  function fetch() {
-    master=$(cat .git/custom-master || echo 'master')
-    branch=$(git symbolic-ref --short HEAD)
+function fetch() {
+  master=$(cat .git/custom-master || echo 'master')
+  branch=$(git symbolic-ref --short HEAD)
 
-    git checkout ${master}
-    git fetch --prune --prune-tags --tags --recurse-submodules
-    git pull
-    status
-    git checkout ${branch}
-  }
+  git checkout ${master}
+  git fetch --prune --prune-tags --tags --recurse-submodules
+  git pull
+  status
+  git checkout ${branch}
+}
 
-  function rebase() {
-    if [ "${branch}" != "${master}" ]
-    then
-      arrow "Rebasing '${branch}' on '${master}'"
-      git rebase ${master}
-      status
-    fi
-  }
-
-  function clone() {
-    echo "${SUN} Cloning ${remote} to ${path}"
-    git clone ${remote} ${path} --recurse-submodules
-    status
-  }
-
-  if [ -d ${path} ]
+function rebase() {
+  if [ "${branch}" != "${master}" ]
   then
-    pushd ${path}
-    sun "Updating ${path}"
-    update
-    popd
-  else
-    sun "Cloning ${remote} to ${path}"
-    clone
+    arrow "Rebasing '${branch}' on '${master}'"
+    git rebase ${master}
+    status
   fi
+}
+
+function clone() {
+  echo "${SUN} Cloning ${remote} to ${path}"
+  git clone ${remote} ${path} --recurse-submodules
+  status
+}
+
+if [ -d ${path} ]
+then
+  pushd ${path}
+  sun "Updating ${path}"
+  update
+  popd
+else
+  sun "Cloning ${remote} to ${path}"
+  clone
+fi
 }
 
 # Only print when redirecting to &3
@@ -81,12 +81,17 @@ exec 3>/dev/stdout
 exec 1>/dev/null
 exec 2>/dev/null
 
-REPOS="${HOME}/.repos"
-
-for repo in $(cat ${REPOS} ${PRIVATE_REPOS})
+OIFS=$IFS
+IFS=":"
+for repos in $(echo ${REPOS_FILES})
 do
-  remote=${repo%|*}
-  path=$(echo -n ${repo#*|} | sed "s#\$HOME#$HOME#")
+  IFS=$OIFS
+  for repo in $(cat ${repos})
+  do
+    remote=${repo%|*}
+    path=$(echo -n ${repo#*|} | sed "s#\$HOME#$HOME#")
 
-  sync ${remote} ${path}
+    sync ${remote} ${path}
+  done
 done
+IFS=$OIFS

@@ -3,7 +3,6 @@ export HOMEBREW_NO_ANALYTICS=1
 
 export DOTFILES_PRIVATE="${HOME}/.dotfiles.private"
 
-# my bin, and project bin
 export PATH="./bin:${DOTFILES}/bin:${PATH}"
 
 # Default editor
@@ -33,16 +32,10 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 # personal repo paths
-export REPOS="${HOME}/.config/nvim:${HOME}/.dotfiles"
+export REPOS_FILES="${DOTFILES}/repos"
 
 # Coding path
 export PROJECTS_PATH="${HOME}/src"
-project_list=
-export PROJECTS="$(joinstr : $( \
-  cd ${PROJECTS_PATH}; \
-  find . -maxdepth 1 -type d -exec bash -c "cd '{}' && pwd" \; \
-  ))"
-export REPOS="${REPOS}:${PROJECTS}"
 
 # Personal CDPATHs
 export CDPATH=".:${HOME}:${PROJECTS_PATH}:${HOME}/.config"
@@ -51,8 +44,8 @@ export CDPATH=".:${HOME}:${PROJECTS_PATH}:${HOME}/.config"
 tabs -2
 
 # asdf
-source $HOMEBREW_PREFIX/opt/asdf/asdf.sh
-source $HOMEBREW_PREFIX/etc/bash_completion.d/asdf.bash
+source ${HOMEBREW_PREFIX}/opt/asdf/asdf.sh
+source ${HOMEBREW_PREFIX}/etc/bash_completion.d/asdf.bash
 
 source ${DOTFILES}/lib/heroku
 source ${DOTFILES}/lib/aliases
