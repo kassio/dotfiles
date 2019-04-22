@@ -1,8 +1,6 @@
 [user]
   name = Kassio Borges
   email = kassioborgesm@gmail.com
-[includeIf "gitdir/i:~/src/telnyx/**"]
-  path = ~/.dotfiles/private/telnyx-gitconfig
 [credential]
   helper = osxkeychain
 [core]
@@ -90,3 +88,5 @@
   autoupdate = true
 [remote "origin"]
   prune = true
+[include]
+  path = ~/.dotfiles.private/gitconfig

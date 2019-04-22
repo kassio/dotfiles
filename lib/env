@@ -1,6 +1,8 @@
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 export HOMEBREW_NO_ANALYTICS=1
 
+export DOTFILES_PRIVATE="${HOME}/.dotfiles.private"
+
 # my bin, and project bin
 export PATH="./bin:${DOTFILES}/bin:${PATH}"
 
@@ -64,7 +66,7 @@ __window_title() {
 precmd_functions=(__ps1 __window_title)
 export PROMPT_COMMAND="__ps1; __window_title"
 
-source ${HOME}/.dotfiles/private/env
+source ${DOTFILES_PRIVATE}/env
 
 iterm_integration_script="${HOME}/.iterm2_shell_integration.${ZSH_NAME:-bash}"
 if [ -f ${iterm_integration_script} ]
