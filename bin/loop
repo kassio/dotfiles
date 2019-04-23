@@ -27,8 +27,7 @@ clear=${LOOP_CLEAR:-false}
 times=${LOOP_TIMES:--1}
 wait=${LOOP_WAIT:-0}
 
-while true
-do
+function parse_args {
   case $1 in
     -h|--help)
       show_help
@@ -37,54 +36,67 @@ do
     -f|--failfast)
       shift
       failfast=true
+
+      parse_args $@
       ;;
     -c|--clear)
       shift
       clear=true
+
+      parse_args $@
       ;;
     -t|--times)
       shift
       times=$1
       shift
+
+      parse_args $@
       ;;
     -w|--wait)
       shift
       wait=$1
       shift
+
+      parse_args $@
       ;;
     *)
       cmd="$@"
-      break
       ;;
   esac
-done
+}
 
-cmd=$(echo "${cmd}" | sed "s/'/'\\''/g")
+function loop-it {
+  parse_args $@
 
-if [ -z "${cmd}" ]
-then
-  show_help
-  exit 1
-fi
+  cmd=$(echo "${cmd}" | sed "s/'/'\\''/g")
 
-build_count=0
-error_count=0
-while [ ${build_count} -lt ${times} ] || [ ${times} -eq -1 ]
-do
-  $((++build_count)) 2>/dev/null
-  [ ${clear} = true ] && clear
-  eval "${cmd}" 2>/dev/null
-
-  if [[ $? != 0 ]]
+  if [ -z "${cmd}" ]
   then
-    $((++error_count)) 2>/dev/null
-    if [[ "${failfast}" = true ]]
-    then
-      break
-    fi
+    show_help
+    exit 1
   fi
-  [ ${wait} -gt 0 ] && sleep ${wait}
-done
 
-[ ${error_count} -gt 0 ] && echo "failed: $error_count"
-exit $error_count
+  build_count=0
+  error_count=0
+  while [ ${build_count} -lt ${times} ] || [ ${times} -eq -1 ]
+  do
+    $((++build_count)) 2>/dev/null
+    [ ${clear} = true ] && clear
+    eval "${cmd}" 2>/dev/null
+
+    if [[ $? != 0 ]]
+    then
+      $((++error_count)) 2>/dev/null
+      if [[ "${failfast}" = true ]]
+      then
+        break
+      fi
+    fi
+    [ ${wait} -gt 0 ] && sleep ${wait}
+  done
+
+  [ ${error_count} -gt 0 ] && echo "failed: ${error_count} of ${times}"
+  exit ${error_count}
+}
+
+loop-it $@
