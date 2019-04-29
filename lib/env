@@ -1,9 +1,6 @@
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 export HOMEBREW_NO_ANALYTICS=1
 
-export DOTFILES_PRIVATE="${HOME}/.dotfiles.private"
-[ -f ${DOTFILES_PRIVATE} ] && source ${DOTFILES_PRIVATE}/env
-
 export PATH="./bin:${DOTFILES}/bin:${PATH}"
 
 # Default editor
@@ -52,6 +49,9 @@ source ${DOTFILES}/lib/heroku
 source ${DOTFILES}/lib/aliases
 source ${DOTFILES}/lib/less
 source ${DOTFILES}/lib/git
+
+export DOTFILES_PRIVATE="${HOME}/.dotfiles.private"
+[ -f "${DOTFILES_PRIVATE}/env" ] && source "${DOTFILES_PRIVATE}/env"
 
 __window_title() {
   echo -ne "\e]1;${PWD/${HOME}/\$HOME}\a"
