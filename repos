@@ -1,3 +1,4 @@
 https://github.com/kassio/dotfiles.git|$HOME/.dotfiles
+https://github.com/kassio/dotfiles.private.git|$HOME/.dotfiles.private
 https://github.com/kassio/nvim.git|$HOME/.config/nvim
 https://github.com/kassio/kassio.github.io|$HOME/src/kassio.github.io
