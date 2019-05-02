@@ -80,10 +80,11 @@ fi
 exec 3>/dev/stdout
 exec 1>/dev/null
 exec 2>/dev/null
+files=${1:-${REPOS_FILES}}
 
 OIFS=$IFS
 IFS=":"
-for repos in $(echo ${REPOS_FILES})
+for repos in $(echo ${files})
 do
   IFS=$OIFS
   for repo in $(cat ${repos})
@@ -94,4 +95,3 @@ do
     sync ${remote} ${path}
   done
 done
-IFS=$OIFS

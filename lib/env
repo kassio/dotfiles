@@ -30,7 +30,7 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 # personal repo paths
-export REPOS_FILES="${DOTFILES}/repos"
+export REPOS_FILES="${DOTFILES}/Reposfile"
 
 # Coding path
 export PROJECTS_PATH="${HOME}/src"
