@@ -90,3 +90,5 @@ alias gtla="g tla"
 alias j="jekyll"
 
 alias c="code"
+
+alias onvim='xargs nvim -p'
