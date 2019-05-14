@@ -23,3 +23,5 @@ ALEPreviewWindow
 .vscode
 
 node_modules
+
+.elixir_ls
