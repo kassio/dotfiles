@@ -10,7 +10,7 @@ docker_ps() {
   local format="$name##$id##$status##$ips##$ports"
 
   docker ps -q \
-    | xargs -IC docker inspect --format="$format" $@ C \
+    | xargs -Icontainer docker inspect --format="$format" $@ container \
     | sed -e "s#^/##" \
     | sed -e "s#,\$##" \
     | column -t -s'##' \
@@ -19,13 +19,16 @@ docker_ps() {
 
 case $@ in
   log|logs|l)
-    docker ps -q | xargs -IC docker logs -f C
+    docker ps -q | xargs -Icontainer docker logs -f container
     ;;
   ps)
     docker_ps
     ;;
   stop)
-    docker ps -q | xargs -IC docker stop C
+    docker ps -q | xargs -Icontainer docker stop container
+    ;;
+  rmiall|rmia)
+    docker images -q | xargs -Iimage docker rmi --force image
     ;;
   *)
     docker $@
