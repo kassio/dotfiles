@@ -3,6 +3,8 @@ export HOMEBREW_NO_ANALYTICS=1
 
 export PATH="./bin:${DOTFILES}/bin:${PATH}"
 
+export GPG_TTY=$(tty)
+
 # Default editor
 export EDITOR="nvim"
 # improve ls colors
