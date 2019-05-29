@@ -24,33 +24,39 @@ bold=""
 message=""
 
 function parse_args {
-  case $1 in
-    -h|--help)
-      show_help
-      exit 0
-      ;;
-    -c|--color)
-      color="\e[38;5;$2m"
-      shift 2
+  if [ $# -eq 0 ]
+  then
+    show_help
+    exit 0
+  else
+    case $1 in
+      -h|--help)
+        show_help
+        exit 0
+        ;;
+      -c|--color)
+        color="\e[38;5;$2m"
+        shift 2
 
-      parse_args $@
-      ;;
-    -u|--underline)
-      underline='\e[4m'
-      shift
+        parse_args $@
+        ;;
+      -u|--underline)
+        underline='\e[4m'
+        shift
 
-      parse_args $@
-      ;;
-    -b|--bold)
-      bold='\e[1m'
-      shift
+        parse_args $@
+        ;;
+      -b|--bold)
+        bold='\e[1m'
+        shift
 
-      parse_args $@
-      ;;
-    *)
-      message="$@"
-      ;;
-  esac
+        parse_args $@
+        ;;
+      *)
+        message="$@"
+        ;;
+    esac
+  fi
 }
 
 function print_c {
