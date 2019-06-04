@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
 
+if [ "$1" = "--help" ]
+then
+  echo "- asdf: Update all asdf plugins"
+  exit
+fi
+
 title "asdf plugins update"
 asdf plugin-update --all
