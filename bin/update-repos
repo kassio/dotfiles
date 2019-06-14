@@ -7,17 +7,10 @@ ERROR=" 🚫 "
 SUN=" 🔅 "
 ARROW=" ➡️  "
 
-function print() {
-  echo -ne "$1" >&3
-}
-
-function sun() {
-  print "${SUN} $1"
-}
-
-function arrow() {
-  print "\t\t${ARROW} $1"
-}
+function print() { echo -ne "$1" >&3; }
+function sun() { print "${SUN} $1"; }
+function log() { print "\t\t $1"; }
+function arrow() { log "${ARROW} $1"; }
 
 function status() {
   if [ $? -eq 0 ]
@@ -35,45 +28,54 @@ function sync() {
   local path="$2"
 
   function update() {
-    fetch && rebase
+    master=$(cat .git/custom-master || echo 'master')
+    branch=$(git symbolic-ref --short HEAD)
+
+    if [ "${branch}" != "${master}" ]
+    then
+      log "» ${branch}"
+      fetch_pull
+    fi
+
+    log "» ${master}"
+    git checkout ${master}
+    fetch_pull
+
+    git checkout ${branch}
+    rebase
   }
 
-function fetch() {
-  master=$(cat .git/custom-master || echo 'master')
-  branch=$(git symbolic-ref --short HEAD)
-
-  git checkout ${master}
-  git fetch --prune --prune-tags --tags --recurse-submodules
-  git pull
-  status
-  git checkout ${branch}
-}
-
-function rebase() {
-  if [ "${branch}" != "${master}" ]
-  then
-    arrow "Rebasing '${branch}' on '${master}'"
-    git rebase ${master}
+  function fetch_pull() {
+    git fetch --prune --prune-tags --tags --recurse-submodules
+    git pull
     status
+  }
+
+  function rebase() {
+    if [ "${branch}" != "${master}" ]
+    then
+      arrow "Rebasing '${branch}' on '${master}'"
+      git rebase ${master}
+      status
+    fi
+  }
+
+  function clone() {
+    echo "${SUN} Cloning ${remote} to ${path}"
+    git clone ${remote} ${path} --recurse-submodules
+    status
+  }
+
+  if [ -d ${path} ]
+  then
+    pushd ${path}
+    sun "Updating ${path}\n"
+    update
+    popd
+  else
+    sun "Cloning ${remote} to ${path}\n"
+    clone
   fi
-}
-
-function clone() {
-  echo "${SUN} Cloning ${remote} to ${path}"
-  git clone ${remote} ${path} --recurse-submodules
-  status
-}
-
-if [ -d ${path} ]
-then
-  pushd ${path}
-  sun "Updating ${path}"
-  update
-  popd
-else
-  sun "Cloning ${remote} to ${path}"
-  clone
-fi
 }
 
 # Only print when redirecting to &3
