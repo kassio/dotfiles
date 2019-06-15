@@ -26,10 +26,12 @@ function sync() {
 
   local remote="$1"
   local path="$2"
-  local master=$(cat .git/custom-master || echo 'master')
-  local branch=$(git symbolic-ref --short HEAD)
+  local master="$(cat .git/custom-master || echo 'master')"
+  local branch="$(git symbolic-ref --short HEAD)"
 
   function update() {
+    sun "Updating ${path}\n"
+
     if [ "${branch}" != "${master}" ]
     then
       log "» ${branch}"
@@ -69,11 +71,9 @@ function sync() {
   if [ -d ${path} ]
   then
     pushd ${path}
-    sun "Updating ${path}\n"
     update
     popd
   else
-    sun "Cloning ${remote} to ${path}\n"
     clone
   fi
 }
