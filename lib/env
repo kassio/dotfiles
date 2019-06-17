@@ -96,4 +96,6 @@ function unset-badge() {
 
 ssh-add -A 2>/dev/null;
 
+[ -f "${HOME}/.env" ] && source "${HOME}/.env"
+
 # vim:ft=sh:
