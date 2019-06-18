@@ -26,40 +26,42 @@ function sync() {
 
   local remote="$1"
   local path="$2"
-  local master="$(cat .git/custom-master || echo 'master')"
-  local branch="$(git symbolic-ref --short HEAD)"
 
   function update() {
+    pushd "${path}"
+
+    local master="$(cat .git/custom-master || echo 'master')"
+    local branch="$(git symbolic-ref --short HEAD)"
+
     sun "Updating ${path}\n"
 
     if [ "${branch}" != "${master}" ]
     then
       log "» ${branch}"
       fetch_pull
+      status
 
       log "» ${master}"
       git checkout ${master}
       fetch_pull
+      status
 
-      git checkout ${branch}
-      rebase
+      arrow "Rebasing '${branch}' on '${master}'"
+      git rebase ${master}
+      status
     else
       log "» ${master}"
       git checkout ${master}
       fetch_pull
+      status
     fi
+
+    popd
   }
 
   function fetch_pull() {
     git fetch --prune --prune-tags --tags --recurse-submodules
     git pull
-    status
-  }
-
-  function rebase() {
-    arrow "Rebasing '${branch}' on '${master}'"
-    git rebase ${master}
-    status
   }
 
   function clone() {
@@ -68,11 +70,9 @@ function sync() {
     status
   }
 
-  if [ -d ${path} ]
+  if [ -d "${path}" ]
   then
-    pushd ${path}
     update
-    popd
   else
     clone
   fi
