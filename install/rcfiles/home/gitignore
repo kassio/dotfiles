@@ -25,3 +25,4 @@ ALEPreviewWindow
 node_modules
 
 .elixir_ls
+Mnesia.nonode@nohost
