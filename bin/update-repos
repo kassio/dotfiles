@@ -41,17 +41,17 @@ function sync() {
       fetch_pull
       status
 
-      log "» ${master}"
       git checkout ${master}
+      log "» ${master}"
       fetch_pull
       status
 
+      git checkout ${branch}
       arrow "Rebasing '${branch}' on '${master}'"
       git rebase ${master}
       status
     else
       log "» ${master}"
-      git checkout ${master}
       fetch_pull
       status
     fi
