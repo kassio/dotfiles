@@ -91,4 +91,7 @@ alias j="jekyll"
 
 alias c="code"
 
-alias onvim='xargs nvim -p'
+alias onvim="xargs nvim -p"
+
+alias lzd="lazydocker"
+alias fr="forego run"
