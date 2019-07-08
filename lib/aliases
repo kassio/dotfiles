@@ -86,6 +86,7 @@ alias gs="g s"
 alias gt="g t"
 alias gtl="g tl"
 alias gtla="g tla"
+alias update-master="gco master; gf; gp; gco -"
 
 alias j="jekyll"
 
