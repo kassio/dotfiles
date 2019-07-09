@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+arg="${1:--l}"
+case "${arg}" in
+  -l|--list)
+    cat ${PGSERVICEFILE} | egrep "\[.*\]" | tr -d '[]'
+    ;;
+  *)
+    psql service="$arg"
+    ;;
+esac
