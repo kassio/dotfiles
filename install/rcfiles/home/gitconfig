@@ -3,8 +3,12 @@
   email = kassioborgesm@gmail.com
 [commit]
   gpgsign = true
+[gpg]
+  program = /usr/local/MacGPG2/bin/gpg2
 [credential]
   helper = osxkeychain
+[remote "origin"]
+  prune = true
 [core]
   excludesfile = ~/.gitignore
   editor = `which $EDITOR`
@@ -15,6 +19,8 @@
   default = current
 [pull]
   rebase = true
+[tag]
+  sort = creatordate
 [grep]
   extendRegexp = true
   lineNumber = true
@@ -30,6 +36,9 @@
 [color "diff"]
   old = red dim
   new = green bold
+[rerere]
+  enabled = true
+  autoupdate = true
 [diff]
   tool = vimdiff
 [difftool]
@@ -83,12 +92,5 @@
   rank = shortlog -sn
   rf = reflog --pretty=log
   rfme = !git rf --author="\"$(git config user.name)\""
-[tag]
-  sort = creatordate
-[rerere]
-  enabled = true
-  autoupdate = true
-[remote "origin"]
-  prune = true
 [include]
   path = ~/.dotfiles.private/gitconfig
