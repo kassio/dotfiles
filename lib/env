@@ -29,7 +29,6 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 # IEX
 export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_bytes 2097152"
 
-
 # personal repo paths
 export REPOS_FILES="${DOTFILES}/Reposfile"
 
@@ -38,6 +37,9 @@ export PROJECTS_PATH="${HOME}/src"
 
 # Personal CDPATHs
 export CDPATH=".:${HOME}:${PROJECTS_PATH}:${HOME}/.config"
+
+# postgres data directory
+export PGDATA="${HOMEBREW_PREFIX}/var/postgres"
 
 # set console tab size to 2 spaces
 tabs -2
