@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+compaudit | xargs sudo chown -R "$(whoami)"
+compaudit | xargs sudo chmod -R go-w
