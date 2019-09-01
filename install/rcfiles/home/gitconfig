@@ -81,7 +81,9 @@
   p = pull
   ps = push
   r = rebase
+  rt = restore
   s = status -sb
+  sw = switch
   t = !git --no-pager tag
   tag-sync = !git fetch --prune origin "+refs/tags/*:refs/tags/*"
   tla = !git tag --list --sort='-authordate' --format '%(color:blue)%(align:10,right)%(refname:lstrip=2)%(end) %(color:red dim)%(objectname:short) %(color:green dim)%(authordate:format-local:%F %R) %(color:yellow dim)%(authorname)'
