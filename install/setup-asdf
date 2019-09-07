@@ -4,21 +4,27 @@ source "$(dirname $0)/global"
 
 title "Setup asdf"
 
-asdf plugin-add ruby
-asdf plugin-add erlang
-asdf plugin-add elixir
+for plugin in elixir erlang nodejs ruby
+do
+  asdf plugin-add "$plugin"
+done
 
 RUBY_VERSION="$(asdf list-all ruby | grep "^\s*\d\.\d\.\d$" | tail -1 | tr -d ' ')"
 
-asdf install ruby ${RUBY_VERSION}
-asdf global ruby ${RUBY_VERSION}
+asdf install ruby "${RUBY_VERSION}"
+asdf global ruby "${RUBY_VERSION}"
 
 ELIXIR_VERSION="$(asdf list-all elixir | grep -v "rc" | sort -h | tail -1)"
 
-asdf install elixir ${ELIXIR_VERSION}
-asdf global elixir ${ELIXIR_VERSION}
+asdf install elixir "${ELIXIR_VERSION}"
+asdf global elixir "${ELIXIR_VERSION}"
 
 ERLANG_VERSION="$(asdf list-all erlang | grep -v "rc" | sort -h | tail -1)"
 
-asdf install erlang ${ERLANG_VERSION}
-asdf global erlang ${ERLANG_VERSION}
+asdf install erlang "${ERLANG_VERSION}"
+asdf global erlang "${ERLANG_VERSION}"
+
+NODE_VERSION="$(asdf list-all nodejs | tail -1)"
+
+asdf install nodejs "${NODE_VERSION}"
+asdf global nodejs "${NODE_VERSION}"

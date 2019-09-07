@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+if [ "$1" == "" ]
+then
+  echo "Usage: "
+  echo "install-all-tools path"
+  echo "will read every '.tool-versions' files and install the required tools"
+  exit 1
+fi
+
+sort -u "$1/*/.tool-versions" | while read -r version
+do
+  asdf install "${version}"
+done

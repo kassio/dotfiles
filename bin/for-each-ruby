@@ -1,23 +1,19 @@
 #!/usr/bin/env bash
 
-set -e
+source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
 
-OIFS=$IFS
-IFS='\n'
-versions=($(asdf list ruby))
 previous=$(asdf current ruby)
-IFS=$OIFS
 
-for rb in ${versions[@]}
+asdf list ruby 2>/dev/null | while read -r rb
 do
-  asdf shell ruby ${rb}
+  eval "asdf shell ruby ${rb} 2>/dev/null"
   echo "with ruby: $(asdf current ruby)"
 
-  if ! eval "$@"
+  if ! eval "$*"
   then
-    echo "$@ failed for ${rb}"
+    echo "$* failed for ${rb}"
     continue
   fi
 done
 
-asdf shell ruby ${previous}
+asdf shell ruby "${previous}"

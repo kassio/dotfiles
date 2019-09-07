@@ -18,7 +18,7 @@ KILLED
 running '${cmd}' for the ${build_count} time.
 failed ${error_count} times
 "
-  exit ${error_count}
+  exit "${error_count}"
 }; trap report SIGINT SIGTERM
 
 # options
@@ -37,36 +37,36 @@ function parse_args {
       shift
       failfast=true
 
-      parse_args $@
+      parse_args "$@"
       ;;
     -c|--clear)
       shift
       clear=true
 
-      parse_args $@
+      parse_args "$@"
       ;;
     -t|--times)
       shift
       times=$1
       shift
 
-      parse_args $@
+      parse_args "$@"
       ;;
     -w|--wait)
       shift
       wait=$1
       shift
 
-      parse_args $@
+      parse_args "$@"
       ;;
     *)
-      cmd="$@"
+      cmd="$*"
       ;;
   esac
 }
 
 function loop-it {
-  parse_args $@
+  parse_args "$@"
 
   cmd=$(echo "${cmd}" | sed "s/'/'\\''/g")
 
@@ -78,25 +78,24 @@ function loop-it {
 
   build_count=0
   error_count=0
-  while [ ${build_count} -lt ${times} ] || [ ${times} -eq -1 ]
+  while [ "${build_count}" -lt "${times}" ] || [ "${times}" -eq -1 ]
   do
-    $((++build_count)) 2>/dev/null
+    ((++build_count))
     [ ${clear} = true ] && clear
-    eval "${cmd}" 2>/dev/null
 
-    if [[ $? != 0 ]]
+    if eval "${cmd}" 2>/dev/null
     then
-      $((++error_count)) 2>/dev/null
+      ((++error_count))
       if [[ "${failfast}" = true ]]
       then
         break
       fi
     fi
-    [ ${wait} -gt 0 ] && sleep ${wait}
+    [ "${wait}" -gt 0 ] && sleep "${wait}"
   done
 
-  [ ${error_count} -gt 0 ] && echo "failed: ${error_count} of ${times}"
+  [ "${error_count}" -gt 0 ] && echo "failed: ${error_count} of ${times}"
   exit ${error_count}
 }
 
-loop-it $@
+loop-it "$@"
