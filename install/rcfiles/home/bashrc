@@ -4,10 +4,10 @@
 if [ -x /usr/libexec/path_helper ]
 then
   PATH=""
-  eval `/usr/libexec/path_helper -s`
+  eval "$(/usr/libexec/path_helper -s)"
 fi
 
-export DOTFILES=$HOME/.dotfiles
+export DOTFILES=${HOME}/.dotfiles
 
 source "$(brew --prefix)/etc/bash_completion"
 
@@ -33,12 +33,11 @@ ${prompt_color}\$${reset} " " ${yellow}(${reset}%s${yellow})"
 # Autocomplete
 load_bash_completion() {
   local prefix=${HOMEBREW_PREFIX:-/usr/local}
-  local brew_bash_completion="$prefix/etc/bash_completion"
-  local brew_bash_completion_contributions="$prefix/Library/Contributions/brew_bash_completion.sh"
+  local brew_bash_completion="${prefix}/etc/bash_completion"
+  local brew_bash_completion_contributions="${prefix}/Library/Contributions/brew_bash_completion.sh"
 
-  [ -e "/etc/bash_completion" ] && source /etc/bash_completion
-  [ -e $brew_bash_completion ] && source $brew_bash_completion
-  [ -e $brew_bash_completion_contributions ] && source $brew_bash_completion_contributions
+  [ -e ${brew_bash_completion} ] && source ${brew_bash_completion}
+  [ -e ${brew_bash_completion_contributions} ] && source ${brew_bash_completion_contributions}
 }; load_bash_completion
 
 # Make ** works beautiful, works to any nested directory.
@@ -63,7 +62,7 @@ complete -o default -o nospace -F _thorcomplete thor
 shopt -s histappend
 
 # History
-export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
+export HISTCONTROL=${HISTCONTROL}${HISTCONTROL+,}ignoredups
 export HISTCONTROL=ignoreboth
 export HISTFILESIZE=10000000000
 export HISTSIZE=1000000
@@ -80,4 +79,4 @@ then
 fi
 
 # My env customization (this line must be the very last on this file)
-source "$DOTFILES/lib/env"
+source "${DOTFILES}/lib/env"
