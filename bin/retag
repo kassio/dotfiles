@@ -29,7 +29,7 @@ gems=true
 verbose=false
 quiet=false
 
-for option in $@
+for option in "$@"
 do
   case $option in
     -G|--no-gems)

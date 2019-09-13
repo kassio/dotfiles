@@ -3,9 +3,9 @@
 arg="${1:--l}"
 case "${arg}" in
   -l|--list)
-    cat ${PGSERVICEFILE} | egrep "\[.*\]" | tr -d '[]'
+     grep -E "\[.*\]" "${PGSERVICEFILE}" | tr -d '[]'
     ;;
   *)
-    psql service="$arg"
+    psql service="${arg}"
     ;;
 esac

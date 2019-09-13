@@ -14,9 +14,9 @@ function title {
       ;;
   esac
 
-  local msg="$@"
+  local msg="$*"
 
   printf "$(print_c -c 3 ${bullet}) $(print_c -b -c ${color} $*)\n"
 }
 
-title $@
+title "$*"

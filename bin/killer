@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-psg $@ | awk '{print $2}' | xargs kill -9
+pgrep -i "$*" | xargs kill -9
