@@ -7,6 +7,11 @@ ERROR=" 🚫 "
 SUN=" 🔅 "
 ARROW=" ➡️  "
 
+# Only print when redirecting to &3
+exec 3>/dev/stdout
+exec 1>/dev/null
+exec 2>/dev/null
+
 function print() { echo -ne "$1" >&3; }
 function sun() { print "${SUN} $1"; }
 function log() { print "\t\t $1"; }
@@ -41,14 +46,14 @@ function sync() {
       fetch_pull
       status
 
-      git checkout ${master}
+      git checkout "${master}"
       log "» ${master}"
       fetch_pull
       status
 
-      git checkout ${branch}
+      git checkout "${branch}"
       arrow "Rebasing '${branch}' on '${master}'"
-      git rebase ${master}
+      git rebase "${master}"
       status
     else
       log "» ${master}"
@@ -66,7 +71,7 @@ function sync() {
 
   function clone() {
     echo "${SUN} Cloning ${remote} to ${path}"
-    git clone ${remote} ${path} --recurse-submodules
+    git clone "${remote}" "${path}" --recurse-submodules
     status
   }
 
@@ -78,22 +83,12 @@ function sync() {
   fi
 }
 
-# Only print when redirecting to &3
-exec 3>/dev/stdout
-exec 1>/dev/null
-exec 2>/dev/null
-files=${1:-${REPOS_FILES}}
+IFS=':' read -ra files <<< "${1:-${REPOS_FILES}}"
 
-OIFS=$IFS
-IFS=":"
-for repos in $(echo ${files})
+for file in "${files[@]}"
 do
-  IFS=$OIFS
-  for repo in $(cat ${repos})
+  while IFS='|' read -r remote path
   do
-    remote=${repo%|*}
-    path=$(echo -n ${repo#*|} | sed "s#\$HOME#$HOME#")
-
-    sync ${remote} ${path}
-  done
+    sync "${remote}" "$(echo -n "${path#*|}" | sed "s#\$HOME#$HOME#") "
+  done < "${file}"
 done
