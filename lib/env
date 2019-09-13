@@ -1,32 +1,22 @@
+# vim:ft=sh:
+
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 export HOMEBREW_NO_ANALYTICS=1
 
 export PATH="./bin:${DOTFILES}/bin:${PATH}"
 
-# Default editor
 export EDITOR="nvim"
-# improve ls colors
+export MANPAGER="nvim -c 'set ft=man' -"
+
 export CLICOLOR=1
-# mysql prompt
 export MYSQL_PS1='\d\$ '
-# my lang
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export LANG="en_US.UTF-8"
-# open man with neovim
-export MANPAGER="nvim -c 'set ft=man' -"
 
 export FZF_DEFAULT_COMMAND="ag --skip-vcs-ignores --hidden --follow --nocolor -l"
 export FZF_DEFAULT_OPTS="--reverse --tiebreak=begin,length,index"
 
-# Android stuff
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-# IEX
 export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_bytes 2097152"
 
 # personal repo paths
@@ -44,59 +34,24 @@ export PGDATA="${HOMEBREW_PREFIX}/var/postgres"
 # set console tab size to 2 spaces
 tabs -2
 
-# asdf
-source ${HOMEBREW_PREFIX}/opt/asdf/asdf.sh
-source ${HOMEBREW_PREFIX}/etc/bash_completion.d/asdf.bash
-
-source ${DOTFILES}/lib/heroku
-source ${DOTFILES}/lib/aliases
-source ${DOTFILES}/lib/less
-source ${DOTFILES}/lib/git
-
-export DOTFILES_PRIVATE="${HOME}/.dotfiles.private"
-[ -f "${DOTFILES_PRIVATE}/env" ] && source "${DOTFILES_PRIVATE}/env"
-
-__window_title() {
-  echo -ne "\e]1;${PWD/${HOME}/\$HOME}\a"
-}
+__window_title() { echo -ne "\e]1;${PWD/${HOME}/\$HOME}\a"; }
 
 precmd_functions=(__ps1 __window_title)
 export PROMPT_COMMAND="__ps1; __window_title"
 
-iterm_integration_script="${HOME}/.iterm2_shell_integration.${ZSH_NAME:-bash}"
-if [ -f ${iterm_integration_script} ]
-then
-  source ${iterm_integration_script}
-fi
-
-# added by travis gem
-if [ -f "${HOME}/.travis/travis.sh" ]
-then
-  source "${HOME}/.travis/travis.sh"
-fi
-
-export __USER_BADGE=""
-# iterm2 badge manipulation
-function set-badge() {
-  if [ -n "$1" ]
-  then
-    export __USER_BADGE="$@"
-  else
-    export __USER_BADGE="$(basename $PWD)"
-  fi
-
-  iterm2_set_user_var badge "${__USER_BADGE}" 2>/dev/null
-}
-
-function unset-badge() {
-  if [ -n "${__USER_BADGE}" ]
-  then
-    iterm2_set_user_var badge "" 2>/dev/null
-  fi
-}
-
 ssh-add -A 2>/dev/null;
 
-[ -f "${HOME}/.env" ] && source "${HOME}/.env"
+# asdf
+source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
+source "${HOMEBREW_PREFIX}/etc/bash_completion.d/asdf.bash"
 
-# vim:ft=sh:
+source "${DOTFILES}/lib/heroku"
+source "${DOTFILES}/lib/aliases"
+source "${DOTFILES}/lib/less"
+source "${DOTFILES}/lib/git"
+
+# added by travis gem
+source "${HOME}/.travis/travis.sh" &>/dev/null
+source "${HOME}/.iterm2_shell_integration.${ZSH_NAME:-bash}" &>/dev/null
+source "${HOME}/.dotfiles.private/env" &>/dev/null
+source "${HOME}/.env" &>/dev/null
