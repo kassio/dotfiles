@@ -48,6 +48,7 @@ brew "lua"
 brew "markdown"
 brew "mas"
 brew "msgpack"
+brew "neovim"
 brew "node"
 brew "nvm"
 brew "oniguruma"
@@ -108,8 +109,8 @@ cask "the-unarchiver"
 cask "visual-studio-code"
 cask "vlc"
 cask "whatsapp"
-cask "zoomus"
 mas "Amphetamine", id: 937984704
+mas "Be Focused", id: 973134470
 mas "Notability", id: 736189492
 mas "Telephone", id: 406825478
 mas "Xcode", id: 497799835
