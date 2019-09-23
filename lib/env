@@ -19,9 +19,6 @@ export FZF_DEFAULT_OPTS="--reverse --tiebreak=begin,length,index"
 
 export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_bytes 2097152"
 
-# personal repo paths
-export REPOS_FILES="${DOTFILES}/Reposfile"
-
 # Coding path
 export PROJECTS_PATH="${HOME}/src"
 
