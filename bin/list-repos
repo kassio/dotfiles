@@ -1,13 +1,24 @@
 #!/usr/bin/env bash
 
-for repo in $(ls -1d $1/*/)
+pushd "$1" > /dev/null \
+  && trap 'popd > /dev/null' EXIT HUP INT QUIT TERM
+
+
+find "${PWD}" -mindepth 1 -maxdepth 1 -type d \
+  | sort -u \
+  | while IFS= read -r repo
 do
   if [ -d "${repo}/.git" ]
   then
-    cd ${repo}
-    target=$(pwd)
+    cd "${repo}" &>/dev/null || exit 1
+    target=${PWD%% }
     remote=$(git remote get-url --push origin)
-    echo "${remote}|${target/${HOME}/\$HOME}"
-    cd - &>/dev/null
+
+    if [ -n "$remote" ]
+    then
+      echo "${remote}|${target/${HOME}/\$HOME}"
+    fi
+
+    cd - &>/dev/null || exit 1
   fi
 done
