@@ -64,7 +64,6 @@
   bfd = "!f() { git branch -D $1 && git push origin :$1; }; f"
   c = commit -v
   ca = commit -v --amend
-  co = checkout
   cp = cherry-pick
   d = !git --no-pager diff
   dp = diff
