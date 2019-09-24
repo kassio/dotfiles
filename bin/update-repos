@@ -17,19 +17,20 @@ function log() { _print "\t\t $1"; }
 function arrow() { log "${ARROW} $1"; }
 function errormsg() { _print "\t\t\t \033[31m  ✖  $1\033[0m"; }
 
+function status_for() {
+  read -r error < <(eval "$*" 2>&1 1>/dev/null)
 
-function status() {
-  if [ -z "$1" ]
+  if [ -z "${error}" ]
   then
     _print " ${OK}\n"
   else
     _print " ${ERROR}\n"
-    errormsg "$1\n"
+    errormsg "${error}\n"
   fi
 }
 
 function sync() {
-  trap 'exit -1' EXIT HUP INT QUIT TERM
+  trap 'exit 1' EXIT HUP INT QUIT TERM
 
   local remote="$1"
   local path="$2"
@@ -48,8 +49,7 @@ function sync() {
 
       git switch "${branch}" 2>/dev/null
       git fetch --prune --prune-tags --tags --recurse-submodules
-      read error < <(git pull 2>&1 >/dev/null)
-      status "${error}"
+      status_for git pull
     done
 
     git switch "${current_branch}" 2>/dev/null
@@ -57,8 +57,7 @@ function sync() {
     if [ "${current_branch}" != "${master}" ]
     then
       arrow "Rebasing '${current_branch}' on '${master}'"
-      git rebase "${master}"
-      status
+      status_for git rebase "${master}"
     fi
 
     popd
@@ -66,8 +65,7 @@ function sync() {
 
   function clone() {
     sun "Cloning ${remote} to ${path}"
-    git clone "${remote}" "${path}" --recurse-submodules
-    status
+    status_for git clone "${remote}" "${path}" --recurse-submodules
   }
 
   if [ -d "${path}" ]
