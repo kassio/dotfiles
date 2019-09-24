@@ -10,19 +10,21 @@ ARROW=" ➡️  "
 # Only print when redirecting to &3
 exec 3>/dev/stdout
 exec 1>/dev/null
-exec 2>/dev/null
 
-function print() { echo -ne "$1" >&3; }
-function sun() { print "${SUN} $1"; }
-function log() { print "\t\t $1"; }
+function _print() { echo -ne "$1" >&3; }
+function sun() { _print "${SUN} $1\n"; }
+function log() { _print "\t\t $1"; }
 function arrow() { log "${ARROW} $1"; }
+function errormsg() { _print "\t\t\t \033[31m  ✖  $1\033[0m"; }
+
 
 function status() {
-  if [ $? -eq 0 ]
+  if [ -z "$1" ]
   then
-    print " ${OK}\n"
+    _print " ${OK}\n"
   else
-    print " ${ERROR}\n"
+    _print " ${ERROR}\n"
+    errormsg "$1\n"
   fi
 }
 
@@ -35,42 +37,35 @@ function sync() {
   function update() {
     pushd "${path}"
 
-    local master="$(cat .git/custom-master || echo 'master')"
-    local branch="$(git symbolic-ref --short HEAD)"
+    local master="$(cat .git/custom-master 2> /dev/null || echo 'master')"
+    local current_branch="$(git symbolic-ref --short HEAD)"
 
-    sun "Updating ${path}\n"
+    sun "Updating ${path}"
 
-    if [ "${branch}" != "${master}" ]
-    then
+    for branch in $(git branch --list | cut -c 3-)
+    do
       log "» ${branch}"
-      fetch_pull
-      status
 
-      git checkout "${master}"
-      log "» ${master}"
-      fetch_pull
-      status
+      git switch "${branch}" 2>/dev/null
+      git fetch --prune --prune-tags --tags --recurse-submodules
+      read error < <(git pull 2>&1 >/dev/null)
+      status "${error}"
+    done
 
-      git checkout "${branch}"
-      arrow "Rebasing '${branch}' on '${master}'"
+    git switch "${current_branch}" 2>/dev/null
+
+    if [ "${current_branch}" != "${master}" ]
+    then
+      arrow "Rebasing '${current_branch}' on '${master}'"
       git rebase "${master}"
-      status
-    else
-      log "» ${master}"
-      fetch_pull
       status
     fi
 
     popd
   }
 
-  function fetch_pull() {
-    git fetch --prune --prune-tags --tags --recurse-submodules
-    git pull
-  }
-
   function clone() {
-    echo "${SUN} Cloning ${remote} to ${path}"
+    sun "Cloning ${remote} to ${path}"
     git clone "${remote}" "${path}" --recurse-submodules
     status
   }
@@ -84,11 +79,10 @@ function sync() {
 }
 
 IFS=':' read -ra files <<< "${1:-${REPOS_FILES}}"
-
 for file in "${files[@]}"
 do
   while IFS='|' read -r remote path
   do
-    sync "${remote}" "$(echo -n "${path#*|}" | sed "s#\$HOME#$HOME#") "
+    sync "${remote}" "${path//\$HOME/$HOME}"
   done < "${file}"
 done
