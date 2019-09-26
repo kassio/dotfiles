@@ -82,19 +82,15 @@ cask "bettertouchtool"
 cask "bitbar"
 cask "dash"
 cask "divvy"
-cask "firefox"
 cask "font-fira-code"
-cask "franz"
 cask "google-backup-and-sync"
 cask "google-chrome"
 cask "google-cloud-sdk"
-cask "gpg-suite-no-mail"
 cask "grammarly"
 cask "imageoptim"
 cask "istat-menus"
 cask "iterm2"
 cask "keybase"
-cask "kindle"
 cask "krisp"
 cask "licecap"
 cask "ngrok"
@@ -110,8 +106,6 @@ cask "visual-studio-code"
 cask "vlc"
 cask "whatsapp"
 mas "Amphetamine", id: 937984704
-mas "Be Focused", id: 973134470
 mas "Notability", id: 736189492
 mas "Telephone", id: 406825478
 mas "Xcode", id: 497799835
-mas "com.inovize.fluid", id: 1077036385
