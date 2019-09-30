@@ -9,13 +9,16 @@ ARROW=" ➡️  "
 
 # Only print when redirecting to &3
 exec 3>/dev/stdout
+exec 4>/dev/stderr
 exec 1>/dev/null
+exec 2>/dev/null
 
 _print() { echo -ne "$1" >&3; }
+_printerr() { echo -ne "$1" >&4; }
 sun() { _print "${SUN} $1\n"; }
 log() { _print "\t\t $1"; }
 arrow() { log "${ARROW} $1"; }
-errormsg() { _print "\033[31m${ERROR} $1\033[0m"; }
+errormsg() { _printerr "\033[31m${ERROR} $1\033[0m"; }
 
 status_for() {
   read -r error < <(eval "$*" 2>&1 1>/dev/null)
