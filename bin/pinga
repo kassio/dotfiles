@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
-ping -c 5 google.com
+target="${1:-google.com}"
+_pinga() { ping -c 5 "${target}"; }
 
-while [ $? -ne 0 ]
+while _pinga
 do
   clear
-  ping -c 5 google.com
+  _pinga
   sleep 0.5
 done
