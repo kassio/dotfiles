@@ -3,7 +3,8 @@
 target="${1:-google.com}"
 _pinga() { ping -c 5 "${target}"; }
 
-while _pinga
+_pinga
+while [ "$?" != 0 ]
 do
   clear
   _pinga
