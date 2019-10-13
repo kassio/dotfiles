@@ -41,6 +41,7 @@
   autoupdate = true
 [diff]
   tool = vimdiff
+  noprefix = true
 [difftool]
   prompt = false
 [difftool "vimdiff"]
