@@ -81,7 +81,6 @@ cask "background-music"
 cask "bartender"
 cask "bettertouchtool"
 cask "bitbar"
-cask "browserosaurus"
 cask "dash"
 cask "divvy"
 cask "firefox"
@@ -110,6 +109,7 @@ cask "vlc"
 cask "whatsapp"
 cask "zoomus"
 mas "Amphetamine", id: 937984704
+mas "LinCastor Browser", id: 1037256618
 mas "Notability", id: 736189492
 mas "Telephone", id: 406825478
 mas "Xcode", id: 497799835
