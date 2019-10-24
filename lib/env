@@ -28,6 +28,9 @@ export CDPATH=".:${HOME}:${PROJECTS_PATH}:${HOME}/.config"
 # postgres data directory
 export PGDATA="${HOMEBREW_PREFIX}/var/postgres"
 
+# gpg
+export GPG_TTY=$(tty)
+
 # set console tab size to 2 spaces
 tabs -2
 

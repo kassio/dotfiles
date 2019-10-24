@@ -3,8 +3,6 @@
   email = kassioborgesm@gmail.com
 [commit]
   gpgsign = true
-[gpg]
-  program = /usr/local/MacGPG2/bin/gpg2
 [credential]
   helper = osxkeychain
 [remote "origin"]
@@ -96,3 +94,5 @@
   rfme = !git rf --author="\"$(git config user.name)\""
 [include]
   path = ~/.dotfiles.private/gitconfig
+[gpg]
+  program = /usr/local/bin/gpg
