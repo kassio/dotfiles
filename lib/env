@@ -18,6 +18,7 @@ export FZF_DEFAULT_COMMAND="ag --skip-vcs-ignores --hidden --follow --nocolor -l
 export FZF_DEFAULT_OPTS="--reverse --tiebreak=begin,length,index"
 
 export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_bytes 2097152"
+export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
 
 # Coding path
 export PROJECTS_PATH="${HOME}/src"
