@@ -88,6 +88,8 @@ _update() {
   do
     while IFS='|' read -r remote path
     do
+      [ "${remote}" == "" ] && continue
+
       path="${path//\$HOME/$HOME}"
 
       if [ -d "${path}" ]
