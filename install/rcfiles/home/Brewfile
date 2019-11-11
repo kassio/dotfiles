@@ -95,6 +95,7 @@ cask "istat-menus"
 cask "iterm2"
 cask "keybase"
 cask "licecap"
+cask "lincastor"
 cask "ngrok"
 cask "postico"
 cask "postman"
@@ -109,6 +110,5 @@ cask "vlc"
 cask "whatsapp"
 cask "zoomus"
 mas "Amphetamine", id: 937984704
-mas "LinCastor Browser", id: 1037256618
 mas "Notability", id: 736189492
 mas "Xcode", id: 497799835
