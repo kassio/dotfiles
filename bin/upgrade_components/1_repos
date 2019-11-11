@@ -7,4 +7,4 @@ then
 fi
 
 title "updating repositories"
-update-repos
+repos --update
