@@ -96,3 +96,5 @@
   path = ~/.dotfiles.private/gitconfig
 [gpg]
   program = /usr/local/bin/gpg
+[advice]
+	detachedHead = false
