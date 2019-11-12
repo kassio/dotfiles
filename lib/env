@@ -3,8 +3,6 @@
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 export HOMEBREW_NO_ANALYTICS=1
 
-export PATH="./bin:${DOTFILES}/bin:${PATH}"
-
 export EDITOR="nvim"
 export MANPAGER="nvim -c 'set ft=man' -"
 
@@ -21,8 +19,8 @@ export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_byte
 export ERLANG_OPENSSL_PATH="${HOMEBREW_PREFIX}/opt/openssl"
 export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --with-ssl=/usr/local/opt/openssl@1.1"
 
-export PATH="${HOMEBREW_PREFIX}/opt/postgresql@10/bin:${HOMEBREW_PREFIX}/opt/node@12/bin:$PATH"
-export PKG_CONFIG_PATH="${HOMEBREW_PREFIX}/opt/icu4c/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PATH="${PATH}:${HOMEBREW_PREFIX}/opt/postgresql@10/bin:${HOMEBREW_PREFIX}/opt/node@12/bin"
+export PKG_CONFIG_PATH="${HOMEBREW_PREFIX}/opt/icu4c/lib/pkgconfig:${PKG_CONFIG_PATH}"
 
 # Coding path
 export PROJECTS_PATH="${HOME}/src"
@@ -60,3 +58,6 @@ source "${HOME}/.travis/travis.sh" &>/dev/null
 source "${HOME}/.iterm2_shell_integration.${ZSH_NAME:-bash}" &>/dev/null
 source "${HOME}/.dotfiles.private/env" &>/dev/null
 source "${HOME}/.env" &>/dev/null
+
+# My personal bin
+export PATH="./bin:${DOTFILES}/bin:${PATH}"
