@@ -13,6 +13,7 @@
   whitespace = trailing-space,space-before-tab,cr-at-eol
   ignorecase = false
   pager = diff-so-fancy | less --tabs=4 -RFX
+  autocrlf = true
 [push]
   default = current
 [pull]
@@ -97,4 +98,4 @@
 [gpg]
   program = /usr/local/bin/gpg
 [advice]
-	detachedHead = false
+  detachedHead = false
