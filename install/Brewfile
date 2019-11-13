@@ -2,7 +2,7 @@ brew "bash"
 brew "bash-completion"
 brew "git"
 brew "readline"
-brew "ruby", link: true
+brew "ruby"
 brew "ruby-build"
 brew "the_silver_searcher"
 brew "zsh"
