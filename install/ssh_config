@@ -1,10 +1,10 @@
-Host *
-  UseKeychain yes
-  AddKeysToAgent yes
-  IdentityFile ~/.ssh/id_rsa
-
 Host github.com
   Hostname github.com
+  IdentityFile ~/.ssh/git_id_rsa
+  IdentitiesOnly yes
+
+Host gist.github.com
+  Hostname gist.github.com
   IdentityFile ~/.ssh/git_id_rsa
   IdentitiesOnly yes
 
@@ -12,3 +12,8 @@ Host bitbucket.org
   Hostname bitbucket.org
   IdentityFile ~/.ssh/git_id_rsa
   IdentitiesOnly yes
+
+Host *
+  UseKeychain yes
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/id_rsa
