@@ -19,9 +19,6 @@ export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_byte
 export ERLANG_OPENSSL_PATH="${HOMEBREW_PREFIX}/opt/openssl"
 export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --with-ssl=/usr/local/opt/openssl@1.1"
 
-export PATH="${PATH}:${HOMEBREW_PREFIX}/opt/postgresql@10/bin:${HOMEBREW_PREFIX}/opt/node@12/bin"
-export PKG_CONFIG_PATH="${HOMEBREW_PREFIX}/opt/icu4c/lib/pkgconfig:${PKG_CONFIG_PATH}"
-
 # Coding path
 export PROJECTS_PATH="${HOME}/src"
 
@@ -32,7 +29,13 @@ export CDPATH=".:${HOME}:${PROJECTS_PATH}:${HOME}/.config"
 export PGDATA="${HOMEBREW_PREFIX}/var/postgres"
 
 # gpg
-export GPG_TTY=$(tty)
+export GPG_TTY="$(tty)"
+
+# libxml2
+export LDFLAGS="-L${HOMEBREW_PREFIX}/opt/libxml2/lib"
+export CPPFLAGS="-I${HOMEBREW_PREFIX}/opt/libxml2/include"
+export PKG_CONFIG_PATH="${HOMEBREW_PREFIX}/opt/libxml2/lib/pkgconfig"
+export PKG_CONFIG_PATH="${HOMEBREW_PREFIX}/opt/icu4c/lib/pkgconfig:${PKG_CONFIG_PATH}"
 
 # set console tab size to 2 spaces
 tabs -2
@@ -60,4 +63,4 @@ source "${HOME}/.dotfiles.private/env" &>/dev/null
 source "${HOME}/.env" &>/dev/null
 
 # My personal bin
-export PATH="./bin:${DOTFILES}/bin:${PATH}"
+export PATH="./bin:${DOTFILES}/bin:${HOMEBREW_PREFIX}:${PATH}"
