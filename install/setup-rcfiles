@@ -7,29 +7,29 @@ title "Setup my rcfiles/configs"
 # Create linked files
 for f in ${INSTALLER}/rcfiles/home/*
 do
-  target=${HOME}/.${f##*/}
-  if [ -L ${target} ]
+  target="${HOME}/.${f##*/}"
+  if [ -L "${target}" ]
   then
-    rm -rf ${target}
-  elif [ -f ${target} ]
+    rm -rf "${target}"
+  elif [ -f "${target}" ]
   then
     echo "${target} already exists and is not a link"
   fi
-  ln -sf ${f} ${target}
+  ln -sf "${f}" "${target}"
 done
 
-mkdir -p ${HOME}/.config
+mkdir -p "${HOME}/.config"
 for f in ${INSTALLER}/rcfiles/home-config/*
 do
-  ln -sf ${f} ${HOME}/.config/${f##*/}
+  ln -sf "${f}" "${HOME}/.config/${f##*/}"
 done
 
-mkdir -p ${HOME}/.docker
-cp ${INSTALLER}/rcfiles/home-docker/config.json ${HOME}/.docker/config.json
+mkdir -p "${HOME}/.docker"
+cp "${INSTALLER}/rcfiles/home-docker/config.json" "${HOME}/.docker/config.json"
 
 # ssh
 # These configs needs to be copied because they are completed for Zendesk
 # softwares.
-mkdir -p ${HOME}/.ssh
-cp ${INSTALLER}/ssh_config ${HOME}/.ssh/config
-chmod -R 700 ${HOME}/.ssh
+mkdir -p "${HOME}/.ssh"
+cp "${INSTALLER}/ssh_config" "${HOME}/.ssh/config"
+chmod -R 700 "${HOME}/.ssh"
