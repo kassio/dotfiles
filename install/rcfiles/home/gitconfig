@@ -2,6 +2,7 @@
   name = Kassio Borges
   email = kassioborgesm@gmail.com
 [commit]
+  template = ~/.dotfiles/git-commit-template
   gpgsign = true
 [credential]
   helper = osxkeychain
