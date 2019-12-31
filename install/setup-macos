@@ -6,9 +6,6 @@ title "Setup MacOS configurations"
 
 macos_path="${INSTALLER}/macos"
 
-# Disable the sound effects on boot
-sudo nvram SystemAudioVolume=" "
-
 # Disable Resume system-wide
 defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -int 0
 
