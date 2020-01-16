@@ -28,6 +28,7 @@ update-iterm2-integrations
 ${INSTALLER}/setup-macos
 ${INSTALLER}/setup-sudo-fingerprint
 ${INSTALLER}/setup-gpg
+${INSTALLER}/setup-rectangle
 
 if [ -f ${HOME}/Dropbox/dotfiles/custom-setup ]
 then
