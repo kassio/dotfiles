@@ -24,9 +24,10 @@ brew bundle --global
 title "Install the iterm2 integrations"
 update-iterm2-integrations
 
-# Customize OSX
+# Customize installed tools
 ${INSTALLER}/setup-macos
 ${INSTALLER}/setup-sudo-fingerprint
+${INSTALLER}/setup-gpg
 
 if [ -f ${HOME}/Dropbox/dotfiles/custom-setup ]
 then
