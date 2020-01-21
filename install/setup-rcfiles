@@ -26,10 +26,3 @@ done
 
 mkdir -p "${HOME}/.docker"
 cp "${INSTALLER}/rcfiles/home-docker/config.json" "${HOME}/.docker/config.json"
-
-# ssh
-# These configs needs to be copied because they are completed for Zendesk
-# softwares.
-mkdir -p "${HOME}/.ssh"
-cp "${INSTALLER}/ssh_config" "${HOME}/.ssh/config"
-chmod -R 700 "${HOME}/.ssh"
