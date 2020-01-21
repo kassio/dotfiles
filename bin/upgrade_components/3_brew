@@ -33,3 +33,6 @@ then
   title --color 220 "Brew not listed in the global Brewfile"
   echo ${unlisted}
 fi
+
+title "To upgrade brew casks run"
+echo "brew cu -af"
