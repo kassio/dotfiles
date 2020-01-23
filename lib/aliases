@@ -13,6 +13,8 @@ alias watch="watch --color"
 alias ..="cd .."
 alias ...="cd ../.."
 
+alias b="brew"
+alias bc="brew cask"
 alias brews="brew services"
 
 # Searching
