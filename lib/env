@@ -25,9 +25,6 @@ export PROJECTS_PATH="${HOME}/src"
 # Personal CDPATHs
 export CDPATH=".:${HOME}:${PROJECTS_PATH}:${HOME}/.config"
 
-# postgres data directory
-export PGDATA="${HOMEBREW_PREFIX}/var/postgres"
-
 # gpg
 export GPG_TTY="$(tty)"
 
