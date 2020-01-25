@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+source "$(dirname $0)/../install/global"
+
+title "Remove my rcfiles/configs"
+
+for f in ${INSTALLER}/rcfiles/home/*
+do
+  rm -rf "${HOME}/.${f##*/}"
+done
+
+for f in ${INSTALLER}/rcfiles/home-config/*
+do
+  rm -rf "${HOME}/.config/${f##*/}"
+done
+
+rm -rf "${INSTALLER}/.docker"
