@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 alias v="vim"
+alias n="nvim"
 
 alias ls="ls -G -h"
 alias la="ls -lA"
