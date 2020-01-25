@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+alias v="vim"
+
+alias ls="ls -G -h"
+alias la="ls -lA"
+
+alias watch="watch --color"
+
+alias ..="cd .."
+alias ...="cd ../.."
+
+alias b="brew"
+alias bc="brew cask"
+alias brews="brew services"
+
+# Searching
+alias grep="grep --color=auto -i"
+
+# Ruby and Rails
+alias r="rails"
+alias RD="RAILS_ENV=development"
+alias RT="RAILS_ENV=test"
+alias RS="RAILS_ENV=staging"
+alias RP="RAILS_ENV=production"
+alias DS="DISABLE_SPRING=1"
+alias be="bundle exec"
+
+# Git
+alias g="git"
+alias ga="git add -A"
+alias gb="git branch"
+alias gc="git commit --verbose"
+alias gca="git commit --verbose --amend"
+alias gclean="git clean"
+alias gcp="git cherry-pick"
+alias gcpa="git cherry-pick --abort"
+alias gcpc="git cherry-pick --continue"
+alias gd="git diff"
+alias gdc="git diff --cached"
+alias gf="git fetch --prune --prune-tags --tags --recurse-submodules=on-demand"
+alias gfix="git commit --amend --no-edit"
+alias gl="git log --pretty=log"
+alias glme='git log --author="Kassio Borges"'
+alias gm="git merge"
+alias gma="git merge --abort"
+alias gp="git pull"
+alias gps="git push"
+alias gr="git rebase"
+alias gra="git rebase --abort"
+alias grc="git rebase --continue"
+alias gri="git rebase --interactive"
+alias grs="git rebase --skip"
+alias grt="git restore"
+alias gs="git status -sb"
+alias gsw="git switch"

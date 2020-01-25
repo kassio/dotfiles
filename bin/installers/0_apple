@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+softwareupdate -ia
+xcode-select --install
+sudo xcodebuild -license accept

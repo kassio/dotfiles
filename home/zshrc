@@ -1,0 +1,70 @@
+autoload -Uz compinit && compinit -C
+autoload -Uz bashcompinit && bashcompinit
+autoload -Uz colors && colors
+
+export DOTFILES="${HOME}/.dotfiles"
+export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
+export PATH="${DOTFILES}/bin:${HOMEBREW_PREFIX}/bin:${PATH}"
+
+export EDITOR="nvim"
+
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWCOLORHINTS=true
+export GIT_PS1_DESCRIBE_STYLE=branch
+export GIT_PS1_SHOWUPSTREAM=verbose
+
+export PROMPT_EOL_MARK=""
+
+source "${HOMEBREW_PREFIX}/opt/fzf/shell/completion.zsh" 2> /dev/null
+source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh" 2> /dev/null
+source "${HOMEBREW_PREFIX}/etc/bash_completion.d/git-prompt.sh"
+source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
+source "${HOMEBREW_PREFIX}/opt/asdf/etc/bash_completion.d/asdf.bash"
+source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+source "${DOTFILES}/lib/alias"
+
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+zstyle ':completion:*' matcher-list \
+  'm:{a-zA-Z}={A-Za-z}' \
+  'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+setopt ALWAYS_TO_END
+setopt AUTO_MENU
+setopt COMPLETE_IN_WORD
+setopt PROMPT_CR
+setopt PROMPT_SP
+unsetopt CORRECT
+unsetopt CORRECT_ALL
+unsetopt FLOWCONTROL
+unsetopt MENU_COMPLETE
+
+skip_global_compinit=1
+fpath=(${HOMEBREW_PREFIX}/share/zsh-completions ${fpath})
+
+for key in '!' '$' '@' '/'; do
+  bindkey "\e${key}" _bash_complete-word
+  bindkey "^X${key}" _bash_list-choices
+done
+
+__ps1() {
+  if [ "$?" -eq 0 ]
+  then
+    local prompt_color="%F{green}"
+  else
+    local prompt_color="%F{red}"
+  fi
+
+  local part1="%F{blue}%~%f"
+  local part2="
+${prompt_color}$%f "
+  local part3="$(print -P " %F{yellow}(%f%%s%F{yellow})")"
+
+  __git_ps1 ${part1} ${part2} ${part3}
+}
+precmd_functions=(__ps1)

@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-export DOTFILES="${HOME}/.dotfiles"
-export INSTALLER="${DOTFILES}/install"
-export PATH="$PATH:${DOTFILES}/bin"

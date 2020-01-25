@@ -1,0 +1,67 @@
+[user]
+  name = Kassio Borges
+  email = kassioborgesm@gmail.com
+[commit]
+  gpgsign = true
+[credential]
+  helper = osxkeychain
+[remote "origin"]
+  prune = true
+[core]
+  excludesfile = ~/.dotfiles/lib/gitignore
+  editor = `which $EDITOR`
+  whitespace = trailing-space,space-before-tab,cr-at-eol
+  ignorecase = false
+  pager = diff-so-fancy | less --tabs=4 -RFX
+[push]
+  default = current
+[pull]
+  rebase = true
+[tag]
+  sort = creatordate
+[grep]
+  extendRegexp = true
+  lineNumber = true
+[help]
+  autocorrect = 1
+[color]
+  branch = true
+  diff = auto
+  interactive = auto
+  status = auto
+  grep = auto
+  ui = auto
+[color "diff"]
+  old = red dim
+  new = green bold
+[rerere]
+  enabled = true
+  autoupdate = true
+[diff]
+  tool = vimdiff
+  noprefix = true
+[difftool]
+  prompt = false
+[difftool "vimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[merge]
+  ff = false
+  conflictstyle = diff3
+  tool = vimdiff
+[mergetool]
+  prompt = false
+[mergetool "vimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[log]
+  date = format-local:"%F %R"
+[pretty]
+  log = %C(red dim)%h %C(green)%cd %C(yellow)%an %C(reset)%C(white)%s %C(blue)%d
+[alias]
+  tag-sync = !git fetch --prune origin "+refs/tags/*:refs/tags/*"
+  today = !git --no-pager l --since=today.midnight
+[include]
+  path = ~/.dotfiles.private/gitconfig
+[gpg]
+  program = /usr/local/bin/gpg
+[advice]
+  detachedHead = false

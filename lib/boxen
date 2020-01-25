@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-# boxen-env
-if [ -e /opt/boxen/env.sh ]
-then
-  source /opt/boxen/env.sh
-fi

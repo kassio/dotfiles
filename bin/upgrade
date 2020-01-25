@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-components_path="${HOME}/.dotfiles/bin/upgrade_components"
+components_path="${DOTFILES}/bin/upgraders"
 timestamp_file="${HOME}/.config/.last-upgrade"
 
 case "$1" in

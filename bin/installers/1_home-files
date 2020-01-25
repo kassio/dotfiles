@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+for f in ${DOTFILES}/home/*
+do
+  ln -sf "${f}" "${HOME}/.${f##*/}"
+done
