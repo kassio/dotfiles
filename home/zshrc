@@ -18,16 +18,6 @@ export GIT_PS1_SHOWUPSTREAM=verbose
 
 export PROMPT_EOL_MARK=""
 
-source "${HOMEBREW_PREFIX}/opt/fzf/shell/completion.zsh" 2> /dev/null
-source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh" 2> /dev/null
-source "${HOMEBREW_PREFIX}/etc/bash_completion.d/git-prompt.sh"
-source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
-source "${HOMEBREW_PREFIX}/opt/asdf/etc/bash_completion.d/asdf.bash"
-source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
-source "${DOTFILES}/lib/alias"
-
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 zstyle ':completion:*' matcher-list \
@@ -46,6 +36,7 @@ unsetopt MENU_COMPLETE
 
 skip_global_compinit=1
 fpath=(${HOMEBREW_PREFIX}/share/zsh-completions ${fpath})
+CDPATH=".:${HOME}:${HOME}/.config:${HOME}/src"
 
 for key in '!' '$' '@' '/'; do
   bindkey "\e${key}" _bash_complete-word
@@ -68,3 +59,14 @@ ${prompt_color}$%f "
   __git_ps1 ${part1} ${part2} ${part3}
 }
 precmd_functions=(__ps1)
+
+source "${HOMEBREW_PREFIX}/opt/fzf/shell/completion.zsh" 2> /dev/null
+source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh" 2> /dev/null
+source "${HOMEBREW_PREFIX}/etc/bash_completion.d/git-prompt.sh"
+source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
+source "${HOMEBREW_PREFIX}/opt/asdf/etc/bash_completion.d/asdf.bash"
+source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+source "${DOTFILES}/lib/alias"
+source "${HOME}/.dotfiles.private/env"
