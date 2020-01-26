@@ -56,6 +56,7 @@ unsetopt flowcontrol
 unsetopt hist_ignore_space # ignore space prefixed commands
 unsetopt menu_complete
 
+tabs -2
 skip_global_compinit=1
 fpath=(${HOMEBREW_PREFIX}/share/zsh-completions ${fpath})
 CDPATH=".:${HOME}:${HOME}/.config:${HOME}/src"
