@@ -25,6 +25,8 @@ if [ -n "${outdated}" ]
 then
   title "Outdated Brew casks"
   echo ${outdated}
+  title "To upgrade brew casks run"
+  echo "brew cu -af"
 fi
 
 unlisted=$(brew bundle cleanup --global)
@@ -33,6 +35,3 @@ then
   title --color 220 "Brew not listed in the global Brewfile"
   echo ${unlisted}
 fi
-
-title "To upgrade brew casks run"
-echo "brew cu -af"

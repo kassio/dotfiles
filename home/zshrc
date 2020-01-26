@@ -3,9 +3,20 @@ autoload -Uz bashcompinit && bashcompinit
 autoload -Uz colors && colors
 
 export DOTFILES="${HOME}/.dotfiles"
-export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
-export PATH="${DOTFILES}/bin:${HOMEBREW_PREFIX}/bin:${PATH}"
+
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
+export PATH="${DOTFILES}/bin:${PATH}"
+
+export HISTFILE=${HOME}/.zhistory
+export HISTSIZE=120000
+export SAVEHIST=100000
+
+export PROMPT_EOL_MARK="" # Remove % from partial lines
+export WORDCHARS="" # Fix the \eb \ef and others.
+
+export HOMEBREW_NO_ANALYTICS=1
 
 export EDITOR="nvim"
 
@@ -16,23 +27,32 @@ export GIT_PS1_SHOWCOLORHINTS=true
 export GIT_PS1_DESCRIBE_STYLE=branch
 export GIT_PS1_SHOWUPSTREAM=verbose
 
-export PROMPT_EOL_MARK=""
-
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
 
-zstyle ':completion:*' matcher-list \
-  'm:{a-zA-Z}={A-Za-z}' \
-  'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-
-setopt ALWAYS_TO_END
-setopt AUTO_MENU
-setopt COMPLETE_IN_WORD
-setopt PROMPT_CR
-setopt PROMPT_SP
-unsetopt CORRECT
-unsetopt CORRECT_ALL
-unsetopt FLOWCONTROL
-unsetopt MENU_COMPLETE
+setopt always_to_end # move cursor to end if word had one match
+setopt auto_menu # automatically use menu completion
+setopt bang_hist # treat the '!' character specially during expansion.
+setopt complete_in_word
+setopt hist_expire_dups_first # expire duplicate entries first when trimming history.
+setopt hist_find_no_dups # do not display a line previously found.
+setopt hist_ignore_all_dups # delete old recorded entry if new entry is a duplicate.
+setopt hist_ignore_dups # don't record an entry that was just recorded again.
+setopt hist_no_store # don't save history command on history
+setopt hist_reduce_blanks # remove superfluous blanks before recording entry.
+setopt hist_save_no_dups # don't write duplicate entries in the history file.
+setopt hist_verify # don't execute immediately upon history expansion.
+setopt inc_append_history # write to the history file immediately, not when the shell exits.
+setopt prompt_cr # remove % from partial lines
+setopt prompt_sp # remove % from partial lines
+setopt share_history # share history between all sessions.
+unsetopt correct
+unsetopt correct_all
+unsetopt extended_history
+unsetopt flowcontrol
+unsetopt hist_ignore_space # ignore space prefixed commands
+unsetopt menu_complete
 
 skip_global_compinit=1
 fpath=(${HOMEBREW_PREFIX}/share/zsh-completions ${fpath})
