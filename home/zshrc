@@ -27,6 +27,8 @@ export GIT_PS1_SHOWCOLORHINTS=true
 export GIT_PS1_DESCRIBE_STYLE=branch
 export GIT_PS1_SHOWUPSTREAM=verbose
 
+export GPG_TTY=$(tty)
+
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
