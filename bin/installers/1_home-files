@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-for f in ${DOTFILES}/home/*
+while read -r f
 do
-  ln -sf "${f}" "${HOME}/.${f}"
-done
+  target="$(basename "${f}")"
+  ln -sf "${f}" "${HOME}/.${target}"
+done < <(find "${DOTFILES}/home")
