@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+retag-gems() {
+  if [ -e 'Gemfile' ]
+  then
+    echo 'Gemfile found, bundling first'
+    bundle
+    ctags-gems
+  fi
+}
+
+retag() {
+  ctags || (rm tags && ctags)
+}
+
+print-help() {
+  echo -e "USAGE: retag [options]
+  Regenerate the ctags file for the current project.
+  Options:
+  -g, --gems      if a Gemfile exists, bundle and generate ctags file for the gems [DEFAULT]
+  -G, -no-gems    even a Gemfile exists, do not bundle/generate ctags file for the gems
+  -v, --verbose   show what's going on
+  -h, --help      show this help message
+"
+}
+
+LOGFILE="/tmp/$(date +"%Y%m%d%H%M%S")-${PWD//\//_}.retag"
+gems=true
+verbose=false
+quiet=false
+
+for option in "$@"
+do
+  case $option in
+    -G|--no-gems)
+      gems=false
+      ;;
+    -g|--gems)
+      gems=true
+      ;;
+    -v|--verbose)
+      verbose=true
+      ;;
+    -q|--quiet)
+      quiet=true
+      ;;
+    -h|--help)
+      print-help
+      exit 0
+      ;;
+  esac
+done
+
+exec 3>/dev/stdout
+if [ "${verbose}" = true ]
+then
+  exec > >(tee -a "${LOGFILE}") 2>&1
+else
+  exec >"${LOGFILE}"
+
+  if [ "${quiet}" = true ]
+  then
+    exec 2>&1
+  fi
+fi
+
+
+if [ "$gems" = true ]
+then
+  echo 'bundling'
+  retag-gems
+fi
+
+retag
