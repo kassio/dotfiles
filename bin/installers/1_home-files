@@ -2,5 +2,5 @@
 
 for f in ${DOTFILES}/home/*
 do
-  ln -sf "${f}" "${HOME}/.${f##*/}"
+  ln -sf "${f}" "${HOME}/.${f}"
 done

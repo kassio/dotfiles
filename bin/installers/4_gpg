@@ -3,7 +3,7 @@
 mkdir -p "${HOME}/.gnupg"
 for f in ${DOTFILES}/lib/gnupg/*
 do
-  ln -sf "${f}" "${HOME}/.gnupg/${f##*/}"
+  ln -sf "${f}" "${HOME}/.gnupg/${f}"
 done
 
 chmod 700 ~/.gnupg
