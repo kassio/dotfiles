@@ -4,6 +4,6 @@ mkdir -p "${HOME}/.gnupg"
 while read -r f
 do
   ln -sf "${f}" "${HOME}/.gnupg/${f}"
-done < <(find "${DOTFILES}/lib/gnupg")
+done < <(ls -1 "${DOTFILES}/lib/gnupg")
 
 chmod 700 ~/.gnupg
