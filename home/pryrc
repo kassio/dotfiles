@@ -2,12 +2,35 @@
 # frozen_string_literal: true
 
 if defined?(PryByebug)
-  Pry.commands.alias_command 's', 'step'
-  Pry.commands.alias_command 'n', 'next'
-  Pry.commands.alias_command 'f', 'finish'
-  Pry.commands.alias_command 'c', 'continue'
+  Pry.commands.alias_command "s", "step"
+  Pry.commands.alias_command "n", "next"
+  Pry.commands.alias_command "f", "finish"
+  Pry.commands.alias_command "c", "continue"
+  Pry.commands.alias_command "l=", "whereami "
 end
 
-Pry::Commands.command /^$/, "repeat last command" do
+Pry::Commands.command(/^$/, "repeat last command") do
   _pry_.run_command Pry.history.to_a.last
+end
+
+def formatted_env
+  case Rails.env
+  when "production"
+    bold_upcased_env = Pry::Helpers::Text.bold(Rails.env.upcase)
+    Pry::Helpers::Text.red(bold_upcased_env)
+  when "staging"
+    Pry::Helpers::Text.yellow(Rails.env)
+  when "development"
+    Pry::Helpers::Text.green(Rails.env)
+  else
+    Rails.env
+  end
+end
+
+def app_name
+  File.basename(Rails.root)
+end
+
+if defined?(Rails)
+  Pry.config.prompt = proc { |obj, nest_level, _| "[#{app_name}][#{formatted_env}] #{obj}:#{nest_level}> " }
 end
