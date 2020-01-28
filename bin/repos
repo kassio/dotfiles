@@ -80,6 +80,7 @@ clone() {
 }
 
 _update() {
+  local files
   local path=""
   trap 'exit 1' EXIT HUP INT QUIT TERM
 
