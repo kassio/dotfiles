@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-ln -sf "${DOTFILES}/lib/rectangleapp/com.knollsoft.Rectangle.plist" "${HOME}/Library/Preferences/com.knollsoft.Rectangle.plist"
