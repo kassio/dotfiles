@@ -77,7 +77,7 @@ __ps1() {
   local part1="%F{blue}%~%f"
   local part2="
 ${prompt_color}$%f "
-  local part3="$(print -P " %F{yellow}(%f%%s%F{yellow})")"
+  local part3="$(print -P " %F{yellow}(%f%%s%F{yellow})${PS1_EXTRA}")"
 
   __git_ps1 ${part1} ${part2} ${part3}
 }
