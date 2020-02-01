@@ -66,6 +66,9 @@ for key in '!' '$' '@' '/'; do
   bindkey "^X${key}" _bash_list-choices
 done
 
+# To be overwritten on $HOME/.dotfiles.private/env
+__ps1_extra() { echo ''; }
+
 __ps1() {
   if [ "$?" -eq 0 ]
   then
@@ -77,7 +80,7 @@ __ps1() {
   local part1="%F{blue}%~%f"
   local part2="
 ${prompt_color}$%f "
-  local part3="$(print -P " %F{yellow}(%f%%s%F{yellow})${PS1_EXTRA}")"
+  local part3="$(print -P " %F{yellow}(%f%%s%F{yellow})$(__ps1_extra)")"
 
   __git_ps1 ${part1} ${part2} ${part3}
 }
