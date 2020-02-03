@@ -90,6 +90,8 @@ __rprompt() {
   then
     local head="$(git symbolic-ref -q HEAD)"
     export RPROMPT="%F{008}$(git for-each-ref --format='%(upstream:short)' "${head}")%f"
+  else
+    export RPROMPT=""
   fi
 }
 precmd_functions=(__ps1 __rprompt)
