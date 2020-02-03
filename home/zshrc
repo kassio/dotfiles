@@ -78,13 +78,16 @@ __ps1() {
   fi
 
   local part1="%F{blue}%~%f"
-  local part2="
-${prompt_color}$%f "
-  local part3="$(print -P " %F{yellow}(%f%%s%F{yellow})$(__ps1_extra)")"
+  local part2="${prompt_color}$%f "
+  local part3="$(print -P " %F{yellow}(%f%%s%F{yellow})$(__ps1_extra)")\n"
 
   __git_ps1 ${part1} ${part2} ${part3}
 }
-precmd_functions=(__ps1)
+__rprompt() {
+  local head="$(git symbolic-ref -q HEAD)"
+  export RPROMPT="%F{008}$(git for-each-ref --format='%(upstream:short)' "${head}")%f"
+}
+precmd_functions=(__ps1 __rprompt)
 
 source "${HOMEBREW_PREFIX}/opt/fzf/shell/completion.zsh" 2> /dev/null
 source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh" 2> /dev/null
