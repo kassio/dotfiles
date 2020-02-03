@@ -78,14 +78,17 @@ __ps1() {
   fi
 
   local part1="%F{blue}%~%f"
-  local part2="${prompt_color}$%f "
-  local part3="$(print -P " %F{yellow}(%f%%s%F{yellow})$(__ps1_extra)")\n"
+  local part2=$(echo -e "\n${prompt_color}$%f ")
+  local part3="$(print -P " %F{yellow}(%f%%s%F{yellow})$(__ps1_extra)")"
 
   __git_ps1 ${part1} ${part2} ${part3}
 }
 __rprompt() {
-  local head="$(git symbolic-ref -q HEAD)"
-  export RPROMPT="%F{008}$(git for-each-ref --format='%(upstream:short)' "${head}")%f"
+  if [ -d ".git" ]
+  then
+    local head="$(git symbolic-ref -q HEAD)"
+    export RPROMPT="%F{008}$(git for-each-ref --format='%(upstream:short)' "${head}")%f"
+  fi
 }
 precmd_functions=(__ps1 __rprompt)
 
