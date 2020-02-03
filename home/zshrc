@@ -51,12 +51,12 @@ setopt inc_append_history # write to the history file immediately, not when the 
 setopt prompt_cr # remove % from partial lines
 setopt prompt_sp # remove % from partial lines
 setopt share_history # share history between all sessions.
-unsetopt correct
-unsetopt correct_all
+unsetopt correct # do not correct me
+unsetopt correct_all # do not correct me
 unsetopt extended_history
 unsetopt flowcontrol
 unsetopt hist_ignore_space # ignore space prefixed commands
-unsetopt menu_complete
+unsetopt menu_complete # do not navigate completion with arrows
 
 tabs -2
 skip_global_compinit=1
@@ -103,4 +103,5 @@ source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 source "${DOTFILES}/lib/alias"
+source "${DOTFILES}/lib/rails"
 source "${HOME}/.dotfiles.private/env"

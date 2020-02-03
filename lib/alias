@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+# vim:ft=zsh:
 
 alias v="vim"
 alias n="nvim"
