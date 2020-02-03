@@ -16,7 +16,8 @@ alias bc="brew cask"
 alias brews="brew services"
 
 # Searching
-alias grep="grep --color=auto -i"
+alias grep="grep -v 'grep --color=auto -i' | grep --color=auto -i"
+alias psg="ps aux | grep"
 
 # Ruby and Rails
 alias r="rails"
