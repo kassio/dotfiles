@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-if [ "$1" = "-v" -o "$1" = "--validate" ]
-then
-  /usr/bin/sudo --validate
-else
-  A=$(alias &>/dev/null) /usr/bin/sudo env -- $@
-fi

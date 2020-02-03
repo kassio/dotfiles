@@ -3,6 +3,8 @@
 alias v="vim"
 alias n="nvim"
 
+alias sudo="sudo "
+
 alias ls="ls -G -h"
 alias la="ls -lA"
 
