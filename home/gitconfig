@@ -59,9 +59,9 @@
 [alias]
   tag-sync = !git fetch --prune origin "+refs/tags/*:refs/tags/*"
   today = !git --no-pager l --since=today.midnight
-[include]
-  path = ~/.dotfiles.private/gitconfig
 [gpg]
   program = /usr/local/bin/gpg
 [advice]
   detachedHead = false
+[include]
+  path = ~/.dotfiles.private/gitconfig
