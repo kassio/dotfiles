@@ -106,4 +106,5 @@ source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting
 
 source "${DOTFILES}/lib/alias"
 source "${DOTFILES}/lib/rails"
-source "${HOME}/.dotfiles.private/env"
+source "${HOME}/.dotfiles.private/env" # Private stuff
+source "${HOME}/.env" 2>/dev/null # Ephemeral stuff
