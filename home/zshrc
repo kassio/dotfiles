@@ -9,7 +9,7 @@ export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 
 export PATH="/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
-export PATH="${DOTFILES}/bin:${PATH}"
+export PATH="${DOTFILES}/bin:./bin:${PATH}"
 
 export HISTFILE=${HOME}/.zhistory
 export HISTSIZE=120000
