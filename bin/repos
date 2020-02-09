@@ -36,7 +36,6 @@ status_for() {
 }
 
 sync() {
-  local master
   local current_branch
   local path
 
@@ -44,7 +43,6 @@ sync() {
 
   pushd "${path}" || _printerr "${path} not found"
 
-  master="$(cat .git/custom-master 2> /dev/null || echo 'master')"
   current_branch="$(git symbolic-ref --short HEAD)"
 
   sun "Updating ${path}"
@@ -59,14 +57,6 @@ sync() {
       git switch "${branch}" 2>/dev/null
       git fetch --prune --prune-tags --tags --recurse-submodules
       (status_for git pull) || break
-
-
-      if [ "${branch}" == "${current_branch}" ] \
-        && [ "${current_branch}" != "${master}" ]
-            then
-              arrow "Rebasing '${current_branch}' on '${master}'"
-              status_for git rebase "${master}"
-      fi
     fi
   done
 
