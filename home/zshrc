@@ -71,29 +71,20 @@ done
 __ps1_extra() { echo ''; }
 
 __ps1() {
-  if [ "$?" -eq 0 ]
-  then
-    local prompt_color="%F{green}"
-  else
-    local prompt_color="%F{red}"
-  fi
-
-  local part1="%F{blue}%~%f"
-  local part2=$(echo -e "\n${prompt_color}$%f ")
-  local part3="$(print -P " %F{yellow}(%f%%s%F{yellow})$(__ps1_extra)")"
-
-  __git_ps1 ${part1} ${part2} ${part3}
-}
-__rprompt() {
   if [ -d ".git" ]
   then
-    local head="$(git symbolic-ref -q HEAD)"
-    export RPROMPT="%F{008}$(git for-each-ref --format='%(upstream:short)' "${head}")%f"
+    local git_remote="$(git rev-parse --abbrev-ref @{upstream} 2>/dev/null | cut -d '/' -f1)"
   else
-    export RPROMPT=""
+    local git_remote=""
   fi
+
+  local ps1_path="%F{blue}%~%f"
+  local ps1_git="$(print -P " %F{yellow}(%F{022}${git_remote}/%f%%s%F{yellow})$(__ps1_extra)")"
+  local ps1_prompt=$(echo -n "\n%(?.%F{green}.%F{red})$%f ")
+
+  __git_ps1 ${ps1_path} ${ps1_prompt} ${ps1_git}
 }
-precmd_functions=(__ps1 __rprompt)
+precmd_functions=(__ps1)
 
 source "${HOMEBREW_PREFIX}/opt/fzf/shell/completion.zsh" 2> /dev/null
 source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh" 2> /dev/null
