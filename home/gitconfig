@@ -10,7 +10,7 @@
 [core]
   excludesfile = ~/.dotfiles/lib/gitignore
   editor = `which $EDITOR`
-  whitespace = trailing-space,space-before-tab,cr-at-eol
+  whitespace = blank-at-eol,blank-at-eof,trailing-space,space-before-tab,cr-at-eol,tabwidth=2
   ignorecase = false
   pager = less --tabs=2 -RFX
 [push]
@@ -24,16 +24,12 @@
   lineNumber = true
 [help]
   autocorrect = 1
-[color]
-  branch = true
-  diff = auto
-  interactive = auto
-  status = auto
-  grep = auto
-  ui = auto
 [color "diff"]
-  old = red dim
+  frag = cyan dim
+  meta = cyan black dim
+  old = red
   new = green bold
+  whitespace = blue reverse
 [rerere]
   enabled = true
   autoupdate = true
