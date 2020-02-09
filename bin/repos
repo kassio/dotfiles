@@ -51,18 +51,21 @@ sync() {
 
   for branch in $(git branch --list | cut -c 3-)
   do
-    log "» ${branch}"
+    if git rev-parse --abbrev-ref "${branch}@{upstream}" 2>/dev/null
+    then
+      log "» ${branch}"
 
-    git switch "${branch}" 2>/dev/null
-    git fetch --prune --prune-tags --tags --recurse-submodules
-    (status_for git pull) || break
+      git switch "${branch}" 2>/dev/null
+      git fetch --prune --prune-tags --tags --recurse-submodules
+      (status_for git pull) || break
 
 
-    if [ "${branch}" == "${current_branch}" ] \
-      && [ "${current_branch}" != "${master}" ]
-        then
-          arrow "Rebasing '${current_branch}' on '${master}'"
-          status_for git rebase "${master}"
+      if [ "${branch}" == "${current_branch}" ] \
+        && [ "${current_branch}" != "${master}" ]
+            then
+              arrow "Rebasing '${current_branch}' on '${master}'"
+              status_for git rebase "${master}"
+      fi
     fi
   done
 
