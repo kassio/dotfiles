@@ -42,7 +42,7 @@ sync() {
 
   path="$1"
 
-  pushd "${path}"
+  pushd "${path}" || _printerr "${path} not found"
 
   master="$(cat .git/custom-master 2> /dev/null || echo 'master')"
   current_branch="$(git symbolic-ref --short HEAD)"
@@ -51,7 +51,8 @@ sync() {
 
   for branch in $(git branch --list | cut -c 3-)
   do
-    if git rev-parse --abbrev-ref "${branch}@{upstream}" 2>/dev/null
+    branch_remote="$(git rev-parse --abbrev-ref "${branch}@{upstream}" 2>/dev/null | cut -d '/' -f1)"
+    if [ "${branch_remote}" = "origin" ]
     then
       log "» ${branch}"
 
@@ -71,7 +72,7 @@ sync() {
 
   git switch "${current_branch}" 2>/dev/null
 
-  popd
+  popd || exit 1
 }
 
 clone() {
@@ -136,6 +137,7 @@ _help() {
 USAGE: repos [--list path|--update]
 Options:
 \t--update | -u \tupdates the list of repositories on \$REPOS_FILES
+\t              \tBranchs with remote set to \"origin\" will be synced
 \t  --list | -l \tlist the repositories on the given path
 
 \`\$REPOS_FILES\` must contain a list of files separated by \`:\`
