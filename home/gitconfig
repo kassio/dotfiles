@@ -12,7 +12,7 @@
   editor = `which $EDITOR`
   whitespace = trailing-space,space-before-tab,cr-at-eol
   ignorecase = false
-  pager = diff-so-fancy | less --tabs=2 -RFX
+  pager = less --tabs=2 -RFX
 [push]
   default = current
 [pull]
