@@ -1,0 +1,53 @@
+#!/usr/bin/env zsh
+
+source "${HOMEBREW_PREFIX}/etc/bash_completion.d/git-prompt.sh"
+
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWCOLORHINTS=true
+export GIT_PS1_DESCRIBE_STYLE=branch
+export GIT_PS1_SHOWUPSTREAM=verbose
+
+__git_remote() {
+  git rev-parse --abbrev-ref @{upstream} 2>/dev/null | cut -d '/' -f1
+}
+
+__git_master_diff() {
+  local from="$(git log --oneline master.. | wc -l | tr -d ' ')"
+  local to="$(git log --oneline ..master | wc -l | tr -d ' ')"
+  local diff=""
+
+  if [ ${from} -eq 0 ] && [ ${to} -eq 0 ]
+  then
+    diff="="
+  else
+    [ ${to} -gt 0 ] && diff="-${to}"
+    [ ${from} -gt 0 ] && diff="${diff}+${from}"
+  fi
+
+  echo "m${diff}"
+}
+
+# To be overwritten on $HOME/.dotfiles.private/env
+__ps1_extra() { echo ''; }
+
+__ps1() {
+  if [ -d ".git" ]
+  then
+    git_remote="$(__git_remote)"
+    git_master_diff="$(__git_master_diff)"
+  else
+    git_remote=""
+    git_master_diff=""
+  fi
+
+  ps1_path="%F{blue}%~%f"
+  ps1_git="$(print -P " %F{yellow}(%F{022}${git_remote}/%f%%s${git_master_diff}%F{yellow})$(__ps1_extra)")"
+  ps1_prompt=$(echo -n "\n%(?.%F{green}.%F{red})$%f ")
+
+
+  __git_ps1 ${ps1_path} ${ps1_prompt} ${ps1_git}
+}
+
+precmd_functions=(__ps1)
