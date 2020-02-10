@@ -46,7 +46,7 @@ alias gd="git diff"
 alias gdc="git diff --cached"
 alias gf="git fetch --prune --prune-tags --tags --recurse-submodules=on-demand"
 alias gfix="git commit --amend --no-edit"
-alias gl="git log --pretty=log"
+alias gla="git log --pretty=log"
 alias glme='git log --author="Kassio Borges"'
 alias gm="git merge"
 alias gma="git merge --abort"
@@ -61,3 +61,24 @@ alias grt="git restore"
 alias gs="git status -sb"
 alias gsw="git switch"
 alias gt="git tag"
+alias gremote="git rev-parse --abbrev-ref @{upstream} 2>/dev/null"
+
+gl() {
+  git log --pretty=log -${1:-20}
+}
+
+master-diff() {
+  local from="$(git log --oneline master.. | wc -l | tr -d ' ')"
+  local to="$(git log --oneline ..master | wc -l | tr -d ' ')"
+  local diff=""
+
+  if [ ${from} -eq 0 ] && [ ${to} -eq 0 ]
+  then
+    diff="="
+  else
+    [ ${to} -gt 0 ] && diff="-${to}"
+    [ ${from} -gt 0 ] && diff="${diff}+${from}"
+  fi
+
+  echo "m${diff}"
+}
