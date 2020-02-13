@@ -21,4 +21,4 @@ __ps1() {
   __git_ps1 ${ps1_path} ${ps1_prompt} ${ps1_git}
 }
 
-precmd_functions=(__ps1)
+precmd_functions+=__ps1
