@@ -3,6 +3,7 @@
 # global
 export DOTFILES="${HOME}/.dotfiles"
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin"
 
 # load zsh stuff
 autoload -Uz compinit && compinit -C
@@ -18,7 +19,6 @@ source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # env
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
 export PATH="./bin:${DOTFILES}/bin:${PATH}"
 
