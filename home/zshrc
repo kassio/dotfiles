@@ -1,14 +1,26 @@
 # vim:ft=zsh:
 
+# global
+export DOTFILES="${HOME}/.dotfiles"
+export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
+
+# load zsh stuff
 autoload -Uz compinit && compinit -C
 autoload -Uz bashcompinit && bashcompinit
 autoload -Uz colors && colors
 
-export DOTFILES="${HOME}/.dotfiles"
-export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
+# load libs stuff
+source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
+source "${HOMEBREW_PREFIX}/opt/asdf/etc/bash_completion.d/asdf.bash"
+source "${HOMEBREW_PREFIX}/opt/fzf/shell/completion.zsh"
+source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
+source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
+# env
 export PATH="/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
+export PATH="./bin:${DOTFILES}/bin:${PATH}"
 
 export HISTFILE=${HOME}/.zhistory
 export HISTSIZE=120000
@@ -17,20 +29,28 @@ export SAVEHIST=100000
 export PROMPT_EOL_MARK="" # Remove % from partial lines
 export WORDCHARS="" # Fix the \eb \ef and others.
 
-export HOMEBREW_NO_ANALYTICS=1
-
 export EDITOR="nvim"
 
 export GPG_TTY=$(tty)
 
+export HOMEBREW_NO_ANALYTICS=1
+
+fpath=(${HOMEBREW_PREFIX}/share/zsh-completions ${fpath})
+CDPATH=".:${HOME}:${HOME}/.config:${HOME}/src"
+
+# style
+tabs -2
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
 
+# options
 setopt always_to_end # move cursor to end if word had one match
 setopt auto_menu # automatically use menu completion
 setopt bang_hist # treat the '!' character specially during expansion.
 setopt complete_in_word
+setopt extendedglob # easy regexp on list files (**)
+setopt glob_dots # include dotfiles in globbing
 setopt hist_expire_dups_first # expire duplicate entries first when trimming history.
 setopt hist_find_no_dups # do not display a line previously found.
 setopt hist_ignore_all_dups # delete old recorded entry if new entry is a duplicate.
@@ -40,6 +60,7 @@ setopt hist_reduce_blanks # remove superfluous blanks before recording entry.
 setopt hist_save_no_dups # don't write duplicate entries in the history file.
 setopt hist_verify # don't execute immediately upon history expansion.
 setopt inc_append_history # write to the history file immediately, not when the shell exits.
+setopt interactive_comments # don't blow up with comments
 setopt prompt_cr # remove % from partial lines
 setopt prompt_sp # remove % from partial lines
 setopt share_history # share history between all sessions.
@@ -50,27 +71,9 @@ unsetopt flowcontrol
 unsetopt hist_ignore_space # ignore space prefixed commands
 unsetopt menu_complete # do not navigate completion with arrows
 
-tabs -2
-skip_global_compinit=1
-fpath=(${HOMEBREW_PREFIX}/share/zsh-completions ${fpath})
-CDPATH=".:${HOME}:${HOME}/.config:${HOME}/src"
-
-for key in '!' '$' '@' '/'; do
-  bindkey "\e${key}" _bash_complete-word
-  bindkey "^X${key}" _bash_list-choices
-done
-
-source "${HOMEBREW_PREFIX}/opt/fzf/shell/completion.zsh" 2> /dev/null
-source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh" 2> /dev/null
-source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
-source "${HOMEBREW_PREFIX}/opt/asdf/etc/bash_completion.d/asdf.bash"
-source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
-# Ensure my bin is on top of the libraries
-export PATH="./bin:${DOTFILES}/bin:${PATH}"
-
+# personal libs
 source "${DOTFILES}/lib/ps1"
+source "${DOTFILES}/lib/bindkeys"
 source "${DOTFILES}/lib/alias"
 source "${DOTFILES}/lib/rails"
 source "${HOME}/.dotfiles.private/env" # Private stuff

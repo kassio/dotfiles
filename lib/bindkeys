@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+# c-x c-e to edit command line in ${EDITOR}
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
+
+for key in '!' '$' '@' '/'; do
+  bindkey "\e${key}" _bash_complete-word
+  bindkey "^X${key}" _bash_list-choices
+done
