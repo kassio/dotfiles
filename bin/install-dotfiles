@@ -4,8 +4,7 @@ export DOTFILES="${HOME}/.dotfiles"
 export PATH="${PATH}:${DOTFILES}/bin"
 export INSTALLERS="${DOTFILES}/bin/installers"
 
-for component in $(ls -1 "${INSTALLERS}/")
-do
+for component in $(ls -1 "${INSTALLERS}/"); do
   echo ">>> ${component}"
   "${INSTALLERS}/${component}"
 done

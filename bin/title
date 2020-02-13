@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-function title {
+function title() {
   local bullet="▸ "
 
   case $1 in
-    -c|--color)
+    -c | --color)
       shift
       local color=$1
       shift

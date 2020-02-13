@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-if [ "$1" = "--help" ]
-then
+if [ "$1" = "--help" ]; then
   echo "- brew: Upgrade all your brews (and clean them up)"
   exit
 fi
@@ -14,23 +13,20 @@ title "Global Brewfile"
 brew bundle check --global --all --verbose
 
 cleaned=$(brew cleanup --prune 7)
-if [ -n "${cleaned}" ]
-then
+if [ -n "${cleaned}" ]; then
   title "Cleaning up old brews"
   echo "${cleaned}"
 fi
 
 outdated=$(brew cask outdated)
-if [ -n "${outdated}" ]
-then
+if [ -n "${outdated}" ]; then
   title "Outdated Brew casks"
   echo "${outdated}"
   title "To upgrade brew casks run \`brew cu -af'"
 fi
 
 unlisted=$(brew bundle cleanup --global)
-if [ -n "${unlisted}" ]
-then
+if [ -n "${unlisted}" ]; then
   title --color 220 "Brew not listed in the global Brewfile"
   echo "${unlisted}"
 fi

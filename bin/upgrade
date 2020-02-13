@@ -4,7 +4,7 @@ components_path="${DOTFILES}/bin/upgraders"
 timestamp_file="${HOME}/.config/.last-upgrade"
 
 case "$1" in
-  --help|-h)
+  --help | -h)
     echo -e "USAGE: upgrade [options]
     Upgrade your system components
 
@@ -17,8 +17,7 @@ case "$1" in
       This option may be used more than once.
 
   Components:"
-    for component in $(ls -1 "${components_path}/")
-    do
+    for component in $(ls -1 "${components_path}/"); do
       echo -e "\t\t$(${components_path}/${component} --help)"
     done
     exit 0
@@ -31,8 +30,7 @@ _exit() {
 }
 
 _last_upgrade() {
-  if [ -f "${timestamp_file}" ]
-  then
+  if [ -f "${timestamp_file}" ]; then
     title "Last upgrade was done on $(cat ${timestamp_file}).\n"
   fi
 }
@@ -43,18 +41,15 @@ _upgrade() {
   _last_upgrade
 
   local only_param="${1#--}"
-  if [ -n "${only_param}" ]
-  then
+  if [ -n "${only_param}" ]; then
     local only=$(find ${components_path} -name "*${only_param}")
-    if [ -n "${only}" ]
-    then
+    if [ -n "${only}" ]; then
       "${only}"
       _exit 0
     fi
   fi
 
-  for component in $(ls -1 "${components_path}/")
-  do
+  for component in $(ls -1 "${components_path}/"); do
     name=$(echo ${component} | sed -E "s/[[:digit:]]+_//")
 
     case "$*" in
@@ -69,7 +64,6 @@ _upgrade() {
 
   _exit 0
 }
-
 
 _upgrade "$@"
 

@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 mkdir -p "${HOME}/.gnupg"
-while read -r f
-do
+while read -r f; do
   ln -sf "${f}" "${HOME}/.gnupg/${f}"
 done < <(ls -1 "${DOTFILES}/lib/gnupg")
 

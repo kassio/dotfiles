@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 
-if [ "$1" = "--help" ]
-then
+if [ "$1" = "--help" ]; then
   echo "- custom: Upgrade your custom components (those that aint in github 🤫 )"
   exit
 fi
 
-if type custom-upgrade &>/dev/null
-then
+if type custom-upgrade &> /dev/null; then
   title "custom upgrade"
   custom-upgrade
 fi

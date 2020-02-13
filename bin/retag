@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 retag-gems() {
-  if [ -e 'Gemfile' ]
-  then
+  if [ -e 'Gemfile' ]; then
     echo 'Gemfile found, bundling first'
     bundle
     ctags-gems
@@ -29,44 +28,39 @@ gems=true
 verbose=false
 quiet=false
 
-for option in "$@"
-do
+for option in "$@"; do
   case $option in
-    -G|--no-gems)
+    -G | --no-gems)
       gems=false
       ;;
-    -g|--gems)
+    -g | --gems)
       gems=true
       ;;
-    -v|--verbose)
+    -v | --verbose)
       verbose=true
       ;;
-    -q|--quiet)
+    -q | --quiet)
       quiet=true
       ;;
-    -h|--help)
+    -h | --help)
       print-help
       exit 0
       ;;
   esac
 done
 
-exec 3>/dev/stdout
-if [ "${verbose}" = true ]
-then
+exec 3> /dev/stdout
+if [ "${verbose}" = true ]; then
   exec > >(tee -a "${LOGFILE}") 2>&1
 else
-  exec >"${LOGFILE}"
+  exec > "${LOGFILE}"
 
-  if [ "${quiet}" = true ]
-  then
+  if [ "${quiet}" = true ]; then
     exec 2>&1
   fi
 fi
 
-
-if [ "$gems" = true ]
-then
+if [ "$gems" = true ]; then
   echo 'bundling'
   retag-gems
 fi
