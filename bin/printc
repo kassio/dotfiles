@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function show_help() {
-  echo -e "usage: print_c [-c|--color|-h|--help] message
+  echo -e "usage: printc [-c|--color|-h|--help] message
   OPTIONS:
   -h, --help  print this message
   -c, --color choose the color of the message
@@ -9,8 +9,8 @@ function show_help() {
   "
 
   for i in {1..256}; do
-    printf "\e[38;5;${i}m$(printf '%03d' ${i}) "
-    [ "$((${i} % 16))" = 0 ] && echo
+    printf "\e[38;5;%dm%03d " ${i} ${i}
+    [ "$((i % 16))" = 0 ] && echo
   done
 
   echo
@@ -36,31 +36,31 @@ function parse_args() {
         color="\e[38;5;$2m"
         shift 2
 
-        parse_args $@
+        parse_args "$@"
         ;;
       -u | --underline)
         underline='\e[4m'
         shift
 
-        parse_args $@
+        parse_args "$@"
         ;;
       -b | --bold)
         bold='\e[1m'
         shift
 
-        parse_args $@
+        parse_args "$@"
         ;;
       *)
-        message="$@"
+        message="$*"
         ;;
     esac
   fi
 }
 
-function print_c() {
+function printc() {
   parse_args "$@"
 
   echo -en "${bold}${underline}${color}${message}${reset}"
 }
 
-print_c $@
+printc "$@"
