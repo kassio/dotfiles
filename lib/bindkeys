@@ -9,3 +9,6 @@ for key in '!' '$' '@' '/'; do
   bindkey "\e${key}" _bash_complete-word
   bindkey "^X${key}" _bash_list-choices
 done
+
+# reverse tab
+bindkey '^[[Z' reverse-menu-complete
