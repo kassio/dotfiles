@@ -75,6 +75,7 @@ unsetopt menu_complete # do not navigate completion with arrows
 source "${DOTFILES}/lib/ps1"
 source "${DOTFILES}/lib/bindkeys"
 source "${DOTFILES}/lib/alias"
+source "${DOTFILES}/lib/fzf"
 source "${DOTFILES}/lib/rails"
 source "${HOME}/.dotfiles.private/env" # Private stuff
 source "${HOME}/.env" 2>/dev/null # Ephemeral stuff
