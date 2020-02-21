@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+mkdir -p "${HOME}/.docker"
+
+cp "${DOTFILES}/lib/docker.json" "${HOME}/.docker/config.json"
