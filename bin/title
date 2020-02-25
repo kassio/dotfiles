@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 function title() {
   local bullet="▸ "
@@ -19,4 +19,4 @@ function title() {
   printf "%s %s\n" "$(printc -c 3 "${bullet}")" "$(printc -b -c "${color}" "${msg}")"
 }
 
-title "$*"
+title $@

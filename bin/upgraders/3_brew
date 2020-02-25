@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 if [ "$1" = "--help" ]; then
   echo "- brew: Upgrade all your brews (and clean them up)"
