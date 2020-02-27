@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 if [ "$1" = "--help" ]; then
-  echo "- vim: Upgrade your vim/neovim packages"
+  echo "- neovim: Upgrade your neovim packages"
   exit
 fi
 
 title "neovim/vim packages upgrade"
-"${HOME}/.config/nvim/bin/pack"
+"${HOME}/.config/nvim/bin/pack --update"
 echo
