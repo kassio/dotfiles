@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Require password immediately after sleep or screen saver begins
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
+# Disable java on safari
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles -bool false
+# Enabling full-disk encryption on next reboot
+# sudo fdesetup enable -user "$USER" | tee ~/Desktop/"FileVault Recovery Key.txt"

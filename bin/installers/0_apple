@@ -3,3 +3,21 @@
 softwareupdate -ia
 xcode-select --install
 sudo xcodebuild -license accept
+
+macos_path="${DOTFILES}/bin/installers/macos"
+
+# Disable Resume system-wide
+defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -int 0
+
+for script in $(find ${macos_path} -type f -d 1)
+do
+  bash ${script}
+done
+
+${macos_path}/services/install
+
+# Kill affected applications
+for app in Finder Dock SystemUIServer
+do
+  killall "$app" >/dev/null 2>&1
+done
