@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+touch "${HOME}/.hushlogin"
+
 for f in $(printf "%s/home/*" "${DOTFILES}"); do
   target="$(basename "${f}")"
   ln -sf "${f}" "${HOME}/.${target}"
