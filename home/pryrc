@@ -34,3 +34,5 @@ end
 if defined?(Rails)
   Pry.config.prompt = proc { |obj, nest_level, _| "[#{app_name}][#{formatted_env}] #{obj}:#{nest_level}> " }
 end
+
+load "#{ENV['HOME']}/.dotfiles/lib/ruby_console.rb"
