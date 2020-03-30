@@ -34,6 +34,16 @@ status_for() {
   fi
 }
 
+update_branch() {
+  local branch="$1"
+  log "» ${branch}"
+
+  git switch "${branch}" 2> /dev/null
+  git fetch --prune --prune-tags --tags --recurse-submodules
+
+  (status_for git pull)
+}
+
 sync() {
   local current_branch
   local path
@@ -46,14 +56,12 @@ sync() {
 
   sun "Updating ${path}"
 
-  for branch in $(git branch --list | cut -c 3-); do
+  update_branch "master"
+
+  for branch in $(git branch --list | cut -c 3- | grep -v "master"); do
     branch_remote="$(git rev-parse --abbrev-ref "${branch}@{upstream}" 2> /dev/null | cut -d '/' -f1)"
     if [ "${branch_remote}" = "origin" ]; then
-      log "» ${branch}"
-
-      git switch "${branch}" 2> /dev/null
-      git fetch --prune --prune-tags --tags --recurse-submodules
-      (status_for git pull) || break
+      update_branch "${branch}"
     fi
   done
 
