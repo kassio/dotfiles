@@ -51,9 +51,9 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>source</key>
-					<string>tell application "Google Chrome"	if it is running then
-		tell the active tab of its first window		reload	end tell
-	end ifend tell-- tell application "Firefox"-- 	activate-- 	tell application "System Events" to keystroke "r" using command down-- end tell-- tell application "System Events" to keystroke tab using command down</string>
+					<string>	tell application "Brave"
+	if it is running then		tell the active tab of its first window			reload		end tell
+		end if	end tell-- tell application "Firefox"-- 	activate-- 	tell application "System Events" to keystroke "r" using command down-- end tell-- tell application "System Events" to keystroke tab using command down</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunScript</string>
@@ -69,6 +69,8 @@
 				</array>
 				<key>Class Name</key>
 				<string>RunScriptAction</string>
+				<key>IgnoresInput</key>
+				<true/>
 				<key>InputUUID</key>
 				<string>D04E5671-4263-41D4-AB08-987DF3578B25</string>
 				<key>Keywords</key>
@@ -107,7 +109,7 @@ end run</string>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>309.000000:368.000000</string>
+				<string>309.000000:420.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
