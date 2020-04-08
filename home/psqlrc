@@ -1,0 +1,14 @@
+\set PROMPT1 '%[%033[1m%]%/ %R%[%033[0m%]%# '
+\set PROMPT2 ' %R > '
+
+\set QUIET 1
+\set ON_ERROR_ROLLBACK interactive
+\set COMP_KEYWORD_CASE upper
+\set HISTFILE ~/.psql/history- :DBNAME
+\set HISTCONTROL ignoredups
+
+\pset pager off
+\pset null '(null)'
+
+\x auto
+\timing
