@@ -17,6 +17,8 @@
   default = current
 [pull]
   rebase = true
+[rebase]
+  autosquash = true
 [tag]
   sort = creatordate
 [grep]
