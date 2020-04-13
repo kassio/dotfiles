@@ -120,14 +120,22 @@ _list() {
     done
 }
 
+_current() {
+  IFS=':' read -ra files <<< "${1:-${REPOS_FILES}}"
+  for file in "${files[@]}"; do
+    column -t -s'|' "${file}" >&3
+  done
+}
+
 _help() {
   _println "Manage (clone, sync, list) git repositories
 
-USAGE: repos [--list path|--update]
+USAGE: repos [--list path|--update|--current]
 Options:
-\t--update | -u \tupdates the list of repositories on \$REPOS_FILES
-\t              \tBranchs with remote set to \"origin\" will be synced
-\t  --list | -l \tlist the repositories on the given path
+\t--update    | -u \tupdates the list of repositories on \$REPOS_FILES
+\t                 \tBranchs with remote set to \"origin\" will be synced
+\t  --list    | -l \tlist the repositories on the given path
+\t  --current | -c \tlist the repositories registered in \$REPOS_FILES
 
 \`\$REPOS_FILES\` must contain a list of files separated by \`:\`
 A Reposfile must contain a list of repos to sync, each line should follow the format:
@@ -142,6 +150,10 @@ case "$1" in
   --list | -l)
     shift
     _list "$@"
+    ;;
+  --current | -c)
+    shift
+    _current "$@"
     ;;
   *)
     _help
