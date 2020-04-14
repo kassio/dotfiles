@@ -41,7 +41,7 @@ update_branch() {
   git switch "${branch}" 2> /dev/null
   git fetch --prune --prune-tags --tags --recurse-submodules
 
-  (status_for git pull)
+  (status_for git pull --quiet)
 }
 
 sync() {
