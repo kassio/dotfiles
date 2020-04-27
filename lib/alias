@@ -61,3 +61,5 @@ alias grt="g restore"
 alias gs="g status -sb"
 alias gsw="g switch"
 alias gt="g tag-list --sort='creatordate'"
+
+alias c="code"
