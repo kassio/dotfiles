@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # Menu bar: hide remaining battery time (on pre-10.8); hide percentage
 defaults write com.apple.menuextra.battery ShowPercent -bool true
 defaults write com.apple.menuextra.battery ShowTime -bool true

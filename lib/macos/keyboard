@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
 defaults write -g AppleKeyboardUIMode -int 3
 # Turn on key repeat (Disable hold modifier)
