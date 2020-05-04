@@ -6,4 +6,4 @@ if [ "$1" = "--help" ]; then
 fi
 
 title "Apple upgrade"
-softwareupdate -ia
+softwareupdate --all --install --force
