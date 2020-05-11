@@ -6,7 +6,6 @@ if defined?(PryByebug)
   Pry.commands.alias_command "n", "next"
   Pry.commands.alias_command "f", "finish"
   Pry.commands.alias_command "c", "continue"
-  Pry.commands.alias_command "l=", "whereami "
 end
 
 Pry::Commands.command(/^$/, "repeat last command") do
@@ -35,4 +34,4 @@ if defined?(Rails)
   Pry.config.prompt = proc { |obj, nest_level, _| "[#{app_name}][#{formatted_env}] #{obj}:#{nest_level}> " }
 end
 
-load "#{ENV['HOME']}/.dotfiles/lib/ruby_console.rb"
+load "#{ENV["HOME"]}/.dotfiles/lib/ruby_console.rb"
