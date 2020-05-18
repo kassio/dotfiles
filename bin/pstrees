@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-pstree -s "$@" | grep --color=auto -i -E "$|$*"
