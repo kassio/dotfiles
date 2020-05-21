@@ -1,1 +1,27 @@
+#!/usr/bin/env bash
 
+exec 3> /dev/stdout
+exec 1> /dev/null
+exec 2> /dev/null
+
+_print() { echo "$1" >&3; }
+
+pushd "${PWD}" > /dev/null &&
+  trap 'popd &> /dev/null' EXIT HUP INT QUIT TERM
+
+IFS=':' read -ra files <<< "${REPOS_FILES}"
+
+for file in "${files[@]}"; do
+  while IFS='|' read -r remote path; do
+    [ "${remote}" == "" ] && continue
+
+    path="${path//\$HOME/$HOME}"
+
+    if [ -d "${path}" ]; then
+      _print "Running '$*' in ${path}"
+      pushd path
+      eval "$*"
+      popd
+    fi
+  done < "${file}"
+done
