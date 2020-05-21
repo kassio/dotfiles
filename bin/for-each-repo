@@ -10,8 +10,8 @@ pushd "${PWD}" &&
 IFS=':' read -ra files <<< "${REPOS_FILES}"
 
 printc() { ~/.dotfiles/bin/printc "$@" >&3; }
-_failed() { printc -c 196 "Failed!\n"; }
-_succeed() { printc -c 34 "Succeed!\n"; }
+_failed() { printc -c 196 " ✗ Failed!\n"; }
+_succeed() { printc -c 34 " ✓ Succeed!\n"; }
 
 for file in "${files[@]}"; do
   while IFS='|' read -r remote path; do
