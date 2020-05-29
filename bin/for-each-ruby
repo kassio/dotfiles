@@ -2,8 +2,6 @@
 
 source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
 
-previous=$(asdf current ruby)
-
 while read -r rb
 do
   eval "asdf shell ruby ${rb} 2>/dev/null"
@@ -16,4 +14,4 @@ do
   fi
 done < <(asdf list ruby 2>/dev/null)
 
-asdf shell ruby "${previous}"
+asdf shell ruby --unset
