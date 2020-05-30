@@ -53,7 +53,7 @@
 [log]
   date = format-local:"%F %R"
 [pretty]
-  log = %C(red dim)%h %C(green)%cd %C(yellow)%an %C(reset)%C(white)%s %C(blue)%d
+  log = %C(red dim)%h %C(green)%cd %C(yellow)%an %C(reset)%C(normal)%s %C(blue)%d
 [alias]
   tag-list = !git tag --list --format='%(color:green dim)%(creatordate:format-local:%F %R) %(color:red dim)%(objectname:short) %(color:blue)%(align:10,left)%(refname:lstrip=2)%(end)'
   tag-sync = !git fetch --prune origin "+refs/tags/*:refs/tags/*"
