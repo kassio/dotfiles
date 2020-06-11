@@ -3,6 +3,8 @@
 alias v="vim"
 alias n="nvim"
 
+alias time="/usr/bin/time"
+
 alias sudo="sudo "
 
 alias ls="ls -G -h"
