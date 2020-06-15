@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+for-each-ruby "gem install $(cat ~/.default-gems | tr "\n" " ")"
