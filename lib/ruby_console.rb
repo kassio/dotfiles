@@ -12,3 +12,10 @@ def toggle_active_record_log!
 
   ActiveRecord::Base.logger
 end
+
+if File.exist?(".debugging.rb")
+  def reload_debugging
+    load ".debugging.rb"
+  end
+  reload_debugging
+end

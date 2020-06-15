@@ -28,3 +28,5 @@ node_modules
 Mnesia.nonode@nohost
 
 .solargraph.yml
+
+.debugging.rb
