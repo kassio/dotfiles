@@ -7,7 +7,7 @@ fi
 
 title "Brew upgrade"
 brew update
-brew upgrade --fetch-HEAD
+brew upgrade --fetch-HEAD --ignore-pinned
 
 title "Global Brewfile"
 brew bundle check --global --all --verbose
