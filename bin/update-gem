@@ -6,6 +6,10 @@ if [ $# -lt 1 ]; then
   exit 1
 fi
 
+__red() {
+  echo -e "\e[31m$*\e[0m"
+}
+
 __update_dependency__() {
   echo -e "💎  \033[00mUpdating \033[0;31m$1\033[00m dependency..."
   bundle update "$1" --quiet
@@ -18,14 +22,15 @@ __update_dependency__() {
 }
 
 __fail__() {
-  echo -e "💣  \033[00mthe test suite fails after 'bundle update $1' \033[0;31m"
+  __red "💣  \033[00mthe test suite fails after 'bundle update $1' \033[0;31m"
   git checkout Gemfile.lock
   exit 1
 }
 
 __commit__() {
   git add Gemfile.lock
-  git commit -m "Update \`$1\` dependency" --quiet
+  git commit -m "Update \`$1\` dependency" --quiet ||
+    echo -e "⚠️  \033[00mNothing to update\n"
 }
 
 for gem in "$@"; do
