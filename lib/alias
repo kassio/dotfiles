@@ -30,7 +30,7 @@ alias DS="DISABLE_SPRING=1"
 alias be="bundle exec"
 
 r() {
-  if [ -f "bin/spring" ]; then
+  if [ $ENABLE_SPRING -gt 0 ] && [ -f "bin/spring" ]; then
     eval "bin/spring rails $@"
   elif [ -f "bin/rails" ]; then
     eval "bin/rails $@"
