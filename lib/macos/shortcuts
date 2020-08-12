@@ -32,9 +32,9 @@ defaults write com.apple.iWork.Keynote NSUserKeyEquivalents '{
 }'
 
 # WhatsApp
-# * "Archive Chat" - cmd-shift-e
+# * "Archive Chat" - cmd-opt-shift-e
 defaults write Whatsapp NSUserKeyEquivalents '{
-  "Archive Chat" = "@$e";
+  "Archive Chat" = "@~$e";
 }'
 
 # Force global keyboard config to follow the 'local'
