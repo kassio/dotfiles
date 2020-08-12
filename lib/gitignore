@@ -30,3 +30,5 @@ Mnesia.nonode@nohost
 .solargraph.yml
 
 _debugging.rb
+
+**/kassio*
