@@ -28,3 +28,4 @@ if defined?(Rails)
 end
 
 load "#{ENV["HOME"]}/.dotfiles/lib/ruby_console.rb"
+load ".irbrc.local"

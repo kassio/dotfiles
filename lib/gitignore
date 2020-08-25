@@ -32,3 +32,5 @@ Mnesia.nonode@nohost
 _debugging.rb
 
 **/kassio*
+
+.irbrc.local
