@@ -44,6 +44,10 @@ update_branch() {
   (status_for git pull --quiet)
 }
 
+clean_and_prune() {
+  git gc && git prune
+}
+
 sync() {
   local current_branch
   local path
@@ -51,6 +55,8 @@ sync() {
   path="$1"
 
   pushd "${path}" || _printerr "${path} not found"
+
+  clean_and_prune
 
   current_branch="$(git symbolic-ref --short HEAD)"
 
