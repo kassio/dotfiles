@@ -5,7 +5,7 @@ Pry.config.pager = false
 Pry.config.history_file = "#{ENV["HOME"]}/.irb_history"
 
 Pry::Commands.command(/^$/, "repeat last command") do
-  _pry_.run_command Pry.history.to_a.last
+  pry_instance.run_command Pry.history.to_a.last
 end
 
 def _register_custom_prompt
@@ -25,7 +25,7 @@ def _register_custom_prompt
   prefix = defined?(Rails) ? "[#{formatted_env}]" : ""
   level = ->(n) { n.zero? ? "" : ":#{n}" }
 
-  Pry::Prompt.add :custom, "", %w[> *] do |target_self, nest_level, _instance, sep|
+  Pry::Prompt.add :custom, "", %w[> *] do |target_self, nest_level, _pry_instance, sep|
     "#{prefix}(#{Pry.view_clip(target_self)})" \
       "#{level.call(nest_level)}#{sep} "
   end
