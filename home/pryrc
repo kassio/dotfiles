@@ -1,31 +1,38 @@
 # vim: ft=ruby
 # frozen_string_literal: true
 
+Pry.config.pager = false
+Pry.config.history_file = "#{ENV["HOME"]}/.irb_history"
+
 Pry::Commands.command(/^$/, "repeat last command") do
   _pry_.run_command Pry.history.to_a.last
 end
 
-def formatted_env
-  case Rails.env
-  when "production"
-    bold_upcased_env = Pry::Helpers::Text.bold(Rails.env.upcase)
-    Pry::Helpers::Text.red(bold_upcased_env)
-  when "staging"
-    Pry::Helpers::Text.yellow(Rails.env)
-  when "development"
-    Pry::Helpers::Text.green(Rails.env)
-  else
-    Rails.env
+def _register_custom_prompt
+  formatted_env =
+    case Rails.env
+    when "production"
+      bold_upcased_env = Pry::Helpers::Text.bold("prd")
+      Pry::Helpers::Text.red(bold_upcased_env)
+    when "staging"
+      Pry::Helpers::Text.yellow("stg")
+    when "development"
+      Pry::Helpers::Text.green("dev")
+    else
+      Rails.env
+    end
+
+  prefix = defined?(Rails) ? "[#{formatted_env}]" : ""
+  level = ->(n) { n.zero? ? "" : ":#{n}" }
+
+  Pry::Prompt.add :custom, "", %w[> *] do |target_self, nest_level, _instance, sep|
+    "#{prefix}(#{Pry.view_clip(target_self)})" \
+      "#{level.call(nest_level)}#{sep} "
   end
 end
 
-def app_name
-  File.basename(Rails.root)
-end
-
-if defined?(Rails)
-  Pry.config.prompt = proc { |obj, nest_level, _| "[#{app_name}][#{formatted_env}] #{obj}:#{nest_level}> " }
-end
+_register_custom_prompt
+Pry.config.prompt = Pry::Prompt[:custom]
 
 load "#{ENV["HOME"]}/.dotfiles/lib/ruby_console.rb"
 load ".irbrc.local"
