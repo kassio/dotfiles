@@ -8,7 +8,14 @@ Pry::Commands.command(/^$/, "repeat last command") do
   pry_instance.run_command Pry.history.to_a.last
 end
 
-def _register_custom_prompt
+if defined?(PryByebug)
+  Pry.commands.alias_command 'C', 'continue'
+  Pry.commands.alias_command 'S', 'step'
+  Pry.commands.alias_command 'N', 'next'
+  Pry.commands.alias_command 'F', 'finish'
+end
+
+def _custom_prompt
   formatted_env =
     case Rails.env
     when "production"
@@ -29,10 +36,10 @@ def _register_custom_prompt
     "#{prefix}(#{Pry.view_clip(target_self)})" \
       "#{level.call(nest_level)}#{sep} "
   end
+
+  Pry::Prompt[:custom]
 end
 
-_register_custom_prompt
-Pry.config.prompt = Pry::Prompt[:custom]
+Pry.config.prompt = _custom_prompt
 
 load "#{ENV["HOME"]}/.dotfiles/lib/ruby_console.rb"
-load ".irbrc.local"

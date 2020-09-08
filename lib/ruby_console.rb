@@ -13,9 +13,9 @@ def toggle_active_record_log!
   ActiveRecord::Base.logger
 end
 
-if File.exist?(".debugging.rb")
-  def reload_debugging
-    load ".debugging.rb"
-  end
-  reload_debugging
+def local_reload
+  filename = ".ruby_console.local"
+
+  load filename if File.exist?(filename)
 end
+reload_debugging

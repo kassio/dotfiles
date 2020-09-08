@@ -24,11 +24,6 @@ ALEPreviewWindow
 
 node_modules
 
-.elixir_ls
-Mnesia.nonode@nohost
-
 .solargraph.yml
 
-_debugging.rb
-
-.irbrc.local
+.ruby_console.local
