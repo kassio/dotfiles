@@ -18,4 +18,4 @@ def local_reload
 
   load filename if File.exist?(filename)
 end
-reload_debugging
+local_reload
