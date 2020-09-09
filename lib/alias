@@ -22,22 +22,14 @@ alias grep="grep -v 'grep --color=auto -i' | grep --color=auto -i"
 alias psg="ps aux | grep"
 
 # Ruby and Rails
+alias r="rails"
+alias sr="bin/spring rails"
+alias be="bundle exec"
 alias RD="RAILS_ENV=development"
 alias RT="RAILS_ENV=test"
 alias RS="RAILS_ENV=staging"
 alias RP="RAILS_ENV=production"
 alias DS="DISABLE_SPRING=1"
-alias be="bundle exec"
-
-r() {
-  if [ $ENABLE_SPRING -gt 0 ] && [ -f "bin/spring" ]; then
-    eval "bin/spring rails $@"
-  elif [ -f "bin/rails" ]; then
-    eval "bin/rails $@"
-  else
-    eval "rails $@"
-  fi
-}
 
 # Git
 alias NGP="GIT_PAGER=cat"
