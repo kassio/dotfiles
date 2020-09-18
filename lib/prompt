@@ -1,0 +1,66 @@
+#!/usr/bin/env zsh
+
+source "${HOMEBREW_PREFIX}/etc/bash_completion.d/git-prompt.sh"
+
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWSTASHSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWCOLORHINTS=true
+export GIT_PS1_DESCRIBE_STYLE=branch
+export GIT_PS1_SHOWUPSTREAM=verbose
+
+prompt_git() {
+  local ps1_path="%F{blue}%~%f"
+  local ps1_git="$(print -P " %F{yellow}(%f%%s%F{yellow})$(__ps1_extra)")"
+  local ps1_prompt=$(echo -n "\n%(?.%F{green}.%F{red})$%f ")
+
+  echo $(__git_ps1 ${ps1_git})
+}
+
+prompt_cmd() {
+  local ps1_path="%F{blue}%~%f $1${PS1_EXTRA}"
+  local ps1_prompt=$(echo -n "\n%(?.%F{green}.%F{red})$%f ")
+
+  echo "${ps1_path} ${ps1_prompt}"
+}
+
+# precmd_functions+=__ps1
+
+
+setopt prompt_subst # enable command substition in prompt
+
+PROMPT='$(prompt_cmd)' # single quotes to prevent immediate execution
+RPROMPT='' # no initial prompt, set dynamically
+
+ASYNC_PROC=0
+function precmd() {
+  function async() {
+    # save to temp file
+    prompt_git > "/tmp/git_prompt_$$"
+
+        # signal parent
+        kill -s USR1 $$
+      }
+
+    # do not clear RPROMPT, let it persist
+
+    # kill child if necessary
+    if [[ "${ASYNC_PROC}" != 0 ]]; then
+      kill -s HUP $ASYNC_PROC >/dev/null 2>&1 || :
+    fi
+
+    # start background computation
+    async &!
+    ASYNC_PROC=$!
+  }
+
+function TRAPUSR1() {
+  # read from temp file
+  PROMPT=$(prompt_cmd "$(cat /tmp/git_prompt_$$)")
+
+    # reset proc number
+    ASYNC_PROC=0
+
+    # redisplay
+    zle && zle reset-prompt
+  }
