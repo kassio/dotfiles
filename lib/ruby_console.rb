@@ -1,21 +1,9 @@
-def silence_rails_warnings!
-  ActiveSupport::Deprecation.silenced = true
-end
-
-def toggle_active_record_log!
-  current = ActiveRecord::Base.logger
-
-  if current != @__original_active_record_logger
-    ActiveRecord::Base.logger = @__original_active_record_logger
-    @__original_active_record_logger = current
-  end
-
-  ActiveRecord::Base.logger
-end
+# frozen_string_literal: true
 
 def local_reload
-  filename = ".ruby_console.local"
+  load File.expand_path("ruby_console/extensions.rb", __dir__)
 
-  load filename if File.exist?(filename)
+  local_ruby_console = ".ruby_console.local"
+  load local_ruby_console if File.exist?(local_ruby_console)
 end
 local_reload
