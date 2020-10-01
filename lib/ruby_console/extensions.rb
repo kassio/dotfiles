@@ -6,11 +6,21 @@ class Object
   end
 end
 
+def __copy(obj)
+  msg = obj.is_a?(String) ? obj : obj.inspect
+
+  `echo "#{msg}" | pbcopy`
+end
+
 def silence_rails_warnings!
+  return unless defined?(Rails)
+
   ActiveSupport::Deprecation.silenced = true
 end
 
 def toggle_active_record_log!
+  return unless defined?(Rails)
+
   current = ActiveRecord::Base.logger
 
   if current != @__original_active_record_logger
