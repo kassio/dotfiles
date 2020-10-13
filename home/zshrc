@@ -25,6 +25,7 @@ source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting
 
 # env
 export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
+export PATH="${HOMEBREW_PREFIX}/opt/python@3.9/bin:${PATH}"
 export PATH="./bin:${DOTFILES}/bin:${PATH}"
 
 export HISTFILE=${HOME}/.zhistory
