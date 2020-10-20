@@ -9,6 +9,7 @@
   prune = true
 [core]
   excludesfile = ~/.dotfiles/lib/gitignore
+  attributesfile = ~/.dotfiles/lib/gitattributes
   editor = `which $EDITOR`
   whitespace = blank-at-eol,blank-at-eof,trailing-space,space-before-tab,cr-at-eol,tabwidth=2
   ignorecase = false
@@ -65,7 +66,7 @@
 [include]
   path = ~/.dotfiles.private/gitconfig
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
