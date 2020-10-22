@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "irb"
+require "irb/completion"
+require "octokit"
+
+def octokit
+  @octokit ||= Octokit::Client.new(:access_token => ENV["OCTOKIT_ACCESS_TOKEN"])
+end
+
+IRB.start
