@@ -5,5 +5,7 @@ def local_reload
 
   local_ruby_console = ".ruby_console.local"
   load local_ruby_console if File.exist?(local_ruby_console)
+
+  __reload if defined?(__reload)
 end
 local_reload
