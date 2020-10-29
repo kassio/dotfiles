@@ -31,5 +31,15 @@ def toggle_active_record_log!
   ActiveRecord::Base.logger
 end
 
+def disable_active_record_log!
+  current = ActiveRecord::Base.logger
+
+  if current != nil
+    @__original_active_record_logger = current
+  end
+
+  ActiveRecord::Base.logger = nil
+end
+
 silence_rails_warnings!
-toggle_active_record_log!
+disable_active_record_log!
