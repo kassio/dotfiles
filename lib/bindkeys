@@ -12,3 +12,6 @@ done
 
 # reverse tab
 bindkey '^[[Z' reverse-menu-complete
+
+# ctrl-u to kill to beginning of line
+bindkey '^U' backward-kill-line
