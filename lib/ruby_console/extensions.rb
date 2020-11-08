@@ -32,6 +32,8 @@ def toggle_active_record_log!
 end
 
 def disable_active_record_log!
+  return unless defined?(Rails)
+
   current = ActiveRecord::Base.logger
 
   if current != nil
