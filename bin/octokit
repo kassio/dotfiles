@@ -1,12 +1,16 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require "irb"
-require "irb/completion"
-require "octokit"
+require 'irb'
+require 'irb/completion'
+require 'octokit'
+
+Octokit.configure do |c|
+  c.auto_paginate = true
+end
 
 def octokit
-  @octokit ||= Octokit::Client.new(:access_token => ENV["OCTOKIT_ACCESS_TOKEN"])
+  @octokit ||= Octokit::Client.new(access_token: ENV['OCTOKIT_ACCESS_TOKEN'])
 end
 
 IRB.start
