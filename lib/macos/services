@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+for service in "$DOTFILES"/lib/macos-services/*.workflow; do
+  cp -R "$service" ~/Library/Services
+done

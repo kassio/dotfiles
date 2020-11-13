@@ -13,10 +13,6 @@ for script in $(find "$macos_path" -type file -depth 1); do
   bash "$script"
 done
 
-for service in "$DOTFILES"/lib/macos-services/*.workflow; do
-  cp -R "$service" ~/Library/Services
-done
-
 # Kill affected applications
 for app in Finder Dock SystemUIServer; do
   killall "$app" > /dev/null 2>&1
