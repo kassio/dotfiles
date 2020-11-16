@@ -1,3 +1,4 @@
+# vim:ft=sh:
 # faster animations on expose
 defaults write com.apple.dock expose-animation-duration -float 0.1
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001

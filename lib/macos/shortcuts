@@ -1,3 +1,4 @@
+# vim:ft=sh:
 # Safari
 # * "Close Tab" = cmd-w (always)
 defaults write com.apple.Safari NSUserKeyEquivalents '{

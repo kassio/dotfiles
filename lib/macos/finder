@@ -1,3 +1,4 @@
+# vim:ft=sh:
 # Use Finders list view as the default view mode
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 # Disable the warning when changing a file extension

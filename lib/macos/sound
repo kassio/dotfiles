@@ -1,2 +1,3 @@
+# vim:ft=sh:
 defaults write NSGlobalDomain com.apple.sound.beep.flash -int 0
 defaults write NSGlobalDomain com.apple.sound.uiaudio.enabled -int 0
