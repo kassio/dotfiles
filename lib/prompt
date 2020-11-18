@@ -10,6 +10,10 @@ export GIT_PS1_SHOWCOLORHINTS=true
 export GIT_PS1_DESCRIBE_STYLE=branch
 export GIT_PS1_SHOWUPSTREAM=verbose
 
+CACHE_DIR="/tmp/git-prompt"
+
+mkdir -p "$CACHE_DIR"
+
 prompt_git() {
   ps1_path="%F{blue}%~%f"
   ps1_git="$(print -P " %F{yellow}(%f%%s%F{yellow}) $(__ps1_extra)")"
@@ -36,7 +40,7 @@ PROMPT='$(prompt_cmd)' # single quotes to prevent immediate execution
 ASYNC_PROC=0
 
 function precmd() {
-  PROMPT_FILE="/tmp/git_prompt_$(echo "$PWD$$" | md5)"
+  PROMPT_FILE="$CACHE_DIR/$(echo "$PWD$$" | md5)"
 
   function async() {
     # save to temp file
