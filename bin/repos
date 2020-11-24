@@ -5,8 +5,10 @@ pushd "${PWD}" > /dev/null &&
 
 OK=" 👌 "
 ERROR=" 🚫 "
-SUN=" 🔅 "
-ARROW=" ➡️  "
+ARROW=" »"
+CLEANING=" 🧹 "
+UPDATE_ARROW=" 🔄 "
+DOWNLOAD_ARROW=" ⬇️  "
 
 # Only print when redirecting to &3
 exec 3> /dev/stdout
@@ -17,10 +19,8 @@ exec 2> /dev/null
 _print() { echo -ne "$1" >&3; }
 _println() { echo -ne "$1\n" >&3; }
 _printerr() { echo -ne "$1" >&4; }
-sun() { _println "${SUN}$1"; }
 log() { _print "\t\t $1"; }
-arrow() { log "${ARROW}$1"; }
-errormsg() { _printerr "\033[31m${ERROR}\n\t\t\t$1\033[0m"; }
+errormsg() { _printerr "\033[31m${ERROR}\n\t\t\t $1\033[0m"; }
 
 status_for() {
   read -r error < <(eval "$*" 2>&1 1> /dev/null)
@@ -36,7 +36,7 @@ status_for() {
 
 update_branch() {
   local branch="$1"
-  log "» ${branch}"
+  _print "\t\t${ARROW} ${branch}"
 
   git switch "${branch}" 2> /dev/null
   git fetch --prune --prune-tags --tags --recurse-submodules
@@ -45,6 +45,7 @@ update_branch() {
 }
 
 clean_and_prune() {
+  _println "\t\t${CLEANING} cleaning"
   git gc && git prune
 }
 
@@ -56,13 +57,9 @@ sync() {
 
   pushd "${path}" || _printerr "${path} not found"
 
-  clean_and_prune
+  update_branch "master"
 
   current_branch="$(git symbolic-ref --short HEAD)"
-
-  sun "Updating ${path}"
-
-  update_branch "master"
 
   for branch in $(git branch --list | cut -c 3- | grep -v "master"); do
     branch_remote="$(git rev-parse --abbrev-ref "${branch}@{upstream}" 2> /dev/null | cut -d '/' -f1)"
@@ -73,6 +70,8 @@ sync() {
 
   git switch "${current_branch}" 2> /dev/null
 
+  clean_and_prune
+
   popd || exit 1
 }
 
@@ -80,7 +79,6 @@ clone() {
   remote="$1"
   path="$2"
 
-  sun "Cloning ${remote} to ${path}"
   status_for git clone "${remote}" "${path}" --recurse-submodules
 }
 
@@ -97,8 +95,10 @@ _update() {
       path="${path//\$HOME/$HOME}"
 
       if [ -d "${path}" ]; then
+        _println "${UPDATE_ARROW} ${path}"
         sync "${path}"
       else
+        _println "${DOWNLOAD_ARROW} ${path}"
         clone "${remote}" "${path}"
       fi
     done < "${file}"
