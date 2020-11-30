@@ -31,9 +31,6 @@ alias RS="RAILS_ENV=staging"
 alias RP="RAILS_ENV=production"
 alias DS="DISABLE_SPRING=1"
 
-alias rubocop-diff="git diff --name-only master | grep '.rb' | xargs bundle exec rubocop"
-alias rspec-diff="git diff --name-only master | grep '_spec.rb' | xargs bundle exec rspec"
-
 # Git
 alias NGP="GIT_PAGER=cat"
 alias g="git"
@@ -51,6 +48,7 @@ alias gcpc="gcp --continue"
 alias gd="g diff"
 alias gdc="gd --cached"
 alias gdf="gd --name-only"
+alias gdfm="gd --name-only master"
 alias gf="g fetch --all --prune --prune-tags --tags --recurse-submodules=on-demand"
 alias gfix="gca --no-edit"
 alias gl="gla -20"
@@ -71,3 +69,7 @@ alias gsw="g switch"
 alias gt="g tag-list --sort='creatordate'"
 
 alias c="code"
+
+alias rubocop-diff="gdfm | grep '.rb' | xargs bundle exec rubocop"
+alias rspec-diff="gdfm | grep '_spec.rb' | xargs bundle exec rspec"
+alias nvim-diff="gdfm | xargs nvim -p"
