@@ -41,6 +41,8 @@ export GPG_TTY=$(tty)
 
 export HOMEBREW_NO_ANALYTICS=1
 
+export SOLARGRAPH_GLOBAL_CONFIG="${DOTFILES}/lib/solargraph.yml"
+
 fpath=(${HOMEBREW_PREFIX}/share/zsh-completions ${fpath})
 CDPATH=".:${HOME}:${HOME}/.config:${HOME}/src"
 
@@ -86,9 +88,3 @@ source "${DOTFILES}/lib/rails"
 source "${DOTFILES}/lib/zsh_autosuggest"
 source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff
 source "${HOME}/.env" 2>/dev/null # Ephemeral stuff
-
-# Added by GDK bootstrap
-export PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig:${PKG_CONFIG_PATH}"
-
-# Added by GDK bootstrap
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=/usr/local/opt/openssl@1.1 --with-readline-dir=/usr/local/opt/readline"

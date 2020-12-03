@@ -1,4 +1,4 @@
 # vim:ft=zsh:
 
-export FZF_DEFAULT_COMMAND="ag --skip-vcs-ignores --hidden --follow --nocolor -l"
+export FZF_DEFAULT_COMMAND="rg --no-ignore-vcs --hidden --follow --color never -l"
 export FZF_DEFAULT_OPTS="--reverse --tiebreak=begin,length,index"
