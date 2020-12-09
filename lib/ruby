@@ -1,0 +1,10 @@
+# vim:ft=zsh:
+
+# Spring enable by default
+export ENABLE_SPRING=1
+
+# Global solargraph configs
+export SOLARGRAPH_GLOBAL_CONFIG="${DOTFILES}/lib/solargraph.yml"
+
+# cache rubocop stuff in /tmp
+export RUBOCOP_CACHE_ROOT="/tmp/rubocop-cache"

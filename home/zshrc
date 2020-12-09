@@ -41,8 +41,6 @@ export GPG_TTY=$(tty)
 
 export HOMEBREW_NO_ANALYTICS=1
 
-export SOLARGRAPH_GLOBAL_CONFIG="${DOTFILES}/lib/solargraph.yml"
-
 fpath=(${HOMEBREW_PREFIX}/share/zsh-completions ${fpath})
 CDPATH=".:${HOME}:${HOME}/.config:${HOME}/src"
 
@@ -84,7 +82,7 @@ source "${DOTFILES}/lib/prompt"
 source "${DOTFILES}/lib/bindkeys"
 source "${DOTFILES}/lib/alias"
 source "${DOTFILES}/lib/fzf"
-source "${DOTFILES}/lib/rails"
+source "${DOTFILES}/lib/ruby"
 source "${DOTFILES}/lib/zsh_autosuggest"
 source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff
 source "${HOME}/.env" 2>/dev/null # Ephemeral stuff
