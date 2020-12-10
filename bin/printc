@@ -3,8 +3,10 @@
 function show_help() {
   echo -e "usage: printc [-c|--color|-h|--help] message
   OPTIONS:
-  -h, --help  print this message
-  -c, --color choose the color of the message
+  -h, --help       print this message
+  -c, --color      choose the color of the message
+  -b, --bold       make the text bold
+  -u, --underline  underlines the text
   Available colors:
   "
 
