@@ -1,0 +1,4 @@
+# vim:ft=sh:
+# Does not keep a process to check for chrome updates
+defaults write com.google.Keystone.Agent checkInterval 0
+
