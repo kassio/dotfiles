@@ -3,7 +3,10 @@
 # global
 export DOTFILES="${HOME}/.dotfiles"
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin"
+export HOMEBREW_NO_ANALYTICS=1
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin" # initial base PATH
+export EDITOR="nvim"
+export GPG_TTY=$(tty)
 
 # load zsh stuff
 autoload -Uz compinit
@@ -23,25 +26,24 @@ source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
 source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
-# env
+# extend PATH with libs
 export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
 export PATH="${HOMEBREW_PREFIX}/opt/python@3.9/bin:${PATH}"
 export PATH="./bin:${DOTFILES}/bin:${PATH}"
 
+# customize the history
 export HISTFILE=${HOME}/.zhistory
 export HISTSIZE=120000
 export SAVEHIST=100000
 
+# customize the shell
 export PROMPT_EOL_MARK="" # Remove % from partial lines
 export WORDCHARS="" # Fix the \eb \ef and others.
 
-export EDITOR="nvim"
-
-export GPG_TTY=$(tty)
-
-export HOMEBREW_NO_ANALYTICS=1
-
+# completion path
 fpath=(${HOMEBREW_PREFIX}/share/zsh-completions ${fpath})
+
+# easier navigation
 CDPATH=".:${HOME}:${HOME}/.config:${HOME}/src"
 
 # style
