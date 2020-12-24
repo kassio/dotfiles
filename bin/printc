@@ -7,6 +7,7 @@ function show_help() {
   -c, --color      choose the color of the message
   -b, --bold       make the text bold
   -u, --underline  underlines the text
+  -r, --raw        do not evaluate the formatting codes
   Available colors:
   "
 
@@ -23,6 +24,7 @@ color=""
 underline=""
 bold=""
 message=""
+raw=""
 
 function parse_args() {
   if [ $# -eq 0 ]; then
@@ -52,6 +54,12 @@ function parse_args() {
 
         parse_args "$@"
         ;;
+      -r | --raw)
+        raw="true"
+        shift
+
+        parse_args "$@"
+        ;;
       *)
         message="$*"
         ;;
@@ -62,7 +70,13 @@ function parse_args() {
 function printc() {
   parse_args "$@"
 
-  echo -en "${bold}${underline}${color}${message}${reset}"
+  msg="${bold}${underline}${color}${message}${reset}"
+
+  if [ "${raw}" = "true" ]; then
+    echo -n "${msg}"
+  else
+    echo -ne "${msg}"
+  fi
 }
 
 printc "$@"
