@@ -136,8 +136,44 @@ class Updater
   end
 end
 
+class Generator
+  def self.list
+    new.list
+  end
+
+  def initialize
+    @git = Git.new
+  end
+
+  def list
+    Dir.each_child(Dir.pwd) do |entry|
+      next unless File.directory?(entry)
+
+      Dir.chdir(entry) do
+        remote = remote_for(entry)
+
+        unless remote.empty?
+          puts "#{remote_for(entry)}|#{expanded_path(entry)}"
+        end
+      end
+    end
+  end
+
+  private
+
+  def remote_for(entry)
+    if Dir.exists?('.git')
+      @git.remote.slice(0).chomp.strip
+    end.to_s
+  end
+
+  def expanded_path(entry)
+    File.expand_path(entry).sub(ENV['HOME'], '$HOME')
+  end
+end
+
 class Git
-  def initialize(repository)
+  def initialize(repository = nil)
     @repository = repository
   end
 
@@ -154,6 +190,10 @@ class Git
 
   def switch(branch)
     git 'switch', branch
+  end
+
+  def remote
+    git 'remote', 'get-url', '--push', 'origin', chdir: false
   end
 
   def remote_for(ref)
@@ -185,7 +225,7 @@ class Git
     cmd = ['git', args].flatten
 
     if chdir
-      Dir.chdir(repository.path) do
+      Dir.chdir(repository&.path) do
         Open3.capture3(*cmd)
       end
     else
@@ -260,9 +300,11 @@ repositories = Repositories.new
 case ARGV[0]
 when %r/\A(-c|--current)\Z/
   puts repositories.current
+when %r/\A(-g|--generate)\Z/
+  puts Generator.list
 when %r/\A(-h|--help)\Z/
   puts <<~HELP
-  USAGE: repos [--update|--current|--help]
+  USAGE: repos [--update|--current|--generate|--help]
 
   Manage (clone, sync, list) git repositories based on the list of repositories
   defined in `$REPOS_FILES`.
@@ -276,9 +318,11 @@ when %r/\A(-h|--help)\Z/
       https://github.com/kassio/neoterm|$HOME/.config/nvim/packed/neoterm
 
   Options:
-  \t--update  | -u  (default) \tupdates all the repositories.
-  \t                          \tOnly branchs with "origin" remote will be synced
-  \t--current | -c            \tlist the repositories currently registered in `$REPOS_FILES`
+  \t--update   | -u  (default) updates all the repositories.
+  \t                           Only branchs with "origin" remote will be synced
+  \t--current  | -c            list the repositories currently registered in `$REPOS_FILES`
+  \t--generate | -g            list the repositories from the current directory in the Reposfile format.
+                               Useful to generate a Reposfile, like: `repos -g > Reposfile`
   HELP
 else
   Updater.sync(repositories)
