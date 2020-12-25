@@ -258,7 +258,14 @@ class Printer
   }.freeze
 
   class << self
-    def print(text = '', symbol: nil, prefix: nil, indent: 0, color: nil, break_line: false)
+    def print(
+      text = '',
+      symbol: nil,
+      prefix: nil,
+      indent: 0,
+      color: nil,
+      break_line: false
+    )
       color ||= color&.to_sym
       prefix ||= symbol&.to_sym
       prefix ||= prefix&.to_sym
