@@ -326,11 +326,11 @@ when %r/\A(-h|--help)\Z/
       https://github.com/kassio/neoterm|$HOME/.config/nvim/packed/neoterm
 
   Options:
-  \t--update   | -u  (default) updates all the repositories.
-  \t                           Only branchs with "origin" remote will be synced
-  \t--current  | -c            list the repositories currently registered in `$REPOS_FILES`
-  \t--generate | -g            list the repositories from the current directory in the Reposfile format.
-                               Useful to generate a Reposfile, like: `repos -g > Reposfile`
+  \t--update   | -u updates all the repositories. (default)
+  \t                Only branchs with "origin" remote will be synced
+  \t--current  | -c list the repositories currently registered in `$REPOS_FILES`
+  \t--generate | -g list the repositories from the current directory in the Reposfile format.
+                    Useful to generate a Reposfile, like: `repos -g > Reposfile`
   HELP
 else
   Updater.sync
