@@ -12,6 +12,10 @@ class Repositories
     end
   end
 
+  def self.current
+    new.current
+  end
+
   def initialize
     @files = Array(ENV['REPOS_FILES'].split(':')).flatten
   end
@@ -65,8 +69,8 @@ end
 
 
 class Updater
-  def self.sync(repositories)
-    repositories.each do |repository|
+  def self.sync
+    Repositories.new.each do |repository|
       if repository.exists?
         new(repository).update
       else
@@ -146,17 +150,17 @@ class Generator
   end
 
   def list
-    Dir.each_child(Dir.pwd) do |entry|
+    Dir.each_child(Dir.pwd).map do |entry|
       next unless File.directory?(entry)
 
       Dir.chdir(entry) do
         remote = remote_for(entry)
 
         unless remote.empty?
-          puts "#{remote_for(entry)}|#{expanded_path(entry)}"
+          "#{remote_for(entry)}|#{expanded_path(entry)}"
         end
       end
-    end
+    end.compact.join("\n")
   end
 
   private
@@ -295,11 +299,9 @@ class Printer
   end
 end
 
-repositories = Repositories.new
-
 case ARGV[0]
 when %r/\A(-c|--current)\Z/
-  puts repositories.current
+  puts Repositories.current
 when %r/\A(-g|--generate)\Z/
   puts Generator.list
 when %r/\A(-h|--help)\Z/
@@ -325,5 +327,5 @@ when %r/\A(-h|--help)\Z/
                                Useful to generate a Reposfile, like: `repos -g > Reposfile`
   HELP
 else
-  Updater.sync(repositories)
+  Updater.sync
 end
