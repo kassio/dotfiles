@@ -67,7 +67,6 @@ class Repositories
   end
 end
 
-
 class Updater
   def self.sync
     Repositories.new.each do |repository|
