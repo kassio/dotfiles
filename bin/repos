@@ -1,166 +1,329 @@
-#!/usr/bin/env bash
+#!/usr/bin/env ruby
+# frozen_string_literal: true
 
-pushd "${PWD}" > /dev/null &&
-  trap 'popd &> /dev/null' EXIT HUP INT QUIT TERM
+require 'open3'
 
-# Only print when redirecting to &3
-exec 3> /dev/stdout
-exec 4> /dev/stderr
-exec 1> /dev/null
-exec 2> /dev/null
+class Repositories
+  include ::Enumerable
 
-OK=$(printc -b -c 2 "✓")
-ERROR=$(printc -b -c 160 "✗")
-ARROW=$(printc -b -c 33 "»")
-CLEANING=$(printc -b -c 33 "※")
-UPDATE_ARROW=$(printc -b -c 33 "⟳ ")
-DOWNLOAD_ARROW=$(printc -b -c 33 "↓")
+  Repository = Struct.new(:remote, :path) do
+    def exists?
+      Dir.exists?(path)
+    end
+  end
 
-_print() { echo -ne "$1" >&3; }
-_println() { echo -ne "$1\n" >&3; }
-_printerr() { echo -ne "$(printc -b -c 160 "$1")" >&4; }
-log() { _print "\t\t $1"; }
+  def initialize
+    @files = Array(ENV['REPOS_FILES'].split(':')).flatten
+  end
 
-status_for() {
-  read -r error < <(eval "$*" 2>&1 1> /dev/null)
+  def each
+    repositories.each do |repository|
+      yield(repository)
+    end
+  end
 
-  if [ -z "${error}" ]; then
-    _print " ${OK}\n"
-    return 0
-  else
-    _printerr "\n\t\t${ERROR} ${error}\n"
-    return 1
-  fi
-}
+  def current
+    map do |repository|
+      '%<remote>s %<path>s' % {
+        remote: repository.remote.ljust(longest_remote_name),
+        path: repository.path
+      }
+    end.join("\n")
+  end
 
-update_branch() {
-  local branch="$1"
-  _print "\t\t${ARROW} ${branch}"
+  private
 
-  git switch "${branch}" 2> /dev/null
-  git fetch --prune --prune-tags --tags --recurse-submodules
+  def longest_remote_name
+    @longest_remote_name ||= repositories.map { |repo| repo.remote.length }.max
+  end
 
-  (status_for git pull --quiet)
-}
+  def repositories
+    @repositories ||= @files.flat_map do |file|
+      File.new(file).readlines.map do |line|
+        remote, path = line.split('|').map(&:to_s).map(&:strip)
 
-clean_and_prune() {
-  _println "\t\t${CLEANING} cleaning"
-  git gc && git prune
-}
+        if remote != ''
+          Repository.new(
+            remote.strip,
+            format_path(path)
+          )
+        end
+      end.compact
+    end
+  end
 
-sync() {
-  local current_branch
-  local path
+  def format_path(path)
+    if path.start_with?('~')
+      path.sub('~', ENV['HOME']).strip
+    elsif path.start_with?('$HOME')
+      path.sub('$HOME', ENV['HOME']).strip
+    else
+      path
+    end.strip
+  end
+end
 
-  path="$1"
 
-  pushd "${path}" || _printerr "${path} not found"
-
-  update_branch "master"
-
-  current_branch="$(git symbolic-ref --short HEAD)"
-
-  for branch in $(git branch --list | cut -c 3- | grep -v "master"); do
-    branch_remote="$(git rev-parse --abbrev-ref "${branch}@{upstream}" 2> /dev/null | cut -d '/' -f1)"
-    if [ "${branch_remote}" = "origin" ]; then
-      update_branch "${branch}"
-    fi
-  done
-
-  git switch "${current_branch}" 2> /dev/null
-
-  clean_and_prune
-
-  popd || exit 1
-}
-
-clone() {
-  remote="$1"
-  path="$2"
-
-  status_for git clone "${remote}" "${path}" --recurse-submodules
-}
-
-_update() {
-  local files
-  local path=""
-  trap 'exit 1' EXIT HUP INT QUIT TERM
-
-  IFS=':' read -ra files <<< "${1:-${REPOS_FILES}}"
-  for file in "${files[@]}"; do
-    while IFS='|' read -r remote path; do
-      [ "${remote}" == "" ] && continue
-
-      path="${path//\$HOME/$HOME}"
-
-      if [ -d "${path}" ]; then
-        _println "${UPDATE_ARROW} ${path}"
-        sync "${path}"
+class Updater
+  def self.sync(repositories)
+    repositories.each do |repository|
+      if repository.exists?
+        new(repository).update
       else
-        _println "${DOWNLOAD_ARROW} ${path}"
-        clone "${remote}" "${path}"
-      fi
-    done < "${file}"
-  done
-}
+        new(repository).clone
+      end
+    end
+  end
 
-_list() {
-  pushd "$1" > /dev/null &&
-    trap 'popd > /dev/null' EXIT HUP INT QUIT TERM
+  def initialize(repository)
+    @repository = repository
+    @git = Git.new(repository)
+  end
 
-  find "${PWD}" -mindepth 1 -maxdepth 1 -type d |
-    sort -u |
-    while IFS= read -r repo; do
-      if [ -d "${repo}/.git" ]; then
-        cd "${repo}" &> /dev/null || exit 1
-        target="${PWD%% }"
-        remote="$(git remote get-url --push origin)"
+  def update
+    Printer.puts repository.path, prefix: :update
 
-        if [ -n "$remote" ]; then
-          _println "${remote}|${target/${HOME}/\$HOME}"
-        fi
+    branches = git.branches
 
-        cd - &> /dev/null || exit 1
-      fi
-    done
-}
+    update_branch('master') if branches.delete('master')
 
-_current() {
-  IFS=':' read -ra files <<< "${1:-${REPOS_FILES}}"
-  for file in "${files[@]}"; do
-    column -t -s'|' "${file}" >&3
-  done
-}
+    branches.each do |branch|
+      if git.remote_for(branch).start_with?('origin')
+        update_branch(branch)
+      end
+    end
+  end
 
-_help() {
-  _println "Manage (clone, sync, list) git repositories
+  def clone
+    Printer.puts repository.path, prefix: :update
+    Printer.print "cloning #{repository.remote} ", prefix: :download, indent: 2
 
-USAGE: repos [--list path|--update|--current]
-Options:
-\t--update    | -u \tupdates the list of repositories on \$REPOS_FILES
-\t                 \tBranchs with remote set to \"origin\" will be synced
-\t  --list    | -l \tlist the repositories on the given path
-\t  --current | -c \tlist the repositories registered in \$REPOS_FILES
+    with_report { git.clone }
+  end
 
-\`\$REPOS_FILES\` must contain a list of files separated by \`:\`
-A Reposfile must contain a list of repos to sync, each line should follow the format:
-  \`<git remote url>|<destination folder>\`"
-}
+  private
 
-case "$1" in
-  --update | -u)
-    shift
-    _update "$@"
-    ;;
-  --list | -l)
-    shift
-    _list "$@"
-    ;;
-  --current | -c)
-    shift
-    _current "$@"
-    ;;
-  *)
-    _help
-    ;;
-esac
+  attr_reader :repository, :git
+
+  def update_branch(branch)
+    Printer.print "updating #{branch} ", prefix: :arrow, indent: 2
+
+    git.switch branch
+    git.fetch
+
+    _, _, status = with_report { git.pull }
+
+    if status.success?
+      Printer.puts "cleaning", prefix: :cleaning, indent: 2
+      git.clean
+    end
+  end
+
+  def with_report
+    result = yield
+    _, stderr, status = result
+
+    if status.success?
+      Printer.puts symbol: :ok
+    else
+      Printer.puts symbol: :error
+      stderr.to_s.split("\n").each do |err|
+        Printer.puts err, indent: 2, color: :error
+      end
+    end
+
+    result
+  end
+end
+
+class Generator
+  def self.list
+    new.list
+  end
+
+  def initialize
+    @git = Git.new
+  end
+
+  def list
+    Dir.each_child(Dir.pwd) do |entry|
+      next unless File.directory?(entry)
+
+      Dir.chdir(entry) do
+        remote = remote_for(entry)
+
+        unless remote.empty?
+          puts "#{remote_for(entry)}|#{expanded_path(entry)}"
+        end
+      end
+    end
+  end
+
+  private
+
+  def remote_for(entry)
+    if Dir.exists?('.git')
+      @git.remote.slice(0).chomp.strip
+    end.to_s
+  end
+
+  def expanded_path(entry)
+    File.expand_path(entry).sub(ENV['HOME'], '$HOME')
+  end
+end
+
+class Git
+  def initialize(repository = nil)
+    @repository = repository
+  end
+
+  def clone
+    git 'clone', repository.remote, repository.path, chdir: false
+  end
+
+  def branches
+    git('branch', '--list')
+      .slice(0)
+      .split("\n")
+      .map { |branch| branch.delete('*').strip }
+  end
+
+  def switch(branch)
+    git 'switch', branch
+  end
+
+  def remote
+    git 'remote', 'get-url', '--push', 'origin', chdir: false
+  end
+
+  def remote_for(ref)
+    git('rev-parse', '--abbrev-ref', "#{ref}@{upstream}")
+      .slice(0)
+      .split("\n")
+      .first
+      .to_s
+  end
+
+  def fetch
+    git 'fetch', '--prune', '--prune-tags', '--tags', '--recurse-submodules'
+  end
+
+  def  pull
+    git 'pull', '--quiet'
+  end
+
+  def clean
+    git 'gc'
+    git 'prune'
+  end
+
+  private
+
+  attr_reader :repository
+
+  def git(*args, chdir: true)
+    cmd = ['git', args].flatten
+
+    if chdir
+      Dir.chdir(repository&.path) do
+        Open3.capture3(*cmd)
+      end
+    else
+      Open3.capture3(*cmd)
+    end
+  end
+end
+
+class Printer
+  COLORS = {
+    ok: 34,
+    error: 160,
+    arrow: 33,
+    cleaning: 207,
+    update: 33,
+    download: 33
+  }.freeze
+
+  SYMBOLS = {
+    ok: "✓",
+    error: "✗",
+    arrow: "»",
+    cleaning: "※",
+    update: "⟳ ",
+    download: "↓"
+  }.freeze
+
+  class << self
+    def print(text = '', symbol: nil, prefix: nil, indent: 0, color: nil, break_line: false)
+      color ||= color&.to_sym
+      prefix ||= symbol&.to_sym
+      prefix ||= prefix&.to_sym
+
+      Kernel.print(
+        text
+        .then { |text| prefixify(text, prefix) }
+        .then { |text| break_line ? "#{text}\n" : text }
+        .then { |text| colorify(text, color) }
+        .then { |text| "#{"\t" * indent}#{text}" }
+      )
+    end
+
+    def puts(text = '', symbol: nil, prefix: nil, indent: 0, color: nil)
+      print(
+        text,
+        symbol: symbol,
+        prefix: prefix,
+        indent: indent,
+        color: color,
+        break_line: true
+      )
+    end
+
+    private
+
+    def colorify(msg, sym)
+      return msg unless COLORS.key?(sym)
+
+      "\e[38;5;#{COLORS[sym]}m#{msg}\e[00m"
+    end
+
+    def prefixify(msg, sym)
+      return msg unless SYMBOLS.key?(sym)
+
+      "#{colorify(SYMBOLS[sym], sym)} #{msg}"
+    end
+  end
+end
+
+repositories = Repositories.new
+
+case ARGV[0]
+when %r/\A(-c|--current)\Z/
+  puts repositories.current
+when %r/\A(-g|--generate)\Z/
+  puts Generator.list
+when %r/\A(-h|--help)\Z/
+  puts <<~HELP
+  USAGE: repos [--update|--current|--generate|--help]
+
+  Manage (clone, sync, list) git repositories based on the list of repositories
+  defined in `$REPOS_FILES`.
+
+  `$REPOS_FILES` must contain a list of files separated by ":"
+
+  A Reposfile must contain a list of Repositories to sync, each line of the file
+  must follow the format: "<git remote url>|<destination folder>". For example:
+
+      https://github.com/rails/rails|~/src/rails
+      https://github.com/kassio/neoterm|$HOME/.config/nvim/packed/neoterm
+
+  Options:
+  \t--update   | -u  (default) updates all the repositories.
+  \t                           Only branchs with "origin" remote will be synced
+  \t--current  | -c            list the repositories currently registered in `$REPOS_FILES`
+  \t--generate | -g            list the repositories from the current directory in the Reposfile format.
+                               Useful to generate a Reposfile, like: `repos -g > Reposfile`
+  HELP
+else
+  Updater.sync(repositories)
+end
