@@ -86,6 +86,7 @@ class Updater
   def update
     Printer.puts repository.path, prefix: :update
 
+    former_branch = git.branch
     branches = git.branches
 
     status = if branches.delete('master')
@@ -96,6 +97,8 @@ class Updater
       Printer.puts "cleaning", prefix: :cleaning, indent: 2
       git.clean
     end
+  ensure
+    git.switch(former_branch) if former_branch
   end
 
   def clone
@@ -190,6 +193,13 @@ class Git
     git 'clone', repository.remote, repository.path, chdir: false
   end
 
+  def branch
+    git('symbolic-ref', '--short', 'HEAD')
+      .slice(0)
+      .split("\n")
+      .first
+  end
+
   def branches
     git('branch', '--list')
       .slice(0)
@@ -230,6 +240,8 @@ class Git
 
   attr_reader :repository
 
+  FakeStatus = Struct.new(:success?)
+
   def git(*args, chdir: true)
     cmd = ['git', args].flatten
 
@@ -240,6 +252,8 @@ class Git
     else
       Open3.capture3(*cmd)
     end
+  rescue => e
+    [nil, e.message, FakeStatus.new(false)]
   end
 end
 
