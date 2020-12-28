@@ -88,12 +88,13 @@ class Updater
 
     branches = git.branches
 
-    update_branch('master') if branches.delete('master')
+    status = if branches.delete('master')
+      update_branch('master')
+    end
 
-    branches.each do |branch|
-      if git.remote_for(branch).start_with?('origin')
-        update_branch(branch)
-      end
+    if status.success? && update_branches(branches)
+      Printer.puts "cleaning", prefix: :cleaning, indent: 2
+      git.clean
     end
   end
 
@@ -108,6 +109,14 @@ class Updater
 
   attr_reader :repository, :git
 
+  def update_branches(branches)
+    branches.map do |branch|
+      if git.remote_for(branch).start_with?('origin')
+        update_branch(branch)
+      end
+    end.compact.all?(&:success?)
+  end
+
   def update_branch(branch)
     Printer.print "updating #{branch} ", prefix: :arrow, indent: 2
 
@@ -116,10 +125,7 @@ class Updater
 
     _, _, status = with_report { git.pull }
 
-    if status.success?
-      Printer.puts "cleaning", prefix: :cleaning, indent: 2
-      git.clean
-    end
+    status
   end
 
   def with_report
