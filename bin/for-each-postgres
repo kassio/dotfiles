@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+
+source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
+
+while read -r pg
+do
+  eval "asdf shell postgres ${pg} 2>/dev/null"
+  echo "with postgres: $(asdf current postgres)"
+
+  if ! eval "$*"
+  then
+    echo "$* failed for ${pg}"
+    continue
+  fi
+done < <(asdf list postgres 2>/dev/null)
+
+asdf shell postgres --unset
