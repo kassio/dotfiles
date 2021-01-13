@@ -10,66 +10,16 @@ export GIT_PS1_SHOWCOLORHINTS=true
 export GIT_PS1_DESCRIBE_STYLE=branch
 export GIT_PS1_SHOWUPSTREAM=verbose
 
-CACHE_DIR="/tmp/git-prompt"
+ # To be overwritten on $HOME/.dotfiles.private/env
+ __ps1_extra() { echo ''; }
 
-mkdir -p "$CACHE_DIR"
+ __ps1() {
+   ps1_path="%F{blue}%~%f"
+   ps1_git="$(print -P " %F{yellow}(%f%%s%F{yellow})$(__ps1_extra)")"
+   ps1_prompt=$(echo -n "\n%(?.%F{green}.%F{red})$%f ")
 
-prompt_git() {
-  ps1_path="%F{blue}%~%f"
-  ps1_git="$(print -P " %F{yellow}(%f%%s%F{yellow}) $(__ps1_extra)")"
-  ps1_prompt="\n%(?.%F{green}.%F{red})$%f "
 
-  __git_ps1 ${ps1_path} ${ps1_prompt} ${ps1_git}
-  echo ${PS1:s/\${__git_ps1_branch_name}/$__git_ps1_branch_name}
-}
+   __git_ps1 ${ps1_path} ${ps1_prompt} ${ps1_git}
+ }
 
-prompt_cmd() {
-  if [ $# -eq 0 ]; then
-    local ps1_path="%F{blue}%~%f"
-    local ps1_prompt="%(?.%F{green}.%F{red})$%f"
-
-    echo -n "${ps1_path} ... $(__ps1_extra)\n${ps1_prompt} "
-  else
-    echo -n $1
-  fi
-}
-
-setopt prompt_subst
-
-PROMPT='$(prompt_cmd)' # single quotes to prevent immediate execution
-ASYNC_PROC=0
-
-function precmd() {
-  PROMPT_FILE="$CACHE_DIR/$(echo "$PWD$$" | md5)"
-
-  function async() {
-    # save to temp file
-    prompt_git > $PROMPT_FILE
-    # signal parent
-    kill -s USR1 $$
-  }
-
-  # kill child if necessary
-  if [[ "${ASYNC_PROC}" != 0 ]]; then
-    kill -s HUP $ASYNC_PROC >/dev/null 2>&1 || :
-  fi
-
-  # start background computation
-  async &!
-  ASYNC_PROC=$!
-}
-
-function TRAPUSR1() {
-  # read from temp file
-  PROMPT=$(prompt_cmd "$(cat $PROMPT_FILE)")
-
-  # reset proc number
-  ASYNC_PROC=0
-
-  # redisplay
-  zle && zle reset-prompt
-}
-
-function zshexit() {
-  rm $PROMPT_FILE
-}
+precmd_functions+=__ps1
