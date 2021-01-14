@@ -34,6 +34,8 @@ alias DS="DISABLE_SPRING=1"
 # Git
 alias NGP="GIT_PAGER=cat"
 alias g="git"
+alias gL="gla --no-patch -L"
+alias gLp="git log -L"
 alias ga="g add -A"
 alias gb="g branch"
 alias gbd="gb -d"
