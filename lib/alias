@@ -65,10 +65,20 @@ alias gra="gr --abort"
 alias grc="gr --continue"
 alias gri="gr --interactive"
 alias grs="gr --skip"
-alias grt="g restore"
 alias gs="g status -sb"
-alias gsw="g switch"
 alias gt="g tag-list --sort='creatordate'"
+
+gsw() {
+  git switch "$(git branch $@ | fzf | tr -d '[:space:]')"
+}
+
+grt() {
+  if [ $# -eq 0 ]; then
+    git restore -- .
+  else
+    git restore $@
+  fi
+}
 
 alias c="code"
 
