@@ -66,12 +66,11 @@ alias grc="gr --continue"
 alias gri="gr --interactive"
 alias grs="gr --skip"
 alias gs="g status -sb"
+alias gsw="g switch"
 alias gt="g tag-list --sort='creatordate'"
 
-gsw() {
-  if ! git switch $@; then
-    git switch "$(git branch $@ | fzf | tr -d '[:space:]')" 2> /dev/null
-  fi
+gswf() {
+  git switch "$(git branch $@ | fzf | tr -d '[:space:]')" 2> /dev/null
 }
 
 grt() {
