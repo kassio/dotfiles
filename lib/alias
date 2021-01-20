@@ -69,7 +69,9 @@ alias gs="g status -sb"
 alias gt="g tag-list --sort='creatordate'"
 
 gsw() {
-  git switch "$(git branch $@ | fzf | tr -d '[:space:]')"
+  if ! git switch $@; then
+    git switch "$(git branch $@ | fzf | tr -d '[:space:]')" 2> /dev/null
+  fi
 }
 
 grt() {
