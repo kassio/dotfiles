@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+pgrep -i "$*" | xargs kill -9
