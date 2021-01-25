@@ -38,7 +38,9 @@ alias gL="gla --no-patch -L"
 alias gLp="git log -L"
 alias ga="g add -A"
 alias gb="g branch"
+alias gbmine="gb --format='%(refname:short)' | grep kassio"
 alias gbd="gb -d"
+alias gbu="git rev-parse --abbrev-ref --symbolic-full-name @{u}"
 alias gbm="gb --merged"
 alias gc="g commit --verbose"
 alias gca="gc --amend"
@@ -79,6 +81,22 @@ grt() {
   else
     git restore $@
   fi
+}
+
+gbmine-rebase() {
+  for branch in $(gbmine); do
+    g rebase $1 $branch
+  done
+}
+
+gbmine-diff() {
+  for branch in $(gbmine); do
+    g-origin-diff $branch
+  done
+}
+
+g-origin-diff() {
+  echo +$(g rev-list --count "origin/$1"..)-$(g rev-list --count .."origin/$1") $1
 }
 
 alias c="code"
