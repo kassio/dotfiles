@@ -1,6 +1,8 @@
 [user]
   name = Kassio Borges
   email = kassioborgesm@gmail.com
+[init]
+  defaultBranch = main
 [commit]
   gpgsign = true
 [credential]
