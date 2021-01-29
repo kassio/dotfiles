@@ -90,14 +90,14 @@ gbmine-rebase() {
   done
 }
 
-gbmine-diff() {
+gbmine-origin-diff() {
   for branch in $(gbmine); do
     g-origin-diff $branch
   done
 }
 
 g-origin-diff() {
-  echo +$(g rev-list --count "origin/$1"..)-$(g rev-list --count .."origin/$1") $1
+  echo +$(g rev-list --count "origin/$1"..$1)-$(g rev-list --count $1.."origin/$1") $1
 }
 
 alias c="code"
