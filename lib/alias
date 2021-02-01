@@ -90,6 +90,12 @@ gbmine-rebase() {
   done
 }
 
+gbmine-master-diff() {
+  for branch in $(gbmine); do
+    g-master-diff $branch
+  done
+}
+
 gbmine-origin-diff() {
   for branch in $(gbmine); do
     g-origin-diff $branch
@@ -98,6 +104,10 @@ gbmine-origin-diff() {
 
 g-origin-diff() {
   echo +$(g rev-list --count "origin/$1"..$1)-$(g rev-list --count $1.."origin/$1") $1
+}
+
+g-master-diff() {
+  echo +$(g rev-list --count "master"..$1)-$(g rev-list --count $1.."master") $1
 }
 
 alias c="code"
