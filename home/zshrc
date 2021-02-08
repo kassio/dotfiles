@@ -4,6 +4,7 @@
 export DOTFILES="${HOME}/.dotfiles"
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_BOOTSNAP=1
 export PATH="/usr/bin:/bin:/usr/sbin:/sbin" # initial base PATH
 export EDITOR="nvim"
 export GPG_TTY=$(tty)
@@ -20,8 +21,6 @@ autoload -Uz colors && colors
 
 # load libs stuff
 source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
-source "${HOMEBREW_PREFIX}/opt/asdf/etc/bash_completion.d/asdf.bash"
-source "${HOMEBREW_PREFIX}/opt/fzf/shell/completion.zsh"
 source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
 source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
@@ -39,9 +38,6 @@ export SAVEHIST=100000
 # customize the shell
 export PROMPT_EOL_MARK="" # Remove % from partial lines
 export WORDCHARS="" # Fix the \eb \ef and others.
-
-# completion path
-fpath=(${HOMEBREW_PREFIX}/share/zsh-completions ${fpath})
 
 # easier navigation
 CDPATH=".:${HOME}:${HOME}/.config:${HOME}/src"

@@ -23,3 +23,6 @@ if [ -n "${outdated}" ]; then
   title "Outdated Brew casks"
   echo "${outdated}"
 fi
+
+title "linking completions"
+brew completions link
