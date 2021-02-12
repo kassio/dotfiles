@@ -1,5 +1,17 @@
 #!/usr/bin/env zsh
 
+bindkey '^E' end-of-line
+bindkey '^A' beginning-of-line
+bindkey '^P' up-line-or-search
+bindkey '^N' down-line-or-search
+
+bindkey '^F' forward-char
+bindkey '^B' backward-char
+
+bindkey '^[D' kill-word
+bindkey '^U' backward-kill-line
+bindkey '^K' kill-line
+
 # c-x c-e to edit command line in ${EDITOR}
 autoload -Uz edit-command-line
 zle -N edit-command-line
@@ -12,6 +24,3 @@ done
 
 # reverse tab
 bindkey '^[[Z' reverse-menu-complete
-
-# ctrl-u to kill to beginning of line
-bindkey '^U' backward-kill-line

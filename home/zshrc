@@ -35,6 +35,8 @@ export HISTFILE=${HOME}/.zhistory
 export HISTSIZE=120000
 export SAVEHIST=100000
 
+export TERM=xterm-256color
+
 # customize the shell
 export PROMPT_EOL_MARK="" # Remove % from partial lines
 export WORDCHARS="" # Fix the \eb \ef and others.
