@@ -76,6 +76,7 @@ unsetopt hist_ignore_space # ignore space prefixed commands
 unsetopt menu_complete # do not navigate completion with arrows
 
 # personal libs
+source "${DOTFILES}/lib/iterm2_shell_integration.zsh"
 source "${DOTFILES}/lib/prompt"
 source "${DOTFILES}/lib/bindkeys"
 source "${DOTFILES}/lib/alias"
