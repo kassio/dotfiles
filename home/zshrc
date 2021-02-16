@@ -9,6 +9,10 @@ export PATH="/usr/bin:/bin:/usr/sbin:/sbin" # initial base PATH
 export EDITOR="nvim"
 export GPG_TTY=$(tty)
 
+# File to keep the current iterm profile name
+export ITERM_PROFILE_FILE="${HOME}/.current_iterm_profile_name"
+echo "$ITERM_PROFILE" > "${ITERM_PROFILE_FILE}"
+
 # load zsh stuff
 autoload -Uz compinit
 if [ $(date +'%j') != $(/usr/bin/stat -f '%Sm' -t '%j' $HOME/.zcompdump) ]; then
