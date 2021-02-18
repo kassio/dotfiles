@@ -1,12 +1,3 @@
 #!/usr/bin/env zsh
 
-if [ $(cat /etc/pam.d/sudo | grep -c "auth       sufficient     pam_tid.so") -le 0 ]
-then
-  # Enable fingerprint with sudo
-  replacement='2i \
-auth       sufficient     pam_tid.so\
-'
-
-  sudo cp /etc/pam.d/sudo{,.original}
-  sed -e "${replacement}" /etc/pam.d/sudo.original | sudo tee /etc/pam.d/sudo
-fi
+sudo cp "${HOME}/.dotfiles/lib/sudo.tpl" /etc/pam.d/sudo
