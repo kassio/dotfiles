@@ -2,12 +2,13 @@
 
 # global
 export DOTFILES="${HOME}/.dotfiles"
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin" # initial base PATH
+export EDITOR="nvim"
+export GPG_TTY=$(tty)
+
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_BOOTSNAP=1
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin" # initial base PATH
-export EDITOR="nvim"
-export GPG_TTY=$(tty)
 
 # File to keep the current iterm profile name
 export ITERM_PROFILE_FILE="${HOME}/.current_iterm_profile_name"
