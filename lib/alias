@@ -38,7 +38,6 @@ alias gL="gla --no-patch -L"
 alias gLp="git log -L"
 alias ga="g add -A"
 alias gb="g branch"
-alias gbmine="gb --format='%(refname:short)' | grep kassio"
 alias gbd="gb -d"
 alias gbu="git rev-parse --abbrev-ref --symbolic-full-name @{u}"
 alias gbm="gb --merged"
@@ -83,6 +82,12 @@ grt() {
   else
     git restore $@
   fi
+}
+
+gbmine() {
+  g for-each-ref --sort=authorname --format='%(authorname)#%(refname:short)' 'refs/heads' |
+    grep 'Kassio Borges' |
+    cut -d '#' -f 2
 }
 
 gbmine-rebase() {
