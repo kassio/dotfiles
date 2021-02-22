@@ -1,3 +1,15 @@
 #!/usr/bin/env bash
 
-ps aux | grep "$*" | awk '{print $2}' |  xargs kill -9
+filter="$*"
+
+processes() {
+  ps aux |
+    grep "${filter}" |
+    grep -v 'grep' |
+    grep -v 'killer' |
+    awk '{print $2}'
+}
+
+for pid in $(processes); do
+  kill -9 "${pid}" || echo "Failed to kill ${pid}"
+done
