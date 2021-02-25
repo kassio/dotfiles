@@ -73,7 +73,7 @@ alias gsw="g switch"
 alias gt="g tag-list --sort='creatordate'"
 
 gswf() {
-  git switch "$(git branch $@ | fzf | tr -d '[:space:]')" 2> /dev/null
+  git switch "$(git branch $@ | fzy | tr -d '[:space:]')" 2> /dev/null
 }
 
 grt() {
