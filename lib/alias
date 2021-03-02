@@ -119,6 +119,7 @@ g-master-diff() {
 alias c="code"
 
 alias to-nvim="xargs nvim -p"
+alias fnvim="find . -type f | fzy | to-nvim"
 
 alias rubocop-diff="gdfm | grep '.rb' | xargs bundle exec rubocop"
 alias rspec-diff="gdfm | grep '_spec.rb' | xargs bundle exec rspec"
