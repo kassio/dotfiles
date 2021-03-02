@@ -88,12 +88,11 @@ class Updater
 
     former_branch = git.branch
     branches = git.branches
+    main_branch = branches.delete(git.main_branch)
+    main_branch_updated = main_branch && update_branch(main_branch)
+    all_branches_updated = update_branches(branches)
 
-    status = if branches.delete('master')
-      update_branch('master')
-    end
-
-    if status.success? && update_branches(branches)
+    if main_branch_updated && all_branches_updated
       Printer.puts "cleaning", prefix: :cleaning, indent: 2
       git.clean
     end
@@ -113,11 +112,11 @@ class Updater
   attr_reader :repository, :git
 
   def update_branches(branches)
-    branches.map do |branch|
+    branches.filter_map do |branch|
       if git.remote_for(branch).start_with?('origin')
         update_branch(branch)
       end
-    end.compact.all?(&:success?)
+    end.all?(&:success?)
   end
 
   def update_branch(branch)
@@ -198,6 +197,12 @@ class Git
       .slice(0)
       .split("\n")
       .first
+  end
+
+  def main_branch
+    git('rev-parse', '--verify', 'origin/main')
+      .slice(0)
+      .then { |rev| rev.empty? ? 'master' : 'main' }
   end
 
   def branches
