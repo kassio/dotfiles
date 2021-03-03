@@ -89,3 +89,5 @@ source "${DOTFILES}/lib/ruby"
 source "${DOTFILES}/lib/zsh_autosuggest"
 source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff
 source "${HOME}/.env" 2>/dev/null # Ephemeral stuff
+
+export RIPGREP_CONFIG_PATH="${DOTFILES}/lib/ripgreprc"

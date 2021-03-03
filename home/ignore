@@ -3,13 +3,13 @@
 *swp
 *~
 
-.git
+.git/*
 
 tags
 tags.gems
 
-tmp
-log
+tmp/*
+log/*
 vendor/bundle/*
 vendor/cache/*
 vendor/ruby/*
