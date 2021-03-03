@@ -84,8 +84,12 @@ grt() {
   fi
 }
 
+gbauthor() {
+  g for-each-ref --sort=authorname --format='%(authorname)#%(refname:short)' 'refs/heads'
+}
+
 gbmine() {
-  g for-each-ref --sort=authorname --format='%(authorname)#%(refname:short)' 'refs/heads' |
+  gbauthor
     grep 'Kassio Borges' |
     cut -d '#' -f 2
 }
