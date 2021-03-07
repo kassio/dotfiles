@@ -26,6 +26,7 @@ autoload -Uz colors && colors
 
 # load libs stuff
 source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
+source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
 source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
@@ -84,7 +85,7 @@ source "${DOTFILES}/lib/iterm2_shell_integration.zsh"
 source "${DOTFILES}/lib/prompt"
 source "${DOTFILES}/lib/bindkeys"
 source "${DOTFILES}/lib/alias"
-source "${DOTFILES}/lib/fzy"
+source "${DOTFILES}/lib/fzf"
 source "${DOTFILES}/lib/ruby"
 source "${DOTFILES}/lib/zsh_autosuggest"
 source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff
