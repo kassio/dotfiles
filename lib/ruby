@@ -3,6 +3,9 @@
 # Spring enable by default
 export ENABLE_SPRING=1
 
+# Use the correct gem binary
+export RUBYGEMS_GEMDEPS=-
+
 # Global solargraph configs
 export SOLARGRAPH_GLOBAL_CONFIG="${DOTFILES}/lib/solargraph.yml"
 
