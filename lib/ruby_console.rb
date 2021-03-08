@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'interactive_editor'
+
 def local_reload
   load File.expand_path("ruby_console/extensions.rb", __dir__)
 

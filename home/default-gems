@@ -3,8 +3,10 @@ bundler
 
 solargraph
 
+interactive_editor
 neovim
 rcodetools
+fastri
 
 standard
 rubocop
