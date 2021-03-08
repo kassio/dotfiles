@@ -1,3 +1,5 @@
 #!/usr/bin/env zsh
 
-for-each-ruby "gem install $(cat ~/.default-gems | tr "\n" " ")"
+for-each-ruby "cat ~/.default-gems | xargs gem install"
+
+for-each-ruby "gem update --system"

@@ -24,6 +24,4 @@ do
   fi
 done < <(asdf list ruby 2>/dev/null)
 
-run 'system'
-
 asdf shell ruby --unset
