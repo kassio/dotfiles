@@ -89,7 +89,7 @@ gbauthor() {
 }
 
 gbmine() {
-  gbauthor
+  gbauthor |
     grep 'Kassio Borges' |
     cut -d '#' -f 2
 }
