@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-mkdir -p "${HOME}/.ctags.d"
-ln -sf "${DOTFILES}/lib/general.ctags" "${DOTFILES}/.ctags.d/general.ctags"
