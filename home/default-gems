@@ -1,8 +1,6 @@
 irb
 bundler
 
-solargraph
-
 interactive_editor
 neovim
 rcodetools
