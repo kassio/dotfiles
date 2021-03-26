@@ -1,8 +1,10 @@
 # vim:ft=sh:
 # Safari
-# * "Close Tab" = cmd-w (always)
+# * "Close Tab" = cmd-w (even pinned, except when it's the last opened tab)
+# * "Quit Safari" = cmd-opt-q
 defaults write com.apple.Safari NSUserKeyEquivalents '{
   "Close Tab" = "@w";
+  "Quit Safari" = "@~q";
 }'
 
 # Finder
