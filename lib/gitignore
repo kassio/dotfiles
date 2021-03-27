@@ -27,3 +27,5 @@ node_modules
 .solargraph.yml
 
 .ruby_console.local
+
+*.rdb
