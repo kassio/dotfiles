@@ -8,7 +8,6 @@ fi
 line='# frozen_string_literal: true'
 sed_src="1i \\
 ${line}\\
-\\
 "
 
 for folder in "$@"; do
