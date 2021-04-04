@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+pg_ctl start;
+eval "$*"
+pg_ctl stop;
