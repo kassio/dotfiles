@@ -1,6 +1,0 @@
-AllCops:
-  CacheRootDirectory: '/tmp/rubocop-cache'
-
-Style/StringLiterals:
-  Enabled: true
-  EnforcedStyle: 'single_quotes'
