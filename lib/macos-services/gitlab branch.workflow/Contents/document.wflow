@@ -59,7 +59,8 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>COMMAND_STRING</key>
-					<string>open "https://gitlab.com/gitlab-org/gitlab/-/tree/$1"</string>
+					<string>arg=$(echo $1 | tr -d ' ')
+open "https://gitlab.com/gitlab-org/gitlab/-/tree/${arg}"</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>

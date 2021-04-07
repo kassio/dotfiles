@@ -59,7 +59,8 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>COMMAND_STRING</key>
-					<string>open "https://gitlab.com/gitlab-org/gitlab/-/commit/$1"</string>
+					<string>arg=$(echo $1 | tr -d ' ')
+open "https://gitlab.com/gitlab-org/gitlab/-/commit/${arg}"</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>
@@ -172,7 +173,7 @@
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>309.000000:305.000000</string>
+				<string>384.000000:305.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
