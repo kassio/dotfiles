@@ -1,7 +1,7 @@
 # vim:ft=zsh:
 
-# Spring enable by default
-export ENABLE_SPRING=1
+# Spring disabled by default
+export ENABLE_SPRING=0
 
 # Global solargraph configs
 export SOLARGRAPH_GLOBAL_CONFIG="${DOTFILES}/lib/solargraph.yml"
