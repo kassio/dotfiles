@@ -125,6 +125,6 @@ alias c="code"
 alias to-nvim="xargs nvim -p"
 alias fnvim="find . -type f | fzy | to-nvim"
 
-alias rubocop-diff="gdfm --diff-filter=d | grep '.rb' | xargs bundle exec rubocop"
+alias rubocop-diff="gdfm --diff-filter=d | grep '.rb' | xargs bundle exec rubocop --parallel"
 alias rspec-diff="gdfm --diff-filter=d | grep '_spec.rb' | xargs bundle exec rspec"
 alias nvim-diff="gdfm --diff-filter=d | to-nvim"
