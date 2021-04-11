@@ -22,3 +22,6 @@ deps/*
 _build/*
 
 .elixir_ls
+
+!.github/*
+!.gitlab/*
