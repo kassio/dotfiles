@@ -7,4 +7,4 @@ export ENABLE_SPRING=0
 export SOLARGRAPH_GLOBAL_CONFIG="${DOTFILES}/lib/solargraph.yml"
 
 # cache rubocop stuff in /tmp
-export RUBOCOP_CACHE_ROOT="/tmp/rubocop-cache"
+export RUBOCOP_CACHE_ROOT="/private/tmp/rubocop-cache"
