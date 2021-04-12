@@ -10,7 +10,7 @@ Octokit.configure do |c|
 end
 
 def octokit
-  @octokit ||= Octokit::Client.new(access_token: ENV['OCTOKIT_ACCESS_TOKEN'])
+  @octokit ||= Octokit::Client.new(access_token: ENV['GITHUB_OCTOKIT_ACCESS_TOKEN'])
 end
 
 IRB.start
