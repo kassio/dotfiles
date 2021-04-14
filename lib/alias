@@ -84,20 +84,16 @@ grt() {
   fi
 }
 
-gbauthor() {
-  g for-each-ref --sort=authorname --format='%(authorname)#%(refname:short)' 'refs/heads'
-}
+gbmine-do() {
+  current_branch=$(g symbolic-ref --short HEAD)
 
-gbmine() {
-  gbauthor |
-    grep 'Kassio Borges' |
-    cut -d '#' -f 2
-}
-
-gbmine-rebase() {
   for branch in $(gbmine); do
-    g rebase $1 $branch
+    echo "> $branch"
+    g switch --quiet $branch
+    eval "$*"
   done
+
+  g switch --quiet $current_branch
 }
 
 gbmine-master-diff() {
@@ -110,6 +106,16 @@ gbmine-origin-diff() {
   for branch in $(gbmine); do
     g-origin-diff $branch
   done
+}
+
+gbauthor() {
+  g for-each-ref --sort=authorname --format='%(authorname)#%(refname:short)' 'refs/heads'
+}
+
+gbmine() {
+  gbauthor |
+    grep 'Kassio Borges' |
+    cut -d '#' -f 2
 }
 
 g-origin-diff() {
