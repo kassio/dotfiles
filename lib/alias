@@ -51,7 +51,7 @@ alias gcpc="gcp --continue"
 alias gd="g diff"
 alias gdc="gd --cached"
 alias gdf="gd --name-only"
-alias gdfm="gd --name-only master"
+alias gdfm="gd --name-only $(g main-branch)"
 alias gf="g fetch --all --prune --prune-tags --tags --recurse-submodules=on-demand"
 alias gfix="gca --no-edit"
 alias gl="gla -20"
@@ -96,9 +96,9 @@ gbmine-do() {
   g switch --quiet $current_branch
 }
 
-gbmine-master-diff() {
+gbmine-main-diff() {
   for branch in $(gbmine); do
-    g-master-diff $branch
+    g-main-diff $branch
   done
 }
 
@@ -119,11 +119,12 @@ gbmine() {
 }
 
 g-origin-diff() {
-  echo +$(g rev-list --count "origin/$1"..$1)-$(g rev-list --count $1.."origin/$1") $1
+  echo +$(g rev-list --count "origin/$1".."$1")-$(g rev-list --count "$1".."origin/$1") $1
 }
 
-g-master-diff() {
-  echo +$(g rev-list --count "master"..$1)-$(g rev-list --count $1.."master") $1
+g-main-diff() {
+  main_branch="$(g main-branch)"
+  echo +$(g rev-list --count "$main_branch".."$1")-$(g rev-list --count "$1".."$main_branch") $1
 }
 
 alias c="code"
