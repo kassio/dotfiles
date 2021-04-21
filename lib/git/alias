@@ -1,0 +1,107 @@
+# vim:ft=zsh:
+
+alias NGP="GIT_PAGER=cat"
+alias g="git"
+
+g-main-branch() {
+  if g-verify-branch "main"; then
+    echo "main"
+  elif g-verify-branch "master"; then
+    echo "master"
+  else
+    echo ""
+  fi
+}
+
+g-verify-branch() {
+  git rev-parse --quiet --verify "origin/$1" > /dev/null
+}
+
+grt() {
+  if [ $# -eq 0 ]; then
+    git restore -- .
+  else
+    git restore $@
+  fi
+}
+
+gbmine-do() {
+  current_branch=$(g symbolic-ref --short HEAD)
+
+  for branch in $(gbmine); do
+    echo "> $branch"
+    g switch --quiet $branch
+    eval "$*"
+  done
+
+  g switch --quiet $current_branch
+}
+
+gbmine-main-diff() {
+  for branch in $(gbmine); do
+    g-main-diff $branch
+  done
+}
+
+gbmine-origin-diff() {
+  for branch in $(gbmine); do
+    g-origin-diff $branch
+  done
+}
+
+gbauthor() {
+  g for-each-ref --sort=authorname --format='%(authorname)#%(refname:short)' 'refs/heads'
+}
+
+gbmine() {
+  gbauthor |
+    grep 'Kassio Borges' |
+    cut -d '#' -f 2
+}
+
+g-origin-diff() {
+  echo +$(g rev-list --count "origin/$1".."$1")-$(g rev-list --count "$1".."origin/$1") $1
+}
+
+g-main-diff() {
+  main_branch="$(g-main-branch)"
+  echo +$(g rev-list --count "${main_branch}".."$1")-$(g rev-list --count "$1".."${main_branch}") $1
+}
+
+alias gL="gla --no-patch -L"
+alias gLp="git log -L"
+alias ga="g add -A"
+alias gb="g branch"
+alias gbd="gb -d"
+alias gbu="git rev-parse --abbrev-ref --symbolic-full-name @{u}"
+alias gbm="gb --merged"
+alias gc="g commit --verbose"
+alias gca="gc --amend"
+alias gclean="g clean"
+alias gco="g checkout"
+alias gcp="g cherry-pick"
+alias gcpa="gcp --abort"
+alias gcpc="gcp --continue"
+alias gd="g diff"
+alias gdc="gd --cached"
+alias gdf="gd --name-only"
+alias gdfm="gd --name-only $(g-main-branch)"
+alias gf="g fetch --all --prune --prune-tags --tags --recurse-submodules=on-demand"
+alias gfix="gca --no-edit"
+alias gl="gla -20"
+alias gla="git log --pretty=log"
+alias glme="gl --author=\"Kassio Borges\""
+alias gm="g merge"
+alias gma="gm --abort"
+alias gp="g pull"
+alias gps="g push"
+alias gpsf="g push --force-with-lease"
+alias gpsu="g push -u"
+alias gr="g rebase"
+alias gra="gr --abort"
+alias grc="gr --continue"
+alias gri="gr --interactive"
+alias grs="gr --skip"
+alias gs="g status -sb"
+alias gsw="g switch"
+alias gt="g tag-list --sort='creatordate'"
