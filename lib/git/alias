@@ -14,15 +14,19 @@ g-main-branch() {
 }
 
 g-verify-branch() {
-  git rev-parse --quiet --verify "origin/$1" > /dev/null
+  g rev-parse --quiet --verify "origin/$1" > /dev/null
 }
 
 grt() {
   if [ $# -eq 0 ]; then
-    git restore -- .
+    g restore -- .
   else
-    git restore $@
+    g restore $@
   fi
+}
+
+gdfm() {
+  g diff --name-only "$(g-main-branch)"
 }
 
 gbmine-do() {
@@ -69,11 +73,11 @@ g-main-diff() {
 }
 
 alias gL="gla --no-patch -L"
-alias gLp="git log -L"
+alias gLp="g log -L"
 alias ga="g add -A"
 alias gb="g branch"
 alias gbd="gb -d"
-alias gbu="git rev-parse --abbrev-ref --symbolic-full-name @{u}"
+alias gbu="g rev-parse --abbrev-ref --symbolic-full-name @{u}"
 alias gbm="gb --merged"
 alias gc="g commit --verbose"
 alias gca="gc --amend"
@@ -85,11 +89,10 @@ alias gcpc="gcp --continue"
 alias gd="g diff"
 alias gdc="gd --cached"
 alias gdf="gd --name-only"
-alias gdfm="gd --name-only $(g-main-branch)"
 alias gf="g fetch --all --prune --prune-tags --tags --recurse-submodules=on-demand"
 alias gfix="gca --no-edit"
 alias gl="gla -20"
-alias gla="git log --pretty=log"
+alias gla="g log --pretty=log"
 alias glme="gl --author=\"Kassio Borges\""
 alias gm="g merge"
 alias gma="gm --abort"
