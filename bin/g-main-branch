@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+g-verify-branch() {
+  git rev-parse --quiet --verify "origin/$1" > /dev/null
+}
+
+if g-verify-branch "main"; then
+  echo "main"
+elif g-verify-branch "master"; then
+  echo "master"
+else
+  echo ""
+fi

@@ -3,20 +3,6 @@
 alias NGP="GIT_PAGER=cat"
 alias g="git"
 
-g-main-branch() {
-  if g-verify-branch "main"; then
-    echo "main"
-  elif g-verify-branch "master"; then
-    echo "master"
-  else
-    echo ""
-  fi
-}
-
-g-verify-branch() {
-  g rev-parse --quiet --verify "origin/$1" > /dev/null
-}
-
 grt() {
   if [ $# -eq 0 ]; then
     g restore -- .
