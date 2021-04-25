@@ -29,7 +29,7 @@ case "$1" in
     only="$1"
     ;;
 
-  *)
+  -h|--help)
     help
     exit
     ;;
