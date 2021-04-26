@@ -1,27 +1,33 @@
+# macos
 .DS_Store
+
+# git
+.git/*
+
+# IDEs
+.idea/*
 *swo
 *swp
 *~
 
-.git/*
-
 tags
 tags.gems
 
+# rails
 tmp/*
 log/*
 vendor/bundle/*
 vendor/cache/*
 vendor/ruby/*
 
+# sass
 .sass-cache
 
+# node
 node_modules/*
 
+# elixir
 deps/*
 _build/*
 
 .elixir_ls
-
-!.github/*
-!.gitlab/*
