@@ -3,6 +3,28 @@
 alias NGP="GIT_PAGER=cat"
 alias g="git"
 
+g-verify-branch() {
+  git rev-parse --quiet --verify "origin/$1" > /dev/null
+}
+
+gb-main() {
+  if g-verify-branch "main"; then
+    echo "main"
+  elif g-verify-branch "master"; then
+    echo "master"
+  else
+    echo ""
+  fi
+}
+
+gb-current() {
+  g branch --show-current
+}
+
+gb-list() {
+  git branch --format='%(refname:short)'
+}
+
 grt() {
   if [ $# -eq 0 ]; then
     g restore -- .
@@ -12,30 +34,18 @@ grt() {
 }
 
 gdfm() {
-  g diff --name-only "$(g-main-branch)"
+  g diff --name-only "$(gb-main)"
 }
 
-gbmine-do() {
-  current_branch=$(g symbolic-ref --short HEAD)
-
-  for branch in $(gbmine); do
-    echo "> $branch"
-    g switch --quiet $branch
-    eval "$*"
-  done
-
-  g switch --quiet $current_branch
-}
-
-gbmine-main-diff() {
-  for branch in $(gbmine); do
-    g-main-diff $branch
+gb-diff-counts() {
+  for branch in $(gb-list); do
+    echo "$(g-main-diff $branch) $branch ($(g-origin-diff $branch))"
   done
 }
 
-gbmine-origin-diff() {
-  for branch in $(gbmine); do
-    g-origin-diff $branch
+gbmine-diff-counts() {
+  for branch in $(gb-list); do
+    echo "$(g-main-diff $branch) $branch ($(g-origin-diff $branch))"
   done
 }
 
@@ -50,12 +60,17 @@ gbmine() {
 }
 
 g-origin-diff() {
-  echo +$(g rev-list --count "origin/$1".."$1")-$(g rev-list --count "$1".."origin/$1") $1
+  echo "u$(g-diff-count "$1" "origin/$1")"
 }
 
 g-main-diff() {
-  main_branch="$(g-main-branch)"
-  echo +$(g rev-list --count "${main_branch}".."$1")-$(g rev-list --count "$1".."${main_branch}") $1
+  g-diff-count "$1" "$(gb-main)"
+}
+
+g-diff-count() {
+  rev1="$1"
+  rev2="$2"
+  echo "+$(g rev-list --count "$rev2".."$rev1")-$(g rev-list --count "$rev1".."$rev2")"
 }
 
 alias gL="gla --no-patch -L"
