@@ -51,6 +51,10 @@ g-diff-count() {
   echo "+$(g rev-list --count "$rev2".."$rev1")-$(g rev-list --count "$rev1".."$rev2")"
 }
 
+gswm() {
+  g switch "$(g branch-main)"
+}
+
 alias gL="gla --no-patch -L"
 alias gLp="g log -L"
 alias ga="g add -A"
