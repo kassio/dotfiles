@@ -3,28 +3,6 @@
 alias NGP="GIT_PAGER=cat"
 alias g="git"
 
-g-verify-branch() {
-  git rev-parse --quiet --verify "origin/$1" > /dev/null
-}
-
-gb-main() {
-  if g-verify-branch "main"; then
-    echo "main"
-  elif g-verify-branch "master"; then
-    echo "master"
-  else
-    echo ""
-  fi
-}
-
-gb-current() {
-  g branch --show-current
-}
-
-gb-list() {
-  git branch --format='%(refname:short)'
-}
-
 grt() {
   if [ $# -eq 0 ]; then
     g restore -- .
@@ -34,28 +12,28 @@ grt() {
 }
 
 gdfm() {
-  g diff --name-only "$(gb-main)"
+  g diff --name-only "$(g branch-main)"
 }
 
 gb-diff-counts() {
-  for branch in $(gb-list); do
+  for branch in $(g branch-list); do
     echo "$(g-main-diff $branch) $branch ($(g-origin-diff $branch))"
   done
 }
 
-gbmine-diff-counts() {
-  for branch in $(gb-list); do
+gb-mine-diff-counts() {
+  for branch in $(g branch-list); do
     echo "$(g-main-diff $branch) $branch ($(g-origin-diff $branch))"
   done
 }
 
-gbauthor() {
+gb-author() {
   g for-each-ref --sort=authorname --format='%(authorname)#%(refname:short)' 'refs/heads'
 }
 
-gbmine() {
-  gbauthor |
-    grep 'Kassio Borges' |
+gb-mine() {
+  gb-author |
+    grep "$(g me)" |
     cut -d '#' -f 2
 }
 
@@ -64,7 +42,7 @@ g-origin-diff() {
 }
 
 g-main-diff() {
-  g-diff-count "$1" "$(gb-main)"
+  g-diff-count "$1" "$(g branch-main)"
 }
 
 g-diff-count() {
