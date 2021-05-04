@@ -55,6 +55,10 @@ gswm() {
   g switch "$(g branch-main)"
 }
 
+grm() {
+  g rebase "$(g branch-main)"
+}
+
 alias gL="gla --no-patch -L"
 alias gLp="g log -L"
 alias ga="g add -A"
