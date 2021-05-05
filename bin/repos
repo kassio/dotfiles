@@ -68,18 +68,19 @@ class Repositories
 end
 
 class Updater
-  def self.sync
+  def self.sync(user_options)
     Repositories.new.each do |repository|
       if repository.exists?
-        new(repository).update
+        new(repository, user_options).update
       else
-        new(repository).clone
+        new(repository, user_options).clone
       end
     end
   end
 
-  def initialize(repository)
+  def initialize(repository, user_options)
     @repository = repository
+    @user_options = user_options
     @git = Git.new(repository)
   end
 
@@ -91,11 +92,7 @@ class Updater
     main_branch = branches.delete(git.main_branch)
     main_branch_updated = main_branch && update_branch(main_branch)
     all_branches_updated = update_branches(branches)
-
-    if main_branch_updated && all_branches_updated
-      Printer.puts "cleaning", prefix: :cleaning, indent: 2
-      git.clean
-    end
+    clean(main_branch_updated && all_branches_updated)
   ensure
     git.switch(former_branch) if former_branch
   end
@@ -109,7 +106,7 @@ class Updater
 
   private
 
-  attr_reader :repository, :git
+  attr_reader :repository, :user_options, :git
 
   def update_branches(branches)
     branches.filter_map do |branch|
@@ -144,6 +141,17 @@ class Updater
     end
 
     result
+  end
+
+  def clean(condition)
+    if user_clean_option? && condition
+      Printer.puts "cleaning", prefix: :cleaning, indent: 2
+      git.clean
+    end
+  end
+
+  def user_clean_option?
+    !user_options.include?('--no-clean')
   end
 end
 
@@ -358,5 +366,5 @@ when %r/\A(-h|--help)\Z/
                     Useful to generate a Reposfile, like: `repos -g > Reposfile`
   HELP
 else
-  Updater.sync
+  Updater.sync(ARGV)
 end

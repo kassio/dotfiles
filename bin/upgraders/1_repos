@@ -6,4 +6,4 @@ if [ "$1" = "--help" ]; then
 fi
 
 title "updating repositories"
-repos --update
+repos --update "$@"

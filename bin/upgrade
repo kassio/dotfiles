@@ -44,7 +44,7 @@ _upgrade() {
   if [ -n "${only_param}" ]; then
     local only=$(find ${components_path} -name "*${only_param}")
     if [ -n "${only}" ]; then
-      "${only}"
+      eval "${only} $@"
       _exit 0
     fi
   fi
@@ -57,7 +57,7 @@ _upgrade() {
         continue
         ;;
       *)
-        "${components_path}/${component}"
+        eval "${components_path}/${component} $@"
         ;;
     esac
   done
