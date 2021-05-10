@@ -33,6 +33,8 @@ alias DS="DISABLE_SPRING=1"
 
 alias c="code"
 
+alias tailf="tail -f"
+
 alias to-nvim="xargs nvim -p"
 
 alias rubocop-diff="gdfm --diff-filter=d | grep '.rb' | xargs bundle exec rubocop --parallel"
