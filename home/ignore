@@ -6,14 +6,17 @@
 
 # IDEs
 .idea/*
+.vscode/*
 *swo
 *swp
 *~
 
+# ctags
 tags
 tags.gems
 
-# rails
+# ruby and rails
+.byebug_history
 tmp/*
 log/*
 vendor/bundle/*
@@ -29,5 +32,7 @@ node_modules/*
 # elixir
 deps/*
 _build/*
-
 .elixir_ls
+
+# redis
+dump.rdb
