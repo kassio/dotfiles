@@ -21,12 +21,6 @@ gb-diff-counts() {
   done
 }
 
-gb-mine-diff-counts() {
-  for branch in $(g branch-list); do
-    echo "$(g-main-diff $branch) $branch ($(g-origin-diff $branch))"
-  done
-}
-
 gb-author() {
   g for-each-ref --sort=authorname --format='%(authorname)#%(refname:short)' 'refs/heads'
 }
@@ -48,7 +42,7 @@ g-main-diff() {
 g-diff-count() {
   rev1="$1"
   rev2="$2"
-  echo "+$(g rev-list --count "$rev2".."$rev1")-$(g rev-list --count "$rev1".."$rev2")"
+  echo "+$(g rev-list --count "$rev2".."$rev1" 2>/dev/null)-$(g rev-list --count "$rev1".."$rev2" 2>/dev/null)"
 }
 
 gswm() {
