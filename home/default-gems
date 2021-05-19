@@ -1,7 +1,6 @@
 irb
 bundler
 
-interactive_editor
 neovim
 rcodetools
 fastri
