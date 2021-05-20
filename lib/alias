@@ -41,4 +41,6 @@ alias rubocop-diff="gdfm --diff-filter=d | grep '.rb' | xargs bundle exec ruboco
 alias rspec-diff="gdfm --diff-filter=d | grep '_spec.rb' | xargs bundle exec rspec"
 alias nvim-diff="gdfm --diff-filter=d | to-nvim"
 
+alias reset-logs='for f in log/*; do [ "$f" != "log/.gitkeep" ] && echo > $f; done'
+
 source "${DOTFILES}/lib/git/alias"
