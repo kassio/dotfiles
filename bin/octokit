@@ -23,4 +23,22 @@ def octokit
   )
 end
 
+def repo_summary(repo)
+  pull_requests = octokit.pull_requests(repo, state: :all)
+  reviews = pull_requests.flat_map { octokit.pull_request_reviews(repo, _1.number) }
+  comments = octokit.issues_comments(repo)
+
+  args = {
+    pull_requests: pull_requests.length,
+    reviews: reviews.length,
+    comments: comments.length
+  }
+
+  puts <<~EOF % args
+  Pull Requests: %{pull_requests}
+  Pull Requests Reviews: %{reviews}
+  Comments: %{comments}
+  EOF
+end
+
 IRB.start
