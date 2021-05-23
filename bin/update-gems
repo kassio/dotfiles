@@ -1,6 +1,0 @@
-#!/bin/bash
-set -e
-
-for gem in $(bundle outdated --parseable | xargs -Igem echo gem | cut -f 1 -d ' '); do
-  update-gem "$gem"
-done

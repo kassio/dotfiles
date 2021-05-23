@@ -10,6 +10,12 @@ __red() {
   echo -e "\e[31m$*\e[0m"
 }
 
+__lint() {
+  if [ -f "bin/rubocop" ]; then
+    bin/rubocop --parallel
+  fi
+}
+
 __run_tests() {
   if [ -f "bin/rspec" ]; then
     bin/rspec
@@ -22,7 +28,7 @@ __update_dependency__() {
   echo -e "💎  \033[00mUpdating \033[0;31m$1\033[00m dependency..."
   bundle update "$1" --quiet
 
-  if __run_tests; then
+  if __lint && __run_tests; then
     __commit__ "$1"
   else
     __fail__ "$1"
