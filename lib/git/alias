@@ -15,7 +15,7 @@ gdfm() {
   g diff --name-only "$(g branch-main)"
 }
 
-gb-diff-counts() {
+gbd() {
   for branch in $(g branch-list); do
     echo "$(g-main-diff $branch) $branch ($(g-origin-diff $branch))"
   done
@@ -61,7 +61,6 @@ alias gL="gla --no-patch -L"
 alias gLp="g log -L"
 alias ga="g add -A"
 alias gb="g branch"
-alias gbd="gb -d"
 alias gbu="g rev-parse --abbrev-ref --symbolic-full-name @{u}"
 alias gbm="gb --merged"
 alias gc="g commit --verbose"
