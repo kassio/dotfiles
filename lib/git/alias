@@ -21,6 +21,16 @@ gbd() {
   done
 }
 
+for-each-branch() {
+  original=$(g branch-current)
+  for branch in $(g branch-list); do
+    echo "> $branch"
+    git switch "$branch"
+    eval "$*"
+  done
+  g branch "$original"
+}
+
 gb-author() {
   g for-each-ref --sort=authorname --format='%(authorname)#%(refname:short)' 'refs/heads'
 }
