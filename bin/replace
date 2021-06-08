@@ -11,6 +11,6 @@ replace_with="$1"
 shift
 echo "Replacing '${find_this}' by '${replace_with}' in '$*'"
 
-rg -l --color never "${find_this}" "$@" |
-  xargs -I files \
-    sed -i "" -e "s/${find_this}/${replace_with}/g" files
+for f in $(rg -l --color never "${find_this}" "$@"); do
+  sd "${find_this}" "${replace_with}" "$f"
+done
