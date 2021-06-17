@@ -16,20 +16,24 @@ if defined?(PryByebug)
 end
 
 def _custom_prompt
-  formatted_env =
-    case Rails.env
-    when "production"
-      bold_upcased_env = Pry::Helpers::Text.bold("prd")
-      Pry::Helpers::Text.red(bold_upcased_env)
-    when "staging"
-      Pry::Helpers::Text.yellow("stg")
-    when "development"
-      Pry::Helpers::Text.green("dev")
-    else
-      Rails.env
-    end
+  prefix = if defined?(Rails)
+    formatted_env =
+      case Rails.env
+      when "production"
+        bold_upcased_env = Pry::Helpers::Text.bold("prd")
+        Pry::Helpers::Text.red(bold_upcased_env)
+      when "staging"
+        Pry::Helpers::Text.yellow("stg")
+      when "development"
+        Pry::Helpers::Text.green("dev")
+      else
+        Rails.env
+      end
+    "[#{formatted_env}]"
+  else
+    ""
+  end
 
-  prefix = defined?(Rails) ? "[#{formatted_env}]" : ""
   level = ->(n) { n.zero? ? "" : ":#{n}" }
 
   Pry::Prompt.add(:custom, "", %w[> *]) do |target_self, nest_level, _pry_instance, sep|
