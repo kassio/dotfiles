@@ -16,29 +16,19 @@ require "octokit"
 
 Octokit.configure { _1.auto_paginate = true }
 
+def neoterm
+  @neoterm ||= 'kassio/neoterm'
+end
+
+def vim_elixir
+  @vim_elixir ||= 'elixir-editors/vim-elixir'
+end
+
 def octokit
   @octokit ||= Octokit::Client.new(
     access_token: ENV["GITHUB_OCTOKIT_ACCESS_TOKEN"],
     per_page: 100
   )
-end
-
-def repo_summary(repo)
-  pull_requests = octokit.pull_requests(repo, state: :all)
-  reviews = pull_requests.flat_map { octokit.pull_request_reviews(repo, _1.number) }
-  comments = octokit.issues_comments(repo)
-
-  args = {
-    pull_requests: pull_requests.length,
-    reviews: reviews.length,
-    comments: comments.length
-  }
-
-  puts <<~EOF % args
-  Pull Requests: %{pull_requests}
-  Pull Requests Reviews: %{reviews}
-  Comments: %{comments}
-  EOF
 end
 
 IRB.start
