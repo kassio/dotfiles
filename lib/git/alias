@@ -25,10 +25,10 @@ for-each-branch() {
   original=$(g branch-current)
   for branch in $(g branch-list); do
     echo "> $branch"
-    git switch "$branch"
+    g switch "$branch"
     eval "$*"
   done
-  g branch "$original"
+  g switch "$original"
 }
 
 gb-author() {
