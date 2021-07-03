@@ -92,6 +92,7 @@ source "${DOTFILES}/lib/lua"
 source "${DOTFILES}/lib/zsh_autosuggest"
 source "${DOTFILES}/lib/jq"
 source "${DOTFILES}/lib/ulimit"
+source "${DOTFILES}/lib/ripgrep"
 source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff
 source "${HOME}/.env" 2>/dev/null # Ephemeral stuff
 
