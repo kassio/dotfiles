@@ -40,6 +40,7 @@ alias to-nvim="xargs nvim -p"
 alias rubocop-diff="gdfm --diff-filter=d | grep '.rb' | xargs bundle exec rubocop --parallel"
 alias rspec-diff="gdfm --diff-filter=d | grep '_spec.rb' | xargs bundle exec rspec"
 alias nvim-diff="gdfm --diff-filter=d | to-nvim"
+alias n-diff="nvim-diff"
 
 alias reset-logs='for f in log/*; do [ "$f" != "log/.gitkeep" ] && echo > $f; done'
 
