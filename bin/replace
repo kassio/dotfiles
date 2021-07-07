@@ -1,16 +1,3 @@
 #!/usr/bin/env bash
 
-if [ $# -lt 3 ]; then
-  echo 'USAGE: replace <search pattern> <new pattern> <files>[ <files> ...]'
-  exit 0
-fi
-
-find_this="$1"
-shift
-replace_with="$1"
-shift
-echo "Replacing '${find_this}' by '${replace_with}' in '$*'"
-
-for f in $(rg -l --color never "${find_this}" "$@"); do
-  sd "${find_this}" "${replace_with}" "$f"
-done
+echoe "Use sd instead!"
