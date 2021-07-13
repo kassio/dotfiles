@@ -22,13 +22,16 @@ gbd() {
 }
 
 for-each-branch() {
-  original=$(g branch-current)
+  branch_original="$(g branch-current)"
+  branch_main="$(g branch-main)"
   for branch in $(g branch-list); do
+    [ "${branch}" = "${branch_main}" ] && continue
+
     echo "> $branch"
     g switch "$branch"
     eval "$*"
   done
-  g switch "$original"
+  g switch "$branch_original"
 }
 
 gb-author() {
