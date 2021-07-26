@@ -21,21 +21,11 @@ gbd() {
   done
 }
 
-for-each-branch() {
-  branch_original="$(g branch-current)"
-  branch_main="$(g branch-main)"
-  for branch in $(g branch-list); do
-    [ "${branch}" = "${branch_main}" ] && continue
-
-    echo "> $branch"
-    g switch "$branch"
-    eval "$*"
-  done
-  g switch "$branch_original"
-}
 
 gb-author() {
-  g for-each-ref --sort=authorname --format='%(authorname)#%(refname:short)' 'refs/heads'
+  g for-each-ref \
+    --sort=authorname \
+    --format='%(authorname)#%(refname:short)' 'refs/heads'
 }
 
 gb-mine() {
@@ -55,7 +45,9 @@ g-main-diff() {
 g-diff-count() {
   rev1="$1"
   rev2="$2"
-  echo "+$(g rev-list --count "$rev2".."$rev1" 2>/dev/null)-$(g rev-list --count "$rev1".."$rev2" 2>/dev/null)"
+  plus=$(g rev-list --count "$rev2".."$rev1" 2>/dev/null)
+  minus=$(g rev-list --count "$rev1".."$rev2" 2>/dev/null)
+  echo "+$plus-$minus"
 }
 
 gswm() {

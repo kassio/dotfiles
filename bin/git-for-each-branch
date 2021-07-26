@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+branch_original="$(git branch-current)"
+branch_main="$(git branch-main)"
+for branch in $(git branch-list); do
+  [ "${branch}" = "${branch_main}" ] && continue
+
+  echo "> $branch"
+  git switch "$branch"
+  eval "$*"
+done
+git switch "$branch_original"
