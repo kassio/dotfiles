@@ -79,3 +79,20 @@
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
   required = true
+
+[interactive]
+  diffFilter = delta --color-only --features=interactive
+[pager]
+  diff = delta
+  log = delta
+  reflog = delta
+  show = delta
+[delta]
+  features = decorations
+  syntax-theme = OneHalfDark
+[delta "interactive"]
+  keep-plus-minus-markers = false
+[delta "decorations"]
+  commit-style = raw
+  file-style = omit
+  hunk-header-style = file line-number syntax
