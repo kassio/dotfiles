@@ -19,7 +19,7 @@ vendor/ruby
 .byebug_history
 .ignore
 
-ALEPreviewWindow
+.projections.json
 .vscode
 
 node_modules
