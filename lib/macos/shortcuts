@@ -4,6 +4,7 @@
 # * "Quit Safari" = cmd-opt-q
 defaults write com.apple.Safari NSUserKeyEquivalents '{
   "Close Tab" = "@w";
+  "Email This Page" = "@~^$8";
   "Quit Safari" = "@~q";
 }'
 
