@@ -87,12 +87,24 @@
   log = delta
   reflog = delta
   show = delta
+
 [delta]
   features = decorations
   syntax-theme = OneHalfDark
+  line-numbers = true
 [delta "interactive"]
   keep-plus-minus-markers = false
 [delta "decorations"]
   commit-style = raw
-  file-style = omit
+
   hunk-header-style = file line-number syntax
+  hunk-header-file-style = bold
+  hunk-header-decoration-style = underline
+
+  file-decoration-style = "#ffeeee" bold box
+  file-style = "#ffeeee" bold
+  file-added-label = [+]
+  file-copied-label = [C]
+  file-modified-label = [M]
+  file-removed-label = [-]
+  file-renamed-label = [R]
