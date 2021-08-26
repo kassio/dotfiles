@@ -9,5 +9,3 @@ if type custom-upgrade &> /dev/null; then
   title "custom upgrade"
   custom-upgrade
 fi
-
-nvim +Upgrade
