@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-asdf plugin-add ruby
+for plugin in $(cat "${DOTFILES}/lib/asdf_default_plugins"); do
+  asdf plugin add "${plugin}"
+done
