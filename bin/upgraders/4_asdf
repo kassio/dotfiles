@@ -11,4 +11,6 @@ asdf plugin-update --all
 for plugin in $(cat "${DOTFILES}/lib/asdf_default_plugins"); do
   title "Ensure latest version of ${plugin}"
   asdf install "${plugin}" latest
+  title "Ensure global version of ${plugin} to be latest"
+  asdf global "${plugin}" latest
 done
