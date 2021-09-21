@@ -24,12 +24,6 @@ fi
 autoload -Uz bashcompinit && bashcompinit
 autoload -Uz colors && colors
 
-# load libs stuff
-source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
-source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
-source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
 # extend PATH with libs
 export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
 export PATH="${HOMEBREW_PREFIX}/opt/python@3.9/bin:${PATH}"
@@ -80,6 +74,12 @@ unsetopt flowcontrol
 unsetopt hist_ignore_space # ignore space prefixed commands
 unsetopt menu_complete # do not navigate completion with arrows
 
+# load libs stuff
+source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
+source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
+source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
 # personal libs
 source "${DOTFILES}/lib/iterm2_shell_integration.zsh"
 source "${DOTFILES}/lib/prompt"
@@ -95,9 +95,3 @@ source "${DOTFILES}/lib/ulimit"
 source "${DOTFILES}/lib/ripgrep"
 source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff
 source "${HOME}/.env" 2>/dev/null # Ephemeral stuff
-
-# Added by GDK bootstrap
-export PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig:${PKG_CONFIG_PATH}"
-
-# Added by GDK bootstrap
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=/usr/local/opt/openssl@1.1 --with-readline-dir=/usr/local/opt/readline"
