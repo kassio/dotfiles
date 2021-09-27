@@ -21,7 +21,10 @@ gdfm() {
 
 gbd() {
   for branch in $(g branch-list); do
-    echo "$(g-main-diff $branch) $branch ($(g-origin-diff $branch))"
+    printf "%10s %s (%s)\n" \
+      $(g-main-diff $branch) \
+      $branch \
+      $(g-origin-diff $branch)
   done
 }
 
