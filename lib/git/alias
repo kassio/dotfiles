@@ -24,10 +24,9 @@ gbd() {
     printf "%10s %s (%s)\n" \
       $(g-main-diff $branch) \
       $branch \
-      $(g-origin-diff $branch)
+      $(g-remote-diff $branch)
   done
 }
-
 
 gb-author() {
   g for-each-ref \
@@ -41,8 +40,10 @@ gb-mine() {
     cut -d '#' -f 2
 }
 
-g-origin-diff() {
-  echo "u$(g-diff-count "$1" "origin/$1")"
+g-remote-diff() {
+  remote=$(git config --get "branch.$1.remote")
+
+  echo "u$(g-diff-count "$1" "${remote}/$1")"
 }
 
 g-main-diff() {
