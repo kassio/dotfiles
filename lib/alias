@@ -33,10 +33,13 @@ alias RP="RAILS_ENV=production"
 alias DS="DISABLE_SPRING=1"
 
 sync() {
-  gswm && gp
-  bundle install 2>/dev/null
-  yarn install 2>/dev/null
-  bin/rails db:migrate 2>/dev/null
+  gswm && git pull
+  { # optional steps
+    bundle install;
+    yarn install;
+    bin/rails db:migrate;
+  } 2>/dev/null
+  git switch -
 }
 
 alias c="code"
