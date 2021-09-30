@@ -1,9 +1,9 @@
 #!/usr/bin/env zsh
 
-rg \
-  --files \
+fd \
+  --type file \
   --no-ignore-vcs \
   --hidden \
   --follow \
-  --color=never \
+  --color never \
   --ignore-file "$HOME/.dotfiles/home/ignore"
