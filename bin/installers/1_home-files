@@ -2,7 +2,9 @@
 
 touch "${HOME}/.hushlogin"
 
-for f in $(printf "%s/home/*" "${DOTFILES}"); do
-  target="$(basename "${f}")"
-  ln -sf "${f}" "${HOME}/.${target}"
+FILES="${HOME}/.dotfiles/home/*"
+
+for f in ${FILES}; do
+  target="${HOME}/.$(basename "${f}")"
+  ln -sf "${f}" "${target}"
 done
