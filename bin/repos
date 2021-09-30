@@ -12,6 +12,10 @@ class Repositories
     end
   end
 
+  def self.each(&block)
+    new.each(&block)
+  end
+
   def self.current
     new.current
   end
@@ -69,7 +73,7 @@ end
 
 class Updater
   def self.sync(user_options)
-    Repositories.new.each do |repository|
+    Repositories.each do |repository|
       if repository.exists?
         new(repository, user_options).update
       else
