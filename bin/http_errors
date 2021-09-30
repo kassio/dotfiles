@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "rack"
+
+class Application
+  def call(env)
+    response_code = env["PATH_INFO"].split("/").filter_map { _1.to_i unless _1.to_s.empty? }.first || 200
+
+    [
+      response_code,
+      { "Content-Type" => "text/html" },
+      ["You requested a #{response_code}."]
+    ]
+  end
+end
+
+Rack::Server.start(app: Application.new)
