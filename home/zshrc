@@ -15,6 +15,8 @@ export ITERM_PROFILE_FILE="${HOME}/.current_iterm_profile_name"
 echo "$ITERM_PROFILE" > "${ITERM_PROFILE_FILE}"
 
 # load zsh stuff
+# load autocomplete modules
+FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:${FPATH}"
 autoload -Uz compinit
 if [ $(date +'%j') != $(/usr/bin/stat -f '%Sm' -t '%j' $HOME/.zcompdump) ]; then
   compinit
@@ -22,6 +24,7 @@ else
   compinit -C
 fi
 autoload -Uz bashcompinit && bashcompinit
+# load colors
 autoload -Uz colors && colors
 
 # extend PATH with libs
