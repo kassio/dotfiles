@@ -167,5 +167,4 @@ if [[ -o interactive ]]; then
     printf "\033]1337;ShellIntegrationVersion=12;shell=zsh\007"
   fi
 fi
-
-alias imgcat=/Users/kassioborges/.iterm2/imgcat;alias imgls=/Users/kassioborges/.iterm2/imgls;alias it2api=/Users/kassioborges/.iterm2/it2api;alias it2attention=/Users/kassioborges/.iterm2/it2attention;alias it2check=/Users/kassioborges/.iterm2/it2check;alias it2copy=/Users/kassioborges/.iterm2/it2copy;alias it2dl=/Users/kassioborges/.iterm2/it2dl;alias it2getvar=/Users/kassioborges/.iterm2/it2getvar;alias it2git=/Users/kassioborges/.iterm2/it2git;alias it2setcolor=/Users/kassioborges/.iterm2/it2setcolor;alias it2setkeylabel=/Users/kassioborges/.iterm2/it2setkeylabel;alias it2ul=/Users/kassioborges/.iterm2/it2ul;alias it2universion=/Users/kassioborges/.iterm2/it2universion
+alias imgcat=${HOME}/.iterm2/imgcat;alias imgls=${HOME}/.iterm2/imgls;alias it2api=${HOME}/.iterm2/it2api;alias it2attention=${HOME}/.iterm2/it2attention;alias it2check=${HOME}/.iterm2/it2check;alias it2copy=${HOME}/.iterm2/it2copy;alias it2dl=${HOME}/.iterm2/it2dl;alias it2getvar=${HOME}/.iterm2/it2getvar;alias it2git=${HOME}/.iterm2/it2git;alias it2setcolor=${HOME}/.iterm2/it2setcolor;alias it2setkeylabel=${HOME}/.iterm2/it2setkeylabel;alias it2ul=${HOME}/.iterm2/it2ul;alias it2universion=${HOME}/.iterm2/it2universion
