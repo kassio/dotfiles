@@ -35,18 +35,6 @@ defaults write com.apple.iWork.Keynote NSUserKeyEquivalents '{
   "Rehearse Slideshow" = "@~x";
 }'
 
-# WhatsApp
-# * "Archive Chat" - cmd-opt-shift-e
-defaults write Whatsapp NSUserKeyEquivalents '{
-  "Archive Chat" = "@~$e";
-}'
-
-# Broadcasts
-# * "Hide Broadcasts" - cmd-w
-defaults write com.highcaffeinecontent.radio NSUserKeyEquivalents '{
-  "Hide Broadcasts" = "@w";
-}'
-
 # Force global keyboard config to follow the 'local'
 sudo cp ~/Library/Preferences/com.apple.HIToolbox.plist \
   /Library/Preferences/com.apple.HIToolbox.plist
