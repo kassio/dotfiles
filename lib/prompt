@@ -14,11 +14,11 @@ export GIT_PS1_SHOWUPSTREAM=verbose
  __ps1_extra() { echo ''; }
 
  __ps1() {
-   local pre="$(print -P "\n")"
-   local post="$(print -P "\n%F{blue}%~%f\n%(?.%F{green}.%F{red})$%f ")"
-   local git="$(print -P "\n%F{yellow}(%f%%s%F{yellow})$(__ps1_extra)")"
+   pre="%F{blue}%~%f"
+   pos=$(echo -n "$(__ps1_extra)\n%(?.%F{green}.%F{red})$%f ")
+   git="$(print -P " %F{yellow}(%f%%s%F{yellow})")"
 
-   __git_ps1 "${pre}" "${post}" "${git}"
+   __git_ps1 ${pre} ${pos} ${git}
  }
 
 precmd_functions+=__ps1
