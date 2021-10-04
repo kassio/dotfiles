@@ -10,15 +10,22 @@ export GIT_PS1_SHOWCOLORHINTS=true
 export GIT_PS1_DESCRIBE_STYLE=branch
 export GIT_PS1_SHOWUPSTREAM=verbose
 
+blue() { print -P "%F{blue}$1%f"; }
+yellow() { print -P "%F{yellow}$1%f"; }
+green() { print -P "%F{green}$1%f"; }
+red() { print -P "%F{red}$1%f"; }
+
  # To be overwritten on $HOME/.dotfiles.private/env
  __ps1_extra() { echo ''; }
 
  __ps1() {
-   pre="%F{blue}%~%f"
-   pos=$(echo -n "$(__ps1_extra)\n%(?.%F{green}.%F{red})$%f ")
-   git="$(print -P " %F{yellow}(%f%%s%F{yellow})")"
+   local pos="$([ $? = 0 ] && green '$' || red '$') "
+   local pre="$(blue "%~") "
+   local git="$(yellow "(")%s$(yellow ")")"
 
-   __git_ps1 ${pre} ${pos} ${git}
+   pos="$(print -P "$(__ps1_extra)\n${pos}")"
+
+   __git_ps1 "${pre}" "${pos}" "${git}"
  }
 
 precmd_functions+=__ps1
