@@ -1,6 +1,7 @@
 # vim: ft=ruby
 # frozen_string_literal: true
 
+Pry.config.collision_warning = true
 Pry.config.pager = false
 Pry.config.history_file = "#{ENV["HOME"]}/.irb_history"
 
