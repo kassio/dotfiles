@@ -16,14 +16,6 @@ require "octokit"
 
 Octokit.configure { _1.auto_paginate = true }
 
-def neoterm
-  @neoterm ||= 'kassio/neoterm'
-end
-
-def vim_elixir
-  @vim_elixir ||= 'elixir-editors/vim-elixir'
-end
-
 def octokit
   @octokit ||= Octokit::Client.new(
     access_token: ENV["GITHUB_OCTOKIT_ACCESS_TOKEN"],
