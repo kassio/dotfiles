@@ -10,6 +10,8 @@ def __copy(obj)
   msg = obj.is_a?(String) ? obj : obj.inspect
 
   `echo "#{msg}" | pbcopy`
+
+  msg
 end
 
 def silence_rails_warnings!
