@@ -33,7 +33,6 @@ export PATH="${HOMEBREW_PREFIX}/opt/python@3.9/bin:${PATH}"
 export PATH="./bin:${DOTFILES}/bin:${PATH}"
 
 # customize the history
-export HISTFILE=${HOME}/.zhistory
 export HISTSIZE=120000
 export SAVEHIST=100000
 
@@ -61,6 +60,7 @@ setopt hist_expire_dups_first # expire duplicate entries first when trimming his
 setopt hist_find_no_dups # do not display a line previously found.
 setopt hist_ignore_all_dups # delete old recorded entry if new entry is a duplicate.
 setopt hist_ignore_dups # don't record an entry that was just recorded again.
+setopt hist_ignore_space # don't save lines that start with space
 setopt hist_no_store # don't save history command on history
 setopt hist_reduce_blanks # remove superfluous blanks before recording entry.
 setopt hist_save_no_dups # don't write duplicate entries in the history file.
