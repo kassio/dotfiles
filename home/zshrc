@@ -10,9 +10,8 @@ export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_BOOTSNAP=1
 
-# File to keep the current iterm profile name
-export ITERM_PROFILE_FILE="${HOME}/.current_iterm_profile_name"
-echo "$ITERM_PROFILE" > "${ITERM_PROFILE_FILE}"
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+source "${DOTFILES}/lib/p10k.cache.zsh" 2>/dev/null # zsh theme
 
 # load zsh stuff
 # load autocomplete modules
@@ -82,10 +81,10 @@ source "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh"
 source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
 source "${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "${HOME}/powerlevel10k/powerlevel10k.zsh-theme" # zsh theme
 
 # personal libs
 source "${DOTFILES}/lib/iterm2_shell_integration.zsh"
-source "${DOTFILES}/lib/prompt"
 source "${DOTFILES}/lib/bindkeys"
 source "${DOTFILES}/lib/alias"
 source "${DOTFILES}/lib/fzf"
@@ -96,5 +95,6 @@ source "${DOTFILES}/lib/zsh_autosuggest"
 source "${DOTFILES}/lib/jq"
 source "${DOTFILES}/lib/ulimit"
 source "${DOTFILES}/lib/ripgrep"
+source "${DOTFILES}/lib/p10k.zsh" 2>/dev/null # zsh theme
 source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff
 source "${HOME}/.env" 2>/dev/null # Ephemeral stuff
