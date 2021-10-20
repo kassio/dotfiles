@@ -55,6 +55,6 @@ alias rspec-diff="gdfm --diff-filter=d | to-rspec"
 alias nvim-diff="gdfm --diff-filter=d | to-nvim"
 alias nd="nvim-diff"
 
-alias reset-logs='for f in log/*; do [ "$f" != "log/.gitkeep" ] && echo > $f; done'
+alias reset-logs='truncate -s 0 log/*'
 
 source "${DOTFILES}/lib/git/alias"
