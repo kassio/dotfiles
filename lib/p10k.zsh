@@ -86,7 +86,7 @@
   typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=103
   typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=39
   typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=true
-  typeset -g POWERLEVEL9K_SHORTEN_FOLDER_MARKER="(${(j:|:)anchor_files})" # "
+  typeset -g POWERLEVEL9K_SHORTEN_FOLDER_MARKER="(${(j:|:)anchor_files})"
   typeset -g POWERLEVEL9K_DIR_TRUNCATE_BEFORE_MARKER=false
   typeset -g POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
   typeset -g POWERLEVEL9K_DIR_MAX_LENGTH=80
@@ -118,48 +118,31 @@
 
     local res="${modified}("
 
-    if [[ -n $VCS_STATUS_LOCAL_BRANCH ]]; then
-      local branch=${(V)VCS_STATUS_LOCAL_BRANCH}
-      res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}" # "
-    fi
-
-    if [[ -n $VCS_STATUS_TAG
-          # Show tag only if not on a branch.
-          # Tip: To always show tag, delete the next line.
-          && -z $VCS_STATUS_LOCAL_BRANCH  # <-- this line
-        ]]; then
-      local tag=${(V)VCS_STATUS_TAG}
-      # If tag name is at most 32 characters long, show it in full.
-      # Otherwise show the first 12 .. the last 12.
-      # Tip: To always show tag name in full without truncation, delete the next line.
-      (( $#tag > 32 )) && tag[13,-13]=".."  # <-- this line
-      res+="${meta}#${clean}${tag//\%/%%}"
-    fi
-
-    # Display the current Git commit if there is no branch and no tag.
-    # Tip: To always display the current Git commit, delete the next line.
-    [[ -z $VCS_STATUS_LOCAL_BRANCH && -z $VCS_STATUS_TAG ]] &&  # <-- this line
-      res+="${meta}@${clean}${VCS_STATUS_COMMIT[1,8]}"
-
-    # Show tracking branch name if it differs from local branch.
-    if [[ -n ${VCS_STATUS_REMOTE_BRANCH:#$VCS_STATUS_LOCAL_BRANCH} ]]; then
-      res+="${meta}:${clean}${(V)VCS_STATUS_REMOTE_BRANCH//\%/%%}" # "
-    fi
+    local branch=${(V)VCS_STATUS_LOCAL_BRANCH}
+    res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
 
     res+=" "
-    (( VCS_STATUS_STASHES        )) && res+="${untracked}\$"
-    (( VCS_STATUS_HAS_UNTRACKED  )) && res+="${conflicted}%%"
-    (( VCS_STATUS_HAS_UNSTAGED   )) && res+="${conflicted}*"
-    (( VCS_STATUS_HAS_STAGED     )) && res+="${clean}+"
+    (( VCS_STATUS_STASHES       )) && res+="${untracked}\$"
+    (( VCS_STATUS_HAS_UNTRACKED )) && res+="${conflicted}%%"
+    (( VCS_STATUS_HAS_UNSTAGED  )) && res+="${conflicted}*"
+    (( VCS_STATUS_HAS_STAGED    )) && res+="${clean}+"
 
-    (( VCS_STATUS_HAS_STAGED ||
-       VCS_STATUS_STASHES ||
-       VCS_STATUS_HAS_UNSTAGED ||
-       VCS_STATUS_HAS_UNTRACKED )) && res+=" "
+    (( VCS_STATUS_STASHES       ||
+       VCS_STATUS_HAS_UNTRACKED ||
+       VCS_STATUS_HAS_UNSTAGED  ||
+       VCS_STATUS_HAS_STAGED    )) && res+=" "
 
-    (( VCS_STATUS_COMMITS_BEHIND || VCS_STATUS_COMMITS_AHEAD)) &&
-      res+="${meta}u-${VCS_STATUS_COMMITS_BEHIND}+${VCS_STATUS_COMMITS_AHEAD}" ||
+    (( VCS_STATUS_COMMITS_BEHIND || VCS_STATUS_COMMITS_AHEAD )) ||
       res+="${meta}u="
+
+    (( VCS_STATUS_COMMITS_BEHIND && VCS_STATUS_COMMITS_AHEAD )) &&
+      res+="${meta}u-${VCS_STATUS_COMMITS_BEHIND}+${VCS_STATUS_COMMITS_AHEAD}"
+
+    (( VCS_STATUS_COMMITS_BEHIND )) &&
+      res+="${meta}u-${VCS_STATUS_COMMITS_BEHIND}"
+
+    (( VCS_STATUS_COMMITS_AHEAD )) &&
+      res+="${meta}u+${VCS_STATUS_COMMITS_AHEAD}"
 
     [[ -n $VCS_STATUS_ACTION ]] && res+=" ${conflicted}${VCS_STATUS_ACTION}"
 
@@ -169,7 +152,7 @@
   }
   functions -M my_git_formatter 2>/dev/null
 
-  typeset -g POWERLEVEL9K_VCS_MAX_INDEX_SIZE_DIRTY=500
+  typeset -g POWERLEVEL9K_VCS_MAX_INDEX_SIZE_DIRTY=-1
   typeset -g POWERLEVEL9K_VCS_DISABLED_WORKDIR_PATTERN='~'
   typeset -g POWERLEVEL9K_VCS_DISABLE_GITSTATUS_FORMATTING=true
   typeset -g POWERLEVEL9K_VCS_CONTENT_EXPANSION='${$((my_git_formatter(1)))+${my_git_format}}'
