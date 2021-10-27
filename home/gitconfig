@@ -68,6 +68,7 @@
   branch-list = branch --format='%(refname:short)'
   branch-current = branch --show-current
   branch-main = !git verify "origin/main" >/dev/null && echo "main" || echo "master"
+  open-remote = !git remote get-url origin | xargs open
 [gpg]
   program = /usr/local/bin/gpg
 [advice]
