@@ -121,25 +121,28 @@
     local branch=${(V)VCS_STATUS_LOCAL_BRANCH}
     res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
 
-    res+=" "
+    (( VCS_STATUS_STASHES        ||
+        VCS_STATUS_HAS_UNTRACKED ||
+        VCS_STATUS_HAS_UNSTAGED  ||
+        VCS_STATUS_HAS_STAGED    )) && res+=" "
+
     (( VCS_STATUS_STASHES       )) && res+="${untracked}\$"
     (( VCS_STATUS_HAS_UNTRACKED )) && res+="${conflicted}%%"
     (( VCS_STATUS_HAS_UNSTAGED  )) && res+="${conflicted}*"
     (( VCS_STATUS_HAS_STAGED    )) && res+="${clean}+"
 
-    (( VCS_STATUS_STASHES       ||
-       VCS_STATUS_HAS_UNTRACKED ||
-       VCS_STATUS_HAS_UNSTAGED  ||
-       VCS_STATUS_HAS_STAGED    )) && res+=" "
+    if  [[ $VCS_STATUS_REMOTE_BRANCH != "" ]] ; then
+      res+=" "
 
-    if (( VCS_STATUS_COMMITS_BEHIND && VCS_STATUS_COMMITS_AHEAD )); then
-      res+="${meta}u-${VCS_STATUS_COMMITS_BEHIND}+${VCS_STATUS_COMMITS_AHEAD}"
-    elif (( VCS_STATUS_COMMITS_BEHIND )); then
-      res+="${meta}u-${VCS_STATUS_COMMITS_BEHIND}"
-    elif (( VCS_STATUS_COMMITS_AHEAD )); then
-      res+="${meta}u+${VCS_STATUS_COMMITS_AHEAD}"
-    else
-      res+="${meta}u="
+      if (( VCS_STATUS_COMMITS_BEHIND && VCS_STATUS_COMMITS_AHEAD )); then
+        res+="${meta}u-${VCS_STATUS_COMMITS_BEHIND}+${VCS_STATUS_COMMITS_AHEAD}"
+      elif (( VCS_STATUS_COMMITS_BEHIND )); then
+        res+="${meta}u-${VCS_STATUS_COMMITS_BEHIND}"
+      elif (( VCS_STATUS_COMMITS_AHEAD )); then
+        res+="${meta}u+${VCS_STATUS_COMMITS_AHEAD}"
+      else
+        res+="${meta}u="
+      fi
     fi
 
     [[ -n $VCS_STATUS_ACTION ]] && res+=" ${conflicted}${VCS_STATUS_ACTION}"
