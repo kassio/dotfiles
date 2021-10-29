@@ -116,22 +116,26 @@
       local conflicted='%244F'  # grey foreground
     fi
 
-    local res="${modified}("
+    local res=""
 
     local branch=${(V)VCS_STATUS_LOCAL_BRANCH}
     res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
 
-    (( VCS_STATUS_STASHES        ||
+    if [[ "${res}" != "" ]]; then
+      ((
+        VCS_STATUS_STASHES ||
         VCS_STATUS_HAS_UNTRACKED ||
         VCS_STATUS_HAS_UNSTAGED  ||
-        VCS_STATUS_HAS_STAGED    )) && res+=" "
+        VCS_STATUS_HAS_STAGED
+      )) && res+=" "
+    fi
 
     (( VCS_STATUS_STASHES       )) && res+="${untracked}\$"
     (( VCS_STATUS_HAS_UNTRACKED )) && res+="${conflicted}%%"
     (( VCS_STATUS_HAS_UNSTAGED  )) && res+="${conflicted}*"
     (( VCS_STATUS_HAS_STAGED    )) && res+="${clean}+"
 
-    if  [[ $VCS_STATUS_REMOTE_BRANCH != "" ]] ; then
+    if  [[ "${VCS_STATUS_REMOTE_BRANCH}" != "" ]] ; then
       res+=" "
 
       if (( VCS_STATUS_COMMITS_BEHIND && VCS_STATUS_COMMITS_AHEAD )); then
@@ -145,11 +149,9 @@
       fi
     fi
 
-    [[ -n $VCS_STATUS_ACTION ]] && res+=" ${conflicted}${VCS_STATUS_ACTION}"
+    [[ -n ${VCS_STATUS_ACTION} ]] && res+="${conflicted}${VCS_STATUS_ACTION}"
 
-    res+="${modified})"
-
-    typeset -g my_git_format=$res
+    typeset -g my_git_format="${modified}(${res}${modified})"
   }
   functions -M my_git_formatter 2>/dev/null
 
