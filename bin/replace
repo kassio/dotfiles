@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-echoe "Use sd instead!"
+echo "Use sd instead!"
