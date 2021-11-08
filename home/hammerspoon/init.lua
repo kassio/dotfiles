@@ -8,8 +8,4 @@ hs.urlevent.bind('RELOAD', function()
   reloadConfig()
 end)
 
-vim_keys = require('spoons.fn-arrows')
-
--- hs.hotkey.bind({ 'fn' }, 'W', function()
---   hs.alert.show('Hello World!')
--- end)
+hs.loadSpoon('FnMate')
