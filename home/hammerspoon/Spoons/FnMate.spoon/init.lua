@@ -1,24 +1,20 @@
 -- Original author: ashfinal <ashfinal@gmail.com>
 -- Based on https://github.com/Hammerspoon/Spoons/raw/master/Spoons/FnMate.spoon.zip
 
-local obj={}
+local obj = {}
 obj.__index = obj
 
-obj.name = "FnMate"
-obj.version = "1.1"
-obj.author = "kassioborges <kassioborgesm@gmail.com>"
-obj.homepage = "https://github.com/Hammerspoon/Spoons"
-obj.license = "MIT - https://opensource.org/licenses/MIT"
-
-local logger = hs.logger.new('fnMate', 'debug')
+obj.name = 'FnMate'
+obj.version = '1.1'
+obj.author = 'kassioborges <kassioborgesm@gmail.com>'
+obj.homepage = 'https://github.com/kassio/dotfiles'
+obj.license = 'MIT - https://opensource.org/licenses/MIT'
 
 local H = {}
 
 H.remove = function(t, list)
-  assert(type(t) == 'table', string.format("Expected table, got %s", type(t)))
-  assert(type(list) == 'table', string.format("Expected table, got %s", type(t)))
-
-  logger.i(hs.inspect({t, list}))
+  assert(type(t) == 'table', string.format('Expected table, got %s', type(t)))
+  assert(type(list) == 'table', string.format('Expected table, got %s', type(t)))
 
   local result = {}
   for _, v in pairs(t) do
@@ -31,7 +27,7 @@ H.remove = function(t, list)
 end
 
 H.keys = function(t, except)
-  assert(type(t) == 'table', string.format("Expected table, got %s", type(t)))
+  assert(type(t) == 'table', string.format('Expected table, got %s', type(t)))
 
   local keys = {}
   for k, _ in pairs(t) do
@@ -72,12 +68,12 @@ local moving = {
     ['Ô'] = 'down',
     [''] = 'up',
     ['Ò'] = 'right',
-  }
+  },
 }
 moving.chars = H.keys(moving.config)
 
 local scrolling = {
-  config = { y = { 3, 0 }, o = { -3, 0 }, u = { 0, -3 }, i = { 0, 3 } }
+  config = { y = { 3, 0 }, o = { -3, 0 }, u = { 0, -3 }, i = { 0, 3 } },
 }
 scrolling.chars = H.keys(scrolling.config)
 
@@ -91,21 +87,13 @@ function obj:init()
       local modifiers = H.remove(H.keys(flags), { 'fn' })
 
       return true, {
-        hs.eventtap.event.newKeyEvent(
-          modifiers,
-          moving.config[char],
-          true
-        )
+        hs.eventtap.event.newKeyEvent(modifiers, moving.config[char], true),
       }
 
       -- scroll
     elseif flags['fn'] and H.contains(scrolling.chars, char) then
       return true, {
-        hs.eventtap.event.newScrollEvent(
-          scrolling.config[char],
-          {},
-          'line'
-        )
+        hs.eventtap.event.newScrollEvent(scrolling.config[char], {}, 'line'),
       }
 
       -- click
