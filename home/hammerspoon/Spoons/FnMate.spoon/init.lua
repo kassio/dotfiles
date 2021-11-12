@@ -1,6 +1,7 @@
 -- Original author: ashfinal <ashfinal@gmail.com>
 -- Based on https://github.com/Hammerspoon/Spoons/raw/master/Spoons/FnMate.spoon.zip
 
+local utils = require('../utils')
 local obj = {}
 obj.__index = obj
 
@@ -10,99 +11,63 @@ obj.author = 'kassioborges <kassioborgesm@gmail.com>'
 obj.homepage = 'https://github.com/kassio/dotfiles'
 obj.license = 'MIT - https://opensource.org/licenses/MIT'
 
-local H = {}
-
-H.remove = function(t, list)
-  assert(type(t) == 'table', string.format('Expected table, got %s', type(t)))
-  assert(type(list) == 'table', string.format('Expected table, got %s', type(t)))
-
-  local result = {}
-  for _, v in pairs(t) do
-    if not H.contains(list, v) then
-      table.insert(result, v)
-    end
+local offset = function(modifiers)
+  if utils.tbl_contains(modifiers, 'cmd') then
+    return 9999
+  elseif utils.tbl_contains(modifiers, 'shift') then
+    return 100
+  elseif utils.tbl_contains(modifiers, 'alt') then
+    return 50
+  else
+    return 10
   end
-
-  return result
 end
 
-H.keys = function(t, except)
-  assert(type(t) == 'table', string.format('Expected table, got %s', type(t)))
-
-  local keys = {}
-  for k, _ in pairs(t) do
-    if except == nil or k ~= except then
-      table.insert(keys, k)
-    end
-  end
-
-  return keys
-end
-
-H.contains = function(tbl, given)
-  local result = false
-
-  for _, value in ipairs(tbl) do
-    if value == given then
-      result = true
-      break
-    end
-  end
-
-  return result
-end
-
-local moving = {
-  config = {
-    h = 'left',
-    j = 'down',
-    k = 'up',
-    l = 'right',
-    -- when opt is down
-    ['˙'] = 'left',
-    ['∆'] = 'down',
-    ['˚'] = 'up',
-    ['¬'] = 'right',
-    -- when opt+shift is down
-    ['Ó'] = 'left',
-    ['Ô'] = 'down',
-    [''] = 'up',
-    ['Ò'] = 'right',
-  },
+local handlers = {
+  [4] = function(modifiers) -- 'h'
+    return true, { hs.eventtap.event.newKeyEvent(modifiers, 'left', true) }
+  end,
+  [38] = function(modifiers) -- 'j'
+    return true, { hs.eventtap.event.newKeyEvent(modifiers, 'down', true) }
+  end,
+  [40] = function(modifiers) -- 'k'
+    return true, { hs.eventtap.event.newKeyEvent(modifiers, 'up', true) }
+  end,
+  [37] = function(modifiers) -- 'l'
+    return true, { hs.eventtap.event.newKeyEvent(modifiers, 'right', true) }
+  end,
+  [16] = function(modifiers) -- 'y'
+    return true, { hs.eventtap.event.newScrollEvent({ offset(modifiers), 0 }, {}, 'line') }
+  end,
+  [32] = function(modifiers) -- 'u'
+    return true, { hs.eventtap.event.newScrollEvent({ 0, -offset(modifiers) }, {}, 'line') }
+  end,
+  [34] = function(modifiers) -- 'i'
+    return true, { hs.eventtap.event.newScrollEvent({ 0, offset(modifiers) }, {}, 'line') }
+  end,
+  [31] = function(modifiers) -- 'o'
+    return true, { hs.eventtap.event.newScrollEvent({ -offset(modifiers), 0 }, {}, 'line') }
+  end,
+  [43] = function() -- ','
+    local currentpos = hs.mouse.getAbsolutePosition()
+    return true, { hs.eventtap.leftClick(currentpos) }
+  end,
+  [47] = function() -- '.'
+    local currentpos = hs.mouse.getAbsolutePosition()
+    return true, { hs.eventtap.rightClick(currentpos) }
+  end,
 }
-moving.chars = H.keys(moving.config)
-
-local scrolling = {
-  config = { y = { 3, 0 }, o = { -3, 0 }, u = { 0, -3 }, i = { 0, 3 } },
-}
-scrolling.chars = H.keys(scrolling.config)
 
 function obj:init()
   local function catcher(event)
     local flags = event:getFlags()
-    local char = string.lower(event:getCharacters())
+    local key = event:getKeyCode()
+    local handler = handlers[key]
 
-    -- move with modifiers
-    if flags['fn'] and H.contains(moving.chars, char) then
-      local modifiers = H.remove(H.keys(flags), { 'fn' })
+    if flags['fn'] and handler then
+      local modifiers = utils.tbl_remove(utils.tbl_keys(flags), { 'fn' })
 
-      return true, {
-        hs.eventtap.event.newKeyEvent(modifiers, moving.config[char], true),
-      }
-
-      -- scroll
-    elseif flags['fn'] and H.contains(scrolling.chars, char) then
-      return true, {
-        hs.eventtap.event.newScrollEvent(scrolling.config[char], {}, 'line'),
-      }
-
-      -- click
-    elseif flags['fn'] and char == ',' then
-      local currentpos = hs.mouse.getAbsolutePosition()
-      return true, { hs.eventtap.leftClick(currentpos) }
-    elseif flags['fn'] and char == '.' then
-      local currentpos = hs.mouse.getAbsolutePosition()
-      return true, { hs.eventtap.rightClick(currentpos) }
+      return handler(modifiers)
     end
   end
 
