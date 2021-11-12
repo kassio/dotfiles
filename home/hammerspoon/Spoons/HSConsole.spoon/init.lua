@@ -9,11 +9,7 @@ obj.license = 'MIT - https://opensource.org/licenses/MIT'
 
 obj.init = function()
   hs.urlevent.bind('hs-console-open', function()
-    local window = hs.console.hswindow()
-
-    if window then
-      window:focus()
-    end
+    hs.openConsole()
   end)
 
   hs.urlevent.bind('hs-console-clear', function()
