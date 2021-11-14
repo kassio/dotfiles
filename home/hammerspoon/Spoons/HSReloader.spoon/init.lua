@@ -13,7 +13,7 @@ local function reloadConfig()
 end
 
 obj.init = function()
-  hs.pathwatcher.new(os.getenv('HOME') .. '/.hammerspoon/',  reloadConfig):start()
+  hs.pathwatcher.new(os.getenv('HOME') .. '/.hammerspoon/', reloadConfig):start()
 
   hs.urlevent.bind('hs-reload', function()
     reloadConfig()
