@@ -1,4 +1,4 @@
-local utils = require('../utils')
+local utils = hs.my.utils
 local logger = hs.logger.new('GlobalShortcuts', 'debug')
 local function script_path()
   local str = debug.getinfo(2, 'S').source:sub(2)
@@ -13,9 +13,8 @@ obj.version = '0.2'
 obj.author = 'kassioborges <kassioborgesm@gmail.com>'
 obj.homepage = 'https://github.com/kassio/dotfiles'
 obj.license = 'MIT - https://opensource.org/licenses/MIT'
-obj.spoonPath = script_path()
-
-package.path = package.path .. ';' .. obj.spoonPath .. 'handlers/?.lua'
+obj.handlers_path = script_path() .. 'handlers'
+package.path = package.path .. ';' .. obj.handlers_path .. '/?.lua'
 
 utils.logger = logger
 
@@ -46,26 +45,21 @@ utils.select_menu_item = function(app, path)
   return utils.noop()
 end
 
+local load_handlers = function()
+  local list, handlers_list = {}, io.popen('ls -1 "' .. obj.handlers_path .. '"')
+
+  for filename in handlers_list:lines() do
+    local handler_name = string.gsub(filename, '%.lua', '')
+
+    table.insert(list, require(handler_name))
+  end
+
+  handlers_list:close()
+
+  return list
+end
+
 function obj:init()
-  local handlers_names = {
-    'global',
-    'fn',
-    'app',
-  }
-
-  local load_handler = function(name)
-    local path = package.searchpath(name, package.path)
-    return loadfile(path)()
-  end
-
-  local load_handlers = function()
-    return hs.fnutils.map(handlers_names, function(handler_name)
-      local handler = load_handler(handler_name)
-      handler.name = handler_name
-      return handler
-    end)
-  end
-
   local handlers = load_handlers()
 
   local function catcher(event)
