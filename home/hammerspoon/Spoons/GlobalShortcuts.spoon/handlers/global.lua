@@ -6,8 +6,6 @@ return {
 
     if flags:containExactly({ 'cmd', 'alt', 'ctrl' }) and char == 'm' then
       utils.select_menu_item(app, { 'Window', 'Merge All Windows' })
-    elseif flags:containExactly({ 'cmd' }) and char == '/' then
-      utils.select_menu_item(app, { 'Help' })
     end
   end,
 }
