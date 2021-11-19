@@ -1,2 +1,4 @@
 ruby
 golang
+shellcheck
+shfmt
