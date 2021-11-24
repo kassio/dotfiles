@@ -46,7 +46,7 @@ utils.select_menu_item = function(app, path)
 end
 
 local load_handlers = function()
-  local list, handlers_list = {}, io.popen('ls -1 "' .. obj.handlers_path .. '"')
+  local list, handlers_list = {}, io.popen(string.format('ls -1 "%s"', obj.handlers_path))
 
   for filename in handlers_list:lines() do
     local handler_name = string.gsub(filename, '%.lua', '')
