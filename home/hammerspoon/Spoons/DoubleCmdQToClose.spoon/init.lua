@@ -10,12 +10,14 @@ obj.license = 'MIT - https://opensource.org/licenses/MIT'
 local quitModal = hs.hotkey.modal.new('cmd','q')
 
 function quitModal:entered()
-  hs.alert.show("Press Cmd+Q again to quit", 1)
+  local app = hs.application.frontmostApplication()
+
+  hs.alert.show("Press Cmd+Q again to quit "..app:title(), 1)
   hs.timer.doAfter(1, function() quitModal:exit() end)
 end
 
 local doQuit = function()
-  hs.application.frontmostApplication():selectMenuItem("^Quit.*$")
+  hs.application.frontmostApplication():kill()
   quitModal:exit()
 end
 
