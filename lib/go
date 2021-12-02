@@ -6,4 +6,4 @@ export GOPATH="${HOME}/src/go"
 export PATH="${PATH}:${GOPATH}/bin"
 
 # easier navigation to go projects
-export CDPATH="${GOPATH}/src"
+export CDPATH="${CDPATH}:${GOPATH}/src"
