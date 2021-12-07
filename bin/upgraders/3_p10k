@@ -1,8 +1,0 @@
-#!/usr/bin/env zsh
-
-title "Update p10k"
-pushd "${HOME}/powerlevel10k"
-
-git pull
-
-popd
