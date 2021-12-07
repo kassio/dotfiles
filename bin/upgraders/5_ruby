@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
 
+if [ "$1" = "--help" ]; then
+  echo "- update ruby gems"
+  exit
+fi
+
 title "Updating ruby gems"
 for-each-ruby gem update --system

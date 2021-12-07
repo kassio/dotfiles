@@ -1,3 +1,12 @@
 #!/usr/bin/env bash
 
+if [ "$1" = "--help" ]; then
+  echo "- antibody: Upgrade zsh_plugins"
+  exit
+fi
+
+title "updating zsh plugins"
+
+antibody bundle < "${DOTFILE}/lib/zsh_plugins" > "${DOTFILES}/home/zsh_plugins.sh"
+
 antibody update
