@@ -67,6 +67,8 @@ function obj:init()
       local retap, new_event = handler.handle(event, utils)
 
       if retap then
+        utils.logger.i('Remapped with: ' .. handler.name)
+
         return retap, new_event
       end
     end

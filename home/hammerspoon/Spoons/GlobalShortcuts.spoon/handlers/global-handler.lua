@@ -1,4 +1,5 @@
 return {
+  name = 'Global Handler',
   handle = function(event, utils)
     local flags = event:getFlags()
     local char = string.lower(event:getCharacters(true))

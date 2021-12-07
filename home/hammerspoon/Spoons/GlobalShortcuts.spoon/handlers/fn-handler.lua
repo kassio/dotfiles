@@ -46,6 +46,7 @@ local handlers = {
 }
 
 return {
+  name = 'Fn Handler',
   handle = function(event, utils)
     local flags = event:getFlags()
     local char = string.lower(event:getCharacters(true))

@@ -9,15 +9,12 @@ local handlers = {
 }
 
 return {
+  name = 'App Handler',
   handle = function(event, utils)
     local flags = event:getFlags()
     local char = string.lower(event:getCharacters(true))
     local app = hs.application.frontmostApplication()
     local handler = handlers[app:title()]
-
-    utils.logger.i(hs.inspect({
-      locked = utils.locked
-    }))
 
     if not utils.locked and handler then
       return handler(app, flags, char, utils)
