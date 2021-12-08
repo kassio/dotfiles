@@ -7,6 +7,6 @@ fi
 
 title "updating zsh plugins"
 
-antibody bundle < "${DOTFILE}/lib/zsh_plugins" > "${DOTFILES}/home/zsh_plugins.sh"
+antibody bundle < "${HOME}/.dotfiles/lib/zsh_plugins" > "${HOME}/.dotfiles/home/zsh_plugins.sh"
 
 antibody update
