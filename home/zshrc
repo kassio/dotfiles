@@ -35,11 +35,6 @@ zstyle ':completion:::::' completer _expand _complete _ignored _approximate # en
 # load colors
 autoload -Uz colors && colors
 
-# extend PATH with libs
-export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
-export PATH="${HOMEBREW_PREFIX}/opt/python@3.9/bin:${PATH}"
-export PATH="./bin:${DOTFILES}/bin:${PATH}"
-
 # customize the history
 export HISTSIZE=120000
 export SAVEHIST=100000
@@ -103,3 +98,8 @@ source "${DOTFILES}/lib/ripgrep"
 source "${DOTFILES}/lib/p10k.zsh" 2>/dev/null # zsh theme
 source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff
 source "${HOME}/.env" 2>/dev/null # Ephemeral stuff
+
+# extend PATH with libs
+export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
+export PATH="${HOMEBREW_PREFIX}/opt/python@3.9/bin:${PATH}"
+export PATH="./bin:${DOTFILES}/bin:${PATH}"
