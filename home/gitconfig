@@ -5,6 +5,8 @@
   defaultBranch = main
 [commit]
   gpgsign = true
+[gpg]
+	format = ssh
 [credential]
   helper = osxkeychain
 [remote "origin"]
@@ -70,8 +72,6 @@
   branch-main = !git verify "origin/main" >/dev/null && echo "main" || echo "master"
   open-remote = !git remote get-url origin | xargs open
   exclude = !sh -c 'echo "$1" >> .git/info/exclude' -
-[gpg]
-  program = /usr/local/bin/gpg
 [advice]
   detachedHead = false
 [include]
