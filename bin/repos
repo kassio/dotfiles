@@ -8,7 +8,7 @@ class Repositories
 
   Repository = Struct.new(:remote, :path) do
     def exists?
-      Dir.exists?(path)
+      Dir.exist?(path)
     end
   end
 
@@ -24,18 +24,17 @@ class Repositories
     @files = Array(ENV['REPOS_FILES'].split(':')).flatten
   end
 
-  def each
-    repositories.each do |repository|
-      yield(repository)
-    end
+  def each(&block)
+    repositories.each(&block)
   end
 
   def current
     map do |repository|
-      '%<remote>s %<path>s' % {
+      String.format(
+        '%<remote>s %<path>s',
         remote: repository.remote.ljust(longest_remote_name),
         path: repository.path
-      }
+      )
     end.join("\n")
   end
 
@@ -50,12 +49,9 @@ class Repositories
       File.new(file).readlines.map do |line|
         remote, path = line.split('|').map(&:to_s).map(&:strip)
 
-        if remote != ''
-          Repository.new(
-            remote.strip,
-            format_path(path)
-          )
-        end
+        next if remote == ''
+
+        Repository.new(remote.strip, format_path(path))
       end.compact
     end
   end
@@ -173,21 +169,18 @@ class Generator
       next unless File.directory?(entry)
 
       Dir.chdir(entry) do
-        remote = remote_for(entry)
-
-        unless remote.empty?
-          "#{remote_for(entry)}|#{expanded_path(entry)}"
-        end
+        "#{remote}|#{expanded_path(entry)}" unless remote.empty?
       end
     end.compact.join("\n")
   end
 
   private
 
-  def remote_for(entry)
-    if Dir.exists?('.git')
-      @git.remote.slice(0).chomp.strip
-    end.to_s
+  def remote
+    @remote ||=
+      if Dir.exist?('.git')
+        @git.remote.slice(0).chomp.strip
+      end.to_s
   end
 
   def expanded_path(entry)
@@ -244,7 +237,7 @@ class Git
     git 'fetch', '--prune', '--prune-tags', '--tags', '--recurse-submodules'
   end
 
-  def  pull
+  def pull
     git 'pull', '--quiet'
   end
 
@@ -269,7 +262,7 @@ class Git
     else
       Open3.capture3(*cmd)
     end
-  rescue => e
+  rescue StandardError => e
     [nil, e.message, FakeStatus.new(false)]
   end
 end
@@ -294,6 +287,8 @@ class Printer
   }.freeze
 
   class << self
+    # rubocop: disable Metrics/ParameterLists
+    # rubocop: disable Metrics/CyclomaticComplexity
     def print(
       text = '',
       symbol: nil,
@@ -308,12 +303,14 @@ class Printer
 
       Kernel.print(
         text
-        .then { |text| prefixify(text, prefix) }
-        .then { |text| break_line ? "#{text}\n" : text }
-        .then { |text| colorify(text, color) }
-        .then { |text| "#{"\t" * indent}#{text}" }
+        .then { prefixify(_1, prefix) }
+        .then { break_line ? "#{_1}\n" : _1 }
+        .then { colorify(_1, color) }
+        .then { "#{"\t" * indent}#{_1}" }
       )
     end
+    # rubocop: enable Metrics/ParameterLists
+    # rubocop: enable Metrics/CyclomaticComplexity
 
     def puts(text = '', symbol: nil, prefix: nil, indent: 0, color: nil)
       print(
@@ -343,31 +340,31 @@ class Printer
 end
 
 case ARGV[0]
-when %r/\A(-c|--current)\Z/
+when /\A(-c|--current)\Z/
   puts Repositories.current
-when %r/\A(-g|--generate)\Z/
+when /\A(-g|--generate)\Z/
   puts Generator.list
-when %r/\A(-h|--help)\Z/
+when /\A(-h|--help)\Z/
   puts <<~HELP
-  USAGE: repos [--update|--current|--generate|--help]
+    USAGE: repos [--update|--current|--generate|--help]
 
-  Manage (clone, sync, list) git repositories based on the list of repositories
-  defined in `$REPOS_FILES`.
+    Manage (clone, sync, list) git repositories based on the list of repositories
+    defined in `$REPOS_FILES`.
 
-  `$REPOS_FILES` must contain a list of files separated by ":"
+    `$REPOS_FILES` must contain a list of files separated by ":"
 
-  A Reposfile must contain a list of Repositories to sync, each line of the file
-  must follow the format: "<git remote url>|<destination folder>". For example:
+    A Reposfile must contain a list of Repositories to sync, each line of the file
+    must follow the format: "<git remote url>|<destination folder>". For example:
 
-      https://github.com/rails/rails|~/src/rails
-      https://github.com/kassio/neoterm|$HOME/.config/nvim/packed/neoterm
+        https://github.com/rails/rails|~/src/rails
+        https://github.com/kassio/neoterm|$HOME/.config/nvim/packed/neoterm
 
-  Options:
-  \t--update   | -u updates all the repositories. (default)
-  \t                Only branchs with "origin" remote will be synced
-  \t--current  | -c list the repositories currently registered in `$REPOS_FILES`
-  \t--generate | -g list the repositories from the current directory in the Reposfile format.
-                    Useful to generate a Reposfile, like: `repos -g > Reposfile`
+    Options:
+    \t--update   | -u updates all the repositories. (default)
+    \t                Only branchs with "origin" remote will be synced
+    \t--current  | -c list the repositories currently registered in `$REPOS_FILES`
+    \t--generate | -g list the repositories from the current directory in the Reposfile format.
+                      Useful to generate a Reposfile, like: `repos -g > Reposfile`
   HELP
 else
   Updater.sync(ARGV)
