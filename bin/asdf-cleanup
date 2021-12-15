@@ -1,0 +1,54 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'set'
+require 'open3'
+
+tool_versions = Hash.new { |h, k| h[k] = Set.new }
+home = ENV['HOME']
+files = Dir.glob("#{home}/src/**/*/.tool-versions", File::FNM_DOTMATCH)
+files << "#{home}/.tool-versions"
+
+CommandResult = Struct.new(:output, :message, :status) do
+  def success?
+    status&.success?
+  end
+end
+
+def asdf(*args)
+  CommandResult.new(*Open3.capture3(*['asdf', args].flatten))
+rescue StandardError => e
+  CommandResult.new('', e.message, false)
+end
+
+def parse_tool_version(file, result)
+  File.new(file).each_line do |line|
+    next if line.start_with?(/\s*#/)
+
+    tool, version = line.split.map(&:strip)
+    result[tool] << version
+  end
+
+  result
+end
+
+def uninstall_exceeding(tool, versions)
+  list = asdf('list', tool)
+
+  return unless list.success?
+
+  versions
+    .to_a
+    .difference(list.output.split("\n").map(&:strip))
+    .each do |version|
+      puts "Removing #{tool}@#{version}"
+      asdf('uninstall', tool, version)
+    end
+end
+
+files
+  .each_with_object(tool_versions) { |f, r| parse_tool_version(f, r) }
+  .reject { |k, v| k.nil? || v.empty? }
+  .each { |t, v| uninstall_exceeding(t, v) }
+
+asdf('reshim')
