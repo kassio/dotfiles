@@ -3,12 +3,15 @@
   email = kassioborgesm@gmail.com
 [init]
   defaultBranch = main
-[commit]
-  gpgsign = true
-[gpg]
-	format = ssh
 [credential]
   helper = osxkeychain
+[gpg]
+  format = ssh
+[commit]
+  gpgsign = true
+[tag]
+  sort = creatordate
+  gpgsign = true
 [remote "origin"]
   prune = true
 [core]
@@ -26,8 +29,6 @@
   rebase = true
 [rebase]
   autosquash = true
-[tag]
-  sort = creatordate
 [grep]
   extendRegexp = true
   lineNumber = true
