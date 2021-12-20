@@ -26,6 +26,7 @@ brew "jq"
 brew "less"
 brew "lsd" # ls replacement
 brew "luajit", args: ["HEAD"] # for neovim
+brew "markdownlint-cli"
 brew "mas"
 brew "neovim"
 brew "pinentry"
