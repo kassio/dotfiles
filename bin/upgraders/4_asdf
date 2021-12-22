@@ -8,8 +8,8 @@ fi
 title "asdf plugins update"
 asdf plugin-update --all
 
-for plugin in $(cat "${HOME}/.dotfiles/lib/asdf_default_plugins"); do
+while read -r plugin; do
   title "Ensure latest version of ${plugin} installed and set globally"
   asdf install "${plugin}" latest
   asdf global "${plugin}" latest
-done
+done < "${HOME}/.dotfiles/lib/asdf_default_plugins"
