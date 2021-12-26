@@ -171,7 +171,7 @@
 
   ########################[ prompt_extra: dynamic information by user ]#########################
   function prompt_extra() {
-    p10k segment -t "$(__ps1_extra)"
+    p10k segment -t "$(__ps1_extra 2>/dev/null)"
   }
 
   function instant_prompt_extra() {
