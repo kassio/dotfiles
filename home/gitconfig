@@ -6,7 +6,7 @@
 [credential]
   helper = osxkeychain
 [gpg]
-  format = ssh
+  program = /usr/local/bin/gpg
 [commit]
   gpgsign = true
 [tag]
