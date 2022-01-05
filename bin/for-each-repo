@@ -14,20 +14,20 @@ _failed() { printc -c 196 " ✗ Failed!\n"; }
 _succeed() { printc -c 34 " ✓ Succeed!\n"; }
 
 for file in "${files[@]}"; do
-  while IFS='|' read -r remote path; do
+  while IFS='|' read -r remote p; do
     [ "${remote}" == "" ] && continue
 
-    path="${path//\$HOME/$HOME}"
+    p="${p//\$HOME/$HOME}"
 
-    if [ -d "${path}" ]; then
-      printc "Running '$*' in '${path}': "
-      pushd ${path}
+    if [ -d "${p}" ]; then
+      printc "Running '$*' in '${p}': "
+      pushd "${p}" || exit
       if eval "$*"; then
         _succeed
       else
         _failed
       fi
-      popd
+      popd || exit
     fi
   done < "${file}"
 done
