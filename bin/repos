@@ -57,13 +57,10 @@ class Repositories
   end
 
   def format_path(path)
-    if path.start_with?('~')
-      path.sub('~', ENV['HOME']).strip
-    elsif path.start_with?('$HOME')
-      path.sub('$HOME', ENV['HOME']).strip
-    else
-      path
-    end.strip
+    path.gsub(/\$(?<varname>[A-Z_]+)\b/) do
+      name = Regexp.last_match(:varname)
+      ENV[name] || raise(NameError, "Unknown environment variable '$#{name}'")
+    end
   end
 end
 
