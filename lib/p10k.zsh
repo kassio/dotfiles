@@ -174,8 +174,9 @@
     p10k segment -t "$(__ps1_extra 2>/dev/null)"
   }
 
+  # do not load prompt extra in the prompt load
   function instant_prompt_extra() {
-    prompt_extra
+    p10k segment -t ""
   }
 
   ##########################[ status: exit code of the last command ]###########################
