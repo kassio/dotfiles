@@ -17,7 +17,6 @@
 [core]
   excludesfile = ~/.dotfiles/lib/gitignore
   attributesfile = ~/.dotfiles/lib/gitattributes
-  editor = `which $EDITOR`
   whitespace = blank-at-eol,blank-at-eof,trailing-space,space-before-tab,cr-at-eol,tabwidth=2
   ignorecase = false
   pager = less --tabs=2 -RFX
