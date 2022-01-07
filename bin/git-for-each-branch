@@ -2,6 +2,7 @@
 
 branch_original="$(git branch-current)"
 branch_main="$(git branch-main)"
+
 for branch in $(git branch-list); do
   [ "${branch}" = "${branch_main}" ] && continue
 
@@ -9,4 +10,5 @@ for branch in $(git branch-list); do
   git switch "$branch"
   eval "$*"
 done
+
 git switch "$branch_original"
