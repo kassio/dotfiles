@@ -57,4 +57,8 @@ alias nd="nvim-diff"
 
 alias reset-logs='truncate -s 0 log/*'
 
+approve-chromedriver-quarentine() {
+  xattr -d com.apple.quarantine "$(which chromedriver)"
+}
+
 source "${DOTFILES}/lib/git/alias"
