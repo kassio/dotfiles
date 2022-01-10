@@ -52,3 +52,13 @@ remove-quarentine() {
 }
 
 alias remove-quarentine-chromedriver="remove-quarentine chromedriver"
+
+# Tail a json file parsing it with jq
+#
+# Example:
+#    jtail log/importer.log 'del(.severity, .time, .correlation_id)'
+jtail() {
+  local file="$1"
+  shift
+  tail -f "${file}" | jq -cC "$@"
+}
