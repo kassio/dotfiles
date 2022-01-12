@@ -1,6 +1,7 @@
 irb
 bundler
 debug
+pry-shell
 
 neovim
 rcodetools
