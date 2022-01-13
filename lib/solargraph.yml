@@ -1,12 +1,15 @@
 ---
 include:
-  - "**/*.rb"
+  - "app/**/*.rb"
+  - "lib/**/*.rb"
 
 exclude:
+  - ".bundle/**/*"
+  - "bin/**/*"
+  - "config/**/*"
   - "spec/**/*"
   - "test/**/*"
   - "vendor/**/*"
-  - ".bundle/**/*"
 
 require: []
 
@@ -19,4 +22,4 @@ require_paths: []
 
 plugins: []
 
-max_files: 0
+max_files: 15000
