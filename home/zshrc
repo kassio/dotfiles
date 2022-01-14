@@ -55,8 +55,6 @@ setopt always_to_end # move cursor to end if word had one match
 setopt auto_menu # automatically use menu completion
 setopt bang_hist # treat the '!' character specially during expansion.
 setopt cd_silent # do not output the path change
-setopt pushd_silent # do not output the path change
-setopt pushd_to_home # pushd without arguments pushd to $HOME
 setopt complete_in_word
 setopt extendedglob # easy regexp on list files (**)
 setopt glob_dots # include dotfiles in globbing
@@ -73,6 +71,8 @@ setopt inc_append_history # write to the history file immediately, not when the 
 setopt interactive_comments # don't blow up with comments
 setopt prompt_cr # remove % from partial lines
 setopt prompt_sp # remove % from partial lines
+setopt pushd_silent # do not output the path change
+setopt pushd_to_home # pushd without arguments pushd to $HOME
 setopt share_history # share history between all sessions.
 unsetopt correct # do not correct me
 unsetopt correct_all # do not correct me
