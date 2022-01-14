@@ -56,7 +56,7 @@ setopt auto_menu # automatically use menu completion
 setopt bang_hist # treat the '!' character specially during expansion.
 setopt cd_silent # do not output the path change
 setopt complete_in_word
-setopt extendedglob # easy regexp on list files (**)
+setopt extended_glob # easy regexp on list files (**)
 setopt glob_dots # include dotfiles in globbing
 setopt hist_expire_dups_first # expire duplicate entries first when trimming history.
 setopt hist_find_no_dups # do not display a line previously found.
@@ -77,7 +77,7 @@ setopt share_history # share history between all sessions.
 unsetopt correct # do not correct me
 unsetopt correct_all # do not correct me
 unsetopt extended_history
-unsetopt flowcontrol
+unsetopt flow_control
 unsetopt hist_ignore_space # ignore space prefixed commands
 unsetopt menu_complete # do not navigate completion with arrows
 
