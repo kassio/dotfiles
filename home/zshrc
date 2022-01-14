@@ -54,6 +54,8 @@ tabs -2
 setopt always_to_end # move cursor to end if word had one match
 setopt auto_menu # automatically use menu completion
 setopt bang_hist # treat the '!' character specially during expansion.
+setopt cd_silent # do not output the path change
+setopt pushd_silent # do not output the path change
 setopt complete_in_word
 setopt extendedglob # easy regexp on list files (**)
 setopt glob_dots # include dotfiles in globbing
