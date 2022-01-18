@@ -12,11 +12,11 @@ grt() {
 }
 
 gdm() {
-  g diff "$(g branch-main)"
+  g diff "$(g branch-main)" "$@"
 }
 
 gdfm() {
-  g diff --name-only "$(g branch-main)"
+  g diff --name-only "$(g branch-main)" "$@"
 }
 
 gbd() {
