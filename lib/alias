@@ -37,7 +37,7 @@ alias c="code"
 alias tailf="tail -f"
 
 alias to-nvim="xargs nvim -p"
-alias to-rspec="grep 'spec.rb' | xargs bundle exec rubocop --parallel"
+alias to-rspec="grep 'spec.rb' | xargs bundle exec rspec"
 alias to-rubocop="grep '.rb' | xargs bundle exec rubocop --parallel"
 
 alias rubocop-diff="gdfm --diff-filter=d | to-rubocop"
