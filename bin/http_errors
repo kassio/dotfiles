@@ -1,17 +1,33 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+require 'bundler/inline'
+
+gemfile do
+  source 'https://rubygems.org'
+
+  gem 'rack'
+  gem 'webrick'
+end
+
 require "rack"
+require 'webrick/httputils'
 
 class Application
   def call(env)
     response_code = env["PATH_INFO"].split("/").filter_map { _1.to_i unless _1.to_s.empty? }.first || 200
 
-    [
-      response_code,
-      { "Content-Type" => "text/html" },
-      ["You requested a #{response_code}."]
-    ]
+    query = env["QUERY_STRING"]
+
+    body = ["You requested a #{response_code}.<br>"]
+
+    body << "Query: #{WEBrick::HTTPUtils.parse_query(query).inspect}" unless query.empty?
+
+      [
+        response_code,
+        { "Content-Type" => "text/html" },
+        body
+      ]
   end
 end
 
