@@ -10,6 +10,7 @@ export GPG_TTY=$(tty)
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_BOOTSNAP=1
+export HOMEBREW_NO_ENV_HINTS=1
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 source "${DOTFILES}/lib/p10k.cache.zsh" 2>/dev/null # zsh theme
