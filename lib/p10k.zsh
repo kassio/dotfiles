@@ -120,6 +120,10 @@
     local branch=${(V)VCS_STATUS_LOCAL_BRANCH}
     res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
 
+    if [[ "$(git config --get "branch.${branch}.remote")" == "security" ]]; then
+      res="${conflicted}SECURITY/${clean}${res}"
+    fi
+
     if [[ "${res}" != "" ]]; then
       ((
         VCS_STATUS_STASHES ||
