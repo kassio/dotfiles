@@ -9,7 +9,9 @@ title "asdf plugins update"
 asdf plugin-update --all
 
 while read -r plugin; do
-  title "Ensure latest version of ${plugin} installed and set globally"
-  asdf install "${plugin}" latest
-  asdf global "${plugin}" latest
+  version="$(asdf latest "${plugin}")"
+
+  title "Ensure latest version (${version}) of ${plugin} installed and set globally"
+  asdf install "${plugin}" "${plugin}"
+  asdf global "${plugin}" "${plugin}"
 done < "${HOME}/.dotfiles/lib/asdf_default_plugins"
