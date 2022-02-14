@@ -3,6 +3,53 @@
 components_path="${DOTFILES}/bin/upgraders"
 timestamp_file="${HOME}/.config/.last-upgrade"
 
+_exit() {
+  date -j '+%d %b %Y %H:%M' > "${timestamp_file}"
+  exit "$1"
+}
+
+_last_upgrade() {
+  if [ -f "${timestamp_file}" ]; then
+    title "Last upgrade was done on $(cat "${timestamp_file}").\n"
+  fi
+}
+
+_component_name() {
+  echo "$1" | sed -E "s/^[^_]*_//"
+}
+
+_upgrade() {
+  trap '_exit -1' HUP INT QUIT TERM
+
+  _last_upgrade
+
+  local only_param="${1#--}"
+  if [ -n "${only_param}" ]; then
+    local only
+    only="$(find "${components_path}" -name "*${only_param}")"
+
+    if [ -n "${only}" ]; then
+      eval "${only} $*"
+      _exit 0
+    fi
+  fi
+
+  for component in $(ls -1 "${components_path}/"); do
+    name="$(_component_name "${component}")"
+
+    case "$*" in
+      *"--no-${name}"*)
+        continue
+        ;;
+      *)
+        eval "${components_path}/${component} $*"
+        ;;
+    esac
+  done
+
+  _exit 0
+}
+
 case "$1" in
   --help | -h)
     echo -e "USAGE: upgrade [options]
@@ -18,52 +65,11 @@ case "$1" in
 
   Components:"
     for component in $(ls -1 "${components_path}/"); do
-      echo -e "\t\t$(${components_path}/${component} --help)"
+      echo -e "\t\t- $(_component_name "${component}"): $("${components_path}/${component}" --help)"
     done
     exit 0
     ;;
 esac
-
-_exit() {
-  echo "$(date -j '+%d %b %Y %H:%M')" > "${timestamp_file}"
-  exit "$1"
-}
-
-_last_upgrade() {
-  if [ -f "${timestamp_file}" ]; then
-    title "Last upgrade was done on $(cat ${timestamp_file}).\n"
-  fi
-}
-
-_upgrade() {
-  trap '_exit -1' HUP INT QUIT TERM
-
-  _last_upgrade
-
-  local only_param="${1#--}"
-  if [ -n "${only_param}" ]; then
-    local only=$(find ${components_path} -name "*${only_param}")
-    if [ -n "${only}" ]; then
-      eval "${only} $@"
-      _exit 0
-    fi
-  fi
-
-  for component in $(ls -1 "${components_path}/"); do
-    name=$(echo ${component} | sed -E "s/[[:digit:]]+_//")
-
-    case "$*" in
-      *"--no-${name}"*)
-        continue
-        ;;
-      *)
-        eval "${components_path}/${component} $@"
-        ;;
-    esac
-  done
-
-  _exit 0
-}
 
 _upgrade "$@"
 

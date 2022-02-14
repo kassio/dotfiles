@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ "$1" = "--help" ]; then
-  echo "- repos: Upgrade your repositories (\$REPOS)"
+  echo "Upgrade your repositories (\$REPOS)"
   exit
 fi
 

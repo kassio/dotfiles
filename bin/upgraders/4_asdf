@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ "$1" = "--help" ]; then
-  echo "- asdf: Update all asdf plugins"
+  echo "Update all asdf plugins"
   exit
 fi
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ "$1" = "--help" ]; then
-  echo "- update ruby gems"
+  echo "update ruby gems"
   exit
 fi
 

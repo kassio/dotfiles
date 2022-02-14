@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ "$1" = "--help" ]; then
-  echo "- apple: Upgrade apple stuff (softwareupdate)"
+  echo "Upgrade apple stuff (softwareupdate)"
   exit
 fi
 

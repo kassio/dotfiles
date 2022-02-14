@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ "$1" = "--help" ]; then
-  echo "- custom: Upgrade your custom components (those that aint in github 🤫 )"
+  echo "Upgrade your custom components (those that aint in github 🤫)"
   exit
 fi
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ "$1" = "--help" ]; then
-  echo "- antibody: Upgrade zsh_plugins"
+  echo "Upgrade zsh_plugins"
   exit
 fi
 
