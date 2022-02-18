@@ -1,3 +1,0 @@
-#!/usr/bin/env zsh
-
-sudo cp "${HOME}/.dotfiles/lib/sudo.tpl" /etc/pam.d/sudo
