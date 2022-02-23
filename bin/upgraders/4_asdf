@@ -9,6 +9,7 @@ title "asdf plugins update"
 asdf plugin-update --all
 
 while read -r plugin; do
+  asdf plugin add "${plugin}"
   version="$(asdf latest "${plugin}")"
 
   title "Ensure latest version (${version}) of ${plugin} installed and set globally"

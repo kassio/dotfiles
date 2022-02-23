@@ -5,10 +5,6 @@
   defaultBranch = main
 [credential]
   helper = osxkeychain
-[gpg]
-  program = /usr/local/bin/gpg
-[commit]
-  gpgsign = true
 [tag]
   sort = creatordate
   gpgsign = true
