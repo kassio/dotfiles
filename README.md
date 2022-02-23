@@ -3,7 +3,7 @@
 ## Install
 
 ```console
-xcode-select --install &&
+softwareupdate --all --install --force &&
   git clone https://github.com/kassio/dotfiles.git ~/.dotfiles &&
   ~/.dotfiles/bin/install-dotfiles
 ```
