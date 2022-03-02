@@ -16,7 +16,7 @@ gdm() {
 }
 
 gdfm() {
-  g diff --name-only "$(g branch-main)" "$@"
+  g diff --name-only "$(g branch-main)..." "$@"
 }
 
 gbd() {
