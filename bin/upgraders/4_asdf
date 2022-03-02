@@ -5,14 +5,14 @@ if [ "$1" = "--help" ]; then
   exit
 fi
 
-title "asdf plugins update"
-asdf plugin-update --all
-
 while read -r plugin; do
-  asdf plugin add "${plugin}"
-  version="$(asdf latest "${plugin}")"
+  title "Ensure ${plugin} is installed and up to date
+  asdf plugin add "${plugin}" # Ensure to have the plugin installed
+  asdf plugin update "${plugin}"
 
+  version="$(asdf latest "${plugin}")"
   title "Ensure latest version (${version}) of ${plugin} installed and set globally"
-  asdf install "${plugin}" "${plugin}"
-  asdf global "${plugin}" "${plugin}"
+
+  asdf install "${plugin}" "${version}"
+  asdf global "${plugin}" "${version}"
 done < "${HOME}/.dotfiles/lib/asdf_default_plugins"
