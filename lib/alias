@@ -40,7 +40,7 @@ alias to-nvim="xargs nvim -p"
 alias nvim-diff="gdfm --diff-filter=d | to-nvim"
 alias nd="nvim-diff"
 
-alias rubocop-diff="gdfm --diff-filter=d | xargs bundle exec rubocop --parallel"
+alias rubocop-diff="gdfm --diff-filter=d | grep '.rb' | xargs bundle exec rubocop --parallel"
 alias rspec-diff="gdfm --diff-filter=d | xargs rspec"
 
 alias truncate0="truncate -c -s 0"
