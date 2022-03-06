@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-if [ "$1" = "--help" ]; then
-  echo "update nvim plugins"
-  exit
-fi
-
-nvim +Upgrade

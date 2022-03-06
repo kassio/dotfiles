@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ "$1" = "--help" ]; then
+  echo "update nvim plugins"
+  exit
+fi
+
+title "Updating nvim plugins"
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'Upgrade'
