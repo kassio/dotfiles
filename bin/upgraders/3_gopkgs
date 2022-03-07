@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+for pkg in "$(cat ${DOTFILES}/lib/gopkgs)"; do
+  go install "${pkg}"
+done
