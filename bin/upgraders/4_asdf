@@ -1,17 +1,22 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
+
+subtitle() {
+  title -s "\t»" -c 31 "$*"
+}
 
 if [ "$1" = "--help" ]; then
   echo "Update all asdf plugins"
   exit
 fi
 
+title "Update default asdf plugins"
 while read -r plugin; do
-  title "Ensure ${plugin} is installed and up to date
+  subtitle "Ensure ${plugin} is installed and up to date
   asdf plugin add "${plugin}" # Ensure to have the plugin installed
   asdf plugin update "${plugin}"
 
   version="$(asdf latest "${plugin}")"
-  title "Ensure latest version (${version}) of ${plugin} installed and set globally"
+  subtitle "Ensure latest version (${version}) of ${plugin} installed and set globally"
 
   asdf install "${plugin}" "${version}"
   asdf global "${plugin}" "${version}"

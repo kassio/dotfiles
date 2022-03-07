@@ -1,5 +1,11 @@
 #!/usr/bin/env zsh
 
-for pkg in "$(cat ${DOTFILES}/lib/gopkgs)"; do
+if [ "$1" = "--help" ]; then
+  echo "Install/Upgrade go packages"
+  exit
+fi
+
+title "Install/Upgrade golang packages"
+while read -r pkg; do
   go install "${pkg}"
-done
+done < "${HOME}/.dotfiles/lib/gopkgs"
