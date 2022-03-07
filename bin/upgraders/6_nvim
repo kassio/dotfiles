@@ -5,5 +5,4 @@ if [ "$1" = "--help" ]; then
   exit
 fi
 
-title "Updating nvim plugins"
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'Upgrade'
+nvim --headless -c 'Upgrade!'
