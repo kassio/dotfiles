@@ -107,6 +107,7 @@
       local   modified='%178F'  # yellow foreground
       local  untracked='%39F'   # blue foreground
       local conflicted='%196F'  # red foreground
+      local       grey='%244F'  # grey foreground
     else
       local       meta='%244F'  # grey foreground
       local      clean='%244F'  # grey foreground
@@ -118,7 +119,11 @@
     local res=""
 
     local branch=${(V)VCS_STATUS_LOCAL_BRANCH}
-    res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
+    if [[ "${branch}" != "" ]]; then
+      res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
+    else
+      res="${grey}${VCS_STATUS_COMMIT[1,8]}${clean}"
+    fi
 
     if [[ "$(git config --get "branch.${branch}.remote")" == "security" ]]; then
       res="${conflicted}SECURITY/${clean}${res}"
