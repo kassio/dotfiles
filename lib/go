@@ -7,3 +7,6 @@ export PATH="${PATH}:${GOPATH}/bin"
 
 # easier navigation to go projects
 export CDPATH="${CDPATH}:${GOPATH}/src"
+
+# Shorter test output
+export GOTESTSUM_FORMAT="dots"
