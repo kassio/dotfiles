@@ -8,3 +8,7 @@ for f in ${FILES}; do
   target="${HOME}/.$(basename "${f}")"
   ln -sf "${f}" "${target}"
 done
+
+# karabiner-elements
+rm -rf "${HOME}/.config/karabiner"
+ln -sf "${HOME}/src/sync/karabiner" "${HOME}/.config/karabiner"

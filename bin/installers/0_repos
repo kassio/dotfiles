@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+mkdir -p "${HOME}/src"
+mkdir -p "${HOME}/.config"
+
+git clone "https://github.com/kassio/nvimfiles.git" "${HOME}/.config/nvim"
+git clone "https://github.com/kassio/dotfiles.private" "${HOME}/.dotfiles.private"
+git clone "https://github.com/kassio/sync.git" "${HOME}/src/sync"
