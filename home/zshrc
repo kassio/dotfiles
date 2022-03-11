@@ -85,7 +85,6 @@ unsetopt menu_complete # do not navigate completion with arrows
 # load libs stuff
 source "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh"
 source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
-source "${HOMEBREW_PREFIX}/etc/grc.zsh"
 source "${HOME}/.zsh_plugins.sh"
 
 # personal libs
