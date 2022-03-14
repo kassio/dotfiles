@@ -6,7 +6,7 @@
 [credential]
   helper = osxkeychain
 [tag]
-  sort = creatordate
+  sort = -creatordate
   gpgsign = true
 [remote "origin"]
   prune = true
