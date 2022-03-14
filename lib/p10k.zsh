@@ -108,21 +108,27 @@
       local  untracked='%39F'   # blue foreground
       local conflicted='%196F'  # red foreground
       local       grey='%244F'  # grey foreground
+      local       pink='%201F'  # pink foreground
     else
       local       meta='%244F'  # grey foreground
       local      clean='%244F'  # grey foreground
       local   modified='%244F'  # grey foreground
       local  untracked='%244F'  # grey foreground
       local conflicted='%244F'  # grey foreground
+      local       pink='%244F'  # grey foreground
     fi
 
-    local res=""
-
-    local branch=${(V)VCS_STATUS_LOCAL_BRANCH}
+    local res
+    local branch="${(V)VCS_STATUS_LOCAL_BRANCH}"
     if [[ "${branch}" != "" ]]; then
-      res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
+      res="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
     else
       res="${grey}${VCS_STATUS_COMMIT[1,8]}${clean}"
+    fi
+
+    local tag="${(V)VCS_STATUS_TAG}"
+    if [[ "${tag}" != "" ]]; then
+      res+=" ${pink}${tag}"
     fi
 
     if [[ "$(git config --get "branch.${branch}.remote")" == "security" ]]; then
