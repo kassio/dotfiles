@@ -6,6 +6,7 @@
 \set COMP_KEYWORD_CASE upper
 \set HISTFILE ~/.psql/history- :DBNAME
 \set HISTCONTROL ignoredups
+\set ECHO_HIDDEN
 
 \pset pager off
 \pset null '(null)'
