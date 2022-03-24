@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+mrid="$1"
+remote="${2:-origin}"
+
+git fetch "${remote}" "merge-requests/${mrid}/head:mr-${remote}-${mrid}" 2>/dev/null ||
+  { echo "Failed to fetch merge request '${mrid}' from '${remote}'"; exit 1; }
+
+git checkout "mr-${remote}-${mrid}"
