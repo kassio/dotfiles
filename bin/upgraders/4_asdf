@@ -11,7 +11,7 @@ fi
 
 title "Update default asdf plugins"
 while read -r plugin; do
-  subtitle "Ensure ${plugin} is installed and up to date
+  subtitle "Ensure ${plugin} is installed and up to date"
   asdf plugin add "${plugin}" # Ensure to have the plugin installed
   asdf plugin update "${plugin}"
 
