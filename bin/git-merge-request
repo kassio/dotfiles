@@ -1,11 +1,11 @@
 #!/usr/bin/env zsh
 
-labels=""
-options=""
-title="$(git show --no-patch --format="%s")"
+local git_options="-o merge_request.create"
+local title="$(git show --no-patch --format="%s")"
 
 function show_help() {
-  echo -e "usage: git mr [OPTIONS] message
+  echo -e \
+  "Usage: git mr [OPTIONS] message
   OPTIONS:
   -h                         Print this message
   -t, --title                Define the Merge Request Title.
@@ -18,7 +18,7 @@ function show_help() {
 }
 
 function parse_args() {
-  case "$1" in
+  case "${1}" in
     -h)
       show_help
       exit 0
@@ -26,21 +26,21 @@ function parse_args() {
     -f | --force)
       shift 1
 
-      options="$options --force-with-lease"
+      git_options="${git_options} --force-with-lease"
 
       parse_args "$@"
       ;;
     -F | --force-without-lease)
       shift 1
 
-      options="$options --force-with-lease"
+      git_options="${git_options} --force-without-lease"
 
       parse_args "$@"
       ;;
     -l | --label)
       shift 1
 
-      labels="$labels $1"
+      git_options="${git_options} -o merge_request.label=\"${1}\""
 
       shift 1
 
@@ -49,7 +49,7 @@ function parse_args() {
     -t | --title)
       shift 1
 
-      title="$1"
+      title="${1}"
 
       shift 1
 
@@ -57,20 +57,15 @@ function parse_args() {
       ;;
     *)
       # All not documented options are passed as git push options
-      options="$options $*"
+      git_options="${git_options} $*"
       ;;
   esac
 }
 
 parse_args "$@"
 
-command="git push -u $options"
-command="$command -o merge_request.create"
-command="$command -o merge_request.title='$title'"
+git_options="${git_options} -o merge_request.title='${title}'"
+command="git push -u ${git_options}"
 
-for label in $labels; do
-  command="$command -o merge_request.label=\"$label\""
-done
-
-# echo "$command"
-eval "$command"
+# echo "${command}"
+eval "${command}"
