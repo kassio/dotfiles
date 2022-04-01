@@ -15,16 +15,19 @@ require "webrick/httputils"
 
 class Application
   def call(env)
-    response_code = env["PATH_INFO"].split("/").filter_map { _1.to_i unless _1.to_s.empty? }.first || 200
+    filename = env["PATH_INFO"].delete("/")
 
-    query = env["QUERY_STRING"]
-
-    body = ["You requested a #{response_code}.<br>"]
-
-    body << "Query: #{WEBrick::HTTPUtils.parse_query(query).inspect}" unless query.empty?
+    body = if filename.empty?
+             ["You must informat a filename to be read from /tmp"]
+           else
+             File.readlines(File.join("/tmp", filename))
+           end
+    puts '-' * 80
+    p body
+    puts '-' * 80
 
     [
-      response_code,
+      200,
       { "Content-Type" => "text/html" },
       body
     ]
