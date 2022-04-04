@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+title -s "\t»" -c 31 "$*"

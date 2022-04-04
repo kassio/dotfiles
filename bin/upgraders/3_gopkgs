@@ -7,5 +7,6 @@ fi
 
 title "Install/Upgrade golang packages"
 while read -r pkg; do
+  subtitle "Installing \"$(echo "${pkg}" | sed 's#.*\/\(.*\)@.*#\1#')\""
   go install "${pkg}"
 done < "${HOME}/.dotfiles/lib/gopkgs"

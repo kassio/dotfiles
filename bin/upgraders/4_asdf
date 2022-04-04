@@ -1,9 +1,5 @@
 #!/usr/bin/env zsh
 
-subtitle() {
-  title -s "\t»" -c 31 "$*"
-}
-
 if [ "$1" = "--help" ]; then
   echo "Update all asdf plugins"
   exit
