@@ -1,4 +1,4 @@
-# vim:ft=zsh:
+#!/usr/bin/env zsh
 
 alias NGP="GIT_PAGER=cat"
 alias g="git"
@@ -20,12 +20,12 @@ gdfm() {
 }
 
 gbd() {
-  for branch in $(g branch-list); do
+  while read -r branch; do
     printf "%10s %s (%s)\n" \
-      $(g-main-diff $branch) \
-      $branch \
-      $(g-upstream-diff $branch)
-  done
+      "$(g-main-diff ${branch})" \
+      "${branch}" \
+      "$(g-upstream-diff ${branch})"
+  done < <(git branch-list)
 }
 
 gb-author() {

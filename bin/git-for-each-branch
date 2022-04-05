@@ -1,14 +1,21 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 branch_original="$(git branch-current)"
 branch_main="$(git branch-main)"
+skip_main=0
 
-for branch in $(git branch-list); do
-  [ "${branch}" = "${branch_main}" ] && continue
+if [ "$1" = "-skip-main" ]; then
+  skip_main=1
+  shift
+fi
 
-  echo "> $branch"
-  git switch "$branch"
+while read -r branch
+do
+  [ ${skip_main} -gt 0 ] && [ "${branch}" = "${branch_main}" ] && continue
+  git switch "${branch}" &>/dev/null
+  title "${branch}"
+  subtitle "running '$*'"
   eval "$*"
-done
+done < <(git branch-list)
 
-git switch "$branch_original"
+git switch "${branch_original}"
