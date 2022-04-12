@@ -5,4 +5,5 @@ if [ "$1" = "--help" ]; then
   exit
 fi
 
-nvim --headless -c 'Upgrade!'
+title "Updating neovim plugin"
+nvim -c 'Upgrade!'
