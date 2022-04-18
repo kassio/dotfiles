@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 components_path="${DOTFILES}/bin/upgraders"
 timestamp_file="${HOME}/.config/.last-upgrade"
@@ -14,12 +14,14 @@ _last_upgrade() {
   fi
 }
 
-_component_name() {
-  echo "$1" | sed -E "s/^[^_]*_//"
-}
+_component_name() { echo "$1" | sed -E "s/^[^_]*_//"; }
+
+_clear_buffer() { echo -n -e '\e[2J\e[3J\e[1;1H'; }
 
 _upgrade() {
   trap '_exit -1' HUP INT QUIT TERM
+
+  _clear_buffer
 
   _last_upgrade
 
@@ -34,7 +36,7 @@ _upgrade() {
     fi
   fi
 
-  for component in $(ls -1 "${components_path}/"); do
+  while read -r component; do
     name="$(_component_name "${component}")"
 
     case "$*" in
@@ -45,7 +47,7 @@ _upgrade() {
         eval "${components_path}/${component} $*"
         ;;
     esac
-  done
+  done < <(ls -1 "${components_path}/")
 
   _exit 0
 }
