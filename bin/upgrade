@@ -44,7 +44,7 @@ _upgrade() {
         continue
         ;;
       *)
-        eval "${components_path}/${component} $*"
+        zsh -c "${components_path}/${component} $*"
         ;;
     esac
   done < <(ls -1 "${components_path}/")
