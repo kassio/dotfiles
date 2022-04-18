@@ -1,7 +1,8 @@
 #!/usr/bin/env zsh
 
-components_path="${DOTFILES}/bin/upgraders"
-timestamp_file="${HOME}/.config/.last-upgrade"
+local components_path="${DOTFILES}/bin/upgraders"
+local components=($( find "${components_path}" -type f | sort | xargs basename; ))
+local timestamp_file="${HOME}/.config/.last-upgrade"
 
 _exit() {
   date -j '+%d %b %Y %H:%M' > "${timestamp_file}"
@@ -26,28 +27,24 @@ _upgrade() {
   _last_upgrade
 
   local only_param="${1#--}"
-  if [ -n "${only_param}" ]; then
-    local only
-    only="$(find "${components_path}" -name "*${only_param}")"
-
-    if [ -n "${only}" ]; then
-      eval "${only} $*"
-      _exit 0
-    fi
+  local only="${components_path}/${only_param}"
+  if [ -n "${only_param}" ] && [ -f "${only}" ]; then
+    zsh -c "${only} $*"
+    _exit 0
   fi
 
-  while read -r component; do
+  for component in "${components[@]}"; do
     name="$(_component_name "${component}")"
 
     case "$*" in
       *"--no-${name}"*)
+        title "skipping ${name}"
         continue
         ;;
-      *)
-        zsh -c "${components_path}/${component} $*"
-        ;;
     esac
-  done < <(ls -1 "${components_path}/")
+
+    zsh -c "${components_path}/${component} $*;"
+  done
 
   _exit 0
 }
@@ -66,7 +63,7 @@ case "$1" in
       This option may be used more than once.
 
   Components:"
-    for component in $(ls -1 "${components_path}/"); do
+    for component in "${components[@]}"; do
       echo -e "\t\t- $(_component_name "${component}"): $("${components_path}/${component}" --help)"
     done
     exit 0

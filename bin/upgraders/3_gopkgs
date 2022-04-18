@@ -1,12 +1,12 @@
 #!/usr/bin/env zsh
 
 if [ "$1" = "--help" ]; then
-  echo "Install/Upgrade go packages"
+  echo "Install golang packages"
   exit
 fi
 
-title "Install/Upgrade golang packages"
+title "[gopkgs] golang packages"
 while read -r pkg; do
-  subtitle "Installing \"$(echo "${pkg}" | sed 's#.*\/\(.*\)@.*#\1#')\""
+  subtitle "installing \"$(echo "${pkg}" | sed 's#.*\/\(.*\)@.*#\1#')\""
   go install "${pkg}"
 done < "${HOME}/.dotfiles/lib/gopkgs"

@@ -5,5 +5,5 @@ if [ "$1" = "--help" ]; then
   exit
 fi
 
-title "Apple upgrade"
+title "[apple] apple upgrade"
 softwareupdate --all --install --force

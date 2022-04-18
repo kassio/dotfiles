@@ -5,18 +5,19 @@ if [ "$1" = "--help" ]; then
   exit
 fi
 
-title "Brew upgrade"
+title "[brew] system upgrade"
+subtitle "brew upgrade"
 brew update
 brew upgrade --fetch-HEAD --ignore-pinned
 
-title "Global Brewfile"
+subtitle "global brewfile"
 brew bundle check --global --all --verbose
 
 cleaned=$(brew cleanup --prune 7)
 if [ -n "${cleaned}" ]; then
-  title "Cleaning up old brews"
+  subtitle "cleaning up old brews"
   echo "${cleaned}"
 fi
 
-title "linking completions"
+subtitle "linking completions"
 brew completions link

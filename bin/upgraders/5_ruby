@@ -5,5 +5,5 @@ if [ "$1" = "--help" ]; then
   exit
 fi
 
-title "Updating ruby gems"
+title "[ruby] updating ruby gems"
 for-each-ruby gem update --system
