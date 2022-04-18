@@ -2,9 +2,14 @@
 
 export DOTFILES="${HOME}/.dotfiles"
 export PATH="${PATH}:${DOTFILES}/bin"
-export INSTALLERS="${DOTFILES}/bin/installers"
 
-for component in $(find "$HOME/.dotfiles/bin/installers" -type file -depth 1 | sort); do
-  echo ">>> ${component}"
-  "${component}"
-done
+components_path="${DOTFILES}/bin/installers"
+
+_component_name() { echo "$1" | sed -E "s/^[^_]*_//"; }
+
+while read -r component; do
+  name="$(_component_name "${component}")"
+  title "Installing ${name}"
+
+  zsh -c "${components_path}/${component} $*"
+done < <(ls -1 "${components_path}/")
