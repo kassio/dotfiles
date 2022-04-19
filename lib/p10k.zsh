@@ -115,6 +115,7 @@
       local   modified='%244F'  # grey foreground
       local  untracked='%244F'  # grey foreground
       local conflicted='%244F'  # grey foreground
+      local       grey='%244F'  # grey foreground
       local       pink='%244F'  # grey foreground
     fi
 
@@ -140,14 +141,16 @@
         VCS_STATUS_STASHES ||
         VCS_STATUS_HAS_UNTRACKED ||
         VCS_STATUS_HAS_UNSTAGED  ||
+        VCS_STATUS_HAS_CONFLICTED ||
         VCS_STATUS_HAS_STAGED
       )) && res+=" "
     fi
 
-    (( VCS_STATUS_STASHES       )) && res+="${untracked}\$"
-    (( VCS_STATUS_HAS_UNTRACKED )) && res+="${conflicted}%%"
-    (( VCS_STATUS_HAS_UNSTAGED  )) && res+="${conflicted}*"
-    (( VCS_STATUS_HAS_STAGED    )) && res+="${clean}+"
+    (( VCS_STATUS_STASHES        )) && res+="${untracked}\$"
+    (( VCS_STATUS_HAS_UNTRACKED  )) && res+="${conflicted}%%"
+    (( VCS_STATUS_HAS_UNSTAGED   )) && res+="${conflicted}*"
+    (( VCS_STATUS_HAS_CONFLICTED )) && res+="${conflicted}!"
+    (( VCS_STATUS_HAS_STAGED     )) && res+="${clean}+"
 
     if  [[ "${VCS_STATUS_REMOTE_BRANCH}" != "" ]] ; then
       res+=" "
@@ -163,7 +166,7 @@
       fi
     fi
 
-    [[ -n ${VCS_STATUS_ACTION} ]] && res+="${conflicted}${VCS_STATUS_ACTION}"
+    [[ -n ${VCS_STATUS_ACTION} ]] && res+="${grey} ${VCS_STATUS_ACTION}"
 
     typeset -g my_git_format="${modified}(${res}${modified})"
   }
