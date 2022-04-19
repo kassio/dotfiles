@@ -61,8 +61,8 @@ cask "tableplus"
 cask "the-unarchiver"
 cask "visual-studio-code"
 cask "zsa-wally"
-mas "Amphetamine", id: 937984704
 mas "1Password", id: 1333542190
-mas "Userscripts", id: 1463298887
+mas "Amphetamine", id: 937984704
 mas "Super Agent", id: 1568262835
+mas "Userscripts", id: 1463298887
 mas "Xcode", id: 497799835
