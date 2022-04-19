@@ -17,12 +17,10 @@ _last_upgrade() {
 
 _component_name() { echo "$1" | sed -E "s/^[^_]*_//"; }
 
-_clear_buffer() { echo -n -e '\e[2J\e[3J\e[1;1H'; }
-
 _upgrade() {
   trap '_exit 1' HUP INT QUIT TERM
 
-  _clear_buffer
+  clear-buffer
 
   _last_upgrade
 
