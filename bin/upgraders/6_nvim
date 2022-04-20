@@ -7,3 +7,4 @@ fi
 
 title "[nvim] updating neovim plugin"
 nvim -c 'Upgrade!'
+nvim -c 'LspInstallServers' -c 'quitall!'
