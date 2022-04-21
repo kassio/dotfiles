@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+tic -x "${DOTFILES}/lib/xterm-256color-italic.terminfo"
