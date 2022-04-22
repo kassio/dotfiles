@@ -89,7 +89,6 @@ source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
 source "${HOME}/.zsh_plugins.sh"
 
 # personal libs
-source "${DOTFILES}/lib/iterm2_shell_integration.zsh"
 source "${DOTFILES}/lib/bindkeys"
 source "${DOTFILES}/lib/alias"
 source "${DOTFILES}/lib/fzf"

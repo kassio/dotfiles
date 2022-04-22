@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+case "$1" in
+  dark)
+    kitty @ set-colors --all --configured "~/.config/kitty/themes/One Dark.conf"
+    echo "dark" > "${HOME}/.cache/term_profile"
+    ;;
+  light)
+    kitty @ set-colors --all --configured "~/.config/kitty/themes/One Half Light.conf"
+    echo "light" > "${HOME}/.cache/term_profile"
+    ;;
+esac
