@@ -50,6 +50,8 @@ alias truncate0="truncate -c -s 0"
 
 source "${DOTFILES}/lib/git/alias"
 
+alias tbroadcast="kitty +kitten broadcast"
+
 remove-quarentine() {
   xattr -d com.apple.quarantine "$(which $1)"
 }
