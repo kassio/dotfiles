@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+if [ "$(cat "${HOME}/.cache/term_profile" 2>/dev/null)" = "light" ]; then
+  "${DOTFILES}/bin/ttheme" "light"
+else
+  "${DOTFILES}/bin/ttheme" "dark"
+fi
