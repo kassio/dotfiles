@@ -51,6 +51,7 @@ CDPATH=".:${HOME}:${HOME}/.config:${HOME}/src"
 
 # style
 tabs -2
+set tab=2
 
 # options
 setopt always_to_end # move cursor to end if word had one match
