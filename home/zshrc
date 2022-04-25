@@ -51,6 +51,7 @@ CDPATH=".:${HOME}:${HOME}/.config:${HOME}/src"
 
 # style
 tabs -2
+stty tab2
 set tab=2
 
 # options
