@@ -62,7 +62,7 @@ case "$1" in
 
   Components:"
     for component in "${components[@]}"; do
-      echo -e "\t\t- $(_component_name "${component}"): $("${components_path}/${component}" --help)"
+      echo -e "    - $(_component_name "${component}"): $("${components_path}/${component}" --help)"
     done
     exit 0
     ;;
