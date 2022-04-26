@@ -303,7 +303,7 @@ class Printer
         .then { prefixify(_1, prefix) }
         .then { break_line ? "#{_1}\n" : _1 }
         .then { colorify(_1, color) }
-        .then { "#{"  " * indent}#{_1}" }
+        .then { "#{'  ' * indent}#{_1}" }
       )
     end
     # rubocop: enable Metrics/ParameterLists
