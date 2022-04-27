@@ -5,7 +5,7 @@ local title="$(git show --no-patch --format="%s")"
 
 function show_help() {
   echo -e \
-  "Usage: git mr [OPTIONS] message
+  "Usage: git merge_request [OPTIONS] message
   OPTIONS:
   -h                         Print this message
   -t, --title                Define the Merge Request Title.
