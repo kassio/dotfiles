@@ -25,7 +25,7 @@ gbd() {
       "$(g-main-diff ${branch})" \
       "${branch}" \
       "$(g-upstream-diff ${branch})"
-  done < <(git branch-list)
+  done < <(git branch-list | grep -v detached)
 }
 
 gb-author() {
