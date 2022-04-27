@@ -36,3 +36,6 @@ _build/*
 
 # redis
 dump.rdb
+
+# golang
+.GOPATH

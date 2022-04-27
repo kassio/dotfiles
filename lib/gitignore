@@ -1,22 +1,19 @@
+.DS_Store
+*darwin*
 *.dir
 *csv
-*darwin*
 *swo
 *swp
 *~
-.DS_Store
 ._vim
+tags
+tags.*
 .benchmarking
 .directory
 .env
 .env.local
 .sass-cache
 .svn
-tags
-tags.*
-vendor/bundle
-vendor/ruby
-.byebug_history
 .ignore
 
 .projections.json
@@ -24,8 +21,12 @@ vendor/ruby
 
 node_modules
 
+.byebug_history
+vendor/bundle
+vendor/ruby
 .solargraph.yml
-
 .ruby_console.local
 
 *.rdb
+
+.GOPATH
