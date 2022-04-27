@@ -1,5 +1,10 @@
 #!/usr/bin/env zsh
 
+
+if [ "${TERM_PROGRAM}" != "kitty" ]; then
+  return
+fi
+
 if [ "$(cat "${HOME}/.cache/term_profile" 2>/dev/null)" = "light" ]; then
   "${DOTFILES}/bin/ttheme" "light"
 else
