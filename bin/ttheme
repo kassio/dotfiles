@@ -3,13 +3,21 @@
 cache="${HOME}/.cache/term_profile"
 themes_path="${HOME}/.config/kitty/themes/"
 
+set_kitty_profile() {
+  if [ "${TERM_PROGRAM}" != "kitty" ]; then
+    return
+  fi
+
+  kitty @ set-colors --all --configured "${themes_path}/$1"
+}
+
 case "$1" in
   dark)
-    kitty @ set-colors --all --configured "${themes_path}/One Dark.conf"
+    set_kitty_profile "One Dark.conf"
     echo "dark" > "${cache}"
     ;;
   light)
-    kitty @ set-colors --all --configured "${themes_path}/One Half Light.conf"
+    set_kitty_profile "One Half Light.conf"
     echo "light" > "${cache}"
     ;;
 esac
