@@ -39,20 +39,22 @@
   enabled = true
   autoupdate = true
 [diff]
-  tool = vimdiff
+  tool = nvim
   noprefix = true
 [difftool]
   prompt = false
-[difftool "vimdiff"]
-  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+  keepBackup = false
+[difftool "nvim"]
+	cmd = nvim -d -c "wincmd l" -c "norm ]c" "$LOCAL" "$MERGED" "$REMOTE"
 [merge]
   ff = false
   conflictstyle = diff3
-  tool = vimdiff
+  tool = nvim
 [mergetool]
   prompt = false
-[mergetool "vimdiff"]
-  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+  keepBackup = false
+[mergetool "nvim"]
+	cmd = nvim -d -c "wincmd l" -c "norm ]c" "$LOCAL" "$MERGED" "$REMOTE"
 [log]
   date = format-local:"%F %R"
 [pretty]
