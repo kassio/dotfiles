@@ -5,18 +5,18 @@ alias g="git"
 
 grt() {
   if [ $# -eq 0 ]; then
-    g restore -- .
+    git restore -- .
   else
-    g restore $@
+    git restore $@
   fi
 }
 
 gdm() {
-  g diff "$(g branch-main)" "$@"
+  git diff "$(git branch-main)" "$@"
 }
 
 gdfm() {
-  g diff --name-only "$(g branch-main)..." "$@"
+  git diff --name-only "$(git branch-main)..." "$@"
 }
 
 gbd() {
@@ -29,14 +29,14 @@ gbd() {
 }
 
 gb-author() {
-  g for-each-ref \
+  git for-each-ref \
     --sort=authorname \
     --format='%(authorname)#%(refname:short)' 'refs/heads'
 }
 
 gb-mine() {
   gb-author |
-    grep "$(g me)" |
+    grep "$(git me)" |
     cut -d '#' -f 2
 }
 
@@ -47,28 +47,47 @@ g-upstream-diff() {
 }
 
 g-main-diff() {
-  g-diff-count "$1" "$(g branch-main)"
+  g-diff-count "$1" "$(git branch-main)"
 }
 
 g-diff-count() {
   rev1="$1"
   rev2="$2"
-  plus=$(g rev-list --count "$rev2".."$rev1" 2>/dev/null)
-  minus=$(g rev-list --count "$rev1".."$rev2" 2>/dev/null)
+  plus=$(git rev-list --count "$rev2".."$rev1" 2>/dev/null)
+  minus=$(git rev-list --count "$rev1".."$rev2" 2>/dev/null)
   echo "+$plus-$minus"
 }
 
 gswm() {
-  g switch "$(g branch-main)"
+  git switch "$(git branch-main)"
 }
 
 grm() {
-  g rebase "$(g branch-main)"
+  git rebase "$(git branch-main)"
 }
 
 grim() {
-  g rebase --interactive "$(g branch-main)"
+  git rebase --interactive "$(git branch-main)"
 }
+
+_other-branches() {
+  _arguments "1: :( ${(@f)$(git branch-others | xargs)} )"
+}
+
+nvim-diff() {
+  local branch
+  if [ $# -eq 0 ]; then
+    branch="$(git branch-main)"
+  else
+    branch="$1"
+  fi
+
+  git diff --name-only --diff-filter=d "${branch}" | to-nvim
+}
+
+alias nd="nvim-diff"
+
+compdef _other-branches nvim-diff
 
 alias gL="gla --no-patch -L"
 alias gLp="g log -L"
