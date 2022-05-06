@@ -13,11 +13,11 @@ set_kitty_profile() {
 
 case "$1" in
   dark)
-    set_kitty_profile "One Dark.conf"
+    set_kitty_profile "nordfox.conf"
     echo "dark" > "${cache}"
     ;;
   light)
-    set_kitty_profile "One Half Light.conf"
+    set_kitty_profile "dayfox.conf"
     echo "light" > "${cache}"
     ;;
 esac
