@@ -13,7 +13,7 @@ set_kitty_profile() {
 
 case "$1" in
   dark)
-    set_kitty_profile "nordfox.conf"
+    set_kitty_profile "nightfox.conf"
     echo "dark" > "${cache}"
     ;;
   light)
