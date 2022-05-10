@@ -1,3 +1,5 @@
+[include]
+  path = ~/.dotfiles.private/gitconfig
 [user]
   name = Kassio Borges
   email = kassioborgesm@gmail.com
@@ -7,7 +9,6 @@
   helper = osxkeychain
 [tag]
   sort = -creatordate
-  gpgsign = true
 [remote "origin"]
   prune = true
 [core]
@@ -74,8 +75,6 @@
   exclude = !sh -c 'echo "$1" >> .git/info/exclude' -
 [advice]
   detachedHead = false
-[include]
-  path = ~/.dotfiles.private/gitconfig
 [filter "lfs"]
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
