@@ -12,7 +12,7 @@ end
 require "irb"
 require "irb/completion"
 
-def darken(hex_color, amount: 0.1)
+def darken(hex_color, amount = 0.1)
   rgb = hex_color.gsub('#', '').scan(/../).map(&:hex)
 
   format(
@@ -23,7 +23,7 @@ def darken(hex_color, amount: 0.1)
   )
 end
 
-def lighten(hex_color, amount: 0.1)
+def lighten(hex_color, amount = 0.1)
   rgb = hex_color.gsub('#', '').scan(/../).map(&:hex)
 
   format(
