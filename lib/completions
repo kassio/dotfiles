@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+_ttheme() {
+  _arguments "1: :( dark light )"
+}
+compdef _ttheme ttheme
