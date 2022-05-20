@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 cache="${HOME}/.cache/term_profile"
-themes_path="${HOME}/.config/kitty/themes/"
+themes_path="${HOME}/.config/kitty/themes"
 current_theme="${themes_path}/current.conf"
 
 set_kitty_profile() {
