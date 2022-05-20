@@ -11,7 +11,6 @@ set_kitty_profile() {
 
   ln -sf "${themes_path}/$1.conf" "${current_theme}"
   kitty @ set-colors --all --configured "${current_theme}"
-  echo "$1" > "${cache}"
 }
 
 case "$1" in
