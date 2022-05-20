@@ -9,17 +9,16 @@ set_kitty_profile() {
     return
   fi
 
-  ln -sf "${themes_path}/$1" "${current_theme}"
+  ln -sf "${themes_path}/$1.conf" "${current_theme}"
   kitty @ set-colors --all --configured "${current_theme}"
+  echo "$1" > "${cache}"
 }
 
 case "$1" in
-  dark)
-    set_kitty_profile "nightfox.conf"
-    echo "dark" > "${cache}"
+  dark|light)
+    set_kitty_profile "$1"
     ;;
-  light)
-    set_kitty_profile "dayfox.conf"
-    echo "light" > "${cache}"
+  *)
+    echo "Usage: ttheme [light|dark]"
     ;;
 esac
