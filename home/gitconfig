@@ -70,7 +70,6 @@
   branch-list = branch --format='%(refname:short)'
   branch-current = branch --show-current
   branch-others = !git branch-list | grep -v "$(git branch-current)" | sort
-  branch-main = !git verify "origin/main" >/dev/null && echo "main" || echo "master"
   open-remote = !git remote get-url origin | xargs open
   exclude = !sh -c 'echo "$1" >> .git/info/exclude' -
 [advice]

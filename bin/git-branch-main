@@ -1,0 +1,18 @@
+#!/usr/bin/env zsh
+
+custom_file=".git/main-branch-name"
+
+case "$1" in
+  --set|-s)
+    echo "$2" > "${custom_file}"
+    ;;
+
+  *)
+    if [ -f "${custom_file}" ]; then
+      cat "${custom_file}"
+    else
+      git verify "origin/main" >/dev/null &&
+        echo "main" || echo "master"
+    fi
+    ;;
+esac
