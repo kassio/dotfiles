@@ -2,6 +2,4 @@
 
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-brew bundle --global
-
-"${HOME}/.dotfiles/bin/upgrade"
+brew bundle --file="${HOME}/.dotfiles/stow/home/.Brewfile"

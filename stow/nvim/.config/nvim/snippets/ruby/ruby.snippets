@@ -1,0 +1,57 @@
+snippet #f
+	# frozen_string_literal: true
+
+snippet #r
+	# rubocop: disable CodeReuse/ActiveRecord
+snippet class
+	class ${1:`v:lua.vim.my.snippets.filename('camelcase')`}${2}
+		${0:$VISUAL}
+	end
+snippet aa
+  attr_accessor ${1}
+snippet aw
+  attr_writer ${1}
+snippet ar
+  attr_reader ${1}
+snippet defi
+	def initialize${1:(${2})}
+		${0:$VISUAL}
+	end
+snippet debug
+	require 'byebug'; byebug
+snippet pry
+	binding.pry
+snippet prys "pry shell"
+	binding.pry_shell
+snippet def
+	def ${1:name}
+		${0:$VISUAL}
+	end
+snippet do
+	do
+		${0:$VISUAL}
+	end
+snippet dop
+	do |${1:param}|
+		${0:$VISUAL}
+	end
+snippet module
+	module ${1:`v:lua.vim.my.snippets.filename('camelcase')`}$2
+		${0:$VISUAL}
+	end
+snippet hri
+	puts '${1:-}' * 80
+snippet hr
+	puts '${1:*}' * 80
+	p ${0:$VISUAL}
+	puts '$1' * 80
+snippet if
+	if $1
+		${0:$VISUAL}
+	end
+snippet JSON
+	JSON.parse(${0:$VISUAL}${1:, symbolize_names: true})
+snippet tap
+	tap { |$1| ${2:p $1} }
+snippet then
+	then { |$1| ${2:p $1} }

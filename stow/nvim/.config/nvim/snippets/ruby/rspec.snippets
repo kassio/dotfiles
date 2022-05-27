@@ -1,0 +1,42 @@
+snippet it
+	it $1 do
+		${0:${VISUAL}}
+	end
+snippet before
+	before do
+		${0:${VISUAL}}
+	end
+snippet context
+	context $1 do
+		${0:${VISUAL}}
+	end
+snippet describe
+	describe $1 do
+		${0:${VISUAL}}
+	end
+snippet scenario
+	scenario $1 do
+		${0:${VISUAL}}
+	end
+snippet feature
+  feature $1 do
+		${0:${VISUAL}}
+	end
+snippet itb
+	it { ${0:${VISUAL}} }
+snippet expect
+	expect($1).${2:to} $3
+snippet expb
+	expect { ${0:${VISUAL}} }.${2:to} $3
+snippet expn
+	expect_next_instance_of($1) do |$2|
+		$0
+	end
+snippet let
+	let($1) $2
+snippet leti
+	let_it_be($1) $2
+snippet rspec
+	RSpec.describe $1${2:, type: :model} do
+		$0
+	end

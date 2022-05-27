@@ -1,0 +1,14 @@
+snippet #!
+	#!/usr/bin/env ${1|zsh,ruby,bash|}
+
+snippet vim
+	# vim:${1:ft=${2:zsh}}:
+
+snippet path
+	${1:`v:lua.vim.my.snippets.expand('%:.:h')`}${2}
+snippet full_path
+	${1:`v:lua.vim.my.snippets.expand('%:p:h')`}${2}
+snippet fname
+	${1:`v:lua.vim.my.snippets.filename()`}${2}
+snippet fname_camelcase
+	${1:`v:lua.vim.my.snippets.filename('camelcase')`}${2}
