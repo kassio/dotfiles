@@ -36,6 +36,7 @@ brew "readline"
 brew "rename"
 brew "ripgrep"
 brew "sd" # sed replacement
+brew "stow" # symlink farm manager
 brew "stylua"
 brew "tree"
 brew "watch"
