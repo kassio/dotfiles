@@ -1,14 +1,4 @@
-local g = vim.g
 local theme = vim.my.theme
-
-g.nvim_tree_git_hl = 1
-g.nvim_tree_highlight_opened_files = 3
-g.nvim_tree_show_icons = {
-  git = 1,
-  folders = 1,
-  folder_arrows = 1,
-  files = 1,
-}
 
 require('nvim-tree').setup({
   disable_netrw = true,
@@ -41,14 +31,9 @@ require('nvim-tree').setup({
   },
   update_focused_file = { enable = false },
   renderer = {
-    indent_markers = {
-      enable = true,
-      icons = {
-        corner = '└ ',
-        edge = '│ ',
-        none = '  ',
-      },
-    },
+    highlight_git = true,
+    highlight_opened_files = 'all',
+    indent_markers = { enable = true },
   },
   view = {
     number = false,
