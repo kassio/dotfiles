@@ -118,6 +118,8 @@ M.load = function()
         'williamboman/nvim-lsp-installer',
         -- generic LSP for diagnostic, formatting, etc
         'jose-elias-alvarez/null-ls.nvim',
+        -- symbols navigator
+        'simrat39/symbols-outline.nvim',
       })
 
       -- Git
