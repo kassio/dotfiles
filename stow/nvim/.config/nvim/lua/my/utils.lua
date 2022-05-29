@@ -31,37 +31,6 @@ M.preserve = function(callback)
   fn.winrestview(saved_view)
 end
 
-M.highlight_define = function(group, color)
-  vim.api.nvim_set_hl(0, group, color)
-end
-
-M.highlight_extend = function(target, source, opts)
-  local ok, source_hl = pcall(vim.api.nvim_get_hl_by_name, source, true)
-  if not ok then
-    P(string.format('Failed to find highlight by name "%s"', source))
-    return
-  end
-
-  local exts = vim.tbl_extend('force', source_hl, opts or {})
-
-  ok = pcall(M.highlight_define, target, exts)
-
-  if not ok then
-    P(
-      string.format(
-        'Failed to set highlight extension: source %s | target: %s | ext: %s ',
-        source,
-        target,
-        vim.inspect(exts)
-      )
-    )
-  end
-end
-
-M.sign_define = function(name, sign, highlight)
-  fn.sign_define(name, { text = sign, texthl = highlight or name })
-end
-
 local get_visual_region = function()
   local pos_start = api.nvim_buf_get_mark(0, '<')
   local pos_end = api.nvim_buf_get_mark(0, '>')

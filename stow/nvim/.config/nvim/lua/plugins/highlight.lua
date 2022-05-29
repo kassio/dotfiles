@@ -1,10 +1,5 @@
 local theme = vim.my.theme
 local colors = theme.colors
-local hl_def = vim.my.utils.highlight_define
-local hl_extend = vim.my.utils.highlight_extend
-local sign_define = vim.my.utils.sign_define
-
-vim.cmd('colorscheme ' .. vim.my.theme.colorscheme)
 
 -- Highlight color strings
 require('colorizer').setup()
@@ -17,6 +12,37 @@ require('pqf').setup({
     hint = theme.signs.hint,
   },
 })
+
+local sign_define = function(name, sign, highlight)
+  vim.fn.sign_define(name, { text = sign, texthl = highlight or name })
+end
+
+local hl_def = function(group, color)
+  vim.api.nvim_set_hl(0, group, color)
+end
+
+local hl_extend = function(target, source, opts)
+  local ok, source_hl = pcall(vim.api.nvim_get_hl_by_name, source, true)
+  if not ok then
+    P(string.format('Failed to find highlight by name "%s"', source))
+    return
+  end
+
+  local exts = vim.tbl_extend('force', source_hl, opts or {})
+
+  ok = pcall(hl_def, target, exts)
+
+  if not ok then
+    P(
+      string.format(
+        'Failed to set highlight extension: source %s | target: %s | ext: %s ',
+        source,
+        target,
+        vim.inspect(exts)
+      )
+    )
+  end
+end
 
 local attrs = function(opts)
   return vim.tbl_extend('keep', opts, {

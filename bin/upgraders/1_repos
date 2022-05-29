@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 if [ "$1" = "--help" ]; then
   echo "Upgrade your repositories (\$REPOS)"

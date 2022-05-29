@@ -1,13 +1,15 @@
 local config = vim.env.HOME .. '/.config/kitty/themes/current.conf'
-local ok, bg = pcall(vim.fn.fnamemodify, vim.fn.resolve(config), ':t:r')
+local ttheme = vim.fn.resolve(config)
 
-if ok and bg == 'light' then
+vim.g.catppuccin_flavour = vim.fn.fnamemodify(ttheme, ':t:r')
+
+if vim.fn.fnamemodify(ttheme, ':p:h:t') == 'light' then
   vim.opt.background = 'light'
 else
   vim.opt.background = 'dark'
 end
 
-require('nightfox').setup({})
+vim.cmd('colorscheme catppuccin')
 
 local common_colors = {
   error = '#CA1243',

@@ -12,6 +12,11 @@ M.setup = function()
   end
 
   vim.api.nvim_create_user_command('Upgrade', require('plugins').upgrade, { bang = true })
+  vim.api.nvim_create_user_command('UpgradeSync', require('plugins').sync, {})
+end
+
+M.sync = function()
+  M.load().sync()
 end
 
 M.upgrade = function(cmd)
@@ -33,7 +38,7 @@ M.upgrade = function(cmd)
 
   vim.my.utils.augroup('user:packing', post_upgrade)
 
-  M.load().sync()
+  M.sync()
 end
 
 M.load = function()
@@ -172,9 +177,11 @@ M.load = function()
         'leoluz/nvim-dap-go', -- go debugger integration
       })
 
+      -- Theme
+      use({ 'catppuccin/nvim', as = 'catppuccin' })
+
       -- Colors
       use({
-        'EdenEast/nightfox.nvim', -- Theme
         'norcalli/nvim-colorizer.lua', -- Highlight color strings
         'norcalli/nvim-terminal.lua', -- Fix terminal colors
         'https://gitlab.com/yorickpeterse/nvim-pqf.git', -- Prettier qf/loc windows
