@@ -66,4 +66,13 @@ lualine.setup({
     globalstatus = true,
   },
   sections = sections,
+  tabline = {
+    lualine_a = {
+      {
+        'tabs',
+        max_length = vim.o.columns / 3,
+        mode = 2,
+      },
+    },
+  },
 })
