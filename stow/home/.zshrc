@@ -47,7 +47,7 @@ export PROMPT_EOL_MARK="" # Remove % from partial lines
 export WORDCHARS="" # Fix the \eb \ef and others.
 
 # easier navigation
-CDPATH=".:${HOME}:${HOME}/.config:${HOME}/src"
+CDPATH=".:${HOME}:${HOME}/src"
 
 # style
 tabs -2
