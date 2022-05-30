@@ -12,6 +12,7 @@ treesitter.setup({
     'kotlin',
     'latex',
     'norg',
+    'r',
     'vala',
   },
   highlight = {
