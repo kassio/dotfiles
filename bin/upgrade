@@ -2,7 +2,7 @@
 
 local components_path="${DOTFILES}/bin/upgraders"
 local components=($( find "${components_path}" -type f | sort | xargs basename; ))
-local timestamp_file="${HOME}/.config/.last-upgrade"
+local timestamp_file="${HOME}/.cache/.last-upgrade"
 
 _exit() {
   date -j '+%d %b %Y %H:%M' > "${timestamp_file}"
