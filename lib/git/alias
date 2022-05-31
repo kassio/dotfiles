@@ -16,7 +16,14 @@ gdm() {
 }
 
 gdfm() {
-  git diff --name-only "$(git branch-main)..." "$@"
+  local branch
+  if [ $# -eq 0 ]; then
+    branch="$(git branch-main)"
+  else
+    branch="$1"
+  fi
+
+  git diff --name-only "${branch}"
 }
 
 gbd() {
@@ -73,19 +80,6 @@ grim() {
 _other-branches() {
   _arguments "1: :( ${(@f)$(git branch-others | xargs)} )"
 }
-
-nvim-diff() {
-  local branch
-  if [ $# -eq 0 ]; then
-    branch="$(git branch-main)"
-  else
-    branch="$1"
-  fi
-
-  git diff --name-only --diff-filter=d "${branch}" | to-nvim
-}
-
-alias nd="nvim-diff"
 
 compdef _other-branches nvim-diff
 
