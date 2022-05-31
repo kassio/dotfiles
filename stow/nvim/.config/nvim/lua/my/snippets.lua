@@ -1,8 +1,12 @@
 local M = {}
 
-M.filename = function(case)
+M.filename = function(case, sufix)
   local filename = vim.api.nvim_buf_get_name(0)
   filename = vim.fn.fnamemodify(filename, ':t:r')
+
+  if sufix ~= nil then
+    filename = filename:gsub(sufix, '')
+  end
 
   if case == 'camelcase' then
     return filename:gsub('_(.)', filename.upper):gsub('^(.)', filename.upper)
