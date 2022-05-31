@@ -164,3 +164,7 @@ hl_extend('goTSproperty', 'Function')
 
 -- zsh
 hl_extend('zshQuoted', 'String', { bold = true })
+
+-- winbar
+hl_extend('WinBar', 'StatusLine')
+hl_extend('WinBarNC', 'StatusLineNC')
