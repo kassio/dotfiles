@@ -109,4 +109,4 @@ source "${HOME}/.env" 2>/dev/null # Ephemeral stuff
 # extend PATH with libs
 export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
 export PATH="${HOMEBREW_PREFIX}/opt/python@3.9/bin:${PATH}"
-export PATH="./bin:${DOTFILES}/bin:${PATH}"
+export PATH="${DOTFILES}/bin:${PATH}"
