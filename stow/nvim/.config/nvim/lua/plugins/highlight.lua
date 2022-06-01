@@ -17,53 +17,51 @@ local sign_define = function(name, sign, highlight)
   vim.fn.sign_define(name, { text = sign, texthl = highlight or name })
 end
 
-local hl_def = function(group, color)
-  vim.api.nvim_set_hl(0, group, color)
-end
+local hl = function(name, extra)
+  extra = extra or {}
 
-local hl_extend = function(target, source, opts)
-  local ok, source_hl = pcall(vim.api.nvim_get_hl_by_name, source, true)
+  local ok, data = pcall(vim.api.nvim_get_hl_by_name, name, true)
   if not ok then
-    P(string.format('Failed to find highlight by name "%s"', source))
-    return
+    P(string.format('Failed to find highlight by name "%s"', name))
+    return extra
   end
 
-  local exts = vim.tbl_extend('force', source_hl, opts or {})
+  return vim.tbl_extend('force', data, extra)
+end
 
-  ok = pcall(hl_def, target, exts)
+local hl_def = function(group, color)
+  local ok, msg = pcall(vim.api.nvim_set_hl, 0, group, color)
 
   if not ok then
     P(
       string.format(
-        'Failed to set highlight extension: source %s | target: %s | ext: %s ',
-        source,
-        target,
-        vim.inspect(exts)
+        'Failed to set highlight (%s): group %s | color: %s',
+        msg,
+        group,
+        vim.inspect(color)
       )
     )
   end
 end
 
-local attrs = function(opts)
-  return vim.tbl_extend('keep', opts, {
-    foreground = 'NONE',
-    background = 'NONE',
-    sp = 'NONE',
-  })
+local hl_extend = function(target, source, opts)
+  local source_hl = hl(source, opts or {})
+
+  hl_def(target, source_hl)
 end
 
 -- Diagnostics (vim.diagnostic)
 -- Default highlight
-hl_def('DiagnosticError', attrs({ foreground = colors.error }))
-hl_def('DiagnosticWarn', attrs({ foreground = colors.warn }))
-hl_def('DiagnosticInfo', attrs({ foreground = colors.info }))
-hl_def('DiagnosticHint', attrs({ foreground = colors.hint }))
+hl_def('DiagnosticError', { background = 'NONE', foreground = colors.error })
+hl_def('DiagnosticWarn', { background = 'NONE', foreground = colors.warn })
+hl_def('DiagnosticInfo', { background = 'NONE', foreground = colors.info })
+hl_def('DiagnosticHint', { background = 'NONE', foreground = colors.hint })
 
 -- VirtualText
-hl_def('DiagnosticVirtualTextError', attrs({ foreground = colors.light_error }))
-hl_def('DiagnosticVirtualTextWarn', attrs({ foreground = colors.light_warn }))
-hl_def('DiagnosticVirtualTextInfo', attrs({ foreground = colors.light_info }))
-hl_def('DiagnosticVirtualTextHint', attrs({ foreground = colors.light_hint }))
+hl_def('DiagnosticVirtualTextError', { background = 'NONE', foreground = colors.light_error })
+hl_def('DiagnosticVirtualTextWarn', { background = 'NONE', foreground = colors.light_warn })
+hl_def('DiagnosticVirtualTextInfo', { background = 'NONE', foreground = colors.light_info })
+hl_def('DiagnosticVirtualTextHint', { background = 'NONE', foreground = colors.light_hint })
 
 -- Signs/Icons definition
 sign_define('DiagnosticSignError', theme.signs.error, 'DiagnosticError')
@@ -73,75 +71,51 @@ sign_define('DiagnosticSignHint', theme.signs.hint, 'DiagnosticHint')
 
 -- Debugger
 sign_define('DapBreakpoint', '●')
-hl_def('DapBreakpoint', attrs({ foreground = colors.error }))
+hl_def('DapBreakpoint', { foreground = colors.error })
 
 sign_define('DapBreakpointCondition', '◆')
 hl_extend('DapBreakpointCondition', 'Number')
 
 sign_define('DapLogPoint', 'Ξ')
-hl_def('DapLogPoint', attrs({ foreground = colors.info }))
+hl_def('DapLogPoint', { foreground = colors.info })
 
 sign_define('DapStopped', '▶')
-hl_def('DapStopped', attrs({ foreground = colors.hint }))
+hl_def('DapStopped', { foreground = colors.hint })
 
 sign_define('DapBreakpointRejected', '◎')
-hl_def('DapBreakpointRejected', attrs({ foreground = colors.warn }))
+hl_def('DapBreakpointRejected', { foreground = colors.warn })
 
 -- Git
-hl_def(
-  'GitSignsCurrentLineBlame',
-  attrs({
-    background = colors.shadow,
-    foreground = colors.highlight,
-    italic = true,
-  })
-)
+hl_def('GitSignsCurrentLineBlame', {
+  background = colors.shadow,
+  foreground = colors.highlight,
+  italic = true,
+})
 
-hl_def('GitSignAdd', attrs({ foreground = colors.hint }))
-hl_def('GitSignChange', attrs({ foreground = colors.warn }))
-hl_def('GitSignDelete', attrs({ foreground = colors.error }))
+hl_def('GitSignAdd', { foreground = colors.hint })
+hl_def('GitSignChange', { foreground = colors.warn })
+hl_def('GitSignDelete', { foreground = colors.error })
 
-hl_def('GitSignAddLineNr', attrs({ foreground = colors.hint }))
-hl_def('GitSignChangeLineNr', attrs({ foreground = colors.warn }))
-hl_def('GitSignDeleteLineNr', attrs({ foreground = colors.error }))
+hl_def('GitSignAddLineNr', { foreground = colors.hint })
+hl_def('GitSignChangeLineNr', { foreground = colors.warn })
+hl_def('GitSignDeleteLineNr', { foreground = colors.error })
 
 -- Spell
-hl_def('SpellBad', attrs({ underdot = true, sp = colors.warn }))
+hl_def('SpellBad', { underdot = true, sp = colors.warn })
 hl_extend('SpellCap', 'SpellBad')
 hl_extend('SpellRare', 'SpellBad')
 hl_extend('SpellLocal', 'SpellBad')
 
--- Spacing/Visual clues
-hl_def('ColorColumn', attrs({ background = colors.shadow }))
-hl_extend('CursorLine', 'ColorColumn')
-
-hl_def('NonText', attrs({ foreground = colors.highlight }))
-hl_extend('Whitespace', 'NonText')
-
-hl_def('VertSplit', { foreground = colors.highlight })
-hl_def('SpecialKey', { foreground = colors.shadow })
-hl_extend('SpecialChar', 'SpecialKey')
-hl_extend('EndOfBuffer', 'SpecialKey')
-
 -- Floating window
 hl_def('NormalFloat', { background = colors.background })
-hl_def('FloatShadow', { background = colors.shadow })
-
--- FloatingIdentifier
-hl_def('FloatingIdentifierBufferNr', { foreground = colors.hint, background = colors.shadow })
-hl_def('FloatingIdentifierBufferName', { foreground = colors.info, background = colors.shadow })
 
 -- matching parantheses/blocks marks
-hl_def('MatchParen', attrs({ bold = true }))
+hl_def('MatchParen', { bold = true })
 
 -- Filetree
-hl_def('NvimTreeOpenedFile', attrs({ bold = true, italic = false, bg = colors.shadow }))
-
--- Treesitter
-hl_def('TSCurrentScope', attrs({ background = colors.shadow }))
+hl_def('NvimTreeOpenedFile', { bold = true, italic = false })
 
 -- globals
-hl_def('TSDefinition', attrs({ background = colors.shadow }))
 hl_extend('TSDefinitionUsage', 'Normal')
 hl_extend('TSTypeBuiltin', 'Type')
 hl_extend('TSVariable', 'Normal')
