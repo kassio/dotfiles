@@ -1,4 +1,6 @@
-require('my.table') -- global extension
+-- global lua extensions
+require('my.table')
+require('my.string')
 
 vim.my = {}
 vim.my.buffers = require('my.buffers')

@@ -9,7 +9,7 @@ M.filename = function(case, sufix)
   end
 
   if case == 'camelcase' then
-    return filename:gsub('_(.)', filename.upper):gsub('^(.)', filename.upper)
+    return string.camelcase(filename)
   else
     return filename
   end
