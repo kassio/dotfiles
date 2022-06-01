@@ -1,19 +1,23 @@
-local config = vim.env.HOME .. '/.config/kitty/themes/current.conf'
-local ttheme = vim.fn.resolve(config)
+local setup = function()
+  local config = vim.env.HOME .. '/.config/kitty/themes/current.conf'
+  local ttheme = vim.fn.resolve(config)
 
-vim.g.catppuccin_flavour = vim.fn.fnamemodify(ttheme, ':t:r')
+  vim.g.catppuccin_flavour = vim.fn.fnamemodify(ttheme, ':t:r')
 
-if vim.fn.fnamemodify(ttheme, ':p:h:t') == 'light' then
-  vim.opt.background = 'light'
-else
-  vim.opt.background = 'dark'
+  if vim.fn.fnamemodify(ttheme, ':p:h:t') == 'light' then
+    vim.opt.background = 'light'
+  else
+    vim.opt.background = 'dark'
+  end
+
+  vim.cmd('colorscheme catppuccin')
 end
 
-vim.cmd('colorscheme catppuccin')
+setup()
 
 local colorscheme = require('catppuccin.api.colors').get_colors()
-
 local M = {
+  reload = setup,
   -- Generic values (independent of the background)
   signs = {
     error = '',
