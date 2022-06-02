@@ -44,12 +44,12 @@ lualine.setup({
   },
   sections = sections,
   tabline = {
-    options = { always_divide_middle = false },
     lualine_a = {
       {
         'tabs',
         mode = 2,
         max_length = vim.o.columns,
+        always_divide_middle = false,
       },
     },
   },
