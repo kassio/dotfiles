@@ -44,6 +44,7 @@ lualine.setup({
   },
   sections = sections,
   tabline = {
+    options = { always_divide_middle = false },
     lualine_a = {
       {
         'tabs',
