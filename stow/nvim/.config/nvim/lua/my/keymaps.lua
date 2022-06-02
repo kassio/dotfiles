@@ -65,24 +65,7 @@ keymap('n', '9gt', '<cmd>tablast<cr>')
 keymap('v', '<leader>p', '"_dP')
 
 -- search current word (ignore case)
-keymap({ 'n', 'v' }, '!', function()
-  vim.my.utils.highlight({ current = true })
-end)
-
--- search current word (sensitive case)
-keymap({ 'n', 'v' }, '<leader>!', function()
-  vim.my.utils.highlight({ current = true, sensitive_case = true })
-end)
-
--- search current word (ignore case, exclusive)
-keymap({ 'n', 'v' }, 'g!', function()
-  vim.my.utils.highlight({ current = true, exclusive = true })
-end)
-
--- search current word (sensitive case, exclusive)
-keymap({ 'n', 'v' }, '<leader>g!', function()
-  vim.my.utils.highlight({ current = true, sensitive_case = true, exclusive = true })
-end)
+keymap({ 'n', 'v' }, '!', '<cmd>Preserve normal! *Nzz<cr>')
 
 -- indent current buffer
 keymap('n', '<leader>ff', vim.my.buffers.indent)

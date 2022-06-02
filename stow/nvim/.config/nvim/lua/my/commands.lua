@@ -4,6 +4,13 @@ local cabbrev = vim.my.utils.cabbrev
 -- reload config
 command('Reload', vim.my.reloader.reload, {})
 
+-- run given command without change current view
+command('Preserve', function(cmd)
+  vim.my.utils.preserve(function()
+    vim.cmd(cmd.args)
+  end)
+end, { nargs = '?' })
+
 -- trim the file
 command('Trim', vim.my.buffers.trim, {})
 

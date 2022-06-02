@@ -31,64 +31,6 @@ M.preserve = function(callback)
   fn.winrestview(saved_view)
 end
 
-local get_visual_region = function()
-  local pos_start = api.nvim_buf_get_mark(0, '<')
-  local pos_end = api.nvim_buf_get_mark(0, '>')
-  local regtype = fn.visualmode()
-
-  return vim.region(0, pos_start, pos_end, regtype, true)
-end
-
-M.selected_text = function()
-  local text = {}
-  local region = get_visual_region()
-  local line_numbers = vim.tbl_keys(region)
-  table.sort(line_numbers)
-
-  for _, n in ipairs(line_numbers) do
-    local portion = region[n]
-    local line = fn.getline(n)
-
-    table.insert(text, string.sub(line, portion[1] + 1, portion[2]))
-  end
-
-  return vim.fn.escape(table.concat(text, '\n'), ' *^$./\\[]')
-end
-
-M.highlight = function(opts)
-  opts = opts or {}
-
-  local text = ''
-  if type(opts) == 'string' then
-    text = opts
-  elseif opts.text then
-    text = opts.text
-  elseif opts.current then
-    text = fn.expand('<cword>')
-  elseif opts.selected then
-    text = M.selected_text()
-  end
-
-  if #text > 0 then
-    fn.setreg('h', text)
-
-    if opts.sensitive_case then
-      text = '\\C' .. text
-    else
-      text = '\\c' .. text
-    end
-
-    if opts.exclusive then
-      text = '\\<' .. text .. '\\>'
-    end
-
-    fn.setreg('/', '\\V' .. text)
-
-    api.nvim_set_vvar('hlsearch', 1)
-    vim.opt.hlsearch = true
-  end
-end
-
 M.fileicon = function(filetype, filename)
   local filetype_extensions = {
     go = 'go',
