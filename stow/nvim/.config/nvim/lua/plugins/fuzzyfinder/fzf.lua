@@ -21,15 +21,9 @@ g.fzf_action = {
   ['ctrl-v'] = 'vsplit',
 }
 
-local fuzzy_grep = function(text)
-  vim.cmd('FuzzyRg ' .. text)
-end
-
 vim.my.fuzzyfinder = {
-  grep_selected = function()
-    fuzzy_grep(utils.selected_text())
-  end,
-  grep_string = function()
-    fuzzy_grep(fn.expand('<cword>'))
+  grep = function()
+    vim.cmd('normal !')
+    vim.cmd('FuzzyRg ' .. fn.getreg('"v'))
   end,
 }

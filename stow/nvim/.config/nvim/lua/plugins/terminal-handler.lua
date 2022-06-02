@@ -25,6 +25,7 @@ g.neoterm_default_mod = 'botright'
 g.neoterm_automap_keys = '<leader>tm'
 g.neoterm_use_relative_path = 1
 g.neoterm_autoscroll = 1
+g.neoterm_fixedsize = 1
 g.neoterm_callbacks = {
   before_exec = function()
     vim.cmd('wall')
@@ -34,7 +35,8 @@ g.neoterm_callbacks = {
       local height = vim.fn.winheight('.')
       g.neoterm_size = math.floor(height / 3)
     else
-      g.neoterm_size = ''
+      local width = vim.fn.winwidth('.')
+      g.neoterm_size = math.floor(width / 2)
     end
 
     return instance

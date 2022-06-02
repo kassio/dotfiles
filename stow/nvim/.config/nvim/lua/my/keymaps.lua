@@ -65,8 +65,9 @@ keymap('n', '9gt', '<cmd>tablast<cr>')
 keymap('v', '<leader>p', '"_dP')
 
 -- search current word
-keymap('n', '!', '<cmd>Preserve normal! *Nzz<cr>')
-keymap('x', '!', 'y/\\V<c-r>"<cr>N')
+keymap('n', '!', '"vyiw/\\V<c-r>v<cr>N')
+-- search current selection
+keymap('x', '!', '"vy/\\V<c-r>v<cr>N')
 
 -- indent current buffer
 keymap('n', '<leader>ff', vim.my.buffers.indent)

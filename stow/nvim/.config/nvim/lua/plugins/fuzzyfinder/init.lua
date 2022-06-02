@@ -21,11 +21,8 @@ cmd_keymap('n', 'f<c-u>', 'Telescope commands')
 cmd_keymap('n', 'f<c-n>', 'Telescope current_buffer_fuzzy_find')
 cmd_keymap('n', 'f<c-w>', 'Telescope lsp_dynamic_workspace_symbols')
 
-keymap('n', '<leader>as', vim.my.fuzzyfinder.grep_selected)
-keymap('v', '<leader>as', vim.my.fuzzyfinder.grep_selected)
-
-keymap('n', '<leader>as', vim.my.fuzzyfinder.grep_string)
-keymap('v', '<leader>as', vim.my.fuzzyfinder.grep_string)
+keymap('n', '<leader>as', vim.my.fuzzyfinder.grep)
+keymap('x', '<leader>as', vim.my.fuzzyfinder.grep)
 
 utils.augroup('user:fuzzyfinder', {
   {
