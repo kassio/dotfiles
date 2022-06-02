@@ -64,8 +64,9 @@ keymap('n', '9gt', '<cmd>tablast<cr>')
 -- paste without replacing the " register
 keymap('v', '<leader>p', '"_dP')
 
--- search current word (ignore case)
-keymap({ 'n', 'v' }, '!', '<cmd>Preserve normal! *Nzz<cr>')
+-- search current word
+keymap('n', '!', '<cmd>Preserve normal! *Nzz<cr>')
+keymap('x', '!', 'y/\\V<c-r>"<cr>N')
 
 -- indent current buffer
 keymap('n', '<leader>ff', vim.my.buffers.indent)
