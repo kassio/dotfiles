@@ -50,6 +50,10 @@ local hl_extend = function(target, source, opts)
   hl_def(target, source_hl)
 end
 
+-- globals
+hl_def('Search', { background = colors.warn })
+hl_def('IncSearch', { background = colors.warn })
+
 -- Diagnostics (vim.diagnostic)
 -- Default highlight
 hl_def('DiagnosticError', { background = 'NONE', foreground = colors.error })
@@ -115,14 +119,17 @@ hl_def('MatchParen', { bold = true })
 -- Filetree
 hl_def('NvimTreeOpenedFile', { bold = true, italic = false })
 
--- globals
-hl_extend('TSDefinitionUsage', 'Normal')
+-- Treesitter globals
 hl_extend('TSTypeBuiltin', 'Type')
 hl_extend('TSVariable', 'Normal')
 hl_extend('TSParameter', 'Normal')
 hl_extend('TSFuncBuiltin', 'Identifier')
 hl_extend('TSStringEscape', 'String', { bold = true })
 hl_extend('TSStringSpecial', 'String', { bold = true })
+
+-- refactoring
+hl_def('TSDefinitionUsage', { background = colors.light_warn })
+hl_def('TSDefinition', { background = colors.light_warn })
 
 -- Ruby with Treesitter
 hl_extend('rubyTSType', 'Type')
