@@ -69,6 +69,21 @@ keymap('n', '!', '"vyiw/\\V<c-r>v<cr>N')
 -- search current selection
 keymap('x', '!', '"vy/\\V<c-r>v<cr>N')
 
+-- search current word case insensitive
+keymap('n', '<leader>!', '"vyiw/\\V\\c<c-r>v<cr>N')
+-- search current selection case insensitive
+keymap('x', '<leader>!', '"vy/\\V\\c<c-r>v<cr>N')
+
+-- search current word exclusive
+keymap('n', 'g!', '"vyiw/\\V\\<<c-r>v\\><cr>N')
+-- search current selection exclusive
+keymap('x', 'g!', '"vy/\\V\\<<c-r>v\\><cr>N')
+
+-- search current word case insensitive exclusive
+keymap('n', '<leader>g!', '"vyiw/\\V\\c\\<<c-r>v\\><cr>N')
+-- search current selection case insensitive exclusive
+keymap('x', '<leader>g!', '"vy/\\V\\c\\<<c-r>v\\><cr>N')
+
 -- indent current buffer
 keymap('n', '<leader>ff', vim.my.buffers.indent)
 
