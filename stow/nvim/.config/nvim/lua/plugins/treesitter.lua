@@ -120,11 +120,34 @@ gps.setup({
   },
 })
 
+local go_package = function()
+  if vim.bo.filetype ~= 'go' then
+    return ''
+  end
+
+  local ln = 0
+  while true do
+    if ln > 300 then
+      return ''
+    end
+
+    local line = vim.api.nvim_buf_get_lines(0, ln, ln + 1, true)[1]
+
+    if string.match(line, '^%s*package%.*') ~= nil then
+      return string.format(' %s › ', vim.split(line, ' ')[2])
+    end
+
+    ln = ln + 1
+  end
+
+  return ''
+end
+
 vim.my.treesitter = {
   gps = {
     location = function()
       if gps.is_available() then
-        return gps.get_location()
+        return go_package() .. gps.get_location()
       else
         return ''
       end

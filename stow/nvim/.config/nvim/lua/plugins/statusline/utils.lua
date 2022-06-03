@@ -2,6 +2,13 @@ local fn = vim.fn
 local filetree = require('nvim-tree.lib')
 local M = {}
 
+M.spacer = {
+  function()
+    return ' '
+  end,
+  padding = 0,
+}
+
 M.filetree_current_file = function()
   return './' .. fn.fnamemodify(filetree.get_node_at_cursor().absolute_path, ':.')
 end
@@ -9,31 +16,6 @@ end
 M.neoterm_id = function()
   return 'neoterm-' .. vim.b.neoterm_id
 end
-
-M.go_package = {
-  function()
-    local ln = 0
-    while true do
-      if ln > 300 then
-        return ''
-      end
-
-      local line = vim.api.nvim_buf_get_lines(0, ln, ln + 1, true)[1]
-
-      if string.match(line, '^%s*package%.*') ~= nil then
-        return string.format(' %s', vim.split(line, ' ')[2])
-      end
-
-      ln = ln + 1
-    end
-
-    return ''
-  end,
-  cond = function()
-    return vim.bo.filetype == 'go'
-  end,
-  separator = '›',
-}
 
 M.mode = function()
   local mode_map = {

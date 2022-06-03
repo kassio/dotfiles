@@ -8,20 +8,24 @@ local winbar_filetype_exclude = {
   'packer',
 }
 
-local colored = function(color, component)
-  return string.format('%%#%s#%%(%s%%)', color, component)
-end
+local winbar = function(hl)
+  return function()
+    if vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype) then
+      vim.opt_local.winbar = ''
+    else
+      local highlight = vim.bo.modified and 'WinBarWarn' or hl
 
-vim.my.winbar = function()
-  if vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype) then
-    vim.opt_local.winbar = ''
-  else
-    vim.opt_local.winbar = table.concat({
-      ' %=',
-      colored('lualine_a_normal', ' %n '),
-      colored('lualine_b_normal', ' %.100f:%-7(%l:%c%)%<%m%r%h '),
-      colored('lualine_c_normal', ' %3p%% '),
-    }, '')
+      vim.opt_local.winbar = table.concat({
+        string.format('%%#%s#', highlight),
+        ' %.100t',
+        ' › ',
+        vim.my.treesitter.gps.location(),
+        '%<%=',
+        ' ┃ ',
+        '%n',
+        ' ',
+      }, '')
+    end
   end
 end
 
@@ -34,6 +38,13 @@ vim.my.utils.augroup('user:winbar', {
       'InsertEnter',
       'BufWritePost',
     },
-    callback = vim.my.winbar,
+    callback = winbar('WinBar'),
+  },
+  {
+    events = {
+      'BufLeave',
+      'BufWinLeave',
+    },
+    callback = winbar('WinBarNC'),
   },
 })
