@@ -4,6 +4,9 @@ local cabbrev = vim.my.utils.cabbrev
 -- reload config
 command('Reload', vim.my.reloader.reload, {})
 
+-- reload theme
+command('ReloadTheme', vim.my.theme.reload, {})
+
 -- run given command without change current view
 command('Preserve', function(cmd)
   vim.my.utils.preserve(function()

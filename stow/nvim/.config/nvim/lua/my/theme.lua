@@ -17,7 +17,10 @@ setup()
 
 local colorscheme = require('catppuccin.api.colors').get_colors()
 local M = {
-  reload = setup,
+  reload = function()
+    setup()
+    R('plugins.highlight')
+  end,
   -- Generic values (independent of the background)
   signs = {
     error = '',
