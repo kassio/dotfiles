@@ -24,10 +24,20 @@ local sections = {
 }
 
 local filetree_sections = vim.tbl_extend('force', sections, {
+  lualine_a = {},
   lualine_b = { utils.filetree_current_file },
+  lualine_c = {},
+  lualine_x = {},
+  lualine_y = {},
+  lualine_z = {},
 })
 local neoterm_sections = vim.tbl_extend('force', sections, {
+  lualine_a = {},
   lualine_b = { utils.neoterm_id },
+  lualine_c = {},
+  lualine_x = {},
+  lualine_y = {},
+  lualine_z = {},
 })
 
 lualine.setup({

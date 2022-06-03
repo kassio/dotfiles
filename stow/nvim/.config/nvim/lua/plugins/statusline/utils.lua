@@ -10,13 +10,6 @@ M.neoterm_id = function()
   return 'neoterm-' .. vim.b.neoterm_id
 end
 
-M.spacer = {
-  function()
-    return ' '
-  end,
-  padding = 0,
-}
-
 M.go_package = {
   function()
     local ln = 0
