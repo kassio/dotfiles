@@ -12,7 +12,7 @@ return {
         diagnostics = {
           globals = {
             'vim',
-            'hs', -- hammerspoon
+            'require',
           },
         },
         workspace = {
