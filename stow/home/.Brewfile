@@ -16,7 +16,6 @@ brew "fontconfig"
 brew "fzf"
 brew "git"
 brew "git-delta" # fancy git diff
-brew "golangci-lint"
 brew "grc"
 brew "grep"
 brew "htop"
