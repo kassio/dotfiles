@@ -51,8 +51,8 @@ local hl_extend = function(target, source, opts)
 end
 
 -- globals
-hl_def('Search', { background = colors.warn })
-hl_def('IncSearch', { background = colors.warn })
+hl_def('Search', { background = colors.warn, foreground = colors.shadow })
+hl_def('IncSearch', { background = colors.warn, foreground = colors.shadow })
 
 -- Diagnostics (vim.diagnostic)
 -- Default highlight
@@ -128,7 +128,7 @@ hl_extend('TSStringEscape', 'String', { bold = true })
 hl_extend('TSStringSpecial', 'String', { bold = true })
 
 -- refactoring
-hl_def('TSDefinitionUsage', { background = colors.light_warn })
+hl_def('TSDefinitionUsage', { background = colors.light_warn, foreground = colors.shadow })
 hl_def('TSDefinition', { background = colors.light_warn })
 
 -- Ruby with Treesitter
