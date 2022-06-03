@@ -125,14 +125,13 @@ local go_package = function()
     return ''
   end
 
-  local ln = 0
-  while true do
-    if ln > 300 then
+  for ln = 0, 300, 1 do
+    local ok, line = pcall(vim.api.nvim_buf_get_lines, 0, ln, ln + 1, true)
+    if not ok then
       return ''
     end
 
-    local line = vim.api.nvim_buf_get_lines(0, ln, ln + 1, true)[1]
-
+    line = line[1]
     if string.match(line, '^%s*package%.*') ~= nil then
       return string.format(' %s › ', vim.split(line, ' ')[2])
     end
