@@ -15,16 +15,20 @@ local winbar = function(hl)
     else
       local highlight = vim.bo.modified and 'WinBarWarn' or hl
 
-      vim.opt_local.winbar = table.concat({
-        string.format('%%#%s#', highlight),
-        ' %.100t',
-        ' › ',
-        vim.my.treesitter.gps.location(),
-        '%<%=',
-        ' ┃ ',
-        '%n',
-        ' ',
-      }, '')
+      pcall(
+        vim.api.nvim_set_option_value,
+        'winbar',
+        table.concat({
+          string.format('%%#%s#', highlight),
+          ' %.100t',
+          ' › ',
+          vim.my.treesitter.gps.location(),
+          '%<%=',
+          '%n',
+          ' ',
+        }, ''),
+        { scope = 'local' }
+      )
     end
   end
 end
