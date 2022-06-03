@@ -147,5 +147,5 @@ hl_extend('goTSproperty', 'Function')
 hl_extend('zshQuoted', 'String', { bold = true })
 
 -- winbar
-hl_extend('WinBar', 'StatusLine')
-hl_extend('WinBarNC', 'StatusLineNC')
+hl_extend('WinBar', 'StatusLine', { background = colors.background })
+hl_extend('WinBarNC', 'StatusLineNC', { background = colors.background })
