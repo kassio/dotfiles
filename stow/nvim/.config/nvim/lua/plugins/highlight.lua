@@ -151,3 +151,6 @@ hl_def('WinBar', { background = colors.background, foreground = colors.highlight
 hl_def('WinBarNC', { background = colors.background, foreground = colors.shadow })
 hl_def('WinBarInfo', { background = colors.background, foreground = colors.info, bold = true })
 hl_def('WinBarWarn', { background = colors.background, foreground = colors.warn, bold = true })
+
+-- Filetree
+hl_def('NvimTreeRootFolder', { foreground = colors.highlight })
