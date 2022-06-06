@@ -148,5 +148,6 @@ hl_extend('zshQuoted', 'String', { bold = true })
 
 -- winbar
 hl_def('WinBar', { background = colors.background, foreground = colors.highlight })
-hl_def('WinBarWarn', { background = colors.background, foreground = colors.warn })
 hl_def('WinBarNC', { background = colors.background, foreground = colors.shadow })
+hl_def('WinBarInfo', { background = colors.background, foreground = colors.info, bold = true })
+hl_def('WinBarWarn', { background = colors.background, foreground = colors.warn, bold = true })
