@@ -42,9 +42,12 @@ local attacher = function(client)
   -- Commands
   command_map(lsp.buf.code_action, 'LspCodeActions', 'gla')
   command_map(lsp.buf.hover, 'LspHover', 'K')
-  command_map(lsp.buf.rename, 'LspRename', 'grr')
   command_map(lsp.buf.signature_help, 'LspSignatureHelp', '<c-k>')
   command_map(lsp.buf.declaration, 'LspGoToDeclaration', 'glD')
+
+  command_map(function()
+    lsp.buf.rename()
+  end, 'LspRename', 'grr')
 
   command_map(function()
     vim.cmd('Telescope lsp_implementations jump_type=split')
