@@ -10,7 +10,6 @@ vim.my.utils.augroup('user:autocommands', {
   {
     events = {
       'BufLeave',
-      'BufWinLeave',
       'FocusLost',
       'WinLeave',
     },
