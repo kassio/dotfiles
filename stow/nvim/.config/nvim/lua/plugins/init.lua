@@ -81,6 +81,9 @@ M.load = function()
         'tpope/vim-repeat', -- Enables repeat surround movements
       })
 
+      -- text aligning
+      use('junegunn/vim-easy-align')
+
       -- File tree
       use({
         'kyazdani42/nvim-tree.lua',
