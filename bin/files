@@ -6,4 +6,4 @@ fd \
   --hidden \
   --follow \
   --color never \
-  --ignore-file "${HOME}/.dotfiles/home/ignore"
+  --ignore-file "${HOME}/.ignore"
