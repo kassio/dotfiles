@@ -47,6 +47,7 @@ vim.my.utils.augroup('user:winbar', {
     events = {
       'CursorMoved',
       'BufWinEnter',
+      'WinEnter',
       'BufFilePost',
       'InsertEnter',
       'BufWritePost',
@@ -57,6 +58,7 @@ vim.my.utils.augroup('user:winbar', {
     events = {
       'BufLeave',
       'BufWinLeave',
+      'WinLeave',
     },
     callback = winbar(false),
   },
