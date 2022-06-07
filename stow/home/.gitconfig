@@ -60,18 +60,6 @@
   date = format-local:"%F %R"
 [pretty]
   log = %C(red dim)%h %C(green)%cd %C(yellow)%an %C(reset)%C(normal)%s %C(blue)%d
-[alias]
-  me = config user.name
-  tag-refs = !git tag --list --format='%(refname:lstrip=2)'
-  tag-list = !git tag --list --format='%(color:green dim)%(creatordate:format-local:%F %R) %(color:red dim)%(objectname:short) %(color:blue)%(align:10,left)%(refname:lstrip=2)%(end)'
-  tag-sync = !git fetch --prune origin "+refs/tags/*:refs/tags/*"
-  today = !git --no-pager log --pretty=log --since=today.midnight
-  verify = rev-parse --quiet --verify
-  branch-list = branch --format='%(refname:short)'
-  branch-current = branch --show-current
-  branch-others = !git branch-list | grep -v "$(git branch-current)" | sort
-  open-remote = !git remote get-url origin | xargs open
-  exclude = !sh -c 'echo "$1" >> .git/info/exclude' -
 [advice]
   detachedHead = false
 [filter "lfs"]
@@ -108,3 +96,16 @@
   file-modified-label = [M]
   file-removed-label = [-]
   file-renamed-label = [R]
+
+[alias]
+  me = config user.name
+  tag-refs = !git tag --list --format='%(refname:lstrip=2)'
+  tag-list = !git tag --list --format='%(color:green dim)%(creatordate:format-local:%F %R) %(color:red dim)%(objectname:short) %(color:blue)%(align:10,left)%(refname:lstrip=2)%(end)'
+  tag-sync = !git fetch --prune origin "+refs/tags/*:refs/tags/*"
+  today = !git --no-pager log --pretty=log --since=today.midnight
+  verify = rev-parse --quiet --verify
+  branch-list = branch --format='%(refname:short)'
+  branch-current = branch --show-current
+  branch-others = !git branch-list | grep -v "$(git branch-current)" | sort
+  open-remote = !git remote get-url origin | xargs open
+  exclude = !sh -c 'echo "$1" >> .git/info/exclude' -
