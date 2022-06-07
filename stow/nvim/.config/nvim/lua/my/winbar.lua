@@ -53,13 +53,12 @@ vim.my.utils.augroup('user:winbar', {
       'BufFilePost',
       'InsertEnter',
       'BufWritePost',
+      'FocusLost',
     },
     callback = winbar(true),
   },
   {
     events = {
-      'BufLeave',
-      'BufWinLeave',
       'WinLeave',
     },
     callback = winbar(false),

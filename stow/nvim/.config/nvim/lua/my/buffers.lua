@@ -32,13 +32,6 @@ M.delete_hidden = function() -- delete all hidden buffers
   end
 end
 
-M.autosave = function()
-  if vim.opt_local.modified:get() then
-    M.trim()
-    vim.cmd('silent! update!')
-  end
-end
-
 M.indent = function()
   utils.preserve(function()
     vim.cmd([[normal! gg=G]])

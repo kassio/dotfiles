@@ -9,11 +9,17 @@ vim.my.utils.augroup('user:autocommands', {
   },
   {
     events = {
-      'BufLeave',
       'FocusLost',
-      'WinLeave',
+      'TextChanged',
+      'VimSuspend',
+      'InsertLeavePre',
     },
     pattern = '*',
-    callback = vim.my.buffers.autosave,
+    callback = function()
+      if vim.bo.modifiable then
+        vim.my.buffers.trim()
+        vim.cmd('silent! update!')
+      end
+    end,
   },
 })
