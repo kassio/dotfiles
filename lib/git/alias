@@ -77,12 +77,6 @@ grim() {
   git rebase --interactive "$(git branch-main)"
 }
 
-_other-branches() {
-  _arguments "1: :( ${(@f)$(git branch-others | xargs)} )"
-}
-
-compdef _other-branches nvim-diff
-
 alias gL="gla --no-patch -L"
 alias gLp="g log -L"
 alias ga="g add -A"
@@ -124,3 +118,14 @@ alias gswmr="g switch-to-merge-request"
 alias gsw="g switch"
 alias gt="g tag-refs"
 alias gtl="g tag-list"
+
+_branches() {
+  _arguments "1: :( ${(@f)$(git branch-list | xargs)} )"
+}
+
+_other-branches() {
+  _arguments "1: :( ${(@f)$(git branch-others | xargs)} )"
+}
+
+compdef _other-branches nvim-diff
+compdef _other-branches gr
