@@ -49,22 +49,22 @@ local attacher = function(client)
     lsp.buf.rename()
   end, 'LspRename', 'grr')
 
-  command_map(function()
-    vim.cmd('Telescope lsp_implementations jump_type=split')
-  end, 'LspImplementation', 'gli')
-
   command_map(lsp.buf.format, 'LspFormatSync', 'glF')
   command_map(function()
     lsp.buf.format({ async = true })
   end, 'LspFormat', 'glf')
 
   command_map(function()
-    vim.cmd('Telescope lsp_definitions jump_type=split')
+    vim.cmd('Telescope lsp_definitions jump_type=never')
   end, 'LspGoToDefinition', 'gld')
 
   command_map(function()
     vim.cmd('Telescope lsp_references')
   end, 'LspListReferences', 'glr')
+
+  command_map(function()
+    vim.cmd('Telescope lsp_implementations jump_type=never')
+  end, 'LspImplementation', 'gli')
 
   command_map(function()
     vim.cmd('Telescope lsp_document_symbols')
