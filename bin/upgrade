@@ -25,8 +25,9 @@ _upgrade() {
   _last_upgrade
 
   local only_param="${1#--}"
-  local only="${components_path}/${only_param}"
-  if [ -n "${only_param}" ] && [ -f "${only}" ]; then
+  local only="$(find "${components_path}" -name "*${only_param}" | head -n 1)"
+
+  if [ -f "${only}" ]; then
     zsh -c "${only} $*"
     _exit 0
   fi
