@@ -16,7 +16,9 @@ require('nvim-tree').setup({
       error = theme.signs.error,
     },
   },
-  filters = { dotfiles = true },
+  filters = {
+    custom = { '^\\.git\\>' },
+  },
   git = {
     enable = true,
     ignore = false,
@@ -31,6 +33,7 @@ require('nvim-tree').setup({
   },
   update_focused_file = { enable = false },
   renderer = {
+    add_trailing = true,
     highlight_git = true,
     highlight_opened_files = 'all',
     indent_markers = { enable = true },
@@ -42,6 +45,13 @@ require('nvim-tree').setup({
     side = 'right',
     signcolumn = 'yes',
     width = 32,
+    mappings = {
+      custom_only = false,
+      list = {
+        { key = { 'f' }, action = '', mode = 'n' },
+        { key = { '<c-f>' }, action = 'live_filter', mode = 'n' },
+      },
+    },
   },
 })
 
