@@ -1,3 +1,4 @@
+local theme = vim.my.theme
 local treesitter = require('nvim-treesitter.configs')
 local spellsitter = require('spellsitter')
 local gps = require('nvim-gps')
@@ -98,7 +99,7 @@ spellsitter.setup({
 })
 
 gps.setup({
-  separator = ' › ',
+  separator = theme.icons.separator,
   icons = {
     ['class-name'] = ' ',
     ['container-name'] = ' ',
@@ -133,7 +134,7 @@ local go_package = function()
 
     line = line[1]
     if string.match(line, '^%s*package%.*') ~= nil then
-      return string.format(' %s › ', vim.split(line, ' ')[2])
+      return string.format(' %s' .. theme.icons.separator, vim.split(line, ' ')[2])
     end
 
     ln = ln + 1

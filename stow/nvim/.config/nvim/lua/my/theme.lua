@@ -45,6 +45,7 @@ return setup({
     path = 'פּ',
     spell = '暈',
     treesitter = '',
+    separator = ' › ',
   },
   colors = {
     error = '#CA1243',
