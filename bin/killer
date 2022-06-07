@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 filter="$*"
 
@@ -7,4 +7,4 @@ ps aux |
   grep -v 'grep' |
   grep -v 'killer' |
   awk '{print $2}' |
-  xargs -P 4 -I{} kill -9 {} || echo "Failed to kill {}";
+  xargs -I % kill -9 %
