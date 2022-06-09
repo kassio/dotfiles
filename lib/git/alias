@@ -129,3 +129,4 @@ _other-branches() {
 
 compdef _other-branches nvim-diff
 compdef _other-branches gr
+compdef _branches gb
