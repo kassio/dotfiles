@@ -103,8 +103,8 @@ source "${DOTFILES}/lib/ulimit"
 source "${DOTFILES}/lib/ripgrep"
 source "${DOTFILES}/lib/p10k.zsh" 2>/dev/null # zsh theme
 source "${DOTFILES}/lib/completions"
-source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff
 source "${HOME}/.env" 2>/dev/null # Ephemeral stuff
+source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff
 
 # extend PATH with libs
 export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
