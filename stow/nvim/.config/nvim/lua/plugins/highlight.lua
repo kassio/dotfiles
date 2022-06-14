@@ -52,6 +52,7 @@ end
 
 -- globals
 hl_def('Search', { background = colors.warn, foreground = colors.shadow })
+hl_def('CurSearch', { background = colors.info, foreground = colors.shadow })
 hl_def('IncSearch', { background = colors.warn, foreground = colors.shadow })
 
 -- Diagnostics (vim.diagnostic)
