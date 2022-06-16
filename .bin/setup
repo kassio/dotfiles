@@ -3,13 +3,6 @@
 export DOTFILES="${HOME}/.dotfiles"
 export PATH="${PATH}:${DOTFILES}/bin"
 
-components_path="${DOTFILES}/bin/installers"
-
-_component_name() { echo "$1" | sed -E "s/^[^_]*_//"; }
-
-for component in $(find "${components_path}" -type f | sort | xargs basename); do
-  name="$(_component_name "${component}")"
-  title "Installing ${name}"
-
-  zsh -c "${components_path}/${component} $*"
-done
+srunner \
+  -c "${DOTFILES}/bin/installers" \
+  -m "${DOTFILES}/lib/installers"
