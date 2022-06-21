@@ -34,3 +34,5 @@ command('SessionDestroyAll', vim.my.sessions.destroy_all, {})
 command('Z', 'w | qa', {})
 cabbrev('wqa', 'Z')
 cabbrev('xa', 'Z')
+
+cabbrev('e', 'e | normal zz')
