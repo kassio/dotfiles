@@ -28,7 +28,7 @@ g.neoterm_autoscroll = 1
 g.neoterm_fixedsize = 1
 g.neoterm_callbacks = {
   before_exec = function()
-    vim.cmd('wall')
+    pcall(vim.cmd, 'wall')
   end,
   before_create_window = function(instance)
     if string.match(instance.mod, 'vert') == nil then
