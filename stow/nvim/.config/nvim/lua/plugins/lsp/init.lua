@@ -2,6 +2,7 @@ local lsp = vim.lsp
 local hdls = lsp.handlers
 local installer = require('plugins.lsp.installer')
 local command = vim.api.nvim_create_user_command
+local telescope = require('telescope.builtin')
 
 -- Add additional capabilities supported by nvim-cmp
 local protocol = lsp.protocol
@@ -55,23 +56,21 @@ local attacher = function(client)
   end, 'LspFormat', 'glf')
 
   command_map(function()
-    vim.cmd('Telescope lsp_definitions jump_type=never')
+    telescope.lsp_definitions({ jump_type = 'never' })
   end, 'LspGoToDefinition', 'gld')
 
-  command_map(function()
-    vim.cmd('Telescope lsp_references')
-  end, 'LspListReferences', 'glr')
+  command_map(telescope.lsp_references, 'LspListReferences', 'glr')
 
   command_map(function()
-    vim.cmd('Telescope lsp_implementations jump_type=never')
+    telescope.lsp_implementations({ jump_type = 'never' })
   end, 'LspImplementation', 'gli')
 
   command_map(function()
-    vim.cmd('Telescope lsp_document_symbols')
+    telescope.lsp_document_symbols({ show_line = true })
   end, 'LspDocumentSymbols', 'gls')
 
   command_map(function()
-    vim.cmd('Telescope lsp_dynamic_workspace_symbols')
+    telescope.lsp_dynamic_workspace_symbols({ show_line = true })
   end, 'LspWorkspaceSymbols', 'glS')
 
   print('LSP: ' .. client.name)
