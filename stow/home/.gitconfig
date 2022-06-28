@@ -17,6 +17,7 @@
   whitespace = blank-at-eol,blank-at-eof,trailing-space,space-before-tab,cr-at-eol,tabwidth=2
   ignorecase = false
   pager = less --tabs=2 -RFX
+  fsmonitor = true
 [apply]
   whitespace = fix
 [push]
@@ -46,7 +47,7 @@
   prompt = false
   keepBackup = false
 [difftool "nvim"]
-	cmd = nvim -d -c "wincmd l" -c "norm ]c" "$LOCAL" "$MERGED" "$REMOTE"
+  cmd = nvim -d -c "wincmd l" -c "norm ]c" "$LOCAL" "$MERGED" "$REMOTE"
 [merge]
   ff = false
   conflictstyle = diff3
@@ -55,7 +56,7 @@
   prompt = false
   keepBackup = false
 [mergetool "nvim"]
-	cmd = nvim -d -c "wincmd l" -c "norm ]c" "$LOCAL" "$MERGED" "$REMOTE"
+  cmd = nvim -d -c "wincmd l" -c "norm ]c" "$LOCAL" "$MERGED" "$REMOTE"
 [log]
   date = format-local:"%F %R"
 [pretty]
