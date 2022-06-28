@@ -239,7 +239,7 @@ class Git
   end
 
   def clean
-    git 'gc'
+    git 'gc', '--cruft', '--prune=1.day.ago'
     git 'prune'
   end
 
