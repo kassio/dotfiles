@@ -15,6 +15,7 @@ treesitter.setup({
     'norg',
     'r',
     'vala',
+    'ocaml',
   },
   highlight = {
     enable = true,
