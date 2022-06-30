@@ -106,7 +106,7 @@ hl_def('GitSignChangeLineNr', { foreground = colors.warn })
 hl_def('GitSignDeleteLineNr', { foreground = colors.error })
 
 -- Spell
-hl_def('SpellBad', { underdot = true, sp = colors.warn })
+hl_def('SpellBad', { underdotted = true, sp = colors.warn })
 hl_extend('SpellCap', 'SpellBad')
 hl_extend('SpellRare', 'SpellBad')
 hl_extend('SpellLocal', 'SpellBad')
