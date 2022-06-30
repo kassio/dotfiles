@@ -1,6 +1,0 @@
-#!/usr/bin/env zsh
-
-for service in "$DOTFILES"/lib/macos-services/*.workflow; do
-  echo ">> Installing \"$service\""
-  cp -R "$service" ~/Library/Services
-done
