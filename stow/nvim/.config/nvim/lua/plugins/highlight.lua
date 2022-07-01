@@ -148,10 +148,10 @@ hl_extend('goTSproperty', 'Function')
 hl_extend('zshQuoted', 'String', { bold = true })
 
 -- winbar
-hl_def('WinBar', { background = colors.background, foreground = colors.highlight })
-hl_def('WinBarNC', { background = colors.background, foreground = colors.shadow })
-hl_def('WinBarInfo', { background = colors.background, foreground = colors.info, bold = true })
-hl_def('WinBarWarn', { background = colors.background, foreground = colors.warn, bold = true })
+hl_extend('WinBar', 'StatusLine', { foreground = colors.highlight })
+hl_extend('WinBarNC', 'WinbBar', { foreground = colors.shadow })
+hl_extend('WinBarInfo', 'WinBar', { foreground = colors.info, bold = true })
+hl_extend('WinBarWarn', 'WinBar', { foreground = colors.warn, bold = true })
 
 -- Filetree
 hl_def('NvimTreeRootFolder', { foreground = colors.highlight })
