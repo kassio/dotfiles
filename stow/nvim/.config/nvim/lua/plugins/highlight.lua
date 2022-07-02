@@ -22,11 +22,10 @@ local hl = function(name, extra)
 
   local ok, data = pcall(vim.api.nvim_get_hl_by_name, name, true)
   if not ok then
-    P(string.format('Failed to find highlight by name "%s"', name))
-    return extra
+    return false, string.format('Failed to find highlight by name "%s"', name)
   end
 
-  return vim.tbl_extend('force', data, extra)
+  return true, vim.tbl_extend('force', data, extra)
 end
 
 local hl_def = function(group, color)
@@ -45,9 +44,14 @@ local hl_def = function(group, color)
 end
 
 local hl_extend = function(target, source, opts)
-  local source_hl = hl(source, opts or {})
+  local ok, source_hl = hl(source, opts or {})
 
-  hl_def(target, source_hl)
+  if ok then
+    hl_def(target, source_hl)
+  else
+    P(string.format('Failed to extend %s with %s: %s', target, source, vim.inspect(source_hl)))
+    hl_def(target, opts or {})
+  end
 end
 
 -- globals
@@ -149,7 +153,7 @@ hl_extend('zshQuoted', 'String', { bold = true })
 
 -- winbar
 hl_extend('WinBar', 'StatusLine', { foreground = colors.highlight })
-hl_extend('WinBarNC', 'WinbBar', { foreground = colors.shadow })
+hl_extend('WinBarNC', 'WinBar', { foreground = colors.shadow })
 hl_extend('WinBarInfo', 'WinBar', { foreground = colors.info, bold = true })
 hl_extend('WinBarWarn', 'WinBar', { foreground = colors.warn, bold = true })
 
