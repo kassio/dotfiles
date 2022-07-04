@@ -33,10 +33,8 @@ local winbar = function(focused)
       'winbar',
       table.concat({
         string.format('%%#%s#', hl_filename),
-        ' %.100t',
+        ' %f',
         string.format('%%#%s#', hl_background),
-        theme.icons.separator,
-        vim.my.treesitter.gps.location(),
         '%<%=',
         string.format('%%#%s#', hl_filename),
         '%n',

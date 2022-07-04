@@ -2,13 +2,6 @@ local fn = vim.fn
 local filetree = require('nvim-tree.lib')
 local M = {}
 
-M.spacer = {
-  function()
-    return ' '
-  end,
-  padding = 0,
-}
-
 M.filetree_current_file = function()
   return './' .. fn.fnamemodify(filetree.get_node_at_cursor().absolute_path, ':.')
 end
