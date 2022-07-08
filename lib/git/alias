@@ -16,14 +16,7 @@ gdm() {
 }
 
 gdfm() {
-  local branch
-  if [ $# -eq 0 ]; then
-    branch="$(git branch-main)"
-  else
-    branch="$1"
-  fi
-
-  git diff --name-only "${branch}"
+  git diff --name-only "$(git branch-main)"
 }
 
 gbd() {
