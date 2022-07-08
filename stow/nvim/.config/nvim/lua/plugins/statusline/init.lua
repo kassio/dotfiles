@@ -51,6 +51,7 @@ lualine.setup({
     section_separators = '',
     component_separators = '',
     globalstatus = true,
+    always_divide_middle = false,
   },
   sections = sections,
   tabline = {
@@ -59,7 +60,6 @@ lualine.setup({
         'tabs',
         mode = 2,
         max_length = vim.o.columns,
-        always_divide_middle = false,
       },
     },
   },
