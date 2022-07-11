@@ -49,7 +49,6 @@ require('nvim-tree').setup({
       custom_only = false,
       list = {
         { key = { 'f' }, action = '', mode = 'n' },
-        { key = { '<c-f>' }, action = 'live_filter', mode = 'n' },
       },
     },
   },
