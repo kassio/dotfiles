@@ -1,11 +1,7 @@
-local statusline = { dark = 'nightfly', light = 'tomorrow' }
-
 local setup = function(opts)
   local config = vim.env.HOME .. '/.config/kitty/themes/current.conf'
   local ttheme = vim.fn.resolve(config)
   local background
-
-  vim.g.catppuccin_flavour = vim.fn.fnamemodify(ttheme, ':t:r')
 
   if vim.fn.fnamemodify(ttheme, ':p:h:t') == 'light' then
     background = 'light'
@@ -13,10 +9,12 @@ local setup = function(opts)
     background = 'dark'
   end
 
-  vim.cmd('colorscheme catppuccin')
+  require(opts.colorscheme).setup()
+  vim.g.catppuccin_flavour = vim.fn.fnamemodify(ttheme, ':t:r')
+  vim.cmd('colorscheme ' .. opts.colorscheme)
   vim.opt.background = background
 
-  local colors = require('catppuccin.api.colors').get_colors()
+  local colors = require(opts.colorscheme .. '.api.colors').get_colors()
 
   return vim.tbl_deep_extend('force', opts, {
     background = background,
@@ -25,11 +23,11 @@ local setup = function(opts)
       shadow = colors.surface0,
       highlight = colors.overlay2,
     },
-    statusline = statusline[background],
   })
 end
 
 return setup({
+  colorscheme = 'catppuccin',
   signs = {
     error = '',
     warn = '',

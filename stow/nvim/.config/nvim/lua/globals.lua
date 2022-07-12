@@ -1,5 +1,5 @@
 local inspect_options = {
-  process = function(item, path)
+  process = function(item)
     if item == nil then
       return tostring(item)
     else
