@@ -14,6 +14,7 @@ brew "coreutils"
 brew "fd" # file finding
 brew "fontconfig"
 brew "fzf"
+brew "gh" # github client, useful for neovim plugins
 brew "git"
 brew "git-delta" # fancy git diff
 brew "grc"
