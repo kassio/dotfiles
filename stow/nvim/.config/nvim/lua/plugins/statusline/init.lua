@@ -23,27 +23,16 @@ local sections = {
   lualine_z = { '[[%3l:%-3c %3p%%]]' },
 }
 
-local filetree_sections = vim.tbl_extend('force', sections, {
-  lualine_a = {},
-  lualine_b = { utils.filetree_current_file },
-  lualine_c = {},
-  lualine_x = {},
-  lualine_y = {},
-  lualine_z = {},
-})
-local neoterm_sections = vim.tbl_extend('force', sections, {
-  lualine_a = {},
-  lualine_b = { utils.neoterm_id },
-  lualine_c = {},
-  lualine_x = {},
-  lualine_y = {},
-  lualine_z = {},
-})
-
 lualine.setup({
   extensions = {
-    { sections = filetree_sections, filetypes = { 'NvimTree' } },
-    { sections = neoterm_sections, filetypes = { 'neoterm' } },
+    {
+      sections = vim.tbl_extend('force', sections, { lualine_b = { utils.filetree_current_file } }),
+      filetypes = { 'NvimTree' },
+    },
+    {
+      sections = vim.tbl_extend('force', sections, { lualine_b = { utils.neoterm_id } }),
+      filetypes = { 'neoterm' },
+    },
   },
   options = {
     theme = theme.colorscheme,
