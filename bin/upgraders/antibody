@@ -6,5 +6,5 @@ if [ "$1" = "--help" ]; then
 fi
 
 title "[antibody] updating zsh plugins"
-antibody bundle < "${HOME}/.dotfiles/lib/zsh_plugins" > "${HOME}/.dotfiles/home/zsh_plugins.sh"
+antibody bundle < "${ZDOTDIR}/antibody_list" > "${ZDOTDIR}/plugins"
 antibody update
