@@ -3,6 +3,6 @@
 export DOTFILES="${HOME}/.dotfiles"
 export PATH="${PATH}:${DOTFILES}/bin"
 
-"${DOTFILES}/bin/installers/macos"
+"${DOTFILES}/bin/installers/setup-macos"
 "${DOTFILES}/bin/installers/stow"
 "${DOTFILES}/bin/installers/upgrade"
