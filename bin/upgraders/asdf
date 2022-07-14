@@ -20,4 +20,4 @@ while read -r plugin; do
 
   asdf install "${plugin}" "${version}" >/dev/null
   asdf global "${plugin}" "${version}" >/dev/null
-done < "${HOME}/.dotfiles/lib/asdf_default_plugins"
+done < "${XDG_CONFIG_HOME}/asdf/list"
