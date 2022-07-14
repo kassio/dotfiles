@@ -8,6 +8,7 @@ M.setup = function()
   if fn.empty(fn.glob(path)) > 0 then
     fn.system(string.format('git clone %s %s', repo, path))
 
+    M.sync()
     vim.cmd('qall!')
   end
 

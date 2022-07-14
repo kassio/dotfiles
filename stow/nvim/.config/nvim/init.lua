@@ -1,8 +1,8 @@
-require('globals')
+require('globals') -- Global functions
+require('plugins').setup() -- Prepare/Install Plugin Manager
 
 require('my') -- my plugins
 
-require('plugins').setup()
 require('plugins.comment')
 require('plugins.projection')
 require('plugins.notification')
