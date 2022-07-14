@@ -13,7 +13,7 @@ export HOMEBREW_BOOTSNAP=1
 export HOMEBREW_NO_ENV_HINTS=1
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-source "${DOTFILES}/lib/p10k.cache.zsh" 2>/dev/null # zsh theme
+source "${ZDOTDIR}/p10k.cache.zsh" 2>/dev/null # zsh theme
 
 set zle_bracketed_paste  # Explicitly restore this zsh default
 autoload -Uz bracketed-paste-magic
