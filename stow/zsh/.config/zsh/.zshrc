@@ -109,4 +109,4 @@ source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff
 # extend PATH with libs
 export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
 export PATH="${HOMEBREW_PREFIX}/opt/python@3.9/bin:${PATH}"
-export PATH="${DOTFILES}/bin:${PATH}"
+export PATH="${XDG_BIN_HOME}:${PATH}"
