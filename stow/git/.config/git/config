@@ -12,8 +12,8 @@
 [remote "origin"]
   prune = true
 [core]
-  excludesfile = ~/.dotfiles/lib/gitignore
-  attributesfile = ~/.dotfiles/lib/gitattributes
+  excludesfile = ~/.config/git/ignore
+  attributesfile = ~/.config/git/attributes
   whitespace = blank-at-eol,blank-at-eof,trailing-space,space-before-tab,cr-at-eol,tabwidth=2
   ignorecase = false
   pager = less --tabs=2 -RFX
