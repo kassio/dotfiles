@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+export DOTFILES="${HOME}/.dotfiles"
+export PATH="${PATH}:${DOTFILES}/bin"
+
+"${DOTFILES}/bin/installers/macos"
+"${DOTFILES}/bin/installers/stow"
+"${DOTFILES}/bin/installers/upgrade"

@@ -11,7 +11,6 @@ export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_BOOTSNAP=1
 export HOMEBREW_NO_ENV_HINTS=1
-export TERM=xterm-256color-italic
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 source "${DOTFILES}/lib/p10k.cache.zsh" 2>/dev/null # zsh theme
@@ -24,7 +23,7 @@ zle -N bracketed-paste bracketed-paste-magic
 # load autocomplete modules
 FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:${FPATH}"
 autoload -Uz compinit
-if [ $(date +'%j') != $(/usr/bin/stat -f '%Sm' -t '%j' $HOME/.zcompdump) ]; then
+if [ "$(date +'%j')" != "$(/usr/bin/stat -f '%Sm' -t '%j' ${ZDOTDIR}/.zcompdump)" ]; then
   compinit
 else
   compinit -C
@@ -88,21 +87,22 @@ unsetopt menu_complete # do not navigate completion with arrows
 # load libs stuff
 source "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh"
 source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
-source "${HOME}/.zsh_plugins.sh"
+
+source "${ZDOTDIR}/plugins"
 
 # personal libs
-source "${DOTFILES}/lib/bindkeys"
-source "${DOTFILES}/lib/alias"
-source "${DOTFILES}/lib/fzf"
-source "${DOTFILES}/lib/ruby"
-source "${DOTFILES}/lib/go"
-source "${DOTFILES}/lib/lua"
-source "${DOTFILES}/lib/zsh_autosuggest"
-source "${DOTFILES}/lib/jq"
-source "${DOTFILES}/lib/ulimit"
-source "${DOTFILES}/lib/ripgrep"
-source "${DOTFILES}/lib/p10k.zsh" 2>/dev/null # zsh theme
-source "${DOTFILES}/lib/completions"
+source "${ZDOTDIR}/bindkeys"
+source "${ZDOTDIR}/alias"
+source "${ZDOTDIR}/fzf"
+source "${ZDOTDIR}/ruby"
+source "${ZDOTDIR}/go"
+source "${ZDOTDIR}/lua"
+source "${ZDOTDIR}/autosuggest"
+source "${ZDOTDIR}/jq"
+source "${ZDOTDIR}/ulimit"
+source "${ZDOTDIR}/ripgrep"
+source "${ZDOTDIR}/p10k.zsh" 2>/dev/null # zsh theme
+source "${ZDOTDIR}/completions"
 source "${HOME}/.env" 2>/dev/null # Ephemeral stuff
 source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff
 

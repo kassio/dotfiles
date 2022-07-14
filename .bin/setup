@@ -1,8 +1,0 @@
-#!/usr/bin/env zsh
-
-export DOTFILES="${HOME}/.dotfiles"
-export PATH="${PATH}:${DOTFILES}/bin"
-
-srunner \
-  -c "${DOTFILES}/bin/installers" \
-  -m "${DOTFILES}/lib/installers"

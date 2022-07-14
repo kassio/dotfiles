@@ -17,4 +17,4 @@ IRB.conf[:SAVE_HISTORY] = 9000
 IRB.conf[:HISTORY_FILE] = "#{ENV["HOME"]}/.irb_history"
 
 
-load "#{ENV["HOME"]}/.dotfiles/lib/ruby_console.rb"
+load "#{ENV["HOME"]}/.config/ruby/console.rb"

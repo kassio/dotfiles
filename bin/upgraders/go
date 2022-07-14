@@ -9,4 +9,4 @@ title "[gopkgs] golang packages"
 while read -r pkg; do
   subtitle "installing \"$(echo "${pkg}" | sed 's#.*\/\(.*\)@.*#\1#')\""
   go install "${pkg}"
-done < "${HOME}/.dotfiles/lib/gopkgs"
+done < "${XDG_CONFIG_HOME}/go/default_packages"

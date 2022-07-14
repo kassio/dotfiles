@@ -51,7 +51,7 @@ alias rspec-diff="gdfm --diff-filter=d | to-rspec"
 
 alias truncate0="truncate -c -s 0"
 
-source "${DOTFILES}/lib/git/alias"
+source "${XDG_CONFIG_HOME}/git/alias"
 
 alias tbroadcast="kitty +kitten broadcast"
 

@@ -1,8 +1,0 @@
-#!/usr/bin/env zsh
-
-for f in "$@"; do
-  if [ "$f" != "log/.gitkeep" ]; then
-    echo "truncating $f"
-    echo > $f
-  fi
-done
