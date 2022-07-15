@@ -6,6 +6,7 @@ M.setup = function()
   local path = string.format('%s/site/pack/packer/opt/packer.nvim', fn.stdpath('data'))
 
   if fn.empty(fn.glob(path)) > 0 then
+    P('Installing packer, after restarting nvim run :Upgrade')
     fn.system(string.format('git clone %s %s', repo, path))
 
     M.sync()
