@@ -35,6 +35,7 @@ brew "readline"
 brew "rename"
 brew "ripgrep"
 brew "sd" # sed replacement
+brew "stow"
 brew "stylua"
 brew "tree"
 brew "watch"
