@@ -16,6 +16,8 @@ treesitter.setup({
     'r',
     'vala',
     'ocaml',
+    'php',
+    'phpdoc',
   },
   highlight = {
     enable = true,
