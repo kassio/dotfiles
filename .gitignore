@@ -1,9 +1,10 @@
+stow/bin/.local/bin/gitlab-runner
 stow/bin/.local/share/
 stow/bin/.local/state/
 stow/home/.Brewfile.lock.json
 stow/karabiner/.config/karabiner/automatic_backups/
 stow/kitty/.config/kitty/themes/current.conf
+stow/zsh/.config/zsh/.zcompcache/
 stow/zsh/.config/zsh/.zcompdump
 stow/zsh/.config/zsh/.zsh_history
 stow/zsh/.config/zsh/.zsh_sessions/
-stow/zsh/.config/zsh/.zcompcache/
