@@ -11,6 +11,7 @@ brew "bash"
 brew "bash-completion"
 brew "bat" # cat replacement
 brew "coreutils"
+brew "dfu-programmer" # flash keyboard firmware
 brew "fd" # file finding
 brew "fontconfig"
 brew "fzf"
