@@ -8,3 +8,5 @@ export SOLARGRAPH_GLOBAL_CONFIG="${XDG_CONFIG_HOME}/solargraph/solargraph.yml"
 
 # cache rubocop stuff in /tmp
 export RUBOCOP_CACHE_ROOT="/private/tmp/rubocop-cache"
+
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
