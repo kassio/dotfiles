@@ -6,9 +6,8 @@ local telescope = require('telescope.builtin')
 
 -- Add additional capabilities supported by nvim-cmp
 local protocol = lsp.protocol
-local capabilities = require('cmp_nvim_lsp').update_capabilities(
-  protocol.make_client_capabilities()
-)
+local capabilities =
+  require('cmp_nvim_lsp').update_capabilities(protocol.make_client_capabilities())
 local completionItem = capabilities.textDocument.completion.completionItem
 completionItem.documentationFormat = { 'markdown', 'plaintext' }
 completionItem.snippetSupport = true
@@ -78,12 +77,6 @@ end
 
 -- Configure LSPs installed by installer
 installer.setup(attacher, capabilities)
-
-vim.my.lsp = {
-  install_servers = installer.install,
-}
-
-command('LspUpdateServers', vim.my.lsp.install_servers, {})
 
 -- Auto format files
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
