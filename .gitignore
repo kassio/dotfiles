@@ -1,4 +1,8 @@
+stow/bin/.local/share/
+stow/bin/.local/state/
+stow/home/.Brewfile.lock.json
+stow/karabiner/.config/karabiner/automatic_backups/
+stow/kitty/.config/kitty/themes/current.conf
 stow/zsh/.config/zsh/.zcompdump
 stow/zsh/.config/zsh/.zsh_history
-stow/kitty/.config/kitty/themes/current.conf
-stow/karabiner/.config/karabiner/automatic_backups/
+stow/zsh/.config/zsh/.zsh_sessions/
