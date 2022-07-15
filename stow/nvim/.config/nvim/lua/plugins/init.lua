@@ -26,7 +26,7 @@ M.upgrade = function(cmd)
     {
       events = { 'User' },
       pattern = 'PackerComplete',
-      command = 'LspUpdateServers',
+      command = 'LspInstallInfo',
     },
   }
 
