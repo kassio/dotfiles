@@ -2,10 +2,14 @@
 
 # global
 export DOTFILES="${HOME}/.dotfiles"
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin" # initial base PATH
 export EDITOR="nvim"
 export GIT_EDITOR="$EDITOR"
 export GPG_TTY=$(tty)
+
+PATH="/usr/bin:/bin:/usr/sbin:/sbin" # system base PATH
+PATH="${PATH}:/usr/local/bin" # intel homebrew
+PATH="${PATH}:/opt/homebrew/bin" # M1 homebrew
+export "${PATH}"
 
 export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
 export HOMEBREW_NO_ANALYTICS=1

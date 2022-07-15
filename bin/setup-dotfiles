@@ -1,7 +1,11 @@
 #!/usr/bin/env zsh
 
 export DOTFILES="${HOME}/.dotfiles"
-export PATH="${PATH}:${DOTFILES}/bin"
+
+PATH="/usr/bin:/bin:/usr/sbin:/sbin" # system base PATH
+PATH="${PATH}:/usr/local/bin" # intel homebrew
+PATH="${PATH}:/opt/homebrew/bin" # M1 homebrew
+export "${PATH}" 
 
 "${DOTFILES}/bin/installers/setup-macos"
 "${DOTFILES}/bin/installers/stow"

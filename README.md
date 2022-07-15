@@ -10,6 +10,10 @@ Sharing for reference only.
 # ensure git is installed
 $ softwareupdate --all --install --force
 
+# check git version
+# which will install git if not installed
+$ git --version 
+
 # clone this repository
 $ git clone https://github.com/kassio/dotfiles.git ~/.dotfiles
 
