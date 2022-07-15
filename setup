@@ -12,3 +12,4 @@ export PATH
 "${DOTFILES}/installers/brew"
 
 echo "> Basic softwares installed"
+echo "> Run upgrade now"

@@ -3,7 +3,7 @@
 basepath="$(dirname "$(realpath "$0")")"
 
 "${basepath}/upgraders/repos"
-"${basepath}/upgraders/antibody"
+"${basepath}/upgraders/zsh_plugins"
 "${basepath}/upgraders/asdf"
 "${basepath}/upgraders/brew"
 "${basepath}/upgraders/go"

@@ -92,8 +92,6 @@ unsetopt menu_complete # do not navigate completion with arrows
 source "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh"
 source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
 
-source "${ZDOTDIR}/plugins"
-
 # personal libs
 source "${ZDOTDIR}/bindkeys"
 source "${ZDOTDIR}/alias"
@@ -107,6 +105,7 @@ source "${ZDOTDIR}/ulimit"
 source "${ZDOTDIR}/ripgrep"
 source "${ZDOTDIR}/p10k.zsh" 2>/dev/null # zsh theme
 source "${ZDOTDIR}/completions"
+source "${ZDOTDIR}/plugins/init"
 source "${HOME}/.env" 2>/dev/null # Ephemeral stuff
 source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff
 
