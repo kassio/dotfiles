@@ -9,4 +9,6 @@ export PATH
 
 "${DOTFILES}/installers/setup-macos"
 "${DOTFILES}/installers/stow"
-"${DOTFILES}/installers/upgrade"
+"${DOTFILES}/installers/brew"
+
+echo "> Basic softwares installed"
