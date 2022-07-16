@@ -78,7 +78,12 @@ M.load = function()
 
       -- Surround chars handling
       use({
-        'tpope/vim-surround',
+        {
+          'kylechui/nvim-surround',
+          config = function()
+            require('nvim-surround').setup()
+          end,
+        },
         'wellle/targets.vim',
         'tpope/vim-repeat', -- Enables repeat surround movements
       })
