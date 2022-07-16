@@ -140,6 +140,8 @@ M.load = function()
       -- Git
       use({
         'lewis6991/gitsigns.nvim',
+        'emmanueltouzery/agitator.nvim',
+      }, {
         requires = 'nvim-lua/plenary.nvim',
       })
 

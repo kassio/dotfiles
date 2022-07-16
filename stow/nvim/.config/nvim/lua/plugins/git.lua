@@ -94,10 +94,11 @@ vim.my.git = {
     open(GIT.get_repository_url())
   end,
   preview_hunk = gitsigns.preview_hunk,
+  blame_toggle = require('agitator').git_blame_toggle,
   blame_line = function()
     gitsigns.blame_line({ full = true, ignore_whitespace = true })
   end,
-  toggle_blame = gitsigns.toggle_current_line_blame,
+  blame_line_toggle = gitsigns.toggle_current_line_blame,
   restore = function()
     vim.cmd('execute "!git restore -- %" | mode')
   end,
@@ -122,9 +123,9 @@ command('GopenFileRemoteUrl', vim.my.git.open_remote_file, { nargs = '?' })
 command('GcopyFileRemoteURL', vim.my.git.copy_remote_file, { nargs = '?' })
 
 command('Gdiff', vim.my.git.diff, { nargs = '?' })
-command('Gblame', vim.my.git.blame_line, {})
+command('GblameLine', vim.my.git.blame_line_toggle, {})
+command('GblameToggle', vim.my.git.blame_toggle, {})
 command('GpreviewHunk', vim.my.git.preview_hunk, {})
-command('GtoggleBlame', vim.my.git.toggle_blame, {})
 
 command('Grt', vim.my.git.restore, {})
 command('Gwrite', vim.my.git.write, {})
