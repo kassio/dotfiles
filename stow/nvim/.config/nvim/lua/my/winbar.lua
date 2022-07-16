@@ -55,6 +55,7 @@ vim.my.utils.augroup('user:winbar', {
       'InsertEnter',
       'BufWritePost',
       'FocusLost',
+      'FileType',
     },
     callback = winbar(true),
   },
