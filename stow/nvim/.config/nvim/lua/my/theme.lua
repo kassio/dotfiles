@@ -29,26 +29,23 @@ return setup({
   colorscheme = {
     name = 'catppuccin',
     colors = require('catppuccin.palettes').get_palette(),
-    setup = function()
-      require('catppuccin').setup()
+    setup = function() require('catppuccin').setup()
     end,
-  },
-  signs = {
-    error = '',
-    warn = '',
-    hint = '',
-    info = '',
-    bug = '',
   },
   icons = {
     buffer = '',
-    snippy = '',
+    bug = '',
+    error = '',
+    hint = '',
+    info = '',
     nvim_lsp = '',
     nvim_lua = '',
     path = 'פּ',
+    separator = ' › ',
+    snippy = '',
     spell = '暈',
     treesitter = '',
-    separator = ' › ',
+    warn = '',
   },
   colors = {
     error = '#CA1243',

@@ -10,10 +10,10 @@ require('nvim-tree').setup({
   diagnostics = {
     enable = true,
     icons = {
-      hint = theme.signs.hint,
-      info = theme.signs.info,
-      warning = theme.signs.warn,
-      error = theme.signs.error,
+      hint = theme.icons.hint,
+      info = theme.icons.info,
+      warning = theme.icons.warn,
+      error = theme.icons.error,
     },
   },
   filters = {

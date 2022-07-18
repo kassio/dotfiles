@@ -6,10 +6,10 @@ require('colorizer').setup()
 -- Prettier quickfix/location list windows
 require('pqf').setup({
   signs = {
-    error = theme.signs.error,
-    warning = theme.signs.warn,
-    info = theme.signs.info,
-    hint = theme.signs.hint,
+    error = theme.icons.error,
+    warning = theme.icons.warn,
+    info = theme.icons.info,
+    hint = theme.icons.hint,
   },
 })
 
@@ -73,10 +73,10 @@ hl_def('DiagnosticVirtualTextInfo', { background = 'NONE', foreground = colors.l
 hl_def('DiagnosticVirtualTextHint', { background = 'NONE', foreground = colors.light_hint })
 
 -- Signs/Icons definition
-sign_define('DiagnosticSignError', theme.signs.error, 'DiagnosticError')
-sign_define('DiagnosticSignWarn', theme.signs.warn, 'DiagnosticWarn')
-sign_define('DiagnosticSignInfo', theme.signs.info, 'DiagnosticInfo')
-sign_define('DiagnosticSignHint', theme.signs.hint, 'DiagnosticHint')
+sign_define('DiagnosticSignError', theme.icons.error, 'DiagnosticError')
+sign_define('DiagnosticSignWarn', theme.icons.warn, 'DiagnosticWarn')
+sign_define('DiagnosticSignInfo', theme.icons.info, 'DiagnosticInfo')
+sign_define('DiagnosticSignHint', theme.icons.hint, 'DiagnosticHint')
 
 -- Debugger
 sign_define('DapBreakpoint', '●')

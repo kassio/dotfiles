@@ -36,9 +36,9 @@ M.setup = function(attacher, capabilities)
     ensure_installed = servers,
     ui = {
       icons = {
-        server_installed = theme.signs.info,
-        server_pending = theme.signs.warn,
-        server_uninstalled = theme.signs.error,
+        server_installed = theme.icons.info,
+        server_pending = theme.icons.warn,
+        server_uninstalled = theme.icons.error,
       },
     },
   })
