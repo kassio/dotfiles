@@ -6,15 +6,13 @@ if [ "$1" = "--help" ]; then
 fi
 
 title "[nvim] updating kitty theme files"
-for theme in latte; do
-  subtitle "Downloading ${theme}"
-  curl -Ls \
-    --url "https://raw.githubusercontent.com/catppuccin/kitty/main/${theme}.conf" \
-    > "${HOME}/.config/kitty/themes/light/${theme}.conf"
-done
-for theme in frappe macchiato mocha; do
-  subtitle "Downloading ${theme}"
-  curl -Ls \
-    --url "https://raw.githubusercontent.com/catppuccin/kitty/main/${theme}.conf" \
-    > "${HOME}/.config/kitty/themes/dark/${theme}.conf"
-done
+
+subtitle "Downloading light theme"
+curl -Ls \
+  --url "https://raw.githubusercontent.com/catppuccin/kitty/main/latte.conf" \
+  > "${HOME}/.config/kitty/themes/light/latte.conf"
+
+subtitle "Downloading dark theme"
+curl -Ls \
+  --url "https://raw.githubusercontent.com/catppuccin/kitty/main/mocha.conf" \
+  > "${HOME}/.config/kitty/themes/dark/mocha.conf"
