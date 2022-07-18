@@ -7,7 +7,7 @@ fi
 local cache="${HOME}/.cache/term_profile"
 local themes_path="${HOME}/.config/kitty/themes"
 local current_theme="${themes_path}/current.conf"
-local theme_path="$(find "${themes_path}" -name "$1.conf")"
+local theme_path="$(find -L "${themes_path}" -name "$1.conf")"
 
 if [ -n "${theme_path}" ]; then
   ln -sf "${theme_path}" "${current_theme}"
