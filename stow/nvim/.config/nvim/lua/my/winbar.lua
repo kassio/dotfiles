@@ -31,12 +31,9 @@ local winbar = function(focused)
       'winbar',
       table.concat({
         string.format('%%#%s#', hl_filename),
-        ' %f',
-        string.format('%%#%s#', hl_background),
-        '%<%=',
-        string.format('%%#%s#', hl_filename),
-        '%n',
-        ' ',
+        '%n',    -- bufnr
+        '%<%=',  -- spacer
+        '%f',    -- filename
       }, ''),
       { scope = 'local' }
     )
