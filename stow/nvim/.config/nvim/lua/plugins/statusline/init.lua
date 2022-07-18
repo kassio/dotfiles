@@ -35,7 +35,7 @@ lualine.setup({
     },
   },
   options = {
-    theme = theme.colorscheme,
+    theme = theme.colorscheme.name,
     icons_enabled = true,
     section_separators = '',
     component_separators = '',

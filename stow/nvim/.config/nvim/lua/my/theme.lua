@@ -1,6 +1,7 @@
 local setup = function(opts)
   local config = vim.env.HOME .. '/.config/kitty/themes/current.conf'
   local ttheme = vim.fn.resolve(config)
+  local colorscheme = opts.colorscheme
   local background
 
   if vim.fn.fnamemodify(ttheme, ':p:h:t') == 'light' then
@@ -9,25 +10,29 @@ local setup = function(opts)
     background = 'dark'
   end
 
-  require(opts.colorscheme).setup()
+  colorscheme.setup()
   vim.g.catppuccin_flavour = vim.fn.fnamemodify(ttheme, ':t:r')
-  vim.cmd('colorscheme ' .. opts.colorscheme)
+  vim.cmd('colorscheme ' .. colorscheme.name)
   vim.opt.background = background
-
-  local colors = require(opts.colorscheme .. '.api.colors').get_colors()
 
   return vim.tbl_deep_extend('force', opts, {
     background = background,
     colors = {
-      background = colors.base,
-      shadow = colors.surface0,
-      highlight = colors.overlay2,
+      background = colorscheme.colors.base,
+      shadow = colorscheme.colors.surface0,
+      highlight = colorscheme.colors.overlay2,
     },
   })
 end
 
 return setup({
-  colorscheme = 'catppuccin',
+  colorscheme = {
+    name = 'catppuccin',
+    colors = require('catppuccin.palettes').get_palette(),
+    setup = function()
+      require('catppuccin').setup()
+    end,
+  },
   signs = {
     error = '',
     warn = '',
