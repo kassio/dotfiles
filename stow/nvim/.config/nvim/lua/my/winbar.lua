@@ -1,5 +1,3 @@
-local theme = vim.my.theme
-
 local winbar_filetype_exclude = {
   '',
   'NvimTree',
