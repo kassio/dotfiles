@@ -16,7 +16,7 @@ gdm() {
 }
 
 gdfm() {
-  git diff --name-only "$(git branch-main)"
+  git diff --name-only "$(git branch-main)..."
 }
 
 gbd() {
