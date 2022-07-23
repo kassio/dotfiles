@@ -41,8 +41,27 @@ lualine.setup({
     component_separators = '',
     globalstatus = true,
     always_divide_middle = false,
+    disabled_filetypes = {
+      winbar = {
+        '',
+        'NvimTree',
+        'TelescopePrompt',
+        'fzf',
+        'help',
+        'neoterm',
+        'packer',
+      },
+    },
   },
   sections = sections,
+  winbar = {
+    lualine_a = { 'bufnr' },
+    lualine_z = { 'filename' },
+  },
+  inactive_winbar = {
+    lualine_a = { 'bufnr' },
+    lualine_z = { 'filename' },
+  },
   tabline = {
     lualine_a = {
       {
