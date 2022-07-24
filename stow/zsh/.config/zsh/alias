@@ -7,8 +7,8 @@ alias time="/usr/bin/time"
 
 alias sudo="sudo "
 
-alias ls="lsd -h"
-alias la="lsd -lA"
+alias ls="lsd"
+alias la="ls -lA"
 
 alias watch="watch --color"
 
