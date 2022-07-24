@@ -7,6 +7,8 @@ fi
 
 title "[gopkgs] golang packages"
 while read -r pkg; do
-  subtitle "installing \"$(echo "${pkg}" | sed 's#.*\/\(.*\)@.*#\1#')\""
-  go install "${pkg}"
+  if [ "$pkg" != "" ]; then
+    subtitle "installing \"$(echo "${pkg}" | sed 's#.*\/\(.*\)@.*#\1#')\""
+    go install "${pkg}"
+  fi
 done < "${XDG_CONFIG_HOME}/go/default_packages"

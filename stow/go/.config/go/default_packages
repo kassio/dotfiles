@@ -1,5 +1,7 @@
 golang.org/x/tools/cmd/goimports@latest
 golang.org/x/tools/gopls@latest
 github.com/go-delve/delve/cmd/dlv@latest
-gitlab.com/kassio/lserver@latest
 github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+
+gitlab.com/kassio/lserver@latest
+gitlab.com/kassio/gsink@latest
