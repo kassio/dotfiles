@@ -2,7 +2,9 @@
 
 basepath="$(dirname "$(realpath "$0")")"
 
-"${basepath}/upgraders/repos"
+clear-screen
+
+"${basepath}/upgraders/gsink"
 "${basepath}/upgraders/zsh_plugins"
 "${basepath}/upgraders/asdf"
 "${basepath}/upgraders/brew"
