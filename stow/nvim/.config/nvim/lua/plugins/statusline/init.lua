@@ -43,7 +43,6 @@ lualine.setup({
     always_divide_middle = false,
     disabled_filetypes = {
       winbar = {
-        '',
         'NvimTree',
         'TelescopePrompt',
         'fzf',
@@ -56,7 +55,21 @@ lualine.setup({
   sections = sections,
   winbar = {
     lualine_a = { 'bufnr' },
-    lualine_z = { 'filename' },
+    lualine_z = {
+      {
+        'filetype',
+        colored = true,
+        icon_only = true,
+      },
+      {
+        'filename',
+        file_status = true,
+        path = 1,
+        shorting_target = 30,
+        symbols = { modified = '', readonly = '', unnamed = ' [No Name]' },
+        padding = { right = 1 },
+      },
+    },
   },
   inactive_winbar = {
     lualine_a = { 'bufnr' },
