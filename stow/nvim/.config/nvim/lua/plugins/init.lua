@@ -14,11 +14,6 @@ M.setup = function()
   end
 
   vim.api.nvim_create_user_command('Upgrade', require('plugins').upgrade, { bang = true })
-  vim.api.nvim_create_user_command('UpgradeSync', require('plugins').sync, {})
-end
-
-M.sync = function()
-  M.load().sync()
 end
 
 M.upgrade = function(cmd)
@@ -40,7 +35,7 @@ M.upgrade = function(cmd)
 
   vim.my.utils.augroup('user:packing', post_upgrade)
 
-  M.sync()
+  M.load().sync()
 end
 
 M.load = function()
