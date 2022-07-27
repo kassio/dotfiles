@@ -58,10 +58,6 @@ g-diff-count() {
   echo "+$plus-$minus"
 }
 
-gswm() {
-  git switch "$(git branch-main)"
-}
-
 grm() {
   git rebase "$(git branch-main)"
 }
@@ -107,6 +103,7 @@ alias gri="gr --interactive"
 alias grs="gr --skip"
 alias gs="g status -sb"
 alias gsw-="g switch -"
+alias gswm="g switch-main"
 alias gswmr="g switch-to-merge-request"
 alias gsw="g switch"
 alias gt="g tag-refs"
