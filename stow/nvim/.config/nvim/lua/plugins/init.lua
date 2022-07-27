@@ -77,16 +77,9 @@ M.load = function()
       use('tpope/vim-abolish')
 
       -- Surround chars handling
-      use({
-        {
-          'kylechui/nvim-surround',
-          config = function()
-            require('nvim-surround').setup()
-          end,
-        },
-        'wellle/targets.vim',
-        'tpope/vim-repeat', -- Enables repeat surround movements
-      })
+      use('kylechui/nvim-surround')
+      use('wellle/targets.vim')
+      use('tpope/vim-repeat') -- Enables repeat surround movements
 
       -- text aligning
       use('junegunn/vim-easy-align')
@@ -107,64 +100,47 @@ M.load = function()
         requires = { 'junegunn/fzf.vim' },
       })
 
-      use({
-        'nvim-telescope/telescope.nvim',
-        'nvim-telescope/telescope-ui-select.nvim',
-        { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-        requires = {
-          'nvim-lua/popup.nvim',
-          'nvim-lua/plenary.nvim',
-        },
-      })
+      use({ 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } })
+      use('nvim-lua/popup.nvim')
+      use('nvim-lua/plenary.nvim')
+      use('nvim-telescope/telescope-ui-select.nvim')
+      use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
 
       -- Treesitter
-      use({
-        { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
-        'nvim-treesitter/nvim-treesitter-textobjects',
-        'nvim-treesitter/nvim-treesitter-refactor',
-        'nvim-treesitter/playground',
-        'lewis6991/spellsitter.nvim',
-        'SmiteshP/nvim-gps',
-      })
+      use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
+      use('nvim-treesitter/nvim-treesitter-textobjects')
+      use('nvim-treesitter/nvim-treesitter-refactor')
+      use('nvim-treesitter/playground')
+      use('lewis6991/spellsitter.nvim')
+      use('SmiteshP/nvim-gps')
 
       -- LSP
-      use({
-        'neovim/nvim-lspconfig',
-        'williamboman/nvim-lsp-installer',
-        -- generic LSP for diagnostic, formatting, etc
-        'jose-elias-alvarez/null-ls.nvim',
-        -- symbols navigator
-        'simrat39/symbols-outline.nvim',
-      })
+      use('neovim/nvim-lspconfig')
+      use('williamboman/nvim-lsp-installer')
+      -- generic LSP for diagnostic, formatting, etc
+      use('jose-elias-alvarez/null-ls.nvim')
+      -- symbols navigator
+      use('simrat39/symbols-outline.nvim')
 
       -- Git
-      use({
-        'lewis6991/gitsigns.nvim',
-        'emmanueltouzery/agitator.nvim',
-      }, {
-        requires = 'nvim-lua/plenary.nvim',
-      })
+      use('lewis6991/gitsigns.nvim')
+      use('emmanueltouzery/agitator.nvim')
 
       -- Completion
-      use({
-        'hrsh7th/nvim-cmp',
-        'hrsh7th/cmp-nvim-lsp',
-        'hrsh7th/cmp-buffer',
-        'hrsh7th/cmp-path',
-        'hrsh7th/cmp-nvim-lua',
-        'f3fora/cmp-spell',
-        'onsails/lspkind-nvim',
-        'ray-x/cmp-treesitter',
-        'hrsh7th/cmp-nvim-lsp-signature-help',
-        -- snippets
-        'dcampos/nvim-snippy',
-        'dcampos/cmp-snippy',
-      })
+      use('hrsh7th/nvim-cmp')
+      use('hrsh7th/cmp-nvim-lsp')
+      use('hrsh7th/cmp-buffer')
+      use('hrsh7th/cmp-path')
+      use('hrsh7th/cmp-nvim-lua')
+      use('f3fora/cmp-spell')
+      use('onsails/lspkind-nvim')
+      use('ray-x/cmp-treesitter')
+      use('hrsh7th/cmp-nvim-lsp-signature-help')
+      -- snippets
+      use('dcampos/nvim-snippy')
+      use('dcampos/cmp-snippy')
 
-      use({
-        'folke/todo-comments.nvim',
-        requires = 'nvim-lua/plenary.nvim',
-      })
+      use('folke/todo-comments.nvim')
 
       -- fancy notification
       use('rcarriga/nvim-notify')
@@ -182,22 +158,18 @@ M.load = function()
       use('vim-test/vim-test')
 
       -- Debugger Tooling
-      use({
-        'mfussenegger/nvim-dap', -- debugger
-        'rcarriga/nvim-dap-ui',
-        'theHamsta/nvim-dap-virtual-text',
-        'leoluz/nvim-dap-go', -- go debugger integration
-      })
+      use('mfussenegger/nvim-dap') -- debugger
+      use('rcarriga/nvim-dap-ui')
+      use('theHamsta/nvim-dap-virtual-text')
+      use('leoluz/nvim-dap-go') -- go debugger integration
 
       -- Theme
       use({ 'catppuccin/nvim', as = 'catppuccin' })
 
       -- Colors
-      use({
-        'norcalli/nvim-colorizer.lua', -- Highlight color strings
-        'norcalli/nvim-terminal.lua', -- Fix terminal colors
-        'https://gitlab.com/yorickpeterse/nvim-pqf.git', -- Prettier qf/loc windows
-      })
+      use('norcalli/nvim-colorizer.lua') -- Highlight color strings
+      use('norcalli/nvim-terminal.lua') -- Fix terminal colors
+      use('https://gitlab.com/yorickpeterse/nvim-pqf.git') -- Prettier qf/loc windows
 
       -- Better language support
       use('euclidianAce/BetterLua.vim') -- Lua
