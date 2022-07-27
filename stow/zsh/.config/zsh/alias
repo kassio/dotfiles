@@ -39,7 +39,7 @@ alias c="code"
 
 alias tailf="tail -f"
 
-alias to-nvim="xargs nvim -p"
+alias to-nvim="tr \\\n \\\0 | xargs -0 nvim -p"
 alias nvim-diff="gdfm --diff-filter=d | to-nvim"
 alias nd="nvim-diff"
 
