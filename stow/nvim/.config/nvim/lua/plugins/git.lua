@@ -123,7 +123,7 @@ command('GopenFileRemoteUrl', vim.my.git.open_remote_file, { nargs = '?' })
 command('GcopyFileRemoteURL', vim.my.git.copy_remote_file, { nargs = '?' })
 
 command('Gdiff', vim.my.git.diff, { nargs = '?' })
-command('GblameLine', vim.my.git.blame_line_toggle, {})
+command('GblameToggleLine', vim.my.git.blame_line_toggle, {})
 command('GblameToggle', vim.my.git.blame_toggle, {})
 command('GpreviewHunk', vim.my.git.preview_hunk, {})
 
