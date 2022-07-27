@@ -122,10 +122,15 @@ M.load = function()
         'SmiteshP/nvim-gps',
       })
 
+      -- LSP/DAP installer
+      use({
+        'williamboman/mason.nvim',
+        'williamboman/mason-lspconfig.nvim',
+      })
+
       -- LSP
       use({
         'neovim/nvim-lspconfig',
-        'williamboman/nvim-lsp-installer',
         'jose-elias-alvarez/null-ls.nvim', -- generic LSP for diagnostic, formatting, etc
         'simrat39/symbols-outline.nvim', -- symbols navigator
       })
