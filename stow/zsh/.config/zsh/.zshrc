@@ -113,4 +113,5 @@ source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff
 export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
 export PATH="${HOMEBREW_PREFIX}/opt/python@3.9/bin:${PATH}"
 export PATH="${XDG_BIN_HOME}:${PATH}"
-export PATH="${XDG_CONFIG_HOME}/git/bin:${PATH}" # git helpers export PATH=".userbin:${PATH}"
+export PATH="${XDG_CONFIG_HOME}/git/bin:${PATH}" # git helpers
+export PATH=".userbin:${PATH}"
