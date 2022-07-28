@@ -18,23 +18,13 @@ M.setup = function()
 end
 
 M.upgrade = function(cmd)
-  local post_upgrade = {
-    {
-      events = { 'User' },
-      pattern = 'PackerComplete',
-      command = 'LspInstallInfo',
-    },
-  }
-
   if cmd.bang then
-    table.insert(post_upgrade, {
+    vim.my.utils.augroup('user:packing', {
       events = { 'User' },
       pattern = 'PackerComplete',
       command = 'quitall!',
     })
   end
-
-  vim.my.utils.augroup('user:packing', post_upgrade)
 
   M.load().sync()
 end
