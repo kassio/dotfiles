@@ -7,6 +7,7 @@ fi
 
 title "[brew] system upgrade"
 subtitle "brew upgrade"
+rm "${HOMEBREW_PREFIX}/var/homebrew/locks/update"
 brew update
 brew upgrade --ignore-pinned
 
