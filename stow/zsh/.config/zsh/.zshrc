@@ -35,7 +35,7 @@ fi
 autoload -Uz bashcompinit && bashcompinit
 # Custom completions
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:||=*'
 zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
 
 # load colors
@@ -113,4 +113,4 @@ source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff
 export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
 export PATH="${HOMEBREW_PREFIX}/opt/python@3.9/bin:${PATH}"
 export PATH="${XDG_BIN_HOME}:${PATH}"
-export PATH=".userbin:${PATH}"
+export PATH="${XDG_CONFIG_HOME}/git/bin:${PATH}" # git helpers export PATH=".userbin:${PATH}"
