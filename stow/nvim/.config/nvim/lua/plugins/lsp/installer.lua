@@ -1,8 +1,40 @@
 local theme = vim.my.theme
 local lspconfig = require('lspconfig')
-local installer = require('mason-lspconfig')
 local generics = require('plugins.lsp.generics')
+local servers_map = require('mason-lspconfig.mappings.server').package_to_lspconfig
 local customizations = require('plugins.lsp.customizations')
+
+local my_servers = table.slice(servers_map, {
+  'bash-language-server',
+  'css-lsp',
+  'go-debug-adapter',
+  'golangci-lint',
+  'golangci-lint-langserver',
+  'golines',
+  'gopls',
+  'gotests',
+  'graphql-language-service-cli',
+  'html-lsp',
+  'json-lsp',
+  'jsonnet-language-server',
+  'lua-language-server',
+  'luacheck',
+  'luaformatter',
+  'markdownlint',
+  'shellcheck',
+  'solargraph',
+  'sql-formatter',
+  'sqlls',
+  'sqls',
+  'stylua',
+  'tailwindcss-language-server',
+  'vetur-vls',
+  'vim-language-server',
+  'vint',
+  'vue-language-server',
+  'yaml-language-server',
+  'yamllint',
+})
 
 require('mason').setup({
   ui = {
@@ -15,23 +47,13 @@ require('mason').setup({
   },
 })
 
-local servers = {
-  'bashls',
-  'cssls',
-  'gopls',
-  'golangci_lint_ls',
-  'graphql',
-  'html',
-  'jsonls',
-  'solargraph',
-  'sqlls',
-  'sqls',
-  'sumneko_lua',
-  'tailwindcss',
-  'vimls',
-  'vuels',
-  'yamlls',
-}
+require('mason-lspconfig').setup()
+
+require('mason-tool-installer').setup({
+  ensure_installed = vim.tbl_keys(my_servers),
+  auto_update = false,
+  run_on_start = false,
+})
 
 return {
   setup = function(attacher, capabilities)
@@ -41,14 +63,9 @@ return {
       capabilities = capabilities,
     }
 
-    installer.setup({
-      automatic_installation = true,
-      ensure_installed = servers,
-    })
-
     generics.setup()
 
-    for _, server in ipairs(servers) do
+    for _, server in pairs(my_servers) do
       local settings = customizations[server] or {}
 
       lspconfig[server].setup(vim.tbl_extend('keep', settings, default_opts))

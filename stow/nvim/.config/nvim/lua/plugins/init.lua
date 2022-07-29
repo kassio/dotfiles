@@ -18,13 +18,23 @@ M.setup = function()
 end
 
 M.upgrade = function(cmd)
+  local post_upgrade = {
+    {
+      events = { 'User' },
+      pattern = 'PackerComplete',
+      command = 'MasonToolsUpdate',
+    },
+  }
+
   if cmd.bang then
-    vim.my.utils.augroup('user:packing', {
+    table.insert(post_upgrade, {
       events = { 'User' },
       pattern = 'PackerComplete',
       command = 'quitall!',
     })
   end
+
+  vim.my.utils.augroup('user:packing', post_upgrade)
 
   M.load().sync()
 end
@@ -116,6 +126,7 @@ M.load = function()
       use({
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
+        'WhoIsSethDaniel/mason-tool-installer.nvim',
       })
 
       -- LSP
