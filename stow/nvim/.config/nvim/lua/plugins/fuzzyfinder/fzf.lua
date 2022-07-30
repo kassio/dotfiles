@@ -1,6 +1,5 @@
 local g = vim.g
 local fn = vim.fn
-local utils = vim.my.utils
 
 g.fzf_command_prefix = 'Fuzzy'
 g.fzf_history_dir = '~/.fzf-history'

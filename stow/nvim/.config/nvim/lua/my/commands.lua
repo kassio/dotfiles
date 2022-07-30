@@ -1,5 +1,4 @@
 local command = vim.api.nvim_create_user_command
-local cabbrev = vim.my.utils.cabbrev
 
 -- reload config
 command('Reload', vim.my.reloader.reload, {})
