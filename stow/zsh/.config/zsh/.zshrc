@@ -105,6 +105,7 @@ source "${ZDOTDIR}/ulimit"
 source "${ZDOTDIR}/ripgrep"
 source "${ZDOTDIR}/p10k.zsh" 2>/dev/null # zsh theme
 source "${ZDOTDIR}/completions"
+source "${ZDOTDIR}/title"
 source "${ZDOTDIR}/plugins/init"
 source "${HOME}/.env" 2>/dev/null # Ephemeral stuff
 source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff

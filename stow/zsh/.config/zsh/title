@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+
+function title() {
+  local result rpath
+  rpath="$(realpath --relative-base="${HOME}" "${PWD}")"
+  if [ "${rpath:0:1}" = "/" ]; then
+    result="${rpath}"
+  else
+    result="\$HOME/${rpath}"
+  fi
+
+  echo -ne "\033]0;${result}\007"
+}
+
+autoload -U add-zsh-hook
+add-zsh-hook precmd title
+add-zsh-hook preexec title
