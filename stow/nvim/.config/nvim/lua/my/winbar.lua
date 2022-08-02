@@ -31,9 +31,9 @@ local winbar = function(focused)
       'winbar',
       table.concat({
         string.format('%%#%s#', hl_filename),
-        '%n', -- bufnr
+        ' %n', -- bufnr
         '%<%=', -- spacer
-        '%f', -- filename
+        vim.fn.expand('%:.')
       }, ''),
       { scope = 'local' }
     )
