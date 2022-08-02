@@ -3,7 +3,13 @@ local filetree = require('nvim-tree.lib')
 local M = {}
 
 M.filetree_current_file = function()
-  return './' .. fn.fnamemodify(filetree.get_node_at_cursor().absolute_path, ':.')
+  local path = filetree.get_node_at_cursor().absolute_path
+
+  if path then
+    return './' .. fn.fnamemodify(path, ':.')
+  else
+    return fn.expand('%:~:h')
+  end
 end
 
 M.neoterm_id = function()

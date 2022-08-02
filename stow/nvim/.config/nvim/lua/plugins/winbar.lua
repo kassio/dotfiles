@@ -16,25 +16,24 @@ local winbar = function(focused)
       return
     end
 
-    local hl_filename = 'WinBarNC'
-
+    local hl_filename
     if focused then
       hl_filename = 'WinBarInfo'
-    end
-
-    if vim.bo.modified then
+    elseif vim.bo.modified then
       hl_filename = 'WinBarWarn'
+    else
+      hl_filename = 'WinBarNC'
     end
 
-    pcall(
-      vim.api.nvim_set_option_value,
+    vim.api.nvim_set_option_value(
       'winbar',
       table.concat({
         string.format('%%#%s#', hl_filename),
-        ' %n', -- bufnr
         '%<%=', -- spacer
-        vim.fn.expand('%:.')
-      }, ''),
+        '%n', -- bufnr
+        vim.fn.expand('%:.'), -- filename
+        '%<%=', -- spacer
+      }, ' '),
       { scope = 'local' }
     )
   end
@@ -43,7 +42,6 @@ end
 vim.my.utils.augroup('user:winbar', {
   {
     events = {
-      'CursorMoved',
       'BufWinEnter',
       'WinEnter',
       'BufFilePost',

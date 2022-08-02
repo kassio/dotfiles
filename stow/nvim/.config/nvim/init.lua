@@ -1,8 +1,12 @@
-require('globals') -- Global functions
-require('plugins').setup() -- Prepare/Install Plugin Manager
+require('globals') -- global functions (used for debbuging)
+require('extensions') -- lua extensions (used everywhere)
 
-require('my') -- my plugins
+-- my own set of configs and helpers (plugin independent)
+require('my')
 
+ -- plugins configurations
+require('plugins').setup()
+require('plugins.highlight')
 require('plugins.comment')
 require('plugins.projection')
 require('plugins.notification')
@@ -15,11 +19,9 @@ require('plugins.treesitter')
 require('plugins.completion')
 require('plugins.lsp')
 require('plugins.debugger')
-require('plugins.statusline')
 require('plugins.todo')
-require('plugins.highlight')
 require('plugins.restorer')
 require('plugins.aligner')
 require('plugins.surround')
-
-require('my.winbar')
+require('plugins.statusline')
+require('plugins.winbar')
