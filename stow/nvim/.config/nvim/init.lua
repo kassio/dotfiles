@@ -21,3 +21,5 @@ require('plugins.highlight')
 require('plugins.restorer')
 require('plugins.aligner')
 require('plugins.surround')
+
+require('my.winbar')
