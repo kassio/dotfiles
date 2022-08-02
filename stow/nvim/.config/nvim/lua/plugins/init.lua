@@ -95,12 +95,6 @@ M.load = function()
 
       -- Fuzzy Finder
       use({
-        'junegunn/fzf',
-        run = ':call fzf#install()',
-        requires = { 'junegunn/fzf.vim' },
-      })
-
-      use({
         {
           'nvim-telescope/telescope.nvim',
           requires = { 'nvim-lua/plenary.nvim' },
