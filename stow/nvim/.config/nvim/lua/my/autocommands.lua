@@ -4,8 +4,23 @@ vim.my.utils.augroup('user:autocommands', {
       'BufWritePre',
       'FileWritePre',
     },
-    pattern = '*',
     callback = vim.my.buffers.trim,
+  },
+  {
+    events = {
+      'WinLeave',
+    },
+    callback = function()
+      vim.opt_local.relativenumber = false
+    end,
+  },
+  {
+    events = {
+      'WinEnter',
+    },
+    callback = function()
+      vim.opt_local.relativenumber = true
+    end,
   },
   {
     events = {
@@ -13,7 +28,6 @@ vim.my.utils.augroup('user:autocommands', {
       'TextChanged',
       'VimSuspend',
     },
-    pattern = '*',
     callback = function()
       if vim.bo.modifiable then
         vim.my.buffers.trim()
