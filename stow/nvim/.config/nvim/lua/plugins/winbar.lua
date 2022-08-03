@@ -1,17 +1,7 @@
-local winbar_filetype_exclude = {
-  '',
-  'NvimTree',
-  'TelescopePrompt',
-  'TelescopeResults',
-  'fzf',
-  'help',
-  'neoterm',
-  'packer',
-}
-
 local winbar = function(focused)
   return function()
-    if vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype) then
+    local ft = vim.bo.filetype
+    if ft == '' or vim.my.utils.plugin_filetype(ft) then
       vim.opt_local.winbar = ''
       return
     end

@@ -8,22 +8,6 @@ vim.my.utils.augroup('user:autocommands', {
   },
   {
     events = {
-      'WinLeave',
-    },
-    callback = function()
-      vim.opt_local.relativenumber = false
-    end,
-  },
-  {
-    events = {
-      'WinEnter',
-    },
-    callback = function()
-      vim.opt_local.relativenumber = true
-    end,
-  },
-  {
-    events = {
       'FocusLost',
       'TextChanged',
       'VimSuspend',

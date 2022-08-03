@@ -4,7 +4,7 @@ require('extensions') -- lua extensions (used everywhere)
 -- my own set of configs and helpers (plugin independent)
 require('my')
 
- -- plugins configurations
+-- plugins configurations
 require('plugins').setup()
 require('plugins.highlight')
 require('plugins.comment')
@@ -23,6 +23,7 @@ require('plugins.todo')
 require('plugins.restorer')
 require('plugins.aligner')
 require('plugins.surround')
+require('plugins.focused-options')
 require('plugins.statusline')
 require('plugins.tabline')
 require('plugins.winbar')

@@ -62,6 +62,20 @@ M.fileicon = function(filetype, filename)
   return require('nvim-web-devicons').get_icon(filename, extension, { default = true })
 end
 
+local plugin_filetypes = {
+  'NvimTree',
+  'TelescopePrompt',
+  'TelescopeResults',
+  'fzf',
+  'help',
+  'neoterm',
+  'packer',
+}
+
+M.plugin_filetype = function(ft)
+  return vim.tbl_contains(plugin_filetypes, vim.bo.filetype)
+end
+
 local valid_flag = function(flag)
   return vim.tbl_contains({ 'p', 'h', 't', 'r', 'e', '.', '~' }, flag)
 end
