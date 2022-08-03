@@ -53,7 +53,13 @@ alias truncate0="truncate -c -s 0"
 
 source "${XDG_CONFIG_HOME}/git/alias"
 
-alias tbroadcast="kitty +kitten broadcast"
+alias kitty-broadcast="kitty +kitten broadcast"
+
+kitty-detach-to-tab() {
+  target="${1:-new}"
+
+  kitty @ detach-window --target-tab "${target}"
+}
 
 remove-quarentine() {
   xattr -d com.apple.quarantine "$(which $1)"
