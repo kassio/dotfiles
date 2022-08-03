@@ -97,4 +97,12 @@ keymap('n', '<leader>bd', '<cmd>bw!<cr>')
 keymap('n', '<leader>da', '<cmd>bufdo bw!<cr>')
 
 -- close floating windows
-keymap('n', '<leader>wa', vim.my.windows.close_floating)
+keymap('n', '<leader>wa', function()
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local ok, config = pcall(vim.api.nvim_win_get_config, win)
+
+    if ok and config.relative ~= '' then
+      vim.api.nvim_win_close(win, true)
+    end
+  end
+end)
