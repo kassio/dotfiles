@@ -66,40 +66,40 @@ local get_limit = function(labels, columns)
   return limit
 end
 
-vim.my.tabline = function()
-  local current = api.nvim_get_current_tabpage()
-  local current_nr = api.nvim_tabpage_get_number(current)
-  local labels = get_labels(current)
-  local labels_text = table.concat(labels)
+return {
+  tabline = function()
+    local current = api.nvim_get_current_tabpage()
+    local current_nr = api.nvim_tabpage_get_number(current)
+    local labels = get_labels(current)
+    local labels_text = table.concat(labels)
 
-  -- Tab labels is not using the whole UI
-  if #labels_text < vim.o.columns then
-    return table.concat({ '%#TabLine#', table.concat(labels), '%#TabLineFill' })
-  elseif current_nr <= math.floor(#labels / 2) then
-    -- When the number of tabs if longer than the UI, some tabs might
-    -- get hidden. To ensure the current tab, and its surrounds is always
-    -- visible, hide only tabs before the current or farther ahead of the
-    -- current tab
-    local limit = math.min(current_nr + get_limit(labels, vim.o.columns), #labels)
+    -- Tab labels is not using the whole UI
+    if #labels_text < vim.o.columns then
+      return table.concat({ '%#TabLine#', table.concat(labels), '%#TabLineFill' })
+    elseif current_nr <= math.floor(#labels / 2) then
+      -- When the number of tabs if longer than the UI, some tabs might
+      -- get hidden. To ensure the current tab, and its surrounds is always
+      -- visible, hide only tabs before the current or farther ahead of the
+      -- current tab
+      local limit = math.min(current_nr + get_limit(labels, vim.o.columns), #labels)
 
-    return table.concat({
-      '%#TabLine#',
-      table.concat(labels, '', 1, limit),
-      '%<(',
-      table.concat(labels, '', limit, #labels),
-      '%)',
-      '%#TabLineFill',
-    })
-  else
-    return table.concat({
-      '%#TabLine#',
-      '%<(',
-      table.concat(labels, '', 1, current_nr - 1),
-      '%)',
-      table.concat(labels, '', current_nr, #labels),
-      '%#TabLineFill',
-    })
-  end
-end
-
-vim.o.tabline = '%!v:lua.vim.my.tabline()'
+      return table.concat({
+        '%#TabLine#',
+        table.concat(labels, '', 1, limit),
+        '%<(',
+        table.concat(labels, '', limit, #labels),
+        '%)',
+        '%#TabLineFill',
+      })
+    else
+      return table.concat({
+        '%#TabLine#',
+        '%<(',
+        table.concat(labels, '', 1, current_nr - 1),
+        '%)',
+        table.concat(labels, '', current_nr, #labels),
+        '%#TabLineFill',
+      })
+    end
+  end,
+}

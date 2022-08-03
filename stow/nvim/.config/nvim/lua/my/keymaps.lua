@@ -98,8 +98,3 @@ keymap('n', '<leader>da', '<cmd>bufdo bw!<cr>')
 
 -- close floating windows
 keymap('n', '<leader>wa', vim.my.windows.close_floating)
-
--- session management
-keymap('n', '<leader>ss', '<cmd>SessionSave<cr>')
-keymap('n', '<leader>sl', '<cmd>SessionLoad<cr>')
-keymap('n', '<leader>sd', '<cmd>SessionDestroy<cr>')
