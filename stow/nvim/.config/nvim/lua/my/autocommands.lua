@@ -12,7 +12,6 @@ vim.my.utils.augroup('user:autocommands', {
       'FocusLost',
       'TextChanged',
       'VimSuspend',
-      'InsertLeavePre',
     },
     pattern = '*',
     callback = function()
