@@ -7,10 +7,10 @@ local winbar = function(focused)
     end
 
     local hl_filename
-    if focused then
-      hl_filename = 'WinBarInfo'
-    elseif vim.bo.modified then
+    if vim.bo.modified then
       hl_filename = 'WinBarWarn'
+    elseif focused then
+      hl_filename = 'WinBarInfo'
     else
       hl_filename = 'WinBarNC'
     end
@@ -32,13 +32,15 @@ end
 vim.my.utils.augroup('user:winbar', {
   {
     events = {
-      'BufWinEnter',
-      'WinEnter',
       'BufFilePost',
-      'InsertEnter',
+      'BufWinEnter',
       'BufWritePost',
-      'FocusLost',
+      'CursorMoved',
       'FileType',
+      'FocusLost',
+      'InsertEnter',
+      'WinEnter',
+      'WinLeave',
     },
     callback = winbar(true),
   },

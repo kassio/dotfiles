@@ -22,6 +22,7 @@ local setup = function(opts)
       background = colorscheme_colors.base,
       shadow = colorscheme_colors.surface0,
       highlight = colorscheme_colors.overlay2,
+      dark_highlight = colorscheme_colors.mantle,
     },
   })
 end

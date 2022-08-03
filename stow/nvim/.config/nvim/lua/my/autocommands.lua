@@ -9,8 +9,10 @@ vim.my.utils.augroup('user:autocommands', {
   {
     events = {
       'FocusLost',
-      'TextChanged',
+      'VimLeavePre',
       'VimSuspend',
+      'BufLeave',
+      'BufEnter',
     },
     callback = function()
       if vim.bo.modifiable then

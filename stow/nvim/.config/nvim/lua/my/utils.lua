@@ -73,7 +73,7 @@ local plugin_filetypes = {
 }
 
 M.plugin_filetype = function(ft)
-  return vim.tbl_contains(plugin_filetypes, vim.bo.filetype)
+  return vim.tbl_contains(plugin_filetypes, ft or vim.bo.filetype)
 end
 
 local valid_flag = function(flag)

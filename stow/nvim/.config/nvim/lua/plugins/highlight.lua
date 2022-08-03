@@ -154,7 +154,7 @@ hl_extend('zshQuoted', 'String', { bold = true })
 -- tabline
 -- TabLineSel and TabLineFill.  |hl-TabLine| |hl-TabLineSel| |hl-TabLineFill|
 hl_def('TabLine', {
-  background = colors.background,
+  background = colors.dark_highlight,
   foreground = colors.highlight,
 })
 hl_extend('TabLineFill', 'TabLine')
@@ -164,11 +164,15 @@ hl_extend('TabLineSel', 'TabLine', {
   bold = true,
 })
 
+hl_def('VertSplit', {
+  background = colors.dark_highlight,
+  foreground = colors.dark_highlight,
+})
+
 -- winbar
 hl_def('WinBar', {
-  background = colors.background,
+  background = colors.dark_highlight,
   foreground = colors.highlight,
-  underdouble = true,
   sp = colors.shadow,
 })
 hl_extend('WinBarNC', 'WinBar', { foreground = colors.shadow })
