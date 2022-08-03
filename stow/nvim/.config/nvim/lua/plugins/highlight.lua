@@ -151,8 +151,21 @@ hl_extend('goTSproperty', 'Function')
 -- zsh
 hl_extend('zshQuoted', 'String', { bold = true })
 
+-- tabline
+-- TabLineSel and TabLineFill.  |hl-TabLine| |hl-TabLineSel| |hl-TabLineFill|
+hl_def('TabLine', {
+  background = colors.background,
+  foreground = colors.highlight,
+})
+hl_extend('TabLineFill', 'TabLine')
+hl_extend('TabLineSel', 'TabLine', {
+  background = colors.info,
+  foreground = colors.shadow,
+  bold = true,
+})
+
 -- winbar
-hl_extend('WinBar', 'StatusLine', {
+hl_def('WinBar', {
   background = colors.background,
   foreground = colors.highlight,
   underdouble = true,
