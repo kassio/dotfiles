@@ -1,4 +1,5 @@
 local telescope = require('telescope')
+local builtin = require('telescope.builtin')
 local actions = require('telescope.actions')
 local utils = vim.my.utils
 local keymap = vim.keymap.set
@@ -169,8 +170,12 @@ cmd_keymap('n', 'f<c-o>', 'Telescope oldfiles')
 cmd_keymap('n', 'f<c-t>', 'Telescope treesitter')
 cmd_keymap('n', 'f<c-u>', 'Telescope commands')
 
--- keymap('n', '<leader>as', vim.my.fuzzyfinder.grep)
--- keymap('x', '<leader>as', vim.my.fuzzyfinder.grep)
+keymap('n', '<leader>as', builtin.grep_string)
+vim.api.nvim_create_user_command('Grep', function(cmd)
+  builtin.grep_string({ search = utils.get_visual_selection() })
+end, { range = 0 })
+
+keymap('x', '<leader>as', ':Grep<cr>')
 
 utils.augroup('user:fuzzyfinder', {
   {

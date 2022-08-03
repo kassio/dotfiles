@@ -2,6 +2,23 @@ local M = {}
 local api = vim.api
 local fn = vim.fn
 
+M.get_visual_selection = function()
+  local s_start = vim.api.nvim_buf_get_mark(0, '<')
+  local s_end = vim.api.nvim_buf_get_mark(0, '>')
+  local start_row = s_start[1] - 1
+  local start_col = s_start[2]
+  local end_row = s_end[1] - 1
+  local end_col = s_end[2] + 1
+  local ok, lines = pcall(vim.api.nvim_buf_get_text, 0, start_row, start_col, end_row, end_col, {})
+
+  if ok then
+    return table.concat(lines, '\n')
+  else
+    print('Failed to get selection: ' .. lines)
+    return ''
+  end
+end
+
 M.to_clipboard = function(text, use_external_clipboard)
   if use_external_clipboard then
     fn.setreg('*', text)
