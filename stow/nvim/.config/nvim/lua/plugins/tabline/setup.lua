@@ -6,59 +6,55 @@ local get_bufnr = function(tab)
 end
 
 local get_name = function(tab)
-  local bufnr = get_bufnr(tab)
-  local fullname = api.nvim_buf_get_name(bufnr)
+  local fullname = api.nvim_buf_get_name(tab.bufnr)
 
   if #fullname == 0 then
     return '[No name]'
   else
     local name = vim.fn.fnamemodify(fullname, ':t')
-    local icon = vim.my.buffers.fileicon(bufnr)
 
-    -- To ensure a tab label limit of 50chars
-    -- Truncate the file name if it's too long
-    -- Take in consideration icon, tab number and spacing
     if #name > 42 then
-      name = string.sub(name, 1, 39) .. '...'
+      return string.sub(name, 1, 39) .. '...'
     end
 
-    return string.format('%s %s', icon, name)
+    return name
   end
 end
 
-local label_for = function(tabnr, name, current)
-  local text = string.format('%%%dT %d %s', tabnr, tabnr, name)
+local label_for = function(tab)
+  local name = get_name(tab)
+  local icon = vim.my.buffers.fileicon(tab.bufnr)
+  local label = string.format('%%3.50(%%%dT %d %s %s %%)', tab.page, tab.page, icon, name)
 
-  if current then
-    -- Ensure current tab text has at least 13chars and at most 50chars
-    text = '%13.50(%#TabLineSel#' .. text .. ' %*%)'
+  if tab.focused then
+    return '%#TabLineSel#' .. label .. '%*'
   else
-    text = text .. ' '
+    return label
   end
-
-  return text
 end
 
-local get_labels = function(current)
+local get_labels = function(focused_tab)
   local tabs = api.nvim_list_tabpages()
 
   return vim.tbl_map(function(tab)
-    local tabnr = api.nvim_tabpage_get_number(tab)
-    local name = get_name(tab)
-
-    return label_for(tabnr, name, tab == current)
+    return label_for({
+      id = tab,
+      page = api.nvim_tabpage_get_number(tab),
+      bufnr = get_bufnr(tab),
+      focused = tab == focused_tab,
+    })
   end, tabs)
 end
 
 local get_limit = function(labels, columns)
-  local current = 0
+  local focused_tab = 0
   local limit = 0
 
   for i, label in ipairs(labels) do
     limit = i
-    current = current + #label
+    focused_tab = focused_tab + #label
 
-    if current >= columns then
+    if focused_tab >= columns then
       break
     end
   end
@@ -68,9 +64,9 @@ end
 
 return {
   tabline = function()
-    local current = api.nvim_get_current_tabpage()
-    local current_nr = api.nvim_tabpage_get_number(current)
-    local labels = get_labels(current)
+    local focused_tab = api.nvim_get_current_tabpage()
+    local current_nr = api.nvim_tabpage_get_number(focused_tab)
+    local labels = get_labels(focused_tab)
     local labels_text = table.concat(labels)
 
     -- Tab labels is not using the whole UI
@@ -78,9 +74,9 @@ return {
       return table.concat({ '%#TabLine#', table.concat(labels), '%#TabLineFill' })
     elseif current_nr <= math.floor(#labels / 2) then
       -- When the number of tabs if longer than the UI, some tabs might
-      -- get hidden. To ensure the current tab, and its surrounds is always
-      -- visible, hide only tabs before the current or farther ahead of the
-      -- current tab
+      -- get hidden. To ensure the focused_tab, and its surrounds is always
+      -- visible, hide only tabs before the focused_tab or farther ahead of the
+      -- focused_tab
       local limit = math.min(current_nr + get_limit(labels, vim.o.columns), #labels)
 
       return table.concat({
