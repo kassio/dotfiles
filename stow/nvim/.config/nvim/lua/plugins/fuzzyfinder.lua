@@ -171,7 +171,7 @@ cmd_keymap('n', 'f<c-t>', 'Telescope treesitter')
 cmd_keymap('n', 'f<c-u>', 'Telescope commands')
 
 keymap('n', '<leader>as', builtin.grep_string)
-vim.api.nvim_create_user_command('Grep', function(cmd)
+vim.api.nvim_create_user_command('Grep', function()
   builtin.grep_string({ search = utils.get_visual_selection() })
 end, { range = 0 })
 
@@ -182,5 +182,10 @@ utils.augroup('user:fuzzyfinder', {
     events = { 'User' },
     pattern = 'TelescopePreviewerLoaded',
     command = 'setlocal wrap number numberwidth=5 norelativenumber',
+  },
+  {
+    events = { 'FileType' },
+    pattern = 'TelescopeResults,TelescopePrompt',
+    command = 'setlocal nonumber norelativenumber',
   },
 })
