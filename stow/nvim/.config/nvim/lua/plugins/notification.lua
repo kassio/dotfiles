@@ -1,7 +1,7 @@
 local notify = require('notify')
 local theme = vim.my.theme
 
-require('notify').setup({
+notify.setup({
   timeout = 1250,
   icons = {
     ERROR = theme.icons.error,
@@ -14,3 +14,5 @@ require('notify').setup({
 })
 
 vim.notify = notify
+
+vim.keymap.set('n', '<leader>nn', notify.dismiss)
