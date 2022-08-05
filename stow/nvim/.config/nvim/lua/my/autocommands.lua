@@ -8,16 +8,19 @@ vim.my.utils.augroup('user:autocommands', {
   },
   {
     events = {
+      'BufEnter',
+      'BufLeave',
       'FocusLost',
+      'TextChanged',
+      'VimLeave',
       'VimLeavePre',
       'VimSuspend',
-      'BufLeave',
-      'BufEnter',
     },
+
     callback = function()
       if vim.bo.modifiable then
         vim.my.buffers.trim()
-        vim.cmd('silent! update!')
+        vim.cmd('silent! wall!')
       end
     end,
   },

@@ -1,3 +1,6 @@
+vim.g.lastplace_ignore = 'gitcommit,gitrebase'
+vim.g.lastplace_ignore_buftype = 'quickfix,nofile,help'
+
 local function set_relative_number(value)
   if vim.my.utils.plugin_filetype(vim.bo.filetype) then
     return
@@ -10,6 +13,8 @@ vim.my.utils.augroup('user:autocommands', {
   {
     events = {
       'WinLeave',
+      'BufLeave',
+      'FocusLost',
     },
     callback = function()
       set_relative_number(false)
@@ -18,6 +23,8 @@ vim.my.utils.augroup('user:autocommands', {
   {
     events = {
       'WinEnter',
+      'BufEnter',
+      'FocusGained',
     },
     callback = function()
       set_relative_number(true)
