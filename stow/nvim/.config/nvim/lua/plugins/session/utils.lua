@@ -44,42 +44,42 @@ local session_list = function()
   return vim.fn.glob(session_for('*'), false, true)
 end
 
-local session_selector = function(list)
+local session_options = function(list)
   local options = {}
 
   for i, path in ipairs(list) do
     local split = vim.fn.split(path, '/')
     local session = split[#split]
     local prefix = prefix_from(session)
-    split = string.format('%s. %s', i, prefix)
+    split = string.format('%s » %s', i, prefix)
 
     table.insert(options, 1, split)
   end
 
   table.sort(options)
 
-  table.insert(options, 1, 'Available Sessions: ')
-
-  return tonumber(vim.fn.inputlist(options))
+  return options
 end
 
 local with_session = function(callback)
   local sessions = session_list()
 
   if #sessions > 0 then
-    local index = session_selector(sessions)
+    local options = session_options(sessions)
 
-    -- confirm returns 0 for <esc>
-    -- and the chose choice indexed on 1
-    if index > 0 then
-      local file = sessions[index]
+    vim.ui.select(options, { prompt = 'Available Sessions' }, function(_choice, index)
+      -- confirm returns 0 for <esc>
+      -- and the chose choice indexed on 1
+      if index > 0 then
+        local file = sessions[index]
 
-      if vim.fn.filereadable(file) then
-        callback(file)
+        if vim.fn.filereadable(file) then
+          callback(file)
 
-        return file
+          return file
+        end
       end
-    end
+    end)
   end
 end
 
@@ -88,14 +88,12 @@ local delete_session = function(session)
 end
 
 M.save = function()
-  local question = 'Choose the session name'
   local default = prefix_from(vim.api.nvim_get_vvar('this_session'))
 
-  if #default > 0 then
-    question = string.format('%s (default %s)', question, default)
-  end
-
-  local prefix = vim.fn.input(question .. ': ')
+  local prefix
+  vim.ui.input({ prompt = 'Choose the session name: ', default = default }, function(input)
+    prefix = input
+  end)
 
   if #prefix == 0 and #default > 0 then
     prefix = default
