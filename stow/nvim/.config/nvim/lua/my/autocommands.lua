@@ -1,6 +1,7 @@
 vim.my.utils.augroup('user:autocommands', {
   {
     events = {
+      'BufFilePre',
       'BufWritePre',
       'FileWritePre',
     },
@@ -12,11 +13,9 @@ vim.my.utils.augroup('user:autocommands', {
       'BufLeave',
       'FocusLost',
       'TextChanged',
-      'VimLeave',
       'VimLeavePre',
       'VimSuspend',
     },
-
     callback = function()
       if vim.bo.modifiable then
         vim.my.buffers.trim()
