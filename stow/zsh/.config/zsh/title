@@ -12,8 +12,7 @@ function title() {
   fi
 
   if [ "${#result}" -gt 30 ]; then
-    result="...${result[-27,-1]}"
-    result="$(echo "${result[-27,-1]}" | sed 's;[^/]*/;.../;')"
+    result="$(echo "${result[-20,-1]}" | sed 's;[^/]*/;.../;')"
   fi
 
   echo -ne "\033]0;${result}\007"
