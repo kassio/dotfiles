@@ -7,6 +7,7 @@ PATH="${PATH}:/usr/local/bin" # intel homebrew
 PATH="${PATH}:/opt/homebrew/bin" # M1 homebrew
 export PATH
 
+"${DOTFILES}/installers/kitty-install"
 "${DOTFILES}/installers/setup-macos"
 "${DOTFILES}/installers/stow"
 "${DOTFILES}/installers/brew"
