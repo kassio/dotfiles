@@ -1,57 +1,51 @@
-local winbar = function(focused)
-  return function()
-    local ft = vim.bo.filetype
-    if ft == '' or vim.my.utils.plugin_filetype(ft) then
-      vim.opt_local.winbar = ''
-      return
-    end
+local api = vim.api
 
-    local hl_filename
-    if vim.bo.modified then
-      hl_filename = 'WinBarWarn'
-    elseif focused then
-      hl_filename = 'WinBarInfo'
-    else
-      hl_filename = 'WinBarNC'
-    end
-
-    vim.api.nvim_set_option_value(
-      'winbar',
-      table.concat({
-        string.format('%%#%s#', hl_filename),
-        '%<%=', -- spacer
-        '%n', -- bufnr
-        vim.fn.expand('%:.'), -- filename
-        '%<%=', -- spacer
-      }, ' '),
-      { scope = 'local' }
-    )
+local winbar = function(bufnr, focused)
+  local hl_filename
+  if api.nvim_buf_get_option(bufnr, 'modified') then
+    hl_filename = 'WinBarWarn'
+  elseif focused then
+    hl_filename = 'WinBarInfo'
+  else
+    hl_filename = 'WinBarNC'
   end
+  local filename = vim.fn.fnamemodify(api.nvim_buf_get_name(bufnr), ':.')
+
+  return table.concat({
+    string.format('%%#%s#', hl_filename),
+    '%<%=',
+    bufnr,
+    filename,
+    '%<%=',
+  }, ' ')
 end
 
 vim.my.utils.augroup('user:winbar', {
   {
     events = {
       'FileType',
-      'FileWritePre',
+      'FileWritePost',
       'FocusLost',
       'InsertEnter',
-      'VimLeavePre',
-      'VimSuspend',
-      'WinEnter',
-      'WinLeave',
-    },
-    callback = winbar(true),
-  },
-  {
-    events = {
-      'FocusLost',
       'TextChanged',
       'VimLeavePre',
       'VimSuspend',
       'WinEnter',
       'WinLeave',
     },
-    callback = winbar(false),
+    callback = function()
+      local curwin = api.nvim_get_current_win()
+
+      for _, winid in ipairs(api.nvim_list_wins()) do
+        local bufnr = api.nvim_win_get_buf(winid)
+        local ft = api.nvim_buf_get_option(bufnr, 'filetype')
+
+        if ft == '' or vim.my.utils.plugin_filetype(ft) then
+          api.nvim_win_set_option(winid, 'winbar', '')
+        else
+          api.nvim_win_set_option(winid, 'winbar', winbar(bufnr, winid == curwin))
+        end
+      end
+    end,
   },
 })
