@@ -9,7 +9,7 @@ local function set_relative_number(value)
   vim.opt_local.relativenumber = value
 end
 
-vim.my.utils.augroup('user:autocommands', {
+vim.my.utils.augroup('user:focus', {
   {
     events = {
       'WinLeave',
@@ -28,6 +28,22 @@ vim.my.utils.augroup('user:autocommands', {
     },
     callback = function()
       set_relative_number(true)
+    end,
+  },
+  {
+    events = {
+      'BufEnter',
+      'BufLeave',
+      'FocusLost',
+      'TextChanged',
+      'VimLeavePre',
+      'VimSuspend',
+    },
+    callback = function()
+      if vim.bo.modifiable then
+        vim.my.buffers.trim()
+        vim.cmd('silent! wall!')
+      end
     end,
   },
 })

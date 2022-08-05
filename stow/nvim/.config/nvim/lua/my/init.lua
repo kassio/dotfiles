@@ -5,7 +5,6 @@ vim.my.snippets = require('my.snippets')
 vim.my.theme = require('my.theme')
 vim.my.utils = require('my.utils')
 
-require('my.autocommands')
 require('my.commands')
 require('my.diagnostic')
 require('my.keymaps')
