@@ -38,20 +38,11 @@ M.indent = function()
   end)
 end
 
-M.filename = function(bufnr)
-  bufnr = bufnr or 0
-
-  return api.nvim_buf_get_name(bufnr)
-end
-
-M.filetype = function(bufnr)
-  bufnr = bufnr or 0
-
-  return api.nvim_buf_get_option(bufnr, 'filetype')
-end
-
 M.fileicon = function(bufnr)
-  return vim.my.utils.fileicon(M.filetype(bufnr), M.filename(bufnr))
+  local filetype = api.nvim_buf_get_option(bufnr, 'filetype')
+  local filename = api.nvim_buf_get_name(bufnr)
+
+  return vim.my.utils.fileicon(filetype, filename)
 end
 
 M.ensure_path_and_write = function()
