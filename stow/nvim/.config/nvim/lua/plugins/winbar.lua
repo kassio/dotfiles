@@ -35,8 +35,9 @@ vim.my.utils.augroup('user:winbar', {
     },
     callback = function()
       local curwin = api.nvim_get_current_win()
+      local curtab = api.nvim_get_current_tabpage()
 
-      for _, winid in ipairs(api.nvim_list_wins()) do
+      for _, winid in ipairs(api.nvim_tabpage_list_wins(curtab)) do
         local bufnr = api.nvim_win_get_buf(winid)
         local ft = api.nvim_buf_get_option(bufnr, 'filetype')
 
