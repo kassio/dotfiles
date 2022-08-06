@@ -69,6 +69,7 @@ local plugin_filetypes = {
   'fzf',
   'help',
   'neoterm',
+  'notify',
   'packer',
 }
 

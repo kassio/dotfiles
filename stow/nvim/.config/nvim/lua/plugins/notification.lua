@@ -11,6 +11,9 @@ notify.setup({
     TRACE = theme.icons.bug,
   },
   background_colour = theme.colors.background,
+  on_close = function()
+    vim.cmd('doautocmd User NotificationClosed')
+  end,
 })
 
 vim.notify = notify
