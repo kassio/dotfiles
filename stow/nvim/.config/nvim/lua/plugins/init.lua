@@ -114,6 +114,7 @@ M.load = function()
         'nvim-treesitter/playground',
         'lewis6991/spellsitter.nvim',
         'SmiteshP/nvim-gps',
+        'theHamsta/nvim-treesitter-pairs',
       })
 
       -- LSP/DAP installer

@@ -54,6 +54,9 @@ treesitter.setup({
         ['[]'] = '@class.outer',
       },
     },
+    pairs = {
+      enable = true,
+    },
     select = {
       enable = true,
       keymaps = {
