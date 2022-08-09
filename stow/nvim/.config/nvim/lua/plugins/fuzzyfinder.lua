@@ -156,7 +156,7 @@ telescope.setup({
 telescope.load_extension('fzf')
 telescope.load_extension('ui-select')
 
-cmd_keymap('n', 'f<c-p>', 'Telescope find_files')
+cmd_keymap('n', 'f<c-p>', 'Telescope find_files find_command=files')
 cmd_keymap('n', 'f<c-y>', 'Telescope live_grep')
 
 cmd_keymap('n', 'f<c-f>', 'Telescope builtin')
