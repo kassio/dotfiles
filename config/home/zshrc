@@ -1,20 +1,31 @@
 # vim:ft=zsh:
 
 # global
+export DOTFILES="${HOME}/.DOTFILES"
+export XDG_BIN_HOME="${DOTFILES}/bin"
+export XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_DATA_HOME="${HOME}/.local/share"
+export XDG_STATE_HOME="${HOME}/.local/state"
 export ZSH_CONFIG_HOME="${XDG_CONFIG_HOME}/zsh"
+
 export EDITOR="nvim"
 export GIT_EDITOR="$EDITOR"
 export GPG_TTY=$(tty)
 
-PATH="/usr/bin:/bin:/usr/sbin:/sbin" # system base PATH
-PATH="${PATH}:/usr/local/bin" # intel homebrew
-PATH="${PATH}:/opt/homebrew/bin" # M1 homebrew
-export PATH
-
-export HOMEBREW_PREFIX="$(brew --prefix 2>/dev/null)"
+export HOMEBREW_PREFIX="/opt/homebrew"
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_BOOTSNAP=1
 export HOMEBREW_NO_ENV_HINTS=1
+
+PATH="/usr/bin:/bin:/usr/sbin:/sbin" # system base PATH
+PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
+PATH="${HOMEBREW_PREFIX}/opt/python@3.9/bin:${PATH}"
+PATH="${XDG_BIN_HOME}:${PATH}"
+PATH="${XDG_CONFIG_HOME}/git/bin:${PATH}" # git helpers
+PATH=".userbin:${PATH}"
+typeset -U PATH
+export PATH
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 source "${ZSH_CONFIG_HOME}/p10k.cache.zsh" 2>/dev/null # zsh theme
@@ -111,10 +122,3 @@ source "${HOME}/.env" 2>/dev/null # Ephemeral stuff
 source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff
 
 export GSINK_CONFIG_PATH="${HOME}/.config/repos.json"
-
-# extend PATH with libs
-export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
-export PATH="${HOMEBREW_PREFIX}/opt/python@3.9/bin:${PATH}"
-export PATH="${XDG_BIN_HOME}:${PATH}"
-export PATH="${XDG_CONFIG_HOME}/git/bin:${PATH}" # git helpers
-export PATH=".userbin:${PATH}"
