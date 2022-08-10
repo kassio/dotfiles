@@ -46,6 +46,13 @@ function parse_args() {
 
       parse_args "$@"
       ;;
+    -m | --milestone)
+      shift 1
+
+      git_options="${git_options} -o merge_request.milestone=\"${1}\""
+
+      shift 1
+      ;;
     -t | --title)
       shift 1
 
