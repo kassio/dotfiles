@@ -4,4 +4,4 @@ export XDG_DATA_HOME="${HOME}/.local/share"
 export XDG_STATE_HOME="${HOME}/.local/state"
 export XDG_BIN_HOME="${HOME}/.local/bin"
 
-export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
+source "${XDG_CONFIG_HOME}/zsh/config"

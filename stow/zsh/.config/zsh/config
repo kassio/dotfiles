@@ -1,7 +1,7 @@
 # vim:ft=zsh:
 
 # global
-export DOTFILES="${HOME}/.dotfiles"
+export ZSH_CONFIG_HOME="${XDG_CONFIG_HOME}/zsh"
 export EDITOR="nvim"
 export GIT_EDITOR="$EDITOR"
 export GPG_TTY=$(tty)
@@ -17,7 +17,7 @@ export HOMEBREW_BOOTSNAP=1
 export HOMEBREW_NO_ENV_HINTS=1
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-source "${ZDOTDIR}/p10k.cache.zsh" 2>/dev/null # zsh theme
+source "${ZSH_CONFIG_HOME}/p10k.cache.zsh" 2>/dev/null # zsh theme
 
 set zle_bracketed_paste  # Explicitly restore this zsh default
 autoload -Uz bracketed-paste-magic
@@ -27,7 +27,7 @@ zle -N bracketed-paste bracketed-paste-magic
 # load autocomplete modules
 FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:${FPATH}"
 autoload -Uz compinit
-if [ "$(date +'%j')" != "$(/usr/bin/stat -f '%Sm' -t '%j' ${ZDOTDIR}/.zcompdump)" ]; then
+if [ "$(date +'%j')" != "$(/usr/bin/stat -f '%Sm' -t '%j' ${HOME}/.zcompdump)" ]; then
   compinit
 else
   compinit -C
@@ -93,20 +93,20 @@ source "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh"
 source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
 
 # personal libs
-source "${ZDOTDIR}/bindkeys"
-source "${ZDOTDIR}/alias"
-source "${ZDOTDIR}/fzf"
-source "${ZDOTDIR}/ruby"
-source "${ZDOTDIR}/go"
-source "${ZDOTDIR}/lua"
-source "${ZDOTDIR}/autosuggest"
-source "${ZDOTDIR}/jq"
-source "${ZDOTDIR}/ulimit"
-source "${ZDOTDIR}/ripgrep"
-source "${ZDOTDIR}/p10k.zsh" 2>/dev/null # zsh theme
-source "${ZDOTDIR}/completions"
-source "${ZDOTDIR}/title"
-source "${ZDOTDIR}/plugins/init"
+source "${ZSH_CONFIG_HOME}/bindkeys"
+source "${ZSH_CONFIG_HOME}/alias"
+source "${ZSH_CONFIG_HOME}/fzf"
+source "${ZSH_CONFIG_HOME}/ruby"
+source "${ZSH_CONFIG_HOME}/go"
+source "${ZSH_CONFIG_HOME}/lua"
+source "${ZSH_CONFIG_HOME}/autosuggest"
+source "${ZSH_CONFIG_HOME}/jq"
+source "${ZSH_CONFIG_HOME}/ulimit"
+source "${ZSH_CONFIG_HOME}/ripgrep"
+source "${ZSH_CONFIG_HOME}/p10k.zsh" 2>/dev/null # zsh theme
+source "${ZSH_CONFIG_HOME}/completions"
+source "${ZSH_CONFIG_HOME}/title"
+source "${ZSH_CONFIG_HOME}/plugins/init"
 source "${HOME}/.env" 2>/dev/null # Ephemeral stuff
 source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff
 

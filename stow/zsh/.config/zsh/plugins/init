@@ -1,21 +1,17 @@
 #!/usr/bin/env zsh
 
 install_path="${XDG_CONFIG_HOME}/antidote"
-list_path="${ZDOTDIR}/plugins/list"
-loader_path="${ZDOTDIR}/plugins/loader"
+list_path="${ZSH_CONFIG_HOME}/plugins/list"
+loader_path="${ZSH_CONFIG_HOME}/plugins/loader"
 
 if [[ ! "${install_path}/antidote.zsh" -nt "${list_path}" ]]; then
-  [[ -e "${install_path}" ]] \
-    || git clone --depth=1 https://github.com/mattmc3/antidote.git "${install_path}"
-  [[ -e "${list_path}" ]] || touch "${list_path}"
+  [[ -e "${install_path}" ]] ||
+    git clone --depth=1 https://github.com/mattmc3/antidote.git "${install_path}"
+
   (
     source "${install_path}/antidote.zsh"
     antidote bundle < "${list_path}" > "${loader_path}"
   )
 fi
 
-# uncomment if you want your session to have commands like `antidote update`
-autoload -Uz "${install_path}/functions/antidote"
-
-antidote load "${list_path}"
 source "${loader_path}"
