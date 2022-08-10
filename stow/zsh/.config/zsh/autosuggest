@@ -1,3 +1,0 @@
-# vim:ft=zsh:
-
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#888888"

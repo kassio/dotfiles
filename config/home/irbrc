@@ -1,0 +1,20 @@
+# vim: ft=ruby
+# frozen_string_literal: true
+
+if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("2.7.0")
+  require "irb/ext/save-history"
+
+  ARGV.concat ["--readline", "--prompt-mode", "simple"]
+  IRB.conf[:USE_READLINE] = true
+end
+
+require "rubygems"
+require "irb/completion"
+
+IRB.conf[:AUTO_INDENT] = true
+IRB.conf[:PROMPT_MODE] = :SIMPLE
+IRB.conf[:SAVE_HISTORY] = 9000
+IRB.conf[:HISTORY_FILE] = "#{ENV["HOME"]}/.irb_history"
+
+
+load "#{ENV["HOME"]}/.config/ruby/console.rb"

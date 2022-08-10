@@ -1,0 +1,23 @@
+#!/usr/bin/env zsh
+
+if [ "$1" = "--help" ]; then
+  echo "Update all asdf plugins"
+  exit
+fi
+
+title "[asdf] asdf default plugins"
+while read -r plugin; do
+  subtitle "${plugin}"
+  err="$(asdf plugin add "${plugin}" 2>&1)" # Ensure to have the plugin installed
+  err_code=$?
+  if [ $err_code -ne 2 ]; then
+    printc -c 1 "    ${err}\n"
+  fi
+  asdf plugin update "${plugin}" >/dev/null
+
+  version="$(asdf latest "${plugin}")"
+  echo "    version ${version} installed and set globally"
+
+  asdf install "${plugin}" "${version}" >/dev/null
+  asdf global "${plugin}" "${version}" >/dev/null
+done < "${XDG_CONFIG_HOME}/asdf/list"

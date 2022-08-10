@@ -1,0 +1,122 @@
+#!/usr/bin/env zsh
+
+alias NGP="GIT_PAGER=cat"
+alias g="git"
+
+grt() {
+  if [ $# -eq 0 ]; then
+    git restore -- .
+  else
+    git restore $@
+  fi
+}
+
+gdm() {
+  git diff "$(git branch-main)" "$@"
+}
+
+gdfm() {
+  git diff --name-only "$(git branch-main)..."
+}
+
+gbd() {
+  while read -r branch; do
+    printf "%10s %s (%s)\n" \
+      "$(g-main-diff ${branch})" \
+      "${branch}" \
+      "$(g-upstream-diff ${branch})"
+  done < <(git branch-list | grep -v detached)
+}
+
+gb-author() {
+  git for-each-ref \
+    --sort=authorname \
+    --format='%(authorname)#%(refname:short)' 'refs/heads'
+}
+
+gb-mine() {
+  gb-author |
+    grep "$(git me)" |
+    cut -d '#' -f 2
+}
+
+g-upstream-diff() {
+  upstream=$(git config --get "branch.$1.remote")
+
+  echo "u$(g-diff-count "$1" "${upstream}/$1")"
+}
+
+g-main-diff() {
+  g-diff-count "$1" "$(git branch-main)"
+}
+
+g-diff-count() {
+  rev1="$1"
+  rev2="$2"
+  plus=$(git rev-list --count "$rev2".."$rev1" 2>/dev/null)
+  minus=$(git rev-list --count "$rev1".."$rev2" 2>/dev/null)
+  echo "+$plus-$minus"
+}
+
+grm() {
+  git rebase "$(git branch-main)"
+}
+
+grim() {
+  git rebase --interactive "$(git branch-main)"
+}
+
+alias gL="gla --no-patch -L"
+alias gLp="g log -L"
+alias ga="g add -A"
+alias gb="g branch"
+alias gbm="gb --merged"
+alias gbr="g branch --remote"
+alias gbu="g rev-parse --abbrev-ref --symbolic-full-name @{u}"
+alias gc="g commit --verbose"
+alias gca="gc --amend"
+alias gclean="g clean"
+alias gco="g checkout"
+alias gcp="g cherry-pick"
+alias gcpa="gcp --abort"
+alias gcpc="gcp --continue"
+alias gd="g diff"
+alias gdc="gd --cached"
+alias gdf="gd --name-only"
+alias gf="g fetch --prune --prune-tags --tags --recurse-submodules=on-demand"
+alias gfix="gca --no-edit"
+alias gl="gla -20"
+alias gla="g log --pretty=log"
+alias glme="gl --author=\"Kassio Borges\""
+alias gm="g merge"
+alias gma="gm --abort"
+alias gmr="g merge-request"
+alias gmt="g mergetool"
+alias gp="g pull"
+alias gps="g push"
+alias gpsf="g push --force-with-lease"
+alias gpsu="g push -u"
+alias gr="g rebase"
+alias gra="gr --abort"
+alias grc="gr --continue"
+alias gri="gr --interactive"
+alias grs="gr --skip"
+alias gs="g status -sb"
+alias gsw-="g switch -"
+alias gswm="g switch-main"
+alias gswmr="g switch-to-merge-request"
+alias gsw="g switch"
+alias gt="g tag-refs"
+alias gtl="g tag-list"
+
+_branches() {
+  _arguments "1: :( ${(@f)$(git branch-list | xargs)} )"
+}
+
+_other-branches() {
+  _arguments "1: :( ${(@f)$(git branch-others | xargs)} )"
+}
+
+compdef _other-branches nvim-diff
+compdef _other-branches gr
+compdef _branches gb

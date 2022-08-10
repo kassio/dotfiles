@@ -1,0 +1,18 @@
+#!/usr/bin/env zsh
+
+if [ "${TERM_PROGRAM}" != "kitty" ]; then
+  return
+fi
+
+local cache="${HOME}/.cache/term_profile"
+local themes_path="${HOME}/.config/kitty/themes"
+local current_theme="${themes_path}/current.conf"
+local theme_path="$(find -L "${themes_path}" -name "$1.conf")"
+
+  ln -sf "${theme_path}" "${current_theme}"
+if [ -n "${theme_path}" ]; then
+  ln -sf "${theme_path}" "${current_theme}"
+  kitty @ set-colors --all --configured "${current_theme}"
+else
+  echo "Usage: ttheme [$(echo "$_kitty_ttheme_files" | tr '\n' '|')]"
+fi

@@ -1,9 +1,0 @@
-#!/usr/bin/env zsh
-
-if [ "$1" = "--help" ]; then
-  echo "update ruby gems"
-  exit
-fi
-
-title "[ruby] updating ruby gems"
-for-each-ruby gem update --system

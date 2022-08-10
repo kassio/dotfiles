@@ -3,14 +3,14 @@
 export DOTFILES="${HOME}/.dotfiles"
 
 PATH="/usr/bin:/bin:/usr/sbin:/sbin" # system base PATH
-PATH="${PATH}:/usr/local/bin" # intel homebrew
-PATH="${PATH}:/opt/homebrew/bin" # M1 homebrew
+PATH="${PATH}:/usr/local/bin"        # intel homebrew
+PATH="${PATH}:/opt/homebrew/bin"     # M1 homebrew
+PATH="${PATH}:${DOTFILES}/bin"       # my stuff
 export PATH
 
 "${DOTFILES}/installers/kitty-install"
 "${DOTFILES}/installers/setup-macos"
-"${DOTFILES}/installers/stow"
+"${DOTFILES}/installers/config"
 "${DOTFILES}/installers/brew"
 
-echo "> Basic softwares installed"
-echo "> Run upgrade now"
+"${DOTFILES}/bin/upgrade"

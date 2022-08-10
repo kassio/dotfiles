@@ -1,8 +1,0 @@
-#!/usr/bin/env zsh
-
-local _ttheme_path="${HOME}/.config/kitty/themes"
-export _kitty_ttheme_files="$(find -L "${_ttheme_path}" -name "*.conf" -type f -exec basename {} .conf \;)"
-_ttheme() {
-  _arguments "1: :( $_kitty_ttheme_files )"
-}
-compdef _ttheme ttheme

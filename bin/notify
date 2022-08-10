@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+osascript -e "display notification \"$1\" \
+  with title \"From Terminal\" \
+  subtitle \"$2\""

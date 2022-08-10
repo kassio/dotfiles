@@ -1,0 +1,9 @@
+color:
+  when: always
+icons:
+  when: always
+sorting:
+  column: name
+  reverse: false
+  dir-grouping: first
+hyperlink: auto

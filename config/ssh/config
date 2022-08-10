@@ -1,0 +1,2 @@
+# vim:ft=sshconfig:
+Include config.d/*

@@ -1,0 +1,31 @@
+#!/usr/bin/env zsh
+
+DOTFILES="${HOME}/.dotfiles"
+
+link() {
+  file="$1"
+  target="$2"
+    if [ ! -L "${target}" ]; then
+      echo "linking ${target}"
+      ln -sf "${file}" "${target}"
+    else
+      echo "already linked ${target}"
+    fi
+}
+
+link_all() {
+  while read file; do
+    target_file="$(basename "${file}")"
+    target="$(printf "$2" "${target_file}")"
+
+    link "${file}" "${target}"
+  done < <(find "$1" -d 1)
+}
+
+link_all "${DOTFILES}/config/home" "${HOME}/.%s"
+link_all "${DOTFILES}/config/xdg" "${HOME}/.config/%s"
+
+mkdir -p "${HOME}/.ssh"
+link "${HOME}/config/ssh/config" "${HOME}/.ssh/config"
+
+link "${DOTFILES}/config/docker" "${HOME}/.docker"

@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+
+if [ "$1" = "--help" ]; then
+  echo "Install golang packages"
+  exit
+fi
+
+title "[gopkgs] golang packages"
+while read -r pkg; do
+  if [ "$pkg" != "" ]; then
+    subtitle "installing \"$(echo "${pkg}" | sed 's#.*\/\(.*\)@.*#\1#')\""
+    go install "${pkg}"
+  fi
+done < "${XDG_CONFIG_HOME}/go/default_packages"

@@ -1,0 +1,78 @@
+#!/usr/bin/env zsh
+
+local git_options="-o merge_request.create"
+local title="$(git show --no-patch --format="%s")"
+
+function show_help() {
+  echo -e \
+  "Usage: git merge_request [OPTIONS] message
+  OPTIONS:
+  -h                         Print this message
+  -t, --title                Define the Merge Request Title.
+                             Fallback to the last commit message first line
+  -l, --label                Can be used multiple times to add labels to the Merge Request
+  -f, --force                Add '--force-with-lease' to the git push
+  -F, --force-without-lease  Add '--force' to the git push
+  *any git push option       Any other option will be passed to git push
+  "
+}
+
+function parse_args() {
+  case "${1}" in
+    -h)
+      show_help
+      exit 0
+      ;;
+    -f | --force)
+      shift 1
+
+      git_options="${git_options} --force-with-lease"
+
+      parse_args "$@"
+      ;;
+    -F | --force-without-lease)
+      shift 1
+
+      git_options="${git_options} --force-without-lease"
+
+      parse_args "$@"
+      ;;
+    -l | --label)
+      shift 1
+
+      git_options="${git_options} -o merge_request.label=\"${1}\""
+
+      shift 1
+
+      parse_args "$@"
+      ;;
+    -m | --milestone)
+      shift 1
+
+      git_options="${git_options} -o merge_request.milestone=\"${1}\""
+
+      shift 1
+      ;;
+    -t | --title)
+      shift 1
+
+      title="${1}"
+
+      shift 1
+
+      parse_args "$@"
+      ;;
+    *)
+      # All not documented options are passed as git push options
+      git_options="${git_options} $*"
+      ;;
+  esac
+}
+
+parse_args "$@"
+
+git_options="${git_options} -o merge_request.title='${title}'"
+command="git push -u ${git_options}"
+
+# echo "${command}"
+eval "${command}"

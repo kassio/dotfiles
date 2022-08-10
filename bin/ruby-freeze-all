@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+if [ $# -lt 1 ]; then
+  echo 'Usage: ruby-freeze-all folder [folder1 folder2 ...]'
+  exit 1
+fi
+
+line='# frozen_string_literal: true'
+sed_src="1i \\
+${line}\\
+"
+
+for folder in "$@"; do
+  files="$(find "${folder}" -name "*.rb" -type f)"
+
+  for file in ${files}; do
+    if ! grep -q "${line}" "${file}"; then
+      sed -i "" -e "${sed_src}" "${file}"
+    fi
+  done
+done

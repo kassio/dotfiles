@@ -1,0 +1,27 @@
+#!/usr/bin/env zsh
+
+source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
+_cmd="$*"
+
+run() {
+  rb="$1"
+
+  eval "asdf shell ruby ${rb} 2>/dev/null"
+  echo "with ruby: $(asdf current ruby)"
+
+  if ! eval "${_cmd}"; then
+    echo "$* failed for ${rb}"
+    return 1
+  else
+    return 0
+  fi
+}
+
+while read -r rb
+do
+  if ! run ${rb}; then
+    continue
+  fi
+done < <(asdf list ruby 2>/dev/null)
+
+asdf shell ruby --unset

@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh |
+  sh /dev/stdin installer=nightly
+
+kitty_path="/Applications/kitty.app"
+icon_path="${HOME}/.dotfiles/stow/kitty/.config/kitty.icns"
+
+cp "${icon_path}" "${kitty_path}/Contents/Resources/kitty.icns"
+touch "${kitty_path}"
+find /var/folders -name "com.apple.dock.iconcache" -exec rm -- {} + 2>/dev/null
+killall Dock

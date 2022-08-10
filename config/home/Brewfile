@@ -1,0 +1,84 @@
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/cask-drivers"
+tap "homebrew/cask-fonts"
+tap "homebrew/cask-versions"
+tap "homebrew/core"
+tap "homebrew/services"
+brew "asdf"
+brew "bash"
+brew "bash-completion"
+brew "bat" # cat replacement
+brew "coreutils"
+brew "dfu-programmer" # flash keyboard firmware
+brew "docutils"
+brew "dpkg"
+brew "exiftool"
+brew "fd"
+brew "fd" # file finding
+brew "fontconfig"
+brew "fzf"
+brew "gh" # github client, useful for neovim plugins
+brew "git"
+brew "git-delta" # fancy git diff
+brew "git-lfs"
+brew "gnupg"
+brew "gpgme"
+brew "graphicsmagick"
+brew "grc"
+brew "grep"
+brew "htop"
+brew "hugo"
+brew "jemalloc"
+brew "jless"
+brew "jq"
+brew "less"
+brew "libffi"
+brew "libiconv"
+brew "libyaml"
+brew "lsd" # ls replacement
+brew "luajit", args: ["HEAD"]
+brew "markdownlint-cli"
+brew "mas"
+brew "neovim", args: ["HEAD"]
+brew "pstree"
+brew "re2"
+brew "readline"
+brew "rename"
+brew "ripgrep"
+brew "sd" # sed replacement
+brew "stylua"
+brew "tree"
+brew "watch"
+brew "wget"
+brew "yamllint"
+brew "youtube-dl"
+brew "zlib"
+brew "zsh"
+cask "1password"
+cask "alfred"
+cask "appcleaner"
+cask "bartender"
+cask "bettertouchtool"
+cask "dash"
+cask "font-caskaydia-cove-nerd-font"
+cask "google-drive"
+cask "istat-menus"
+cask "itsycal"
+cask "karabiner-elements"
+cask "monitorcontrol"
+cask "notion"
+cask "qlmarkdown"
+cask "qmk-toolbox"
+cask "slack"
+cask "spotify"
+cask "tableplus"
+cask "the-unarchiver"
+cask "visual-studio-code"
+mas "1Password for Safari", id: 1569813296
+mas "Amphetamine", id: 937984704
+mas "GarageBand", id: 682658836
+mas "Okta Extension App", id: 1439967473
+mas "Super Agent", id: 1568262835
+mas "Userscripts", id: 1463298887
+mas "Xcode", id: 497799835

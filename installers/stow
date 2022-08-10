@@ -1,7 +1,0 @@
-#!/usr/bin/env zsh
-
-pushd "${HOME}/.dotfiles/stow"
-
-stow --verbose --target="${HOME}" --dir="${HOME}/.dotfiles/stow" */
-
-popd
