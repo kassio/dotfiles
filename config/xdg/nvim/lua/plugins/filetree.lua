@@ -1,4 +1,4 @@
-local theme = vim.my.theme
+local theme = require('plugins.highlight.theme')
 
 require('nvim-tree').setup({
   disable_netrw = true,

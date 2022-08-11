@@ -1,4 +1,4 @@
-local theme = vim.my.theme
+local theme = require('plugins.highlight.theme')
 local colors = theme.colors
 
 -- Highlight color strings

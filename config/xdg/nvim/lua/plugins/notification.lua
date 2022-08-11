@@ -1,5 +1,5 @@
 local notify = require('notify')
-local theme = vim.my.theme
+local theme = require('plugins.highlight.theme')
 
 notify.setup({
   timeout = 1250,

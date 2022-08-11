@@ -41,7 +41,6 @@ return {
   end,
 
   reload_theme = function()
-    vim.my.theme = R('my.theme')
     R('plugins.highlight')
     R('plugins.statusline')
   end,

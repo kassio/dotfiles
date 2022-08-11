@@ -1,6 +1,7 @@
 local cmp = require('cmp')
 local mapping = cmp.mapping
 local snippy = require('snippy')
+local theme = require('plugins.highlight.theme')
 
 snippy.setup({
   mappings = {
@@ -20,7 +21,7 @@ cmp.setup({
       local icon = require('lspkind').presets.default[vim_item.kind]
       vim_item.kind = string.format('%s %s', icon, vim_item.kind)
 
-      vim_item.menu = (vim.my.theme.icons)[entry.source.name]
+      vim_item.menu = (theme.icons)[entry.source.name]
 
       return vim_item
     end,

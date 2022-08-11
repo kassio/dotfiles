@@ -1,7 +1,7 @@
-local theme = vim.my.theme
 local lspconfig = require('lspconfig')
-local generics = require('plugins.lsp.generics')
 local servers_map = require('mason-lspconfig.mappings.server').package_to_lspconfig
+local generics = require('plugins.lsp.generics')
+local theme = require('plugins.highlight.theme')
 local customizations = require('plugins.lsp.customizations')
 
 local my_servers = table.slice(servers_map, {

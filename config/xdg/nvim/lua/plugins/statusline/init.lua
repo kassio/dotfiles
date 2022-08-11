@@ -1,5 +1,5 @@
 local lualine = require('lualine')
-local theme = vim.my.theme
+local theme = require('plugins.highlight.theme')
 
 local utils = require('plugins.statusline.utils')
 

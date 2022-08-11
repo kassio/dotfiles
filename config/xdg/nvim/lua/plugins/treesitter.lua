@@ -1,4 +1,4 @@
-local theme = vim.my.theme
+local theme = require('plugins.highlight.theme')
 local treesitter = require('nvim-treesitter.configs')
 local spellsitter = require('spellsitter')
 local gps = require('nvim-gps')
