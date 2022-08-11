@@ -6,35 +6,32 @@ M.setup = function()
   local path = string.format('%s/site/pack/packer/opt/packer.nvim', fn.stdpath('data'))
 
   if fn.empty(fn.glob(path)) > 0 then
-    P('Installing packer, after restarting nvim run :Upgrade')
     fn.system(string.format('git clone %s %s', repo, path))
 
     M.upgrade({ bang = true })
-  else
-    M.load()
+
+    return
   end
 
   vim.api.nvim_create_user_command('Upgrade', require('plugins').upgrade, { bang = true })
 end
 
 M.upgrade = function(cmd)
-  local post_upgrade = {
-    {
-      events = { 'User' },
-      pattern = 'PackerComplete',
-      command = 'MasonToolsUpdate',
-    },
-  }
+  cmd = cmd or {}
+  local group = vim.api.nvim_create_augroup('user:packing', { clear = false })
+  vim.api.nvim_create_autocmd({ 'User' }, {
+    group = group,
+    pattern = 'PackerComplete',
+    command = 'MasonToolsUpdate',
+  })
 
   if cmd.bang then
-    table.insert(post_upgrade, {
-      events = { 'User' },
+    vim.api.nvim_create_autocmd({ 'User' }, {
+      group = group,
       pattern = 'PackerComplete',
       command = 'quitall!',
     })
   end
-
-  vim.my.utils.augroup('user:packing', post_upgrade)
 
   M.load().sync()
 end
