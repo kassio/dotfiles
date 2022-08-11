@@ -102,19 +102,19 @@
     fi
 
     if (( $1 )); then
-      local       meta='%f'     # default foreground
-      local      clean='%76F'   # green foreground
-      local   modified='%178F'  # yellow foreground
-      local  untracked='%39F'   # blue foreground
-      local conflicted='%196F'  # red foreground
+      local    default='%f'     # default foreground
+      local      green='%76F'   # green foreground
+      local     yellow='%178F'  # yellow foreground
+      local       blue='%39F'   # blue foreground
+      local        red='%196F'  # red foreground
       local       grey='%244F'  # grey foreground
       local       pink='%201F'  # pink foreground
     else
-      local       meta='%244F'  # grey foreground
-      local      clean='%244F'  # grey foreground
-      local   modified='%244F'  # grey foreground
-      local  untracked='%244F'  # grey foreground
-      local conflicted='%244F'  # grey foreground
+      local     default='%244F'  # grey foreground
+      local      green='%244F'  # grey foreground
+      local     yellow='%244F'  # grey foreground
+      local       blue='%244F'  # grey foreground
+      local        red='%244F'  # grey foreground
       local       grey='%244F'  # grey foreground
       local       pink='%244F'  # grey foreground
     fi
@@ -122,9 +122,9 @@
     local res
     local branch="${(V)VCS_STATUS_LOCAL_BRANCH}"
     if [[ "${branch}" != "" ]]; then
-      res="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
+      res="${green}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
     else
-      res="${grey}${VCS_STATUS_COMMIT[1,8]}${clean}"
+      res="${grey}${VCS_STATUS_COMMIT[1,8]}${green}"
     fi
 
     local tag="${(V)VCS_STATUS_TAG}"
@@ -133,7 +133,7 @@
     fi
 
     if [[ "$(git config --get "branch.${branch}.remote")" == "security" ]]; then
-      res="${conflicted}SECURITY/${clean}${res}"
+      res="${red}SECURITY/${green}${res}"
     fi
 
     if [[ "${res}" != "" ]]; then
@@ -146,29 +146,29 @@
       )) && res+=" "
     fi
 
-    (( VCS_STATUS_STASHES        )) && res+="${untracked}\$"
-    (( VCS_STATUS_HAS_UNTRACKED  )) && res+="${conflicted}%%"
-    (( VCS_STATUS_HAS_UNSTAGED   )) && res+="${conflicted}*"
-    (( VCS_STATUS_HAS_CONFLICTED )) && res+="${conflicted}!"
-    (( VCS_STATUS_HAS_STAGED     )) && res+="${clean}+"
+    (( VCS_STATUS_STASHES        )) && res+="${blue}\$"
+    (( VCS_STATUS_HAS_UNTRACKED  )) && res+="${red}%%"
+    (( VCS_STATUS_HAS_UNSTAGED   )) && res+="${red}*"
+    (( VCS_STATUS_HAS_CONFLICTED )) && res+="${red}!"
+    (( VCS_STATUS_HAS_STAGED     )) && res+="${green}+"
 
     if  [[ "${VCS_STATUS_REMOTE_BRANCH}" != "" ]] ; then
       res+=" "
 
       if (( VCS_STATUS_COMMITS_BEHIND && VCS_STATUS_COMMITS_AHEAD )); then
-        res+="${meta}u-${VCS_STATUS_COMMITS_BEHIND}+${VCS_STATUS_COMMITS_AHEAD}"
+        res+="${default}u-${VCS_STATUS_COMMITS_BEHIND}+${VCS_STATUS_COMMITS_AHEAD}"
       elif (( VCS_STATUS_COMMITS_BEHIND )); then
-        res+="${meta}u-${VCS_STATUS_COMMITS_BEHIND}"
+        res+="${default}u-${VCS_STATUS_COMMITS_BEHIND}"
       elif (( VCS_STATUS_COMMITS_AHEAD )); then
-        res+="${meta}u+${VCS_STATUS_COMMITS_AHEAD}"
+        res+="${default}u+${VCS_STATUS_COMMITS_AHEAD}"
       else
-        res+="${meta}u="
+        res+="${default}u="
       fi
     fi
 
     [[ -n ${VCS_STATUS_ACTION} ]] && res+="${grey} ${VCS_STATUS_ACTION}"
 
-    typeset -g my_git_format="${modified}(${res}${modified})"
+    typeset -g my_git_format="${yellow}(${res}${yellow})"
   }
   functions -M my_git_formatter 2>/dev/null
 
