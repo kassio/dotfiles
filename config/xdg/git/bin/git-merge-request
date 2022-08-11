@@ -8,11 +8,13 @@ function show_help() {
   "Usage: git merge_request [OPTIONS] message
   OPTIONS:
   -h                         Print this message
-  -t, --title                Define the Merge Request Title.
+  -t, --title                Define the Merge Request title.
                              Fallback to the last commit message first line
   -l, --label                Can be used multiple times to add labels to the Merge Request
+  -m, --milestone            Add the Merge Request milestone
+  --draft                    Set the Merge Request as Draft and skip the CI
   -f, --force                Add '--force-with-lease' to the git push
-  -F, --force-without-lease  Add '--force' to the git push
+  -F, --force-without-lease  Add '--force-without-lease' to the git push
   *any git push option       Any other option will be passed to git push
   "
 }
@@ -52,6 +54,15 @@ function parse_args() {
       git_options="${git_options} -o merge_request.milestone=\"${1}\""
 
       shift 1
+
+      parse_args "$@"
+      ;;
+    --draft)
+      shift 1
+
+      git_options="${git_options} -o merge_request.draft -o ci.skip"
+
+      parse_args "$@"
       ;;
     -t | --title)
       shift 1
