@@ -1,0 +1,18 @@
+#!/usr/bin/env zsh
+
+project=$(git remote get-url origin | sed 's/.*\/\(.*\).git/\1/')
+project_url=$(git remote get-url origin | sed 's/\.git//')
+
+if [ $# -eq 0 ]; then
+  branch="$(git symbolic-ref --short HEAD 2>/dev/null)"
+else
+  branch="$1"
+fi
+
+if [ "${branch}" != "" ] && [ "${branch}" != "$(git branch-main)" ]; then
+  mr_iid="$(gl-prd "merge_requests?source_branch=${branch}" | jq -j '.[0].iid')"
+
+  open "${project_url}/merge_requests/${mr_iid}"
+else
+  echo "not in a feature branch"
+fi
