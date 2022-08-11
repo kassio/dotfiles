@@ -39,6 +39,11 @@ end
 vim.my.utils.augroup('user:winbar', {
   {
     events = { 'User' },
+    pattern = 'NotificationOpened',
+    callback = reload,
+  },
+  {
+    events = { 'User' },
     pattern = 'NotificationClosed',
     callback = reload,
   },
