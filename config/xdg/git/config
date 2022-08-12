@@ -1,3 +1,4 @@
+# vim: set filetype=gitconfig:
 [include]
   path = ~/.dotfiles.private/gitconfig
 [user]
