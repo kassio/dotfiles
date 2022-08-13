@@ -30,47 +30,69 @@ local nmap = function(lhs, rhs)
   vim.keymap.set('n', lhs, rhs, { buffer = 0, silent = true })
 end
 
-local command_map = function(fn, name, map)
-  command(name, fn, {})
+local command_map = function(fn, map, cmd_name, cmd_opts)
+  cmd_opts = cmd_opts or {}
+  vim.api.nvim_create_user_command(cmd_name, fn, cmd_opts)
 
   if map ~= nil then
-    nmap(map, string.format('<cmd>%s<cr>', name))
+    vim.keymap.set('n', map, fn)
   end
 end
 
 local attacher = function(client)
-  -- Commands
-  command_map(lsp.buf.code_action, 'LspCodeActions', 'gla')
-  command_map(lsp.buf.hover, 'LspHover', 'K')
-  command_map(lsp.buf.signature_help, 'LspSignatureHelp', '<c-k>')
-  command_map(lsp.buf.declaration, 'LspGoToDeclaration', 'glD')
+  command_map(function()
+    lsp.buf.hover()
+  end, 'K', 'LspHover')
+
+  command_map(function()
+    lsp.buf.signature_help()
+  end, '<c-k>', 'LspSignatureHelp')
+
+  command_map(function()
+    lsp.buf.declaration()
+  end, 'glD', 'LspGoToDeclaration')
+
+  command_map(function(cmd)
+    cmd = cmd or {}
+
+    if (cmd.range or 0) > 0 then
+      lsp.buf.range_code_action()
+    else
+      lsp.buf.code_action()
+    end
+  end, 'gla', 'LspCodeActions', { range = 0 })
 
   command_map(function()
     lsp.buf.rename()
-  end, 'LspRename', 'grr')
+  end, 'grr', 'LspRename')
 
-  command_map(lsp.buf.format, 'LspFormatSync', 'glF')
+  command_map(function()
+    lsp.buf.format()
+  end, 'glF', 'LspFormatSync')
+
   command_map(function()
     lsp.buf.format({ async = true })
-  end, 'LspFormat', 'glf')
+  end, 'glf', 'LspFormat')
 
   command_map(function()
     telescope.lsp_definitions({ jump_type = 'never' })
-  end, 'LspGoToDefinition', 'gld')
+  end, 'gld', 'LspGoToDefinition')
 
-  command_map(telescope.lsp_references, 'LspListReferences', 'glr')
+  command_map(function()
+    telescope.lsp_references()
+  end, 'glr', 'LspListReferences')
 
   command_map(function()
     telescope.lsp_implementations({ jump_type = 'never' })
-  end, 'LspImplementation', 'gli')
+  end, 'gli', 'LspImplementation')
 
   command_map(function()
     telescope.lsp_document_symbols({ show_line = true })
-  end, 'LspDocumentSymbols', 'gls')
+  end, 'gls', 'LspDocumentSymbols')
 
   command_map(function()
     telescope.lsp_dynamic_workspace_symbols({ show_line = true })
-  end, 'LspWorkspaceSymbols', 'glS')
+  end, 'glS', 'LspWorkspaceSymbols')
 
   print('LSP: ' .. client.name)
 end

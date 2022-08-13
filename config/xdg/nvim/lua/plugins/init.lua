@@ -126,6 +126,7 @@ M.load = function()
         'neovim/nvim-lspconfig',
         'jose-elias-alvarez/null-ls.nvim', -- generic LSP for diagnostic, formatting, etc
         'simrat39/symbols-outline.nvim', -- symbols navigator
+        'ThePrimeagen/refactoring.nvim', -- required for null-ls refactoring module
       })
 
       -- Git
