@@ -33,17 +33,6 @@ keymap('i', '<esc>', '<c-c>')
 -- undo breakpoints
 keymap('i', ',', ',<c-g>u')
 keymap('i', '.', '.<c-g>u')
-keymap('i', '!', '!<c-g>u')
-keymap('i', '?', '?<c-g>u')
-keymap('i', '(', '(<c-g>u')
-keymap('i', ')', ')<c-g>u')
-keymap('i', '}', '}<c-g>u')
-keymap('i', '{', '{<c-g>u')
-keymap('i', '[', '[<c-g>u')
-keymap('i', ']', ']<c-g>u')
-keymap('i', '_', '_<c-g>u')
-keymap('i', '-', '-<c-g>u')
-keymap('i', '#', '#<c-g>u')
 
 -- keep the cursor centered while moving
 keymap('n', 'n,', 'nzzzv')
