@@ -3,5 +3,5 @@ function string.camelcase(str)
 end
 
 function string.trim(str)
-  return tr:gsub('^%s*(.-)%s*$', '%1')
+  return str:gsub('^%s*(.-)%s*$', '%1')
 end
