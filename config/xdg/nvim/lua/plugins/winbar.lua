@@ -1,5 +1,16 @@
 local api = vim.api
 local utils = require('my.utils')
+local hl = require('my.utils.highlights')
+local colors = require('plugins.highlight.theme').colors
+
+hl.def('WinBar', {
+  background = colors.dark_highlight,
+  foreground = colors.highlight,
+  sp = colors.shadow,
+})
+hl.extend('WinBarNC', 'WinBar', { foreground = colors.shadow })
+hl.extend('WinBarInfo', 'WinBar', { foreground = colors.info, bold = true })
+hl.extend('WinBarWarn', 'WinBar', { foreground = colors.warn, bold = true })
 
 local winbar = function(bufnr, focused)
   local hl_filename

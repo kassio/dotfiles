@@ -2,6 +2,24 @@ local keymap = vim.keymap.set
 local dap = require('dap')
 local widgets = require('dap.ui.widgets')
 local dapui = require('dapui')
+local hl = require('my.utils.highlights')
+local colors = require('plugins.highlight.theme').colors
+
+-- Debugger
+hl.sign('DapBreakpoint', '●')
+hl.def('DapBreakpoint', { foreground = colors.error })
+
+hl.sign('DapBreakpointCondition', '◆')
+hl.extend('DapBreakpointCondition', 'Number')
+
+hl.sign('DapLogPoint', 'Ξ')
+hl.def('DapLogPoint', { foreground = colors.info })
+
+hl.sign('DapStopped', '▶')
+hl.def('DapStopped', { foreground = colors.hint })
+
+hl.sign('DapBreakpointRejected', '◎')
+hl.def('DapBreakpointRejected', { foreground = colors.warn })
 
 require('nvim-dap-virtual-text').setup()
 

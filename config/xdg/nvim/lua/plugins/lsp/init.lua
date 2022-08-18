@@ -2,6 +2,9 @@ local lsp = vim.lsp
 local hdls = lsp.handlers
 local installer = require('plugins.lsp.installer')
 local telescope = require('telescope.builtin')
+local outliner = require('symbols-outline')
+
+outliner.setup()
 
 -- Add additional capabilities supported by nvim-cmp
 local protocol = lsp.protocol

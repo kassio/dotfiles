@@ -3,6 +3,32 @@ local treesitter = require('nvim-treesitter.configs')
 local spellsitter = require('spellsitter')
 local utils = require('my.utils')
 local gps = require('nvim-gps')
+local hl = utils.highlights
+local colors = theme.colors
+
+-- Treesitter globals
+hl.extend('TSTypeBuiltin', 'Type')
+hl.extend('TSVariable', 'Normal')
+hl.extend('TSParameter', 'Normal')
+hl.extend('TSFuncBuiltin', 'Identifier')
+hl.extend('TSStringEscape', 'String', { bold = true })
+hl.extend('TSStringSpecial', 'String', { bold = true })
+
+-- refactoring
+hl.def('TSDefinitionUsage', { background = colors.light_warn, foreground = colors.shadow })
+hl.def('TSDefinition', { background = colors.light_warn })
+
+-- Ruby with Treesitter
+hl.extend('rubyTSType', 'Type')
+hl.extend('rubyTSLabel', 'Identifier')
+hl.extend('rubyTSSymbol', 'Identifier')
+hl.extend('rubyTSVariableBuiltin', 'Constant')
+
+-- Go with Treesitter
+hl.extend('goTSnamespace', 'Normal', { bold = true })
+hl.extend('goTSvariable', 'Normal')
+hl.extend('goTSfunction_name', 'Function')
+hl.extend('goTSproperty', 'Function')
 
 -- vim-matchup plugin, uses treesitter
 -- Do not show the not visible matching context on statusline
@@ -127,28 +153,6 @@ gps.setup({
     },
   },
 })
-
-local go_package = function()
-  if vim.bo.filetype ~= 'go' then
-    return ''
-  end
-
-  for ln = 0, 300, 1 do
-    local ok, line = pcall(vim.api.nvim_buf_get_lines, 0, ln, ln + 1, true)
-    if not ok then
-      return ''
-    end
-
-    line = line[1]
-    if string.match(line, '^%s*package%.*') ~= nil then
-      return string.format(' %s' .. theme.icons.separator, vim.split(line, ' ')[2])
-    end
-
-    ln = ln + 1
-  end
-
-  return ''
-end
 
 vim.api.nvim_create_user_command('TSGPSLocation', function()
   print(utils.treesitter.location())

@@ -2,6 +2,8 @@ local gitsigns = require('gitsigns')
 local fn = vim.fn
 local command = vim.api.nvim_create_user_command
 local utils = require('my.utils')
+local colors = require('plugins.highlight.theme').colors
+local hl = utils.highlights
 
 local cabbrev = utils.cabbrev
 
@@ -18,6 +20,21 @@ local git = function(args, callback)
     return output
   end
 end
+
+-- Git
+hl.def('GitSignsCurrentLineBlame', {
+  background = colors.shadow,
+  foreground = colors.highlight,
+  italic = true,
+})
+
+hl.def('GitSignAdd', { foreground = colors.hint })
+hl.def('GitSignChange', { foreground = colors.warn })
+hl.def('GitSignDelete', { foreground = colors.error })
+
+hl.def('GitSignAddLineNr', { foreground = colors.hint })
+hl.def('GitSignChangeLineNr', { foreground = colors.warn })
+hl.def('GitSignDeleteLineNr', { foreground = colors.error })
 
 local GIT = {}
 

@@ -6,6 +6,7 @@ M.treesitter = require('my.utils.treesitter')
 M.buffers = require('my.utils.buffers')
 M.reloader = require('my.utils.reloader')
 M.snippets = require('my.utils.snippets')
+M.highlights = require('my.utils.highlights')
 
 M.get_visual_selection = function()
   local s_start = vim.api.nvim_buf_get_mark(0, '<')
