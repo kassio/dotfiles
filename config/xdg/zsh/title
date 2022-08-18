@@ -1,8 +1,15 @@
 #!/usr/bin/env zsh
 
+function last_parts() {
+  IFS="/" read -A parts <<< "$1"
+
+  printf ".../%s/%s" "${parts[-2]}" "${parts[-1]}"
+}
+
 function title() {
   local result rpath
   rpath="$(realpath --relative-base="${HOME}" "${PWD}")"
+
   if [ "${rpath:0:1}" = "/" ]; then
     result="${rpath}"
   elif [ "${rpath}" = "." ]; then
@@ -12,7 +19,7 @@ function title() {
   fi
 
   if [ "${#result}" -gt 30 ]; then
-    result="$(echo "${result[-20,-1]}" | sed 's;[^/]*/;.../;')"
+    result="$(last_parts "${result}")"
   fi
 
   echo -ne "\033]0;${result}\007"
