@@ -5,6 +5,9 @@ if [ "$1" = "--help" ]; then
   exit
 fi
 
+title "[nvim] reinstalling neovim"
+brew reinstall neovim
+
 title "[nvim] updating neovim plugin"
 echo > ~/.cache/nvim/packer.nvim.log
 nvim -c 'Upgrade!'
