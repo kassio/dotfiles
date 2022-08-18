@@ -1,6 +1,8 @@
+local utils = require('my.utils')
+
 local ruby_cmd = function(name, replacer)
   vim.api.nvim_create_user_command('Ruby' .. name, function(cmd)
-    vim.my.utils.preserve(function()
+    utils.buffers.preserve(function()
       vim.cmd(string.format('silent %s,%s%s/e', cmd.line1, cmd.line2, replacer))
     end)
   end, { range = true })
@@ -15,7 +17,7 @@ ruby_cmd('VarToLet', [[s/@\?\(\w\+\)\s*=\s*\(.*\)/let(:\1) { \2 }]])
 require('nvim-surround').buffer_setup({
   delimiters = {
     pairs = {
-      ["#"] = { "#{", "}" },
-    }
-  }
+      ['#'] = { '#{', '}' },
+    },
+  },
 })

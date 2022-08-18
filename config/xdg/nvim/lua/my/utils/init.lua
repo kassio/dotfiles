@@ -2,6 +2,11 @@ local M = {}
 local api = vim.api
 local fn = vim.fn
 
+M.treesitter = require('my.utils.treesitter')
+M.buffers = require('my.utils.buffers')
+M.reloader = require('my.utils.reloader')
+M.snippets = require('my.utils.snippets')
+
 M.get_visual_selection = function()
   local s_start = vim.api.nvim_buf_get_mark(0, '<')
   local s_end = vim.api.nvim_buf_get_mark(0, '>')
@@ -40,12 +45,6 @@ end
 
 M.cabbrev = function(lhs, rhs)
   vim.cmd(string.format('cabbrev %s %s', lhs, rhs))
-end
-
-M.preserve = function(callback)
-  local saved_view = fn.winsaveview()
-  callback()
-  fn.winrestview(saved_view)
 end
 
 M.fileicon = function(filetype, filename)

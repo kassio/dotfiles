@@ -1,7 +1,7 @@
 local telescope = require('telescope')
 local builtin = require('telescope.builtin')
 local actions = require('telescope.actions')
-local utils = vim.my.utils
+local utils = require('my.utils')
 local keymap = vim.keymap.set
 local cmd_keymap = function(mode, map, cmd)
   keymap(mode, map, '<cmd>' .. cmd .. '<cr>')

@@ -1,7 +1,8 @@
 local gitsigns = require('gitsigns')
 local fn = vim.fn
 local command = vim.api.nvim_create_user_command
-local utils = vim.my.utils
+local utils = require('my.utils')
+
 local cabbrev = utils.cabbrev
 
 local open = function(url)
@@ -74,7 +75,7 @@ gitsigns.setup({
   numhl = true,
 })
 
-vim.my.git = {
+local M = {
   open_remote_file = function(cmd)
     local use_main = cmd.args == 'main' or cmd.args == 'master'
     local file = fn.expand('%:.')
@@ -118,18 +119,18 @@ vim.my.git = {
 vim.keymap.set('n', ']c', gitsigns.next_hunk)
 vim.keymap.set('n', '[c', gitsigns.prev_hunk)
 
-command('GopenRepository', vim.my.git.open_repository, {})
-command('GopenFileRemoteUrl', vim.my.git.open_remote_file, { nargs = '?' })
-command('GcopyFileRemoteURL', vim.my.git.copy_remote_file, { nargs = '?' })
+command('GopenRepository', M.open_repository, {})
+command('GopenFileRemoteUrl', M.open_remote_file, { nargs = '?' })
+command('GcopyFileRemoteURL', M.copy_remote_file, { nargs = '?' })
 
-command('Gdiff', vim.my.git.diff, { nargs = '?' })
-command('GblameToggleLine', vim.my.git.blame_line_toggle, {})
-command('GblameToggle', vim.my.git.blame_toggle, {})
-command('GpreviewHunk', vim.my.git.preview_hunk, {})
+command('Gdiff', M.diff, { nargs = '?' })
+command('GblameToggleLine', M.blame_line_toggle, {})
+command('GblameToggle', M.blame_toggle, {})
+command('GpreviewHunk', M.preview_hunk, {})
 
-command('Grt', vim.my.git.restore, {})
-command('Gwrite', vim.my.git.write, {})
-command('GbranchCurrent', vim.my.git.branch_current, {})
+command('Grt', M.restore, {})
+command('Gwrite', M.write, {})
+command('GbranchCurrent', M.branch_current, {})
 
 cabbrev('Gd', 'Gdiff')
 cabbrev('Gw', 'Gwrite')

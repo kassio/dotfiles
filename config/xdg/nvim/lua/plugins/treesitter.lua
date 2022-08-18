@@ -1,6 +1,7 @@
 local theme = require('plugins.highlight.theme')
 local treesitter = require('nvim-treesitter.configs')
 local spellsitter = require('spellsitter')
+local utils = require('my.utils')
 local gps = require('nvim-gps')
 
 -- vim-matchup plugin, uses treesitter
@@ -149,21 +150,9 @@ local go_package = function()
   return ''
 end
 
-vim.my.treesitter = {
-  gps = {
-    location = function()
-      if gps.is_available() then
-        return go_package() .. gps.get_location()
-      else
-        return ''
-      end
-    end,
-  },
-}
-
 vim.api.nvim_create_user_command('TSGPSLocation', function()
-  print(vim.my.treesitter.gps.location())
+  print(utils.treesitter.location())
 end, {})
 vim.api.nvim_create_user_command('TSGPSLocationCopy', function(cmd)
-  vim.my.utils.to_clipboard(vim.my.treesitter.gps.location(), cmd.bang)
+  utils.to_clipboard(utils.treesitter.location(), cmd.bang)
 end, {})

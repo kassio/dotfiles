@@ -1,11 +1,11 @@
 local lualine = require('lualine')
 local theme = require('plugins.highlight.theme')
-
+local myutils = require('my.utils')
 local utils = require('plugins.statusline.utils')
 
 local sections = {
   lualine_a = { utils.mode() },
-  lualine_b = { vim.my.treesitter.gps.location },
+  lualine_b = { myutils.treesitter.location },
   lualine_c = {},
   lualine_x = {
     {

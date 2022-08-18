@@ -1,4 +1,5 @@
 local api = vim.api
+local utils = require('my.utils')
 
 local winbar = function(bufnr, focused)
   local hl_filename
@@ -28,7 +29,7 @@ local reload = function()
     local bufnr = api.nvim_win_get_buf(winid)
     local ft = api.nvim_buf_get_option(bufnr, 'filetype')
 
-    if ft == '' or vim.my.utils.plugin_filetype(ft) then
+    if ft == '' or utils.plugin_filetype(ft) then
       api.nvim_win_set_option(winid, 'winbar', '')
     else
       api.nvim_win_set_option(winid, 'winbar', winbar(bufnr, winid == curwin))
@@ -36,7 +37,7 @@ local reload = function()
   end
 end
 
-vim.my.utils.augroup('user:winbar', {
+utils.augroup('user:winbar', {
   {
     events = { 'User' },
     pattern = 'NotificationOpened',

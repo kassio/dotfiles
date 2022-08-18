@@ -1,15 +1,17 @@
+local utils = require('my.utils')
+
 vim.g.lastplace_ignore = 'gitcommit,gitrebase'
 vim.g.lastplace_ignore_buftype = 'quickfix,nofile,help'
 
 local function set_relative_number(value)
-  if vim.my.utils.plugin_filetype(vim.bo.filetype) then
+  if utils.plugin_filetype(vim.bo.filetype) then
     return
   end
 
   vim.opt_local.relativenumber = value
 end
 
-vim.my.utils.augroup('user:focus', {
+utils.augroup('user:focus', {
   {
     events = {
       'WinLeave',
@@ -41,7 +43,7 @@ vim.my.utils.augroup('user:focus', {
     },
     callback = function()
       if vim.bo.modifiable then
-        vim.my.buffers.trim()
+        utils.buffers.trim()
         vim.cmd('silent! wall!')
       end
     end,

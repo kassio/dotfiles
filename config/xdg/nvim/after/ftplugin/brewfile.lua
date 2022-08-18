@@ -18,7 +18,7 @@ end
 
 vim.api.nvim_buf_create_user_command(0, 'Sort', brew_sort, {})
 
-vim.my.utils.augroup('user:brewfile', {
+utils.augroup('user:brewfile', {
   {
     events = { 'BufWritePre', 'FileWritePre' },
     pattern = 'brewfile',

@@ -1,4 +1,5 @@
 local api = vim.api
+local buffers = require('my.utils.buffers')
 
 local get_bufnr = function(tab)
   local winnr = api.nvim_tabpage_get_win(tab)
@@ -23,7 +24,7 @@ end
 
 local label_for = function(tab)
   local name = get_name(tab)
-  local icon = vim.my.buffers.fileicon(tab.bufnr)
+  local icon = buffers.fileicon(tab.bufnr)
   local label = string.format('%%3.50(%%%dT %d %s %s %%)', tab.page, tab.page, icon, name)
 
   if tab.focused then

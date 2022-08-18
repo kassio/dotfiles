@@ -1,92 +1,109 @@
-local keymap = vim.keymap.set
-
 ------------------------------------------------------------
 -- Operation pending maps need to be passed as string
 -- expressions to vim, hence the double quote
 --
 -- select current line (inner)
-keymap('x', 'il', ':<c-u>normal! g_v_<cr>')
-keymap('o', 'il', '":normal vil<cr>"', { expr = true })
+vim.keymap.set('x', 'il', ':<c-u>normal! g_v_<cr>')
+vim.keymap.set('o', 'il', '":normal vil<cr>"', { expr = true })
 
 -- select current line (outer)
-keymap('x', 'al', ':<c-u>normal! g_v0<cr>')
-keymap('o', 'al', '":normal val<cr>"', { expr = true })
+vim.keymap.set('x', 'al', ':<c-u>normal! g_v0<cr>')
+vim.keymap.set('o', 'al', '":normal val<cr>"', { expr = true })
 
 -- select all lines
-keymap('x', 'aF', ':<c-u>keepjumps normal! GVgg0<cr>')
-keymap('o', 'aF', '":normal vaF<cr>"', { expr = true })
+vim.keymap.set('x', 'aF', ':<c-u>keepjumps normal! GVgg0<cr>')
+vim.keymap.set('o', 'aF', '":normal vaF<cr>"', { expr = true })
 ------------------------------------------------------------
 
 -- disable ex mode
-keymap('n', [[Q]], [[<nop>]])
+vim.keymap.set('n', [[Q]], [[<nop>]])
 
 -- allow gf to open non-existing files
-keymap('n', 'gf', ':e <cfile><cr>')
+vim.keymap.set('n', 'gf', ':e <cfile><cr>')
 
 -- use gj/gk by default to better navigation on wrapped lines
-keymap('n', 'j', 'gj')
-keymap('n', 'k', 'gk')
+vim.keymap.set('n', 'j', 'gj')
+vim.keymap.set('n', 'k', 'gk')
 
 -- faster esc
-keymap('i', '<esc>', '<c-c>')
+vim.keymap.set('i', '<esc>', '<c-c>')
 
 -- undo breakpoints
-keymap('i', ',', ',<c-g>u')
-keymap('i', '.', '.<c-g>u')
+vim.keymap.set('i', ',', ',<c-g>u')
+vim.keymap.set('i', '.', '.<c-g>u')
 
 -- keep the cursor centered while moving
-keymap('n', 'n,', 'nzzzv')
-keymap('n', 'N,', 'Nzzzv')
-keymap('n', 'J,', 'mzJ`z')
+vim.keymap.set('n', 'n,', 'nzzzv')
+vim.keymap.set('n', 'N,', 'Nzzzv')
+vim.keymap.set('n', 'J,', 'mzJ`z')
 
-keymap('n', ']c', ']czz')
-keymap('n', '[c', '[czz')
-keymap('n', ']d', ']dzz')
-keymap('n', '[d', '[dzz')
+vim.keymap.set('n', ']c', ']czz')
+vim.keymap.set('n', '[c', '[czz')
+vim.keymap.set('n', ']d', ']dzz')
+vim.keymap.set('n', '[d', '[dzz')
 
 -- escape from terminal mode with double <esc>
-keymap('t', [[<esc><esc>]], [[<c-\><c-n>]])
+vim.keymap.set('t', [[<esc><esc>]], [[<c-\><c-n>]])
 
 -- move to the last tab
-keymap('n', '9gt', '<cmd>tablast<cr>')
+vim.keymap.set('n', '9gt', '<cmd>tablast<cr>')
 
 -- paste without replacing the " register
-keymap('v', '<leader>p', '"_dP')
+vim.keymap.set('v', '<leader>p', '"_dP')
 
 -- search current word
-keymap('n', '!', '"vyiw/\\V<c-r>v<cr>N')
+vim.keymap.set('n', '!', '"vyiw/\\V<c-r>v<cr>N')
 -- search current selection
-keymap('x', '!', '"vy/\\V<c-r>v<cr>N')
+vim.keymap.set('x', '!', '"vy/\\V<c-r>v<cr>N')
 
 -- search current word case insensitive
-keymap('n', '<leader>!', '"vyiw/\\V\\c<c-r>v<cr>N')
+vim.keymap.set('n', '<leader>!', '"vyiw/\\V\\c<c-r>v<cr>N')
 -- search current selection case insensitive
-keymap('x', '<leader>!', '"vy/\\V\\c<c-r>v<cr>N')
+vim.keymap.set('x', '<leader>!', '"vy/\\V\\c<c-r>v<cr>N')
 
 -- search current word exclusive
-keymap('n', 'g!', '"vyiw/\\V\\<<c-r>v\\><cr>N')
+vim.keymap.set('n', 'g!', '"vyiw/\\V\\<<c-r>v\\><cr>N')
 -- search current selection exclusive
-keymap('x', 'g!', '"vy/\\V\\<<c-r>v\\><cr>N')
+vim.keymap.set('x', 'g!', '"vy/\\V\\<<c-r>v\\><cr>N')
 
 -- search current word case insensitive exclusive
-keymap('n', '<leader>g!', '"vyiw/\\V\\c\\<<c-r>v\\><cr>N')
+vim.keymap.set('n', '<leader>g!', '"vyiw/\\V\\c\\<<c-r>v\\><cr>N')
 -- search current selection case insensitive exclusive
-keymap('x', '<leader>g!', '"vy/\\V\\c\\<<c-r>v\\><cr>N')
+vim.keymap.set('x', '<leader>g!', '"vy/\\V\\c\\<<c-r>v\\><cr>N')
+
+-- delete current buffer
+vim.keymap.set('n', '<leader>bd', '<cmd>bw!<cr>')
+-- delete all buffers
+vim.keymap.set('n', '<leader>da', '<cmd>bufdo bw!<cr>')
 
 -- indent current buffer
-keymap('n', '<leader>ff', vim.my.buffers.indent)
+vim.keymap.set('n', '<leader>ff', function()
+  require('my.utils').preserve(function()
+    vim.cmd([[normal! gg=G]])
+  end)
+end)
 
 -- delete all buffers except current
-keymap('n', '<leader>bo', vim.my.buffers.only)
+vim.keymap.set('n', '<leader>bo', function() -- delete all buffers but current
+  local current = vim.api.nvim_win_get_buf(0)
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if buf ~= current then
+      vim.api.nvim_buf_delete(buf, { force = true })
+    end
+  end
+end)
+
 -- delete all hidden buffers
-keymap('n', '<leader>dh', vim.my.buffers.delete_hidden)
--- delete current buffer
-keymap('n', '<leader>bd', '<cmd>bw!<cr>')
--- delete all buffers
-keymap('n', '<leader>da', '<cmd>bufdo bw!<cr>')
+vim.keymap.set('n', '<leader>dh', function() -- delete all hidden buffers
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.tbl_isempty(vim.fn.win_findbuf(buf)) and vim.api.nvim_buf_is_valid(buf) then
+      vim.api.nvim_buf_delete(buf, { force = true })
+    end
+  end
+end)
 
 -- close floating windows
-keymap('n', '<leader>wa', function()
+vim.keymap.set('n', '<leader>wa', function()
   for _, win in ipairs(vim.api.nvim_list_wins()) do
     local ok, config = pcall(vim.api.nvim_win_get_config, win)
 

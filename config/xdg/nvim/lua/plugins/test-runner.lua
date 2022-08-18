@@ -9,17 +9,14 @@ keymap('n', '<leader>tf', ':Tclear | TestFile<cr>')
 keymap('n', '<leader>tc', ':Tclear | TestNearest<cr>')
 keymap('n', '<leader>tr', ':Tclear | TestLast<cr>')
 
-vim.my.test_runner = {
-  rspec = function()
-    vim.g['test#last_position'] = {
-      file = 'spec/models/file_spec.rb',
-      col = 1,
-      line = 1,
-    }
+vim.api.nvim_create_user_command('RSpec', function()
+  vim.g['test#last_position'] = {
+    file = 'spec/models/file_spec.rb',
+    col = 1,
+    line = 1,
+  }
 
-    vim.cmd('TestSuite')
-  end,
-}
+  vim.cmd('TestSuite')
+end, {})
 
-vim.api.nvim_create_user_command('RSpec', vim.my.test_runner.rspec, {})
 vim.cmd('cabbrev Rspec RSpec')

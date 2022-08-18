@@ -4,22 +4,22 @@ require('terminal').setup()
 
 local g = vim.g
 local keymap = vim.keymap.set
-local count_nkeymap = function(key, command)
-  keymap('n', key, function()
-    vim.my.terminal.numbered_cmd(command)
-  end)
+local utils = require('my.utils')
+
+local numbered_cmd = function(cmd)
+  local number = vim.v.count
+  if number == 0 then
+    number = vim.b.neoterm_target or ''
+  end
+
+  vim.cmd(string.gsub(cmd, '{{target}}', number))
 end
 
-vim.my.terminal = {
-  numbered_cmd = function(cmd)
-    local number = vim.v.count
-    if number == 0 then
-      number = vim.b.neoterm_target or ''
-    end
-
-    vim.cmd(string.gsub(cmd, '{{target}}', number))
-  end,
-}
+local count_nkeymap = function(key, command)
+  keymap('n', key, function()
+    numbered_cmd(command)
+  end)
+end
 
 g.neoterm_default_mod = 'botright'
 g.neoterm_automap_keys = '<leader>tm'
@@ -53,7 +53,7 @@ count_nkeymap('<leader>tl', '{{target}}Tclear')
 count_nkeymap('<leader>tL', '{{target}}Tclear!')
 count_nkeymap('<leader>tk', '{{target}}Tkill')
 
-vim.my.utils.augroup('user:terminal', {
+utils.augroup('user:terminal', {
   {
     events = { 'TermOpen' },
     pattern = '*',
