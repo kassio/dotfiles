@@ -157,6 +157,7 @@ gps.setup({
 vim.api.nvim_create_user_command('TSGPSLocation', function()
   print(utils.treesitter.location())
 end, {})
+
 vim.api.nvim_create_user_command('TSGPSLocationCopy', function(cmd)
   utils.to_clipboard(utils.treesitter.location(), cmd.bang)
 end, {})

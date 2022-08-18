@@ -2,10 +2,10 @@ require('globals') -- global functions (used for debbuging)
 require('extensions') -- lua extensions (used everywhere)
 
 -- my own set of configs and helpers (plugin independent)
+require('my.options')
 require('my.keymaps')
 require('my.commands')
 require('my.diagnostic')
-require('my.options')
 
 -- plugins configurations
 require('plugins').setup()
