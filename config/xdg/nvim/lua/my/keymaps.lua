@@ -78,7 +78,7 @@ vim.keymap.set('n', '<leader>da', '<cmd>bufdo bw!<cr>')
 
 -- indent current buffer
 vim.keymap.set('n', '<leader>ff', function()
-  require('my.utils').preserve(function()
+  require('my.utils.buffers').preserve(function()
     vim.cmd([[normal! gg=G]])
   end)
 end)
