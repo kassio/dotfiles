@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+ cat $HOME/.config/kitty/*/*.conf |
+   /opt/homebrew/bin/rg map |
+   /opt/homebrew/bin/fzf --no-sort
