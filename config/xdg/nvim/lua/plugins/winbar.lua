@@ -62,9 +62,12 @@ utils.augroup('user:winbar', {
   {
     events = {
       'BufWrite',
+      'CursorMoved',
       'FileType',
       'FileWritePost',
       'FocusLost',
+      'InsertEnter',
+      'InsertLeave',
       'SessionLoadPost',
       'TextChanged',
       'WinEnter',
