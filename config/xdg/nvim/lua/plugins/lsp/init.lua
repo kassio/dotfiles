@@ -1,7 +1,6 @@
 local lsp = vim.lsp
 local hdls = lsp.handlers
 local installer = require('plugins.lsp.installer')
-local command = vim.api.nvim_create_user_command
 local telescope = require('telescope.builtin')
 
 -- Add additional capabilities supported by nvim-cmp
@@ -25,10 +24,6 @@ hdls['textDocument/hover'] = lsp.with(hdls.hover, { border = 'rounded' })
 hdls['textDocument/signatureHelp'] = lsp.with(hdls.signature_help, { border = 'rounded' })
 
 vim.keymap.set('n', '<leader>o', '<cmd>SymbolsOutline<cr>', { silent = true })
-
-local nmap = function(lhs, rhs)
-  vim.keymap.set('n', lhs, rhs, { buffer = 0, silent = true })
-end
 
 local command_map = function(fn, map, cmd_name, cmd_opts)
   cmd_opts = cmd_opts or {}
