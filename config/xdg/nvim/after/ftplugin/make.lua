@@ -1,1 +1,1 @@
-vim.cmd('setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4')
+vim.cmd('setlocal noexpandtab tabstop=2 shiftwidth=2 softtabstop=2')
