@@ -22,3 +22,13 @@ command('Write', utils.buffers.ensure_path_and_write, {})
 
 -- copy filename
 command('CopyFilename', utils.copy_filename, { bang = true, nargs = '?' })
+
+command('LockWindowSize', function()
+  vim.opt_local.winfixwidth = true
+  vim.opt_local.winfixheight = true
+end, {})
+
+command('UnlockWindowSize', function()
+  vim.opt_local.winfixwidth = false
+  vim.opt_local.winfixheight = false
+end, {})
