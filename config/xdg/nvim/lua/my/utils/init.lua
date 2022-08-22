@@ -71,6 +71,8 @@ local plugin_filetypes = {
   'neoterm',
   'notify',
   'packer',
+  'cmp_menu',
+  'cmp_docs',
 }
 
 M.plugin_filetype = function(ft)
