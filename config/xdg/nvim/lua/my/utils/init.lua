@@ -4,7 +4,6 @@ local fn = vim.fn
 
 M.treesitter = require('my.utils.treesitter')
 M.buffers = require('my.utils.buffers')
-M.reloader = require('my.utils.reloader')
 M.snippets = require('my.utils.snippets')
 M.highlights = require('my.utils.highlights')
 

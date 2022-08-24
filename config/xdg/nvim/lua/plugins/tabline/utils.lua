@@ -72,7 +72,7 @@ return {
 
     -- Tab labels is not using the whole UI
     if #labels_text < vim.o.columns then
-      return table.concat({ '%#TabLine#', table.concat(labels), '%#TabLineFill' })
+      return table.concat({ '%#TabLine#', labels_text, '%#TabLineFill' })
     elseif current_nr <= math.floor(#labels / 2) then
       -- When the number of tabs if longer than the UI, some tabs might
       -- get hidden. To ensure the focused_tab, and its surrounds is always

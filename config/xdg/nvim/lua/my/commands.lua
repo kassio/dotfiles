@@ -1,12 +1,6 @@
 local command = vim.api.nvim_create_user_command
 local utils = require('my.utils')
 
--- reload config
-command('Reload', utils.reloader.reload, {})
-
--- reload theme
-command('ReloadTheme', utils.reloader.reload_theme, {})
-
 -- run given command without change current view
 command('Preserve', function(cmd)
   utils.preserve(function()
