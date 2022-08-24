@@ -1,37 +1,47 @@
+local api = vim.api
+local fn = vim.fn
 local M = {}
 
 M.setup = function()
-  local fn = vim.fn
   local repo = 'https://github.com/wbthomason/packer.nvim'
   local path = string.format('%s/site/pack/packer/opt/packer.nvim', fn.stdpath('data'))
 
   if fn.empty(fn.glob(path)) > 0 then
     fn.system(string.format('git clone %s %s', repo, path))
 
-    M.upgrade({ bang = true })
+    M.upgrade_and_close()
 
     return
   end
 
-  vim.api.nvim_create_user_command('Upgrade', require('plugins').upgrade, { bang = true })
+  api.nvim_create_user_command('Upgrade', require('plugins').upgrade, {})
+  api.nvim_create_user_command('UpgradeAndClose', require('plugins').upgrade_and_close, {})
 end
 
-M.upgrade = function(cmd)
-  cmd = cmd or {}
-  local group = vim.api.nvim_create_augroup('user:packing', { clear = false })
-  vim.api.nvim_create_autocmd({ 'User' }, {
+M.upgrade_and_close = function()
+  local group = api.nvim_create_augroup('user:packing', { clear = false })
+  api.nvim_create_autocmd({ 'User' }, {
     group = group,
     pattern = 'PackerComplete',
     command = 'MasonToolsUpdate',
   })
 
-  if cmd.bang then
-    vim.api.nvim_create_autocmd({ 'User' }, {
-      group = group,
-      pattern = 'PackerComplete',
-      command = 'quitall!',
-    })
-  end
+  api.nvim_create_autocmd({ 'User' }, {
+    group = group,
+    pattern = 'PackerComplete',
+    command = 'quitall!',
+  })
+
+  M.load().sync()
+end
+
+M.upgrade = function()
+  local group = api.nvim_create_augroup('user:packing', { clear = false })
+  api.nvim_create_autocmd({ 'User' }, {
+    group = group,
+    pattern = 'PackerComplete',
+    command = 'MasonToolsUpdate',
+  })
 
   M.load().sync()
 end
@@ -41,7 +51,7 @@ M.load = function()
 
   local packer = require('packer')
 
-  packer.init({ compile_path = vim.fn.stdpath('data') .. '/site/plugin/packer.vim' })
+  packer.init({ compile_path = fn.stdpath('data') .. '/site/plugin/packer.vim' })
 
   return packer.startup({
     function(use)

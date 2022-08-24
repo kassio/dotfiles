@@ -5,8 +5,8 @@ local utils = require('plugins.statusline.utils')
 
 local sections = {
   lualine_a = { utils.mode() },
-  lualine_b = { myutils.treesitter.location },
-  lualine_c = {},
+  lualine_b = { 'branch' },
+  lualine_c = { myutils.treesitter.location },
   lualine_x = {
     {
       'diagnostics',
@@ -19,8 +19,8 @@ local sections = {
       },
     },
   },
-  lualine_y = { 'diff', 'branch' },
-  lualine_z = { '[[%3l:%-3c %3p%%]]' },
+  lualine_y = { 'diff' },
+  lualine_z = { '%3l:%-3c %3p%%' },
 }
 
 lualine.setup({

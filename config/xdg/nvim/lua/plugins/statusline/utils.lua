@@ -56,9 +56,7 @@ M.mode = function()
     return mode_map[mode_code]
   end
 
-  return {
-    get_mode,
-  }
+  return { get_mode }
 end
 
 return M

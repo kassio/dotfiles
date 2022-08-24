@@ -2,6 +2,21 @@ local M = {}
 local api = vim.api
 local fn = vim.fn
 
+local plugin_filetypes = {
+  'FineCmdlinePrompt',
+  'NvimTree',
+  'Outline',
+  'TelescopePrompt',
+  'TelescopeResults',
+  'cmp_docs',
+  'cmp_menu',
+  'fzf',
+  'help',
+  'neoterm',
+  'notify',
+  'packer',
+}
+
 M.treesitter = require('my.utils.treesitter')
 M.buffers = require('my.utils.buffers')
 M.snippets = require('my.utils.snippets')
@@ -60,20 +75,6 @@ M.fileicon = function(filetype, filename)
 
   return require('nvim-web-devicons').get_icon(filename, extension, { default = true })
 end
-
-local plugin_filetypes = {
-  'NvimTree',
-  'TelescopePrompt',
-  'TelescopeResults',
-  'fzf',
-  'help',
-  'neoterm',
-  'notify',
-  'packer',
-  'cmp_menu',
-  'cmp_docs',
-  'FineCmdlinePrompt',
-}
 
 M.plugin_filetype = function(ft)
   return vim.tbl_contains(plugin_filetypes, ft or vim.bo.filetype)
