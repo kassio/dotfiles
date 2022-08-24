@@ -73,6 +73,7 @@ local plugin_filetypes = {
   'packer',
   'cmp_menu',
   'cmp_docs',
+  'FineCmdlinePrompt',
 }
 
 M.plugin_filetype = function(ft)

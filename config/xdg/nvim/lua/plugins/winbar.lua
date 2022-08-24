@@ -41,9 +41,9 @@ local reload = function()
     local ft = api.nvim_buf_get_option(bufnr, 'filetype')
 
     if ft == '' or utils.plugin_filetype(ft) then
-      api.nvim_win_set_option(winid, 'winbar', '')
+      pcall(api.nvim_win_set_option, winid, 'winbar', '')
     else
-      api.nvim_win_set_option(winid, 'winbar', winbar(bufnr, winid == curwin))
+      pcall(api.nvim_win_set_option, winid, 'winbar', winbar(bufnr, winid == curwin))
     end
   end
 end
