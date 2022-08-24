@@ -16,13 +16,13 @@ require('fine-cmdline').setup({
       style = 'rounded',
     },
     buf_options = {
-      filetype = 'FineCmdlinePrompt'
-    }
+      filetype = 'FineCmdlinePrompt',
+    },
   },
   before_mount = function(input)
     vim.api.nvim_buf_set_option(input.bufnr, 'filetype', 'fine_cmdline')
   end,
 })
 
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1
 vim.api.nvim_set_keymap('n', ':', '<cmd>FineCmdline<CR>', { noremap = true })
