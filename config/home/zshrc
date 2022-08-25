@@ -23,6 +23,7 @@ PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
 PATH="${HOMEBREW_PREFIX}/opt/python@3.9/bin:${PATH}"
 PATH="${XDG_BIN_HOME}:${PATH}"
 PATH="${XDG_CONFIG_HOME}/git/bin:${PATH}" # git helpers
+PATH="${XDG_CONFIG_HOME}/kitty/bin:${PATH}" # git helpers
 PATH=".userbin:${PATH}"
 typeset -U PATH
 export PATH
