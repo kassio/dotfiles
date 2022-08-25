@@ -23,7 +23,7 @@ gbd() {
   while read -r branch; do
     printf "%10s %s (%s)\n" \
       "$(g-main-diff ${branch})" \
-      "${branch}" \
+      "$(git show-branch-remote ${branch})/${branch}" \
       "$(g-upstream-diff ${branch})"
   done < <(git branch-list | grep -v detached)
 }
@@ -41,13 +41,14 @@ gb-mine() {
 }
 
 g-upstream-diff() {
-  upstream=$(git config --get "branch.$1.remote")
-
-  echo "u$(g-diff-count "$1" "${upstream}/$1")"
+  echo "u$(g-diff-count "$1" "$(git show-branch-remote $1)/$1")"
 }
 
 g-main-diff() {
-  g-diff-count "$1" "$(git branch-main)"
+  branch_main="$(git branch-main)"
+  full_branch_main="$(git show-branch-remote $1)/${branch_main}"
+
+  g-diff-count "$1" "${full_branch_main}"
 }
 
 g-diff-count() {
