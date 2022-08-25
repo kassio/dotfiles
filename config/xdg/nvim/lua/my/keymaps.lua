@@ -112,3 +112,8 @@ vim.keymap.set('n', '<leader>wa', function()
     end
   end
 end)
+
+-- open the url under the cursorra
+vim.keymap.set('n', 'gx', function()
+  vim.fn.jobstart('open ' .. vim.fn.expand('<cfile>'))
+end, { silent = true })
