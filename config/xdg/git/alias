@@ -16,7 +16,9 @@ gdm() {
 }
 
 gdfm() {
-  git diff --name-only "$(git branch-main)..."
+  branch="$(git branch-current)"
+  remote="$(git show-branch-remote "${branch}")"
+  git diff --name-only "${remote:-origin}/$(git branch-main)..."
 }
 
 gbd() {
