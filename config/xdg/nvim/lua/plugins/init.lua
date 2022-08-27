@@ -64,11 +64,6 @@ M.load = function()
         requires = { 'kyazdani42/nvim-web-devicons' },
       })
 
-      use({
-        'VonHeikemen/fine-cmdline.nvim',
-        requires = { 'MunifTanjim/nui.nvim' },
-      })
-
       -- Project management
       use({ 'tpope/vim-projectionist' })
 
