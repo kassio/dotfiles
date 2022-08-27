@@ -58,6 +58,9 @@ M.load = function()
       -- Packer can manage itself
       use({ 'wbthomason/packer.nvim', opt = true })
 
+      -- fix CursorHold
+      use({ 'antoinemadec/FixCursorHold.nvim' })
+
       -- Statusline
       use({
         'nvim-lualine/lualine.nvim',
