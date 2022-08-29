@@ -113,7 +113,13 @@ vim.keymap.set('n', '<leader>wa', function()
   end
 end)
 
--- open the url under the cursorra
+-- open the url under the cursor
 vim.keymap.set('n', 'gx', function()
   vim.fn.jobstart('open ' .. vim.fn.expand('<cfile>'))
+end, { silent = true })
+
+vim.keymap.set('x', 'gx', function()
+  vim.cmd('normal! "vy')
+  local uri = vim.fn.getreg('v')
+  vim.fn.jobstart('open ' .. string.gsub(uri, '%s', ''))
 end, { silent = true })
