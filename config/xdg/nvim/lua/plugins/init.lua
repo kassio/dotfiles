@@ -23,12 +23,12 @@ M.upgrade_and_close = function()
   api.nvim_create_autocmd({ 'User' }, {
     group = group,
     pattern = 'PackerComplete',
-    command = 'MasonToolsUpdate',
+    command = 'echo "\nUpdating MasonTools" | MasonToolsUpdate',
   })
 
   api.nvim_create_autocmd({ 'User' }, {
     group = group,
-    pattern = 'PackerComplete',
+    pattern = 'MasonToolsUpdateCompleted',
     command = 'quitall!',
   })
 
