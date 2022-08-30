@@ -4,3 +4,5 @@ curl -L https://sw.kovidgoyal.net/kitty/installer.sh |
   sh /dev/stdin installer=nightly
 
 kitty-icon-replace
+
+xattr -d com.apple.quarantine "$(which 'kitty')"
