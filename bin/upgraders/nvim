@@ -10,5 +10,4 @@ brew reinstall neovim
 
 title "[nvim] updating neovim plugin"
 echo > ~/.cache/nvim/packer.nvim.log
-nvim -c 'UpgradeAndClose'
-cat ~/.cache/nvim/packer.nvim.log
+nvim -c 'UpgradeAndClose' --headless
