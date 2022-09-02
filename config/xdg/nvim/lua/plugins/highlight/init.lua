@@ -18,7 +18,6 @@ require('pqf').setup({
 hl.def('Search', { background = colors.warn, foreground = colors.shadow })
 hl.def('CurSearch', { background = colors.info, foreground = colors.shadow })
 hl.def('IncSearch', { background = colors.warn, foreground = colors.shadow })
-hl.def('VertSplit', { background = colors.dark_highlight, foreground = colors.dark_highlight })
 
 -- Spell
 hl.def('SpellBad', { underdotted = true, sp = colors.warn })

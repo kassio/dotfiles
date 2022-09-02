@@ -2,7 +2,12 @@ local M = {}
 local api = vim.api
 local fn = vim.fn
 
-local plugin_filetypes = {
+M.treesitter = require('my.utils.treesitter')
+M.buffers = require('my.utils.buffers')
+M.snippets = require('my.utils.snippets')
+M.highlights = require('my.utils.highlights')
+
+M.plugin_filetypes = {
   'FineCmdlinePrompt',
   'NvimTree',
   'Outline',
@@ -16,11 +21,6 @@ local plugin_filetypes = {
   'notify',
   'packer',
 }
-
-M.treesitter = require('my.utils.treesitter')
-M.buffers = require('my.utils.buffers')
-M.snippets = require('my.utils.snippets')
-M.highlights = require('my.utils.highlights')
 
 M.get_visual_selection = function()
   local s_start = vim.api.nvim_buf_get_mark(0, '<')
@@ -63,21 +63,19 @@ M.cabbrev = function(lhs, rhs)
 end
 
 M.fileicon = function(filetype, filename)
-  local filetype_extensions = {
-    go = 'go',
-    ruby = 'rb',
-    sh = 'sh',
-    bash = 'bash',
-    zsh = 'zsh',
-  }
-
-  local extension = filetype_extensions[filetype] or fn.fnamemodify(filename, ':e') or filetype
+  local extension = fn.fnamemodify(filename, ':e') or filetype
 
   return require('nvim-web-devicons').get_icon(filename, extension, { default = true })
 end
 
+M.fileicon_color = function(filetype, filename)
+  local extension = fn.fnamemodify(filename, ':e') or filetype
+
+  return require('nvim-web-devicons').get_icon_color(filename, extension, { default = true })
+end
+
 M.plugin_filetype = function(ft)
-  return vim.tbl_contains(plugin_filetypes, ft or vim.bo.filetype)
+  return vim.tbl_contains(M.plugin_filetypes, ft or vim.bo.filetype)
 end
 
 local valid_flag = function(flag)

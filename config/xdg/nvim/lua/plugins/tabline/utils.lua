@@ -14,8 +14,8 @@ local get_name = function(tab)
   else
     local name = vim.fn.fnamemodify(fullname, ':t')
 
-    if #name > 42 then
-      return string.sub(name, 1, 39) .. '...'
+    if #name > 50 then
+      return '...' .. string.sub(name, #name - 46, -1)
     end
 
     return name
@@ -25,7 +25,7 @@ end
 local label_for = function(tab)
   local name = get_name(tab)
   local icon = buffers.fileicon(tab.bufnr)
-  local label = string.format('%%3.50(%%%dT %d %s %s %%)', tab.page, tab.page, icon, name)
+  local label = string.format('%%3.57(%%%dT %d %s %s %%)', tab.page, tab.page, icon, name)
 
   if tab.focused then
     return '%#TabLineSel#' .. label .. '%*'

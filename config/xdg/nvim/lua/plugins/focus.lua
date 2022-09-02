@@ -4,7 +4,7 @@ vim.g.lastplace_ignore = 'gitcommit,gitrebase'
 vim.g.lastplace_ignore_buftype = 'quickfix,nofile,help'
 
 local function set_relative_number(value)
-  if utils.plugin_filetype(vim.bo.filetype) then
+  if pcall(utils.plugin_filetype, vim.bo.filetype) then
     return
   end
 
