@@ -64,7 +64,7 @@ local get_limit = function(labels, columns)
 end
 
 return {
-  tabline = function()
+  render = function()
     local focused_tab = api.nvim_get_current_tabpage()
     local current_nr = api.nvim_tabpage_get_number(focused_tab)
     local labels = get_labels(focused_tab)

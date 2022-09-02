@@ -9,4 +9,4 @@ hl.extend(
   { background = colors.info, foreground = colors.shadow, bold = true }
 )
 
-vim.opt.tabline = '%!v:lua.require("plugins.tabline.utils").tabline()'
+vim.opt.tabline = '%!v:lua.require("plugins.tabline.utils").render()'
