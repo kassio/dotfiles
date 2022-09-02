@@ -8,6 +8,8 @@ bindkey '^N' down-line-or-search
 bindkey '^F' forward-char
 bindkey '^B' backward-char
 
+bindkey '^D' delete-char-or-list
+bindkey '^H' backward-delete-char
 bindkey '^[D' kill-word
 bindkey '^U' backward-kill-line
 bindkey '^K' kill-line
