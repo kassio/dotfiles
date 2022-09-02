@@ -151,3 +151,4 @@ command('GbranchCurrent', M.branch_current, {})
 
 cabbrev('Gd', 'Gdiff')
 cabbrev('Gw', 'Gwrite')
+cabbrev('Ga', 'Gwrite')
