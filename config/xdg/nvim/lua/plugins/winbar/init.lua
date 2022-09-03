@@ -6,5 +6,6 @@ hl.def('Winbar', {
   foreground = colors.highlight,
   bold = true,
 })
+hl.extend('WinbarNC', 'Winbar', { bold = false })
 
 vim.opt.winbar = '%{%v:lua.require("plugins.winbar.utils").render()%}'
