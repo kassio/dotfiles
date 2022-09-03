@@ -22,16 +22,36 @@ local get_name = function(tab)
   end
 end
 
+local highlight = function(label, color)
+  return string.format('%%#%s#%s%%*', color, label)
+end
+
 local label_for = function(tab)
   local name = get_name(tab)
-  local icon = buffers.fileicon(tab.bufnr)
-  local label = string.format('%%3.57(%%%dT %d %s %s %%)', tab.page, tab.page, icon, name)
+  local icon, hl_icon = buffers.fileicon(tab.bufnr)
+  local hl = 'TabLineSel'
 
-  if tab.focused then
-    return '%#TabLineSel#' .. label .. '%*'
-  else
-    return label
+  if not tab.focused then
+    hl = 'TabLine'
+    hl_icon = 'TabLine'
   end
+
+  local sep = highlight('┃', hl)
+
+  local components = {
+    sep,
+    string.format('%%%sT', tab.page) .. highlight(string.format('%d', tab.page), hl),
+    highlight(icon, hl_icon),
+    highlight(name, hl),
+  }
+
+  if tab.id == tab.count then
+    table.insert(components, sep)
+  else
+    table.insert(components, '')
+  end
+
+  return table.concat(components, ' ')
 end
 
 local get_labels = function(focused_tab)
@@ -43,6 +63,7 @@ local get_labels = function(focused_tab)
       page = api.nvim_tabpage_get_number(tab),
       bufnr = get_bufnr(tab),
       focused = tab == focused_tab,
+      count = #tabs,
     })
   end, tabs)
 end
@@ -69,9 +90,10 @@ return {
     local current_nr = api.nvim_tabpage_get_number(focused_tab)
     local labels = get_labels(focused_tab)
     local labels_text = table.concat(labels)
+    local parsed_text = vim.api.nvim_eval_statusline(labels_text, { use_tabline = true })
 
     -- Tab labels is not using the whole UI
-    if #labels_text < vim.o.columns then
+    if parsed_text.width < vim.o.columns then
       return table.concat({ '%#TabLine#', labels_text, '%#TabLineFill' })
     elseif current_nr <= math.floor(#labels / 2) then
       -- When the number of tabs if longer than the UI, some tabs might
