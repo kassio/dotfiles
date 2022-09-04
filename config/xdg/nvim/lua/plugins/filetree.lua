@@ -1,9 +1,8 @@
 local theme = require('plugins.highlight.theme')
 local hl = require('my.utils.highlights')
-local colors = require('plugins.highlight.theme').colors
 
-hl.def('NvimTreeOpenedFile', { bold = true, italic = false })
-hl.def('NvimTreeRootFolder', { foreground = colors.highlight })
+hl.def('NvimTreeOpenedFile', { bold = true, italic = true })
+hl.extend('NvimTreeRootFolder', 'NvimTreeFolderName', { bold = true })
 
 require('nvim-tree').setup({
   disable_netrw = true,

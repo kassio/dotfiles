@@ -36,20 +36,13 @@ local label_for = function(tab)
     hl_icon = 'TabLine'
   end
 
-  local sep = highlight('┃', hl)
-
   local components = {
-    sep,
+    highlight('┃', hl),
     string.format('%%%sT', tab.page) .. highlight(string.format('%d', tab.page), hl),
     highlight(icon, hl_icon),
     highlight(name, hl),
+    '',
   }
-
-  if tab.id == tab.count then
-    table.insert(components, sep)
-  else
-    table.insert(components, '')
-  end
 
   return table.concat(components, ' ')
 end

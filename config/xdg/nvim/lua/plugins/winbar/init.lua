@@ -3,9 +3,13 @@ local colors = require('plugins.highlight.theme').colors
 
 hl.def('Winbar', {
   background = colors.dark_highlight,
-  foreground = colors.highlight,
+  foreground = colors['Normal'].foreground,
   bold = true,
 })
-hl.extend('WinbarNC', 'Winbar', { bold = false })
+hl.def('WinbarNC', {
+  background = colors.dark_highlight,
+  foreground = colors.highlight,
+  bold = false,
+})
 
 vim.opt.winbar = '%{%v:lua.require("plugins.winbar.utils").render()%}'

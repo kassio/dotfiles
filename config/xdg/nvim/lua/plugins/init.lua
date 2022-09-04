@@ -67,6 +67,12 @@ M.load = function()
         requires = { 'kyazdani42/nvim-web-devicons' },
       })
 
+      -- Tabline
+      use({
+        'romgrk/barbar.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons' },
+      })
+
       -- Project management
       use({ 'tpope/vim-projectionist' })
 
