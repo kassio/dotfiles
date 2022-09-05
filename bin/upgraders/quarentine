@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+
+if [ "$1" = "--help" ]; then
+  echo "Remove quarentine from apps"
+  exit
+fi
+
+title "[quarentine] remove quarentine from apps"
+
+for app in chromedriver kitty; do
+  remove-quarentine "$(which "${app}")" 2>/dev/null &&
+    subtitle "${app}: removed" ||
+    subtitle "${app}: nothing to do"
+done

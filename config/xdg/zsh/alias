@@ -61,10 +61,6 @@ kitty-detach-to-tab() {
   kitty @ detach-window --target-tab "${target}"
 }
 
-remove-quarentine() {
-  xattr -d com.apple.quarantine "$(which $1)"
-}
-
 alias remove-quarentine-chromedriver="remove-quarentine chromedriver"
 
 # Tail a json file parsing it with jq

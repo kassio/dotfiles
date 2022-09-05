@@ -13,4 +13,5 @@ clear-screen
 "${basepath}/upgraders/ruby"
 "${basepath}/upgraders/nvim"
 "${basepath}/upgraders/kitty"
+"${basepath}/upgraders/quarentine"
 "${basepath}/upgraders/custom"
