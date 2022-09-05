@@ -26,6 +26,7 @@ local reloadTheme = function(bg)
     R('plugins.statusline')
     R('plugins.tabline')
     R('plugins.winbar')
+    R('plugins.git')
   end
 end
 
