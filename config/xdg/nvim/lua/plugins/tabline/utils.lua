@@ -26,23 +26,36 @@ local highlight = function(label, color)
   return string.format('%%#%s#%s%%*', color, label)
 end
 
+local SELECTED = 'TabLineSel'
+local UNSELECTED = 'Tabline'
+
 local label_for = function(tab)
   local name = get_name(tab)
   local icon, hl_icon = buffers.fileicon(tab.bufnr)
-  local hl = 'TabLineSel'
+  local hl = SELECTED
 
   if not tab.focused then
-    hl = 'TabLine'
-    hl_icon = 'TabLine'
+    hl = UNSELECTED
+    hl_icon = UNSELECTED
   end
 
   local components = {
-    highlight('┃', hl),
+    '',
     string.format('%%%sT', tab.page) .. highlight(string.format('%d', tab.page), hl),
     highlight(icon, hl_icon),
     highlight(name, hl),
-    '',
+    highlight('┃', hl),
   }
+
+  if tab.page == 1 then
+    table.remove(components, 1)
+    table.insert(components, 1, highlight('┃', hl))
+  end
+
+  if tab.focused_tab == (tab.page + 1) then
+    table.remove(components, #components)
+    table.insert(components, highlight('┃', SELECTED))
+  end
 
   return table.concat(components, ' ')
 end
@@ -50,13 +63,14 @@ end
 local get_labels = function(focused_tab)
   local tabs = api.nvim_list_tabpages()
 
+  vim.cmd('messages clear')
   return vim.tbl_map(function(tab)
     return label_for({
       id = tab,
       page = api.nvim_tabpage_get_number(tab),
       bufnr = get_bufnr(tab),
       focused = tab == focused_tab,
-      count = #tabs,
+      focused_tab = focused_tab,
     })
   end, tabs)
 end

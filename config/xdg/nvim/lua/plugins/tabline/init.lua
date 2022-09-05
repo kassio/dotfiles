@@ -13,5 +13,4 @@ hl.def('TabLineSel', {
   bold = true,
 })
 
-R('plugins.tabline.utils')
 vim.opt.tabline = '%!v:lua.require("plugins.tabline.utils").render()'
