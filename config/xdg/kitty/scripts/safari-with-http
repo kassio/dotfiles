@@ -12,4 +12,4 @@ case "${text}" in
     ;;
 esac
 
-open "${text}"
+open -a Safari "${text}"
