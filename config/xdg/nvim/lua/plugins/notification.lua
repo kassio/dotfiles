@@ -10,7 +10,7 @@ notify.setup({
     DEBUG = theme.icons.bug,
     TRACE = theme.icons.bug,
   },
-  background_colour = theme.colors.background,
+  -- background_colour = theme['Normal'].background,
   on_open = function()
     vim.cmd('doautocmd User NotificationOpened')
   end,

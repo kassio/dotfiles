@@ -1,6 +1,7 @@
 local theme = require('plugins.highlight.theme')
 local hl = require('my.utils.highlights')
 local colors = theme.colors
+local command = vim.api.nvim_create_user_command
 
 -- Highlight color strings
 require('colorizer').setup()
@@ -14,10 +15,27 @@ require('pqf').setup({
   },
 })
 
+local reloadTheme = function(bg)
+  return function()
+    if bg == 'light' then
+      theme.colorscheme = theme.setLightTheme()
+    else
+      theme.colorscheme = theme.setDarkTheme()
+    end
+
+    R('plugins.statusline')
+    R('plugins.tabline')
+    R('plugins.winbar')
+  end
+end
+
+command('LightTheme', reloadTheme('light'), {})
+command('DarkTheme', reloadTheme(), {})
+
 -- globals
-hl.def('Search', { background = colors.warn, foreground = colors.shadow })
-hl.def('CurSearch', { background = colors.info, foreground = colors.shadow })
-hl.def('IncSearch', { background = colors.warn, foreground = colors.shadow })
+hl.def('Search', { background = colors.warn, foreground = theme['Normal'].background })
+hl.def('CurSearch', { background = colors.info, foreground = theme['Normal'].background })
+hl.def('IncSearch', { background = colors.warn, foreground = theme['Normal'].background })
 
 -- Spell
 hl.def('SpellBad', { underdotted = true, sp = colors.warn })
@@ -26,7 +44,7 @@ hl.extend('SpellRare', 'SpellBad')
 hl.extend('SpellLocal', 'SpellBad')
 
 -- Floating wind:ow
-hl.def('NormalFloat', { background = colors.background })
+hl.def('NormalFloat', { background = theme['Normal'].background })
 
 -- matching parantheses/blocks marks
 hl.def('MatchParen', { bold = true })
