@@ -1,5 +1,8 @@
 local api = vim.api
 local buffers = require('my.utils.buffers')
+local UNSELECTED = 'Tabline'
+local SELECTED = 'TabLineSel'
+local FILL = '%#TabLineFill'
 
 local get_bufnr = function(tab)
   local winnr = api.nvim_tabpage_get_win(tab)
@@ -25,9 +28,6 @@ end
 local highlight = function(label, color)
   return string.format('%%#%s#%s%%*', color, label)
 end
-
-local SELECTED = 'TabLineSel'
-local UNSELECTED = 'Tabline'
 
 local label_for = function(tab)
   local name = get_name(tab)
@@ -101,7 +101,7 @@ return {
 
     -- Tab labels is not using the whole UI
     if parsed_text.width < vim.o.columns then
-      return table.concat({ '%#TabLine#', labels_text, '%#TabLineFill' })
+      return table.concat({ labels_text, FILL })
     elseif current_nr <= math.floor(#labels / 2) then
       -- When the number of tabs if longer than the UI, some tabs might
       -- get hidden. To ensure the focused_tab, and its surrounds is always
@@ -110,21 +110,19 @@ return {
       local limit = math.min(current_nr + get_limit(labels, vim.o.columns), #labels)
 
       return table.concat({
-        '%#TabLine#',
         table.concat(labels, '', 1, limit),
         '%<(',
         table.concat(labels, '', limit, #labels),
         '%)',
-        '%#TabLineFill',
+        FILL,
       })
     else
       return table.concat({
-        '%#TabLine#',
         '%<(',
         table.concat(labels, '', 1, current_nr - 1),
         '%)',
         table.concat(labels, '', current_nr, #labels),
-        '%#TabLineFill',
+        FILL,
       })
     end
   end,
