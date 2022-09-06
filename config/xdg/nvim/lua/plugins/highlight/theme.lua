@@ -1,6 +1,12 @@
-local setTheme = function(bg, flavor)
-  vim.opt.background = bg
-  vim.g.catppuccin_flavour = flavor
+local colorschemes = {
+  light = { bg = 'light', flavour = 'latte' },
+  dark = { bg = 'dark', flavour = 'mocha' },
+}
+
+local set_colorscheme = function(name)
+  local theme = colorschemes[name]
+  vim.opt.background = theme.bg
+  vim.g.catppuccin_flavour = theme.flavour
 
   require('catppuccin').setup()
   vim.cmd('colorscheme catppuccin')
@@ -11,28 +17,22 @@ local setTheme = function(bg, flavor)
   }
 end
 
-local setDarkTheme = function()
-  return setTheme('dark', 'mocha')
-end
-
-local setLightTheme = function()
-  return setTheme('light', 'latte')
-end
-
-local colorscheme_loader = function()
+local colorscheme_from_terminal = function()
   local config = vim.env.HOME .. '/.config/kitty/themes/current.conf'
   local ttheme = vim.fn.resolve(config)
+  local name = 'dark'
 
   if vim.fn.fnamemodify(ttheme, ':p:h:t') == 'light' then
-    return setLightTheme()
+    name = 'light'
   end
 
-  return setDarkTheme()
+  return set_colorscheme(name)
 end
 
-local colorscheme = colorscheme_loader()
+local colorscheme = colorscheme_from_terminal()
 local theme = {
   colorscheme = colorscheme,
+  set = set_colorscheme,
   icons = {
     buffer = '',
     bug = '',
@@ -58,8 +58,6 @@ local theme = {
     light_info = '#A5D0FF',
     light_hint = '#B5E6CE',
   },
-  setLightTheme = setLightTheme,
-  setDarkTheme = setDarkTheme,
 }
 
 setmetatable(theme, {

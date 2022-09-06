@@ -17,11 +17,7 @@ require('pqf').setup({
 
 local reloadTheme = function(bg)
   return function()
-    if bg == 'light' then
-      theme.colorscheme = theme.setLightTheme()
-    else
-      theme.colorscheme = theme.setDarkTheme()
-    end
+    theme.set(bg)
 
     R('plugins.statusline')
     R('plugins.tabline')
@@ -31,7 +27,7 @@ local reloadTheme = function(bg)
 end
 
 command('LightTheme', reloadTheme('light'), {})
-command('DarkTheme', reloadTheme(), {})
+command('DarkTheme', reloadTheme('dark'), {})
 
 -- globals
 hl.def('Search', { background = colors.warn, foreground = theme['Normal'].background })
