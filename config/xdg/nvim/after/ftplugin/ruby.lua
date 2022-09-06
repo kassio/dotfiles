@@ -13,3 +13,13 @@ ruby_cmd('ConvertHashStringKeyToSymbol', [[s/\(['"]\)\([^\1]\{-\}\)\1\s*\(=>\|:\
 ruby_cmd('ConvertHashSymbolKeyToString', [[s/\(\w\+\)\%(:\|\s*=>\)/'\1' =>]])
 ruby_cmd('LetToVar', [[s/let\%(\w\+\)\?(:\(\w\+\))\s*{\s*\(.\{-\}\)\s*}/\1 = \2]])
 ruby_cmd('VarToLet', [[s/@\?\(\w\+\)\s*=\s*\(.*\)/let(:\1) { \2 }]])
+
+require('nvim-surround').buffer_setup({
+  surrounds = {
+    ['#'] = {
+      add = { '#{', '}' },
+      find = '(#{)[^}]-(})',
+      delete = '(#{)()[^}]-(})()',
+    },
+  },
+})
