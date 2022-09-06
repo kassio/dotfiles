@@ -14,7 +14,6 @@ require "irb/completion"
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:PROMPT_MODE] = :SIMPLE
 IRB.conf[:SAVE_HISTORY] = 9000
-IRB.conf[:HISTORY_FILE] = "#{ENV["HOME"]}/.irb_history"
+IRB.conf[:HISTORY_FILE] = File.join(ENV['XDG_CACHE_HOME'], "ruby", "history")
 
-
-load "#{ENV["HOME"]}/.config/ruby/console.rb"
+load File.join(ENV['XDG_CONFIG_HOME'], "ruby", "console.rb")

@@ -3,11 +3,13 @@
 
 Pry.config.collision_warning = true
 Pry.config.pager = false
-Pry.config.history_file = "#{ENV["HOME"]}/.irb_history"
+Pry.config.history_file = File.join(ENV['XDG_CACHE_HOME'], "ruby", "history")
 
 Pry::Commands.command(/^$/, "repeat last command") do
   pry_instance.run_command Pry.history.to_a.last
 end
+
+Pry.config.editor = proc { |file, line| "nvim #{file}:#{line}" }
 
 if defined?(PryByebug)
   Pry.commands.alias_command 'c', 'continue'
@@ -17,23 +19,24 @@ if defined?(PryByebug)
 end
 
 def _custom_prompt
-  prefix = if defined?(Rails)
-    formatted_env =
-      case Rails.env
-      when "production"
-        bold_upcased_env = Pry::Helpers::Text.bold("prd")
-        Pry::Helpers::Text.red(bold_upcased_env)
-      when "staging"
-        Pry::Helpers::Text.yellow("stg")
-      when "development"
-        Pry::Helpers::Text.green("dev")
-      else
-        Rails.env
-      end
-    "[#{formatted_env}]"
-  else
-    ""
-  end
+  prefix =
+    if defined?(Rails)
+      formatted_env =
+        case Rails.env
+        when "production"
+          bold_upcased_env = Pry::Helpers::Text.bold("prd")
+          Pry::Helpers::Text.red(bold_upcased_env)
+        when "staging"
+          Pry::Helpers::Text.yellow("stg")
+        when "development"
+          Pry::Helpers::Text.green("dev")
+        else
+          Rails.env
+        end
+      "[#{formatted_env}]"
+    else
+      ""
+    end
 
   level = ->(n) { n.zero? ? "" : ":#{n}" }
 
@@ -47,4 +50,4 @@ end
 
 Pry.config.prompt = _custom_prompt
 
-load "#{ENV["HOME"]}/.dotfiles/lib/ruby_console.rb"
+load File.join(ENV['XDG_CONFIG_HOME'], "ruby", "console.rb")
