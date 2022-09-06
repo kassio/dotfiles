@@ -31,18 +31,18 @@ local UNSELECTED = 'Tabline'
 
 local label_for = function(tab)
   local name = get_name(tab)
-  local icon, hl_icon = buffers.fileicon(tab.bufnr)
-  local hl = SELECTED
 
+  local hl = SELECTED
   if not tab.focused then
     hl = UNSELECTED
-    hl_icon = UNSELECTED
   end
+
+  local icon, icon_hl = buffers.fileicon_custom_bg(tab.bufnr, hl)
 
   local components = {
     '',
     string.format('%%%sT', tab.page) .. highlight(string.format('%d', tab.page), hl),
-    highlight(icon, hl_icon),
+    highlight(icon, icon_hl),
     highlight(name, hl),
     highlight('┃', hl),
   }

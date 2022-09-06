@@ -9,18 +9,18 @@ return {
     end
 
     local bufnr = vim.api.nvim_get_current_buf()
-    local icon, hl_icon = utils.buffers.fileicon(bufnr)
-    local hl = 'Winbar'
+    local bg_hl = 'Winbar'
 
     if tonumber(vim.g.actual_curbuf) ~= tonumber(bufnr) then
-      hl = 'WinbarNC'
-      hl_icon = 'WinbarNC'
+      bg_hl = 'WinbarNC'
     end
 
+    local icon, icon_hl = utils.buffers.fileicon_custom_bg(bufnr, bg_hl)
+
     local winbar = table.concat({
-      string.format('%%#%s#', hl),
+      string.format('%%#%s#', bg_hl),
       '%=',
-      string.format('%%#%s#%s%%*', hl_icon, icon),
+      string.format('%%#%s#%s%%*', icon_hl, icon),
       ' %f',
       ' %n',
       '%=',
