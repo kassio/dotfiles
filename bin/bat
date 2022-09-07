@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+
+local bat="${HOMEBREW_PREFIX}/bin/bat"
+local kitty_themes_path="${HOME}/.config/kitty/themes"
+local kitty_current_theme="${kitty_themes_path}/current.conf"
+local kitty_theme="$(realpath --relative-base="${kitty_themes_path}" "${kitty_current_theme}")"
+local bat_theme_name="gruvbox-dark"
+
+if [ "${current_theme}" = "light.conf" ]; then
+  bat_theme_name="gruvbox-light"
+fi
+
+BAT_THEME="${bat_theme_name}" "${bat}" "$@"

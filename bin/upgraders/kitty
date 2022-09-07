@@ -11,9 +11,9 @@ mkdir -p "${HOME}/.config/kitty/themes"
 subtitle "Downloading light theme"
 curl -Ls \
   --url "https://raw.githubusercontent.com/catppuccin/kitty/main/latte.conf" \
-  > "${HOME}/.config/kitty/themes/light/latte.conf"
+  > "${HOME}/.config/kitty/themes/light.conf"
 
 subtitle "Downloading dark theme"
 curl -Ls \
   --url "https://raw.githubusercontent.com/catppuccin/kitty/main/mocha.conf" \
-  > "${HOME}/.config/kitty/themes/dark/mocha.conf"
+  > "${HOME}/.config/kitty/themes/dark.conf"
