@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+title "[duti] custom file associations"
+
+while read config; do
+  subtitle "${config}"
+done < <(cat "${HOME}/.dotfiles/config/duti")
+
+duti "${HOME}/.dotfiles/config/duti"

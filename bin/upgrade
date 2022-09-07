@@ -6,6 +6,7 @@ clear-screen
 
 "${basepath}/upgraders/gsink"
 "${basepath}/upgraders/apple"
+"${basepath}/upgraders/duti"
 "${basepath}/upgraders/brew"
 "${basepath}/upgraders/zsh_plugins"
 "${basepath}/upgraders/asdf"

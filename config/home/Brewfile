@@ -13,6 +13,7 @@ brew "coreutils"
 brew "dfu-programmer" # flash keyboard firmware
 brew "docutils"
 brew "dpkg"
+brew "duti"
 brew "exiftool"
 brew "fd"
 brew "fd" # file finding
