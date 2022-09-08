@@ -67,4 +67,8 @@ local colorscheme_from_terminal = function()
   return set_colorscheme(name)
 end
 
-return colorscheme_from_terminal()
+local theme = colorscheme_from_terminal()
+
+theme.set = set_colorscheme
+
+return theme

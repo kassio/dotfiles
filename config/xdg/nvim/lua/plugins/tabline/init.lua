@@ -1,7 +1,11 @@
 local hl = require('my.utils.highlights')
 local theme = require('plugins.highlight.theme')
 
-hl.def('TabLine', { foreground = theme.colors.blue })
+hl.def('TabLine', {
+  foreground = theme.colors.blue,
+  special = theme.colors.blue,
+  underline = true,
+})
 hl.extend('TabLineFill', 'TabLine')
 hl.extend('TabLineSel', 'TabLine', { bold = true })
 

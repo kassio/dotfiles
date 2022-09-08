@@ -33,7 +33,7 @@ local label_for = function(tab)
   local name = get_name(tab)
 
   local hl = SELECTED
-  local icon, icon_hl = buffers.fileicon_custom_bg(tab.bufnr, hl)
+  local icon, icon_hl = buffers.fileicon_extend_hl(tab.bufnr, hl)
 
   if not tab.focused then
     hl = UNSELECTED

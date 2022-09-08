@@ -1,5 +1,5 @@
-local theme = require('plugins.highlight.theme')
 local hl = require('my.utils.highlights')
+local theme = require('plugins.highlight.theme')
 local colors = theme.colors
 local command = vim.api.nvim_create_user_command
 
@@ -20,7 +20,9 @@ local reloadTheme = function(bg)
     theme.set(bg)
 
     R('plugins.statusline')
+    R('plugins.tabline.utils')
     R('plugins.tabline')
+    R('plugins.winbar.utils')
     R('plugins.winbar')
     R('plugins.git')
   end
@@ -35,7 +37,7 @@ hl.def('CurSearch', { background = colors.info, foreground = theme['Normal'].bac
 hl.def('IncSearch', { background = colors.warn, foreground = theme['Normal'].background })
 
 -- Spell
-hl.def('SpellBad', { underdotted = true, sp = colors.warn })
+hl.def('SpellBad', { undercurl = true, special = colors.warn })
 hl.extend('SpellCap', 'SpellBad')
 hl.extend('SpellRare', 'SpellBad')
 hl.extend('SpellLocal', 'SpellBad')

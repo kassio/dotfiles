@@ -26,23 +26,13 @@ M.fileicon = function(bufnr)
   return require('my.utils').fileicon(filetype, filename)
 end
 
-M.fileicon_custom_bg = function(bufnr, bg_hl)
+M.fileicon_extend_hl = function(bufnr, hl)
   local hlutil = require('my.utils.highlights')
   local icon, icon_hl = M.fileicon(bufnr)
-  local bg = hlutil.get(bg_hl).background
-
-  if bg == nil then
-    return icon, icon_hl
-  end
-
-  local name = icon_hl .. bg
+  local name = icon_hl .. hl
 
   if icon_custom_with_custom_bg[name] == nil then
-    hlutil.def(name, {
-      foreground = hlutil.get(icon_hl).foreground,
-      background = bg,
-    })
-
+    hlutil.extend(name, hl, { foreground = hlutil.get(icon_hl).foreground })
     icon_custom_with_custom_bg[name] = true
   end
 
