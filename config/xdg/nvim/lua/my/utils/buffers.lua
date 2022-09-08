@@ -1,5 +1,4 @@
 local M = {}
-local icon_custom_with_custom_bg = {}
 
 M.preserve = function(callback)
   local saved_view = vim.fn.winsaveview()
@@ -27,16 +26,10 @@ M.fileicon = function(bufnr)
 end
 
 M.fileicon_extend_hl = function(bufnr, hl)
-  local hlutil = require('my.utils.highlights')
-  local icon, icon_hl = M.fileicon(bufnr)
-  local name = icon_hl .. hl
+  local filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
+  local filename = vim.api.nvim_buf_get_name(bufnr)
 
-  if icon_custom_with_custom_bg[name] == nil then
-    hlutil.extend(name, hl, { foreground = hlutil.get(icon_hl).foreground })
-    icon_custom_with_custom_bg[name] = true
-  end
-
-  return icon, name
+  return require('my.utils').fileicon_extend_hl(filetype, filename, hl)
 end
 
 M.ensure_path_and_write = function()

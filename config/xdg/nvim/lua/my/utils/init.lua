@@ -1,6 +1,7 @@
 local M = {}
 local api = vim.api
 local fn = vim.fn
+local extended_icon_highlight = {}
 
 M.treesitter = require('my.utils.treesitter')
 M.buffers = require('my.utils.buffers')
@@ -72,6 +73,23 @@ M.fileicon_color = function(filetype, filename)
   local extension = fn.fnamemodify(filename, ':e') or filetype
 
   return require('nvim-web-devicons').get_icon_color(filename, extension, { default = true })
+end
+
+M.fileicon_name = function(filetype)
+  return require('nvim-web-devicons').get_icon_name_by_filetype(filetype) or 'Default'
+end
+
+M.fileicon_extend_hl = function(filetype, filename, hl)
+  local icon, icon_color = M.fileicon_color(filetype, filename)
+  local icon_name = M.fileicon_name(filetype)
+  local name = hl .. 'Icon' .. icon_name
+
+  if extended_icon_highlight[name] == nil then
+    M.highlights.extend(name, hl, { foreground = icon_color })
+    extended_icon_highlight[name] = true
+  end
+
+  return icon, name
 end
 
 M.plugin_filetype = function(ft)
