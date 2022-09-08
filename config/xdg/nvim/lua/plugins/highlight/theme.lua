@@ -1,3 +1,30 @@
+local colors = {
+  error = '#CA1243',
+  warn = '#F7C154',
+  info = '#6699CC',
+  hint = '#50A14F',
+  light_error = '#FD83A1',
+  light_warn = '#FFF4A8',
+  light_info = '#A5D0FF',
+  light_hint = '#B5E6CE',
+}
+
+local icons = {
+  buffer = '',
+  bug = '',
+  error = '',
+  hint = '',
+  info = '',
+  nvim_lsp = '',
+  nvim_lua = '',
+  path = 'פּ',
+  separator = ' › ',
+  snippy = '',
+  spell = '暈',
+  treesitter = '',
+  warn = '',
+}
+
 local colorschemes = {
   light = { bg = 'light', flavour = 'latte' },
   dark = { bg = 'dark', flavour = 'mocha' },
@@ -11,10 +38,21 @@ local set_colorscheme = function(name)
   require('catppuccin').setup()
   vim.cmd('colorscheme catppuccin')
 
-  return {
-    name = 'catppuccin',
-    palettes = require('catppuccin.palettes').get_palette(),
+  local palette = require('catppuccin.palettes').get_palette()
+
+  local result = {
+    colorscheme = 'catppuccin',
+    icons = icons,
+    colors = vim.tbl_extend('keep', colors, palette),
   }
+
+  setmetatable(result, {
+    __index = function(_, key)
+      return require('my.utils.highlights').get(key)
+    end,
+  })
+
+  return result
 end
 
 local colorscheme_from_terminal = function()
@@ -29,41 +67,4 @@ local colorscheme_from_terminal = function()
   return set_colorscheme(name)
 end
 
-local colorscheme = colorscheme_from_terminal()
-local theme = {
-  colorscheme = colorscheme,
-  set = set_colorscheme,
-  icons = {
-    buffer = '',
-    bug = '',
-    error = '',
-    hint = '',
-    info = '',
-    nvim_lsp = '',
-    nvim_lua = '',
-    path = 'פּ',
-    separator = ' › ',
-    snippy = '',
-    spell = '暈',
-    treesitter = '',
-    warn = '',
-  },
-  colors = {
-    error = '#CA1243',
-    warn = '#F7C154',
-    info = '#6699CC',
-    hint = '#50A14F',
-    light_error = '#FD83A1',
-    light_warn = '#FFF4A8',
-    light_info = '#A5D0FF',
-    light_hint = '#B5E6CE',
-  },
-}
-
-setmetatable(theme, {
-  __index = function(_, key)
-    return require('my.utils.highlights').get(key)
-  end,
-})
-
-return theme
+return colorscheme_from_terminal()
