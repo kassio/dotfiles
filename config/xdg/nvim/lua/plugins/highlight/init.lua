@@ -19,6 +19,7 @@ local reloadTheme = function(bg)
   return function()
     theme.set(bg)
 
+    R('plugins.filetree')
     R('plugins.statusline')
     R('plugins.tabline.utils')
     R('plugins.tabline')
