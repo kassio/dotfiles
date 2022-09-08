@@ -94,6 +94,9 @@ M.load = function()
       -- text aligning
       use({ 'junegunn/vim-easy-align' })
 
+      -- list continuation
+      use({ 'gaoDean/autolist.nvim' })
+
       -- File tree
       use({
         'kyazdani42/nvim-tree.lua',
