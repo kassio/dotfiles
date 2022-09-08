@@ -22,7 +22,7 @@ local colorscheme_from_terminal = function()
   local ttheme = vim.fn.resolve(config)
   local name = 'dark'
 
-  if vim.fn.fnamemodify(ttheme, ':p:h:t') == 'light' then
+  if vim.fn.fnamemodify(ttheme, ':p:t:r') == 'light' then
     name = 'light'
   end
 
