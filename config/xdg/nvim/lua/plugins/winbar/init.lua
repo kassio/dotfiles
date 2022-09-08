@@ -1,7 +1,6 @@
 local hl = require('my.utils.highlights')
-local theme = require('plugins.highlight.theme')
 
-hl.def('Winbar', vim.tbl_extend('keep', theme.StatusLine, { bold = true }))
-hl.def('WinbarNC', theme.StatusLine)
+hl.extend('WinbarNC', 'StatusLine')
+hl.extend('Winbar', 'WinbarNC', { bold = true })
 
 vim.opt.winbar = '%{%v:lua.require("plugins.winbar.utils").render()%}'
