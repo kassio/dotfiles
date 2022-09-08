@@ -190,7 +190,7 @@ M.load = function()
       use({ 'catppuccin/nvim', as = 'catppuccin' })
 
       -- Colors
-      use({ 'norcalli/nvim-colorizer.lua' }) -- Highlight color strings
+      use({ 'NvChad/nvim-colorizer.lua' }) -- Highlight color strings
       use({ 'norcalli/nvim-terminal.lua' }) -- Fix terminal colors
       use({ 'https://gitlab.com/yorickpeterse/nvim-pqf.git' }) -- Prettier qf/loc windows
 
