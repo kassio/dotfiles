@@ -2,8 +2,8 @@
 
 title "[duti] custom file associations"
 
-while read config; do
-  subtitle "${config}"
-done < <(cat "${HOME}/.dotfiles/config/duti")
+local duticonfig="${HOME}/.dotfiles/config/duti"
 
-duti "${HOME}/.dotfiles/config/duti"
+bat --plain "${duticonfig}"
+
+duti "${duticonfig}"
