@@ -9,6 +9,8 @@ opt.complete:remove('t')
 opt.completeopt = { 'menu', 'menuone', 'preview', 'noselect' }
 opt.confirm = true
 opt.copyindent = true
+opt.cursorline = true
+opt.cursorlineopt = 'number'
 opt.dictionary = '/usr/share/dict/words'
 opt.diffopt = { 'internal', 'filler', 'closeoff', 'vertical' }
 opt.expandtab = true

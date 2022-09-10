@@ -3,8 +3,10 @@ local utils = require('my.utils')
 vim.g.lastplace_ignore = 'gitcommit,gitrebase'
 vim.g.lastplace_ignore_buftype = 'quickfix,nofile,help'
 
-local function set_relative_number(value)
-  if pcall(utils.plugin_filetype, vim.bo.filetype) then
+local function set_focus(value)
+  local ft = vim.bo.filetype
+
+  if ft == '' or utils.plugin_filetype(ft) then
     return
   end
 
@@ -19,7 +21,7 @@ utils.augroup('user:focus', {
       'FocusLost',
     },
     callback = function()
-      set_relative_number(false)
+      set_focus(false)
     end,
   },
   {
@@ -29,7 +31,7 @@ utils.augroup('user:focus', {
       'FocusGained',
     },
     callback = function()
-      set_relative_number(true)
+      set_focus(true)
     end,
   },
   {
