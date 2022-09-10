@@ -12,7 +12,11 @@ end, { nargs = '?' })
 command('Trim', utils.buffers.trim, {})
 
 -- Ensure path exists and writes the file
-command('Write', utils.buffers.ensure_path_and_write, {})
+command('Write', function()
+  local path = vim.fn.expand('%:h')
+  vim.fn.mkdir(path, 'p')
+  vim.cmd('update!')
+end, {})
 
 -- copy filename
 command('CopyFilename', utils.copy_filename, { bang = true, nargs = '?' })

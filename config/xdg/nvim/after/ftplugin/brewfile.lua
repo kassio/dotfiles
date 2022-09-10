@@ -6,7 +6,7 @@ local cmd = function(str)
 end
 
 local brew_sort = function()
-  utils.preserve(function()
+  utils.buffers.preserve(function()
     cmd('normal ggV/^brew<CR>k:sort<CR>')
     cmd('normal gg/^brew<CR>V/^cask<CR>k:sort<CR>')
     cmd('normal gg/^cask<CR>V/^mas<CR>k:sort<CR>')
