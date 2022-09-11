@@ -6,4 +6,3 @@ aug END
 function! s:set_filetype()
   setl syntax=rspec
 endfunction
-
