@@ -3,6 +3,7 @@ local theme = require('plugins.highlight.theme')
 
 hl.def('TabLine', {
   foreground = theme.colors.surface1,
+  background = theme.colors.mantle,
   special = theme.colors.blue,
   underline = true,
 })

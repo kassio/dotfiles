@@ -36,6 +36,7 @@ command('DarkTheme', reloadTheme('dark'), {})
 hl.def('Search', { background = colors.warn, foreground = theme['Normal'].background })
 hl.def('CurSearch', { background = colors.info, foreground = theme['Normal'].background })
 hl.def('IncSearch', { background = colors.warn, foreground = theme['Normal'].background })
+hl.def('VertSplit', { foreground = colors.blue })
 
 -- Spell
 hl.def('SpellBad', { undercurl = true, special = colors.warn })
