@@ -125,7 +125,6 @@ M.load = function()
         'nvim-treesitter/nvim-treesitter-textobjects',
         'nvim-treesitter/nvim-treesitter-refactor',
         'nvim-treesitter/playground',
-        'lewis6991/spellsitter.nvim',
         'SmiteshP/nvim-gps',
         'theHamsta/nvim-treesitter-pairs',
       })

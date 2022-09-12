@@ -59,6 +59,7 @@ utils.augroup('user:terminal', {
     command = 'setlocal ' .. table.concat({
       'nonumber',
       'scrolloff=0',
+      'nospell',
       'norelativenumber',
       'nocursorline',
       'bufhidden=hide',

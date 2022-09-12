@@ -1,6 +1,5 @@
 local theme = require('plugins.highlight.theme')
 local treesitter = require('nvim-treesitter.configs')
-local spellsitter = require('spellsitter')
 local utils = require('my.utils')
 local gps = require('nvim-gps')
 local hl = utils.highlights
@@ -127,11 +126,6 @@ treesitter.setup({
     use_virtual_text = true,
     lint_events = { 'BufWrite', 'CursorHold' },
   },
-})
-
-spellsitter.setup({
-  hl = 'SpellBad',
-  captures = { 'comment', 'string' },
 })
 
 gps.setup({
