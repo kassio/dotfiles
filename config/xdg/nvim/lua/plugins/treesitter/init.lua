@@ -5,6 +5,8 @@ local gps = require('nvim-gps')
 local hl = utils.highlights
 local colors = theme.colors
 
+require('plugins.treesitter.refactor')
+
 -- Treesitter globals
 hl.extend('TSTypeBuiltin', 'Type')
 hl.extend('TSVariable', 'Normal')
