@@ -23,8 +23,8 @@ end
 
 -- Git
 hl.def('GitSignsCurrentLineBlame', {
-  background = colors.shadow,
-  foreground = colors.highlight,
+  background = colors.mantle,
+  foreground = colors.surface1,
   italic = true,
 })
 
@@ -86,6 +86,7 @@ gitsigns.setup({
     delay = 1000,
     ignore_whitespace = false,
   },
+  current_line_blame_formatter = '<author> - <summary>, <author_time:%Y%m%d>',
   diff_opts = {
     vertical = true,
   },
