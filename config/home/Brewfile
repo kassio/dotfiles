@@ -23,6 +23,7 @@ brew "gh" # github client, useful for neovim plugins
 brew "git"
 brew "git-delta" # fancy git diff
 brew "git-lfs"
+brew "golangci-lint"
 brew "gnupg"
 brew "gpgme"
 brew "graphicsmagick"
