@@ -41,7 +41,7 @@ snippet rspec
 
   require 'spec_helper'
 
-  RSpec.describe ${1:`v:lua.vim.my.snippets.filename('camelcase', '_spec')`}${2} do
+  RSpec.describe ${1:`v:lua.require("my.utils.snippets").filename('camelcase', '_spec')`}${2} do
     $0
   end
 snippet ssopen
