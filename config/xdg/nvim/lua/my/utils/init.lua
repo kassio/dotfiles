@@ -23,6 +23,8 @@ M.plugin_filetypes = {
   'packer',
 }
 
+--- Get current visual selection text.
+---@return string
 M.get_visual_selection = function()
   local s_start = vim.api.nvim_buf_get_mark(0, '<')
   local s_end = vim.api.nvim_buf_get_mark(0, '>')
@@ -40,6 +42,10 @@ M.get_visual_selection = function()
   end
 end
 
+--- Copy given text to clipboard.
+---@param text string
+---@param use_external_clipboard boolean
+---@return nil
 M.to_clipboard = function(text, use_external_clipboard)
   if use_external_clipboard then
     fn.setreg('*', text)
@@ -50,6 +56,9 @@ M.to_clipboard = function(text, use_external_clipboard)
   end
 end
 
+--- Creates an autocommand group.
+---@param name string
+---@param autocmds any[]
 M.augroup = function(name, autocmds)
   local group = api.nvim_create_augroup(name, { clear = true })
   for _, opts in ipairs(autocmds) do

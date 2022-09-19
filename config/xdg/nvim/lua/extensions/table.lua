@@ -1,4 +1,4 @@
--- removekey: Removes the given key from the table, returning its value
+--- Removes the given key from the table, returning its value.
 ---@param tbl table
 ---@param key any
 ---@return any
@@ -8,7 +8,7 @@ function table.removekey(tbl, key)
   return element
 end
 
--- slice: Reduces the given table returning a new table with only the given key values
+--- Reduces the given table returning a new table with only the given key values.
 ---@param tbl table
 ---@param keys any[]
 ---@return table<any, any>

@@ -1,4 +1,4 @@
-require('globals') -- global functions (used for debbuging)
+require('globals') -- global functions (used for debugging)
 require('extensions') -- lua extensions (used everywhere)
 
 -- my own set of configs and helpers (plugin independent)
