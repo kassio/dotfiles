@@ -16,11 +16,12 @@ hl.extend('TSStringEscape', 'String', { bold = true })
 hl.extend('TSStringSpecial', 'String', { bold = true })
 
 -- refactoring
-hl.def('TSDefinitionUsage', {
-  background = colors.light_warn,
-  foreground = theme['Normal'].background,
+hl.def('TSDefinition', {
+  underdotted = true,
+  background = theme.colors.mantle,
+  special = theme.colors.blue,
 })
-hl.def('TSDefinition', { background = colors.light_warn })
+hl.extend('TSDefinitionUsage', 'TSDefinition')
 
 -- Ruby with Treesitter
 hl.extend('rubyTSType', 'Type')
