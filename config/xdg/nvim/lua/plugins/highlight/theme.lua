@@ -30,29 +30,29 @@ local colorschemes = {
   dark = { bg = 'dark', flavour = 'mocha' },
 }
 
-local set_colorscheme = function(name)
-  local theme = colorschemes[name]
-  vim.opt.background = theme.bg
-  vim.g.catppuccin_flavour = theme.flavour
+local set_colorscheme = function(name, theme)
+  theme = theme or {}
+  local colorscheme = colorschemes[name]
 
-  require('catppuccin').setup()
+  vim.opt.background = colorscheme.bg
+  vim.g.catppuccin_flavour = colorscheme.flavour
+
+  R('catppuccin').setup()
   vim.cmd('colorscheme catppuccin')
 
-  local palette = require('catppuccin.palettes').get_palette()
+  local palette = require('catppuccin.palettes').get_palette(colorscheme.flavour)
 
-  local result = {
-    colorscheme = 'catppuccin',
-    icons = icons,
-    colors = vim.tbl_extend('keep', colors, palette),
-  }
+  theme.colorscheme = 'catppuccin'
+  theme.icons = icons
+  theme.colors = vim.tbl_extend('keep', colors, palette)
 
-  setmetatable(result, {
+  setmetatable(theme, {
     __index = function(_, key)
       return require('my.utils.highlights').get(key)
     end,
   })
 
-  return result
+  return theme
 end
 
 local colorscheme_from_terminal = function()
@@ -69,6 +69,8 @@ end
 
 local theme = colorscheme_from_terminal()
 
-theme.set = set_colorscheme
+theme.set = function(name)
+  set_colorscheme(name, theme)
+end
 
 return theme

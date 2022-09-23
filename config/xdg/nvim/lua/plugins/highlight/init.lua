@@ -1,6 +1,5 @@
 local hl = require('my.utils.highlights')
 local theme = require('plugins.highlight.theme')
-local colors = theme.colors
 local command = vim.api.nvim_create_user_command
 
 -- Highlight color strings
@@ -20,12 +19,13 @@ local reloadTheme = function(bg)
     theme.set(bg)
 
     R('plugins.filetree')
-    R('plugins.statusline')
-    R('plugins.tabline.utils')
-    R('plugins.tabline')
-    R('plugins.winbar.utils')
-    R('plugins.winbar')
     R('plugins.git')
+    R('plugins.statusline')
+    R('plugins.tabline')
+    R('plugins.tabline.utils')
+    R('plugins.treesitter')
+    R('plugins.winbar')
+    R('plugins.winbar.utils')
   end
 end
 
@@ -33,19 +33,16 @@ command('LightTheme', reloadTheme('light'), {})
 command('DarkTheme', reloadTheme('dark'), {})
 
 -- globals
-hl.def('Search', { background = colors.warn, foreground = theme['Normal'].background })
-hl.def('CurSearch', { background = colors.info, foreground = theme['Normal'].background })
-hl.def('IncSearch', { background = colors.warn, foreground = theme['Normal'].background })
-hl.def('VertSplit', { foreground = colors.blue })
+hl.def('Search', { background = theme.colors.warn, foreground = theme.colors.base })
+hl.def('CurSearch', { background = theme.colors.info, foreground = theme.colors.base })
+hl.def('IncSearch', { background = theme.colors.warn, foreground = theme.colors.base })
+hl.def('VertSplit', { foreground = theme.colors.blue })
 
 -- Spell
-hl.def('SpellBad', { undercurl = true, special = colors.warn })
+hl.def('SpellBad', { undercurl = true, special = theme.colors.warn })
 hl.extend('SpellCap', 'SpellBad')
 hl.extend('SpellRare', 'SpellBad')
 hl.extend('SpellLocal', 'SpellBad')
-
--- Floating wind:ow
-hl.def('NormalFloat', { background = theme['Normal'].background })
 
 -- matching parantheses/blocks marks
 hl.def('MatchParen', { bold = true })

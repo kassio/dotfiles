@@ -3,7 +3,6 @@ local treesitter = require('nvim-treesitter.configs')
 local utils = require('my.utils')
 local gps = require('nvim-gps')
 local hl = utils.highlights
-local colors = theme.colors
 
 require('plugins.treesitter.refactor')
 
