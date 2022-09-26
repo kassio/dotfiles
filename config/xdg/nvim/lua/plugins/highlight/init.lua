@@ -40,6 +40,7 @@ hl.def('Search', { background = theme.colors.warn, foreground = theme.colors.bas
 hl.def('CurSearch', { background = theme.colors.info, foreground = theme.colors.base })
 hl.def('IncSearch', { background = theme.colors.warn, foreground = theme.colors.base })
 hl.def('VertSplit', { foreground = theme.colors.blue })
+hl.def('ColorColumn', { background = theme.colors.mantle })
 
 -- Spell
 hl.def('SpellBad', { undercurl = true, special = theme.colors.warn })
