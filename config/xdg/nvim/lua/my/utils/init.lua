@@ -91,14 +91,21 @@ end
 M.fileicon_extend_hl = function(filetype, filename, hl)
   local icon, icon_color = M.fileicon_color(filetype, filename)
   local icon_name = M.fileicon_name(filetype)
-  local name = hl .. 'Icon' .. icon_name
+  local ext = { foreground = icon_color }
+  local name = hl .. string.camelcase(icon_name) .. 'Icon'
 
   if extended_icon_highlight[name] == nil then
-    M.highlights.extend(name, hl, { foreground = icon_color })
-    extended_icon_highlight[name] = true
+    M.highlights.extend(name, hl, ext)
+    extended_icon_highlight[name] = { hl = hl, ext = ext }
   end
 
   return icon, name
+end
+
+M.reload_fileicon_extends = function()
+  for name, tbl in pairs(extended_icon_highlight) do
+    M.highlights.extend(name, tbl.hl, tbl.ext)
+  end
 end
 
 M.plugin_filetype = function(ft)

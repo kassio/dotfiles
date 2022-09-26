@@ -20,12 +20,15 @@ local reloadTheme = function(bg)
 
     R('plugins.filetree')
     R('plugins.git')
+    R('plugins.highlight')
     R('plugins.statusline')
     R('plugins.tabline')
     R('plugins.tabline.utils')
     R('plugins.treesitter')
     R('plugins.winbar')
     R('plugins.winbar.utils')
+
+    require('my.utils').reload_fileicon_extends()
   end
 end
 
