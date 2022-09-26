@@ -19,6 +19,9 @@
   ignorecase = false
   pager = less --tabs=2 -RFX
   fsmonitor = true
+[fetch]
+  prune = true
+  parallel = 4
 [apply]
   whitespace = fix
 [push]
