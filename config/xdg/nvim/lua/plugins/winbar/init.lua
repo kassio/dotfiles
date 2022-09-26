@@ -9,6 +9,7 @@ hl.def('WinbarNC', {
 })
 hl.extend('Winbar', 'WinbarNC', {
   foreground = theme.colors.blue,
+  special = theme.colors.blue,
   bold = true,
 })
 
