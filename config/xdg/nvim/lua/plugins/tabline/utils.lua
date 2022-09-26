@@ -3,8 +3,8 @@ local buffers = require('my.utils.buffers')
 local UNSELECTED = 'Tabline'
 local SELECTED = 'TabLineSel'
 local FILL = '%#TabLineFill'
-local SELECTEDSEP = '┃'
-local UNSELECTEDSEP = '│'
+local SELECTEDSEP = '▍'
+local UNSELECTEDSEP = '▏'
 
 local get_bufnr = function(tab)
   local winnr = api.nvim_tabpage_get_win(tab)
@@ -45,22 +45,16 @@ local label_for = function(tab)
   end
 
   local components = {
-    highlight(sep, hl),
+    highlight(sep .. ' ', hl),
     string.format('%%%sT', tab.nr) .. highlight(string.format('%d', tab.nr), hl),
+    highlight(' ', hl),
     highlight(icon, icon_hl),
+    highlight(' ', hl),
     highlight(name, hl),
-    highlight(sep, hl),
+    highlight('  ', hl),
   }
 
-  if tab.nr ~= tab.count and not tab.focused then
-    components[#components] = ''
-  end
-
-  if tab.nr == (tab.curtab_nr + 1) then
-    components[1] = ''
-  end
-
-  return table.concat(components, ' ')
+  return table.concat(components, '')
 end
 
 local get_labels = function(curtab_page, curtab_nr)
