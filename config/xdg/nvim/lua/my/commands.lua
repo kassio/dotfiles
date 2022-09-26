@@ -12,21 +12,28 @@ end, { nargs = '?' })
 command('Trim', utils.buffers.trim, {})
 
 -- Ensure path exists and writes the file
-command('Write', function()
+command('WriteWithPath', function()
   local path = vim.fn.expand('%:h')
   vim.fn.mkdir(path, 'p')
-  vim.cmd('update!')
+  vim.cmd('write!')
 end, {})
 
 -- copy filename
 command('CopyFilename', utils.copy_filename, { bang = true, nargs = '?' })
 
-command('LockWindowSize', function()
+
+-- window size fix/unfix
+local fix_window_size = function()
   vim.opt_local.winfixwidth = true
   vim.opt_local.winfixheight = true
-end, {})
+end
 
-command('UnlockWindowSize', function()
+local unfix_window_size = function()
   vim.opt_local.winfixwidth = false
   vim.opt_local.winfixheight = false
-end, {})
+end
+
+command('LockWindowSize', fix_window_size, {})
+command('FixWindowSize', fix_window_size, {})
+command('UnlockWindowSize', unfix_window_size, {})
+command('UnfixWindowSize', unfix_window_size, {})
