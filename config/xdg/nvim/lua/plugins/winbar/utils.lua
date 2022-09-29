@@ -1,4 +1,5 @@
 local utils = require('my.utils')
+local icons = require('plugins.icons')
 
 local get_name = function(bufnr)
   local fullname = vim.api.nvim_buf_get_name(bufnr)
@@ -32,14 +33,14 @@ return {
 
     local bufnr = vim.api.nvim_get_current_buf()
     local name = get_name(bufnr)
+
     local hl = 'Winbar'
+    local icon, icon_hl = icons.buffers.fileicon_extend_hl(bufnr, hl)
 
     if tonumber(vim.g.actual_curwin) ~= tonumber(winid) then
       hl = 'WinbarNC'
       icon_hl = 'WinbarNC'
     end
-
-    local icon, icon_hl = utils.buffers.fileicon_extend_hl(bufnr, hl)
 
     return table.concat({
       highlight('%=', hl),

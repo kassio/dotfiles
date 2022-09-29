@@ -1,5 +1,6 @@
 local api = vim.api
-local buffers = require('my.utils.buffers')
+local icons = require('plugins.icons')
+
 local UNSELECTED = 'Tabline'
 local SELECTED = 'TabLineSel'
 local FILL = '%#TabLineFill'
@@ -34,7 +35,7 @@ local label_for = function(tab)
   local name = get_name(tab)
 
   local hl = SELECTED
-  local icon, icon_hl = buffers.fileicon_extend_hl(tab.bufnr, SELECTED)
+  local icon, icon_hl = icons.buffers.fileicon_extend_hl(tab.bufnr, SELECTED)
 
   if not tab.focused then
     hl = UNSELECTED
