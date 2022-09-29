@@ -60,7 +60,7 @@
   prompt = false
   keepBackup = false
 [mergetool "nvim"]
-  cmd = nvim -d -c "wincmd l" -c "norm ]c" "$LOCAL" "$MERGED" "$REMOTE"
+  cmd = "nvim -d $MERGED $LOCAL $BASE $REMOTE -c 'wincmd J | wincmd ='"
 [log]
   date = format-local:"%F %R"
 [pretty]
