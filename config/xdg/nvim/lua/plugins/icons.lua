@@ -2,7 +2,7 @@ local devicons = require('nvim-web-devicons')
 local icons = devicons.get_icons()
 
 icons['rb'] = {
-  icon = '',
+  icon = '',
   color = '#701516',
   cterm_color = '52',
   name = 'rb',
