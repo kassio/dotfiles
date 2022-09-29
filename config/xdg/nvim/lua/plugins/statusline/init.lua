@@ -6,7 +6,14 @@ local utils = require('plugins.statusline.utils')
 local sections = {
   lualine_a = { utils.mode() },
   lualine_b = { 'branch' },
-  lualine_c = { myutils.treesitter.location },
+  lualine_c = {
+    {
+      myutils.treesitter.location,
+      on_click = function()
+        vim.cmd('TSGPSLocationCopy')
+      end,
+    },
+  },
   lualine_x = {
     {
       'diagnostics',
