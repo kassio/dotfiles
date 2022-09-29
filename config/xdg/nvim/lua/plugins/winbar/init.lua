@@ -3,8 +3,9 @@ local utils = require('my.utils')
 local hl = utils.highlights
 
 hl.def('WinbarNC', {
-  foreground = theme.colors.surface1,
   background = theme.colors.base,
+  foreground = theme.colors.surface1,
+  special = theme.colors.surface1,
   underline = true,
 })
 hl.extend('Winbar', 'WinbarNC', {

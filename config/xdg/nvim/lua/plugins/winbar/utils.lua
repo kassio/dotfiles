@@ -17,33 +17,36 @@ local get_name = function(bufnr)
   end
 end
 
+local highlight = function(label, color)
+  return string.format('%%#%s#%s%%*', color, label)
+end
+
 return {
   render = function()
     local ft = vim.bo.filetype
+    local winid = vim.api.nvim_get_current_win()
 
     if ft == '' or utils.plugin_filetype(ft) then
       return ''
     end
 
-    local bg_hl = 'Winbar'
     local bufnr = vim.api.nvim_get_current_buf()
     local name = get_name(bufnr)
-    local icon, icon_hl = utils.buffers.fileicon_extend_hl(bufnr, bg_hl)
+    local hl = 'Winbar'
 
-    if tonumber(vim.g.actual_curbuf) ~= tonumber(bufnr) then
-      bg_hl = 'WinbarNC'
+    if tonumber(vim.g.actual_curwin) ~= tonumber(winid) then
+      hl = 'WinbarNC'
       icon_hl = 'WinbarNC'
     end
 
-    local winbar = table.concat({
-      string.format('%%#%s#', bg_hl),
-      '%=',
-      string.format('%%#%s#%s%%*', icon_hl, icon),
-      name,
-      '%n',
-      '%=',
-    }, ' ')
+    local icon, icon_hl = utils.buffers.fileicon_extend_hl(bufnr, hl)
 
-    return winbar
+    return table.concat({
+      highlight('%=', hl),
+      highlight(icon, icon_hl),
+      highlight(name, hl),
+      highlight('%n', hl),
+      highlight('%=', hl),
+    }, ' ')
   end,
 }
