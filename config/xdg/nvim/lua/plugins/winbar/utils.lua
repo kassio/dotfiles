@@ -1,5 +1,16 @@
 local utils = require('my.utils')
 local icons = require('plugins.icons')
+local winbar_by_ft = {}
+
+for ft in ipairs(utils.plugin_filetypes) do
+  winbar_by_ft[ft] = ''
+end
+
+winbar_by_ft[''] = '…'
+winbar_by_ft.NvimTree = 'explorer'
+winbar_by_ft.neoterm = 'neoterm'
+winbar_by_ft.help = 'help'
+winbar_by_ft.packer = 'plugins'
 
 local get_name = function(bufnr)
   local fullname = vim.api.nvim_buf_get_name(bufnr)
@@ -27,8 +38,8 @@ return {
     local ft = vim.bo.filetype
     local winid = vim.api.nvim_get_current_win()
 
-    if ft == '' or utils.plugin_filetype(ft) then
-      return ''
+    if vim.tbl_contains(vim.tbl_keys(winbar_by_ft), ft) then
+      return '%=' .. winbar_by_ft[ft] .. '%='
     end
 
     local bufnr = vim.api.nvim_get_current_buf()
