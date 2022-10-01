@@ -43,16 +43,23 @@ end
 
 --- Copy given text to clipboard.
 ---@param text string
----@param use_external_clipboard boolean
+---@param system_clipboard boolean
 ---@return nil
-M.to_clipboard = function(text, use_external_clipboard)
-  if use_external_clipboard then
-    fn.setreg('*', text)
-    print(string.format('"%s" copied to system clipboard', text))
-  else
-    fn.setreg('"', text)
-    print(string.format('"%s" copied to clipboard', text))
+M.to_clipboard = function(text, system_clipboard)
+  local reg = '"'
+  local fmt = string.trim([[
+"%s"
+copied to %s
+]])
+  local msg = 'clipboard'
+
+  if system_clipboard then
+    reg = '*'
+    msg = 'system clipboard'
   end
+
+  fn.setreg(reg, text)
+  vim.notify(string.format(fmt, text, msg), vim.log.levels.INFO)
 end
 
 --- Creates an autocommand group.
