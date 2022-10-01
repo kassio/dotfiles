@@ -17,6 +17,7 @@ notify.setup({
   on_close = function()
     vim.cmd('doautocmd User NotificationClosed')
   end,
+  top_down = false,
 })
 
 vim.notify = notify
