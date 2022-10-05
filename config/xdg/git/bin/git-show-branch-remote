@@ -1,3 +1,0 @@
-#!/usr/bin/env zsh
-
-  git config --get "branch.$1.remote"

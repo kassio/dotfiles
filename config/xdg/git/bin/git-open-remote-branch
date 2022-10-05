@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+local branch="$(git symbolic-ref --short HEAD 2>/dev/null)"
+
+if [ $# -ne 0 ]; then
+  branch="$1"
+fi
+
+local remote="$(git config --get "branch.${branch}.remote")"
+
+open "$(git remote get-url "${remote}" | sed 's/\.git//')/-/tree/${branch}"
