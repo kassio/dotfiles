@@ -17,7 +17,7 @@ gdm() {
 
 gdfm() {
   branch="$(git branch-current)"
-  remote="$(git show-branch-remote "${branch}")"
+  remote="$(git get-branch-remote "${branch}")"
   git diff --name-only "${remote:-origin}/$(git branch-main)..."
 }
 
@@ -42,14 +42,14 @@ gb-mine() {
 }
 
 g-upstream-diff() {
-  local remote="$(git show-branch-remote ${branch})"
+  local remote="$(git get-branch-remote ${branch})"
 
-  echo "${remote}$(g-diff-count "$1" "$(git show-branch-remote $1)/$1")"
+  echo "${remote}$(g-diff-count "$1" "$(git get-branch-remote $1)/$1")"
 }
 
 g-main-diff() {
   branch_main="$(git branch-main)"
-  full_branch_main="$(git show-branch-remote $1)/${branch_main}"
+  full_branch_main="$(git get-branch-remote $1)/${branch_main}"
 
   g-diff-count "$1" "${full_branch_main}"
 }
