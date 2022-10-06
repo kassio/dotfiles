@@ -85,5 +85,4 @@ parse_args "$@"
 git_options="${git_options} -o merge_request.title='${title}'"
 command="git push -u ${git_options}"
 
-# echo "${command}"
 eval "${command}"
