@@ -64,6 +64,7 @@ opt.spell = true
 opt.spelllang = 'en'
 opt.splitbelow = true
 opt.splitright = true
+opt.splitkeep = 'screen'
 opt.swapfile = false
 opt.switchbuf = { 'useopen', 'usetab', 'split' }
 opt.tabstop = 2
