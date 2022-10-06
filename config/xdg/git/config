@@ -20,8 +20,9 @@
   pager = less --tabs=2 -RFX
   fsmonitor = true
 [fetch]
-  prune = true
   parallel = 4
+  prune = true
+  showForcedUpdates = true
 [apply]
   whitespace = fix
 [push]
