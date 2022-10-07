@@ -14,6 +14,4 @@ hl.extend('Winbar', 'WinbarNC', {
   bold = true,
 })
 
-R('my.utils')
-R('plugins.winbar.utils')
 vim.opt.winbar = '%{%v:lua.require("plugins.winbar.utils").render()%}'
