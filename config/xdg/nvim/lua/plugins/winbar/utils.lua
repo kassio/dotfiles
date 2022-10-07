@@ -77,13 +77,13 @@ return {
 
     return table.concat({
       highlight(winbar_hl),
-      '%=',
+      '%n',
       highlight(icon_hl),
       icon,
       highlight(winbar_hl),
       '%' .. bufnr .. '@WinbarClick@' .. name .. '%T',
-      '%n',
       '%=',
+      '%3l:%-3c %3p%% ',
     }, ' ')
   end,
 }
