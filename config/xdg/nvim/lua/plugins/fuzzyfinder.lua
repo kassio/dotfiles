@@ -1,83 +1,9 @@
 local telescope = require('telescope')
 local builtin = require('telescope.builtin')
 local actions = require('telescope.actions')
+local themes = require('telescope.themes')
 local utils = require('my.utils')
 local keymap = vim.keymap.set
-local cmd_keymap = function(mode, map, cmd)
-  keymap(mode, map, '<cmd>' .. cmd .. '<cr>')
-end
-
-telescope.setup({
-  extensions = {
-    fzf = {
-      case_mode = 'smart_case',
-      fuzzy = true,
-      override_file_sorter = false,
-      override_generic_sorter = false,
-    },
-    ['ui-select'] = {
-      require('telescope.themes').get_dropdown(),
-    },
-  },
-
-  defaults = {
-    dynamic_preview_title = true,
-    layout_config = {
-      prompt_position = 'top',
-      flex = {
-        flip_columns = 250,
-        flip_lines = 50,
-        vertical = {
-          height = 0.99,
-          width = 0.7,
-          mirror = true,
-        },
-        horizontal = {
-          height = 0.99,
-          width = 0.99,
-          mirror = false,
-        },
-      },
-    },
-    layout_strategy = 'flex',
-    mappings = {
-      i = {
-        ['<C-j>'] = actions.move_selection_next,
-        ['<C-k>'] = actions.move_selection_previous,
-        ['<C-n>'] = actions.cycle_history_next,
-        ['<C-p>'] = actions.cycle_history_prev,
-        ['<C-u>'] = { '<c-u>', type = 'command' }, -- delete inputted text
-        ['<C-a>'] = { '<home>', type = 'command' }, -- move cursor to the beginning of input
-        ['<C-e>'] = { '<end>', type = 'command' }, -- move cursor to the end of input
-      },
-      n = {
-        ['<C-j>'] = actions.move_selection_next,
-        ['<C-k>'] = actions.move_selection_previous,
-        ['<C-n>'] = actions.cycle_history_next,
-        ['<C-p>'] = actions.cycle_history_prev,
-        ['<C-u>'] = { '<c-u>', type = 'command' }, -- delete inputted text
-        ['<C-a>'] = { '<home>', type = 'command' }, -- move cursor to the beginning of input
-        ['<C-e>'] = { '<end>', type = 'command' }, -- move cursor to the end of input
-      },
-    },
-    path_display = { 'smart' },
-    preview_title = '',
-    prompt_prefix = '› ',
-    selection_caret = '› ',
-    set_env = { ['COLORTERM'] = 'truecolor' },
-    sorting_strategy = 'ascending',
-    vimgrep_arguments = {
-      'rg',
-      '--color=never',
-      '--no-heading',
-      '--with-filename',
-      '--line-number',
-      '--column',
-      '--smart-case',
-    },
-    winblend = 0,
-  },
-})
 
 telescope.load_extension('fzf')
 telescope.load_extension('ui-select')
@@ -99,22 +25,15 @@ telescope.setup({
     dynamic_preview_title = true,
     layout_config = {
       prompt_position = 'top',
-      flex = {
-        flip_columns = 250,
-        flip_lines = 50,
-        vertical = {
-          height = 0.99,
-          width = 0.7,
-          mirror = true,
-        },
-        horizontal = {
-          height = 0.99,
-          width = 0.99,
-          mirror = false,
-        },
+      horizontal = {
+        height = 0.9,
+        mirror = false,
+        preview_cutoff = 120,
+        preview_width = 0.65,
+        width = 0.9,
       },
     },
-    layout_strategy = 'flex',
+    layout_strategy = 'horizontal',
     mappings = {
       i = {
         ['<C-j>'] = actions.move_selection_next,
@@ -156,27 +75,31 @@ telescope.setup({
 telescope.load_extension('fzf')
 telescope.load_extension('ui-select')
 
-cmd_keymap('n', 'f<c-p>', 'Telescope find_files find_command=files')
-cmd_keymap('n', 'f<c-;>', 'Telescope find_files theme=ivy find_command=files')
-cmd_keymap('n', 'f<c-y>', 'Telescope live_grep')
+keymap('n', 'f<c-p>', function()
+  builtin.find_files({ find_command = { 'files' } })
+end)
 
-cmd_keymap('n', 'f<c-f>', 'Telescope builtin')
-cmd_keymap('n', 'f<c-h>', 'Telescope help_tags')
-cmd_keymap('n', 'f<c-i>', 'Telescope git_files')
-cmd_keymap('n', 'f<c-k>', 'Telescope buffers')
-cmd_keymap('n', 'f<c-l>', 'Telescope highlights')
-cmd_keymap('n', 'f<c-m>', 'Telescope keymaps')
-cmd_keymap('n', 'f<c-n>', 'Telescope current_buffer_fuzzy_find')
-cmd_keymap('n', 'f<c-o>', 'Telescope oldfiles')
-cmd_keymap('n', 'f<c-t>', 'Telescope treesitter')
-cmd_keymap('n', 'f<c-u>', 'Telescope commands')
+keymap('n', 'f<c-;>', function()
+  builtin.find_files(themes.get_ivy({ find_command = { 'files' } }))
+end)
 
+keymap('n', 'f<c-y>', builtin.live_grep)
+keymap('n', 'f<c-f>', builtin.builtin)
+keymap('n', 'f<c-h>', builtin.help_tags)
+keymap('n', 'f<c-i>', builtin.git_files)
+keymap('n', 'f<c-k>', builtin.buffers)
+keymap('n', 'f<c-l>', builtin.highlights)
+keymap('n', 'f<c-m>', builtin.keymaps)
+keymap('n', 'f<c-n>', builtin.current_buffer_fuzzy_find)
+keymap('n', 'f<c-o>', builtin.oldfiles)
+keymap('n', 'f<c-t>', builtin.treesitter)
+keymap('n', 'f<c-u>', builtin.commands)
 keymap('n', '<leader>as', builtin.grep_string)
+keymap('x', '<leader>as', ':Grep<cr>')
+
 vim.api.nvim_create_user_command('Grep', function()
   builtin.grep_string({ search = utils.get_visual_selection() })
 end, { range = 0 })
-
-keymap('x', '<leader>as', ':Grep<cr>')
 
 utils.augroup('user:fuzzyfinder', {
   {
