@@ -21,6 +21,11 @@ local reloadTheme = function(bg)
     R('plugins.filetree')
     R('plugins.git')
     R('plugins.highlight')
+    R('plugins.statusline.components.diagnostics')
+    R('plugins.statusline.components.git-status')
+    R('plugins.statusline.components.git-branch')
+    R('plugins.statusline.components.mode')
+    R('plugins.statusline.utils')
     R('plugins.statusline')
     R('plugins.tabline')
     R('plugins.tabline.utils')
@@ -28,12 +33,17 @@ local reloadTheme = function(bg)
     R('plugins.winbar')
     R('plugins.winbar.utils')
 
-    require('my.utils').reload_fileicon_extends()
+    require('plugins.icons').reload_fileicon_extends()
   end
 end
 
 command('LightTheme', reloadTheme('light'), {})
 command('DarkTheme', reloadTheme('dark'), {})
+
+for name, value in pairs(theme.colors) do
+  hl.def(string.format('Theme.%s.Foreground', string.camelcase(name)), { foreground = value })
+  hl.def(string.format('Theme.%s.Background', string.camelcase(name)), { background = value })
+end
 
 -- globals
 hl.def('Search', { background = theme.colors.warn, foreground = theme.colors.base })

@@ -55,12 +55,6 @@ M.load = function()
       -- fix CursorHold
       use({ 'antoinemadec/FixCursorHold.nvim' })
 
-      -- Statusline
-      use({
-        'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons' },
-      })
-
       -- Project management
       use({ 'tpope/vim-projectionist' })
 
