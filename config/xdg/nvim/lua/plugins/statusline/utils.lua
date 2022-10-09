@@ -12,7 +12,7 @@ return {
       utils.treesitter.location(),
       '%=',
       require('plugins.statusline.components.ui').render(),
-      '%=',
+      ' ',
       require('plugins.statusline.components.git-status').render(),
       require('plugins.statusline.components.git-branch').render(),
     }, '')
