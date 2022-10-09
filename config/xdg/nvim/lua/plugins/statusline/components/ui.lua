@@ -10,8 +10,12 @@ local components = {
     cond = stl.search.has,
   },
   {
-    fn = stl.message.get_hl,
-    cond = stl.message.has,
+    fn = stl.search.get,
+    cond = stl.search.has,
+  },
+  {
+    fn = stl.ruller.get,
+    cond = stl.ruller.has,
   },
 }
 
