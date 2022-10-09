@@ -153,8 +153,19 @@ M.load = function()
 
       use({ 'folke/todo-comments.nvim' })
 
-      -- fancy notification
-      use({ 'rcarriga/nvim-notify' })
+      -- UI
+      use({
+        'folke/noice.nvim',
+        event = 'VimEnter',
+        config = function()
+          require('noice').setup()
+        end,
+        requires = {
+          -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+          'MunifTanjim/nui.nvim',
+          'rcarriga/nvim-notify',
+        },
+      })
 
       -- terminal handling
       use({ 'kassio/neoterm' })
