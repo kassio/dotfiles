@@ -2,10 +2,10 @@ local theme = require('plugins.highlight.theme')
 local hl = require('my.utils.highlights')
 local utils = require('plugins.statusline.utils')
 
-hl.extend('StatuslineGit', 'Theme.Surface0.Background', { bold = true })
-hl.extend('StatuslineGitAdded', 'StatuslineGit', { foreground = theme.colors.hint })
-hl.extend('StatuslineGitRemoved', 'StatuslineGit', { foreground = theme.colors.error })
-hl.extend('StatuslineGitChanged', 'StatuslineGit', { foreground = theme.colors.warn })
+hl.extend('Statusline.Git', 'Theme.Surface0.Background', { bold = true })
+hl.extend('Statusline.Git.Added', 'Statusline.Git', { foreground = theme.colors.hint })
+hl.extend('Statusline.Git.Removed', 'Statusline.Git', { foreground = theme.colors.error })
+hl.extend('Statusline.Git.Changed', 'Statusline.Git', { foreground = theme.colors.warn })
 
 local labels = {
   added = '+',
@@ -20,12 +20,7 @@ local format_gitstatus = function(counters, name)
     return ''
   end
 
-  return string.format(
-    '%s %s%d',
-    utils.highlight('StatuslineGit' .. string.camelcase(name)),
-    labels[name],
-    count
-  )
+  return string.format('%s%s%d', utils.highlight('Git', name), labels[name], count)
 end
 
 return {
@@ -39,12 +34,12 @@ return {
       format_gitstatus(dict, 'removed'),
     })
 
-    local values = table.concat(statuses, '')
+    local values = table.concat(statuses, ' ')
 
     if values == '' then
       return ''
     end
 
-    return string.format('%s %%*', values)
+    return string.format('%s %s %%*', utils.highlight('Git'), values)
   end,
 }

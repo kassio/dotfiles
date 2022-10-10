@@ -21,10 +21,10 @@ return {
 
     for _, component in ipairs(components) do
       if component.cond() then
-        value = value .. ' ' .. component.fn()
+        value = string.format('%s %s', value, component.fn())
       end
     end
 
-    return value
+    return string.format(' %s ', value)
   end,
 }

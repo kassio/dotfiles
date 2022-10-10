@@ -2,18 +2,17 @@ local theme = require('plugins.highlight.theme')
 local hls = require('my.utils.highlights')
 local stl_hl = require('plugins.statusline.utils').highlight
 
-hls.def('StatuslineModeNormal', {
-  background = theme.colors.blue,
+hls.extend('Statusline.Mode.Normal', 'Theme.Blue.Background', {
   foreground = theme.colors.mantle,
   bold = true,
 })
-hls.extend('StatuslineModeCmd', 'StatuslineModeNormal', { background = '#00ff00' })
-hls.extend('StatuslineModeInsert', 'StatuslineModeNormal', { background = '#0fa000' })
-hls.extend('StatuslineModeReplace', 'StatuslineModeNormal', { background = '#ff55dd' })
-hls.extend('StatuslineModeSearch', 'StatuslineModeNormal', { background = '#ff55dd' })
-hls.extend('StatuslineModeSelect', 'StatuslineModeNormal', { background = '#ff55dd' })
-hls.extend('StatuslineModeTerminal', 'StatuslineModeNormal', { background = '#005000' })
-hls.extend('StatuslineModeVisual', 'StatuslineModeNormal', { background = '#ff55dd' })
+hls.extend('Statusline.Mode.Cmd', 'Statusline.Mode.Normal', { background = '#00ff00' })
+hls.extend('Statusline.Mode.Insert', 'Statusline.Mode.Normal', { background = '#0fa000' })
+hls.extend('Statusline.Mode.Replace', 'Statusline.Mode.Normal', { background = '#ff55dd' })
+hls.extend('Statusline.Mode.Search', 'Statusline.Mode.Normal', { background = '#ff55dd' })
+hls.extend('Statusline.Mode.Select', 'Statusline.Mode.Normal', { background = '#ff55dd' })
+hls.extend('Statusline.Mode.Terminal', 'Statusline.Mode.Normal', { background = '#005000' })
+hls.extend('Statusline.Mode.Visual', 'Statusline.Mode.Normal', { background = '#ff55dd' })
 
 local mode_map = {
   [''] = 'S',
@@ -49,18 +48,18 @@ local mode_map = {
 }
 
 local mode_highlights = {
-  ['!'] = 'StatuslineModeNormal',
-  ['?'] = 'StatuslineModeSearch',
-  ['C'] = 'StatuslineModeCmd',
-  ['E'] = 'StatuslineModeCmd',
-  ['I'] = 'StatuslineModeInsert',
-  ['M'] = 'StatuslineModeNormal',
-  ['N'] = 'StatuslineModeNormal',
-  ['O'] = 'StatuslineModeNormal',
-  ['R'] = 'StatuslineModeReplace',
-  ['S'] = 'StatuslineModeSelect',
-  ['T'] = 'StatuslineModeTerminal',
-  ['V'] = 'StatuslineModeVisual',
+  ['!'] = 'Normal',
+  ['?'] = 'Search',
+  ['C'] = 'Cmd',
+  ['E'] = 'Cmd',
+  ['I'] = 'Insert',
+  ['M'] = 'Normal',
+  ['N'] = 'Normal',
+  ['O'] = 'Normal',
+  ['R'] = 'Replace',
+  ['S'] = 'Select',
+  ['T'] = 'Terminal',
+  ['V'] = 'Visual',
 }
 
 return {
@@ -73,6 +72,6 @@ return {
 
     local mode = mode_map[mode_code]
 
-    return string.format('%s %s %%*', stl_hl(mode_highlights[mode]), mode)
+    return string.format('%s %s %%*', stl_hl('Mode', mode_highlights[mode]), mode)
   end,
 }
