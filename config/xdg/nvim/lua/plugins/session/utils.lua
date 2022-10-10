@@ -25,7 +25,7 @@ local error = function(msg)
 end
 
 local prefix_from = function(session)
-  session = vim.fn.split(session, '/')
+  session = vim.fn.split(session or '', '/')
 
   if #session > 0 then
     session = session[#session]
@@ -95,7 +95,7 @@ M.save = function()
     prefix = input
   end)
 
-  if #prefix == 0 and #default > 0 then
+  if string.len(prefix or '') == 0 and string.len(default or '') > 0 then
     prefix = default
   end
 
