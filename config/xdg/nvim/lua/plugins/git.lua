@@ -32,10 +32,6 @@ hl.def('GitSignAdd', { foreground = colors.hint })
 hl.def('GitSignChange', { foreground = colors.warn })
 hl.def('GitSignDelete', { foreground = colors.error })
 
-hl.def('GitSignAddLineNr', { foreground = colors.hint })
-hl.def('GitSignChangeLineNr', { foreground = colors.warn })
-hl.def('GitSignDeleteLineNr', { foreground = colors.error })
-
 local GIT = {}
 
 GIT.get_repository_url = function()
@@ -74,11 +70,11 @@ end
 
 gitsigns.setup({
   signs = {
-    add = { hl = 'GitSignAdd', numhl = 'GitSignAddLineNr', text = '│' },
-    change = { hl = 'GitSignChange', numhl = 'GitSignChangeLineNr', text = '│' },
-    delete = { hl = 'GitSignDelete', numhl = 'GitSignDeleteLineNr', text = '│' },
-    topdelete = { hl = 'GitSignDelete', numhl = 'GitSignDeleteLineNr', text = '‾' },
-    changedelete = { hl = 'GitSignDelete', numhl = 'GitSignDeleteLineNr', text = '│' },
+    add = { hl = 'GitSignAdd', text = '│' },
+    change = { hl = 'GitSignChange', text = '│' },
+    delete = { hl = 'GitSignDelete', text = '│' },
+    topdelete = { hl = 'GitSignDelete', text = '‾' },
+    changedelete = { hl = 'GitSignDelete', text = '│' },
   },
   current_line_blame_opts = {
     virt_text = true,
@@ -90,7 +86,7 @@ gitsigns.setup({
   diff_opts = {
     vertical = true,
   },
-  numhl = true,
+  numhl = false,
 })
 
 local M = {
