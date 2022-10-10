@@ -2,20 +2,16 @@ local stl = require('noice').api.statusline
 
 local components = {
   {
+    fn = stl.search.get,
+    cond = stl.search.has,
+  },
+  {
+    fn = stl.ruler.get,
+    cond = stl.ruler.has,
+  },
+  {
     fn = stl.command.get,
     cond = stl.command.has,
-  },
-  {
-    fn = stl.search.get,
-    cond = stl.search.has,
-  },
-  {
-    fn = stl.search.get,
-    cond = stl.search.has,
-  },
-  {
-    fn = stl.ruller.get,
-    cond = stl.ruller.has,
   },
 }
 
