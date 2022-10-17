@@ -60,6 +60,15 @@ local attacher = function(client)
   end, 'gla', 'LspCodeActions', { range = 0 })
 
   command_map(function()
+    lsp.buf.code_action({
+      filter = function(action)
+        return action.title == 'Blame line'
+      end,
+      apply = true,
+    })
+  end, 'glb', 'GitBlame')
+
+  command_map(function()
     lsp.buf.rename()
   end, 'grr', 'LspRename')
 

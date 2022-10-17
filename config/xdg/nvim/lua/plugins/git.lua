@@ -109,7 +109,6 @@ local M = {
     open(GIT.get_repository_url())
   end,
   preview_hunk = gitsigns.preview_hunk,
-  blame_toggle = require('agitator').git_blame_toggle,
   blame_line = function()
     gitsigns.blame_line({ full = true, ignore_whitespace = true })
   end,
@@ -133,19 +132,23 @@ local M = {
 vim.keymap.set('n', ']c', gitsigns.next_hunk)
 vim.keymap.set('n', '[c', gitsigns.prev_hunk)
 
-command('GopenRepository', M.open_repository, {})
-command('GopenFileRemoteUrl', M.open_remote_file, { nargs = '?' })
-command('GcopyFileRemoteURL', M.copy_remote_file, { nargs = '?' })
+command('GitOpenRepository', M.open_repository, {})
+command('GitOpenFileRemoteUrl', M.open_remote_file, { nargs = '?' })
+command('GitCopyFileRemoteURL', M.copy_remote_file, { nargs = '?' })
 
-command('Gdiff', M.diff, { nargs = '?' })
-command('GblameToggleLine', M.blame_line_toggle, {})
-command('GblameToggle', M.blame_toggle, {})
-command('GpreviewHunk', M.preview_hunk, {})
+command('GitDiff', M.diff, { nargs = '?' })
+cabbrev('Gd', 'GitDiff')
 
-command('Grt', M.restore, {})
-command('Gwrite', M.write, {})
-command('GbranchCurrent', M.branch_current, {})
+command('GitToggleLineBlame', M.blame_line_toggle, {})
+cabbrev('GLineBlame', 'GitToggleLineBlame')
 
-cabbrev('Gd', 'Gdiff')
-cabbrev('Gw', 'Gwrite')
-cabbrev('Ga', 'Gwrite')
+command('GitPreviewHunk', M.preview_hunk, {})
+
+command('GitRestore', M.restore, {})
+cabbrev('Grt', 'GitRestore')
+
+command('GitWrite', M.write, {})
+cabbrev('Gw', 'GitWrite')
+cabbrev('Ga', 'GitWrite')
+
+command('GitBranchCurrent', M.branch_current, {})

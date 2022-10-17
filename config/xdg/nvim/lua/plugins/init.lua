@@ -37,7 +37,7 @@ M.upgrade = function()
     command = 'MasonToolsUpdate',
   })
 
-  M.load().sync()
+  R('plugins').load().sync()
 end
 
 M.load = function()
@@ -133,7 +133,7 @@ M.load = function()
       })
 
       -- Git
-      use({ 'lewis6991/gitsigns.nvim', 'emmanueltouzery/agitator.nvim' })
+      use({ 'lewis6991/gitsigns.nvim' })
 
       -- Completion
       use({
