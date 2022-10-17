@@ -14,6 +14,7 @@ return {
       '%=',
       require('plugins.statusline.components.ui').render(),
       require('plugins.statusline.components.git-status').render(),
+      '%<', -- truncate branch name if stautsline is too long
       require('plugins.statusline.components.git-branch').render(),
     }, '')
   end,
