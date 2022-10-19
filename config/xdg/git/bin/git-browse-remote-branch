@@ -6,6 +6,15 @@ if [ $# -ne 0 ]; then
   branch="$1"
 fi
 
-local remote="$(git config --get "branch.${branch}.remote")"
+local branch_remote="$(git config --get "branch.${branch}.remote")"
+local remote_url="$(git remote get-url "${branch_remote}" | sed 's/\.git//')"
 
-open "$(git remote get-url "${remote}" | sed 's/\.git//')/-/tree/${branch}"
+case "${remote_url}" in
+  *gitlab*)
+    open "${remote_url}/-/tree/${branch}"
+    ;;
+
+  *github*)
+    open "${remote_url}/tree/${branch}"
+    ;;
+esac
