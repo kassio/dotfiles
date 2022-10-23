@@ -1,3 +1,15 @@
+local render_component = function(name)
+  local component = require('plugins.statusline.components.' .. name)
+  local ok, msg = pcall(component.render)
+
+  if ok then
+    return msg
+  else
+    P(msg)
+    return ''
+  end
+end
+
 return {
   highlight = function(...)
     local opts = { ... }
@@ -8,14 +20,14 @@ return {
   end,
   render = function()
     return table.concat({
-      require('plugins.statusline.components.mode').render(),
-      require('plugins.statusline.components.diagnostics').render(),
-      require('plugins.statusline.components.code-location').render(),
+      render_component('mode'),
+      render_component('diagnostics'),
+      render_component('code-location'),
       '%=',
-      require('plugins.statusline.components.ui').render(),
-      require('plugins.statusline.components.git-status').render(),
+      render_component('ui'),
+      render_component('git-status'),
       '%<', -- truncate branch name if stautsline is too long
-      require('plugins.statusline.components.git-branch').render(),
+      render_component('git-branch'),
     }, '')
   end,
 }

@@ -1,4 +1,13 @@
-local stl = require('noice').api.statusline
+local ok, noice = pcall(require, 'noice')
+if not ok then
+  return {
+    render = function()
+      return ''
+    end,
+  }
+end
+
+local stl = noice.api.statusline
 
 local components = {
   {
