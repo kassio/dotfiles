@@ -33,21 +33,8 @@ local highlight = function(color)
   return string.format('%%#%s#', color)
 end
 
--- HACK: for somereason, calling v:lua.require is not working
-vim.api.nvim_exec(
-  [[
-function! WinbarClick(bufnr, _clicks, button, mods)
-  call v:lua.require("plugins.winbar.utils").click(
-  \ a:bufnr,
-  \ a:button,
-  \ a:mods)
-endfunction
-  ]],
-  true
-)
-
 return {
-  click = function(bufnr, button, mods)
+  on_click = function(bufnr, _clicks, button, mods)
     local text = vim.api.nvim_buf_get_name(bufnr)
 
     if button ~= 'l' then
@@ -75,13 +62,16 @@ return {
       icon_hl = 'WinbarNC'
     end
 
+    local clickable_name =
+      string.format("%%%d@v:lua.require'plugins.winbar.utils'.on_click@%s%%X", bufnr, name)
+
     return table.concat({
       highlight(winbar_hl),
       '%n',
       highlight(icon_hl),
       icon,
       highlight(winbar_hl),
-      '%' .. bufnr .. '@WinbarClick@' .. name .. '%T',
+      clickable_name,
       '%=',
       '%3l:%-3c %3p%% ',
     }, ' ')
