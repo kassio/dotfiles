@@ -45,3 +45,5 @@ require('noice').setup({
     },
   },
 })
+
+vim.keymap.set('n', 'f<c-,>', '<cmd>Noice telescope<cr>')
