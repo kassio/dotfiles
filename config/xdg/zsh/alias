@@ -40,7 +40,10 @@ alias c="code"
 alias tailf="tail -f"
 
 alias to-nvim="tr \\\n \\\0 | xargs -0 nvim -p"
-alias nvim-diff="gdfm --diff-filter=d | to-nvim"
+
+nvim-diff() {
+  git diff --name-only --relative --diff-filter=d "${1:-.}" | to-nvim
+}
 alias nd="nvim-diff"
 
 alias to-rubocop="grep '.rb' | xargs bundle exec rubocop --parallel"

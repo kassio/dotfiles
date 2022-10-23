@@ -18,7 +18,9 @@ gdm() {
 gdfm() {
   branch="$(git branch-current)"
   remote="$(git get-branch-remote "${branch}")"
-  git diff --name-only "${remote:-origin}/$(git branch-main)..."
+
+  git diff --name-only --relative \
+    "${remote:-origin}/$(git branch-main)..."
 }
 
 gbd() {
@@ -86,7 +88,7 @@ alias gcpa="gcp --abort"
 alias gcpc="gcp --continue"
 alias gd="g diff"
 alias gdc="gd --cached"
-alias gdf="gd --name-only"
+alias gdf="gd --name-only --relative"
 alias gf="g fetch --prune --prune-tags --tags --recurse-submodules=on-demand"
 alias gfix="gca --no-edit"
 alias gl="gla -20"
