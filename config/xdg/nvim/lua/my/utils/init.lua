@@ -51,11 +51,11 @@ M.to_clipboard = function(text, system_clipboard)
 "%s"
 copied to %s
 ]])
-  local msg = 'clipboard'
+  local msg = 'a register'
 
   if system_clipboard then
     reg = '*'
-    msg = 'system clipboard'
+    msg = 'the system clipboard'
   end
 
   fn.setreg(reg, text)
