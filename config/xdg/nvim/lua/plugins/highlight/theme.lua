@@ -35,9 +35,15 @@ local set_colorscheme = function(name, theme)
   local colorscheme = colorschemes[name]
 
   vim.opt.background = colorscheme.bg
-  vim.g.catppuccin_flavour = colorscheme.flavour
 
-  R('catppuccin').setup()
+  R('catppuccin').setup({
+    flavour = 'mocha',
+    background = {
+      light = 'latte',
+      dark = 'mocha',
+    },
+  })
+
   vim.cmd('colorscheme catppuccin')
 
   local palette = require('catppuccin.palettes').get_palette(colorscheme.flavour)
