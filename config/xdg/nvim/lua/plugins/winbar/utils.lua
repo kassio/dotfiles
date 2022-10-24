@@ -62,8 +62,7 @@ return {
       icon_hl = 'WinbarNC'
     end
 
-    local clickable_name =
-      string.format("%%%d@v:lua.require'plugins.winbar.utils'.on_click@%s%%X", bufnr, name)
+    local clickable_name = utils.statusline.clickable(name, 'plugins.winbar.utils')
 
     return table.concat({
       highlight(winbar_hl),

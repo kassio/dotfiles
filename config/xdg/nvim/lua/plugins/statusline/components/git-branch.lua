@@ -1,13 +1,14 @@
 local theme = require('plugins.highlight.theme')
-local hls = require('my.utils.highlights')
-local utils = require('plugins.statusline.utils')
+local utils = require('my.utils')
 
-hls.extend('Statusline.Git.Branch', 'Theme.Blue.Background', {
+utils.highlights.extend('Statusline.Git.Branch', 'Theme.Blue.Background', {
   foreground = theme.colors.mantle,
 })
-hls.extend('Statusline.Git.Branch.Name', 'Statusline.Git.Branch', {
+utils.highlights.extend('Statusline.Git.Branch.Name', 'Statusline.Git.Branch', {
   bold = true,
 })
+
+local hl = utils.statusline.highlighter('Statusline', 'Git')
 
 return {
   render = function()
@@ -17,11 +18,6 @@ return {
       return ''
     end
 
-    return string.format(
-      '%s  %s%s ',
-      utils.highlight('Git', 'Branch'),
-      utils.highlight('Git', 'Branch', 'Name'),
-      vim.g['gitsigns_head']
-    )
+    return string.format('%s  %s%s ', hl('Branch'), hl('Branch', 'Name'), vim.g['gitsigns_head'])
   end,
 }

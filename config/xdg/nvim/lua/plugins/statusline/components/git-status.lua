@@ -1,11 +1,20 @@
 local theme = require('plugins.highlight.theme')
-local hl = require('my.utils.highlights')
-local utils = require('plugins.statusline.utils')
+local utils = require('my.utils')
 
-hl.extend('Statusline.Git', 'Theme.Surface0.Background', { bold = true })
-hl.extend('Statusline.Git.Added', 'Statusline.Git', { foreground = theme.colors.hint })
-hl.extend('Statusline.Git.Removed', 'Statusline.Git', { foreground = theme.colors.error })
-hl.extend('Statusline.Git.Changed', 'Statusline.Git', { foreground = theme.colors.warn })
+utils.highlights.extend('Statusline.Git', 'Theme.Surface0.Background', { bold = true })
+utils.highlights.extend('Statusline.Git.Added', 'Statusline.Git', { foreground = theme.colors.hint })
+utils.highlights.extend(
+  'Statusline.Git.Removed',
+  'Statusline.Git',
+  { foreground = theme.colors.error }
+)
+utils.highlights.extend(
+  'Statusline.Git.Changed',
+  'Statusline.Git',
+  { foreground = theme.colors.warn }
+)
+
+local hl = utils.statusline.highlighter('Statusline', 'Git')
 
 local labels = {
   added = '+',
@@ -20,7 +29,7 @@ local format_gitstatus = function(counters, name)
     return ''
   end
 
-  return string.format('%s%s%d', utils.highlight('Git', name), labels[name], count)
+  return string.format('%s%s%d', hl(name), labels[name], count)
 end
 
 return {
@@ -40,6 +49,6 @@ return {
       return ''
     end
 
-    return string.format('%s %s %%*', utils.highlight('Git'), values)
+    return string.format('%s %s %%*', hl(), values)
   end,
 }

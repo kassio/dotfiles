@@ -2,22 +2,18 @@ local render_component = function(name)
   local component = require('plugins.statusline.components.' .. name)
   local ok, msg = pcall(component.render)
 
-  if ok then
-    return msg
-  else
-    P(msg)
+  if not ok then
+    if msg ~= '' then
+      P(string.format('Failed to render statusline component %s: %s', name, msg))
+    end
+
     return ''
   end
+
+  return msg
 end
 
 return {
-  highlight = function(...)
-    local opts = { ... }
-
-    table.insert(opts, 1, 'Statusline')
-
-    return string.format('%%#%s#', table.concat(opts, '.'))
-  end,
   render = function()
     return table.concat({
       render_component('mode'),

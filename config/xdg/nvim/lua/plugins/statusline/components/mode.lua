@@ -1,18 +1,23 @@
 local theme = require('plugins.highlight.theme')
-local hls = require('my.utils.highlights')
-local stl_hl = require('plugins.statusline.utils').highlight
+local utils = require('my.utils')
 
-hls.extend('Statusline.Mode.Normal', 'Theme.Blue.Background', {
+local hl = utils.statusline.highlighter('Statusline', 'Mode')
+
+local extend_mode_hls = function(target, origin, ext)
+  return utils.highlights.extend('Statusline.Mode.' .. target, 'Statusline.Mode.' .. origin, ext)
+end
+
+utils.highlights.extend('Statusline.Mode.Normal', 'Theme.Blue.Background', {
   foreground = theme.colors.mantle,
   bold = true,
 })
-hls.extend('Statusline.Mode.Cmd', 'Statusline.Mode.Normal', { background = '#00ff00' })
-hls.extend('Statusline.Mode.Insert', 'Statusline.Mode.Normal', { background = '#0fa000' })
-hls.extend('Statusline.Mode.Replace', 'Statusline.Mode.Normal', { background = '#ff55dd' })
-hls.extend('Statusline.Mode.Search', 'Statusline.Mode.Normal', { background = '#ff55dd' })
-hls.extend('Statusline.Mode.Select', 'Statusline.Mode.Normal', { background = '#ff55dd' })
-hls.extend('Statusline.Mode.Terminal', 'Statusline.Mode.Normal', { background = '#005000' })
-hls.extend('Statusline.Mode.Visual', 'Statusline.Mode.Normal', { background = '#ff55dd' })
+extend_mode_hls('Cmd', 'Normal', { background = '#00ff00' })
+extend_mode_hls('Insert', 'Normal', { background = '#0fa000' })
+extend_mode_hls('Replace', 'Normal', { background = '#ff55dd' })
+extend_mode_hls('Search', 'Normal', { background = '#ff55dd' })
+extend_mode_hls('Select', 'Normal', { background = '#ff55dd' })
+extend_mode_hls('Terminal', 'Normal', { background = '#005000' })
+extend_mode_hls('Visual', 'Normal', { background = '#ff55dd' })
 
 local mode_map = {
   [''] = 'S',
@@ -72,6 +77,6 @@ return {
 
     local mode = mode_map[mode_code]
 
-    return string.format('%s %s %%*', stl_hl('Mode', mode_highlights[mode]), mode)
+    return string.format('%s %s %%*', hl(mode_highlights[mode]), mode)
   end,
 }

@@ -6,6 +6,7 @@ M.treesitter = require('my.utils.treesitter')
 M.buffers = require('my.utils.buffers')
 M.snippets = require('my.utils.snippets')
 M.highlights = require('my.utils.highlights')
+M.statusline = require('my.utils.statusline')
 
 M.plugin_filetypes = {
   'FineCmdlinePrompt',
@@ -39,6 +40,27 @@ M.get_visual_selection = function()
     print('Failed to get selection: ' .. lines)
     return ''
   end
+end
+
+--- Copy given text to clipboard.
+---@param text string
+---@param system_clipboard boolean
+---@return nil
+M.to_clipboard = function(text, system_clipboard)
+  local reg = '"'
+  local fmt = string.trim([[
+"%s"
+copied to %s
+]])
+  local msg = 'a register'
+
+  if system_clipboard then
+    reg = '*'
+    msg = 'the system clipboard'
+  end
+
+  fn.setreg(reg, text)
+  vim.notify(string.format(fmt, text, msg), vim.log.levels.INFO)
 end
 
 --- Copy given text to clipboard.
