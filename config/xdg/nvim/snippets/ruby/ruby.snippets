@@ -2,7 +2,7 @@ snippet #f
 	# frozen_string_literal: true
 
 snippet lint
-	# rubocop: disable CodeReuse/ActiveRecord
+	# rubocop: disable ${1:CodeReuse/ActiveRecord}
 snippet class
 	class ${1:`v:lua.require('my.utils.snippets').filename('camelcase')`}${2}
 		${0:$VISUAL}
