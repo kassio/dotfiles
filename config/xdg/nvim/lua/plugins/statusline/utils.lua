@@ -3,10 +3,6 @@ local render_component = function(name)
   local ok, msg = pcall(component.render)
 
   if not ok then
-    if msg ~= '' then
-      P(string.format('Failed to render statusline component %s: %s', name, msg))
-    end
-
     return ''
   end
 
