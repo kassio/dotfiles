@@ -29,10 +29,6 @@ local get_name = function(bufnr)
   end
 end
 
-local highlight = function(color)
-  return string.format('%%#%s#', color)
-end
-
 return {
   on_click = function(bufnr, _clicks, button, mods)
     local text = vim.api.nvim_buf_get_name(bufnr)
@@ -65,7 +61,7 @@ return {
     local clickable_name = utils.statusline.clickable(name, 'plugins.winbar.utils')
 
     return table.concat({
-      highlight(winbar_hl),
+      utils.statusline.highlight(winbar_hl),
       '%n',
       highlight(icon_hl),
       icon,

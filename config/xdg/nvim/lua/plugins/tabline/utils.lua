@@ -1,5 +1,6 @@
 local api = vim.api
 local icons = require('plugins.icons')
+local utils = require('my.utils.statusline')
 
 local UNSELECTED = 'Tabline'
 local SELECTED = 'TabLineSel'
@@ -28,7 +29,7 @@ local get_name = function(tab)
 end
 
 local highlight = function(label, color)
-  return string.format('%%#%s#%s%%*', color, label)
+  return string.format('%s%s%%*', utils.highlight(color), label)
 end
 
 local label_for = function(tab)

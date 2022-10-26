@@ -17,8 +17,20 @@ M.highlighter = function(...)
 
     local path = vim.tbl_flatten({ prefix, suffix })
 
-    return string.format('%%#%s#', table.concat(path, '.'))
+    return M.highlight(table.concat(path, '.'))
   end
+end
+
+--- Build a clickable statusline component
+--
+--- Example:
+--
+--- highlight('text')
+--- => "%#text#"
+---@param name string name of the highlight
+---@return string
+M.highlight = function(name)
+  return string.format('%%#%s#', name)
 end
 
 --- Build a clickable statusline component
