@@ -25,19 +25,20 @@ local icons = {
   warn = '',
 }
 
-local colorschemes = {
-  light = { bg = 'light', flavour = 'latte' },
-  dark = { bg = 'dark', flavour = 'mocha' },
+local flavours = {
+  light = 'latte',
+  dark = 'mocha',
 }
 
-local set_colorscheme = function(name, theme)
+local set_colorscheme = function(background, theme)
   theme = theme or {}
-  local colorscheme = colorschemes[name]
 
-  vim.opt.background = colorscheme.bg
+  local flavour = flavours[background]
 
-  R('catppuccin').setup({
-    flavour = 'mocha',
+  vim.opt.background = background
+
+  require('catppuccin').setup({
+    flavour = flavour,
     background = {
       light = 'latte',
       dark = 'mocha',
@@ -46,7 +47,7 @@ local set_colorscheme = function(name, theme)
 
   vim.cmd('colorscheme catppuccin')
 
-  local palette = require('catppuccin.palettes').get_palette(colorscheme.flavour)
+  local palette = require('catppuccin.palettes').get_palette(flavour)
 
   theme.colorscheme = 'catppuccin'
   theme.icons = icons
