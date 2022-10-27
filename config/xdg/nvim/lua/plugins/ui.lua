@@ -8,7 +8,7 @@ require('noice').setup({
         col = '50%',
       },
       size = {
-        width = 80,
+        width = '90%',
         height = 'auto',
       },
     },
@@ -19,7 +19,7 @@ require('noice').setup({
         col = '50.5%',
       },
       size = {
-        width = 82,
+        width = '91.5%',
         height = 10,
       },
       border = {
