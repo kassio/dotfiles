@@ -6,7 +6,13 @@ if [ "$1" = "--help" ]; then
 fi
 
 install() {
-  brew install --force --build-from-source --fetch-HEAD --HEAD "$1" 2>/dev/null
+  brew unlink "$1"
+  brew install \
+    --force \
+    --build-from-source \
+    --fetch-HEAD \
+    --HEAD "$1"
+  brew link --force "$1"
 }
 
 title "[nvim] reinstalling neovim"
