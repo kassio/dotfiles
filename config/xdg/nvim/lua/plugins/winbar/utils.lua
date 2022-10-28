@@ -63,9 +63,9 @@ return {
     return table.concat({
       utils.statusline.highlight(winbar_hl),
       '%n',
-      highlight(icon_hl),
+      utils.statusline.highlight(icon_hl),
       icon,
-      highlight(winbar_hl),
+      utils.statusline.highlight(winbar_hl),
       clickable_name,
       '%=',
       '%3l:%-3c %3p%% ',
