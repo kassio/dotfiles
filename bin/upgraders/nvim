@@ -5,20 +5,15 @@ if [ "$1" = "--help" ]; then
   exit
 fi
 
-install() {
-  brew unlink "$1"
-  brew install \
-    --force \
-    --build-from-source \
-    --fetch-HEAD \
-    --HEAD "$1"
-  brew link --force "$1"
-}
-
 title "[nvim] reinstalling neovim"
-install tree-sitter
-install luajit
-install neovim
+
+brew unlink neovim 2>/dev/null
+brew install \
+  --force \
+  --build-from-source \
+  --fetch-HEAD \
+  --HEAD neovim 2>/dev/null
+brew link neovim 2>/dev/null
 
 title "[nvim] updating neovim plugin"
 nvim -c 'UpgradeAndClose'
