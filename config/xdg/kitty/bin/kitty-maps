@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
 
+PATH="$PATH:/opt/homebrew/bin:/usr/bin"
+
  cat $HOME/.config/kitty/configs/maps.conf |
-   /usr/bin/sed 's/^map\s*//' |
-   /opt/homebrew/bin/fzf --layout=reverse
+   egrep "^map" |
+   sort |
+   column -t -s'#' |
+   fzf --layout=reverse
