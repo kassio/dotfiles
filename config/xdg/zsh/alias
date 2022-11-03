@@ -45,6 +45,7 @@ nvim-diff() {
   git diff --name-only --relative --diff-filter=d "${1:-.}" | to-nvim
 }
 alias nd="nvim-diff"
+alias ndm="nvim-diff master..."
 
 alias to-rubocop="grep '.rb' | xargs bundle exec rubocop --parallel"
 alias rubocop-diff="gdfm --diff-filter=d | to-rubocop"
