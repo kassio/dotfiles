@@ -27,3 +27,6 @@ autocommand
 neoterm
 configs
 lua
+sidekiq
+rollout
+api
