@@ -6,6 +6,7 @@ vim.g.mapleader = ' '
 opt.autowriteall = true
 opt.backup = false
 opt.cindent = true
+opt.cmdheight = 1
 opt.colorcolumn = { 80, 100, 120 }
 opt.complete:remove('t')
 opt.completeopt = {

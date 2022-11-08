@@ -16,7 +16,6 @@ return {
       render_component('diagnostics'),
       render_component('code-location'),
       '%=',
-      render_component('ui'),
       render_component('git-status'),
       '%<', -- truncate branch name if stautsline is too long
       render_component('git-branch'),

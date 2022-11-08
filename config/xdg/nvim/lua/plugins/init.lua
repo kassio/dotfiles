@@ -153,18 +153,8 @@ M.load = function()
 
       use({ 'folke/todo-comments.nvim' })
 
-      -- UI
-      use({
-        'folke/noice.nvim',
-        event = 'VimEnter',
-        config = function()
-          require('plugins.ui')
-        end,
-        requires = {
-          'MunifTanjim/nui.nvim',
-          'rcarriga/nvim-notify',
-        },
-      })
+      -- notification
+      use({ 'rcarriga/nvim-notify' })
 
       -- terminal handling
       use({ 'kassio/neoterm' })
