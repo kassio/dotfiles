@@ -63,27 +63,6 @@ copied to %s
   vim.notify(string.format(fmt, text, msg), vim.log.levels.INFO)
 end
 
---- Copy given text to clipboard.
----@param text string
----@param system_clipboard boolean
----@return nil
-M.to_clipboard = function(text, system_clipboard)
-  local reg = '"'
-  local fmt = string.trim([[
-"%s"
-copied to %s
-]])
-  local msg = 'a register'
-
-  if system_clipboard then
-    reg = '*'
-    msg = 'the system clipboard'
-  end
-
-  fn.setreg(reg, text)
-  vim.notify(string.format(fmt, text, msg), vim.log.levels.INFO)
-end
-
 --- Creates an autocommand group.
 ---@param name string
 ---@param autocmds any[]
