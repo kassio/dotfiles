@@ -115,6 +115,7 @@ M.load = function()
         'nvim-treesitter/playground',
         'SmiteshP/nvim-gps',
         'theHamsta/nvim-treesitter-pairs',
+        'nvim-treesitter/nvim-treesitter-context',
       })
 
       -- LSP/DAP installer

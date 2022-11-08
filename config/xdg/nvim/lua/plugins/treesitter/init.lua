@@ -5,6 +5,7 @@ local gps = require('nvim-gps')
 local hl = utils.highlights
 
 require('plugins.treesitter.refactor')
+require('plugins.treesitter.context')
 
 -- Treesitter globals
 hl.extend('TSTypeBuiltin', 'Type')
