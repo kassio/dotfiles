@@ -108,7 +108,6 @@
   branch-others = !git branch-list | grep -v "$(git branch-current)" | sort
   exclude = !sh -c 'echo "$1" >> .git/info/exclude' -
   me = config user.name
-  open-remote = !git remote get-url origin | xargs open
   switch-main = !git switch "$(git branch-main)"
   tag-list = !git tag --list --format='%(color:green dim)%(creatordate:format-local:%F %R) %(color:red dim)%(objectname:short) %(color:blue)%(align:10,left)%(refname:lstrip=2)%(end)'
   tag-refs = !git tag --list --format='%(refname:lstrip=2)'
