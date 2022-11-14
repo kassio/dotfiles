@@ -2,38 +2,10 @@ local theme = require('plugins.highlight.theme')
 local treesitter = require('nvim-treesitter.configs')
 local utils = require('my.utils')
 local gps = require('nvim-gps')
-local hl = utils.highlights
 
 require('plugins.treesitter.refactor')
 require('plugins.treesitter.context')
-
--- Treesitter globals
-hl.extend('TSTypeBuiltin', 'Type')
-hl.extend('TSVariable', 'Normal')
-hl.extend('TSParameter', 'Normal')
-hl.extend('TSFuncBuiltin', 'Identifier')
-hl.extend('TSStringEscape', 'String', { bold = true })
-hl.extend('TSStringSpecial', 'String', { bold = true })
-
--- refactoring
-hl.def('TSDefinition', {
-  underdotted = true,
-  background = theme.colors.mantle,
-  special = theme.colors.blue,
-})
-hl.extend('TSDefinitionUsage', 'TSDefinition')
-
--- Ruby with Treesitter
-hl.extend('rubyTSType', 'Type')
-hl.extend('rubyTSLabel', 'Identifier')
-hl.extend('rubyTSSymbol', 'Identifier')
-hl.extend('rubyTSVariableBuiltin', 'Constant')
-
--- Go with Treesitter
-hl.extend('goTSnamespace', 'Normal', { bold = true })
-hl.extend('goTSvariable', 'Normal')
-hl.extend('goTSfunction_name', 'Function')
-hl.extend('goTSproperty', 'Function')
+require('plugins.treesitter.highlights')
 
 -- vim-matchup plugin, uses treesitter
 -- Do not show the not visible matching context on statusline
