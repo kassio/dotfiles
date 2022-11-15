@@ -1,11 +1,9 @@
-local theme = require('plugins.highlight.theme')
 local treesitter = require('nvim-treesitter.configs')
-local utils = require('my.utils')
-local gps = require('nvim-gps')
 
 require('plugins.treesitter.refactor')
 require('plugins.treesitter.context')
 require('plugins.treesitter.highlights')
+require('plugins.treesitter.gps')
 
 -- vim-matchup plugin, uses treesitter
 -- Do not show the not visible matching context on statusline
@@ -102,34 +100,3 @@ treesitter.setup({
     lint_events = { 'BufWrite', 'CursorHold' },
   },
 })
-
-gps.setup({
-  separator = theme.icons.separator,
-  icons = {
-    ['class-name'] = ' ',
-    ['container-name'] = ' ',
-    ['function-name'] = ' ',
-    ['method-name'] = ' ',
-    ['tag-name'] = ' ',
-  },
-  languages = {
-    ruby = {
-      icons = {
-        ['class-name'] = '::',
-        ['container-name'] = '::',
-        ['function-name'] = '.',
-        ['method-name'] = '#',
-        ['tag-name'] = '',
-      },
-      separator = '',
-    },
-  },
-})
-
-vim.api.nvim_create_user_command('TSGPSLocation', function()
-  print(utils.treesitter.location())
-end, {})
-
-vim.api.nvim_create_user_command('TSGPSLocationCopy', function(cmd)
-  utils.to_clipboard(utils.treesitter.location(), cmd.bang)
-end, {})
