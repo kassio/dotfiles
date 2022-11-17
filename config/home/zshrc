@@ -23,7 +23,6 @@ PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
 PATH="${HOMEBREW_PREFIX}/opt/python@3.9/bin:${PATH}"
 PATH="${XDG_BIN_HOME}:${PATH}"
 PATH="${XDG_CONFIG_HOME}/git/bin:${PATH}" # git helpers
-PATH="${XDG_CONFIG_HOME}/kitty/bin:${PATH}" # git helpers
 PATH=".userbin:${PATH}"
 typeset -U PATH
 export PATH
@@ -108,16 +107,19 @@ source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
 export GSINK_CONFIG_PATH="${HOME}/.config/repos.json"
 
 # personal libs
+source "${XDG_CONFIG_HOME}/ripgrep/env"
+source "${XDG_CONFIG_HOME}/ruby/env"
+source "${XDG_CONFIG_HOME}/go/env"
+source "${XDG_CONFIG_HOME}/kitty/env"
+source "${XDG_CONFIG_HOME}/iterm2"
+
 source "${ZSH_CONFIG_HOME}/bindkeys"
 source "${ZSH_CONFIG_HOME}/alias"
 source "${ZSH_CONFIG_HOME}/fzf"
-source "${ZSH_CONFIG_HOME}/ruby"
-source "${ZSH_CONFIG_HOME}/go"
 source "${ZSH_CONFIG_HOME}/lua"
 source "${ZSH_CONFIG_HOME}/autosuggest"
 source "${ZSH_CONFIG_HOME}/jq"
 source "${ZSH_CONFIG_HOME}/ulimit"
-source "${ZSH_CONFIG_HOME}/ripgrep"
 source "${ZSH_CONFIG_HOME}/p10k.zsh" 2>/dev/null # zsh theme
 source "${ZSH_CONFIG_HOME}/completions"
 source "${ZSH_CONFIG_HOME}/title"
