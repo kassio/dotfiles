@@ -4,6 +4,7 @@ PATH="$PATH:/opt/homebrew/bin:/usr/bin"
 
  cat $HOME/.config/kitty/configs/maps.conf |
    egrep "^map" |
+   cut -c4- |
    sort |
    column -t -s'#' |
    fzf --layout=reverse
