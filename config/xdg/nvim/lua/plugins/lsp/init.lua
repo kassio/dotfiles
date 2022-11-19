@@ -85,7 +85,7 @@ local attacher = function(client)
   end, 'gld', 'LspGoToDefinition')
 
   command_map(function()
-    telescope.lsp_references()
+    telescope.lsp_references({ jump_type = 'never' })
   end, 'glr', 'LspListReferences')
 
   command_map(function()
