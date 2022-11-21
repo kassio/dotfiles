@@ -110,13 +110,13 @@
       local       grey='%244F'  # grey foreground
       local       pink='%201F'  # pink foreground
     else
-      local     default='%244F'  # grey foreground
-      local      green='%244F'  # grey foreground
-      local     yellow='%244F'  # grey foreground
-      local       blue='%244F'  # grey foreground
-      local        red='%244F'  # grey foreground
-      local       grey='%244F'  # grey foreground
-      local       pink='%244F'  # grey foreground
+      local     default='%244F' # grey foreground
+      local       green='%244F' # grey foreground
+      local      yellow='%244F' # grey foreground
+      local        blue='%244F' # grey foreground
+      local         red='%244F' # grey foreground
+      local        grey='%244F' # grey foreground
+      local        pink='%244F' # grey foreground
     fi
 
     local res
