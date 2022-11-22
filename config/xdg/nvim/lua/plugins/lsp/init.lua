@@ -93,11 +93,11 @@ local attacher = function(client)
   end, 'gli', 'LspImplementation')
 
   command_map(function()
-    telescope.lsp_document_symbols({ show_line = true })
+    telescope.lsp_document_symbols()
   end, 'gls', 'LspDocumentSymbols')
 
   command_map(function()
-    telescope.lsp_dynamic_workspace_symbols({ show_line = true })
+    telescope.lsp_dynamic_workspace_symbols()
   end, 'glS', 'LspWorkspaceSymbols')
 
   print('LSP: ' .. client.name)
