@@ -30,12 +30,6 @@ snippet ife
 	}
 snippet package
 	package ${1:`v:lua.require('my.utils.snippets').expand('%:.:h:t', 'main')`}
-
-	${2:import "fmt"}
-
-	func main() {
-		$0
-	}
 snippet select
 	select {
 	case $1:
