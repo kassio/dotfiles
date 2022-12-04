@@ -6,27 +6,32 @@
   },
   {
     "name": "syncer",
-    "remote": "https://github.com/kassio/sync.git",
+    "remote": "https://github.com/kassio/sync",
     "local": "$HOME/src/sync"
   },
   {
+    "name": "blog",
+    "remote": "https://gitlab.com/kassio/kassio",
+    "local": "$HOME/src/kassio"
+  },
+  {
     "name": "gdk",
-    "remote": "https://gitlab.com/gitlab-org/gitlab-development-kit.git",
+    "remote": "https://gitlab.com/gitlab-org/gitlab-development-kit",
     "local": "$HOME/src/gdk"
   },
   {
     "name": "gitlab",
-    "remote": "https://gitlab.com/gitlab-org/gitlab.git",
+    "remote": "https://gitlab.com/gitlab-org/gitlab",
     "local": "$HOME/src/gdk/gitlab"
   },
   {
     "name": "gitlab-pages",
-    "remote": "https://gitlab.com/gitlab-org/gitlab-pages.git",
+    "remote": "https://gitlab.com/gitlab-org/gitlab-pages",
     "local": "$HOME/src/gdk/gitlab-pages"
   },
   {
     "name": "review-tanuki",
-    "remote": "https://gitlab.com/nolith/review-tanuki.git",
+    "remote": "https://gitlab.com/nolith/review-tanuki",
     "local": "$HOME/src/review-tanuki"
   }
 ]
