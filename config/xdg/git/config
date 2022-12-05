@@ -48,6 +48,7 @@
 [diff]
   tool = nvim
   noprefix = true
+  renameLimit = 5000
 [difftool]
   prompt = false
   keepBackup = false
