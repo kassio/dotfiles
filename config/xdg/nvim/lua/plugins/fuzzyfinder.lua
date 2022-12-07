@@ -101,6 +101,11 @@ vim.api.nvim_create_user_command('Grep', function()
   builtin.grep_string({ search = utils.get_visual_selection() })
 end, { range = 0 })
 
+vim.api.nvim_create_user_command('GrepIn', function(cmd)
+  local dirs = vim.split(cmd.args, ',', { trimempty = true, plain = true })
+  builtin.grep_string({ search = utils.get_visual_selection(), search_dirs = dirs })
+end, { range = 0, nargs = '*' })
+
 utils.augroup('user:fuzzyfinder', {
   {
     events = { 'User' },
