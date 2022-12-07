@@ -26,6 +26,10 @@ M.plugin_filetypes = {
 --- Get current visual selection text.
 ---@return string
 M.get_visual_selection = function()
+  if vim.api.nvim_get_mode().mode == 'n' then
+    return vim.fn.expand('<cword>')
+  end
+
   local s_start = vim.api.nvim_buf_get_mark(0, '<')
   local s_end = vim.api.nvim_buf_get_mark(0, '>')
   local start_row = s_start[1] - 1
@@ -34,12 +38,12 @@ M.get_visual_selection = function()
   local end_col = s_end[2] + 1
   local ok, lines = pcall(vim.api.nvim_buf_get_text, 0, start_row, start_col, end_row, end_col, {})
 
-  if ok then
-    return table.concat(lines, '\n')
-  else
+  if not ok then
     print('Failed to get selection: ' .. lines)
-    return ''
+    return vim.fn.expand('<cword>')
   end
+
+  return table.concat(lines, '\n')
 end
 
 --- Copy given text to clipboard.
