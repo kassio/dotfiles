@@ -4,6 +4,16 @@ local hl = require('my.utils.highlights')
 hl.def('NvimTreeOpenedFile', { bold = true, italic = true })
 hl.extend('NvimTreeRootFolder', 'NvimTreeFolderName', { bold = true })
 
+local toggle_resize = function()
+  local winnr = vim.api.nvim_get_current_win()
+  local width = vim.api.nvim_win_get_width(winnr)
+  if width <= 32 then
+    vim.cmd('NvimTreeResize +50')
+  else
+    vim.cmd('NvimTreeResize 32')
+  end
+end
+
 require('nvim-tree').setup({
   disable_netrw = true,
   hijack_netrw = true,
@@ -52,7 +62,8 @@ require('nvim-tree').setup({
     mappings = {
       custom_only = false,
       list = {
-        { key = { 'f' }, action = '', mode = 'n' },
+        { key = { 'f' }, mode = 'n', action = '' },
+        { key = { 'A' }, mode = 'n', action = 'toggle_size', action_cb = toggle_resize },
       },
     },
   },
