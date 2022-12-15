@@ -83,6 +83,13 @@ keymap('n', 'f<c-;>', function()
   builtin.find_files(themes.get_ivy({ find_command = { 'files' } }))
 end)
 
+keymap('n', 'f<c-r>', function()
+  builtin.find_files({
+    find_command = { 'files' },
+    search_dirs = { 'app', 'lib', 'ee/app', 'ee/lib' },
+  })
+end)
+
 keymap('n', 'f<c-y>', builtin.live_grep)
 keymap('n', 'f<c-f>', builtin.builtin)
 keymap('n', 'f<c-h>', builtin.help_tags)
