@@ -50,7 +50,7 @@ alias ndm="nvim-diff master..."
 alias to-rubocop="grep '.rb' | xargs bundle exec rubocop --parallel"
 alias rubocop-diff="gdfm --diff-filter=d | to-rubocop"
 
-alias rspec-diff="gdfm --diff-filter=d | grep '_spec.rb' | rspec"
+alias rspec-diff="gdfm --diff-filter=d | grep '_spec.rb' | xargs bundle exec rspec"
 
 alias truncate0="truncate -c -s 0"
 
