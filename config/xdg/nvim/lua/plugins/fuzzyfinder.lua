@@ -40,6 +40,9 @@ telescope.setup({
         ['<C-k>'] = actions.move_selection_previous,
         ['<C-n>'] = actions.cycle_history_next,
         ['<C-p>'] = actions.cycle_history_prev,
+        ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+        ['<C-b>'] = actions.preview_scrolling_up,
+        ['<C-f>'] = actions.preview_scrolling_down,
         ['<C-u>'] = { '<c-u>', type = 'command' }, -- delete inputted text
         ['<C-a>'] = { '<home>', type = 'command' }, -- move cursor to the beginning of input
         ['<C-e>'] = { '<end>', type = 'command' }, -- move cursor to the end of input
@@ -49,6 +52,9 @@ telescope.setup({
         ['<C-k>'] = actions.move_selection_previous,
         ['<C-n>'] = actions.cycle_history_next,
         ['<C-p>'] = actions.cycle_history_prev,
+        ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+        ['<C-b>'] = actions.preview_scrolling_up,
+        ['<C-f>'] = actions.preview_scrolling_down,
         ['<C-u>'] = { '<c-u>', type = 'command' }, -- delete inputted text
         ['<C-a>'] = { '<home>', type = 'command' }, -- move cursor to the beginning of input
         ['<C-e>'] = { '<end>', type = 'command' }, -- move cursor to the end of input
