@@ -12,7 +12,7 @@
   {
     "name": "blog",
     "remote": "https://gitlab.com/kassio/kassio",
-    "local": "$HOME/src/kassio"
+    "local": "$HOME/src/blog"
   },
   {
     "name": "gdk",
