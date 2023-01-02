@@ -33,5 +33,10 @@
     "name": "review-tanuki",
     "remote": "https://gitlab.com/nolith/review-tanuki",
     "local": "$HOME/src/review-tanuki"
+  },
+  {
+    "name": "trip budget",
+    "remote": "https://gitlab.com/kassio/tripbudget",
+    "local": "$HOME/src/tripbudget"
   }
 ]
