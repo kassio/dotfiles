@@ -58,9 +58,6 @@ M.load = function()
       -- Project management
       use({ 'tpope/vim-projectionist' })
 
-      -- Load configs from .editorconfig
-      use({ 'gpanders/editorconfig.nvim' })
-
       -- Restore last position
       use({ 'farmergreg/vim-lastplace' })
 
