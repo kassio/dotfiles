@@ -49,4 +49,18 @@ M.clickable = function(text, callback_path)
   return string.format("%%%d@v:lua.require'%s'.on_click@%s%%X", bufnr, callback, text)
 end
 
+M.render_component = function(name)
+  local component_ok, component = pcall(require, 'plugins.hbar.components.' .. name)
+  if not component_ok then
+    return ''
+  end
+
+  local render_ok, msg = pcall(component.render)
+  if not render_ok then
+    return ''
+  end
+
+  return msg
+end
+
 return M

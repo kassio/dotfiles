@@ -1,13 +1,4 @@
-local render_component = function(name)
-  local component = require('plugins.hbar.components.' .. name)
-  local ok, msg = pcall(component.render)
-
-  if not ok then
-    return ''
-  end
-
-  return msg
-end
+local render_component = require('plugins.hbar.utils').render_component
 
 return {
   render = function()
