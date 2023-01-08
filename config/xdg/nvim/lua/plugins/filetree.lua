@@ -1,18 +1,9 @@
 local theme = require('plugins.highlight.theme')
 local hl = require('my.utils.highlights')
+local api = require('nvim-tree.api')
 
 hl.def('NvimTreeOpenedFile', { bold = true, italic = true })
 hl.extend('NvimTreeRootFolder', 'NvimTreeFolderName', { bold = true })
-
-local toggle_resize = function()
-  local winnr = vim.api.nvim_get_current_win()
-  local width = vim.api.nvim_win_get_width(winnr)
-  if width <= 32 then
-    vim.cmd('NvimTreeResize +50')
-  else
-    vim.cmd('NvimTreeResize 32')
-  end
-end
 
 require('nvim-tree').setup({
   disable_netrw = true,
@@ -63,11 +54,26 @@ require('nvim-tree').setup({
       custom_only = false,
       list = {
         { key = { 'f' }, mode = 'n', action = '' },
-        { key = { 'A' }, mode = 'n', action = 'toggle_size', action_cb = toggle_resize },
+        {
+          key = { 'A' },
+          mode = 'n',
+          action = 'toggle_size',
+          action_cb = function()
+            local winnr = vim.api.nvim_get_current_win()
+            local width = vim.api.nvim_win_get_width(winnr)
+            if width <= 32 then
+              vim.cmd('NvimTreeResize +50')
+            else
+              vim.cmd('NvimTreeResize 32')
+            end
+          end,
+        },
       },
     },
   },
 })
 
-vim.keymap.set('n', '<leader>p', ':NvimTreeToggle<CR>', { silent = true })
-vim.keymap.set('n', '<leader>fl', ':NvimTreeFindFile<CR>', { silent = true })
+vim.keymap.set('n', '<leader>p', api.tree.toggle, { silent = true })
+vim.keymap.set('n', '<leader>fl', function()
+  api.tree.toggle({ find_file = true })
+end, { silent = true })
