@@ -31,7 +31,7 @@ local reloadTheme = function(bg)
     R('plugins.tabline.renderer')
     R('plugins.treesitter')
     R('plugins.winbar')
-    R('plugins.winbar.utils')
+    R('plugins.winbar.renderer')
 
     require('plugins.icons').reload_fileicon_extends()
   end
