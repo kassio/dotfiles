@@ -1,5 +1,6 @@
 local theme = require('plugins.highlight.theme')
 local utils = require('my.utils')
+local hl = require('plugins.statusline.utils').highlighter('Statusline', 'Git')
 
 utils.highlights.extend('Statusline.Git', 'Theme.Surface0.Background', { bold = true })
 utils.highlights.extend('Statusline.Git.Added', 'Statusline.Git', { foreground = theme.colors.hint })
@@ -13,8 +14,6 @@ utils.highlights.extend(
   'Statusline.Git',
   { foreground = theme.colors.warn }
 )
-
-local hl = utils.statusline.highlighter('Statusline', 'Git')
 
 local labels = {
   added = '+',

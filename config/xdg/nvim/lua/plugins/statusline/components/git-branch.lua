@@ -1,5 +1,6 @@
 local theme = require('plugins.highlight.theme')
 local utils = require('my.utils')
+local hl = require('plugins.statusline.utils').highlighter('Statusline', 'Git')
 
 utils.highlights.extend('Statusline.Git.Branch', 'Theme.Blue.Background', {
   foreground = theme.colors.mantle,
@@ -7,8 +8,6 @@ utils.highlights.extend('Statusline.Git.Branch', 'Theme.Blue.Background', {
 utils.highlights.extend('Statusline.Git.Branch.Name', 'Statusline.Git.Branch', {
   bold = true,
 })
-
-local hl = utils.statusline.highlighter('Statusline', 'Git')
 
 return {
   render = function()

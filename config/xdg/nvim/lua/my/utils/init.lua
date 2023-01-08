@@ -6,7 +6,6 @@ M.treesitter = require('my.utils.treesitter')
 M.buffers = require('my.utils.buffers')
 M.snippets = require('my.utils.snippets')
 M.highlights = require('my.utils.highlights')
-M.statusline = require('my.utils.statusline')
 
 M.plugin_filetypes = {
   'FineCmdlinePrompt',

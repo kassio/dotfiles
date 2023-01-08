@@ -1,4 +1,5 @@
 local utils = require('my.utils')
+local clickable = require('plugins.statusline.utils').clickable
 
 return {
   on_click = function(_bufnr, _clicks, _button, mods)
@@ -7,7 +8,7 @@ return {
   render = function()
     return string.format(
       ' %s ',
-      utils.statusline.clickable(
+      clickable(
         utils.treesitter.location(),
         'plugins.statusline.components.code-location'
       )

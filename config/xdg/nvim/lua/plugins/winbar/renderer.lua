@@ -1,6 +1,8 @@
 local utils = require('my.utils')
 local icons = require('plugins.icons')
 local winbar_by_ft = {}
+local hl = require('plugins.statusline.utils').highlight
+local clickable = require('plugins.statusline.utils').clickable
 
 for ft in ipairs(utils.plugin_filetypes) do
   winbar_by_ft[ft] = ''
@@ -58,14 +60,14 @@ return {
       icon_hl = 'WinbarNC'
     end
 
-    local clickable_name = utils.statusline.clickable(name, 'plugins.winbar.utils')
+    local clickable_name = clickable(name, 'plugins.winbar.utils')
 
     return table.concat({
-      utils.statusline.highlight(winbar_hl),
+      hl(winbar_hl),
       '%n',
-      utils.statusline.highlight(icon_hl),
+      hl(icon_hl),
       icon,
-      utils.statusline.highlight(winbar_hl),
+      hl(winbar_hl),
       clickable_name,
       '%=',
       '%3l:%-3c %3p%% ',

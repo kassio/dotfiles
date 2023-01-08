@@ -1,7 +1,6 @@
 local theme = require('plugins.highlight.theme')
 local utils = require('my.utils')
-
-local hl = utils.statusline.highlighter('Statusline', 'Mode')
+local hl = require('plugins.statusline.utils').highlighter('Statusline', 'Mode')
 
 local extend_mode_hls = function(target, origin, ext)
   return utils.highlights.extend('Statusline.Mode.' .. target, 'Statusline.Mode.' .. origin, ext)
