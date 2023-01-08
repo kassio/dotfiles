@@ -1,5 +1,5 @@
 local utils = require('my.utils')
-local clickable = require('plugins.statusline.utils').clickable
+local clickable = require('plugins.hbar.utils').clickable
 
 return {
   on_click = function(_bufnr, _clicks, _button, mods)
@@ -10,7 +10,7 @@ return {
       ' %s ',
       clickable(
         utils.treesitter.location(),
-        'plugins.statusline.components.code-location'
+        'plugins.hbar.components.code-location'
       )
     )
   end,

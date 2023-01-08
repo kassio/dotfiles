@@ -1,8 +1,8 @@
 local utils = require('my.utils')
 local icons = require('plugins.icons')
 local winbar_by_ft = {}
-local hl = require('plugins.statusline.utils').highlight
-local clickable = require('plugins.statusline.utils').clickable
+local hl = require('plugins.hbar.utils').highlight
+local clickable = require('plugins.hbar.utils').clickable
 
 for ft in ipairs(utils.plugin_filetypes) do
   winbar_by_ft[ft] = ''

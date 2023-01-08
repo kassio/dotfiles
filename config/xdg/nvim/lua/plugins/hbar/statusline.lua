@@ -1,5 +1,5 @@
 local render_component = function(name)
-  local component = require('plugins.statusline.components.' .. name)
+  local component = require('plugins.hbar.components.' .. name)
   local ok, msg = pcall(component.render)
 
   if not ok then

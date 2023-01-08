@@ -1,6 +1,6 @@
 local api = vim.api
 local icons = require('plugins.icons')
-local utils = require('plugins.statusline.utils')
+local utils = require('plugins.hbar.utils')
 
 local UNSELECTED = 'Tabline'
 local SELECTED = 'TabLineSel'
