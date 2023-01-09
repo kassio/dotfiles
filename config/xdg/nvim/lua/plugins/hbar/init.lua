@@ -17,19 +17,6 @@ hl.def('TabLineSel', {
   bold = true,
 })
 
-hl.def('WinbarNC', {
-  background = theme.colors.base,
-  foreground = theme.colors.surface1,
-  special = theme.colors.surface1,
-  underline = true,
-})
-
-hl.extend('Winbar', 'WinbarNC', {
-  foreground = theme.colors.blue,
-  special = theme.colors.blue,
-  bold = true,
-})
-
 local renderer = function(name)
   return string.format('%%{%%v:lua.require("plugins.hbar.%s").render()%%}', name)
 end

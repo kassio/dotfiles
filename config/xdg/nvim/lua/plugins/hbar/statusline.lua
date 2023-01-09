@@ -1,15 +1,15 @@
-local render_component = require('plugins.hbar.utils').render_component
+local hbar = require('plugins.hbar.utils')
 
 return {
   render = function()
     return table.concat({
-      render_component('mode'),
-      render_component('diagnostics'),
-      render_component('code-location'),
+      hbar.render_component('mode'),
+      hbar.render_component('diagnostics'),
+      hbar.render_component('code-location'),
       '%=',
-      render_component('git-status'),
+      hbar.render_component('git-status'),
       '%<', -- truncate branch name if stautsline is too long
-      render_component('git-branch'),
+      hbar.render_component('git-branch'),
     }, '')
   end,
 }
