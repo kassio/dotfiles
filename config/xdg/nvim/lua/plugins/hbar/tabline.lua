@@ -45,28 +45,29 @@ end
 
 local tab_label = function(tab, opts)
   local tabnr = api.nvim_tabpage_get_number(tab)
-  local label = string.format(
-    '%s ',
-    table.concat({
-      '▍',
-      string.format('%%%sT%s', tabnr, tabnr),
-      hbar.render_component('filename', tab_get_bufnr(tab), { fnamemodifier = ':t' }),
-    }, ' ')
-  )
+  local components = {
+    '%#TablineFill#▐%*',
+    ' ',
+    string.format('%%%sT%s', tabnr, tabnr),
+    ' ',
+    hbar.render_component('filename', tab_get_bufnr(tab), { fnamemodifier = ':t' }),
+    ' ',
+    '%#TablineFill#▌%*',
+  }
+
+  -- tab after the focused one
+  if (opts.curtab_page + 1) == tab then
+    components[1] = ''
+  end
 
   if opts.focused then
-    label = string.format('%%#TabLineSel#%s', label)
+    components[1] = '%#TablineSelSep#█%#TabLineSel#'
+    components[#components] = '%#TablineSelSep#█%*'
+  elseif not opts.last then
+    components[#components] = ''
   end
 
-  if opts.last and opts.focused then
-    return string.format('%s%%#TablineSelSep#▌%%*', label)
-  end
-
-  if opts.last then
-    return string.format('%s▌%%*', label)
-  end
-
-  return string.format('%%#TabLine#%s%%*', label)
+  return table.concat(components, '')
 end
 
 local tab_labels = function(curtab_page)
@@ -76,12 +77,12 @@ local tab_labels = function(curtab_page)
   return vim.tbl_map(function(tab)
     idx = idx + 1
 
-    local label = tab_label(tab, {
+    return tab_label(tab, {
+      idx = idx,
+      curtab_page = curtab_page,
+      focused = curtab_page == tab,
       last = idx == #tabs,
-      focused = tab == curtab_page,
     })
-
-    return label
   end, tabs)
 end
 
