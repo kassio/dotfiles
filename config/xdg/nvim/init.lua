@@ -9,8 +9,11 @@ require('my.diagnostic')
 
 -- plugins configurations
 require('plugins').setup()
+
+-- colors setup
 require('plugins.icons')
 require('plugins.highlight')
+
 require('plugins.comment')
 require('plugins.projection')
 require('plugins.notification')

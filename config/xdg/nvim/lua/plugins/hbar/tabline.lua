@@ -3,10 +3,6 @@ local theme = require('plugins.highlight.theme')
 local hbar = require('plugins.hbar.utils')
 local api = vim.api
 
-hl.def('TabLineFill', {
-  background = theme.colors.surface1,
-})
-
 hl.def('TabLine', {
   foreground = theme.colors.surface2,
   background = theme.colors.surface0,
@@ -16,6 +12,14 @@ hl.def('TabLineSel', {
   foreground = theme.colors.blue,
   background = theme.colors.base,
   bold = true,
+})
+
+hl.extend('TablineSelSep', 'TabLineSel', {
+  background = theme.colors.surface0,
+})
+
+hl.def('TabLineFill', {
+  background = theme.colors.surface0,
 })
 
 local get_limit = function(labels, columns)
@@ -39,7 +43,7 @@ local tab_get_bufnr = function(tab)
   return api.nvim_win_get_buf(winnr)
 end
 
-local tab_label = function(tab, focused)
+local tab_label = function(tab, opts)
   local tabnr = api.nvim_tabpage_get_number(tab)
   local label = string.format(
     '%s ',
@@ -50,17 +54,35 @@ local tab_label = function(tab, focused)
     }, ' ')
   )
 
-  if focused then
-    return string.format('%%#TabLineSel#%s', label)
+  if opts.focused then
+    label = string.format('%%#TabLineSel#%s', label)
   end
 
-  return string.format('%%#TabLine#%s', label)
+  if opts.last and opts.focused then
+    return string.format('%s%%#TablineSelSep#▌%%*', label)
+  end
+
+  if opts.last then
+    return string.format('%s▌%%*', label)
+  end
+
+  return string.format('%%#TabLine#%s%%*', label)
 end
 
 local tab_labels = function(curtab_page)
+  local tabs = api.nvim_list_tabpages()
+  local idx = 0
+
   return vim.tbl_map(function(tab)
-    return tab_label(tab, tab == curtab_page)
-  end, api.nvim_list_tabpages())
+    idx = idx + 1
+
+    local label = tab_label(tab, {
+      last = idx == #tabs,
+      focused = tab == curtab_page,
+    })
+
+    return label
+  end, tabs)
 end
 
 local fix_position = function(labels, curtab_page)
@@ -99,6 +121,6 @@ return {
     local curtab_page = api.nvim_get_current_tabpage()
     local labels = tab_labels(curtab_page)
 
-    return fix_position(labels, curtab_page) .. '%#TabLineFill'
+    return fix_position(labels, curtab_page) .. '%#TabLineFill#'
   end,
 }

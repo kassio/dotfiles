@@ -62,19 +62,12 @@ local set_colorscheme = function(background, theme)
   return theme
 end
 
-local colorscheme_from_terminal = function()
-  local config = vim.env.HOME .. '/.config/kitty/themes/current.conf'
-  local ttheme = vim.fn.resolve(config)
-  local name = 'dark'
-
-  if vim.fn.fnamemodify(ttheme, ':p:t:r') == 'light' then
-    name = 'light'
-  end
-
-  return set_colorscheme(name)
+local theme
+if vim.env.ITERM_PROFILE == 'light' then
+  theme = set_colorscheme('light')
+else
+  theme = set_colorscheme('dark')
 end
-
-local theme = colorscheme_from_terminal()
 
 theme.set = function(name)
   set_colorscheme(name, theme)
