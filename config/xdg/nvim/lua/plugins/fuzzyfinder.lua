@@ -81,13 +81,20 @@ telescope.setup({
 telescope.load_extension('fzf')
 telescope.load_extension('ui-select')
 
+-- git
 -- git modified files
-keymap('n', 'f<c-g>', function()
-  builtin.find_files({ find_command = { 'git', 'ls-files', '--modified' } })
+keymap('n', 'f<c-g>m', function()
+  local args = {
+    'git',
+    'ls-files',
+    '--modified',
+  }
+
+  builtin.find_files({ find_command = args })
 end)
 
 -- git modified files (in relation to the main branch)
-keymap('n', 'f<c-b>', function()
+keymap('n', 'f<c-b>d', function()
   local main = vim.fn.system('git-branch-main')
   local args = {
     'git',
@@ -99,6 +106,8 @@ keymap('n', 'f<c-b>', function()
 
   builtin.find_files({ find_command = args })
 end)
+
+keymap('n', 'f<c-g>g', builtin.git_files)
 
 keymap('n', 'f<c-p>', function()
   builtin.find_files({ find_command = { 'files' } })
@@ -118,7 +127,6 @@ end)
 keymap('n', 'f<c-y>', builtin.live_grep)
 keymap('n', 'f<c-f>', builtin.builtin)
 keymap('n', 'f<c-h>', builtin.help_tags)
-keymap('n', 'f<c-i>', builtin.git_files)
 keymap('n', 'f<c-k>', builtin.buffers)
 keymap('n', 'f<c-l>', builtin.highlights)
 keymap('n', 'f<c-m>', builtin.keymaps)
