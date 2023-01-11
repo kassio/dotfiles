@@ -2,20 +2,17 @@ local hl = require('my.utils').highlights
 local theme = require('plugins.highlight.theme')
 local hbar = require('plugins.hbar.utils')
 local api = vim.api
+local SEP = '|'
 
 hl.def('TabLine', {
   foreground = theme.colors.surface2,
-  background = theme.colors.surface0,
+  background = theme.colors.base,
 })
 
 hl.def('TabLineSel', {
   foreground = theme.colors.blue,
   background = theme.colors.base,
   bold = true,
-})
-
-hl.extend('TablineSelSep', 'TabLineSel', {
-  background = theme.colors.surface0,
 })
 
 hl.def('TabLineFill', {
@@ -38,31 +35,33 @@ local get_limit = function(labels, columns)
   return limit
 end
 
-local tab_get_bufnr = function(tab)
-  local winnr = api.nvim_tabpage_get_win(tab)
+local tab_get_bufnr = function(tab_page)
+  local winnr = api.nvim_tabpage_get_win(tab_page)
   return api.nvim_win_get_buf(winnr)
 end
 
-local tab_label = function(tab, opts)
-  local tabnr = api.nvim_tabpage_get_number(tab)
+local tab_label = function(opts)
+  local tabnr = api.nvim_tabpage_get_number(opts.tab_page)
   local components = {
-    '%#TablineFill#▐%*',
+    SEP,
     ' ',
     string.format('%%%sT%s', tabnr, tabnr),
     ' ',
-    hbar.render_component('filename', tab_get_bufnr(tab), { fnamemodifier = ':t' }),
+    hbar.render_component('filename', tab_get_bufnr(opts.tab_page), { fnamemodifier = ':t' }),
     ' ',
-    '%#TablineFill#▌%*',
+    SEP,
   }
 
-  -- tab after the focused one
-  if (opts.curtab_page + 1) == tab then
+  if opts.first then
+    components[1] = '%#Tabline#' .. components[1]
+  elseif (opts.curtab_nr + 1) == opts.tab_nr then
+    -- tab after the focused one
     components[1] = ''
   end
 
   if opts.focused then
-    components[1] = '%#TablineSelSep#█%#TabLineSel#'
-    components[#components] = '%#TablineSelSep#█%*'
+    components[1] = '%#TablineSel#' .. SEP
+    components[#components] = SEP .. '%#Tabline#'
   elseif not opts.last then
     components[#components] = ''
   end
@@ -70,24 +69,25 @@ local tab_label = function(tab, opts)
   return table.concat(components, '')
 end
 
-local tab_labels = function(curtab_page)
-  local tabs = api.nvim_list_tabpages()
-  local idx = 0
+local tab_labels = function(curtab_nr)
+  local tab_pages = api.nvim_list_tabpages()
+  local tab_nr = 0
 
-  return vim.tbl_map(function(tab)
-    idx = idx + 1
+  return vim.tbl_map(function(tab_page)
+    tab_nr = tab_nr + 1
 
-    return tab_label(tab, {
-      idx = idx,
-      curtab_page = curtab_page,
-      focused = curtab_page == tab,
-      last = idx == #tabs,
+    return tab_label({
+      tab_page = tab_page,
+      tab_nr = tab_nr,
+      curtab_nr = curtab_nr,
+      focused = curtab_nr == tab_nr,
+      first = tab_nr == 1,
+      last = tab_nr == #tab_pages,
     })
-  end, tabs)
+  end, tab_pages)
 end
 
-local fix_position = function(labels, curtab_page)
-  local curtab_nr = api.nvim_tabpage_get_number(curtab_page)
+local fix_position = function(labels, curtab_nr)
   local labels_text = table.concat(labels)
   local parsed_text = vim.api.nvim_eval_statusline(labels_text, { use_tabline = true })
 
@@ -96,9 +96,9 @@ local fix_position = function(labels, curtab_page)
     return labels_text
   elseif curtab_nr <= math.floor(#labels / 2) then
     -- When the number of tabs if longer than the UI, some tabs might
-    -- get hidden. To ensure the curtab_page, and its surrounds is always
-    -- visible, hide only tabs before the curtab_page or farther ahead of the
-    -- curtab_page
+    -- get hidden. To ensure the curtab_nr, and its surrounds is always
+    -- visible, hide only tabs before the curtab_nr or farther ahead of the
+    -- curtab_nr
     local limit = math.min(curtab_nr + get_limit(labels, vim.o.columns), #labels)
 
     return table.concat({
@@ -120,8 +120,9 @@ end
 return {
   render = function()
     local curtab_page = api.nvim_get_current_tabpage()
-    local labels = tab_labels(curtab_page)
+    local curtab_nr = api.nvim_tabpage_get_number(curtab_page)
+    local labels = tab_labels(curtab_nr)
 
-    return fix_position(labels, curtab_page) .. '%#TabLineFill#'
+    return fix_position(labels, curtab_nr) .. '%#TabLineFill#'
   end,
 }
