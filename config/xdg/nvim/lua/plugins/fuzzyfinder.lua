@@ -81,6 +81,25 @@ telescope.setup({
 telescope.load_extension('fzf')
 telescope.load_extension('ui-select')
 
+-- git modified files
+keymap('n', 'f<c-g>', function()
+  builtin.find_files({ find_command = { 'git', 'ls-files', '--modified' } })
+end)
+
+-- git modified files (in relation to the main branch)
+keymap('n', 'f<c-b>', function()
+  local main = vim.fn.system('git-branch-main')
+  local args = {
+    'git',
+    'diff',
+    '--name-only',
+    '--relative',
+    string.format('%s...', vim.trim(main)),
+  }
+
+  builtin.find_files({ find_command = args })
+end)
+
 keymap('n', 'f<c-p>', function()
   builtin.find_files({ find_command = { 'files' } })
 end)
