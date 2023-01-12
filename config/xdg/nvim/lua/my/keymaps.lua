@@ -119,8 +119,23 @@ keymap.set('n', 'gx', function()
   vim.fn.jobstart('open ' .. vim.fn.expand('<cfile>'))
 end, { silent = true })
 
+-- open the url under the cursor
 keymap.set('x', 'gx', function()
   vim.cmd('normal! "vy')
   local uri = vim.fn.getreg('v')
   vim.fn.jobstart('open ' .. string.gsub(uri, '%s', ''))
+end, { silent = true })
+
+-- paste " reg in snake_case
+keymap.set('n', 'g<c-p>_', function()
+  local value = vim.fn.getreg('"')
+
+  vim.api.nvim_paste(string.snakecase(value), '', -1)
+end, { silent = true })
+
+-- paste " reg in CamelCase
+keymap.set('n', 'g<c-p>c', function()
+  local value = vim.fn.getreg('"')
+
+  vim.api.nvim_paste(string.camelcase(value), '', -1)
 end, { silent = true })
