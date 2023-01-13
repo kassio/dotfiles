@@ -12,6 +12,5 @@ clear-screen
 "${basepath}/upgraders/asdf"
 "${basepath}/upgraders/go"
 "${basepath}/upgraders/ruby"
-"${basepath}/upgraders/kitty"
 "${basepath}/upgraders/quarentine"
 "${basepath}/upgraders/custom"

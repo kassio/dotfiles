@@ -110,7 +110,6 @@ export GSINK_CONFIG_PATH="${HOME}/.config/repos.json"
 source "${XDG_CONFIG_HOME}/ripgrep/env"
 source "${XDG_CONFIG_HOME}/ruby/env"
 source "${XDG_CONFIG_HOME}/go/env"
-source "${XDG_CONFIG_HOME}/kitty/env"
 source "${XDG_CONFIG_HOME}/iterm2"
 
 source "${ZSH_CONFIG_HOME}/bindkeys"

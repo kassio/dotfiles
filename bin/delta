@@ -1,12 +1,9 @@
 #!/usr/bin/env zsh
 
 local delta="${HOMEBREW_PREFIX}/bin/delta"
-local kitty_themes_path="${HOME}/.config/kitty/themes"
-local kitty_current_theme="${kitty_themes_path}/current.conf"
-local kitty_theme="$(realpath --relative-base="${kitty_themes_path}" "${kitty_current_theme}")"
 local delta_theme="gruvbox-dark"
 
-if [ "${kitty_theme}" = "light.conf" ]; then
+if [ "${ITERM_PROFILE}" = "light" ]; then
   delta_theme="gruvbox-light"
 fi
 

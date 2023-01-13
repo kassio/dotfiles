@@ -1,9 +1,0 @@
-#!/usr/bin/env zsh
-
-kitty_path="/Applications/kitty.app"
-icon_path="${HOME}/.dotfiles/config/xdg/kitty/kitty.icns"
-
-cp "${icon_path}" "${kitty_path}/Contents/Resources/kitty.icns"
-touch "${kitty_path}"
-find /var/folders -name "com.apple.dock.iconcache" -exec rm -- {} + 2>/dev/null
-killall Dock

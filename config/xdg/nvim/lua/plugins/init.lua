@@ -188,7 +188,6 @@ M.load = function()
       use({ 'jparise/vim-graphql' }) -- Graphql
       use({ 'stephenway/postcss.vim' }) -- Postcss
       use({ 'tpope/vim-git' }) -- Postcss
-      use({ 'fladson/vim-kitty' }) -- kitty terminal config
     end,
     config = {
       autoremove = true,

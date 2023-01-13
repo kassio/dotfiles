@@ -63,14 +63,6 @@ alias truncate0="truncate -c -s 0"
 
 source "${XDG_CONFIG_HOME}/git/alias"
 
-alias kitty-broadcast="kitty +kitten broadcast"
-
-kitty-detach-to-tab() {
-  target="${1:-new}"
-
-  kitty @ detach-window --target-tab "${target}"
-}
-
 alias remove-quarentine-chromedriver="remove-quarentine chromedriver"
 
 # Tail a json file parsing it with jq
