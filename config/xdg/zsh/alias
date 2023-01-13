@@ -43,10 +43,9 @@ alias to-nvim="tr \\\n \\\0 | xargs -0 nvim -p"
 alias to-rubocop="grep '.rb' | xargs bundle exec rubocop --parallel"
 
 diff-to() { git diff --name-only --relative --diff-filter=d "${1:-.}"; }
-main-diff-to() { diff-to "$(git branch-main)..." }
 
 nvim-diff() { diff-to "$1" | to-nvim; }
-ndm() { main-diff-to | to-nvim; }
+ndm() { diff-to "$(git branch-main)" | to-nvim; }
 alias nd="nvim-diff"
 
 rubocop-diff() { diff-to "$1" | to-rubocop; }
@@ -58,6 +57,19 @@ rspec-diff() {
     xargs bundle exec rspec
 }
 rspec-diff-main() { rspec-diff "$(git branch-main)..."; }
+
+rails-migrate-diff() {
+  migrations() {
+    diff-to "$(git branch-main)..." |
+      grep 'db/migrate' |
+      xargs -I{} basename {}
+  }
+
+  while read migration; do
+    echo "> rails db:migrate VERSION='${migration:0:14}'"
+    VERSION="${migration:0:14}" bundle exec rails db:migrate
+  done < <(migrations)
+}
 
 alias truncate0="truncate -c -s 0"
 
