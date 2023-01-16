@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+migrations() {
+  git diff --name-only --relative --diff-filter=d "$(git branch-main)..." |
+    grep 'db/migrate' |
+    xargs -I{} basename {}
+}
+
+run() {
+  echo "> rails $1 VERSION='$2'"
+  VERSION="$2" bundle exec rails "$1"
+}
+
+cmd="db:migrate"
+case "$1" in
+  down)
+    cmd="${cmd}:down"
+    ;;
+
+  *)
+    cmd="${cmd}:up"
+    ;;
+esac
+shift
+
+while read -r migration; do
+  if [ $# -gt 0 ]; then
+    for db in "$@"; do
+      run "${cmd}:${db}" "${migration:0:14}"
+    done
+  else
+    run "${cmd}" "${migration:0:14}"
+  fi
+done < <(migrations)

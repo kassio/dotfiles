@@ -58,19 +58,6 @@ rspec-diff() {
 }
 rspec-diff-main() { rspec-diff "$(git branch-main)..."; }
 
-rails-migrate-diff() {
-  migrations() {
-    diff-to "$(git branch-main)..." |
-      grep 'db/migrate' |
-      xargs -I{} basename {}
-  }
-
-  while read migration; do
-    echo "> rails db:migrate VERSION='${migration:0:14}'"
-    VERSION="${migration:0:14}" bundle exec rails db:migrate
-  done < <(migrations)
-}
-
 alias truncate0="truncate -c -s 0"
 
 source "${XDG_CONFIG_HOME}/git/alias"
