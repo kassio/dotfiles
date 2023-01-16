@@ -94,7 +94,7 @@ keymap('n', 'f<c-g>m', function()
 end)
 
 -- git modified files (in relation to the main branch)
-keymap('n', 'f<c-b>d', function()
+keymap('n', 'f<c-g>d', function()
   local main = vim.fn.system('git-branch-main')
   local args = {
     'git',
