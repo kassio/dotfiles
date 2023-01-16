@@ -1,12 +1,17 @@
+local utils = require('my.utils')
+
 local default_opts = {
   fnamemodifier = ':.',
 }
 
 return {
-  render = function(bufnr, opts)
+  on_click = function(msg, opts)
+    utils.to_clipboard(msg, opts.mouse_btn ~= 'l')
+  end,
+  render = function(opts)
     opts = vim.tbl_deep_extend('keep', opts or {}, default_opts)
 
-    local fullname = vim.api.nvim_buf_get_name(bufnr)
+    local fullname = vim.api.nvim_buf_get_name(opts.bufnr)
 
     if #fullname == 0 then
       return '[No name]'

@@ -23,7 +23,7 @@ return {
       ' %s ',
       table.concat({
         '%n',
-        hbar.render_component('filename', bufnr),
+        hbar.render_component('filename', { bufnr = bufnr, clickable = true }),
         '%=',
         '%3l:%-3c %3p%%',
       }, ' ')

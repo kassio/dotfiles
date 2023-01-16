@@ -47,7 +47,10 @@ local tab_label = function(opts)
     ' ',
     string.format('%%%sT%s', tabnr, tabnr),
     ' ',
-    hbar.render_component('filename', tab_get_bufnr(opts.tab_page), { fnamemodifier = ':t' }),
+    hbar.render_component('filename', {
+      bufnr = tab_get_bufnr(opts.tab_page),
+      fnamemodifier = ':t',
+    }),
     ' ',
     SEP,
   }
@@ -69,25 +72,7 @@ local tab_label = function(opts)
   return table.concat(components, '')
 end
 
-local tab_labels = function(curtab_nr)
-  local tab_pages = api.nvim_list_tabpages()
-  local tab_nr = 0
-
-  return vim.tbl_map(function(tab_page)
-    tab_nr = tab_nr + 1
-
-    return tab_label({
-      tab_page = tab_page,
-      tab_nr = tab_nr,
-      curtab_nr = curtab_nr,
-      focused = curtab_nr == tab_nr,
-      first = tab_nr == 1,
-      last = tab_nr == #tab_pages,
-    })
-  end, tab_pages)
-end
-
-local fix_position = function(labels, curtab_nr)
+local fix_relative_position = function(labels, curtab_nr)
   local labels_text = table.concat(labels)
   local parsed_text = vim.api.nvim_eval_statusline(labels_text, { use_tabline = true })
 
@@ -121,8 +106,22 @@ return {
   render = function()
     local curtab_page = api.nvim_get_current_tabpage()
     local curtab_nr = api.nvim_tabpage_get_number(curtab_page)
-    local labels = tab_labels(curtab_nr)
+    local tab_pages = api.nvim_list_tabpages()
+    local tab_nr = 0
 
-    return fix_position(labels, curtab_nr) .. '%#TabLineFill#'
+    local labels = vim.tbl_map(function(tab_page)
+      tab_nr = tab_nr + 1
+
+      return tab_label({
+        tab_page = tab_page,
+        tab_nr = tab_nr,
+        curtab_nr = curtab_nr,
+        focused = curtab_nr == tab_nr,
+        first = tab_nr == 1,
+        last = tab_nr == #tab_pages,
+      })
+    end, tab_pages)
+
+    return fix_relative_position(labels, curtab_nr) .. '%#TabLineFill#'
   end,
 }
