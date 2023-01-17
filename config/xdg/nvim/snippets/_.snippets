@@ -5,10 +5,10 @@ snippet vim
 	# vim:${1:ft=${2:zsh}}:
 
 snippet path
-  ${1:`v:lua.require('my.utils.snippets').expand('%:.:h')`}${2}
+  ${1:`!lua require('my.utils.snippets').expand('%:.:h')`}${2}
 snippet full_path
-  ${1:`v:lua.require('my.utils.snippets').expand('%:p:h')`}${2}
+  ${1:`!lua require('my.utils.snippets').expand('%:p:h')`}${2}
 snippet fname
-  ${1:`v:lua.require('my.utils.snippets').filename()`}${2}
+  ${1:`!lua require('my.utils.snippets').filename()`}${2}
 snippet fname_camelcase
-  ${1:`v:lua.require('my.utils.snippets').filename('camelcase')`}${2}
+  ${1:`!lua require('my.utils.snippets').filename('camelcase')`}${2}
