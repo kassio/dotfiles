@@ -11,3 +11,6 @@ rubocop
 
 gitlab-development-kit
 gitlab-markup
+
+solargraph
+solargraph-rails
