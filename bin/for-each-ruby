@@ -1,10 +1,10 @@
 #!/usr/bin/env zsh
 
-source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
+source "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh"
 _cmd="$*"
 
 run() {
-  rb="$1"
+  rb="$(echo "$1" | sed 's/[^0-9.]//g')"
 
   eval "asdf shell ruby ${rb} 2>/dev/null"
   echo "with ruby: $(asdf current ruby)"
