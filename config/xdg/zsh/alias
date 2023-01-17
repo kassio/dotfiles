@@ -40,7 +40,6 @@ alias c="code"
 alias tailf="tail -f"
 
 alias to-nvim="tr \\\n \\\0 | xargs -0 nvim -p"
-alias to-rubocop="grep '.rb' | xargs bundle exec rubocop --parallel"
 
 diff-to() { git diff --name-only --relative --diff-filter=d "${1:-.}"; }
 
@@ -48,13 +47,22 @@ nvim-diff() { diff-to "$1" | to-nvim; }
 ndm() { diff-to "$(git branch-main)" | to-nvim; }
 alias nd="nvim-diff"
 
-rubocop-diff() { diff-to "$1" | to-rubocop; }
-rubocop-diff-main() { rubocop-diff "$(git branch-main)..."; }
+rubocop-diff() {
+  ref="$1"
+  shift
+
+  diff-to "${ref}" |
+    grep '.rb' |
+    xargs bundle rubocop --parallel "$@"
+}
 
 rspec-diff() {
-  diff-to "$1" |
+  ref="$1"
+  shift
+
+  diff-to "${ref}" |
     grep '_spec.rb' |
-    xargs bundle exec rspec
+    xargs bundle exec rspec "$@"
 }
 rspec-diff-main() { rspec-diff "$(git branch-main)..."; }
 
