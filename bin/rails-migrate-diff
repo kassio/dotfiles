@@ -13,11 +13,12 @@ run() {
 
 cmd="db:migrate"
 case "$1" in
-  down)
-    cmd="${cmd}:down"
+  down|redo|status|up)
+    cmd="${cmd}:$1"
     ;;
 
   *)
+    echo "unknown cmd $1, using :up as default"
     cmd="${cmd}:up"
     ;;
 esac
