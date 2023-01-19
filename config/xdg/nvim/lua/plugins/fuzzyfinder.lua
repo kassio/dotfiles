@@ -83,7 +83,10 @@ keymap('n', 'f<c-g>m', function()
     '--modified',
   }
 
-  builtin.find_files({ find_command = args })
+  builtin.find_files({
+    find_command = args,
+    prompt_title = 'git: modified files',
+  })
 end)
 
 -- git modified files (in relation to the main branch)
@@ -97,7 +100,10 @@ keymap('n', 'f<c-g>d', function()
     string.format('%s...', vim.trim(main)),
   }
 
-  builtin.find_files({ find_command = args })
+  builtin.find_files({
+    find_command = args,
+    prompt_title = 'git: files changed from main',
+  })
 end)
 
 -- find files without modal
@@ -114,11 +120,13 @@ keymap('n', 'f<c-r>', function()
       'ee/app',
       'ee/lib',
     },
+    prompt_title = 'rails (app, lib)',
   })
 end)
 
 keymap('n', 'f<c-p>', builtin.find_files)
-keymap('n', 'f<c-y>', builtin.live_grep)
+keymap('n', 'f<c-s-p>', builtin.resume)
+keymap('n', 'f<c-.>', builtin.live_grep)
 keymap('n', 'f<c-f>', builtin.builtin)
 keymap('n', 'f<c-h>', builtin.help_tags)
 keymap('n', 'f<c-k>', builtin.buffers)
@@ -127,17 +135,28 @@ keymap('n', 'f<c-m>', builtin.keymaps)
 keymap('n', 'f<c-n>', builtin.current_buffer_fuzzy_find)
 keymap('n', 'f<c-o>', builtin.oldfiles)
 keymap('n', 'f<c-t>', builtin.treesitter)
-keymap('n', 'f<c-u>', builtin.commands)
+keymap('n', 'f<c-,>', builtin.commands)
 keymap('n', '<leader>as', builtin.grep_string)
 keymap('x', '<leader>as', ':Grep<cr>')
 
 vim.api.nvim_create_user_command('Grep', function()
-  builtin.grep_string({ search = utils.get_visual_selection() })
+  local str = utils.get_visual_selection()
+
+  builtin.grep_string({
+    search = str,
+    prompt_title = string.format('grep: "%s"', str),
+  })
 end, { range = 0 })
 
 vim.api.nvim_create_user_command('GrepIn', function(cmd)
   local dirs = vim.split(cmd.args, ',', { trimempty = true, plain = true })
-  builtin.grep_string({ search = utils.get_visual_selection(), search_dirs = dirs })
+  local str = utils.get_visual_selection()
+
+  builtin.grep_string({
+    search = str,
+    search_dirs = dirs,
+    prompt_title = string.format('grep: "%s" (%s)', str, table.concat(dirs, ', ')),
+  })
 end, { range = 0, nargs = '*' })
 
 utils.augroup('user:fuzzyfinder', {

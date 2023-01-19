@@ -93,14 +93,8 @@ M.load = function()
 
       -- Fuzzy Finder
       use({
-        {
-          'nvim-telescope/telescope.nvim',
-          requires = { 'nvim-lua/plenary.nvim' },
-        },
-        {
-          'nvim-telescope/telescope-fzf-native.nvim',
-          run = 'make',
-        },
+        { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } },
+        { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
         'nvim-telescope/telescope-ui-select.nvim',
       })
 
