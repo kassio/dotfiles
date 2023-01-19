@@ -71,6 +71,7 @@ end
 gitsigns.setup({
   signs = {
     add = { hl = 'GitSignAdd', text = '│' },
+    untracked = { hl = 'GitSignAdd', text = '|' },
     change = { hl = 'GitSignChange', text = '│' },
     delete = { hl = 'GitSignDelete', text = '│' },
     topdelete = { hl = 'GitSignDelete', text = '‾' },
@@ -83,9 +84,7 @@ gitsigns.setup({
     ignore_whitespace = false,
   },
   current_line_blame_formatter = '<author> - <summary>, <author_time:%Y%m%d>',
-  diff_opts = {
-    vertical = true,
-  },
+  diff_opts = { vertical = true },
   numhl = false,
 })
 
