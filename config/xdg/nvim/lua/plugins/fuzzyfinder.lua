@@ -66,15 +66,6 @@ telescope.setup({
     selection_caret = '› ',
     set_env = { ['COLORTERM'] = 'truecolor' },
     sorting_strategy = 'ascending',
-    vimgrep_arguments = {
-      'rg',
-      '--color=never',
-      '--no-heading',
-      '--with-filename',
-      '--line-number',
-      '--column',
-      '--smart-case',
-    },
     winblend = 0,
   },
 })
@@ -82,6 +73,8 @@ telescope.load_extension('fzf')
 telescope.load_extension('ui-select')
 
 -- git
+keymap('n', 'f<c-g>g', builtin.git_files)
+
 -- git modified files
 keymap('n', 'f<c-g>m', function()
   local args = {
@@ -107,23 +100,24 @@ keymap('n', 'f<c-g>d', function()
   builtin.find_files({ find_command = args })
 end)
 
-keymap('n', 'f<c-g>g', builtin.git_files)
-
-keymap('n', 'f<c-p>', function()
-  builtin.find_files({ find_command = { 'files' } })
-end)
-
+-- find files without modal
 keymap('n', 'f<c-;>', function()
-  builtin.find_files(themes.get_ivy({ find_command = { 'files' } }))
+  builtin.find_files(themes.get_ivy())
 end)
 
+-- rails business files (including gitlab ee)
 keymap('n', 'f<c-r>', function()
   builtin.find_files({
-    find_command = { 'files' },
-    search_dirs = { 'app', 'lib', 'ee/app', 'ee/lib' },
+    search_dirs = {
+      'app',
+      'lib',
+      'ee/app',
+      'ee/lib',
+    },
   })
 end)
 
+keymap('n', 'f<c-p>', builtin.find_files)
 keymap('n', 'f<c-y>', builtin.live_grep)
 keymap('n', 'f<c-f>', builtin.builtin)
 keymap('n', 'f<c-h>', builtin.help_tags)
