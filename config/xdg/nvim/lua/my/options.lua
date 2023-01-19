@@ -46,9 +46,6 @@ opt.listchars = {
   trail = '·',
 }
 opt.mouse = 'a'
-opt.number = true
-opt.numberwidth = 5
-opt.relativenumber = true
 opt.secure = true
 opt.sessionoptions = { 'winpos', 'tabpages', 'help' }
 opt.shiftround = true
