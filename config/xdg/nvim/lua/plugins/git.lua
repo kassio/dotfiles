@@ -139,8 +139,9 @@ command('GitCopyFileRemoteURL', M.copy_remote_file, { nargs = '?' })
 command('GitDiff', M.diff, { nargs = '?' })
 cabbrev('Gd', 'GitDiff')
 
-command('GitToggleLineBlame', M.blame_line_toggle, {})
-cabbrev('GLineBlame', 'GitToggleLineBlame')
+command('GitBlameInLineToggle', M.blame_line_toggle, {})
+command('GitBlame', M.blame_line, {})
+cabbrev('Gblame', 'GitBlame')
 
 command('GitPreviewHunk', M.preview_hunk, {})
 
