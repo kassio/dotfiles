@@ -71,7 +71,7 @@ end
 gitsigns.setup({
   signs = {
     add = { hl = 'GitSignAdd', text = '│' },
-    untracked = { hl = 'GitSignAdd', text = '|' },
+    untracked = { hl = 'GitSignAdd', text = '│' },
     change = { hl = 'GitSignChange', text = '│' },
     delete = { hl = 'GitSignDelete', text = '│' },
     topdelete = { hl = 'GitSignDelete', text = '‾' },
