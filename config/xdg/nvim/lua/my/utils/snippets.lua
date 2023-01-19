@@ -25,4 +25,22 @@ M.expand = function(fmt, default)
   end
 end
 
+M.ruby_class = function()
+  local filename = vim.fn.expand('%:.')
+
+  if string.match(filename, '^lib/') or string.match(filename, '^app/') then
+    local result = ''
+
+    for dir in string.gmatch(filename, '(%w+)/') do
+      if dir ~= 'lib' and dir ~= 'app' then
+        result = result .. '::' .. string.camelcase(dir)
+      end
+    end
+
+    return result .. '::' .. M.filename('camelcase')
+  else
+    return M.filename('camelcase')
+  end
+end
+
 return M

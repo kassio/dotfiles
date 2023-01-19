@@ -4,7 +4,7 @@ snippet #f
 snippet lint
 	# rubocop: disable ${1:CodeReuse/ActiveRecord}
 snippet class
-	class ${1:`!lua require('my.utils.snippets').filename('camelcase')`}${2}
+	class ${1:`!lua require('my.utils.snippets').ruby_class()`}${2}
 		${0:$VISUAL}
 	end
 snippet aa
@@ -36,7 +36,7 @@ snippet dop
 		${0:$VISUAL}
 	end
 snippet module
-	module ${1:`!lua require('my.utils.snippets').filename('camelcase')`}$2
+	module ${1:`!lua require('my.utils.snippets').ruby_class()`}$2
 		${0:$VISUAL}
 	end
 snippet hri
