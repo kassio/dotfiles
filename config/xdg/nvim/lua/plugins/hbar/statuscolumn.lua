@@ -6,18 +6,20 @@ return {
       return ''
     end
 
+    local fold = '%C'
     local sign = '%s'
     local lnum = '%=%l'
-
-    if vim.wo[winnr].relativenumber then
-      lnum = '%=%r'
-    end
 
     if vim.v.relnum == 0 then
       lnum = '%l%='
     end
 
+    if vim.wo[winnr].relativenumber then
+      lnum = '%=%r'
+    end
+
     return table.concat({
+      fold,
       sign,
       lnum,
       '│',
