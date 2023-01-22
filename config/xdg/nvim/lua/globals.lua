@@ -1,4 +1,4 @@
-local inspect_options = {
+local inspect_defaults = {
   process = function(item)
     if item == nil then
       return tostring(item)
@@ -7,16 +7,20 @@ local inspect_options = {
     end
   end,
 }
+
 -- P = Print with inpect
-P = function(anything)
-  print(vim.inspect(anything, inspect_options))
+_G.P = function(anything, o)
+  local opts = vim.tbl_deep_extend('keep', o or {}, inspect_defaults)
+
+  print(vim.inspect(anything, opts))
+
   return anything
 end
 
 -- R = Reload
 -- Reloads a package by name
 -- If it fails to be loaded the error is printed
-R = function(name)
+_G.R = function(name)
   if package.loaded[name] ~= nil then
     package.loaded[name] = nil
   end
@@ -30,3 +34,31 @@ R = function(name)
     print(result) -- error message
   end
 end
+
+_G.Theme = {
+  colors = {
+    error = '#CA1243',
+    warn = '#F7C154',
+    info = '#6699CC',
+    hint = '#50A14F',
+    light_error = '#FD83A1',
+    light_warn = '#FFF4A8',
+    light_info = '#A5D0FF',
+    light_hint = '#B5E6CE',
+  },
+  icons = {
+    buffer = '',
+    bug = '',
+    error = '',
+    hint = '',
+    info = '',
+    nvim_lsp = '',
+    nvim_lua = '',
+    path = 'פּ',
+    separator = ' › ',
+    snippy = '',
+    spell = '暈',
+    treesitter = '',
+    warn = '',
+  },
+}

@@ -1,5 +1,4 @@
-local theme = require('plugins.highlight.theme')
-local hl = require('my.utils.highlights')
+local hl = require('utils.highlights')
 
 -- Treesitter globals
 hl.extend('TSTypeBuiltin', 'Type')
@@ -12,8 +11,8 @@ hl.extend('TSStringSpecial', 'String', { bold = true })
 -- refactoring
 hl.def('TSDefinition', {
   underdotted = true,
-  background = theme.colors.mantle,
-  special = theme.colors.blue,
+  background = Theme.colors.mantle,
+  special = Theme.colors.blue,
 })
 hl.extend('TSDefinitionUsage', 'TSDefinition')
 

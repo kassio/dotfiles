@@ -1,5 +1,4 @@
-local theme = require('plugins.highlight.theme')
-local utils = require('my.utils')
+local utils = require('utils')
 local hl = require('plugins.hbar.utils').highlighter('Statusline', 'Mode')
 
 local extend_mode_hls = function(target, origin, ext)
@@ -7,7 +6,7 @@ local extend_mode_hls = function(target, origin, ext)
 end
 
 utils.highlights.extend('Statusline.Mode.Normal', 'Theme.Blue.Background', {
-  foreground = theme.colors.mantle,
+  foreground = Theme.colors.mantle,
   bold = true,
 })
 extend_mode_hls('Cmd', 'Normal', { background = '#00ff00' })

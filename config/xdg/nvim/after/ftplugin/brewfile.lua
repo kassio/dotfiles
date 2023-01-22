@@ -1,4 +1,4 @@
-local utils = require('my.utils')
+local utils = require('utils')
 
 local cmd = function(str)
   local cmd_str = vim.api.nvim_replace_termcodes(str, true, true, true)

@@ -1,4 +1,4 @@
-local utils = require('my.utils')
+local utils = require('utils')
 
 local default_opts = {
   fnamemodifier = ':.',

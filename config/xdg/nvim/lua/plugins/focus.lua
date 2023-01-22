@@ -1,4 +1,4 @@
-local utils = require('my.utils')
+local utils = require('utils')
 
 vim.g.lastplace_ignore = 'gitcommit,gitrebase'
 vim.g.lastplace_ignore_buftype = 'quickfix,nofile,help'

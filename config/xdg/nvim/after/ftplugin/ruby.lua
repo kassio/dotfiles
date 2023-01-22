@@ -1,4 +1,4 @@
-local utils = require('my.utils')
+local utils = require('utils')
 
 local ruby_cmd = function(name, replacer)
   vim.api.nvim_create_user_command('Ruby' .. name, function(cmd)
