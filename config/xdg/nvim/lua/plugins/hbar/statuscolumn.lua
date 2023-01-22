@@ -1,8 +1,6 @@
 return {
   render = function()
-    local winnr = vim.api.nvim_get_current_win()
-
-    if not vim.wo[winnr].number then
+    if not (vim.wo.number or vim.wo.relativenumber) then
       return ''
     end
 
@@ -10,12 +8,12 @@ return {
     local sign = '%s'
     local lnum = '%=%l'
 
-    if vim.v.relnum == 0 then
-      lnum = '%l%='
+    if vim.wo.relativenumber then
+      lnum = '%=%r'
     end
 
-    if vim.wo[winnr].relativenumber then
-      lnum = '%=%r'
+    if vim.v.relnum == 0 then
+      lnum = '%l%='
     end
 
     return table.concat({
