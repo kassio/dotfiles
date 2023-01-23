@@ -1,5 +1,5 @@
 local command = vim.api.nvim_create_user_command
-local utils = require('my.utils')
+local utils = require('utils')
 
 -- run given command without change current view
 command('Preserve', function(cmd)

@@ -1,4 +1,4 @@
-local utils = require('my.utils')
+local utils = require('utils')
 
 return {
   on_click = function(msg, opts)

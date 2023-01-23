@@ -1,18 +1,17 @@
-local theme = require('plugins.highlight.theme')
-local utils = require('my.utils')
+local utils = require('utils')
 local hl = require('plugins.hbar.utils').highlighter('Statusline', 'Git')
 
 utils.highlights.extend('Statusline.Git', 'Theme.Surface0.Background', { bold = true })
-utils.highlights.extend('Statusline.Git.Added', 'Statusline.Git', { foreground = theme.colors.hint })
+utils.highlights.extend('Statusline.Git.Added', 'Statusline.Git', { foreground = Theme.colors.hint })
 utils.highlights.extend(
   'Statusline.Git.Removed',
   'Statusline.Git',
-  { foreground = theme.colors.error }
+  { foreground = Theme.colors.error }
 )
 utils.highlights.extend(
   'Statusline.Git.Changed',
   'Statusline.Git',
-  { foreground = theme.colors.warn }
+  { foreground = Theme.colors.warn }
 )
 
 local labels = {

@@ -1,35 +1,16 @@
-require('globals') -- global functions (used for debugging)
-require('extensions') -- lua extensions (used everywhere)
+-- global functions
+require('globals')
+-- lua extensions
+require('extensions')
 
 -- my own set of configs and helpers (plugin independent)
-require('my.options')
-require('my.keymaps')
-require('my.commands')
-require('my.diagnostic')
+require('config.options')
+require('config.keymaps')
+require('config.commands')
+require('config.diagnostic')
 
--- plugins configurations
-require('plugins').setup()
+require('plugins.lazy')
 
--- colors setup
-require('plugins.icons')
-require('plugins.highlight')
-
-require('plugins.comment')
-require('plugins.projection')
-require('plugins.notification')
-require('plugins.git')
-require('plugins.filetree')
-require('plugins.terminal-handler')
-require('plugins.test-runner')
-require('plugins.fuzzyfinder')
-require('plugins.treesitter')
-require('plugins.completion')
-require('plugins.lsp')
-require('plugins.debugger')
-require('plugins.todo')
-require('plugins.aligner')
-require('plugins.surround')
 require('plugins.session')
 require('plugins.hbar')
 require('plugins.focus')
-require('plugins.lists')

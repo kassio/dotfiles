@@ -1,17 +1,16 @@
-local hl = require('my.utils').highlights
-local theme = require('plugins.highlight.theme')
+local hl = require('utils').highlights
 local hbar = require('plugins.hbar.utils')
 
 hl.def('WinbarNC', {
-  background = theme.colors.base,
-  foreground = theme.colors.surface1,
-  special = theme.colors.surface1,
+  background = Theme.colors.base,
+  foreground = Theme.colors.surface1,
+  special = Theme.colors.surface1,
   underline = true,
 })
 
 hl.extend('Winbar', 'WinbarNC', {
-  foreground = theme.colors.blue,
-  special = theme.colors.blue,
+  foreground = Theme.colors.blue,
+  special = Theme.colors.blue,
   bold = true,
 })
 

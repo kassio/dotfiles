@@ -1,9 +1,8 @@
-local theme = require('plugins.highlight.theme')
-local utils = require('my.utils')
+local utils = require('utils')
 local gps = require('nvim-gps')
 
 gps.setup({
-  separator = theme.icons.separator,
+  separator = Theme.icons.separator,
   icons = {
     ['class-name'] = ' ',
     ['container-name'] = ' ',

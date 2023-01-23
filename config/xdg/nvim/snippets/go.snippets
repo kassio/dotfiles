@@ -29,7 +29,7 @@ snippet ife
 		$2
 	}
 snippet package
-	package ${1:`!lua require('my.utils.snippets').expand('%:.:h:t', 'main')`}
+	package ${1:`!lua require('utils.snippets').expand('%:.:h:t', 'main')`}
 snippet select
 	select {
 	case $1:

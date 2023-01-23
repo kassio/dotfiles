@@ -1,5 +1,4 @@
-local theme = require('plugins.highlight.theme')
-local utils = require('my.utils')
+local utils = require('utils')
 local hl = require('plugins.hbar.utils').highlighter('Statusline', 'Diagnostic')
 
 local extend_diagnostic_hl = function(target, ext)
@@ -7,10 +6,10 @@ local extend_diagnostic_hl = function(target, ext)
 end
 
 utils.highlights.extend('Statusline.Diagnostic', 'Theme.Surface0.Background', { bold = true })
-extend_diagnostic_hl('Hint', { foreground = theme.colors.hint })
-extend_diagnostic_hl('Info', { foreground = theme.colors.info })
-extend_diagnostic_hl('Warn', { foreground = theme.colors.warn })
-extend_diagnostic_hl('Error', { foreground = theme.colors.error })
+extend_diagnostic_hl('Hint', { foreground = Theme.colors.hint })
+extend_diagnostic_hl('Info', { foreground = Theme.colors.info })
+extend_diagnostic_hl('Warn', { foreground = Theme.colors.warn })
+extend_diagnostic_hl('Error', { foreground = Theme.colors.error })
 
 local format_diagnostic = function(level)
   local count = vim.tbl_count(vim.diagnostic.get(0, {
@@ -21,7 +20,7 @@ local format_diagnostic = function(level)
     return ''
   end
 
-  return string.format('%s%s%s', hl(level), theme.icons[level], count)
+  return string.format('%s%s%s', hl(level), Theme.icons[level], count)
 end
 
 return {

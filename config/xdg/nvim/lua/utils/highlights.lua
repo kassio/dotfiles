@@ -1,14 +1,19 @@
 local M = {}
 
 M.sign = function(name, sign, highlight)
-  vim.fn.sign_define(name, { text = sign, texthl = highlight or name })
+  vim.fn.sign_define(name, {
+    text = sign,
+    texthl = highlight or name,
+  })
 end
 
 M.get = function(name)
   local ok, data = pcall(vim.api.nvim_get_hl_by_name, name, true)
 
   if not ok then
-    vim.notify(string.format('Failed to find highlight by name "%s"', name), vim.log.levels.ERROR)
+    local msg = string.format('Failed to find highlight by name "%s"', name)
+    vim.notify(msg, vim.log.levels.ERROR)
+
     return {}
   end
 

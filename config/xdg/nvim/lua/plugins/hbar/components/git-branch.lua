@@ -1,9 +1,8 @@
-local theme = require('plugins.highlight.theme')
-local utils = require('my.utils')
+local utils = require('utils')
 local hl = require('plugins.hbar.utils').highlighter('Statusline', 'Git')
 
 utils.highlights.extend('Statusline.Git.Branch', 'Theme.Blue.Background', {
-  foreground = theme.colors.mantle,
+  foreground = Theme.colors.mantle,
 })
 utils.highlights.extend('Statusline.Git.Branch.Name', 'Statusline.Git.Branch', {
   bold = true,
