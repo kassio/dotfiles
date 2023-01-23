@@ -12,7 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  lockfile = vim.fn.stdpath('cache') .. '/lazy-lock.json', -- lockfile generated after running update.
+  lockfile = vim.fn.stdpath('cache') .. '/lazy-lock.json',
   spec = {
     { import = 'lazy-plugins' },
   },

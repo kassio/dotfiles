@@ -60,12 +60,12 @@ return {
 
     gitsigns.setup({
       signs = {
-        add = { text = '│' },
-        untracked = { text = '│' },
-        change = { text = '│' },
-        delete = { text = '│' },
+        add = { text = '▎' },
+        untracked = { text = '▎' },
+        change = { text = '▎' },
+        delete = { text = '▎' },
         topdelete = { text = '‾' },
-        changedelete = { text = '│' },
+        changedelete = { text = '_' },
       },
       current_line_blame_opts = {
         virt_text = true,
