@@ -2,7 +2,6 @@ local M = {}
 local api = vim.api
 local fn = vim.fn
 
-M.treesitter = require('utils.treesitter')
 M.buffers = require('utils.buffers')
 M.snippets = require('utils.snippets')
 M.highlights = require('utils.highlights')

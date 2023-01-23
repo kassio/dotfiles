@@ -1,4 +1,4 @@
-local hbar = require('plugins.hbar.utils')
+local hbar = require('config.hbar.utils')
 
 return {
   render = function()

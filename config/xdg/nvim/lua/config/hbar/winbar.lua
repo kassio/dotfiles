@@ -1,5 +1,5 @@
 local hl = require('utils').highlights
-local hbar = require('plugins.hbar.utils')
+local hbar = require('config.hbar.utils')
 
 hl.def('WinbarNC', {
   background = Theme.colors.base,

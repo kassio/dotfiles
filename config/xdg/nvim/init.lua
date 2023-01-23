@@ -6,7 +6,3 @@ require('extensions')
 
 -- my config
 require('config')
-
--- homemade plugins
-require('plugins.session')
-require('plugins.hbar')

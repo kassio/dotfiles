@@ -1,4 +1,4 @@
-local session = require('plugins.session.utils')
+local session = require('config.session.utils')
 
 local command_map = function(fn, map, cmd_name, cmd_opts)
   cmd_opts = cmd_opts or {}

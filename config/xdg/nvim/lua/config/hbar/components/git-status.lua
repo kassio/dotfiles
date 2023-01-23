@@ -1,5 +1,5 @@
 local utils = require('utils')
-local hl = require('plugins.hbar.utils').highlighter('Statusline', 'Git')
+local hl = require('config.hbar.utils').highlighter('Statusline', 'Git')
 
 utils.highlights.extend('Statusline.Git', 'Theme.Surface0.Background', { bold = true })
 utils.highlights.extend('Statusline.Git.Added', 'Statusline.Git', { foreground = Theme.colors.hint })

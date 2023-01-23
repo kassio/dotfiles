@@ -1,6 +1,6 @@
 local servers_map = require('mason-lspconfig.mappings.server').package_to_lspconfig
 
-return  table.slice(servers_map, {
+return table.slice(servers_map, {
   'bash-language-server',
   'css-lsp',
   'dockerfile-language-server',

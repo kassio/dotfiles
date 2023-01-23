@@ -69,7 +69,7 @@ end
 ---@return string
 M.render_component = function(name, ...)
   local args = ... or {}
-  local path = 'plugins.hbar.components.' .. name
+  local path = 'config.hbar.components.' .. name
   local component_ok, component = pcall(require, path)
   if not component_ok then
     return ''
@@ -97,7 +97,7 @@ M.render_component = function(name, ...)
     end
 
     local s = string.format(
-      "%%%d@v:lua.require'plugins.hbar.utils'.clickable@%s%%X",
+      "%%%d@v:lua.require'config.hbar.utils'.clickable@%s%%X",
       clickable_id,
       result.formatted
     )

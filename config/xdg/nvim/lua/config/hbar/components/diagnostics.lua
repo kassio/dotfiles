@@ -1,5 +1,5 @@
 local utils = require('utils')
-local hl = require('plugins.hbar.utils').highlighter('Statusline', 'Diagnostic')
+local hl = require('config.hbar.utils').highlighter('Statusline', 'Diagnostic')
 
 local extend_diagnostic_hl = function(target, ext)
   return utils.highlights.extend('Statusline.Diagnostic.' .. target, 'Statusline.Diagnostic', ext)

@@ -1,5 +1,5 @@
 local hl = require('utils').highlights
-local hbar = require('plugins.hbar.utils')
+local hbar = require('config.hbar.utils')
 local api = vim.api
 local SEP = '|'
 

@@ -1,5 +1,5 @@
 local utils = require('utils')
-local hl = require('plugins.hbar.utils').highlighter('Statusline', 'Mode')
+local hl = require('config.hbar.utils').highlighter('Statusline', 'Mode')
 
 local extend_mode_hls = function(target, origin, ext)
   return utils.highlights.extend('Statusline.Mode.' .. target, 'Statusline.Mode.' .. origin, ext)

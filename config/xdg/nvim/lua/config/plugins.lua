@@ -14,7 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   lockfile = vim.fn.stdpath('cache') .. '/lazy-lock.json',
   spec = {
-    { import = 'lazy-plugins' },
+    { import = 'plugins' },
   },
   performance = {
     cache = { enabled = true },

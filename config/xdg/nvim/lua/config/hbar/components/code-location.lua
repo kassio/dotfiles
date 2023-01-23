@@ -5,7 +5,7 @@ return {
     utils.to_clipboard(msg, opts.mouse_btn ~= 'l')
   end,
   render = function()
-    local location = utils.treesitter.location()
+    local location = 'location'
 
     return {
       formatted = string.format(' %s ', location),

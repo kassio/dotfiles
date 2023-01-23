@@ -1,5 +1,5 @@
 local renderer = function(name)
-  return string.format('%%{%%v:lua.require("plugins.hbar.%s").render()%%}', name)
+  return string.format('%%{%%v:lua.require("config.hbar.%s").render()%%}', name)
 end
 
 vim.opt.laststatus = 3
