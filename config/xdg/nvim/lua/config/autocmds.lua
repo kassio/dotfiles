@@ -16,6 +16,20 @@ end
 utils.augroup('user:focus', {
   {
     events = {
+      'FocusGained',
+      'TermClose',
+      'TermLeave',
+    },
+    command = 'checktime',
+  },
+  {
+    events = { 'VimResized' },
+    callback = function()
+      vim.cmd('tabdo wincmd =')
+    end,
+  },
+  {
+    events = {
       'WinLeave',
       'BufLeave',
       'FocusLost',
@@ -32,6 +46,19 @@ utils.augroup('user:focus', {
     },
     callback = function()
       set_focus(true)
+    end,
+  },
+  {
+    events = {
+      'FileType',
+    },
+    pattern = {
+      'gitcommit',
+      'markdown',
+    },
+    callback = function()
+      vim.opt_local.wrap = true
+      vim.opt_local.spell = true
     end,
   },
   {

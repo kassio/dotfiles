@@ -1,0 +1,7 @@
+-- my own set of configs and helpers (plugin independent)
+require('config.options')
+require('config.keymaps')
+require('config.commands')
+require('config.diagnostic')
+require('config.autocmds')
+require('config.plugins')

@@ -2,6 +2,7 @@ local opt = vim.opt
 
 -- Space as map leader
 vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 opt.autowriteall = true
 opt.backup = false
@@ -79,3 +80,6 @@ opt.virtualedit = 'block'
 opt.wildignorecase = true
 opt.wrap = false
 opt.writebackup = false
+
+-- fix markdown indentation settings
+vim.g.markdown_recommended_style = 0
