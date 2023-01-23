@@ -30,6 +30,11 @@
     "local": "$HOME/src/gdk/gitlab-pages"
   },
   {
+    "name": "gitlab runbooks",
+    "remote": "https://gitlab.com/gitlab-com/runbooks.git",
+    "local": "$HOME/src/gdk/runbooks"
+  },
+  {
     "name": "review-tanuki",
     "remote": "https://gitlab.com/nolith/review-tanuki",
     "local": "$HOME/src/review-tanuki"
