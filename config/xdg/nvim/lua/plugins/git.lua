@@ -34,7 +34,7 @@ return {
     end
 
     -- Tries to get git ref for the given file/line
-    --   If not found return the main branch
+    -- If not found return the main branch
     -- Also returns the main branch if the third parameter is true
     GIT.get_ref = function(file, line, use_main)
       if not use_main then
@@ -79,7 +79,7 @@ return {
     })
 
     local M = {
-      open_remote_file = function(cmd)
+      browse_file = function(cmd)
         local use_main = cmd.args == 'main' or cmd.args == 'master'
         local file = fn.expand('%:.')
         local line = fn.line('.')
@@ -94,8 +94,11 @@ return {
 
         utils.to_clipboard(GIT.get_remote_url(file, line, use_main), opts.clipboard)
       end,
-      open_repository = function()
+      browse_repository = function()
         open(GIT.get_repository_url())
+      end,
+      browse_merge_request = function()
+        fn.jobstart({ 'git-browse-merge-request' })
       end,
       preview_hunk = gitsigns.preview_hunk,
       blame_line = function()
@@ -121,26 +124,53 @@ return {
     vim.keymap.set('n', ']c', gitsigns.next_hunk)
     vim.keymap.set('n', '[c', gitsigns.prev_hunk)
 
-    command('GitOpenRepository', M.open_repository, {})
-    command('GitOpenFileRemoteUrl', M.open_remote_file, { nargs = '?' })
-    command('GitCopyFileRemoteURL', M.copy_remote_file, { nargs = '?' })
+    command('GitBrowseRepository', M.browse_repository, {
+      desc = 'git: open origin in the browser',
+    })
+    command('GitBrowseMergeRequest', M.browse_merge_request, {
+      desc = 'git: open merge request in the browser',
+    })
+    command('GitBrowseFileRemoteUrl', M.browse_file, {
+      nargs = '?',
+      desc = 'git: open remote file in the browser',
+    })
 
-    command('GitDiff', M.diff, { nargs = '?' })
+    command('GitCopyFileRemoteURL', M.copy_remote_file, {
+      nargs = '?',
+      desc = 'git: copy remote file url',
+    })
+
+    command('GitDiff', M.diff, {
+      nargs = '?',
+      desc = 'git: open diff in a split view',
+    })
     cabbrev('Gd', 'GitDiff')
 
-    command('GitBlameInLineToggle', M.blame_line_toggle, {})
-    command('GitBlame', M.blame_line, {})
+    command('GitBlameInLineToggle', M.blame_line_toggle, {
+      desc = 'git: toggle inline blame',
+    })
+    command('GitBlame', M.blame_line, {
+      desc = 'git: blame current line',
+    })
     cabbrev('Gblame', 'GitBlame')
 
-    command('GitPreviewHunk', M.preview_hunk, {})
+    command('GitPreviewHunk', M.preview_hunk, {
+      desc = 'git: preview hunk',
+    })
 
-    command('GitRestore', M.restore, {})
+    command('GitRestore', M.restore, {
+      desc = 'git: restore file to last committed version',
+    })
     cabbrev('Grt', 'GitRestore')
 
-    command('GitWrite', M.write, {})
+    command('GitWrite', M.write, {
+      desc = 'git: add diff to stage',
+    })
     cabbrev('Gw', 'GitWrite')
     cabbrev('Ga', 'GitWrite')
 
-    command('GitBranchCurrent', M.branch_current, {})
+    command('GitBranchCurrent', M.branch_current, {
+      desc = 'git: print current branch name',
+    })
   end,
 }
