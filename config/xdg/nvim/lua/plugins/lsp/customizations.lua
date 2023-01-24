@@ -51,10 +51,6 @@ return {
     },
   },
 
-  sqlls = {
-    cmd = { '$HOME/.asdf/shims/sql-language-server', 'up', '--method', 'stdio' },
-  },
-
   solargraph = {
     root_dir = util.root_pattern('.git', 'Gemfile'),
     settings = {
