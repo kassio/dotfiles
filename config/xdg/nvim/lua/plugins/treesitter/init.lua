@@ -5,7 +5,6 @@ return {
     'nvim-treesitter/nvim-treesitter-textobjects',
     'nvim-treesitter/nvim-treesitter-refactor',
     'nvim-treesitter/playground',
-    'SmiteshP/nvim-gps',
     'theHamsta/nvim-treesitter-pairs',
     'nvim-treesitter/nvim-treesitter-context',
   },
@@ -15,7 +14,6 @@ return {
     require('plugins.treesitter.refactor')
     require('plugins.treesitter.context')
     require('plugins.treesitter.highlights')
-    require('plugins.treesitter.gps')
 
     vim.o.foldmethod = 'expr'
     vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
