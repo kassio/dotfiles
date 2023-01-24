@@ -14,8 +14,6 @@ return {
   'tpope/vim-repeat',
   -- Extended text objects
   'wellle/targets.vim',
-  -- Better pairs matching
-  'andymass/vim-matchup',
   -- Split/Join commands
   'AndrewRadev/splitjoin.vim',
 

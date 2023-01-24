@@ -2,11 +2,15 @@ return {
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
   dependencies = {
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    'nvim-treesitter/nvim-treesitter-refactor',
-    'nvim-treesitter/playground',
-    'theHamsta/nvim-treesitter-pairs',
     'nvim-treesitter/nvim-treesitter-context',
+    'nvim-treesitter/nvim-treesitter-refactor',
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    'nvim-treesitter/playground',
+
+    'theHamsta/nvim-treesitter-pairs',
+
+    -- Better pairs matching
+    'andymass/vim-matchup',
   },
   config = function()
     local treesitter = require('nvim-treesitter.configs')
@@ -29,11 +33,11 @@ return {
         'kotlin',
         'latex',
         'norg',
-        'r',
-        'vala',
         'ocaml',
         'php',
         'phpdoc',
+        'r',
+        'vala',
       },
       highlight = {
         enable = true,

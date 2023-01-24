@@ -21,11 +21,21 @@ return {
         vim.cmd(string.gsub(cmd, '{{target}}', number))
       end
 
-      local count_nkeymap = function(key, command)
+      local count_nkeymap = function(key, command, desc)
         keymap('n', key, function()
           numbered_cmd(command)
-        end)
+        end, { desc = 'neoterm: ' .. desc })
       end
+
+      keymap('n', '<leader>tg', ':Tredo<cr>', { desc = 'neoterm: redo' })
+
+      count_nkeymap('<leader>tt', '{{target}}Ttoggle', 'toggle')
+      count_nkeymap('<leader>vt', 'botright vertical {{target}} Ttoggle', 'vertical toggle')
+      count_nkeymap('<leader>ht', 'botright {{target}} Ttoggle', 'horizontal toggle')
+      count_nkeymap('<leader>te', '{{target}}T exit', 'exit')
+      count_nkeymap('<leader>tl', '{{target}}Tclear', 'clear')
+      count_nkeymap('<leader>tL', '{{target}}Tclear!', 'erase buffer')
+      count_nkeymap('<leader>tk', '{{target}}Tkill', 'kill (send ctrl_c)')
 
       g.neoterm_default_mod = 'botright'
       g.neoterm_automap_keys = '<leader>tm'
@@ -47,16 +57,6 @@ return {
           return instance
         end,
       }
-
-      keymap('n', '<leader>tg', ':Tredo<cr>')
-
-      count_nkeymap('<leader>tt', '{{target}}Ttoggle')
-      count_nkeymap('<leader>vt', 'botright vertical {{target}} Ttoggle')
-      count_nkeymap('<leader>ht', 'botright {{target}} Ttoggle')
-      count_nkeymap('<leader>te', '{{target}}T exit')
-      count_nkeymap('<leader>tl', '{{target}}Tclear')
-      count_nkeymap('<leader>tL', '{{target}}Tclear!')
-      count_nkeymap('<leader>tk', '{{target}}Tkill')
 
       utils.augroup('user:terminal', {
         {
