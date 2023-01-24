@@ -8,6 +8,7 @@ clear-screen
 "${basepath}/upgraders/apple"
 "${basepath}/upgraders/duti"
 "${basepath}/upgraders/brew"
+"${basepath}/upgraders/nvim"
 "${basepath}/upgraders/zsh_plugins"
 "${basepath}/upgraders/asdf"
 "${basepath}/upgraders/go"
