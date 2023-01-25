@@ -22,6 +22,13 @@ return {
             mason = true,
           },
         },
+        custom_highlights = function(colors)
+          return {
+            ['IncSearch'] = { fg = colors.base, bg = colors.yellow },
+            ['Search'] = { fg = colors.base, bg = colors.yellow },
+            ['CurSearch'] = { fg = colors.base, bg = colors.red, style = { 'italic', 'bold' } },
+          }
+        end,
       })
 
       vim.cmd.colorscheme('catppuccin')
