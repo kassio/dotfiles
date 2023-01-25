@@ -13,6 +13,11 @@ run() {
 
 cmd="db:migrate"
 case "$1" in
+  -l|--list)
+    migrations
+    exit
+    ;;
+
   down|redo|status|up)
     cmd="${cmd}:$1"
     ;;
