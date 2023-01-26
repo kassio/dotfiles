@@ -5,193 +5,113 @@ return {
     'nvim-telescope/telescope-ui-select.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   },
-  keys = {
-    {
-      'f<c-p>',
-      function()
-        require('telescope.builtin').find_files()
-      end,
-      desc = 'find files',
-    },
+  keys = function()
+    local builtin = require('telescope.builtin')
 
-    {
-      'f<c-;>',
-      function()
-        require('telescope.builtin').find_files(require('telescope.themes').get_ivy())
-      end,
-      desc = 'files [non block]',
-    },
+    return {
+      {
+        'f<c-;>',
+        function()
+          builtin.find_files(require('telescope.themes').get_ivy())
+        end,
+        desc = 'files [non block]',
+      },
 
-    {
-      'f<c-s-p>',
-      function()
-        require('telescope.builtin').resume()
-      end,
-      desc = 'resume fuzzyfinder',
-    },
+      { 'f<c-p>', builtin.find_files, desc = 'find files' },
 
-    {
-      'f<c-/>',
-      function()
-        require('telescope.builtin').live_grep()
-      end,
-      desc = 'live grep',
-    },
+      { 'f<c-s-p>', builtin.resume, desc = 'resume fuzzyfinder' },
 
-    {
-      'f<c-f>',
-      function()
-        require('telescope.builtin').builtin()
-      end,
-      desc = 'finders',
-    },
+      { 'f<c-/>', builtin.live_grep, desc = 'live grep' },
 
-    {
-      'f<c-h>',
-      function()
-        require('telescope.builtin').help_tags()
-      end,
-      desc = 'help tags',
-    },
+      { 'f<c-f>', builtin.builtin, desc = 'finders' },
 
-    {
-      'f<c-b>',
-      function()
-        require('telescope.builtin').buffers()
-      end,
-      desc = 'buffers',
-    },
+      { 'f<c-h>', builtin.help_tags, desc = 'help tags' },
 
-    {
-      'f<c-l>',
-      function()
-        require('telescope.builtin').highlights()
-      end,
-      desc = 'highlights',
-    },
+      { 'f<c-b>', builtin.buffers, desc = 'buffers' },
 
-    {
-      'f<c-k>',
-      function()
-        require('telescope.builtin').keymaps()
-      end,
-      desc = 'keymaps',
-    },
+      { 'f<c-l>', builtin.highlights, desc = 'highlights' },
 
-    {
-      'f<c-.>',
-      function()
-        require('telescope.builtin').current_buffer_fuzzy_find()
-      end,
-      desc = 'current buffer finder',
-    },
+      { 'f<c-k>', builtin.keymaps, desc = 'keymaps' },
 
-    {
-      'f<c-o>',
-      function()
-        require('telescope.builtin').oldfiles()
-      end,
-      desc = 'oldfiles',
-    },
+      { 'f<c-n>', builtin.current_buffer_fuzzy_find, desc = 'current buffer finder' },
 
-    {
-      'f<c-t>',
-      function()
-        require('telescope.builtin').treesitter()
-      end,
-      desc = 'treesitter',
-    },
+      { 'f<c-o>', builtin.oldfiles, desc = 'oldfiles' },
 
-    {
-      'f<c-,>',
-      function()
-        require('telescope.builtin').commands()
-      end,
-      desc = 'commands',
-    },
+      { 'f<c-t>', builtin.treesitter, desc = 'treesitter' },
 
-    {
-      'f<c-g>g',
-      function()
-        require('telescope.builtin').git_files()
-      end,
-      desc = 'git: files',
-    },
+      { 'f<c-,>', builtin.commands, desc = 'commands' },
 
-    {
-      'f<c-g>m',
-      function()
-        require('telescope.builtin').find_files({
-          find_command = { 'git', 'ls-files', '--modified' },
-          prompt_title = 'git: modified files',
-        })
-      end,
-      desc = 'git: modified files',
-    },
+      { 'f<c-g>g', builtin.git_files, desc = 'git: files' },
 
-    {
-      'f<c-g>d',
-      function()
-        local main = vim.fn.system('git-branch-main')
+      {
+        'f<c-g>m',
+        function()
+          builtin.find_files({
+            find_command = { 'git', 'ls-files', '--modified' },
+            prompt_title = 'git: modified files',
+          })
+        end,
+        desc = 'git: modified files',
+      },
 
-        require('telescope.builtin').find_files({
-          find_command = {
-            'git',
-            'diff',
-            '--name-only',
-            '--relative',
-            string.format('%s...', vim.trim(main)),
-          },
-          prompt_title = 'git: branch diff',
-        })
-      end,
-      desc = 'git: branch diff',
-    },
+      {
+        'f<c-g>d',
+        function()
+          local main = vim.fn.system('git-branch-main')
 
-    {
-      'f<c-r>',
-      function()
-        require('telescope.builtin').find_files({
-          search_dirs = { 'app', 'lib', 'ee/app', 'ee/lib' },
-          prompt_title = 'rails (app, lib)',
-        })
-      end,
-      desc = 'rails (app, lib)',
-    },
+          builtin.find_files({
+            find_command = {
+              'git',
+              'diff',
+              '--name-only',
+              '--relative',
+              string.format('%s...', vim.trim(main)),
+            },
+            prompt_title = 'git: branch diff',
+          })
+        end,
+        desc = 'git: branch diff',
+      },
 
-    {
-      'f<c-s-r>',
-      function()
-        require('telescope.builtin').find_files({
-          search_dirs = { 'app', 'lib', 'spec', 'ee/app', 'ee/lib', 'ee/spec' },
-          prompt_title = 'rails (app, lib)',
-        })
-      end,
-      desc = 'rails (app, lib, spec)',
-    },
+      {
+        'f<c-r>',
+        function()
+          builtin.find_files({
+            search_dirs = { 'app', 'lib', 'ee/app', 'ee/lib' },
+            prompt_title = 'rails (app, lib)',
+          })
+        end,
+        desc = 'rails (app, lib)',
+      },
 
-    {
-      '<leader>as',
-      function()
-        require('telescope.builtin').grep_string()
-      end,
-      desc = 'grep string',
-    },
+      {
+        'f<c-s-r>',
+        function()
+          builtin.find_files({
+            search_dirs = { 'app', 'lib', 'spec', 'ee/app', 'ee/lib', 'ee/spec' },
+            prompt_title = 'rails (app, lib)',
+          })
+        end,
+        desc = 'rails (app, lib, spec)',
+      },
 
-    {
-      '<leader>as',
-      function()
-        local str = require('utils').get_visual_selection()
+      { '<leader>as', builtin.grep_string, desc = 'grep string' },
 
-        require('telescope.builtin').grep_string({
-          search = str,
-          prompt_title = string.format('grep: "%s"', str),
-        })
-      end,
-      mode = 'x',
-      desc = 'grep string',
-    },
-  },
+      {
+        '<leader>as',
+        function()
+          local str = require('utils').get_visual_selection()
+
+          builtin.grep_string({
+            search = str,
+            prompt_title = string.format('grep: "%s"', str),
+          })
+        end,
+        mode = 'x',
+        desc = 'grep string',
+      },
+    }
+  end,
   config = function()
     local telescope = require('telescope')
     local builtin = require('telescope.builtin')
