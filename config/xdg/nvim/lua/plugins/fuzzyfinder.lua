@@ -160,6 +160,17 @@ return {
     },
 
     {
+      'f<c-s-r>',
+      function()
+        require('telescope.builtin').find_files({
+          search_dirs = { 'app', 'lib', 'spec', 'ee/app', 'ee/lib', 'ee/spec' },
+          prompt_title = 'rails (app, lib)',
+        })
+      end,
+      desc = 'rails (app, lib, spec)',
+    },
+
+    {
       '<leader>as',
       function()
         require('telescope.builtin').grep_string()
