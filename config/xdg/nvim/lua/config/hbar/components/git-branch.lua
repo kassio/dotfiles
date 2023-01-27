@@ -1,12 +1,4 @@
 local utils = require('utils')
-local hl = require('config.hbar.utils').highlighter('Statusline', 'Git')
-
-utils.highlights.extend('Statusline.Git.Branch', 'Theme.Blue.Background', {
-  foreground = Theme.colors.mantle,
-})
-utils.highlights.extend('Statusline.Git.Branch.Name', 'Statusline.Git.Branch', {
-  bold = true,
-})
 
 return {
   on_click = function(msg, opts)
@@ -20,7 +12,7 @@ return {
     end
 
     return {
-      formatted = string.format('%s  %s%s ', hl('Branch'), hl('Branch', 'Name'), branch),
+      formatted = string.format('  %s ', branch),
       raw = branch,
     }
   end,

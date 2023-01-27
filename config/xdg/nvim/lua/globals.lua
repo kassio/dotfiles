@@ -36,16 +36,6 @@ _G.R = function(name)
 end
 
 _G.Theme = {
-  colors = {
-    error = '#CA1243',
-    warn = '#F7C154',
-    info = '#6699CC',
-    hint = '#50A14F',
-    light_error = '#FD83A1',
-    light_warn = '#FFF4A8',
-    light_info = '#A5D0FF',
-    light_hint = '#B5E6CE',
-  },
   icons = {
     buffer = '',
     bug = '',

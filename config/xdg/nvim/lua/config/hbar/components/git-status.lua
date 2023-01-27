@@ -1,19 +1,3 @@
-local utils = require('utils')
-local hl = require('config.hbar.utils').highlighter('Statusline', 'Git')
-
-utils.highlights.extend('Statusline.Git', 'Theme.Surface0.Background', { bold = true })
-utils.highlights.extend('Statusline.Git.Added', 'Statusline.Git', { foreground = Theme.colors.hint })
-utils.highlights.extend(
-  'Statusline.Git.Removed',
-  'Statusline.Git',
-  { foreground = Theme.colors.error }
-)
-utils.highlights.extend(
-  'Statusline.Git.Changed',
-  'Statusline.Git',
-  { foreground = Theme.colors.warn }
-)
-
 local labels = {
   added = '+',
   removed = '-',
@@ -27,7 +11,7 @@ local format_gitstatus = function(counters, name)
     return ''
   end
 
-  return string.format('%s%s%d', hl(name), labels[name], count)
+  return string.format('%s%d', labels[name], count)
 end
 
 return {
@@ -47,6 +31,6 @@ return {
       return ''
     end
 
-    return string.format('%s %s %%*', hl(), values)
+    return string.format(' %s %%*', values)
   end,
 }

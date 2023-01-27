@@ -1,18 +1,4 @@
-local hl = require('utils').highlights
 local hbar = require('config.hbar.utils')
-
-hl.def('WinbarNC', {
-  background = Theme.colors.base,
-  foreground = Theme.colors.surface1,
-  special = Theme.colors.surface1,
-  underline = true,
-})
-
-hl.extend('Winbar', 'WinbarNC', {
-  foreground = Theme.colors.blue,
-  special = Theme.colors.blue,
-  bold = true,
-})
 
 return {
   render = function()

@@ -1,22 +1,3 @@
-local utils = require('utils')
-local hl = require('config.hbar.utils').highlighter('Statusline', 'Mode')
-
-local extend_mode_hls = function(target, origin, ext)
-  return utils.highlights.extend('Statusline.Mode.' .. target, 'Statusline.Mode.' .. origin, ext)
-end
-
-utils.highlights.extend('Statusline.Mode.Normal', 'Theme.Blue.Background', {
-  foreground = Theme.colors.mantle,
-  bold = true,
-})
-extend_mode_hls('Cmd', 'Normal', { background = '#00ff00' })
-extend_mode_hls('Insert', 'Normal', { background = '#0fa000' })
-extend_mode_hls('Replace', 'Normal', { background = '#ff55dd' })
-extend_mode_hls('Search', 'Normal', { background = '#ff55dd' })
-extend_mode_hls('Select', 'Normal', { background = '#ff55dd' })
-extend_mode_hls('Terminal', 'Normal', { background = '#005000' })
-extend_mode_hls('Visual', 'Normal', { background = '#ff55dd' })
-
 local mode_map = {
   [''] = 'S',
   [''] = 'V',
@@ -75,6 +56,6 @@ return {
 
     local mode = mode_map[mode_code]
 
-    return string.format('%s %s %%*', hl(mode_highlights[mode]), mode)
+    return string.format('%%#Statusline.Mode.%s# %s %%*', mode_highlights[mode], mode)
   end,
 }

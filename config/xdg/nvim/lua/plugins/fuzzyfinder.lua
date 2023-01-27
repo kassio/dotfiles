@@ -15,34 +15,34 @@ return {
         function()
           builtin.find_files(require('telescope.themes').get_ivy())
         end,
-        desc = 'files [non block]',
+        desc = 'telescope: files [non block]',
       },
 
-      { 'f<c-p>', builtin.find_files, desc = 'find files' },
+      { 'f<c-p>', builtin.find_files, desc = 'telescope: find files' },
 
-      { 'f<c-s-p>', builtin.resume, desc = 'resume fuzzyfinder' },
+      { 'f<c-s-p>', builtin.resume, desc = 'telescope: resume fuzzyfinder' },
 
-      { 'f<c-y>', builtin.live_grep, desc = 'live grep' },
+      { 'f<c-y>', builtin.live_grep, desc = 'telescope: live grep' },
 
-      { 'f<c-f>', builtin.builtin, desc = 'finders' },
+      { 'f<c-f>', builtin.builtin, desc = 'telescope: finders' },
 
-      { 'f<c-h>', builtin.help_tags, desc = 'help tags' },
+      { 'f<c-h>', builtin.help_tags, desc = 'telescope: help tags' },
 
-      { 'f<c-b>', builtin.buffers, desc = 'buffers' },
+      { 'f<c-b>', builtin.buffers, desc = 'telescope: buffers' },
 
-      { 'f<c-l>', builtin.highlights, desc = 'highlights' },
+      { 'f<c-l>', builtin.highlights, desc = 'telescope: highlights' },
 
-      { 'f<c-k>', builtin.keymaps, desc = 'keymaps' },
+      { 'f<c-k>', builtin.keymaps, desc = 'telescope: keymaps' },
 
-      { 'f<c-n>', builtin.current_buffer_fuzzy_find, desc = 'current buffer finder' },
+      { 'f<c-n>', builtin.current_buffer_fuzzy_find, desc = 'telescope: current buffer finder' },
 
-      { 'f<c-o>', builtin.oldfiles, desc = 'oldfiles' },
+      { 'f<c-o>', builtin.oldfiles, desc = 'telescope: oldfiles' },
 
-      { 'f<c-t>', builtin.treesitter, desc = 'treesitter' },
+      { 'f<c-t>', builtin.treesitter, desc = 'telescope: treesitter' },
 
-      { 'f<c-m>', builtin.commands, desc = 'commands' },
+      { 'f<c-m>', builtin.commands, desc = 'telescope: commands' },
 
-      { 'f<c-g>g', builtin.git_files, desc = 'git: files' },
+      { 'f<c-g>g', builtin.git_files, desc = 'telescope: git files' },
 
       {
         'f<c-g>m',
@@ -52,7 +52,7 @@ return {
             prompt_title = 'git: modified files',
           })
         end,
-        desc = 'git: modified files',
+        desc = 'telescope: git modified files',
       },
 
       {
@@ -71,7 +71,7 @@ return {
             prompt_title = 'git: branch diff',
           })
         end,
-        desc = 'git: branch diff',
+        desc = 'telescope: git branch diff',
       },
 
       {
@@ -82,7 +82,7 @@ return {
             prompt_title = 'rails (app, lib)',
           })
         end,
-        desc = 'rails (app, lib)',
+        desc = 'telescope: rails (app, lib)',
       },
 
       {
@@ -93,10 +93,10 @@ return {
             prompt_title = 'rails (app, lib)',
           })
         end,
-        desc = 'rails (app, lib, spec)',
+        desc = 'telescope: rails (app, lib, spec)',
       },
 
-      { '<leader>as', builtin.grep_string, desc = 'grep string' },
+      { '<leader>as', builtin.grep_string, desc = 'telescope: grep string' },
 
       {
         '<leader>as',
@@ -109,7 +109,7 @@ return {
           })
         end,
         mode = 'x',
-        desc = 'grep string',
+        desc = 'telescope: grep string',
       },
     }
   end,

@@ -1,22 +1,6 @@
-local hl = require('utils').highlights
 local hbar = require('config.hbar.utils')
 local api = vim.api
 local SEP = '|'
-
-hl.def('TabLine', {
-  foreground = Theme.colors.surface2,
-  background = Theme.colors.base,
-})
-
-hl.def('TabLineSel', {
-  foreground = Theme.colors.blue,
-  background = Theme.colors.base,
-  bold = true,
-})
-
-hl.def('TabLineFill', {
-  background = Theme.colors.surface0,
-})
 
 local get_limit = function(labels, columns)
   local curtab_page = 0

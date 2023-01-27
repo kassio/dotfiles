@@ -43,23 +43,14 @@ return {
     local dapui = require('dapui')
     local hl = require('utils.highlights')
 
+    require('nvim-dap-virtual-text').setup()
+
     -- Debugger
     hl.sign('DapBreakpoint', '●')
-    hl.def('DapBreakpoint', { foreground = Theme.colors.error })
-
     hl.sign('DapBreakpointCondition', '◆')
-    hl.extend('DapBreakpointCondition', 'Number')
-
     hl.sign('DapLogPoint', 'Ξ')
-    hl.def('DapLogPoint', { foreground = Theme.colors.info })
-
     hl.sign('DapStopped', '▶')
-    hl.def('DapStopped', { foreground = Theme.colors.hint })
-
     hl.sign('DapBreakpointRejected', '◎')
-    hl.def('DapBreakpointRejected', { foreground = Theme.colors.warn })
-
-    require('nvim-dap-virtual-text').setup()
 
     dapui.setup()
     dap.listeners.after.event_initialized['dapui_config'] = function()

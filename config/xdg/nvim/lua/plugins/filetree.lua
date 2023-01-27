@@ -77,8 +77,5 @@ return {
         },
       },
     })
-
-    hl.def('NvimTreeOpenedFile', { bold = true, italic = true })
-    hl.extend('NvimTreeRootFolder', 'NvimTreeFolderName', { bold = true })
   end,
 }
