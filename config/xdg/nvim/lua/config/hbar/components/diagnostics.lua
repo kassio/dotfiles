@@ -7,12 +7,7 @@ local format_diagnostic = function(level)
     return ''
   end
 
-  return string.format(
-    '%%#Diagnostic%s#%s%s%%*',
-    string.camelcase(level),
-    Theme.icons[level],
-    count
-  )
+  return string.format('%%#hbar.diagnostics.%s#%s%s', level, Theme.icons[level], count)
 end
 
 return {
@@ -32,6 +27,6 @@ return {
       return ''
     end
 
-    return string.format('%s %%*', values)
+    return string.format(' %s %%*', values)
   end,
 }

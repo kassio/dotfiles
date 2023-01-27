@@ -80,20 +80,31 @@ return {
             ['WinBar'] = { fg = c.blue, bold = true },
             ['WinBarNC'] = { bg = c.base, fg = c.surface1 },
 
-            -- tabline
-            ['TabLine'] = { fg = c.surface2, bg = c.base },
-            ['TabLineSel'] = { fg = c.blue, bg = c.base, bold = true },
-            ['TabLineFill'] = { bg = c.surface0 },
+            -- hbar: sections
+            ['hbar.section.a'] = { bg = c.blue, fg = c.base, bold = true },
+            ['hbar.section.b'] = { bg = c.surface0 },
+            ['hbar.section.c'] = { bg = c.crust },
 
-            -- statusline: mode
-            ['Statusline.Mode.Normal'] = { bg = c.blue, fg = c.base, bold = true },
-            ['Statusline.Mode.Cmd'] = { bg = c.green, fg = c.base, bold = true },
-            ['Statusline.Mode.Insert'] = { bg = c.teal, fg = c.base, bold = true },
-            ['Statusline.Mode.Replace'] = { bg = c.pink, fg = c.base, bold = true },
-            ['Statusline.Mode.Search'] = { bg = c.pink, fg = c.base, bold = true },
-            ['Statusline.Mode.Select'] = { bg = c.pink, fg = c.base, bold = true },
-            ['Statusline.Mode.Terminal'] = { bg = c.sapphire, fg = c.base, bold = true },
-            ['Statusline.Mode.Visual'] = { bg = c.pink, fg = c.base, bold = true },
+            -- hbar: diagnostics
+            ['hbar.diagnostics.error'] = { bg = c.surface0, fg = c.red },
+            ['hbar.diagnostics.warn'] = { bg = c.surface0, fg = c.peach },
+            ['hbar.diagnostics.info'] = { bg = c.surface0, fg = c.info },
+            ['hbar.diagnostics.hint'] = { bg = c.surface0, fg = c.green },
+
+            -- hbar: git
+            ['hbar.git.removed'] = { bg = c.surface0, fg = c.red },
+            ['hbar.git.changed'] = { bg = c.surface0, fg = c.peach },
+            ['hbar.git.added'] = { bg = c.surface0, fg = c.info },
+
+            -- hbar: mode
+            ['hbar.mode.normal'] = { bg = c.blue, fg = c.base, bold = true },
+            ['hbar.mode.cmd'] = { bg = c.green, fg = c.base, bold = true },
+            ['hbar.mode.insert'] = { bg = c.teal, fg = c.base, bold = true },
+            ['hbar.mode.replace'] = { bg = c.pink, fg = c.base, bold = true },
+            ['hbar.mode.search'] = { bg = c.pink, fg = c.base, bold = true },
+            ['hbar.mode.select'] = { bg = c.pink, fg = c.base, bold = true },
+            ['hbar.mode.terminal'] = { bg = c.sapphire, fg = c.base, bold = true },
+            ['hbar.mode.visual'] = { bg = c.pink, fg = c.base, bold = true },
 
             -- nvim tree
             ['NvimTreeOpenedFile'] = { bold = true, italic = true },

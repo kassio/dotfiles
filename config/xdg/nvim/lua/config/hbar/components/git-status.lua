@@ -11,7 +11,7 @@ local format_gitstatus = function(counters, name)
     return ''
   end
 
-  return string.format('%s%d', labels[name], count)
+  return string.format('%%#hbar.git.%s#%s%d', name, labels[name], count)
 end
 
 return {

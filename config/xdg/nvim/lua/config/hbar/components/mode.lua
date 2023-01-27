@@ -56,6 +56,6 @@ return {
 
     local mode = mode_map[mode_code]
 
-    return string.format('%%#Statusline.Mode.%s# %s %%*', mode_highlights[mode], mode)
+    return string.format('%%#hbar.mode.%s# %s %%*', mode_highlights[mode], mode)
   end,
 }
