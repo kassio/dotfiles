@@ -1,101 +1,36 @@
-local utils = require('utils')
 local telescope = require('telescope.builtin')
 local lsp = vim.lsp
 
-return function(client, bufnr)
-  utils.keycmds({
-    prefix = 'Lsp',
-    list = {
-      {
-        cmd = 'Hover',
-        key = 'K',
-        opts = { buffer = bufnr },
-        fn = lsp.buf.hover,
-      },
-      {
-        cmd = 'SignatureHelp',
-        key = '<c-k>',
-        opts = { buffer = bufnr },
-        fn = lsp.buf.signature_help,
-      },
-      {
-        cmd = 'GoToDeclaration',
-        key = 'glD',
-        opts = { buffer = bufnr },
-        fn = lsp.buf.declaration,
-      },
-      {
-        cmd = 'Rename',
-        key = 'grr',
-        opts = { buffer = bufnr },
-        fn = lsp.buf.rename,
-      },
-      {
-        cmd = 'FormatSync',
-        key = 'glF',
-        opts = { buffer = bufnr },
-        fn = lsp.buf.format,
-      },
-      {
-        cmd = 'DocumentSymbols',
-        key = 'gls',
-        opts = { buffer = bufnr },
-        fn = telescope.lsp_document_symbols,
-      },
-      {
-        cmd = 'WorkspaceSymbols',
-        key = 'glS',
-        opts = { buffer = bufnr },
-        fn = telescope.lsp_dynamic_workspace_symbols,
-      },
-      {
-        cmd = 'CodeActions',
-        key = 'gla',
-        opts = { buffer = bufnr, range = 0 },
-        fn = function(cmd)
-          cmd = cmd or {}
-
-          if (cmd.range or 0) > 0 then
-            lsp.buf.range_code_action()
-          else
-            lsp.buf.code_action()
-          end
-        end,
-      },
-    },
-    {
-      cmd = 'Format',
-      key = 'glf',
-      opts = { buffer = bufnr },
-      fn = function()
-        lsp.buf.format({ async = true })
-      end,
-    },
-    {
-      cmd = 'GoToDefinition',
-      key = 'gld',
-      opts = { buffer = bufnr },
-      fn = function()
-        telescope.lsp_definitions({ jump_type = 'never' })
-      end,
-    },
-    {
-      cmd = 'ListReferences',
-      key = 'glr',
-      opts = { buffer = bufnr },
-      function()
-        telescope.lsp_references({ jump_type = 'never' })
-      end,
-    },
-    {
-      cmd = 'Implementation',
-      key = 'gli',
-      opts = { buffer = bufnr },
-      fn = function()
-        telescope.lsp_implementations({ jump_type = 'never' })
-      end,
-    },
+local keymap = function(bufnr, desc, mode, lhs, rhs)
+  vim.keymap.set(mode, lhs, rhs, {
+    silent = true,
+    buffer = bufnr,
+    desc = 'lsp: ' .. desc,
   })
+end
+
+return function(client, bufnr)
+  keymap(bufnr, 'hover', 'n', 'K', lsp.buf.hover)
+  keymap(bufnr, 'signature help', 'n', '<c-k>', lsp.buf.signature_help)
+  keymap(bufnr, 'rename', 'n', 'grr', lsp.buf.rename)
+  keymap(bufnr, 'format (sync)', 'n', 'glf', lsp.buf.format)
+  keymap(bufnr, 'code actions', { 'n', 'v', 'x' }, 'gla', lsp.buf.code_action)
+  keymap(bufnr, 'declarations', 'n', 'glD', lsp.buf.declaration)
+
+  keymap(bufnr, 'document symbols', 'n', 'gls', telescope.lsp_document_symbols)
+  keymap(bufnr, 'workspace symbols', 'n', 'glS', telescope.lsp_dynamic_workspace_symbols)
+
+  keymap(bufnr, 'definitions', 'n', 'gld', function()
+    telescope.lsp_definitions({ jump_type = 'never' })
+  end)
+
+  keymap(bufnr, 'references', 'n', 'glr', function()
+    telescope.lsp_references({ jump_type = 'never' })
+  end)
+
+  keymap(bufnr, 'implementations', 'n', 'gli', function()
+    telescope.lsp_implementations({ jump_type = 'never' })
+  end)
 
   vim.notify(client.name .. ' loaded', nil, { title = 'LSP' })
 end

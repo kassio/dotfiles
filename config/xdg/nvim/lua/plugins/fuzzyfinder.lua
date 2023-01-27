@@ -5,6 +5,7 @@ return {
     'nvim-telescope/telescope-ui-select.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   },
+  cmd = 'Telescope',
   keys = function()
     local builtin = require('telescope.builtin')
 
@@ -21,7 +22,7 @@ return {
 
       { 'f<c-s-p>', builtin.resume, desc = 'resume fuzzyfinder' },
 
-      { 'f<c-/>', builtin.live_grep, desc = 'live grep' },
+      { 'f<c-y>', builtin.live_grep, desc = 'live grep' },
 
       { 'f<c-f>', builtin.builtin, desc = 'finders' },
 
@@ -39,7 +40,7 @@ return {
 
       { 'f<c-t>', builtin.treesitter, desc = 'treesitter' },
 
-      { 'f<c-,>', builtin.commands, desc = 'commands' },
+      { 'f<c-m>', builtin.commands, desc = 'commands' },
 
       { 'f<c-g>g', builtin.git_files, desc = 'git: files' },
 

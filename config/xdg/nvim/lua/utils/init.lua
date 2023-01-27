@@ -105,24 +105,4 @@ M.copy_filename = function(cmd)
   M.to_clipboard(filename, cmd.bang)
 end
 
-M.keycmds = function(tbl)
-  for _, data in ipairs(tbl.list) do
-    local opts = data.opts or {}
-    local cmd_opts = table.slice(opts, { 'range', 'nargs' })
-
-    if opts.bufnr ~= nil then
-      vim.api.nvim_buf_create_user_command(
-        data.opts.bufnr,
-        tbl.prefix .. data.cmd,
-        data.fn,
-        cmd_opts
-      )
-    else
-      vim.api.nvim_create_user_command(tbl.prefix .. data.cmd, data.fn, cmd_opts)
-    end
-
-    vim.keymap.set(data.mode or 'n', data.key, data.fn, table.slice(opts, { 'buffer' }))
-  end
-end
-
 return M
