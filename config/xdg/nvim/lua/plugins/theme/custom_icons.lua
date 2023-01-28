@@ -1,23 +1,24 @@
-local sign = function(name, icon)
-  vim.fn.sign_define(name, {
-    text = icon,
-    texthl = name,
-  })
-end
+local def_sign = require('utils.highlights').def_sign
 
 return {
   setup = function()
-    -- debugger
-    sign('DapBreakpoint', '●')
-    sign('DapBreakpointCondition', '◆')
-    sign('DapLogPoint', 'Ξ')
-    sign('DapStopped', '▶')
-    sign('DapBreakpointRejected', '◎')
+    -- diagnostics
+    def_sign('error', '')
+    def_sign('warn', '')
+    def_sign('info', '')
+    def_sign('hint', '')
 
     -- diagnostics
-    sign('DiagnosticSignError', '')
-    sign('DiagnosticSignWarn', '')
-    sign('DiagnosticSignInfo', '')
-    sign('DiagnosticSignHint', '')
+    def_sign('DiagnosticSignError', '')
+    def_sign('DiagnosticSignWarn', '')
+    def_sign('DiagnosticSignInfo', '')
+    def_sign('DiagnosticSignHint', '')
+
+    -- debugger
+    def_sign('DapBreakpoint', '●')
+    def_sign('DapBreakpointCondition', '◆')
+    def_sign('DapLogPoint', 'Ξ')
+    def_sign('DapStopped', '▶')
+    def_sign('DapBreakpointRejected', '◎')
   end,
 }

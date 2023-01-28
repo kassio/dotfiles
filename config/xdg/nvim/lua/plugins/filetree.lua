@@ -20,10 +20,10 @@ return {
       diagnostics = {
         enable = true,
         icons = {
-          hint = Theme.icons.hint,
-          info = Theme.icons.info,
-          warning = Theme.icons.warn,
-          error = Theme.icons.error,
+          hint = hl.get_sign_icon('hint'),
+          info = hl.get_sign_icon('info'),
+          warning = hl.get_sign_icon('warn'),
+          error = hl.get_sign_icon('error'),
         },
       },
       filters = {

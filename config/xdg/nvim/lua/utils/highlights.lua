@@ -33,4 +33,17 @@ M.extend = function(target, source, opts)
   M.def(target, vim.tbl_extend('force', M.get(source), opts or {}))
 end
 
+M.def_sign = function(name, icon)
+  vim.fn.sign_define(name, {
+    text = icon,
+    texthl = name,
+  })
+end
+
+M.get_sign_icon = function(name)
+  local sign = vim.fn.sign_getdefined(name)[1]
+
+  return vim.trim(sign.text)
+end
+
 return M
