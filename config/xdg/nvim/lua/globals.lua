@@ -34,21 +34,3 @@ _G.R = function(name)
     print(result) -- error message
   end
 end
-
-_G.Theme = {
-  icons = {
-    buffer = '',
-    bug = '',
-    error = '',
-    hint = '',
-    info = '',
-    nvim_lsp = '',
-    nvim_lua = '',
-    path = 'פּ',
-    separator = ' › ',
-    snippy = '',
-    spell = '暈',
-    treesitter = '',
-    warn = '',
-  },
-}

@@ -41,16 +41,8 @@ return {
   config = function()
     local dap = require('dap')
     local dapui = require('dapui')
-    local hl = require('utils.highlights')
 
     require('nvim-dap-virtual-text').setup()
-
-    -- Debugger
-    hl.sign('DapBreakpoint', '●')
-    hl.sign('DapBreakpointCondition', '◆')
-    hl.sign('DapLogPoint', 'Ξ')
-    hl.sign('DapStopped', '▶')
-    hl.sign('DapBreakpointRejected', '◎')
 
     dapui.setup()
     dap.listeners.after.event_initialized['dapui_config'] = function()

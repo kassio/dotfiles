@@ -2,8 +2,6 @@
 return {
   -- Fix CursorHold
   'antoinemadec/FixCursorHold.nvim',
-  -- Custom dev icons
-  'kyazdani42/nvim-web-devicons',
   -- Restore last position
   'farmergreg/vim-lastplace',
   -- Open file with file_path:line:path

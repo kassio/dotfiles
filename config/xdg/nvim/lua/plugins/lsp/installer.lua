@@ -59,11 +59,6 @@ return {
     require('mason').setup({
       ui = {
         border = 'none',
-        icons = {
-          server_installed = Theme.icons.info,
-          server_pending = Theme.icons.warn,
-          server_uninstalled = Theme.icons.error,
-        },
       },
     })
     require('mason-lspconfig').setup()

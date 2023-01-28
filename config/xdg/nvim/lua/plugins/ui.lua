@@ -6,13 +6,6 @@ return {
 
       notify.setup({
         timeout = 1250,
-        icons = {
-          ERROR = Theme.icons.error,
-          WARN = Theme.icons.warn,
-          INFO = Theme.icons.info,
-          DEBUG = Theme.icons.bug,
-          TRACE = Theme.icons.bug,
-        },
         on_open = function()
           vim.cmd('doautocmd User NotificationOpened')
         end,

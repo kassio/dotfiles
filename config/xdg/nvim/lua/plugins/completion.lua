@@ -17,6 +17,18 @@ return {
     local cmp = require('cmp')
     local mapping = cmp.mapping
     local snippy = require('snippy')
+    local lspkind = require('lspkind')
+
+    local source_icons = {
+      buffer = '',
+      bug = '',
+      nvim_lsp = '',
+      nvim_lua = '',
+      path = 'פּ',
+      snippy = '',
+      spell = '暈',
+      treesitter = '',
+    }
 
     snippy.setup({
       mappings = {
@@ -32,14 +44,16 @@ return {
 
     cmp.setup({
       formatting = {
-        format = function(entry, vim_item)
-          local icon = require('lspkind').presets.default[vim_item.kind]
-          vim_item.kind = string.format('%s %s', icon, vim_item.kind)
+        format = lspkind.cmp_format({
+          mode = 'symbol',
+          maxwidth = 50,
+          ellipsis_char = '...',
+          before = function(entry, vim_item)
+            vim_item.menu = source_icons[entry.source.name]
 
-          vim_item.menu = (Theme.icons)[entry.source.name]
-
-          return vim_item
-        end,
+            return vim_item
+          end,
+        }),
       },
 
       mapping = {
@@ -66,14 +80,14 @@ return {
         { name = 'nvim_lsp' },
         { name = 'nvim_lsp_signature_help' },
       }, {
-          { name = 'nvim_lua' },
-        }, {
-          { name = 'treesitter' },
-          { name = 'buffer' },
-          { name = 'spell' },
-        }, {
-          { name = 'path' },
-        }),
+        { name = 'nvim_lua' },
+      }, {
+        { name = 'treesitter' },
+        { name = 'buffer' },
+        { name = 'spell' },
+      }, {
+        { name = 'path' },
+      }),
 
       window = {
         documentation = {

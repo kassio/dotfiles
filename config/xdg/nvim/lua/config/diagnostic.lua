@@ -1,11 +1,4 @@
 local diagnostic = vim.diagnostic
-local hl = require('utils.highlights')
-
--- Signs/Icons definition
-hl.sign('DiagnosticSignError', Theme.icons.error, 'DiagnosticError')
-hl.sign('DiagnosticSignWarn', Theme.icons.warn, 'DiagnosticWarn')
-hl.sign('DiagnosticSignInfo', Theme.icons.info, 'DiagnosticInfo')
-hl.sign('DiagnosticSignHint', Theme.icons.hint, 'DiagnosticHint')
 
 vim.keymap.set('n', '[d', diagnostic.goto_prev)
 vim.keymap.set('n', ']d', diagnostic.goto_next)
