@@ -10,3 +10,6 @@ export CDPATH="${CDPATH}:${GOPATH}/src"
 
 # Shorter test output
 export GOTESTSUM_FORMAT="dots"
+
+# Default GO packages
+export ASDF_GOLANG_DEFAULT_PACKAGES_FILE="${HOME}/.config/go/default_packages"
