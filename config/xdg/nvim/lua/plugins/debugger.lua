@@ -5,39 +5,99 @@ return {
     'theHamsta/nvim-dap-virtual-text',
     'leoluz/nvim-dap-go',
   },
-  keys = function()
-    local dap = require('dap')
-    local dapui = require('dapui')
-    local widgets = require('dap.ui.widgets')
-
-    return {
-      { '<F4>', dap.step_back, desc = 'dap: step back' },
-      { '<F5>', dap.continue, desc = 'dap: continue' },
-      { '<F6>', dap.step_over, desc = 'dap: step over' },
-      { '<F7>', dap.step_into, desc = 'dap: step into' },
-      { '<F8>', dap.step_out, desc = 'dap: step out' },
-      { '<F9>', dap.close, desc = 'dap: close' },
-      { '<leader>dk', widgets.hover, desc = 'dap: hover' },
-      { '<leader>dr', dap.repl.open, desc = 'dap: repl' },
-      { '<leader>dl', dap.run_last, desc = 'dap: run last' },
-      { '<leader>db', dap.toggle_breakpoint, desc = 'dap: toggle breakpoint' },
-      { '<leader>du', dapui.toggle, desc = 'dap: toggle ui' },
-      {
-        '<leader>dB',
-        function()
-          dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))
-        end,
-        desc = 'dap: set breakpoint (conditionally)',
-      },
-      {
-        '<leader>dp',
-        function()
-          dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
-        end,
-        desc = 'dap: set breakpoint (with log message)',
-      },
-    }
-  end,
+  keys = {
+    {
+      '<F4>',
+      function()
+        require('dap').step_back()
+      end,
+      desc = 'dap: step back',
+    },
+    {
+      '<F5>',
+      function()
+        require('dap').continue()
+      end,
+      desc = 'dap: continue',
+    },
+    {
+      '<F6>',
+      function()
+        require('dap').step_over()
+      end,
+      desc = 'dap: step over',
+    },
+    {
+      '<F7>',
+      function()
+        require('dap').step_into()
+      end,
+      desc = 'dap: step into',
+    },
+    {
+      '<F8>',
+      function()
+        require('dap').step_out()
+      end,
+      desc = 'dap: step out',
+    },
+    {
+      '<F9>',
+      function()
+        require('dap').close()
+      end,
+      desc = 'dap: close',
+    },
+    {
+      '<leader>dk',
+      function()
+        require('dap.ui.widgets').hover()
+      end,
+      desc = 'dap: hover',
+    },
+    {
+      '<leader>dr',
+      function()
+        require('dap').repl.open()
+      end,
+      desc = 'dap: repl',
+    },
+    {
+      '<leader>dl',
+      function()
+        require('dap').run_last()
+      end,
+      desc = 'dap: run last',
+    },
+    {
+      '<leader>db',
+      function()
+        require('dap').toggle_breakpoint()
+      end,
+      desc = 'dap: toggle breakpoint',
+    },
+    {
+      '<leader>du',
+      function()
+        require('dapui').toggle()
+      end,
+      desc = 'dap: toggle ui',
+    },
+    {
+      '<leader>dB',
+      function()
+        require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))
+      end,
+      desc = 'dap: set breakpoint (conditionally)',
+    },
+    {
+      '<leader>dp',
+      function()
+        require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
+      end,
+      desc = 'dap: set breakpoint (with log message)',
+    },
+  },
   config = function()
     local dap = require('dap')
     local dapui = require('dapui')
