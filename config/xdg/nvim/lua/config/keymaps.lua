@@ -24,13 +24,11 @@ keymap.set('i', '<esc>', '<c-c>', { desc = 'faster esc' })
 keymap.set('i', ',', ',<c-g>u', { desc = 'undo breakpoints' })
 keymap.set('i', '.', '.<c-g>u')
 
-keymap.set('n', 'n,', 'nzzzv', { desc = 'keep the cursor centered while moving' })
-keymap.set('n', 'N,', 'Nzzzv', { desc = 'keep the cursor centered while moving' })
-keymap.set('n', 'J,', 'mzJ`z', { desc = 'keep the cursor centered while moving' })
-keymap.set('n', ']c', ']czz', { desc = 'keep the cursor centered while moving' })
-keymap.set('n', '[c', '[czz', { desc = 'keep the cursor centered while moving' })
-keymap.set('n', ']d', ']dzz', { desc = 'keep the cursor centered while moving' })
-keymap.set('n', '[d', '[dzz', { desc = 'keep the cursor centered while moving' })
+keymap.set('n', 'n', 'nzzzv', { desc = 'keep the cursor centered while moving' })
+keymap.set('n', 'N', 'Nzzzv', { desc = 'keep the cursor centered while moving' })
+keymap.set('n', 'J', 'mzJ`z', { desc = 'keep the cursor centered while moving' })
+keymap.set('n', '}', '}zzzv', { desc = 'keep the cursor centered while moving' })
+keymap.set('n', '{', '{zzzv', { desc = 'keep the cursor centered while moving' })
 
 keymap.set(
   't',

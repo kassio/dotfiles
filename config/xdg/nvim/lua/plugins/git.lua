@@ -121,8 +121,15 @@ return {
       end,
     }
 
-    vim.keymap.set('n', ']c', gitsigns.next_hunk)
-    vim.keymap.set('n', '[c', gitsigns.prev_hunk)
+    vim.keymap.set('n', ']c', function()
+      gitsigns.next_hunk()
+      vim.cmd.normal('zz')
+    end, { desc = 'git: next hunk' })
+
+    vim.keymap.set('n', '[c', function()
+      gitsigns.prev_hunk()
+      vim.cmd.normal('zz')
+    end, { desc = 'git: previous hunk' })
 
     command('GitBrowseRepository', M.browse_repository, {
       desc = 'git: open origin in the browser',

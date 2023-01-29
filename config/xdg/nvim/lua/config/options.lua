@@ -80,6 +80,7 @@ opt.virtualedit = 'block'
 opt.wildignorecase = true
 opt.wrap = false
 opt.writebackup = false
+opt.scrolloff = 3
 
 -- fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
