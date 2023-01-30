@@ -8,45 +8,119 @@ return {
   cmd = 'Telescope',
   keys = {
     {
-      'f<c-;>',
+      '<leader>f;',
       function()
         require('telescope.builtin').find_files(require('telescope.themes').get_ivy())
       end,
       desc = 'telescope: files [non block]',
     },
 
-    { 'f<c-p>', function() require('telescope.builtin').find_files() end, desc = 'telescope: find files' },
-
-    { 'f<c-s-p>', function() require('telescope.builtin').resume() end, desc = 'telescope: resume fuzzyfinder' },
-
-    { 'f<c-y>', function() require('telescope.builtin').live_grep() end, desc = 'telescope: live grep' },
-
-    { 'f<c-f>', function() require('telescope.builtin').builtin() end, desc = 'telescope: finders' },
-
-    { 'f<c-h>', function() require('telescope.builtin').help_tags() end, desc = 'telescope: help tags' },
-
-    { 'f<c-b>', function() require('telescope.builtin').buffers() end, desc = 'telescope: buffers' },
-
-    { 'f<c-l>', function() require('telescope.builtin').highlights() end, desc = 'telescope: highlights' },
-
-    { 'f<c-k>', function() require('telescope.builtin').keymaps() end, desc = 'telescope: keymaps' },
+    {
+      '<leader>fp',
+      function()
+        require('telescope.builtin').find_files()
+      end,
+      desc = 'telescope: find files',
+    },
 
     {
-      'f<c-n>',
-      function() require('telescope.builtin').current_buffer_fuzzy_find() end,
+      '<leader>fP',
+      function()
+        require('telescope.builtin').resume()
+      end,
+      desc = 'telescope: resume fuzzyfinder',
+    },
+
+    {
+      '<leader>fy',
+      function()
+        require('telescope.builtin').live_grep()
+      end,
+      desc = 'telescope: live grep',
+    },
+
+    {
+      '<leader>ff',
+      function()
+        require('telescope.builtin').builtin({ previwer = false })
+      end,
+      desc = 'telescope: finders',
+    },
+
+    {
+      '<leader>fh',
+      function()
+        require('telescope.builtin').help_tags()
+      end,
+      desc = 'telescope: help tags',
+    },
+
+    {
+      '<leader>fb',
+      function()
+        require('telescope.builtin').buffers()
+      end,
+      desc = 'telescope: buffers',
+    },
+
+    {
+      '<leader>fl',
+      function()
+        require('telescope.builtin').highlights()
+      end,
+      desc = 'telescope: highlights',
+    },
+
+    {
+      '<leader>fk',
+      function()
+        require('telescope.builtin').keymaps()
+      end,
+      desc = 'telescope: keymaps',
+    },
+
+    {
+      '<leader>fn',
+      function()
+        require('telescope.builtin').current_buffer_fuzzy_find()
+      end,
       desc = 'telescope: current buffer finder',
     },
 
-    { 'f<c-o>', function() require('telescope.builtin').oldfiles() end, desc = 'telescope: oldfiles' },
-
-    { 'f<c-t>', function() require('telescope.builtin').treesitter() end, desc = 'telescope: treesitter' },
-
-    { 'f<c-m>', function() require('telescope.builtin').commands() end, desc = 'telescope: commands' },
-
-    { 'f<c-g>g', function() require('telescope.builtin').git_files() end, desc = 'telescope: git files' },
+    {
+      '<leader>fo',
+      function()
+        require('telescope.builtin').oldfiles()
+      end,
+      desc = 'telescope: oldfiles',
+    },
 
     {
-      'f<c-g>m',
+      '<leader>ft',
+      function()
+        require('telescope.builtin').treesitter()
+      end,
+      desc = 'telescope: treesitter',
+    },
+
+    {
+      '<leader>fm',
+      function()
+        require('telescope.builtin').commands()
+      end,
+      desc = 'telescope: commands',
+    },
+
+    {
+      '<leader>fgg',
+      function()
+        require('telescope.builtin').git_files()
+      end,
+      desc = 'telescope: git files',
+    },
+
+    {
+      '<leader>fgm',
       function()
         require('telescope.builtin').find_files({
           find_command = { 'git', 'ls-files', '--modified' },
@@ -57,7 +131,7 @@ return {
     },
 
     {
-      'f<c-g>d',
+      '<leader>fgd',
       function()
         local main = vim.fn.system('git-branch-main')
 
@@ -76,7 +150,7 @@ return {
     },
 
     {
-      'f<c-r>',
+      '<leader>fr',
       function()
         require('telescope.builtin').find_files({
           search_dirs = { 'app', 'lib', 'ee/app', 'ee/lib' },
@@ -87,17 +161,23 @@ return {
     },
 
     {
-      'f<c-s-r>',
+      '<leader>fR',
       function()
         require('telescope.builtin').find_files({
           search_dirs = { 'app', 'lib', 'spec', 'ee/app', 'ee/lib', 'ee/spec' },
-          prompt_title = 'rails (app, lib)',
+          prompt_title = 'rails (app, lib, spec)',
         })
       end,
       desc = 'telescope: rails (app, lib, spec)',
     },
 
-    { '<leader>as', function() require('telescope.builtin').grep_string() end, desc = 'telescope: grep string' },
+    {
+      '<leader>as',
+      function()
+        require('telescope.builtin').grep_string()
+      end,
+      desc = 'telescope: grep string',
+    },
 
     {
       '<leader>as',
