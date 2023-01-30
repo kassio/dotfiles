@@ -5,7 +5,7 @@ return {
   },
   keys = {
     {
-      '<leader>pt',
+      '<leader>pp',
       '<cmd>NvimTreeToggle<cr>',
       silent = true,
       desc = 'filetree: toggle',
@@ -43,14 +43,6 @@ return {
       git = {
         enable = true,
         ignore = false,
-      },
-      ignore_ft_on_setup = {
-        '.git',
-        'node_modules',
-        'dump.rdb',
-        '.byebug_history',
-        '.vscode',
-        '.idea',
       },
       update_focused_file = { enable = false },
       renderer = {
