@@ -15,6 +15,18 @@ keymap.set('o', 'aF', '":normal vaF<cr>"', { expr = true, desc = 'select all lin
 keymap.set('n', [[Q]], [[<nop>]], { desc = 'disable ex mode' })
 
 keymap.set('n', 'gf', ':e <cfile><cr>', { desc = 'allow gf to open non-existing files' })
+keymap.set(
+  'n',
+  '<c-f>f',
+  ':split <cfile><cr>',
+  { desc = 'open filepath under the cursor (horizontal split)' }
+)
+keymap.set(
+  'n',
+  '<c-f>v',
+  ':vsplit <cfile><cr>',
+  { desc = 'open filepath under the cursor (vertical split)' }
+)
 
 keymap.set('n', 'j', 'gj', { silent = true })
 keymap.set('n', 'k', 'gk', { silent = true })
