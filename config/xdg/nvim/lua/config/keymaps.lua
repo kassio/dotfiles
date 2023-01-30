@@ -27,6 +27,12 @@ keymap.set(
   ':vsplit <cfile><cr>',
   { desc = 'open filepath under the cursor (vertical split)' }
 )
+keymap.set(
+  'n',
+  '<c-f>t',
+  ':tabedit <cfile><cr>',
+  { desc = 'open filepath under the cursor (new tab)' }
+)
 
 keymap.set('n', 'j', 'gj', { silent = true })
 keymap.set('n', 'k', 'gk', { silent = true })
