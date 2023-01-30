@@ -4,8 +4,19 @@ return {
     'kyazdani42/nvim-web-devicons',
   },
   keys = {
-    { '<leader>p', '<cmd>NvimTreeToggle<cr>', silent = true },
-    { '<leader>fl', '<cmd>NvimTreeFindFile<cr>', silent = true },
+    {
+      '<leader>pt',
+      '<cmd>NvimTreeToggle<cr>',
+      silent = true,
+      desc = 'filetree: toggle',
+    },
+
+    {
+      '<leader>pf',
+      '<cmd>NvimTreeFindFile<cr>',
+      silent = true,
+      desc = 'filetree: find file',
+    },
   },
   config = function()
     local hl = require('utils.highlights')

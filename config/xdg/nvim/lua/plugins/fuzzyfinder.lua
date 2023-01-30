@@ -12,6 +12,7 @@ return {
       function()
         require('telescope.builtin').find_files(require('telescope.themes').get_ivy())
       end,
+      silent = true,
       desc = 'telescope: files [non block]',
     },
 
@@ -20,6 +21,7 @@ return {
       function()
         require('telescope.builtin').find_files()
       end,
+      silent = true,
       desc = 'telescope: find files',
     },
 
@@ -28,6 +30,7 @@ return {
       function()
         require('telescope.builtin').resume()
       end,
+      silent = true,
       desc = 'telescope: resume fuzzyfinder',
     },
 
@@ -36,6 +39,7 @@ return {
       function()
         require('telescope.builtin').live_grep()
       end,
+      silent = true,
       desc = 'telescope: live grep',
     },
 
@@ -44,6 +48,7 @@ return {
       function()
         require('telescope.builtin').builtin({ previwer = false })
       end,
+      silent = true,
       desc = 'telescope: finders',
     },
 
@@ -52,6 +57,7 @@ return {
       function()
         require('telescope.builtin').help_tags()
       end,
+      silent = true,
       desc = 'telescope: help tags',
     },
 
@@ -60,6 +66,7 @@ return {
       function()
         require('telescope.builtin').buffers()
       end,
+      silent = true,
       desc = 'telescope: buffers',
     },
 
@@ -68,6 +75,7 @@ return {
       function()
         require('telescope.builtin').highlights()
       end,
+      silent = true,
       desc = 'telescope: highlights',
     },
 
@@ -76,6 +84,7 @@ return {
       function()
         require('telescope.builtin').keymaps()
       end,
+      silent = true,
       desc = 'telescope: keymaps',
     },
 
@@ -84,6 +93,7 @@ return {
       function()
         require('telescope.builtin').current_buffer_fuzzy_find()
       end,
+      silent = true,
       desc = 'telescope: current buffer finder',
     },
 
@@ -92,6 +102,7 @@ return {
       function()
         require('telescope.builtin').oldfiles()
       end,
+      silent = true,
       desc = 'telescope: oldfiles',
     },
 
@@ -100,6 +111,7 @@ return {
       function()
         require('telescope.builtin').treesitter()
       end,
+      silent = true,
       desc = 'telescope: treesitter',
     },
 
@@ -108,6 +120,7 @@ return {
       function()
         require('telescope.builtin').commands()
       end,
+      silent = true,
       desc = 'telescope: commands',
     },
 
@@ -116,6 +129,7 @@ return {
       function()
         require('telescope.builtin').git_files()
       end,
+      silent = true,
       desc = 'telescope: git files',
     },
 
@@ -127,6 +141,7 @@ return {
           prompt_title = 'git: modified files',
         })
       end,
+      silent = true,
       desc = 'telescope: git modified files',
     },
 
@@ -146,6 +161,7 @@ return {
           prompt_title = 'git: branch diff',
         })
       end,
+      silent = true,
       desc = 'telescope: git branch diff',
     },
 
@@ -157,6 +173,7 @@ return {
           prompt_title = 'rails (app, lib)',
         })
       end,
+      silent = true,
       desc = 'telescope: rails (app, lib)',
     },
 
@@ -168,6 +185,7 @@ return {
           prompt_title = 'rails (app, lib, spec)',
         })
       end,
+      silent = true,
       desc = 'telescope: rails (app, lib, spec)',
     },
 
@@ -176,6 +194,7 @@ return {
       function()
         require('telescope.builtin').grep_string()
       end,
+      silent = true,
       desc = 'telescope: grep string',
     },
 
@@ -190,6 +209,7 @@ return {
         })
       end,
       mode = 'x',
+      silent = true,
       desc = 'telescope: grep string',
     },
   },
