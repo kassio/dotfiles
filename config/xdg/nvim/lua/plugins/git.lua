@@ -75,7 +75,7 @@ return {
       },
       current_line_blame_formatter = '<author> - <summary>, <author_time:%Y%m%d>',
       diff_opts = { vertical = true },
-      numhl = false,
+      numhl = true,
     })
 
     local M = {
