@@ -9,7 +9,13 @@ return {
     'jose-elias-alvarez/null-ls.nvim',
 
     -- required for null-ls refactoring module
-    'ThePrimeagen/refactoring.nvim',
+    {
+      'ThePrimeagen/refactoring.nvim',
+      dependencies = {
+        { 'nvim-lua/plenary.nvim' },
+        { 'nvim-treesitter/nvim-treesitter' },
+      },
+    },
   },
   config = function()
     local lspconfig = require('lspconfig')
