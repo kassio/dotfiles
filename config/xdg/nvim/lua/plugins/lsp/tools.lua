@@ -7,8 +7,6 @@ local map = table.slice(lsp_package, {
   'editorconfig-checker',
   'go-debug-adapter',
   'golangci-lint',
-  'golangci-lint-langserver',
-  'golines',
   'gopls',
   'gotests',
   'graphql-language-service-cli',
@@ -22,7 +20,6 @@ local map = table.slice(lsp_package, {
   'markdownlint',
   'prettier',
   'rubocop',
-  'ruby-lsp',
   'shellcheck',
   'shfmt',
   'solargraph',
@@ -37,7 +34,6 @@ local map = table.slice(lsp_package, {
   'vint',
   'vue-language-server',
   'yaml-language-server',
-  'yamlfmt',
   'yamllint',
 })
 
