@@ -57,5 +57,23 @@ return {
         end
       end,
     })
+
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'MasonToolsStartingInstall',
+      callback = function()
+        vim.schedule(function()
+          vim.notify('Starting', vim.log.levels.INFO, { title = 'Updating Mason tools' })
+        end)
+      end,
+    })
+
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'MasonToolsUpdateCompleted',
+      callback = function()
+        vim.schedule(function()
+          vim.notify('Finished', vim.log.levels.INFO, { title = 'Updating Mason tools' })
+        end)
+      end,
+    })
   end,
 }
