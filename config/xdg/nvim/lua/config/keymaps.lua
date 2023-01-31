@@ -94,7 +94,7 @@ keymap.set(
 keymap.set('n', '<leader>bd', '<cmd>bw!<cr>', { desc = 'delete current buffer' })
 keymap.set('n', '<leader>da', '<cmd>bufdo bw!<cr>', { desc = 'delete all buffers' })
 
-keymap.set('n', '<leader>ff', function()
+keymap.set('n', '<leader>f=', function()
   require('utils.buffers').preserve(function()
     vim.cmd([[normal! gg=G]])
   end)
