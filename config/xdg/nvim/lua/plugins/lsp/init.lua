@@ -48,9 +48,13 @@ return {
 
     -- Auto format files
     vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-      pattern = '*.lua,*.go,*.rb,*.json,*.js',
+      pattern = '*.lua,*.go,*.json,*.js',
       callback = function()
-        vim.lsp.buf.format({ async = false })
+        if not vim.b.skip_format then
+          vim.schedule(function()
+            vim.lsp.buf.format({ async = false })
+          end)
+        end
       end,
     })
   end,
