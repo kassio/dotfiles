@@ -13,24 +13,23 @@ run() {
 
 cmd="db:migrate"
 case "$1" in
-  -l|--list)
+  down|redo|status|up)
+    cmd="${cmd}:$1"
+    shift
+    ;;
+
+  *)
+    echo "Usage: rails-migrate-diff <up|down|redo|status> [databases]"
+    echo "       - databases will be required when in a multiple database application"
+    echo
     migrations
     exit
     ;;
 
-  down|redo|status|up)
-    cmd="${cmd}:$1"
-    ;;
-
-  *)
-    echo "unknown cmd $1, using :up as default"
-    cmd="${cmd}:up"
-    ;;
 esac
-shift
 
 while read -r migration; do
-  if [ $# -gt 0 ]; then
+  if [ $# -gt 1 ]; then
     for db in "$@"; do
       run "${cmd}:${db}" "${migration:0:14}"
     done
