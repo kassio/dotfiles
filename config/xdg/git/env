@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+export GIT_EDITOR="$EDITOR"
+export GIT_COMPLETION_CHECKOUT_NO_GUESS=1

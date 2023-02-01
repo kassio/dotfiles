@@ -10,7 +10,6 @@ export XDG_STATE_HOME="${HOME}/.local/state"
 export ZSH_CONFIG_HOME="${XDG_CONFIG_HOME}/zsh"
 
 export EDITOR="nvim"
-export GIT_EDITOR="$EDITOR"
 export GPG_TTY=$(tty)
 
 export HOMEBREW_PREFIX="/opt/homebrew"
@@ -111,6 +110,7 @@ source "${XDG_CONFIG_HOME}/ripgrep/env"
 source "${XDG_CONFIG_HOME}/ruby/env"
 source "${XDG_CONFIG_HOME}/go/env"
 source "${XDG_CONFIG_HOME}/iterm2"
+source "${XDG_CONFIG_HOME}/git/env"
 
 source "${ZSH_CONFIG_HOME}/bindkeys"
 source "${ZSH_CONFIG_HOME}/alias"
