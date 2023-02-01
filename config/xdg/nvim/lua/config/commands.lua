@@ -19,8 +19,10 @@ command('WriteWithPath', function()
 end, {})
 
 -- copy filename
-command('CopyFilename', utils.copy_filename, { bang = true, nargs = '?' })
-
+command('CopyFilename', utils.copy_filename, {
+  bang = true,
+  nargs = '?',
+})
 
 -- window size fix/unfix
 local fix_window_size = function()

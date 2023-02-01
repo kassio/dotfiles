@@ -14,6 +14,8 @@ return {
   'wellle/targets.vim',
   -- Split/Join commands
   'AndrewRadev/splitjoin.vim',
+  -- Sudo writer/reader
+  'lambdalisue/suda.vim',
 
   -- Better language support
   -- Lua
