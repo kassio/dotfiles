@@ -48,29 +48,12 @@ M.clickable = function(id, click_count, mouse_btn, modifiers)
   M.clickables[id](click_count, mouse_btn, modifiers)
 end
 
---- Renders a hbar component,
---- all extra arguments are passed to the component render() function
---- if the component has a on_click() function, it makes the rendered text clickable.
---
---- Example:
---
--- -- component:
--- {
---   render = function(arg1, arg2),
---   on_click = function(bufnr, click_count, mouse_btn, modifier)
--- }
---
---- render_component('name', 'arg1', 'arg2')
---
---- => "%1@v:lua.require'plugins.text'.on_click@text%X"
---
----@param name string clickable text
----@param ... any render extra arguments (passed as table)
----@return string
-M.render_component = function(name, ...)
+local render_component = function(name, ...)
   local args = ... or {}
   local path = 'config.hbar.components.' .. name
-  local component_ok, component = pcall(require, path)
+  -- local component_ok, component = pcall(require, path)
+  -- TODO
+  local component_ok, component = pcall(R, path)
   if not component_ok then
     return ''
   end
@@ -104,6 +87,35 @@ M.render_component = function(name, ...)
     return s
   else
     return result.formatted
+  end
+end
+
+--- Renders a hbar component,
+--- all extra arguments are passed to the component render() function
+--- if the component has a on_click() function, it makes the rendered text clickable.
+--
+--- Example:
+--
+-- -- component:
+-- {
+--   render = function(arg1, arg2),
+--   on_click = function(bufnr, click_count, mouse_btn, modifier)
+-- }
+--
+--- render_component('name', 'arg1', 'arg2')
+--
+--- => "%1@v:lua.require'plugins.text'.on_click@text%X"
+--
+---@param name string clickable text
+---@param ... any render extra arguments (passed as table)
+---@return string
+M.render_component = function(name, ...)
+  local ok, text = pcall(render_component, name, ...)
+
+  if ok then
+    return text
+  else
+    return name
   end
 end
 
