@@ -30,8 +30,8 @@ return {
       keymap('n', '<leader>tg', ':Tredo<cr>', { desc = 'neoterm: redo' })
 
       count_nkeymap('<leader>tt', '{{target}}Ttoggle', 'toggle')
-      count_nkeymap('<leader>vt', 'botright vertical {{target}} Ttoggle', 'vertical toggle')
-      count_nkeymap('<leader>ht', 'botright {{target}} Ttoggle', 'horizontal toggle')
+      count_nkeymap('<leader>tv', 'botright vertical {{target}} Ttoggle', 'vertical toggle')
+      count_nkeymap('<leader>th', 'botright {{target}} Ttoggle', 'horizontal toggle')
       count_nkeymap('<leader>te', '{{target}}T exit', 'exit')
       count_nkeymap('<leader>tl', '{{target}}Tclear', 'clear')
       count_nkeymap('<leader>tL', '{{target}}Tclear!', 'erase buffer')

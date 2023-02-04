@@ -5,14 +5,14 @@ return {
   },
   keys = {
     {
-      '<leader>pp',
+      '<leader>et',
       '<cmd>NvimTreeToggle<cr>',
       silent = true,
       desc = 'filetree: toggle',
     },
 
     {
-      '<leader>pf',
+      '<leader>ef',
       '<cmd>NvimTreeFindFile<cr>',
       silent = true,
       desc = 'filetree: find file',
