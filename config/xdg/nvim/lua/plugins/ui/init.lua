@@ -5,7 +5,7 @@ return {
     name = 'catppuccin',
     priority = 1000,
     config = function()
-      local highlights = require('plugins.theme.config.highlights')
+      local highlights = require('plugins.ui.config.highlights')
 
       require('catppuccin').setup({
         opts = {
@@ -58,7 +58,7 @@ return {
     'nvim-tree/nvim-web-devicons',
     priority = 999,
     config = function()
-      require('plugins.theme.config.icons').setup()
+      require('plugins.ui.config.icons').setup()
 
       local devicons = require('nvim-web-devicons')
       local icons = devicons.get_icons()
