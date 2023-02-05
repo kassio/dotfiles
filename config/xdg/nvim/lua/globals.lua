@@ -1,4 +1,6 @@
 local inspect_defaults = {
+  newline = '',
+  indent = '',
   process = function(item)
     if item == nil then
       return tostring(item)
