@@ -1,10 +1,11 @@
 return {
+  -- Theme
   {
     'catppuccin/nvim',
     name = 'catppuccin',
     priority = 1000,
     config = function()
-      local custom_highlights = require('plugins.theme.custom_highlights')
+      local highlights = require('plugins.theme.config.highlights')
 
       require('catppuccin').setup({
         opts = {
@@ -22,19 +23,42 @@ return {
             mason = true,
           },
         },
-        custom_highlights = custom_highlights,
+        custom_highlights = highlights,
       })
 
       vim.cmd.colorscheme('catppuccin')
     end,
   },
 
+  -- Notifications
+  {
+    'rcarriga/nvim-notify',
+    config = function()
+      local notify = require('notify')
+
+      notify.setup({
+        timeout = 1250,
+        on_open = function()
+          vim.cmd('doautocmd User NotificationOpened')
+        end,
+        on_close = function()
+          vim.cmd('doautocmd User NotificationClosed')
+        end,
+        top_down = false,
+      })
+
+      vim.notify = notify
+
+      vim.keymap.set('n', '<leader>nn', notify.dismiss)
+    end,
+  },
+
   -- Custom dev icons
   {
-    'kyazdani42/nvim-web-devicons',
+    'nvim-tree/nvim-web-devicons',
     priority = 999,
     config = function()
-      require('plugins.theme.custom_icons').setup()
+      require('plugins.theme.config.icons').setup()
 
       local devicons = require('nvim-web-devicons')
       local icons = devicons.get_icons()

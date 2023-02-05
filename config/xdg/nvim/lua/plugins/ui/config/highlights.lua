@@ -4,10 +4,10 @@ return function(colors)
     warn = '#F7C154',
     info = '#6699CC',
     hint = '#50A14F',
-    light_error = '#FD83A1',
-    light_warn = '#FFF4A8',
-    light_info = '#A5D0FF',
-    light_hint = '#B5E6CE',
+    error_light = '#FD83A1',
+    warn_light = '#FFF4A8',
+    info_light = '#A5D0FF',
+    hint_light = '#B5E6CE',
   }, colors)
 
   return {
@@ -25,10 +25,10 @@ return function(colors)
     ['Info'] = { fg = c.info },
     ['Hint'] = { fg = c.hint },
 
-    ['Error.Light'] = { fg = c.light_error },
-    ['Warn.Light'] = { fg = c.light_warn },
-    ['Info.Light'] = { fg = c.light_info },
-    ['Hint.Light'] = { fg = c.light_hint },
+    ['Error.Light'] = { fg = c.error_light },
+    ['Warn.Light'] = { fg = c.warn_light },
+    ['Info.Light'] = { fg = c.info_light },
+    ['Hint.Light'] = { fg = c.hint_light },
 
     -- diff
     ['@text.diff.delete'] = { fg = c.error },
