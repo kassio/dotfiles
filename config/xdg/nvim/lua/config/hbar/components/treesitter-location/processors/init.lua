@@ -1,13 +1,13 @@
 local default = function(nodes)
-  local text = ''
+  local result = {}
 
   for _, node in ipairs(nodes) do
     local _, value = table.unpack(node)
 
-    text = text .. ' » ' .. value
+    table.insert(result, value)
   end
 
-  return text
+  return table.concat(result, ' » ')
 end
 
 return {
