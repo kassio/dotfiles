@@ -5,7 +5,7 @@ return {
   },
   keys = {
     {
-      '<leader>et',
+      '<leader>ee',
       '<cmd>NvimTreeToggle<cr>',
       silent = true,
       desc = 'filetree: toggle',
