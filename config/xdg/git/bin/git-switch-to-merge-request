@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 
 # find branch from $remote matching $commit
 remote_branch_match() {
