@@ -5,14 +5,14 @@ return {
       '<leader>ee',
       '<cmd>NvimTreeToggle<cr>',
       silent = true,
-      desc = 'filetree: toggle',
+      desc = 'explorer: toggle',
     },
 
     {
       '<leader>ef',
       '<cmd>NvimTreeFindFile<cr>',
       silent = true,
-      desc = 'filetree: find file',
+      desc = 'explorer: find file',
     },
   },
   config = function()
