@@ -51,9 +51,7 @@ end
 local render_component = function(name, ...)
   local args = ... or {}
   local path = 'config.hbar.components.' .. name
-  -- local component_ok, component = pcall(require, path)
-  -- TODO
-  local component_ok, component = pcall(R, path)
+  local component_ok, component = pcall(require, path)
   if not component_ok then
     return ''
   end
