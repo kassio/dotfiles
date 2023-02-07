@@ -47,6 +47,9 @@ return {
         highlight_git = true,
         highlight_opened_files = 'all',
         indent_markers = { enable = true },
+        root_folder_label = function(path)
+          return '» ' .. vim.fn.fnamemodify(path, ':t')
+        end,
       },
       view = {
         number = false,
