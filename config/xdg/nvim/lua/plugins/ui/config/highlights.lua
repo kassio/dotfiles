@@ -105,10 +105,6 @@ return function(colors)
     ['hbar.mode.terminal'] = { bg = c.sapphire, fg = c.base, bold = true },
     ['hbar.mode.visual'] = { bg = c.pink, fg = c.base, bold = true },
 
-    -- nvim tree
-    ['NvimTreeOpenedFile'] = { bold = true, italic = true },
-    ['NvimTreeRootFolder'] = { link = 'NvimTreeFolderName', bold = true },
-
     -- dap
     ['DapBreakpoint'] = { fg = c.red },
     ['DapLogPoint'] = { fg = c.blue },

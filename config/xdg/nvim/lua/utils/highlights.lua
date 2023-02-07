@@ -1,18 +1,5 @@
 local M = {}
 
-M.get = function(name)
-  local ok, data = pcall(vim.api.nvim_get_hl_by_name, name, true)
-
-  if not ok then
-    local msg = string.format('Failed to find highlight by name "%s"', name)
-    vim.notify(msg, vim.log.levels.ERROR)
-
-    return {}
-  end
-
-  return data
-end
-
 M.def = function(group, color)
   local ok, msg = pcall(vim.api.nvim_set_hl, 0, group, color)
 
