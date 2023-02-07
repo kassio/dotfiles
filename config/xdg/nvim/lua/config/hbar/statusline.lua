@@ -5,7 +5,7 @@ return {
     return table.concat({
       hbar.render_component('mode'),
       '%#hbar.section.b#',
-      hbar.render_component('treesitter-location'),
+      hbar.render_component('treesitter-location', { clickable = true }),
       hbar.render_component('diagnostics'),
       '%#hbar.section.c#',
       '%=',

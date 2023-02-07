@@ -1,3 +1,13 @@
+if not table.unpack then
+  table.unpack = unpack
+end
+
+if not table.pack then
+  function table.pack(...)
+    return { ... }
+  end
+end
+
 --- Removes the given key from the table, returning its value.
 ---@param tbl table
 ---@param key any

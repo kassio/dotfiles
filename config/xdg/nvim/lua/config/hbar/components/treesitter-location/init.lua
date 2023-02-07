@@ -1,6 +1,4 @@
-if not table.unpack then
-  table.unpack = unpack
-end
+local utils = require('utils')
 
 local api = vim.api
 local ts = vim.treesitter
@@ -10,6 +8,9 @@ local ts_utils = require('nvim-treesitter.ts_utils')
 local processors = require('config.hbar.components.treesitter-location.processors')
 
 return {
+  on_click = function(msg, opts)
+    utils.to_clipboard(vim.trim(msg), opts.mouse_btn ~= 'l')
+  end,
   render = function()
     local bufnr = api.nvim_get_current_buf()
     local filetype = api.nvim_buf_get_option(bufnr, 'filetype')
