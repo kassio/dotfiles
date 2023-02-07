@@ -49,7 +49,7 @@ return {
 
       vim.notify = notify
 
-      vim.keymap.set('n', '<leader>nn', notify.dismiss)
+      vim.keymap.set('n', '<leader>nn', notify.dismiss, { desc = 'notification: dismiss' })
     end,
   },
 
