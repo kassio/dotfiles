@@ -53,7 +53,7 @@ rubocop-diff() {
 
   diff-to "${ref}" |
     grep '.rb' |
-    xargs bundle rubocop --parallel "$@"
+    xargs bundle exec rubocop --parallel "$@"
 }
 
 rspec-diff() {
