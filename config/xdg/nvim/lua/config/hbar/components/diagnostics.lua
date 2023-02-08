@@ -1,3 +1,5 @@
+local hl = require('utils.highlights')
+
 local format_diagnostic = function(level)
   local count = vim.tbl_count(vim.diagnostic.get(0, {
     severity = vim.diagnostic.severity[string.upper(level)],
@@ -7,7 +9,7 @@ local format_diagnostic = function(level)
     return ''
   end
 
-  return string.format('%%#hbar.diagnostics.%s#%s%s', level, Theme.icons[level], count)
+  return string.format('%%#hbar.diagnostics.%s#%s%s', level, hl.get_sign_icon(level), count)
 end
 
 return {
