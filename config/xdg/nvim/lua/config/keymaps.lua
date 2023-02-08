@@ -12,7 +12,11 @@ keymap.set('x', 'aF', ':<c-u>keepjumps normal! GVgg0<cr>', { desc = 'select all 
 keymap.set('o', 'aF', '":normal vaF<cr>"', { expr = true, desc = 'select all lines' })
 ------------------------------------------------------------
 
-keymap.set('n', [[Q]], [[<nop>]], { desc = 'disable ex mode' })
+keymap.set('n', 'Q', '<nop>', { desc = 'disable ex mode' })
+
+-- remap jumps
+keymap.set('n', '<leader>jn', '<c-i>', { desc = 'jump: newer cursor position' })
+keymap.set('n', '<leader>jp', '<c-o>', { desc = 'jump: older cursor position' })
 
 keymap.set('n', 'gf', ':e <cfile><cr>', { desc = 'allow gf to open non-existing files' })
 keymap.set(
