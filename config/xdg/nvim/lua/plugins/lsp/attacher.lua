@@ -31,6 +31,4 @@ return function(client, bufnr)
   keymap(bufnr, 'implementations', 'n', 'gli', function()
     telescope.lsp_implementations({ jump_type = 'never' })
   end)
-
-  vim.notify(client.name .. ' loaded', nil, { title = 'LSP' })
 end
