@@ -78,6 +78,12 @@ alias remove-quarentine-chromedriver="remove-quarentine chromedriver"
 #    jtail log/importer.log 'del(.severity, .time, .correlation_id)'
 jtail() {
   local file="$1"
+  local cmd=""
   shift
-  tail -f "${file}" | jq -cC "$@"
+
+  if [ $# -gt 0 ]; then
+    cmd="| $@"
+  fi
+
+  tail -f "${file}" | jq -cCR "fromjson? ${cmd}"
 }
