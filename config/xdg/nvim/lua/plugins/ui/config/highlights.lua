@@ -77,7 +77,7 @@ return function(colors)
     -- tabline
     ['TabLine'] = { bg = c.base, fg = c.surface2 },
     ['TabLineSel'] = { bg = c.base, fg = c.blue, bold = true },
-    ['TabLineFill'] = { bg = c.surface0 },
+    ['TabLineFill'] = { bg = c.surface0, fg = c.surface0 },
 
     -- hbar: sections
     ['hbar.section.a'] = { bg = c.blue, fg = c.base, bold = true },

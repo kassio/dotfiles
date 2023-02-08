@@ -1,6 +1,6 @@
 local hbar = require('config.hbar.utils')
 local api = vim.api
-local SEP = '|'
+local SEP = ' '
 
 local get_limit = function(labels, columns)
   local curtab_page = 0
