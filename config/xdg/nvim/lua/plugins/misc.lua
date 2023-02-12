@@ -12,8 +12,6 @@ return {
   'tpope/vim-repeat',
   -- Extended text objects
   'wellle/targets.vim',
-  -- Split/Join commands
-  'AndrewRadev/splitjoin.vim',
   -- Sudo writer/reader
   'lambdalisue/suda.vim',
 
