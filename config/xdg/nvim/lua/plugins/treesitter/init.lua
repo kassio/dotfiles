@@ -1,9 +1,10 @@
 return {
   {
     'Wansmer/treesj',
+    cmd = { 'TSJJoin', 'TSJSplit', 'TSJToggle' },
     keys = {
-      { 'gj', '<cmd>TSJJoin<cr>', silent = true, desc = 'tsj: join nodes' },
-      { 'gs', '<cmd>TSSplit<cr>', silent = true, desc = 'tsj: split nodes' },
+      { 'gJ', '<cmd>TSJJoin<cr>', silent = true, desc = 'tsj: join nodes' },
+      { 'gS', '<cmd>TSJSplit<cr>', silent = true, desc = 'tsj: split nodes' },
     },
     config = function()
       require('treesj').setup({
