@@ -2,7 +2,7 @@ local util = require('lspconfig.util')
 local fn = vim.fn
 
 return {
-  sumneko_lua = {
+  lua_ls = {
     root_dir = util.root_pattern('.stylua.toml'),
     settings = {
       Lua = {
