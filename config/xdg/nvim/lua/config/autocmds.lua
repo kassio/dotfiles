@@ -11,6 +11,7 @@ local function set_focus(value)
   end
 
   vim.opt_local.relativenumber = value
+  vim.cmd.normal('zz')
 end
 
 utils.augroup('user:focus', {
