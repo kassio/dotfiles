@@ -3,15 +3,14 @@ local utils = require('utils')
 vim.g.lastplace_ignore = 'gitcommit,gitrebase'
 vim.g.lastplace_ignore_buftype = 'quickfix,nofile,help'
 
-local function set_focus(value)
+local function set_focus(focus)
   local ft = vim.bo.filetype
 
   if ft == '' or utils.plugin_filetype(ft) then
     return
   end
 
-  vim.opt_local.relativenumber = value
-  vim.cmd.normal('zz')
+  vim.opt_local.relativenumber = focus
 end
 
 utils.augroup('user:focus', {
