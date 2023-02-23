@@ -21,19 +21,19 @@ keymap.set('n', '<leader>jp', '<c-o>', { desc = 'jump: older cursor position' })
 keymap.set('n', 'gf', ':e <cfile><cr>', { desc = 'allow gf to open non-existing files' })
 keymap.set(
   'n',
-  '<c-f>f',
+  '<c-g>f',
   ':split <cfile><cr>',
   { desc = 'open filepath under the cursor (horizontal split)' }
 )
 keymap.set(
   'n',
-  '<c-f>v',
+  '<c-g>v',
   ':vsplit <cfile><cr>',
   { desc = 'open filepath under the cursor (vertical split)' }
 )
 keymap.set(
   'n',
-  '<c-f>t',
+  '<c-g>t',
   ':tabedit <cfile><cr>',
   { desc = 'open filepath under the cursor (new tab)' }
 )
