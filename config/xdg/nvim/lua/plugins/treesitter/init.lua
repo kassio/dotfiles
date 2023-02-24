@@ -1,19 +1,5 @@
 return {
   {
-    'Wansmer/treesj',
-    cmd = { 'TSJJoin', 'TSJSplit', 'TSJToggle' },
-    keys = {
-      { 'gJ', '<cmd>TSJJoin<cr>', silent = true, desc = 'tsj: join nodes' },
-      { 'gS', '<cmd>TSJSplit<cr>', silent = true, desc = 'tsj: split nodes' },
-    },
-    config = function()
-      require('treesj').setup({
-        use_default_keymaps = false,
-      })
-    end,
-  },
-
-  {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     dependencies = {
