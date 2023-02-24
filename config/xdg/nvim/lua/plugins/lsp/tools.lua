@@ -13,7 +13,6 @@ local map = table.slice(lsp_package, {
   'jsonnet-language-server',
   'lua-language-server',
   'rubocop',
-  'ruby-lsp',
   'shellcheck',
   'shfmt',
   'solargraph',
