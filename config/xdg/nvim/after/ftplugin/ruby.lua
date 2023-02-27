@@ -23,3 +23,22 @@ require('nvim-surround').buffer_setup({
     },
   },
 })
+
+vim.api.nvim_create_user_command('RSpec', function(cmd)
+  local _, lnum, col = table.unpack(vim.fn.getcurpos())
+  local file = cmd.args
+
+  if file == '' then
+    file = vim.fn.expand('%')
+  end
+
+  vim.g['test#last_position'] = {
+    file = file,
+    line = lnum,
+    col = col,
+  }
+
+  vim.cmd.T(string.format('bundle exec rspec %s:%s:%s', file, lnum, col))
+end, { nargs = '?' })
+
+vim.cmd('cabbrev Rspec RSpec')
