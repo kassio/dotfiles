@@ -136,18 +136,6 @@ return {
     {
       '<leader>fgm',
       function()
-        require('telescope.builtin').find_files({
-          find_command = { 'git', 'ls-files', '--modified' },
-          prompt_title = 'git: modified files',
-        })
-      end,
-      silent = true,
-      desc = 'telescope: git modified files',
-    },
-
-    {
-      '<leader>fgd',
-      function()
         local main = vim.fn.system('git-branch-main')
 
         require('telescope.builtin').find_files({
@@ -159,6 +147,18 @@ return {
             string.format('%s...', vim.trim(main)),
           },
           prompt_title = 'git: branch diff',
+        })
+      end,
+      silent = true,
+      desc = 'telescope: git modified files',
+    },
+
+    {
+      '<leader>fgd',
+      function()
+        require('telescope.builtin').find_files({
+          find_command = { 'git', 'ls-files', '--modified' },
+          prompt_title = 'git: modified files',
         })
       end,
       silent = true,
