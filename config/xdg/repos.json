@@ -41,7 +41,7 @@
   },
   {
     "name": "trip budget",
-    "remote": "https://gitlab.com/kassio/tripbudget",
+    "remote": "https://gitlab.com/tripbudget/tripbudget.gitlab.io",
     "local": "$HOME/src/tripbudget"
   }
 ]
