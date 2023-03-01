@@ -41,6 +41,7 @@ brew "lsd" # ls replacement
 brew "luajit", args: ["HEAD"]
 brew "markdownlint-cli"
 brew "mas"
+brew "mike-engel/jwt-cli/jwt-cli"
 brew "neovim", args: ["HEAD"]
 brew "pstree"
 brew "re2"
