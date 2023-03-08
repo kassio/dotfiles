@@ -21,20 +21,36 @@ M.plugin_filetypes = {
   'packer',
 }
 
+local ensure_positive = function(value)
+  if value < 0 then
+    return 0
+  end
+
+  return value
+end
+
 --- Get current visual selection text.
 ---@return string
 M.get_visual_selection = function()
-  if vim.api.nvim_get_mode().mode == 'n' then
-    return vim.fn.expand('<cword>')
-  end
+  local _, start_row, start_col, _ = table.unpack(fn.getpos("'<"))
+  local _, end_row, end_col, _ = table.unpack(fn.getpos("'>"))
 
-  local s_start = vim.api.nvim_buf_get_mark(0, '<')
-  local s_end = vim.api.nvim_buf_get_mark(0, '>')
-  local start_row = s_start[1] - 1
-  local start_col = s_start[2]
-  local end_row = s_end[1] - 1
-  local end_col = s_end[2] + 1
-  local ok, lines = pcall(vim.api.nvim_buf_get_text, 0, start_row, start_col, end_row, end_col, {})
+  local selection = {
+    start_row = ensure_positive(start_row - 1),
+    start_col = ensure_positive(start_col - 1),
+    end_row = ensure_positive(end_row - 1),
+    end_col = end_col,
+  }
+
+  local ok, lines = pcall(
+    api.nvim_buf_get_text,
+    0,
+    selection.start_row,
+    selection.start_col,
+    selection.end_row,
+    selection.end_col,
+    {}
+  )
 
   if not ok then
     print('Failed to get selection: ' .. lines)
