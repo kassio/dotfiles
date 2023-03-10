@@ -14,7 +14,7 @@ return function(colors)
     -- globals
     ['IncSearch'] = { fg = c.base, bg = c.yellow },
     ['Search'] = { fg = c.base, bg = c.yellow },
-    ['CurSearch'] = { fg = c.base, bg = c.red, style = { 'italic', 'bold' } },
+    ['CurSearch'] = { fg = c.base, bg = c.red, italic = true, bold = true },
 
     ['@string'] = { fg = c.green },
     ['@string.special'] = { fg = c.green, bold = true },
