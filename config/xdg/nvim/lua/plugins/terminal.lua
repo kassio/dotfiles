@@ -28,6 +28,12 @@ return {
       end
 
       keymap('n', '<leader>tg', ':Tredo<cr>', { desc = 'neoterm: redo' })
+      keymap(
+        'n',
+        '<leader>tm',
+        vim.fn['neoterm#map_do'],
+        { desc = 'neoterm: run command saved with Tmap' }
+      )
 
       count_nkeymap('<leader>tt', '{{target}}Ttoggle', 'toggle')
       count_nkeymap('<leader>tv', 'botright vertical {{target}} Ttoggle', 'vertical toggle')
@@ -38,7 +44,7 @@ return {
       count_nkeymap('<leader>tk', '{{target}}Tkill', 'kill (send ctrl_c)')
 
       g.neoterm_default_mod = 'botright'
-      g.neoterm_automap_keys = '<leader>tm'
+      g.neoterm_automap_keys = ''
       g.neoterm_use_relative_path = 1
       g.neoterm_autoscroll = 1
       g.neoterm_callbacks = {
