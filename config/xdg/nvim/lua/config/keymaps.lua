@@ -18,26 +18,6 @@ keymap.set('n', 'Q', '<nop>', { desc = 'disable ex mode' })
 keymap.set('n', '<leader>jn', '<c-i>', { desc = 'jump: newer cursor position' })
 keymap.set('n', '<leader>jp', '<c-o>', { desc = 'jump: older cursor position' })
 
-keymap.set('n', 'gf', ':e <cfile><cr>', { desc = 'allow gf to open non-existing files' })
-keymap.set(
-  'n',
-  '<c-g>f',
-  ':split <cfile><cr>',
-  { desc = 'open filepath under the cursor (horizontal split)' }
-)
-keymap.set(
-  'n',
-  '<c-g>v',
-  ':vsplit <cfile><cr>',
-  { desc = 'open filepath under the cursor (vertical split)' }
-)
-keymap.set(
-  'n',
-  '<c-g>t',
-  ':tabedit <cfile><cr>',
-  { desc = 'open filepath under the cursor (new tab)' }
-)
-
 keymap.set('n', 'j', 'gj', { silent = true })
 keymap.set('n', 'k', 'gk', { silent = true })
 

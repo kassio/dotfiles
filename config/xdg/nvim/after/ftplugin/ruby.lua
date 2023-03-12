@@ -42,3 +42,4 @@ vim.api.nvim_create_user_command('RSpec', function(cmd)
 end, { nargs = '?' })
 
 vim.cmd('cabbrev Rspec RSpec')
+vim.opt_local.path:append({ 'lib/' })
