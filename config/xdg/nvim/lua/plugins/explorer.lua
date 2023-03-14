@@ -10,7 +10,10 @@ return {
 
     {
       '<leader>ef',
-      '<cmd>NvimTreeFindFile<cr>',
+      function()
+        vim.cmd('NvimTreeFindFile')
+        vim.cmd('NvimTreeFocus')
+      end,
       silent = true,
       desc = 'explorer: find file',
     },
