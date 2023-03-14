@@ -32,9 +32,6 @@ alias RS="RAILS_ENV=staging"
 alias RP="RAILS_ENV=production"
 alias DS="DISABLE_SPRING=1"
 
-# Colorify "go test" output
-alias go="${HOMEBREW_PREFIX}/bin/grc go"
-
 alias c="code"
 
 alias tailf="tail -f"
