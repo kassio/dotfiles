@@ -28,4 +28,4 @@ end"
 
 while read line; do
   echo "${line}" | jq -RCc "${cmd}"
-done < "${1:-/dev/stdin}"
+done < /dev/stdin
