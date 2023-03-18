@@ -1,0 +1,31 @@
+#!/usr/bin/env zsh
+
+# Parses logs/jsons that have a file:linenumber header, so, a log like:
+#
+#    filename:10: {"some": "json", "in": 10}
+#    filename:10: {"some": "otherjson", "in": 10}
+#    filename:10: {"some": "andnewjson", "in": 10}
+#
+# when called like: cat /some/log/file | title-jq ".some"
+#
+#    json
+#    otherjson
+#    andjson
+#
+matcher="\"^.*:[0-9]+: ({.*)\""
+cmd=". as \$raw |
+if test(${matcher}) then
+  try (
+    match(${matcher})
+    | .captures
+    | .[]
+    | .string
+    | fromjson
+  ) catch {msg: \"\(\$raw)\"}
+else
+  try fromjson catch {msg: \"\(\$raw)\"}
+end"
+
+while read line; do
+  echo "${line}" | jq -RCc "${cmd}"
+done < "${1:-/dev/stdin}"
