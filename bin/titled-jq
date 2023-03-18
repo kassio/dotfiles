@@ -13,7 +13,7 @@
 #    andjson
 #
 matcher="\"^.*:[0-9]+: ({.*)\""
-cmd=". as \$raw |
+jqcmd=". as \$raw |
 if test(${matcher}) then
   try (
     match(${matcher})
@@ -24,8 +24,15 @@ if test(${matcher}) then
   ) catch {msg: \"\(\$raw)\"}
 else
   try fromjson catch {msg: \"\(\$raw)\"}
-end"
+end |
+  . as \$parsed"
+
+if [ $# -gt 0 ]; then
+  jqcmd="${jqcmd} | try $@ catch \$parsed"
+else
+  jqcmd="${jqcmd} | \$parsed"
+fi
 
 while read line; do
-  echo "${line}" | jq -RCc "${cmd}"
+  echo "${line}" | jq -RCc "${jqcmd}"
 done < /dev/stdin
