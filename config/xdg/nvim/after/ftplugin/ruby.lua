@@ -42,4 +42,24 @@ vim.api.nvim_create_user_command('RSpec', function(cmd)
 end, { nargs = '?' })
 
 vim.cmd('cabbrev Rspec RSpec')
-vim.opt_local.path:append({ 'lib/' })
+vim.opt_local.path:append({
+  'app/channels',
+  'app/components',
+  'app/controllers',
+  'app/enums',
+  'app/events',
+  'app/experiments',
+  'app/finders',
+  'app/graphql',
+  'app/helpers',
+  'app/mailers',
+  'app/models',
+  'app/policies',
+  'app/presenters',
+  'app/serializers',
+  'app/services',
+  'app/uploaders',
+  'app/validators',
+  'app/workers',
+  'lib',
+})
