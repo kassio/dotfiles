@@ -83,5 +83,15 @@ opt.wrap = false
 opt.writebackup = false
 opt.scrolloff = 3
 
+opt.number = true
+opt.relativenumber = true
+opt.numberwidth = 5
+opt.statuscolumn = '%{%v:lua.require("config.status.statuscolumn").render()%}'
+
+opt.winbar = '%{%v:lua.require("config.status.winbar").render()%}'
+
+opt.laststatus = 3
+opt.statusline = '%{%v:lua.require("config.status.statusline").render()%}'
+
 -- fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
