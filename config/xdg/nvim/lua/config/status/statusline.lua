@@ -111,8 +111,8 @@ return {
       mode(),
       diagnositcs(),
       '%=',
+      '%S',
       git_status(),
-      '%<', -- truncate branch name if stautsline is too long
       git_branch(),
     })
 
