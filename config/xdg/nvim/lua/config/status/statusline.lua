@@ -38,7 +38,7 @@ local function mode()
     return mode_code
   end
 
-  return mode_map[mode_code]
+  return string.format('%%#Info#%s%%*', mode_map[mode_code])
 end
 
 local function diagnositcs()
