@@ -9,7 +9,7 @@ local keymap = function(bufnr, desc, mode, lhs, rhs)
   })
 end
 
-return function(client, bufnr)
+return function(_client, bufnr)
   keymap(bufnr, 'hover', 'n', 'K', lsp.buf.hover)
   keymap(bufnr, 'signature help', 'n', '<c-k>', lsp.buf.signature_help)
   keymap(bufnr, 'rename', 'n', 'grr', lsp.buf.rename)
