@@ -9,11 +9,13 @@ dap_go.setup()
 vim.api.nvim_create_user_command('GoDebugTest', dap_go.debug_test, {})
 vim.keymap.set('n', '<leader>dt', '<cmd>GoDebugTest<cr>')
 
-vim.api.nvim_create_user_command('GoAcceptance', function(cmd)
-  local cmds = {
-    'clear',
-    'make',
-    string.format("GOFLAGS='-count=1' go test -v -run '%s' ./test/acceptance", cmd.args),
-  }
-  vim.cmd.T(table.concat(cmds, ' && '))
-end, { nargs = 1 })
+vim.api.nvim_create_user_command('GoAcceptance', function(c)
+  local cmd = string.format("GOFLAGS='-count=1' go test -v ./test/acceptance", c.args)
+  if #c.args > 0 then
+    cmd = string.format("GOFLAGS='-count=1' go test -v -run '%s' ./test/acceptance", c.args)
+  end
+
+  local command = { 'clear', 'make', cmd }
+
+  vim.cmd.T(table.concat(command, ' && '))
+end, { nargs = '?' })
