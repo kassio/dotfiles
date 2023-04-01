@@ -65,15 +65,9 @@ local function git_status()
   local counters = vim.b['gitsigns_status_dict'] or {}
 
   local labels = {
-    added = '+',
-    changed = '~',
-    removed = '-',
-  }
-
-  local highlights = {
-    added = 'Hint',
-    changed = 'Warn',
-    removed = 'Error',
+    added = { icon = '+', hl = 'Hint' },
+    changed = { icon = '~', hl = 'Warn' },
+    removed = { icon = '-', hl = 'Error' },
   }
 
   local statusList = vim.tbl_map(function(name)
@@ -83,7 +77,9 @@ local function git_status()
       return ''
     end
 
-    return string.format('%%#%s#%s%d%%*', highlights[name], labels[name], count)
+    local label = labels[name]
+
+    return string.format('%%#%s#%s%d%%*', label.hl, label.icon, count)
   end, { 'added', 'changed', 'removed' })
 
   statusList = vim.tbl_filter(function(e)

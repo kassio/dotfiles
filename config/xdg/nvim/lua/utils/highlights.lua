@@ -30,7 +30,7 @@ end
 M.get_sign_icon = function(name)
   local sign = vim.fn.sign_getdefined(name)[1]
 
-  return vim.trim(sign.text)
+  return vim.trim(sign.text), vim.trim(sign.texthl or '')
 end
 
 return M

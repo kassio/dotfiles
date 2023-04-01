@@ -93,7 +93,7 @@ opt.winbar = '%{%v:lua.require("config.status.winbar").render()%}'
 opt.laststatus = 3
 opt.cmdheight = 0
 opt.showcmdloc = 'statusline'
-opt.statusline = '%{%v:lua.R("config.status.statusline").render()%}'
+opt.statusline = '%{%v:lua.require("config.status.statusline").render()%}'
 
 -- fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
