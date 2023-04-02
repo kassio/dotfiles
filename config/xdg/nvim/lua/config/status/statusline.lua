@@ -108,6 +108,7 @@ return {
       diagnositcs(),
       '%=',
       '%S',
+      vim.g.macromsg,
       git_status(),
       git_branch(),
     })

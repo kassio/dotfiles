@@ -51,9 +51,7 @@ utils.augroup('user:focus', {
     end,
   },
   {
-    events = {
-      'FileType',
-    },
+    events = { 'FileType' },
     pattern = {
       'gitcommit',
       'markdown',
@@ -61,6 +59,22 @@ utils.augroup('user:focus', {
     callback = function()
       vim.opt_local.wrap = true
       vim.opt_local.spell = true
+    end,
+  },
+  {
+    events = { 'RecordingEnter' },
+    callback = function()
+      vim.g.macromsg = string.format('recording @%s', vim.fn.reg_recording())
+    end,
+  },
+  {
+    events = { 'RecordingLeave' },
+    callback = function()
+      vim.g.macromsg = vim.v.event.regname .. ' recorded'
+
+      utils.after(3000, function()
+        vim.g.macromsg = ''
+      end)
     end,
   },
   {

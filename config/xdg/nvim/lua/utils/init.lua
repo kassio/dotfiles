@@ -121,4 +121,9 @@ M.copy_filename = function(cmd)
   M.to_clipboard(filename, cmd.bang)
 end
 
+M.after = function(ms, callback)
+  local timer = vim.loop.new_timer()
+  timer:start(ms, 0, callback)
+end
+
 return M
