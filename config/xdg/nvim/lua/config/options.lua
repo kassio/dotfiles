@@ -88,12 +88,14 @@ opt.relativenumber = true
 opt.numberwidth = 5
 opt.statuscolumn = '%{%v:lua.require("config.status.statuscolumn").render()%}'
 
-opt.winbar = '%{%v:lua.require("config.status.winbar").render()%}'
-
 opt.laststatus = 3
 opt.cmdheight = 0
 opt.showcmdloc = 'statusline'
 opt.statusline = '%{%v:lua.require("config.status.statusline").render()%}'
+
+opt.tabline = '%{%v:lua.R("config.status.tabline").render()%}'
+
+opt.winbar = '%{%v:lua.require("config.status.winbar").render()%}'
 
 -- fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
