@@ -38,7 +38,7 @@ local function mode()
     return mode_code
   end
 
-  return string.format('%%#Info#%s%%*', mode_map[mode_code])
+  return string.format('%s', mode_map[mode_code])
 end
 
 local function diagnositcs()
@@ -51,7 +51,7 @@ local function diagnositcs()
       return ''
     end
 
-    return string.format('%%#%s#%s%s%%*', level, hl.get_sign_icon(level), count)
+    return string.format('%%#%s#%s%s%%*', string.camelcase(level), hl.get_sign_icon(level), count)
   end, { 'error', 'warn', 'info', 'hint' })
 
   diagnosticList = vim.tbl_filter(function(e)
@@ -96,7 +96,7 @@ local function git_branch()
     return ''
   end
 
-  return string.format('%%#Info# %s%%*', branch)
+  return string.format(' %s', branch)
 end
 
 return {
@@ -104,6 +104,7 @@ return {
     local components = vim.tbl_filter(function(value)
       return value ~= ''
     end, {
+      '%#StatusLine#',
       mode(),
       diagnositcs(),
       '%=',

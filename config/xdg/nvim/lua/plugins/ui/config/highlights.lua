@@ -65,6 +65,10 @@ return function(colors)
     ['DiagnosticVirtualTextInfo'] = { link = 'Info.Light' },
     ['DiagnosticVirtualTextHint'] = { link = 'Hint.Light' },
 
+    -- statusline
+    ['StatusLine'] = { fg = c.blue },
+    ['StatusLineNC'] = { fg = c.surface1 },
+
     -- winbar
     ['WinBar'] = { fg = c.blue, bold = true },
     ['WinBarNC'] = { bg = c.base, fg = c.surface1 },
