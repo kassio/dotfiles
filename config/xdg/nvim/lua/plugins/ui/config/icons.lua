@@ -2,11 +2,12 @@ local def_sign = require('utils.highlights').def_sign
 
 return {
   setup = function()
-    -- diagnostics
+    -- generic
     def_sign('error', '')
     def_sign('warn', '')
     def_sign('info', '')
     def_sign('hint', '')
+    def_sign('todo', '')
 
     -- diagnostics
     def_sign('DiagnosticSignError', '')
