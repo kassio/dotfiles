@@ -13,7 +13,7 @@ return {
     end
 
     if vim.v.relnum == 0 then
-      lnum = '∙%l∙%='
+      lnum = '%=∙%l∙'
     end
 
     return table.concat({
