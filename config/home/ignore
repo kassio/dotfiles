@@ -6,6 +6,7 @@
 
 # IDEs
 .idea/
+.theia/
 .vscode/
 *swo
 *swp
@@ -16,6 +17,7 @@ tags
 tags.gems
 
 # ruby and rails
+.bundle
 .byebug_history
 tmp/
 log/

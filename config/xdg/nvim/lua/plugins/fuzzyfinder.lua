@@ -18,7 +18,10 @@ return {
     {
       '<leader>ff',
       function()
-        require('telescope.builtin').find_files()
+        require('telescope.builtin').find_files({
+          -- include hidden files
+          find_command = { 'rg', '--files', '--hidden', '--glob', '!**/.git/*' },
+        })
       end,
       silent = true,
       desc = 'telescope: find files',
