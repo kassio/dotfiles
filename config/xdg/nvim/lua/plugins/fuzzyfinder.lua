@@ -15,16 +15,14 @@ return {
       silent = true,
       desc = 'telescope: files [non block]',
     },
-
     {
-      '<leader>fp',
+      '<leader>ff',
       function()
         require('telescope.builtin').find_files()
       end,
       silent = true,
       desc = 'telescope: find files',
     },
-
     {
       '<leader>fP',
       function()
@@ -33,7 +31,6 @@ return {
       silent = true,
       desc = 'telescope: resume fuzzyfinder',
     },
-
     {
       '<leader>fy',
       function()
@@ -42,16 +39,14 @@ return {
       silent = true,
       desc = 'telescope: live grep',
     },
-
     {
-      '<leader>ff',
+      '<leader>fa',
       function()
         require('telescope.builtin').builtin({ previwer = false })
       end,
       silent = true,
       desc = 'telescope: finders',
     },
-
     {
       '<leader>fh',
       function()
@@ -60,7 +55,6 @@ return {
       silent = true,
       desc = 'telescope: help tags',
     },
-
     {
       '<leader>fb',
       function()
@@ -69,7 +63,6 @@ return {
       silent = true,
       desc = 'telescope: buffers',
     },
-
     {
       '<leader>fl',
       function()
@@ -78,7 +71,6 @@ return {
       silent = true,
       desc = 'telescope: highlights',
     },
-
     {
       '<leader>fk',
       function()
@@ -87,7 +79,6 @@ return {
       silent = true,
       desc = 'telescope: keymaps',
     },
-
     {
       '<leader>fn',
       function()
@@ -96,7 +87,6 @@ return {
       silent = true,
       desc = 'telescope: current buffer finder',
     },
-
     {
       '<leader>fo',
       function()
@@ -105,7 +95,6 @@ return {
       silent = true,
       desc = 'telescope: oldfiles',
     },
-
     {
       '<leader>ft',
       function()
@@ -114,7 +103,6 @@ return {
       silent = true,
       desc = 'telescope: treesitter',
     },
-
     {
       '<leader>fm',
       function()
@@ -123,7 +111,6 @@ return {
       silent = true,
       desc = 'telescope: commands',
     },
-
     {
       '<leader>fgg',
       function()
@@ -132,7 +119,6 @@ return {
       silent = true,
       desc = 'telescope: git files',
     },
-
     {
       '<leader>fgm',
       function()
@@ -152,7 +138,6 @@ return {
       silent = true,
       desc = 'telescope: git modified files',
     },
-
     {
       '<leader>fgd',
       function()
@@ -164,7 +149,6 @@ return {
       silent = true,
       desc = 'telescope: git branch diff',
     },
-
     {
       '<leader>fr',
       function()
@@ -176,7 +160,6 @@ return {
       silent = true,
       desc = 'telescope: rails (app, lib)',
     },
-
     {
       '<leader>fR',
       function()
@@ -188,7 +171,6 @@ return {
       silent = true,
       desc = 'telescope: rails (app, lib, spec)',
     },
-
     {
       '<leader>as',
       function()
@@ -197,7 +179,6 @@ return {
       silent = true,
       desc = 'telescope: grep string',
     },
-
     {
       '<leader>as',
       function()
