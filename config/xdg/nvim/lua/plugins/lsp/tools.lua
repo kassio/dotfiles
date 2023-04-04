@@ -12,7 +12,6 @@ local map = table.slice(lsp_package, {
   'json-lsp',
   'jsonnet-language-server',
   'lua-language-server',
-  'rubocop',
   'rust-analyzer',
   'rustfmt',
   'shellcheck',
@@ -20,7 +19,6 @@ local map = table.slice(lsp_package, {
   'solargraph',
   'sql-formatter',
   'sqlls',
-  'sqls',
   'stylua',
   'tailwindcss-language-server',
   'typescript-language-server',
@@ -28,8 +26,6 @@ local map = table.slice(lsp_package, {
   'vim-language-server',
   'vue-language-server',
   'yaml-language-server',
-  'yamlfmt',
-  'yamllint',
 })
 
 return {
