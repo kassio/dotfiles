@@ -1,3 +1,5 @@
+vim.loader.enable()
+
 -- global functions
 require('globals')
 
