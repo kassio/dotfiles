@@ -11,8 +11,8 @@ M.trim = function()
   vim.opt.hlsearch = false
 
   M.preserve(function()
-    vim.cmd([[silent %s/\v\s+$//e]])
-    vim.cmd([[silent %s/\v($\n\s*)+%$//e]])
+    vim.cmd([[keeppatterns silent %s/\v\s+$//e]])
+    vim.cmd([[keeppatterns silent %s/\v($\n\s*)+%$//e]])
   end)
 
   vim.opt.hlsearch = hlsearch
