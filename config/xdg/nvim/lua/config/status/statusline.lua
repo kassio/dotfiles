@@ -99,6 +99,28 @@ local function git_branch()
   return string.format(' %s', branch)
 end
 
+local function search_count()
+  if vim.v.hlsearch == 0 then
+    return ''
+  end
+
+  local maxcount = 999
+  local term = vim.fn.getreg('@')
+  local result = vim.fn.searchcount({ maxcount = maxcount, timeout = 500 })
+  local current = result.current
+  local total = result.total
+
+  if total > result.maxcount then
+    total = '>' .. maxcount
+  end
+
+  if result.incomplete == 1 then
+    total = '??'
+  end
+
+  return string.format('/%s [%s/%s]', term, current, total)
+end
+
 return {
   render = function()
     local components = vim.tbl_filter(function(value)
@@ -110,6 +132,7 @@ return {
       '%=',
       '%S',
       vim.g.macromsg,
+      search_count(),
       git_status(),
       git_branch(),
     })
