@@ -4,6 +4,9 @@ local opt = vim.opt
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- fix markdown indentation settings
+vim.g.markdown_recommended_style = 0
+
 opt.autowriteall = true
 opt.backup = false
 opt.cindent = true
@@ -96,6 +99,3 @@ opt.statusline = '%{%v:lua.require("config.status.statusline").render()%}'
 opt.tabline = '%{%v:lua.R("config.status.tabline").render()%}'
 
 opt.winbar = '%{%v:lua.require("config.status.winbar").render()%}'
-
--- fix markdown indentation settings
-vim.g.markdown_recommended_style = 0
