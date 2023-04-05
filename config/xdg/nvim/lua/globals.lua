@@ -16,16 +16,7 @@ end
 -- Reloads a package by name
 -- If it fails to be loaded the error is printed
 _G.R = function(name)
-  if package.loaded[name] ~= nil then
-    package.loaded[name] = nil
-  end
+  package.loaded[name] = nil
 
-  local status, result = pcall(require, name)
-
-  if status then
-    return result -- package
-  else
-    print('Failed to load ' .. name)
-    print(result) -- error message
-  end
+  return require(name)
 end
