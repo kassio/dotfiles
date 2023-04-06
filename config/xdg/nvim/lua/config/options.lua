@@ -85,17 +85,3 @@ opt.wildignorecase = true
 opt.wrap = false
 opt.writebackup = false
 opt.scrolloff = 3
-
-opt.number = true
-opt.relativenumber = true
-opt.numberwidth = 5
-opt.statuscolumn = '%{%v:lua.require("config.status.statuscolumn").render()%}'
-
-opt.laststatus = 3
-opt.cmdheight = 0
-opt.showcmdloc = 'statusline'
-opt.statusline = '%{%v:lua.require("config.status.statusline").render()%}'
-
-opt.tabline = '%{%v:lua.R("config.status.tabline").render()%}'
-
-opt.winbar = '%{%v:lua.require("config.status.winbar").render()%}'

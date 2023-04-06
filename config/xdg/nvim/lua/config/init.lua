@@ -7,6 +7,7 @@ require('config.autocmds')
 
 -- inhouse plugins
 require('config.session')
+require('config.status')
 
 -- community plugins
 require('config.plugins')
