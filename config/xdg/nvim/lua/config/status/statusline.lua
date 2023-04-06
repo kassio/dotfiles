@@ -82,7 +82,7 @@ return {
       '%S',
       vim.g.macromsg,
       search_count(),
-      '%3p%% %3l:%-3c',
+      '%3l:%-3c %3p%%',
     })
 
     return string.format('%s', table.concat(components, ' '))
