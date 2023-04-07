@@ -30,6 +30,17 @@ return function(colors)
     ['Info.Light'] = { fg = c.info_light },
     ['Hint.Light'] = { fg = c.hint_light },
 
+    -- msg level
+    ['Error.Bg'] = { bg = c.error },
+    ['Warn.Bg'] = { bg = c.warn },
+    ['Info.Bg'] = { bg = c.info },
+    ['Hint.Bg'] = { bg = c.hint },
+
+    ['Error.Light.Bg'] = { bg = c.error_light },
+    ['Warn.Light.Bg'] = { bg = c.warn_light },
+    ['Info.Light.Bg'] = { bg = c.info_light },
+    ['Hint.Light.Bg'] = { bg = c.hint_light },
+
     -- git: diff
     ['GitSignsDelete'] = { link = 'Error' },
     ['GitSignsChange'] = { link = 'Warn' },

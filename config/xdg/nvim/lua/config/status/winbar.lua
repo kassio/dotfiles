@@ -1,4 +1,17 @@
 local hl = require('utils.highlights')
+local git_labels = {
+  added = { icon = '+', hl = 'Hint' },
+  changed = { icon = '~', hl = 'Warn' },
+  removed = { icon = '-', hl = 'Error' },
+}
+
+local function hlname(name, focused)
+  if focused then
+    return 'WinBar'
+  end
+
+  return name
+end
 
 local function todos(bufnr, focused)
   local signs = vim.fn.sign_getplaced(bufnr, { group = 'todo-signs' })[1].signs
@@ -9,12 +22,7 @@ local function todos(bufnr, focused)
 
   local icon = hl.get_sign_icon('todo')
 
-  local hlname = 'WinBarNC'
-  if focused then
-    hlname = 'WinBar'
-  end
-
-  return string.format('%%#%s#%s%s%%*', hlname, icon, #signs)
+  return string.format('%%#%s#%s%s%%*', hlname('WinBar', focused), icon, #signs)
 end
 
 local function diagnositcs(bufnr, focused)
@@ -27,12 +35,12 @@ local function diagnositcs(bufnr, focused)
       return ''
     end
 
-    local hlname = 'WinBarNC'
-    if focused then
-      hlname = string.camelcase(level)
-    end
-
-    return string.format('%%#%s#%s%s%%*', hlname, hl.get_sign_icon(level), count)
+    return string.format(
+      '%%#%s#%s%s%%*',
+      hlname(string.camelcase(level), focused),
+      hl.get_sign_icon(level),
+      count
+    )
   end, { 'error', 'warn', 'info', 'hint' })
 
   diagnosticList = vim.tbl_filter(function(e)
@@ -45,12 +53,6 @@ end
 local function git_status(bufnr, focused)
   local counters = vim.b[bufnr]['gitsigns_status_dict'] or {}
 
-  local labels = {
-    added = { icon = '+', hl = 'Hint' },
-    changed = { icon = '~', hl = 'Warn' },
-    removed = { icon = '-', hl = 'Error' },
-  }
-
   local statusList = vim.tbl_map(function(name)
     local count = tonumber(counters[name]) or 0
 
@@ -58,14 +60,9 @@ local function git_status(bufnr, focused)
       return ''
     end
 
-    local label = labels[name]
+    local label = git_labels[name]
 
-    local hlname = 'WinBarNC'
-    if focused then
-      hlname = label.hl
-    end
-
-    return string.format('%%#%s#%s%d%%*', hlname, label.icon, count)
+    return string.format('%%#%s#%s%d%%*', hlname(label.hl, focused), label.icon, count)
   end, { 'added', 'changed', 'removed' })
 
   statusList = vim.tbl_filter(function(e)

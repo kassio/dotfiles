@@ -7,6 +7,7 @@ local mode_map = {
   ['Rx'] = 'R',
   ['S'] = 'S',
   ['V'] = 'V',
+  ['\22'] = 'V',
   ['c'] = 'C',
   ['ce'] = 'E',
   ['cv'] = 'E',
@@ -29,24 +30,30 @@ local mode_map = {
   ['v'] = 'V',
 }
 
+local mode_hl = {
+  ['!'] = 'Hint.Light.Bg',
+  ['?'] = 'Warn.Bg',
+  ['C'] = 'Hint.Light.Bg',
+  ['E'] = 'Hint.Light.Bg',
+  ['I'] = 'Error.Bg',
+  ['M'] = 'Warn.Bg',
+  ['N'] = 'Info.Bg',
+  ['O'] = 'Warn.Bg',
+  ['R'] = 'Error.Light.Bg',
+  ['S'] = 'Warn.Bg',
+  ['T'] = 'Hint.Bg',
+  ['V'] = 'Warn.Bg',
+}
+
 local function mode()
-  local mode_code = vim.api.nvim_get_mode().mode
+  local key = tostring(vim.api.nvim_get_mode().mode)
+  local value = mode_map[key]
 
-  if mode_map[mode_code] == nil then
-    return mode_code
+  if value == nil then
+    return key
   end
 
-  return string.format('%s', mode_map[mode_code])
-end
-
-local function git_branch()
-  local branch = vim.g['gitsigns_head']
-
-  if branch == nil then
-    return ''
-  end
-
-  return string.format(' %s', branch)
+  return string.format('%%#%s# %s %%*', mode_hl[value], value)
 end
 
 local function search_count()
@@ -55,7 +62,7 @@ local function search_count()
   end
 
   local maxcount = 999
-  local term = vim.fn.getreg('@')
+  local term = vim.fn.getreg('/')
   local result = vim.fn.searchcount({ maxcount = maxcount, timeout = 500 })
   local current = result.current
   local total = result.total
@@ -71,18 +78,30 @@ local function search_count()
   return string.format('/%s [%s/%s]', term, current, total)
 end
 
+local function git_branch()
+  local branch = vim.g['gitsigns_head']
+
+  if branch == nil then
+    return ''
+  end
+
+  return string.format('%%#Info.Bg#  %s %%*', branch)
+end
+
 return {
+  mode_map = mode_map,
+  mode_hl = mode_hl,
   render = function()
     local components = vim.tbl_filter(function(value)
       return value ~= ''
     end, {
       mode(),
-      git_branch(),
-      '%=',
-      '%S',
       vim.g.macromsg,
       search_count(),
+      '%=',
+      '%S',
       '%3l:%-3c %3p%%',
+      git_branch(),
     })
 
     return string.format('%s', table.concat(components, ' '))
