@@ -6,14 +6,14 @@ local git_labels = {
 }
 
 local function hlname(name, focused)
-  if focused then
-    return 'WinBar'
+  if not focused then
+    return 'WinBarNC'
   end
 
   return name
 end
 
-local function todos(bufnr, focused)
+local function get_todos(bufnr, focused)
   local signs = vim.fn.sign_getplaced(bufnr, { group = 'todo-signs' })[1].signs
 
   if #signs <= 0 then
@@ -25,7 +25,7 @@ local function todos(bufnr, focused)
   return string.format('%%#%s#%s%s%%*', hlname('WinBar', focused), icon, #signs)
 end
 
-local function diagnositcs(bufnr, focused)
+local function get_diagnositcs(bufnr, focused)
   local diagnosticList = vim.tbl_map(function(level)
     local count = vim.tbl_count(vim.diagnostic.get(bufnr, {
       severity = vim.diagnostic.severity[string.upper(level)],
@@ -50,7 +50,7 @@ local function diagnositcs(bufnr, focused)
   return table.concat(diagnosticList, ' ')
 end
 
-local function git_status(bufnr, focused)
+local function get_git_status(bufnr, focused)
   local counters = vim.b[bufnr]['gitsigns_status_dict'] or {}
 
   local statusList = vim.tbl_map(function(name)
@@ -84,9 +84,9 @@ return {
         '%f',
         '%m',
         '%=',
-        todos(bufnr, focused),
-        diagnositcs(bufnr, focused),
-        git_status(bufnr, focused),
+        get_todos(bufnr, focused),
+        get_diagnositcs(bufnr, focused),
+        get_git_status(bufnr, focused),
       }, ' ')
     )
   end,
