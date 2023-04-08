@@ -45,7 +45,7 @@ local mode_hl = {
   ['V'] = 'Warn.Bg',
 }
 
-local function mode()
+local function get_mode()
   local key = tostring(vim.api.nvim_get_mode().mode)
   local value = mode_map[key]
 
@@ -53,10 +53,12 @@ local function mode()
     return key
   end
 
-  return string.format('%%#%s# %s %%*', mode_hl[value], value)
+  local hl = mode_hl[value]
+
+  return string.format('%%#%s# %s %%*', hl, value), hl
 end
 
-local function search_count()
+local function get_search_count()
   if vim.v.hlsearch == 0 then
     return ''
   end
@@ -78,30 +80,30 @@ local function search_count()
   return string.format('/%s [%s/%s]', term, current, total)
 end
 
-local function git_branch()
+local function get_git_branch(hl)
   local branch = vim.g['gitsigns_head']
 
   if branch == nil then
     return ''
   end
 
-  return string.format('%%#Info.Bg#  %s %%*', branch)
+  return string.format('%%#%s#  %s %%*', hl, branch)
 end
 
 return {
-  mode_map = mode_map,
-  mode_hl = mode_hl,
   render = function()
+    local mode, hl = get_mode()
+
     local components = vim.tbl_filter(function(value)
       return value ~= ''
     end, {
-      mode(),
+      mode,
       vim.g.macromsg,
-      search_count(),
+      get_search_count(),
       '%=',
       '%S',
       '%3l:%-3c %3p%%',
-      git_branch(),
+      get_git_branch(hl),
     })
 
     return string.format('%s', table.concat(components, ' '))
