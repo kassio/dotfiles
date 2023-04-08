@@ -43,35 +43,35 @@ keymap.set('n', '9gt', '<cmd>tablast<cr>', { desc = 'move to the last tab' })
 
 keymap.set('v', '<leader>p', '"_dP', { desc = 'paste without replacing the " register' })
 
-keymap.set('n', '!', '"vyiw/\\V<c-r>v<cr>N', { desc = 'search current word' })
-keymap.set('x', '!', '"vy/\\V<c-r>v<cr>N', { desc = 'search current selection' })
+keymap.set('n', '!', '"vyiw/<c-r>v<cr>N', { desc = 'search current word' })
+keymap.set('x', '!', '"vy/<c-r>v<cr>N', { desc = 'search current selection' })
 
 keymap.set(
   'n',
   '<leader>!',
-  '"vyiw/\\V\\c<c-r>v<cr>N',
+  '"vyiw/\\c<c-r>v<cr>N',
   { desc = 'search current word case insensitive' }
 )
 keymap.set(
   'x',
   '<leader>!',
-  '"vy/\\V\\c<c-r>v<cr>N',
+  '"vy/\\c<c-r>v<cr>N',
   { desc = 'search current selection case insensitive' }
 )
 
-keymap.set('n', 'g!', '"vyiw/\\V\\<<c-r>v\\><cr>N', { desc = 'search current word exclusive' })
-keymap.set('x', 'g!', '"vy/\\V\\<<c-r>v\\><cr>N', { desc = 'search current selection exclusive' })
+keymap.set('n', 'g!', '"vyiw/\\<<c-r>v\\><cr>N', { desc = 'search current word exclusive' })
+keymap.set('x', 'g!', '"vy/\\<<c-r>v\\><cr>N', { desc = 'search current selection exclusive' })
 
 keymap.set(
   'n',
   '<leader>g!',
-  '"vyiw/\\V\\c\\<<c-r>v\\><cr>N',
+  '"vyiw/\\c\\<<c-r>v\\><cr>N',
   { desc = 'search current word case insensitive exclusive' }
 )
 keymap.set(
   'x',
   '<leader>g!',
-  '"vy/\\V\\c\\<<c-r>v\\><cr>N',
+  '"vy/\\c\\<<c-r>v\\><cr>N',
   { desc = 'search current selection case insensitive exclusive' }
 )
 
