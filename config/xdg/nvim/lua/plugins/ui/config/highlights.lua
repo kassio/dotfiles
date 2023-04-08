@@ -30,16 +30,14 @@ return function(colors)
     ['Info.Light'] = { fg = c.info_light },
     ['Hint.Light'] = { fg = c.hint_light },
 
-    -- msg level
-    ['Error.Bg'] = { bg = c.error },
-    ['Warn.Bg'] = { bg = c.warn },
-    ['Info.Bg'] = { bg = c.info },
-    ['Hint.Bg'] = { bg = c.hint },
-
-    ['Error.Light.Bg'] = { bg = c.error_light },
-    ['Warn.Light.Bg'] = { bg = c.warn_light },
-    ['Info.Light.Bg'] = { bg = c.info_light },
-    ['Hint.Light.Bg'] = { bg = c.hint_light },
+    -- Statusline mode highlight
+    ['Statusline.Command'] = { fg = c.base, bg = c.hint },
+    ['Statusline.Insert'] = { fg = c.base, bg = c.warn },
+    ['Statusline.Normal'] = { fg = c.base, bg = c.info },
+    ['Statusline.Replace'] = { fg = c.base, bg = c.warn_light },
+    ['Statusline.Search'] = { fg = c.base, bg = c.info_light },
+    ['Statusline.Terminal'] = { fg = c.base, bg = c.hint },
+    ['Statusline.Visual'] = { fg = c.base, bg = c.warn_light },
 
     -- git: diff
     ['GitSignsDelete'] = { link = 'Error' },
