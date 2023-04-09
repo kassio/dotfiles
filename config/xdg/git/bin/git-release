@@ -1,0 +1,27 @@
+#!/usr/bin/env zsh
+
+latest="$(git describe --abbrev=0 --tags)"
+latest="${latest#v}"
+
+parts=(${(@s/./)latest})
+
+major="${parts[1]}"
+minor="${parts[2]}"
+patch="${parts[3]}"
+
+case "$1" in
+  major)
+    major=$((major + 1))
+    minor=0
+    patch=0
+    ;;
+  minor)
+    minor=$((minor + 1))
+    patch=0
+    ;;
+  *)
+    patch=$((patch + 1))
+    ;;
+esac
+
+echo "git tag v${major}.${minor}.${patch}"
