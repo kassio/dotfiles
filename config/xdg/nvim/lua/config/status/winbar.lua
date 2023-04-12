@@ -13,6 +13,24 @@ local function hlname(name, focused)
   return name
 end
 
+local function filename(bufnr)
+  local fullname = vim.api.nvim_buf_get_name(bufnr)
+
+  if #fullname == 0 then
+    return '[No name]'
+  else
+    local name = vim.fn.fnamemodify(fullname, ':.')
+    local limit = (vim.o.columns - 16)
+
+    if #name > limit then
+      local slash_limit = string.find(name, '/', #name - limit) or -1
+      return '.../' .. string.sub(name, slash_limit + 1)
+    end
+
+    return name
+  end
+end
+
 local function get_todos(bufnr, focused)
   local signs = vim.fn.sign_getplaced(bufnr, { group = 'todo-signs' })[1].signs
 
@@ -81,7 +99,7 @@ return {
       ' %s ',
       table.concat({
         '%n',
-        '%f',
+        filename(bufnr),
         '%m',
         '%=',
         get_todos(bufnr, focused),
