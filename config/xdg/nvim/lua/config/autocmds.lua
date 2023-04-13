@@ -72,9 +72,9 @@ utils.augroup('user:focus', {
     callback = function()
       vim.g.macromsg = vim.v.event.regname .. ' recorded'
 
-      utils.after(3000, function()
+      vim.defer_fn(function()
         vim.g.macromsg = ''
-      end)
+      end, 3000)
     end,
   },
   {
