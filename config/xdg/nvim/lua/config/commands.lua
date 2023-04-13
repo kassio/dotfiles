@@ -24,6 +24,12 @@ command('CopyFilename', utils.copy_filename, {
   nargs = '?',
 })
 
+command('Draft', function()
+  vim.opt_local.buftype = 'nofile'
+  vim.opt_local.bufhidden = 'hide'
+  vim.opt_local.buflisted = false
+end, {})
+
 -- window size fix/unfix
 local fix_window_size = function()
   vim.opt_local.winfixwidth = true
