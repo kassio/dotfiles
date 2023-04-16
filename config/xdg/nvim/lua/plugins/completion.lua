@@ -80,11 +80,11 @@ return {
         { name = 'nvim_lsp' },
         { name = 'nvim_lsp_signature_help' },
       }, {
-        { name = 'nvim_lua' },
-      }, {
         { name = 'treesitter' },
         { name = 'buffer' },
         { name = 'spell' },
+      }, {
+        { name = 'nvim_lua' },
       }, {
         { name = 'path' },
       }),
@@ -93,6 +93,22 @@ return {
         documentation = {
           border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
         },
+      },
+    })
+
+    cmp.setup.cmdline(':', {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = cmp.config.sources({
+        { name = 'path' },
+      }, {
+        { name = 'cmdline' },
+      }),
+    })
+
+    cmp.setup.cmdline({ '/', '?' }, {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = {
+        { name = 'buffer' },
       },
     })
   end,
