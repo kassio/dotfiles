@@ -40,7 +40,7 @@ local function get_todos(bufnr, focused)
 
   local icon = hl.get_sign_icon('todo')
 
-  return string.format('%%#%s#%s%s%%*', hlname('WinBar', focused), icon, #signs)
+  return string.format('%%#%s#%s %s%%*', hlname('WinBar', focused), icon, #signs)
 end
 
 local function get_diagnositcs(bufnr, focused)
@@ -54,7 +54,7 @@ local function get_diagnositcs(bufnr, focused)
     end
 
     return string.format(
-      '%%#%s#%s%s%%*',
+      '%%#%s#%s %s%%*',
       hlname(string.camelcase(level), focused),
       hl.get_sign_icon(level),
       count
