@@ -16,6 +16,7 @@ return function(colors)
     ['Search'] = { fg = c.base, bg = c.yellow },
     ['CurSearch'] = { fg = c.base, bg = c.blue, italic = true, bold = true },
 
+    ['@method'] = { link = '@funciton' },
     ['@string'] = { fg = c.green },
     ['@string.special'] = { fg = c.green, bold = true },
 
