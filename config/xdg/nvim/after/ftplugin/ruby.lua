@@ -24,21 +24,19 @@ require('nvim-surround').buffer_setup({
   },
 })
 
-vim.api.nvim_create_user_command('RSpec', function(cmd)
+vim.api.nvim_create_user_command('RSpec', function(c)
   local _, lnum, col = table.unpack(vim.fn.getcurpos())
-  local file = cmd.args
+  local file = c.args
 
   if file == '' then
     file = vim.fn.expand('%')
   end
 
-  vim.g['test#last_position'] = {
-    file = file,
-    line = lnum,
-    col = col,
-  }
 
-  vim.cmd.T(string.format('bundle exec rspec %s:%s:%s', file, lnum, col))
+  vim.g['test#last_strategy'] = 'neoterm'
+  vim.g['test#last_command'] = string.format('bundle exec rspec %s:%s:%s', file, lnum, col)
+
+  vim.cmd.TestLast()
 end, { nargs = '?' })
 
 vim.cmd('cabbrev Rspec RSpec')
