@@ -1,14 +1,15 @@
 return {
   'hrsh7th/nvim-cmp',
   dependencies = {
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-path',
-    'hrsh7th/cmp-nvim-lua',
     'f3fora/cmp-spell',
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-cmdline',
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-nvim-lsp-signature-help',
+    'hrsh7th/cmp-nvim-lua',
+    'hrsh7th/cmp-path',
     'onsails/lspkind-nvim',
     'ray-x/cmp-treesitter',
-    'hrsh7th/cmp-nvim-lsp-signature-help',
     -- snippets
     'dcampos/nvim-snippy',
     'dcampos/cmp-snippy',
