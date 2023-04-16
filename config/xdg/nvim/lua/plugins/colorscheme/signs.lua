@@ -1,7 +1,7 @@
-local def_sign = require('utils.highlights').def_sign
-
 return {
   setup = function()
+    local def_sign = require('utils.highlights').def_sign
+
     -- generic
     def_sign('error', '')
     def_sign('warn', '')

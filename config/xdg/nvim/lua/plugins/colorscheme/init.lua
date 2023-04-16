@@ -19,10 +19,12 @@ return {
         },
         show_end_of_buffer = false,
         term_colors = false,
-        custom_highlights = require('plugins.ui.config.highlights'),
+        custom_highlights = require('plugins.colorscheme.highlights'),
       })
 
       vim.cmd.colorscheme('catppuccin')
+
+      require('plugins.colorscheme.signs').setup()
     end,
   },
 }
