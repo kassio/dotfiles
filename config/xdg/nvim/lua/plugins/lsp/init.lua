@@ -26,11 +26,7 @@ return {
       },
     },
     config = function()
-      local lspconfig = require('lspconfig')
       local tools = require('plugins.lsp.tools')
-      local attacher = require('plugins.lsp.attacher')
-      local capabilities = require('plugins.lsp.capabilities')
-      local customizations = require('plugins.lsp.customizations')
 
       require('plugins.lsp.handlers').setup()
       require('plugins.lsp.generics').setup()
@@ -42,17 +38,11 @@ return {
         run_on_start = false,
       })
 
-      local default_opts = {
+      tools.setup({
         single_file_support = true,
-        on_attach = attacher,
-        capabilities = capabilities,
-      }
-
-      for _, server in ipairs(tools.lsps) do
-        local settings = customizations[server] or {}
-
-        lspconfig[server].setup(vim.tbl_extend('keep', settings, default_opts))
-      end
+        on_attach = require('plugins.lsp.attacher'),
+        capabilities = require('plugins.lsp.capabilities'),
+      })
 
       -- Auto format files
       vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
