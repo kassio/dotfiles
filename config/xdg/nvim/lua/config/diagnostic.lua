@@ -22,10 +22,10 @@ end, { desc = 'diagnostic: show all diagnostics from workspace' })
 
 diagnostic.config({
   virtual_text = {
-    severity = diagnostic.severity.ERROR,
+    severity = diagnostic.severity.WARN,
     spacing = 8,
   },
-  underline = false,
+  underline = true,
   severity_sort = true,
   float = {
     focusable = false,

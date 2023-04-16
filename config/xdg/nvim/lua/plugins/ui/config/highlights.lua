@@ -69,10 +69,10 @@ return function(colors)
     ['DiagnosticUnderlineHint'] = { link = 'Hint.Light' },
 
     -- diagnostics: virtual text
-    ['DiagnosticVirtualTextError'] = { link = 'Error.Light' },
-    ['DiagnosticVirtualTextWarn'] = { link = 'Warn.Light' },
-    ['DiagnosticVirtualTextInfo'] = { link = 'Info.Light' },
-    ['DiagnosticVirtualTextHint'] = { link = 'Hint.Light' },
+    ['DiagnosticVirtualTextError'] = { fg = c.error_light, italic = true },
+    ['DiagnosticVirtualTextWarn'] = { fg = c.warn_light, italic = true },
+    ['DiagnosticVirtualTextInfo'] = { fg = c.info_light, italic = true },
+    ['DiagnosticVirtualTextHint'] = { fg = c.hint_light, italic = true },
 
     -- statusline
     ['StatusLine'] = { fg = c.blue },
