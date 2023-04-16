@@ -10,6 +10,18 @@ return {
           light = 'latte',
           dark = 'mocha',
         },
+        color_overrides = {
+          all = {
+            error = '#CA1243',
+            warn = '#F7C154',
+            info = '#6699CC',
+            hint = '#50A14F',
+            error_light = '#FD83A1',
+            warn_light = '#FFF4A8',
+            info_light = '#A5D0FF',
+            hint_light = '#B5E6CE',
+          },
+        },
         integrations = {
           cmp = true,
           mason = true,

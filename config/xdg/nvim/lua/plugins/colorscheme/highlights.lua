@@ -1,15 +1,4 @@
-return function(colors)
-  local c = vim.tbl_extend('keep', {
-    error = '#CA1243',
-    warn = '#F7C154',
-    info = '#6699CC',
-    hint = '#50A14F',
-    error_light = '#FD83A1',
-    warn_light = '#FFF4A8',
-    info_light = '#A5D0FF',
-    hint_light = '#B5E6CE',
-  }, colors)
-
+return function(c)
   return {
     -- globals
     ['IncSearch'] = { fg = c.base, bg = c.yellow },
@@ -18,7 +7,7 @@ return function(colors)
 
     ['@method'] = { link = '@funciton' },
     ['@string'] = { fg = c.green },
-    ['@string.special'] = { fg = c.green, bold = true },
+    ['@string.specialecial'] = { fg = c.green, bold = true },
 
     -- msg level
     ['Error'] = { fg = c.error },
@@ -64,10 +53,10 @@ return function(colors)
     ['DiagnosticFloatingHint'] = { link = 'Hint' },
 
     -- diagnostics: underline
-    ['DiagnosticUnderlineError'] = { link = 'Error.Light' },
-    ['DiagnosticUnderlineWarn'] = { link = 'Warn.Light' },
-    ['DiagnosticUnderlineInfo'] = { link = 'Info.Light' },
-    ['DiagnosticUnderlineHint'] = { link = 'Hint.Light' },
+    ['DiagnosticUnderlineError'] = { special = c.error_light, undercurl = true },
+    ['DiagnosticUnderlineWarn'] = { special = c.warn_light, undercurl = true },
+    ['DiagnosticUnderlineInfo'] = { special = c.info_light, undercurl = true },
+    ['DiagnosticUnderlineHint'] = { special = c.hint_light, undercurl = true },
 
     -- diagnostics: virtual text
     ['DiagnosticVirtualTextError'] = { fg = c.error_light, italic = true },
