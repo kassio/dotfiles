@@ -11,6 +11,10 @@ end, { nargs = '?' })
 -- trim the file
 command('Trim', utils.buffers.trim, {})
 
+-- change background
+command('Dark', 'set bg=dark', {})
+command('Light', 'set bg=light', {})
+
 -- Ensure path exists and writes the file
 command('WriteWithPath', function()
   local path = vim.fn.expand('%:h')
