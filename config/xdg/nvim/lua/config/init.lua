@@ -5,9 +5,9 @@ require('config.commands')
 require('config.diagnostic')
 require('config.autocmds')
 
+-- community plugins
+require('config.plugins')
+
 -- inhouse plugins
 require('config.session')
 require('config.status')
-
--- community plugins
-require('config.plugins')

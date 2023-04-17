@@ -2,7 +2,6 @@ return {
   'nvim-telescope/telescope.nvim',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'nvim-telescope/telescope-ui-select.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   },
   cmd = 'Telescope',
@@ -204,7 +203,6 @@ return {
     local utils = require('utils')
 
     telescope.load_extension('fzf')
-    telescope.load_extension('ui-select')
 
     telescope.setup({
       extensions = {
@@ -213,9 +211,6 @@ return {
           fuzzy = true,
           override_file_sorter = true,
           override_generic_sorter = true,
-        },
-        ['ui-select'] = {
-          require('telescope.themes').get_dropdown(),
         },
       },
 
@@ -268,7 +263,6 @@ return {
       },
     })
     telescope.load_extension('fzf')
-    telescope.load_extension('ui-select')
 
     vim.api.nvim_create_user_command('Grep', function(cmd)
       local args = vim.split(cmd.args, ' ')

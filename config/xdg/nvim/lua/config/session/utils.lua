@@ -7,9 +7,6 @@ local escaped_file_path = string.gsub(vim.fn.getcwd(), '[/%.]', M.path_replacer)
 
 local notify = function(msg, level)
   vim.notify(msg, level, { title = 'Session Manager' })
-
-  -- Clear command UI
-  vim.cmd('echo')
 end
 
 local info = function(msg)
@@ -61,16 +58,16 @@ local session_options = function(list)
   return options
 end
 
-local with_session = function(callback)
+local select_session = function(title, callback)
   local sessions = session_list()
 
   if #sessions > 0 then
     local options = session_options(sessions)
 
-    vim.ui.select(options, { prompt = 'Available Sessions' }, function(_choice, index)
+    vim.ui.select(options, { prompt = title }, function(_choice, index)
       -- confirm returns 0 for <esc>
       -- and the chose choice indexed on 1
-      if index > 0 then
+      if index ~= nil and index > 0 then
         local file = sessions[index]
 
         if vim.fn.filereadable(file) then
@@ -87,14 +84,7 @@ local delete_session = function(session)
   vim.fn.delete(session, 'rf')
 end
 
-M.save = function()
-  local default = prefix_from(vim.api.nvim_get_vvar('this_session'))
-
-  local prefix
-  vim.ui.input({ prompt = 'Choose the session name: ', default = default }, function(input)
-    prefix = input
-  end)
-
+local save_session = function(prefix, default)
   if string.len(prefix or '') == 0 and string.len(default or '') > 0 then
     prefix = default
   end
@@ -114,8 +104,21 @@ M.save = function()
   end
 end
 
+M.save = function()
+  local default = prefix_from(vim.api.nvim_get_vvar('this_session'))
+
+  vim.ui.input({
+    prompt = 'Choose the session name: ',
+    default = default,
+  }, function(input)
+    if input ~= nil then
+      save_session(input, default)
+    end
+  end)
+end
+
 M.load = function()
-  local session = with_session(function(session)
+  local session = select_session('Available sessions', function(session)
     vim.cmd(string.format('silent! source %s | redraw!', session))
     info(string.format('Session "%s" loaded', prefix_from(session)))
   end)
@@ -126,10 +129,9 @@ M.load = function()
 end
 
 M.destroy = function()
-  return with_session(function(session)
+  return select_session('Existing sessions', function(session)
     delete_session(session)
-    print(' ')
-    info(string.format('Session "%s" deleted', prefix_from(session)))
+    error(string.format('Session "%s" deleted', prefix_from(session)))
   end)
 end
 
