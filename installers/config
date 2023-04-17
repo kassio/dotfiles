@@ -29,3 +29,7 @@ mkdir -p "${HOME}/.ssh"
 link "${HOME}/config/ssh/config" "${HOME}/.ssh/config"
 
 link "${DOTFILES}/config/docker" "${HOME}/.docker"
+
+link \
+  "${DOTFILES}/config/iterm2scripts" \
+  "${HOME}/Library/Application Support/iTerm2/Scripts"

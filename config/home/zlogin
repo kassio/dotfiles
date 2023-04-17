@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+
+cached="$(cat -s "${HOME}/.cache/iterm_profile" 2> /dev/null)"
+
+if [ "${cached}" = "light" ]; then
+    "${HOME}/.iterm2/it2profile" -s light
+fi

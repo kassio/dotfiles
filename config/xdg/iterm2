@@ -1,7 +1,5 @@
 # vim:ft=zsh:
 
-if [ "${TERM_PROGRAM}" = "iTerm.app" ]; then
-  source "${HOME}/.iterm2_shell_integration.zsh"
+source "${HOME}/.iterm2_shell_integration.zsh"
 
-  export PATH="${PATH}:${HOME}/.iterm"
-fi
+export PATH="${PATH}:${HOME}/.iterm"
