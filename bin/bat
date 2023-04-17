@@ -3,7 +3,7 @@
 local bat="${HOMEBREW_PREFIX}/bin/bat"
 local bat_theme_name="gruvbox-dark"
 
-if [ "${ITERM_PROFILE}" = "light" ]; then
+if [ "$("${HOME}/.iterm2/it2profile" -g)" = "light" ]; then
   bat_theme_name="gruvbox-light"
 fi
 
