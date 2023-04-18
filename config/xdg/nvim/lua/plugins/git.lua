@@ -131,53 +131,45 @@ return {
       vim.cmd.normal('zz')
     end, { desc = 'git: previous hunk' })
 
-    command('GitBrowseRepository', M.browse_repository, {
-      desc = 'git: open origin in the browser',
-    })
-    command('GitBrowseMergeRequest', M.browse_merge_request, {
-      desc = 'git: open merge request in the browser',
-    })
-    command('GitBrowseFileRemoteUrl', M.browse_file, {
-      nargs = '?',
-      desc = 'git: open remote file in the browser',
-    })
+    command(
+      'GitBrowseRepository',
+      M.browse_repository,
+      { desc = 'git: open origin in the browser' }
+    )
+    command(
+      'GitBrowseMergeRequest',
+      M.browse_merge_request,
+      { desc = 'git: open merge request in the browser' }
+    )
+    command(
+      'GitBrowseFileRemoteUrl',
+      M.browse_file,
+      { nargs = '?', desc = 'git: open remote file in the browser' }
+    )
 
-    command('GitCopyFileRemoteURL', M.copy_remote_file, {
-      nargs = '?',
-      desc = 'git: copy remote file url',
-    })
+    command(
+      'GitCopyFileRemoteURL',
+      M.copy_remote_file,
+      { nargs = '?', desc = 'git: copy remote file url' }
+    )
 
-    command('GitDiff', M.diff, {
-      nargs = '?',
-      desc = 'git: open diff in a split view',
-    })
+    command('GitDiff', M.diff, { nargs = '?', desc = 'git: open diff in a split view' })
     cabbrev('Gd', 'GitDiff')
 
-    command('GitBlameInLineToggle', M.blame_line_toggle, {
-      desc = 'git: toggle inline blame',
-    })
-    command('GitBlame', M.blame_line, {
-      desc = 'git: blame current line',
-    })
+    vim.keymap.set('n', '<c-g>', M.blame_line, { desc = 'git: blame current line' })
+    command('GitBlameInLineToggle', M.blame_line_toggle, { desc = 'git: toggle inline blame' })
+    command('GitBlame', M.blame_line, { desc = 'git: blame current line' })
     cabbrev('Gblame', 'GitBlame')
 
-    command('GitPreviewHunk', M.preview_hunk, {
-      desc = 'git: preview hunk',
-    })
+    command('GitPreviewHunk', M.preview_hunk, { desc = 'git: preview hunk' })
 
-    command('GitRestore', M.restore, {
-      desc = 'git: restore file to last committed version',
-    })
+    command('GitRestore', M.restore, { desc = 'git: restore file to last committed version' })
     cabbrev('Grt', 'GitRestore')
 
-    command('GitWrite', M.write, {
-      desc = 'git: add diff to stage',
-    })
+    command('GitWrite', M.write, { desc = 'git: add diff to stage' })
     cabbrev('Gw', 'GitWrite')
     cabbrev('Ga', 'GitWrite')
 
-    command('GitBranchCurrent', M.branch_current, {
-      desc = 'git: print current branch name',
-    })
+    command('GitBranchCurrent', M.branch_current, { desc = 'git: print current branch name' })
   end,
 }
