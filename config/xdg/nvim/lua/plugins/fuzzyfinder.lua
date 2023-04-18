@@ -90,6 +90,16 @@ return {
       desc = 'telescope: current buffer finder',
     },
     {
+      '<leader>fi',
+      function()
+        require('telescope.builtin').current_buffer_fuzzy_find({
+          default_text = vim.fn.expand('<cword>')
+        })
+      end,
+      silent = true,
+      desc = 'telescope: find current word in current buffer',
+    },
+    {
       '<leader>fo',
       function()
         require('telescope.builtin').oldfiles()
