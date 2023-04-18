@@ -178,20 +178,7 @@ return {
       function()
         require('telescope.builtin').grep_string()
       end,
-      silent = true,
-      desc = 'telescope: grep string',
-    },
-    {
-      '<leader>as',
-      function()
-        local str = require('utils').get_visual_selection()
-
-        require('telescope.builtin').grep_string({
-          search = str,
-          prompt_title = string.format('grep: "%s"', str),
-        })
-      end,
-      mode = 'x',
+      mode = { 'n', 'v' },
       silent = true,
       desc = 'telescope: grep string',
     },
