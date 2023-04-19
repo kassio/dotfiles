@@ -25,7 +25,7 @@ utils.augroup('user:focus', {
   {
     events = { 'VimResized' },
     callback = function()
-      local curtab = vim.api.nvim_get_current_tabpage()
+      local curtab = vim.api.nvim_tabpage_get_number(vim.api.nvim_get_current_tabpage())
       vim.cmd.tabdo('wincmd =')
       vim.cmd.tabnext(curtab)
     end,
