@@ -1,5 +1,6 @@
 # macos
 .DS_Store
+*darwin*
 
 # git
 .git/

@@ -19,7 +19,12 @@ return {
       function()
         require('telescope.builtin').find_files({
           -- include hidden files
-          find_command = { 'rg', '--files', '--hidden', '--glob', '!**/.git/*' },
+          find_command = {
+            'rg',
+            '--files',
+            '--hidden',
+            '--no-ignore-vcs',
+          },
         })
       end,
       silent = true,
@@ -93,7 +98,7 @@ return {
       '<leader>fi',
       function()
         require('telescope.builtin').current_buffer_fuzzy_find({
-          default_text = vim.fn.expand('<cword>')
+          default_text = vim.fn.expand('<cword>'),
         })
       end,
       silent = true,
