@@ -13,7 +13,7 @@ link() {
     fi
 }
 
-link_dir() {
+link_all() {
   while read file; do
     target_file="$(basename "${file}")"
     target="$(printf "$2" "${target_file}")"
@@ -22,13 +22,13 @@ link_dir() {
   done < <(find "$1" -d 1)
 }
 
-link_dir "${DOTFILES}/config/home" "${HOME}/.%s"
-link_dir "${DOTFILES}/config/xdg" "${HOME}/.config/%s"
+link_all "${DOTFILES}/config/home" "${HOME}/.%s"
+link_all "${DOTFILES}/config/xdg" "${HOME}/.config/%s"
 
 mkdir -p "${HOME}/.ssh"
 link "${HOME}/config/ssh/config" "${HOME}/.ssh/config"
 
-link_dir "${DOTFILES}/config/docker" "${HOME}/.docker"
+link_all "${DOTFILES}/config/docker" "${HOME}/.docker"
 
 link \
   "${DOTFILES}/config/iterm2scripts" \
