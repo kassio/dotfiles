@@ -9,10 +9,23 @@ link() {
       echo "linking ${target}"
       ln -sf "${file}" "${target}"
     else
-      echo "already linked ${target}"
+      echo "${target} already linked to $(realpath "${target}")"
     fi
 }
 
+# Link all files from a given directory
+# Usage: link_all <source_dir> <target_fmt>
+#   * source_dir   source directory
+#   * target_fmt   how each file of the source directory will be created
+#                  THIS MUST CONTAIN A %s OF WHERE THE FILE WILL BE CREATED
+#
+# Example: (where tmp/dir/{a, b, c} exists)
+#
+# $ mkdir -p "/tmp/other-dir"
+# $ link_all "/tmp/dir" "/tmp/other-dir/.%s"
+#   linking /tmp/dir/a to /tmp/other-dir/.a
+#   linking /tmp/dir/b to /tmp/other-dir/.b
+#   linking /tmp/dir/c to /tmp/other-dir/.c
 link_all() {
   while read file; do
     target_file="$(basename "${file}")"
@@ -23,12 +36,15 @@ link_all() {
 }
 
 link_all "${DOTFILES}/config/home" "${HOME}/.%s"
+
+mkdir -p "${HOME}/.config"
 link_all "${DOTFILES}/config/xdg" "${HOME}/.config/%s"
 
 mkdir -p "${HOME}/.ssh"
-link "${HOME}/config/ssh/config" "${HOME}/.ssh/config"
+link "${DOTFILES}/config/ssh/config" "${HOME}/.ssh/config"
 
-link_all "${DOTFILES}/config/docker" "${HOME}/.docker"
+mkdir -p "${HOME}/.docker"
+link_all "${DOTFILES}/config/docker" "${HOME}/.docker/%s"
 
 link \
   "${DOTFILES}/config/iterm2scripts" \
