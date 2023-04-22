@@ -1,6 +1,7 @@
 # vim:ft=zsh:
 
 alias v="vim"
+alias nvim="nvim --listen ~/.cache/nvim/$$${RANDOM}.pipe"
 alias n="nvim"
 
 alias time="/usr/bin/time"

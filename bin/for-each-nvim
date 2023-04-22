@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+for server in "${HOME}/.cache/nvim/"*.pipe; do
+  /opt/homebrew/bin/nvim --server "${server}" --remote-send ":$1<cr>"
+done

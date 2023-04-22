@@ -3,7 +3,7 @@
 local delta="${HOMEBREW_PREFIX}/bin/delta"
 local delta_theme="gruvbox-dark"
 
-if [ "$("${HOME}/.iterm2/it2profile" -g)" = "light" ]; then
+if [ "$(cat -s "${HOME}/.cache/iterm_profile")" = "light" ]; then
   delta_theme="gruvbox-light"
 fi
 
