@@ -48,12 +48,10 @@ return {
             item.abbr = content .. whitespace(MAX_LABEL_WIDTH, #content)
           end
 
-          item.kind = table.concat(vim.tbl_filter(function(i)
-            return i ~= ''
-          end, {
-            symbols.lspsource[entry.source.name] or '',
-            symbols.lspkind[item.kind] or symbols.lspkind.Unknown,
-          }), ' ')..'|'
+          item.kind = string.format(
+            '%s │',
+            symbols.lspkind[item.kind] or symbols.lspsource[entry.source.name] or '  '
+          )
 
           item.menu = nil
 
@@ -95,9 +93,14 @@ return {
       }),
 
       window = {
-        documentation = {
-          border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-        },
+        completion = cmp.config.window.bordered({
+          scrollbar = true,
+          max_width = 80,
+        }),
+        documentation = cmp.config.window.bordered({
+          scrollbar = true,
+          max_width = 80,
+        }),
       },
     })
 
