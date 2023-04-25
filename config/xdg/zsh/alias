@@ -44,6 +44,7 @@ diff-to() { git diff --name-only --relative --diff-filter=d "${1:-.}"; }
 nvim-diff() { diff-to "$1" | to-nvim; }
 ndm() { diff-to "$(git branch-main)" | to-nvim; }
 alias nd="nvim-diff"
+alias ndf="git diff --name-only --relative | to-nvim"
 
 rubocop-diff() {
   ref="$1"
