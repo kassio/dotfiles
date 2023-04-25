@@ -70,7 +70,7 @@ local function get_search_count()
     total = '??'
   end
 
-  return string.format('/%s [%s/%s]', term, current, total)
+  return string.format('| /%s [%s/%s]', term, current, total)
 end
 
 local function get_git_branch(hl)
@@ -83,6 +83,16 @@ local function get_git_branch(hl)
   return string.format('%%#%s#  %s %%*', hl, branch)
 end
 
+local function macromsg()
+  local msg = vim.g.macromsg
+
+  if msg ~= nil and msg ~= '' then
+    return '| ' .. msg
+  end
+
+  return ''
+end
+
 return {
   render = function()
     local mode, hl = get_mode()
@@ -91,11 +101,11 @@ return {
       return value ~= ''
     end, {
       mode,
-      vim.g.macromsg,
+      '%3l:%-3c %3p%%',
       get_search_count(),
+      macromsg(),
       '%=',
       '%S',
-      '%3l:%-3c %3p%%',
       get_git_branch(hl),
     })
 
