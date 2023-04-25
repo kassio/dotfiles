@@ -1,8 +1,8 @@
 local hl = require('utils.highlights')
 local git_labels = {
-  added = { icon = '+', hl = 'Hint' },
-  changed = { icon = '~', hl = 'Warn' },
-  removed = { icon = '-', hl = 'Error' },
+  added = { icon = '󰐖', hl = 'Hint' },
+  changed = { icon = '󰦓', hl = 'Warn' },
+  removed = { icon = '󰍵', hl = 'Error' },
 }
 
 local function hlname(name, focused)
@@ -13,11 +13,20 @@ local function hlname(name, focused)
   return name
 end
 
+local function count_limitter(counter, l)
+  l = l or 99
+  if counter > l then
+    return '99+'
+  end
+
+  return counter
+end
+
 local function filename(bufnr)
   local fullname = vim.api.nvim_buf_get_name(bufnr)
 
   if #fullname == 0 then
-    return '[No name]'
+    return ''
   else
     local name = vim.fn.fnamemodify(fullname, ':.')
     local limit = (vim.o.columns - 16)
@@ -40,7 +49,7 @@ local function get_todos(bufnr, focused)
 
   local icon = hl.get_sign_icon('todo')
 
-  return string.format('%%#%s#%s %s%%*', hlname('WinBar', focused), icon, #signs)
+  return string.format('%%#%s#%s %s%%*', hlname('WinBar', focused), icon, count_limitter(#signs))
 end
 
 local function get_diagnositcs(bufnr, focused)
@@ -57,7 +66,7 @@ local function get_diagnositcs(bufnr, focused)
       '%%#%s#%s %s%%*',
       hlname(string.camelcase(level), focused),
       hl.get_sign_icon(level),
-      count
+      count_limitter(count)
     )
   end, { 'error', 'warn', 'info', 'hint' })
 
@@ -80,7 +89,12 @@ local function get_git_status(bufnr, focused)
 
     local label = git_labels[name]
 
-    return string.format('%%#%s#%s%d%%*', hlname(label.hl, focused), label.icon, count)
+    return string.format(
+      '%%#%s#%s %s%%*',
+      hlname(label.hl, focused),
+      label.icon,
+      count_limitter(count)
+    )
   end, { 'added', 'changed', 'removed' })
 
   statusList = vim.tbl_filter(function(e)

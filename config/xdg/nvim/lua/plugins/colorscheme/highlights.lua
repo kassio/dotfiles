@@ -69,7 +69,7 @@ return function(c)
     ['StatusLineNC'] = { fg = c.surface1 },
 
     -- winbar
-    ['WinBar'] = { fg = c.blue, bold = true },
+    ['WinBar'] = { fg = c.blue },
     ['WinBarNC'] = { bg = c.base, fg = c.surface1 },
 
     -- tabline
