@@ -1,9 +1,5 @@
 local hl = require('utils.highlights')
-local git_labels = {
-  added = { icon = '󰐖', hl = 'Hint' },
-  changed = { icon = '󰦓', hl = 'Warn' },
-  removed = { icon = '󰍵', hl = 'Error' },
-}
+local symbols = require('utils.symbols')
 
 local function hlname(name, focused)
   if not focused then
@@ -16,7 +12,7 @@ end
 local function count_limitter(counter, l)
   l = l or 99
   if counter > l then
-    return '99+'
+    return '++'
   end
 
   return counter
@@ -47,9 +43,12 @@ local function get_todos(bufnr, focused)
     return ''
   end
 
-  local icon = hl.get_sign_icon('todo')
-
-  return string.format('%%#%s#%s %s%%*', hlname('WinBar', focused), icon, count_limitter(#signs))
+  return string.format(
+    '%%#%s#%s %s%%*',
+    hlname('WinBar', focused),
+    symbols.todo,
+    count_limitter(#signs)
+  )
 end
 
 local function get_diagnositcs(bufnr, focused)
@@ -65,10 +64,10 @@ local function get_diagnositcs(bufnr, focused)
     return string.format(
       '%%#%s#%s %s%%*',
       hlname(string.camelcase(level), focused),
-      hl.get_sign_icon(level),
+      symbols.diagnostics[level],
       count_limitter(count)
     )
-  end, { 'error', 'warn', 'info', 'hint' })
+  end, vim.tbl_keys(symbols.diagnostics))
 
   diagnosticList = vim.tbl_filter(function(e)
     return e ~= ''
@@ -87,15 +86,13 @@ local function get_git_status(bufnr, focused)
       return ''
     end
 
-    local label = git_labels[name]
-
     return string.format(
       '%%#%s#%s %s%%*',
-      hlname(label.hl, focused),
-      label.icon,
+      hlname(hl.git[name], focused),
+      symbols.git[name],
       count_limitter(count)
     )
-  end, { 'added', 'changed', 'removed' })
+  end, vim.tbl_keys(hl.git))
 
   statusList = vim.tbl_filter(function(e)
     return e ~= ''

@@ -8,7 +8,6 @@ return {
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-nvim-lua',
     'hrsh7th/cmp-path',
-    'onsails/lspkind-nvim',
     'ray-x/cmp-treesitter',
     -- snippets
     'dcampos/nvim-snippy',
@@ -18,18 +17,7 @@ return {
     local cmp = require('cmp')
     local mapping = cmp.mapping
     local snippy = require('snippy')
-    local lspkind = require('lspkind')
-
-    local source_icons = {
-      buffer = '',
-      bug = '',
-      nvim_lsp = '',
-      nvim_lua = '',
-      path = 'פּ',
-      snippy = '',
-      spell = '暈',
-      treesitter = '',
-    }
+    local symbols = require('utils.symbols')
 
     snippy.setup({
       mappings = {
@@ -43,18 +31,34 @@ return {
       },
     })
 
+    local MAX_LABEL_WIDTH = 50
+    local function whitespace(max, len)
+      return (' '):rep(max - len)
+    end
+
     cmp.setup({
       formatting = {
-        format = lspkind.cmp_format({
-          mode = 'symbol',
-          maxwidth = 50,
-          ellipsis_char = '...',
-          before = function(entry, vim_item)
-            vim_item.menu = source_icons[entry.source.name]
+        fields = { 'kind', 'abbr' },
+        format = function(entry, item)
+          -- Limit content width.
+          local content = item.abbr
+          if #content > MAX_LABEL_WIDTH then
+            item.abbr = vim.fn.strcharpart(content, 0, MAX_LABEL_WIDTH) .. '…'
+          else
+            item.abbr = content .. whitespace(MAX_LABEL_WIDTH, #content)
+          end
 
-            return vim_item
-          end,
-        }),
+          item.kind = table.concat(vim.tbl_filter(function(i)
+            return i ~= ''
+          end, {
+            symbols.lspsource[entry.source.name] or '',
+            symbols.lspkind[item.kind] or symbols.lspkind.Unknown,
+          }), ' ')..'|'
+
+          item.menu = nil
+
+          return item
+        end,
       },
 
       mapping = {

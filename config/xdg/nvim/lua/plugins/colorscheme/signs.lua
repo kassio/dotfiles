@@ -1,25 +1,16 @@
 return {
   setup = function()
+    local symbols = require('utils.symbols')
     local def_sign = require('utils.highlights').def_sign
 
-    -- generic
-    def_sign('error', '')
-    def_sign('warn', '')
-    def_sign('info', '')
-    def_sign('hint', '')
-    def_sign('todo', '')
+    for name, symbol in pairs(symbols.diagnostics) do
+      def_sign(name, symbol)
 
-    -- diagnostics
-    def_sign('DiagnosticSignError', '')
-    def_sign('DiagnosticSignWarn', '')
-    def_sign('DiagnosticSignInfo', '')
-    def_sign('DiagnosticSignHint', '')
+      def_sign('DiagnosticSign' .. string.camelcase(name), symbol)
+    end
 
-    -- debugger
-    def_sign('DapBreakpoint', '●')
-    def_sign('DapBreakpointCondition', '◆')
-    def_sign('DapLogPoint', 'Ξ')
-    def_sign('DapStopped', '▶')
-    def_sign('DapBreakpointRejected', '◎')
+    for name, symbol in pairs(symbols.debugger) do
+      def_sign(name, symbol)
+    end
   end,
 }

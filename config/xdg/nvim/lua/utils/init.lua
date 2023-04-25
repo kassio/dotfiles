@@ -5,6 +5,7 @@ local fn = vim.fn
 M.buffers = require('utils.buffers')
 M.snippets = require('utils.snippets')
 M.highlights = require('utils.highlights')
+M.symbols = require('utils.symbols')
 
 M.plugin_filetypes = {
   'FineCmdlinePrompt',
