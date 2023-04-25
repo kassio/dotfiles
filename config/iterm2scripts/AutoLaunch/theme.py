@@ -20,14 +20,14 @@ async def main(connection):
 
     async def setProfile(name):
         partialProfiles = await iterm2.PartialProfile.async_query(connection)
-        currentTab = app.current_terminal_window.current_tab
 
         for partial in partialProfiles:
             if partial.name == name:
                 profile = await partial.async_get_full_profile()
-                await currentTab.current_session.async_set_profile(profile)
-                writeCache(name)
+                for tab in app.current_terminal_window.tabs:
+                    await tab.current_session.async_set_profile(profile)
                 updateNvimSessions(name)
+                writeCache(name)
                 return
 
     @iterm2.RPC
