@@ -1,12 +1,5 @@
 return {
   {
-    'j-hui/fidget.nvim',
-    config = {
-      text = { spinner = 'dots' },
-    },
-  },
-
-  {
     'neovim/nvim-lspconfig',
     dependencies = {
       'WhoIsSethDaniel/mason-tool-installer.nvim',
