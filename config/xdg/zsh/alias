@@ -41,8 +41,7 @@ alias to-nvim="tr \\\n \\\0 | xargs -0 nvim -p"
 
 diff-to() { git diff --name-only --relative --diff-filter=d "${1:-.}"; }
 
-nvim-diff() { diff-to "$1" | to-nvim; }
-ndm() { diff-to "$(git branch-main)..." | to-nvim; }
+nvim-diff() { diff-to "${1:-master...}" | to-nvim; }
 alias nd="nvim-diff"
 alias ndf="git diff --name-only --relative | to-nvim"
 
@@ -50,7 +49,7 @@ rubocop-diff() {
   ref="$1"
   shift
 
-  diff-to "${ref}" |
+  diff-to "${ref:-master...}" |
     grep '.rb' |
     xargs bundle exec rubocop --parallel "$@"
 }
@@ -59,7 +58,7 @@ rspec-diff() {
   ref="$1"
   shift
 
-  diff-to "${ref}" |
+  diff-to "${ref:-master...}" |
     grep '_spec.rb' |
     xargs bundle exec rspec "$@"
 }
