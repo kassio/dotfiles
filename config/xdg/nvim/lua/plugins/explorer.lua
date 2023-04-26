@@ -61,27 +61,28 @@ return {
         side = 'right',
         signcolumn = 'yes',
         width = 32,
-        mappings = {
-          custom_only = false,
-          list = {
-            { key = { 'f' }, mode = 'n', action = '' },
-            {
-              key = { 'A' },
-              mode = 'n',
-              action = 'toggle_size',
-              action_cb = function()
-                local winnr = vim.api.nvim_get_current_win()
-                local width = vim.api.nvim_win_get_width(winnr)
-                if width <= 32 then
-                  vim.cmd('NvimTreeResize +50')
-                else
-                  vim.cmd('NvimTreeResize 32')
-                end
-              end,
-            },
-          },
-        },
       },
+      on_attach = function(bufnr)
+        local api = require('nvim-tree.api')
+
+        api.config.mappings.default_on_attach(bufnr)
+
+        vim.keymap.set('n', 'A', function()
+          local winnr = vim.api.nvim_get_current_win()
+          local width = vim.api.nvim_win_get_width(winnr)
+          if width <= 32 then
+            vim.cmd('NvimTreeResize +50')
+          else
+            vim.cmd('NvimTreeResize 32')
+          end
+        end, {
+          desc = 'nvim-tree: toggle size',
+          buffer = bufnr,
+          noremap = true,
+          silent = true,
+          nowait = true,
+        })
+      end,
     })
   end,
 }
