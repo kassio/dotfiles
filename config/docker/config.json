@@ -1,4 +1,4 @@
 {
-  "credsStore": "desktop",
+  "credsStore": "osxkeychain",
   "detachKeys": "ctrl-q,ctrl-q"
 }
