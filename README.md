@@ -18,5 +18,5 @@ $ git --version
 $ git clone https://github.com/kassio/dotfiles.git ~/.dotfiles
 
 # install everything
-$ ~/.dotfiles/setup
+$ ~/.dotfiles/install
 ```
