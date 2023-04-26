@@ -10,6 +10,7 @@ alias sudo="sudo "
 
 alias ls="lsd"
 alias la="ls -lA"
+alias l="ls -A"
 
 alias watch="watch --color"
 
