@@ -1,10 +1,10 @@
 # dotfiles
 
-Sharing for reference only.
+## Sharing for reference only
 
 **Use it at your own risk.**
 
-## Install
+### Install
 
 ```console
 # ensure git is installed
