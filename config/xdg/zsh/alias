@@ -48,7 +48,7 @@ alias ndf="git diff --name-only --relative | to-nvim"
 
 rubocop-diff() {
   ref="$1"
-  shift
+  [ "$#" -gt 0 ] && shift
 
   diff-to "${ref:-master...}" |
     grep '.rb' |
@@ -57,7 +57,7 @@ rubocop-diff() {
 
 rspec-diff() {
   ref="$1"
-  shift
+  [ "$#" -gt 0 ] && shift
 
   diff-to "${ref:-master...}" |
     grep '_spec.rb' |
