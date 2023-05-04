@@ -267,21 +267,26 @@ return {
     telescope.load_extension('fzf')
 
     vim.api.nvim_create_user_command('Grep', function(cmd)
-      local args = vim.split(cmd.args, ' ')
-      local str = args[1]
-      local dirs = vim.split(args[2] or '', ',', { trimempty = true, plain = true })
-      local prompt = string.format('grep: "%s"', str)
+      local prompt = 'grep: "%s"'
+      local str = cmd.fargs[1]
+      local search_args = {
+        search = str,
+        prompt_title = string.format(prompt, str),
+      }
 
+      local dirs = vim.split(cmd.fargs[2] or '', ',', { trimempty = true, plain = true })
       if #dirs > 0 then
-        prompt = prompt .. string.format(' (in: %s)', table.concat(dirs, ', '))
+        search_args.search_dirs = dirs
+        search_args.prompt_title =
+          string.format(prompt .. ' (in: %s)', str, table.concat(dirs, ','))
       end
 
-      builtin.grep_string({
-        search = str,
-        search_dirs = dirs,
-        prompt_title = prompt,
-      })
-    end, { range = 0, nargs = '*' })
+      builtin.grep_string(search_args)
+    end, {
+      range = 0,
+      nargs = '*',
+      desc = 'telescope: search the given string `:Grep <string> [dir1,dir2]`',
+    })
 
     utils.augroup('user:fuzzyfinder', {
       {
