@@ -105,7 +105,7 @@
 
 [alias]
   branch-current = branch --show-current
-  branch-list = branch --format='%(refname:short)'
+  branch-list = !git branch --format='%(refname:short)' | sort
   branch-others = !git branch-list | grep -v "$(git branch-current)" | sort
   exclude = !sh -c 'echo "$1" >> .git/info/exclude' -
   me = config user.name
