@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require 'irb'
+
+Dir.glob(File.expand_path(File.join(Dir.pwd, 'lib', '**', '*.rb'))).each do |file|
+  require file
+end
+
+IRB.start
