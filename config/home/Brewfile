@@ -50,6 +50,7 @@ brew "rename"
 brew "ripgrep"
 brew "sd" # sed replacement
 brew "stylua"
+brew "terminal-notifier"
 brew "tree"
 brew "watch"
 brew "wget"

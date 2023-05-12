@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
 
-osascript -e "display notification \"$1\" \
-  with title \"From Terminal\" \
-  subtitle \"$2\""
+msg="$1"
+title="$2"
+
+terminal-notifier \
+  -activate "com.googlecode.iterm2" \
+  -title "${title}" \
+  -message "${msg}"
