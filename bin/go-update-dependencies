@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+while read -r dep
+do
+  echo "trying to update ${dep}"
+  go-update-dependency "${dep}"
+done < <(go-outdated)

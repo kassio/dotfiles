@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+dep="$1"
+go get -u "${dep}"
+go mod tidy
+
+if make test
+then
+  git switch -c "update/${dep}"
+  git commit -am "Update ${dep}"
+else
+  git restore .
+fi
+
+git switch master
