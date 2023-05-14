@@ -15,6 +15,12 @@
     "local": "$HOME/src/blog"
   },
   {
+    "name": "trip budget",
+    "remote": "https://gitlab.com/tripbudget/tripbudget.gitlab.io",
+    "local": "$HOME/src/tripbudget"
+  },
+
+  {
     "name": "gdk",
     "remote": "https://gitlab.com/gitlab-org/gitlab-development-kit",
     "local": "$HOME/src/gdk"
@@ -40,8 +46,8 @@
     "local": "$HOME/src/review-tanuki"
   },
   {
-    "name": "trip budget",
-    "remote": "https://gitlab.com/tripbudget/tripbudget.gitlab.io",
-    "local": "$HOME/src/tripbudget"
+    "name": "triage ops",
+    "remote": "https://gitlab.com/gitlab-org/quality/triage-ops.git",
+    "local": "$HOME/src/gdk/triage-ops"
   }
 ]
