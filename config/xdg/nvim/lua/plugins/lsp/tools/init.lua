@@ -1,6 +1,18 @@
 local lspconfig = require('lspconfig')
-local customizations = require('plugins.lsp.tools.customizations')
 local lsp_package = require('mason-lspconfig.mappings.server').package_to_lspconfig
+
+--- Find lsp server personal customizations or return empty table
+---@param server string lsp server name
+---@return table
+local function customizationsFor(server)
+  local ok, customizations = pcall(require, 'plugins.lsp.tools.customizations.' .. server)
+
+  if not ok then
+    return {}
+  end
+
+  return customizations
+end
 
 local map = table.slice(lsp_package, {
   'bash-language-server',
@@ -39,9 +51,7 @@ M.lsps = vim.tbl_values(map)
 ---@param opts table default setup opts to be merged with tools/customizations
 M.setup = function(opts)
   for _, server in ipairs(M.lsps) do
-    local settings = customizations[server] or {}
-
-    lspconfig[server].setup(vim.tbl_extend('keep', settings, opts))
+    lspconfig[server].setup(vim.tbl_extend('keep', customizationsFor(server), opts))
   end
 end
 
