@@ -14,3 +14,5 @@ clear-screen
 "${basepath}/upgraders/ruby"
 "${basepath}/upgraders/quarentine"
 "${basepath}/upgraders/custom"
+
+notify "Upgraded"
