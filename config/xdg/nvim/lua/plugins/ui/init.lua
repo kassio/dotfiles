@@ -110,4 +110,20 @@ return {
       vim.keymap.set('n', '<leader>nn', notify.dismiss, { desc = 'notification: dismiss' })
     end,
   },
+
+  -- vim.ui.input & vim.ui.select
+  {
+    'stevearc/dressing.nvim',
+    config = function()
+      require('dressing').setup({
+        input = {
+          enabled = true,
+          title_pos = 'center',
+          anchor = 'NW',
+          relative = 'editor',
+        },
+        select = { enabled = true },
+      })
+    end,
+  },
 }

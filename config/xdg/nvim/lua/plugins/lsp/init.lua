@@ -68,4 +68,12 @@ return {
       })
     end,
   },
+
+  -- Show LSP loading information
+  {
+    'j-hui/fidget.nvim',
+    config = {
+      text = { spinner = 'dots' },
+    },
+  },
 }
