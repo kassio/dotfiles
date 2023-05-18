@@ -139,6 +139,13 @@ return {
     end, { nargs = '?', desc = 'git: restore file to last committed version' })
     cabbrev('Grt', 'GitRestore')
 
+    command('GitReset', function(cmd)
+      local tree = cmd.args ~= '' and cmd.args or 'HEAD'
+
+      vim.cmd('execute "!git reset ' .. tree .. ' -- %" | mode')
+    end, { nargs = '?', desc = 'git: reset file to HEAD or given tree' })
+    cabbrev('Grt', 'GitRestore')
+
     command('GitWrite', function()
       local file = fn.expand('%:.')
       vim.cmd('update!')
