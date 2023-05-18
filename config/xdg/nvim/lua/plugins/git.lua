@@ -78,49 +78,6 @@ return {
       numhl = true,
     })
 
-    local M = {
-      browse_file = function(cmd)
-        local use_main = cmd.args == 'main' or cmd.args == 'master'
-        local file = fn.expand('%:.')
-        local line = fn.line('.')
-
-        open(GIT.get_remote_url(file, line, use_main))
-      end,
-      copy_remote_file = function(opts)
-        opts = opts or {}
-        local use_main = opts.ref == 'main' or opts.ref == 'master'
-        local file = fn.expand('%:.')
-        local line = fn.line('.')
-
-        utils.to_clipboard(GIT.get_remote_url(file, line, use_main), opts.clipboard)
-      end,
-      browse_repository = function()
-        open(GIT.get_repository_url())
-      end,
-      browse_merge_request = function()
-        fn.jobstart({ 'git-browse-merge-request' })
-      end,
-      preview_hunk = gitsigns.preview_hunk,
-      blame_line = function()
-        gitsigns.blame_line({ full = true, ignore_whitespace = true })
-      end,
-      blame_line_toggle = gitsigns.toggle_current_line_blame,
-      restore = function()
-        vim.cmd('execute "!git restore -- %" | mode')
-      end,
-      branch_current = function()
-        print(vim.g.gitsigns_head)
-      end,
-      diff = function(cmd)
-        gitsigns.diffthis(cmd.args)
-      end,
-      write = function()
-        local file = fn.expand('%:.')
-        vim.cmd('update!')
-        git('add ' .. file)
-      end,
-    }
-
     vim.keymap.set('n', ']c', function()
       gitsigns.next_hunk()
       vim.cmd.normal('zz')
@@ -131,46 +88,63 @@ return {
       vim.cmd.normal('zz')
     end, { desc = 'git: previous hunk' })
 
-    command(
-      'GitBrowseRepository',
-      M.browse_repository,
-      { desc = 'git: open origin in the browser' }
-    )
-    command(
-      'GitBrowseMergeRequest',
-      M.browse_merge_request,
-      { desc = 'git: open merge request in the browser' }
-    )
-    command(
-      'GitBrowseFileRemoteUrl',
-      M.browse_file,
-      { nargs = '?', desc = 'git: open remote file in the browser' }
-    )
+    command('GitBrowseRepository', function()
+      open(GIT.get_repository_url())
+    end, { desc = 'git: open origin in the browser' })
 
-    command(
-      'GitCopyFileRemoteURL',
-      M.copy_remote_file,
-      { nargs = '?', desc = 'git: copy remote file url' }
-    )
+    command('GitBrowseMergeRequest', function()
+      fn.jobstart({ 'git-browse-merge-request' })
+    end, { desc = 'git: open merge request in the browser' })
 
-    command('GitDiff', M.diff, { nargs = '?', desc = 'git: open diff in a split view' })
+    command('GitBrowseFileRemoteUrl', function(cmd)
+      local use_main = cmd.args == 'main' or cmd.args == 'master'
+      local file = fn.expand('%:.')
+      local line = fn.line('.')
+
+      open(GIT.get_remote_url(file, line, use_main))
+    end, { nargs = '?', desc = 'git: open remote file in the browser' })
+
+    command('GitCopyFileRemoteURL', function(cmd)
+      local use_main = cmd.args == 'main' or cmd.args == 'master'
+      local file = fn.expand('%:.')
+      local line = fn.line('.')
+
+      utils.to_clipboard(GIT.get_remote_url(file, line, use_main), cmd.bang)
+    end, { nargs = '?', bang = true, desc = 'git: copy remote file url' })
+
+    command('GitDiff', function(cmd)
+      gitsigns.diffthis(cmd.args)
+    end, { nargs = '?', desc = 'git: open diff in a split view' })
     cabbrev('Gd', 'GitDiff')
     cabbrev('Gdm', 'GitDiff main')
 
-    vim.keymap.set('n', '<c-g>', M.blame_line, { desc = 'git: blame current line' })
-    command('GitBlameInLineToggle', M.blame_line_toggle, { desc = 'git: toggle inline blame' })
-    command('GitBlame', M.blame_line, { desc = 'git: blame current line' })
+    vim.keymap.set('n', '<c-g>', function()
+      gitsigns.blame_line({ full = true, ignore_whitespace = true })
+    end, { desc = 'git: blame current line' })
+    command('GitBlame', function()
+      gitsigns.blame_line({ full = true, ignore_whitespace = true })
+    end, { desc = 'git: blame current line' })
     cabbrev('Gblame', 'GitBlame')
 
-    command('GitPreviewHunk', M.preview_hunk, { desc = 'git: preview hunk' })
+    command(
+      'GitBlameInLineToggle',
+      gitsigns.toggle_current_line_blame,
+      { desc = 'git: toggle inline blame' }
+    )
 
-    command('GitRestore', M.restore, { desc = 'git: restore file to last committed version' })
+    command('GitPreviewHunk', gitsigns.prev_hunk, { desc = 'git: preview hunk' })
+
+    command('GitRestore', function()
+      vim.cmd('execute "!git restore -- %" | mode')
+    end, { nargs = '?', desc = 'git: restore file to last committed version' })
     cabbrev('Grt', 'GitRestore')
 
-    command('GitWrite', M.write, { desc = 'git: add diff to stage' })
+    command('GitWrite', function()
+      local file = fn.expand('%:.')
+      vim.cmd('update!')
+      git('add ' .. file)
+    end, { desc = 'git: add diff to stage' })
     cabbrev('Gw', 'GitWrite')
     cabbrev('Ga', 'GitWrite')
-
-    command('GitBranchCurrent', M.branch_current, { desc = 'git: print current branch name' })
   end,
 }
