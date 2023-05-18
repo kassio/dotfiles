@@ -155,6 +155,7 @@ return {
 
     command('GitDiff', M.diff, { nargs = '?', desc = 'git: open diff in a split view' })
     cabbrev('Gd', 'GitDiff')
+    cabbrev('Gdm', 'GitDiff main')
 
     vim.keymap.set('n', '<c-g>', M.blame_line, { desc = 'git: blame current line' })
     command('GitBlameInLineToggle', M.blame_line_toggle, { desc = 'git: toggle inline blame' })
