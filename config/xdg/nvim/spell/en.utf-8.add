@@ -30,3 +30,4 @@ lua
 sidekiq
 rollout
 api
+arity
