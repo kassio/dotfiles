@@ -42,6 +42,7 @@ alias c="code"
 alias tailf="tail -f"
 
 alias to-nvim="tr \\\n \\\0 | xargs -0 nvim -p"
+alias tn="to-nvim"
 
 diff-to() { git diff --name-only --relative --diff-filter=d "${1:-.}"; }
 
