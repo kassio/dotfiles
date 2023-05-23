@@ -24,7 +24,10 @@ alias grep="grep -v 'grep --color=auto -i' | grep --color=auto -i"
 alias psg="ps aux | grep"
 
 # Ruby and Rails
-alias r="rails"
+r() {
+  rails "$@" 2>/dev/null || bundle exec rails "$@"
+}
+
 alias sr="bin/spring rails"
 alias be="bundle exec"
 alias bi="bundle install"
