@@ -1,3 +1,8 @@
 #!/usr/bin/env zsh
 
-printf '\e]8;;http://%s\e\\%s\e]8;;\e\\\n' "${2}" "${1}"
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+  echo "Usage: linkto [-h|--help] <text> <URL>"
+  exit
+fi
+
+printf '\e]8;;%s\e\\%s\e]8;;\e\\\n' "${2}" "${1}"
