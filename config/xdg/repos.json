@@ -19,7 +19,6 @@
     "remote": "https://gitlab.com/tripbudget/tripbudget.gitlab.io",
     "local": "$HOME/src/tripbudget"
   },
-
   {
     "name": "gdk",
     "remote": "https://gitlab.com/gitlab-org/gitlab-development-kit",
@@ -49,5 +48,10 @@
     "name": "triage ops",
     "remote": "https://gitlab.com/gitlab-org/quality/triage-ops.git",
     "local": "$HOME/src/gdk/triage-ops"
+  },
+  {
+    "name": "gitlab xbar",
+    "remote": "https://gitlab.com/kassio/gitlab-xbar.git",
+    "local": "$HOME/src/gitlab-xbar"
   }
 ]
