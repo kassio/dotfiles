@@ -49,3 +49,6 @@ link_all "${DOTFILES}/config/docker" "${HOME}/.docker/%s"
 link \
   "${DOTFILES}/config/iterm2scripts" \
   "${HOME}/Library/Application Support/iTerm2/Scripts"
+
+link "${HOME}/src/gitlab-xbar/gitlab.5m.sh" \
+  "${HOME}/Library/Application Support/xbar/plugins"
