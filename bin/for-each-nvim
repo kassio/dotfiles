@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+cmd="<c-c>:$1<cr>"
 while read server; do
-  /opt/homebrew/bin/nvim --server "${server}" --remote-send ":$1<cr>"
+  echo ">> executing '${cmd}' in ${server}"
+  /opt/homebrew/bin/nvim --server "${server}" --remote-send "${cmd}"
 done < <(find "${HOME}/.cache/nvim" -name "*.pipe")
