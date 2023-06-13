@@ -72,6 +72,7 @@ return {
   -- Show LSP loading information
   {
     'j-hui/fidget.nvim',
+    tag = 'legacy',
     config = {
       text = { spinner = 'dots' },
     },
