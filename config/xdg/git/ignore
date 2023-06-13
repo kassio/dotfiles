@@ -26,3 +26,6 @@ vendor/ruby
 .ruby_console.local
 *.rdb
 .GOPATH
+
+.psqlrc.local
+.psqlrc.local.d

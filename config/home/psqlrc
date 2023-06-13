@@ -10,3 +10,7 @@
 \pset null '(null)'
 
 \timing
+
+\if `[ -f ".psqlrc" ] && echo 1 || echo 0`
+  \ir .psqlrc.local
+\endif
