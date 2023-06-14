@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+cat <<-EOF | sudo tee /etc/hosts
+## broadcasts
+255.255.255.255	broadcasthost
+# ----------------------------
+
+## Base
+127.0.0.1  localhost l
+::1        localhost l
+# ----------------------------
+EOF
