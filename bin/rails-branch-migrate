@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+
+direction="${1}"; shift
+if [ "${direction}" != "up" ] && [ "${direction}" != "down" ]; then
+  help
+  exit 1
+fi
+
+branch="$(git branch-current)"
+remote="$(git get-branch-remote "${branch}")"
+
+git diff --name-only --relative \
+  "${remote:-origin}/$(git branch-main)..." |
+  grep "db/migrate" |
+  xargs basename |
+  cut -f 1 -d '_' |
+  xargs -Iversion bundle exec rails "db:migrate:${direction}" VERSION=version
