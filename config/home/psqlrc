@@ -7,6 +7,7 @@
 \set HISTCONTROL ignoredups
 
 \pset pager off
+\pset tuples_only off
 \pset null '(null)'
 
 \timing
