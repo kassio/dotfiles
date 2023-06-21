@@ -10,6 +10,15 @@ return {
         gc_details = true,
         tide = true,
       },
+      hints = {
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        compositeLiteralTypes = true,
+        constantValues = true,
+        functionTypeParameters = true,
+        parameterNames = true,
+        rangeVariableTypes = true,
+      },
       analyses = {
         nilness = true,
         shadow = true,

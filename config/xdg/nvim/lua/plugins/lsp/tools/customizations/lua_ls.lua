@@ -5,6 +5,9 @@ return {
   root_dir = util.root_pattern('.stylua.toml'),
   settings = {
     Lua = {
+      hint = {
+        enable = true,
+      },
       format = {
         enabled = false,
       },

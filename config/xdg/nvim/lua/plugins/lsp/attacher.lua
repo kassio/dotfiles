@@ -9,7 +9,7 @@ local keymap = function(bufnr, desc, mode, lhs, rhs)
   })
 end
 
-return function(_client, bufnr)
+return function(client, bufnr)
   keymap(bufnr, 'hover', 'n', 'K', lsp.buf.hover)
   keymap(bufnr, 'signature help', 'n', '<c-k>', lsp.buf.signature_help)
   keymap(bufnr, 'rename', 'n', 'grr', lsp.buf.rename)
@@ -31,4 +31,8 @@ return function(_client, bufnr)
   keymap(bufnr, 'implementations', 'n', 'gli', function()
     telescope.lsp_implementations({ jump_type = 'never' })
   end)
+
+  if client.server_capabilities.inlayHintProvider then
+    vim.lsp.buf.inlay_hint(bufnr, true)
+  end
 end
