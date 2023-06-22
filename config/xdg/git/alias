@@ -16,7 +16,7 @@ gdm() {
 }
 
 gdfm() {
-  branch="$(git branch-current)"
+  branch="$(git branch --show-current)"
   remote="$(git get-branch-remote "${branch}")"
 
   git diff --name-only --relative \

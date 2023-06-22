@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-branch_original="$(git branch-current)"
+branch_original="$(git branch --show-current)"
 branch_main="$(git branch-main)"
 skip_main=0
 

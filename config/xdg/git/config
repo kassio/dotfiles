@@ -104,9 +104,8 @@
   file-renamed-label = [R]
 
 [alias]
-  branch-current = branch --show-current
   branch-list = !git branch --format='%(refname:short)' | sort
-  branch-others = !git branch-list | grep -v "$(git branch-current)" | sort
+  branch-others = !git branch-list | grep -v "$(git branch --show-current)" | sort
   exclude = !sh -c 'echo "$1" >> .git/info/exclude' -
   me = config user.name
   switch-main = !git switch "$(git branch-main)"
