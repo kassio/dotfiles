@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+branch="$(git branch --show-current)"
+
+git log --branches --no-walk --author=kassio --format='%S' |
+  xargs -t -Ibranch git switch branch;
+
+git switch "${branch}"
