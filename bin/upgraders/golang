@@ -6,8 +6,5 @@ if [ "$1" = "--help" ]; then
 fi
 
 title "[golang] updating golang packages"
-while read -r pkg; do
-  [ "${pkg}" = "" ] && continue
-
-  go install "${pkg}"
-done < "${ASDF_GOLANG_DEFAULT_PACKAGES_FILE}"
+cat "${ASDF_GOLANG_DEFAULT_PACKAGES_FILE}" |
+  xargs -P 4 -Ipkg go install pkg
