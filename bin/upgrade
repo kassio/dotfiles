@@ -12,6 +12,7 @@ clear-screen
 "${basepath}/upgraders/zsh_plugins"
 "${basepath}/upgraders/asdf"
 "${basepath}/upgraders/ruby"
+"${basepath}/upgraders/golang"
 "${basepath}/upgraders/quarentine"
 "${basepath}/upgraders/custom"
 
