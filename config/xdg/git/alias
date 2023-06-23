@@ -72,6 +72,14 @@ grim() {
   git rebase --interactive "$(git branch-main)"
 }
 
+gsw() {
+  if [ $# -eq 0 ]; then
+    git switch "$(git branch | fzf | xargs)"
+  else
+    git switch "$@"
+  fi
+}
+
 alias gL="gla --no-patch -L"
 alias gLp="g log -L"
 alias ga="g add -A"
@@ -110,6 +118,5 @@ alias gs="g status -sb"
 alias gsw-="g switch -"
 alias gswm="g switch-main"
 alias gswmr="g switch-to-merge-request"
-alias gsw="g switch"
 alias gt="g tag-refs"
 alias gtl="g tag-list"
