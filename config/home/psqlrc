@@ -10,6 +10,9 @@
 \pset tuples_only off
 \pset null '(null)'
 
+-- Use vertical output when horizontal doesn't fit in the screen width
+\x auto
+
 \timing
 
 \if `[ -f ".psqlrc" ] && echo 1 || echo 0`

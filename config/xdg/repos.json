@@ -1,57 +1,55 @@
-[
-  {
-    "name": "dotfiles",
-    "remote": "https://github.com/kassio/dotfiles",
-    "local": "$HOME/.dotfiles"
+{
+  "settings": {
+    "colors": true,
+    "afterSync": [
+      "git",
+      "branch-sync"
+    ]
   },
-  {
-    "name": "syncer",
-    "remote": "https://github.com/kassio/sync",
-    "local": "$HOME/src/sync"
-  },
-  {
-    "name": "blog",
-    "remote": "https://gitlab.com/kassio/kassio",
-    "local": "$HOME/src/blog"
-  },
-  {
-    "name": "trip budget",
-    "remote": "https://gitlab.com/tripbudget/tripbudget.gitlab.io",
-    "local": "$HOME/src/tripbudget"
-  },
-  {
-    "name": "gdk",
-    "remote": "https://gitlab.com/gitlab-org/gitlab-development-kit",
-    "local": "$HOME/src/gdk"
-  },
-  {
-    "name": "gitlab",
-    "remote": "https://gitlab.com/gitlab-org/gitlab",
-    "local": "$HOME/src/gdk/gitlab"
-  },
-  {
-    "name": "gitlab-pages",
-    "remote": "https://gitlab.com/gitlab-org/gitlab-pages",
-    "local": "$HOME/src/gdk/gitlab-pages"
-  },
-  {
-    "name": "gitlab runbooks",
-    "remote": "https://gitlab.com/gitlab-com/runbooks.git",
-    "local": "$HOME/src/gdk/runbooks"
-  },
-  {
-    "name": "review-tanuki",
-    "remote": "https://gitlab.com/nolith/review-tanuki",
-    "local": "$HOME/src/review-tanuki"
-  },
-  {
-    "name": "triage ops",
-    "remote": "https://gitlab.com/gitlab-org/quality/triage-ops.git",
-    "local": "$HOME/src/gdk/triage-ops"
-  },
-  {
-    "name": "gitlab xbar",
-    "remote": "https://gitlab.com/kassio/gitlab-xbar.git",
-    "local": "$HOME/src/gitlab-xbar"
+  "repositories": {
+    "dotfiles": {
+      "remote": "https://github.com/kassio/dotfiles",
+      "local": "$HOME/.dotfiles"
+    },
+    "syncer": {
+      "remote": "https://github.com/kassio/sync",
+      "local": "$HOME/src/sync"
+    },
+    "blog": {
+      "remote": "https://gitlab.com/kassio/kassio",
+      "local": "$HOME/src/blog"
+    },
+    "trip budget": {
+      "remote": "https://gitlab.com/tripbudget/tripbudget.gitlab.io",
+      "local": "$HOME/src/tripbudget"
+    },
+    "gdk": {
+      "remote": "https://gitlab.com/gitlab-org/gitlab-development-kit",
+      "local": "$HOME/src/gdk"
+    },
+    "gitlab": {
+      "remote": "https://gitlab.com/gitlab-org/gitlab",
+      "local": "$HOME/src/gdk/gitlab"
+    },
+    "gitlab-pages": {
+      "remote": "https://gitlab.com/gitlab-org/gitlab-pages",
+      "local": "$HOME/src/gdk/gitlab-pages"
+    },
+    "gitlab runbooks": {
+      "remote": "https://gitlab.com/gitlab-com/runbooks.git",
+      "local": "$HOME/src/gdk/runbooks"
+    },
+    "review-tanuki": {
+      "remote": "https://gitlab.com/nolith/review-tanuki",
+      "local": "$HOME/src/review-tanuki"
+    },
+    "triage ops": {
+      "remote": "https://gitlab.com/gitlab-org/quality/triage-ops.git",
+      "local": "$HOME/src/gdk/triage-ops"
+    },
+    "gitlab xbar": {
+      "remote": "https://gitlab.com/kassio/gitlab-xbar.git",
+      "local": "$HOME/src/gitlab-xbar"
+    }
   }
-]
+}
