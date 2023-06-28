@@ -37,7 +37,7 @@ alias RS="RAILS_ENV=staging"
 alias RP="RAILS_ENV=production"
 alias DS="DISABLE_SPRING=1"
 
-alias c="code"
+alias vsc="code"
 
 alias tailf="tail -f"
 
