@@ -1,14 +1,10 @@
 #!/usr/bin/env zsh
 
-_branches() {
-  _arguments "1: :( ${(@f)$(git branch-list | xargs)} )"
-}
-
-_other-branches() {
-  _arguments "1: :( ${(@f)$(git branch-others | xargs)} )"
-}
+_branches() { _arguments "1: :( ${(@f)$(git branch-list | xargs)} )"; }
+_other-branches() { _arguments "1: :( ${(@f)$(git branch-others | xargs)} )"; }
 
 compdef _other-branches nvim-diff
 compdef _other-branches gr
 compdef _branches gb
+compdef _branches gsw
 compdef _branches git-browse-merge-request
