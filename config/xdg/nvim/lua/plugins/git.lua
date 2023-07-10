@@ -9,7 +9,7 @@ return {
     local cabbrev = utils.cabbrev
 
     local open = function(url)
-      fn.jobstart({ 'open', url })
+      vim.ui.open(url)
     end
 
     local git = function(args, callback)
@@ -22,9 +22,7 @@ return {
       end
     end
 
-    local GIT = {}
-
-    GIT.get_repository_url = function()
+    local get_repository_url = function()
       return git('remote get-url origin', function(url)
         url = string.gsub(url, '^git@', 'https://')
         url = string.gsub(url, '%.git$', '')
@@ -36,7 +34,7 @@ return {
     -- Tries to get git ref for the given file/line
     -- If not found return the main branch
     -- Also returns the main branch if the third parameter is true
-    GIT.get_ref = function(file, line, use_main)
+    local get_ref = function(file, line, use_main)
       if not use_main then
         local pathspec = string.format('-L "%s,%s:%s"', line, line, file)
         local cmd = string.format('log -1 --no-patch --pretty=format:"%%H" %s', pathspec)
@@ -51,9 +49,9 @@ return {
       return git('branch-main')
     end
 
-    GIT.get_remote_url = function(file, line, use_main)
-      local ref = GIT.get_ref(file, line, use_main)
-      local repository_url = GIT.get_repository_url()
+    local get_remote_url = function(file, line, use_main)
+      local ref = get_ref(file, line, use_main)
+      local repository_url = get_repository_url()
 
       return string.format('%s/blob/%s/%s#L%s', repository_url, ref, file, line)
     end
@@ -89,7 +87,7 @@ return {
     end, { desc = 'git: previous hunk' })
 
     command('GitBrowseRepository', function()
-      open(GIT.get_repository_url())
+      open(get_repository_url())
     end, { desc = 'git: open origin in the browser' })
 
     command('GitBrowseMergeRequest', function()
@@ -101,7 +99,7 @@ return {
       local file = fn.expand('%:.')
       local line = fn.line('.')
 
-      open(GIT.get_remote_url(file, line, use_main))
+      open(get_remote_url(file, line, use_main))
     end, { nargs = '?', desc = 'git: open remote file in the browser' })
 
     command('GitCopyFileRemoteURL', function(cmd)
@@ -109,7 +107,7 @@ return {
       local file = fn.expand('%:.')
       local line = fn.line('.')
 
-      utils.to_clipboard(GIT.get_remote_url(file, line, use_main), cmd.bang)
+      utils.to_clipboard(get_remote_url(file, line, use_main), cmd.bang)
     end, { nargs = '?', bang = true, desc = 'git: copy remote file url' })
 
     command('GitDiff', function(cmd)

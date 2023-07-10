@@ -112,13 +112,13 @@ keymap.set('n', '<leader>wa', function()
 end, { desc = 'close floating windows' })
 
 keymap.set('n', 'gx', function()
-  vim.fn.jobstart('open ' .. vim.fn.expand('<cfile>'))
+  vim.ui.open(vim.fn.expand('<cfile>'))
 end, { silent = true, desc = 'open the URL under the cursor' })
 
 keymap.set('x', 'gx', function()
   vim.cmd('normal! "vy')
   local uri = vim.fn.getreg('v')
-  vim.fn.jobstart('open ' .. string.gsub(uri, '%s', ''))
+  vim.ui.open(string.gsub(uri, '%s', ''))
 end, { silent = true, desc = 'open the URL under the cursor' })
 
 keymap.set('n', 'g<c-p>_', function()
