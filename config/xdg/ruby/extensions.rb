@@ -33,6 +33,12 @@ def toggle_active_record_log!
   ActiveRecord::Base.logger
 end
 
+def enable_active_record_log!
+  return unless defined?(Rails)
+
+  ActiveRecord::Base.logger = Logger.new($stdout)
+end
+
 def disable_active_record_log!
   return unless defined?(Rails)
 
