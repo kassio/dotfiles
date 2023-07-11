@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+case "${1}" in
+  master|main)
+    echo "$(git branch-main)"
+    exit
+    ;;
+esac
+
+[ "$#" -gt 0 ] && echo "$@"
