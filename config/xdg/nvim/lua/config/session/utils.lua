@@ -1,5 +1,5 @@
 local M = {
-  session_dir = string.format('%s/sessions', vim.fn.stdpath('data')),
+  session_dir = string.format('%s/sessions', vim.fn.stdpath('state')),
   path_replacer = '_',
 }
 
