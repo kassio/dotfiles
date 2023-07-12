@@ -8,3 +8,5 @@ require('extensions')
 
 -- my config
 require('config')
+
+pcall(vim.cmd.source, vim.env.HOME .. '/.nvim.lua')
