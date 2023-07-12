@@ -61,23 +61,26 @@ end
 local select_session = function(title, callback)
   local sessions = session_list()
 
-  if #sessions > 0 then
-    local options = session_options(sessions)
-
-    vim.ui.select(options, { prompt = title }, function(_choice, index)
-      -- confirm returns 0 for <esc>
-      -- and the chose choice indexed on 1
-      if index ~= nil and index > 0 then
-        local file = sessions[index]
-
-        if vim.fn.filereadable(file) then
-          callback(file)
-
-          return file
-        end
-      end
-    end)
+  if #sessions <= 0 then
+    return
   end
+
+  local options = session_options(sessions)
+
+  vim.ui.select(options, { prompt = title }, function(_choice, index)
+    -- confirm returns 0 for <esc>
+    -- and the chose choice indexed on 1
+    if index == nil and index <= 0 then
+      return
+    end
+
+    local file = sessions[index]
+   if vim.fn.filereadable(file) then
+      callback(file)
+
+      return file
+    end
+  end)
 end
 
 local delete_session = function(session)
