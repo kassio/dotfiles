@@ -31,18 +31,6 @@ gbd() {
   done < <(git branch-list | grep -v detached)
 }
 
-gb-author() {
-  git for-each-ref \
-    --sort=authorname \
-    --format='%(authorname)#%(refname:short)' 'refs/heads'
-}
-
-gb-mine() {
-  gb-author |
-    grep "$(git me)" |
-    cut -d '#' -f 2
-}
-
 g-upstream-diff() {
   local remote="$(git get-branch-remote ${branch})"
 
