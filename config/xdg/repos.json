@@ -1,11 +1,5 @@
 {
-  "settings": {
-    "colors": true,
-    "afterSync": [
-      "git",
-      "branch-sync"
-    ]
-  },
+  "settings": { "colors": true },
   "repositories": {
     "dotfiles": {
       "remote": "https://github.com/kassio/dotfiles",

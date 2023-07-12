@@ -1,7 +1,9 @@
 #!/usr/bin/env zsh
 
 git for-each-ref \
-  --sort=committername \
-  --format='%(committername)#%(refname:lstrip=3)' |
+  --sort=authorname \
+  --format='%(authorname)#%(refname:short)' |
   grep "$(git me)" |
-  cut -d '#' -f 2
+  sort -u |
+  cut -d '#' -f 2 |
+  sort

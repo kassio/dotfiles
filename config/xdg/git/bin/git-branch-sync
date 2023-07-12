@@ -1,7 +1,0 @@
-#!/usr/bin/env zsh
-
-branch="$(git branch --show-current)"
-
-git branch-mine | xargs -t -Ibranch git switch branch;
-
-git switch "${branch}"
