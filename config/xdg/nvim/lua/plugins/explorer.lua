@@ -43,6 +43,7 @@ return {
       git = {
         enable = true,
         ignore = false,
+        timeout = 1600,
       },
       update_focused_file = { enable = false },
       renderer = {
