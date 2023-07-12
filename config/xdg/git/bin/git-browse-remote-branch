@@ -2,11 +2,20 @@
 
 local branch="$(git symbolic-ref --short HEAD 2>/dev/null)"
 
-if [ $# -ne 0 ]; then
+if [ $# -gt 0 ]; then
   branch="$1"
+  shift
 fi
 
-local branch_remote="$(git config --get "branch.${branch}.remote")"
+
+local branch_remote
+if [ $# -gt 0 ]; then
+  branch_remote="$1"
+  shift
+else
+  branch_remote="$(git config --get "branch.${branch}.remote")"
+fi
+
 local remote_url="$(git remote get-url "${branch_remote}" | sed 's/\.git//')"
 
 case "${remote_url}" in
