@@ -83,6 +83,7 @@ return {
       function()
         require('telescope.builtin').keymaps()
       end,
+      mode = { 'n', 'v' },
       silent = true,
       desc = 'telescope: keymaps',
     },
@@ -125,6 +126,7 @@ return {
       function()
         require('telescope.builtin').commands()
       end,
+      mode = { 'n', 'v' },
       silent = true,
       desc = 'telescope: commands',
     },
