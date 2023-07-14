@@ -25,7 +25,9 @@ local sources = {
   builtin.diagnostics.checkmake, -- makefile - via go/default_packages
   builtin.diagnostics.editorconfig_checker, -- via go/default_packages
   builtin.diagnostics.golangci_lint, -- go - via go/default_packages
-  builtin.diagnostics.luacheck, -- lua - via brew
+  builtin.diagnostics.luacheck.with({ -- lua - via brew
+    extra_args = { '--globals', 'vim', 'describe' },
+  }),
   builtin.diagnostics.markdownlint, -- markdown - via brew
   builtin.diagnostics.shellcheck, -- shell - via brew
   builtin.diagnostics.tidy, -- html - via brew
