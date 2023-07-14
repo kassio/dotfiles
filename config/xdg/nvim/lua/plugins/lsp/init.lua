@@ -6,8 +6,16 @@ return {
       'jose-elias-alvarez/null-ls.nvim',
     },
     config = function()
-      require('plugins.lsp.handlers').setup()
-      require('plugins.lsp.attacher').setup()
+      local lsp = vim.lsp
+      local handlers = lsp.handlers
+
+      handlers['textDocument/hover'] = lsp.with(handlers.hover, {
+        border = 'rounded',
+      })
+
+      handlers['textDocument/signatureHelp'] = lsp.with(handlers.signature_help, {
+        border = 'rounded',
+      })
 
       require('plugins.lsp.servers').setup()
       require('plugins.lsp.general').setup()
