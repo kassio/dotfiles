@@ -16,7 +16,6 @@ return {
     config = function()
       local treesitter = require('nvim-treesitter.configs')
 
-      require('plugins.treesitter.refactor')
       require('plugins.treesitter.context')
       require('plugins.treesitter.highlights')
 
