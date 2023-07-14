@@ -1,36 +1,34 @@
 local lspconfig = require('lspconfig')
 local capabilities = require('plugins.lsp.capabilities')
 
---- Find lsp server personal customizations or return empty table
----@param server string lsp server name
----@return table
-local function config(server)
+local function config(server, defaults)
   local ok, cfg = pcall(require, 'plugins.lsp.servers.' .. server)
 
   if not ok then
-    return {}
+    return defaults
   end
 
-  return cfg
+  return vim.tbl_deep_extend('force', defaults, cfg)
 end
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 local servers = {
-  'bashls', -- via brew bash-language-server
-  'cssls', -- via brew vscode-langservers-extracted
-  'gopls', -- via go/default_packages
-  'jsonls', -- via brew vscode-langservers-extracted
-  'jsonnet_ls', -- via go/default_packages
-  'lua_ls', -- via brew lua-language-server
-  'solargraph', -- via ruby
-  'sqlls', -- via brew sql-language-server
-  'yamlls', -- via brew yaml-language-server
+  'bashls', -- bash - via brew bash-language-server
+  'cssls', -- css - via brew vscode-langservers-extracted
+  'gopls', -- go - via go/default_packages
+  'jsonls', -- json - via brew vscode-langservers-extracted
+  'jsonnet_ls', -- jsonnet - via go/default_packages
+  'jqls', -- jq - via go/default_packages
+  'lua_ls', -- lua - via brew lua-language-server
+  'solargraph', -- ruby - via rubygems
+  'sqlls', -- sql - via brew sql-language-server
+  'yamlls', -- yaml - via brew yaml-language-server
 }
 
 return {
   setup = function()
     for _, server in pairs(servers) do
-      cfgs = vim.tbl_extend('keep', config(server), {
+      local cfgs = config(server, {
         single_file_support = true,
         capabilities = capabilities,
       })

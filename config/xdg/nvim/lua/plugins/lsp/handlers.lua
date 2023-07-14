@@ -1,8 +1,8 @@
+local lsp = vim.lsp
+local handlers = lsp.handlers
+
 return {
   setup = function()
-    local lsp = vim.lsp
-    local handlers = lsp.handlers
-
     handlers['textDocument/hover'] = lsp.with(handlers.hover, {
       border = 'rounded',
     })

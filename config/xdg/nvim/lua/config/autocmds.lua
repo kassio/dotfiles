@@ -50,24 +50,13 @@ utils.augroup('user:focus', {
       set_focus(true)
     end,
   },
-  {
-    events = { 'FileType' },
-    pattern = {
-      'gitcommit',
-      'markdown',
-    },
-    callback = function()
-      vim.opt_local.wrap = true
-      vim.opt_local.spell = true
-    end,
-  },
-  {
+  { -- used on statusline
     events = { 'RecordingEnter' },
     callback = function()
       vim.g.macromsg = string.format('recording @%s', vim.fn.reg_recording())
     end,
   },
-  {
+  { -- used on statusline
     events = { 'RecordingLeave' },
     callback = function()
       vim.g.macromsg = vim.v.event.regname .. ' recorded'
@@ -75,6 +64,16 @@ utils.augroup('user:focus', {
       vim.defer_fn(function()
         vim.g.macromsg = ''
       end, 3000)
+    end,
+  },
+  { -- autoformat
+    events = 'BufWritePre',
+    callback = function()
+      if not vim.bo.modifiable or vim.b.skip_format ~= nil then
+        return
+      end
+
+      vim.lsp.buf.format({ async = false })
     end,
   },
   {
@@ -87,10 +86,12 @@ utils.augroup('user:focus', {
       'VimSuspend',
     },
     callback = function()
-      if vim.bo.modifiable then
-        utils.buffers.trim()
-        vim.cmd('silent! wall!')
+      if not vim.bo.modifiable then
+        return
       end
+
+      utils.buffers.trim()
+      vim.cmd('silent! wall!')
     end,
   },
 })

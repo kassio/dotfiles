@@ -17,27 +17,31 @@ end
 
 local sources = {
   -- code actions
-  builtin.code_actions.gitsigns,
-  builtin.code_actions.refactoring,
-  builtin.code_actions.shellcheck,
+  builtin.code_actions.gitsigns, -- via 'lewis6991/gitsigns.nvim'
+  builtin.code_actions.refactoring, -- via 'ThePrimeagen/refactoring.nvim'
+  builtin.code_actions.shellcheck, -- via brew
 
   -- diagnostics
-  builtin.diagnostics.golangci_lint,
-  builtin.diagnostics.markdownlint,
-  builtin.diagnostics.shellcheck,
-  builtin.diagnostics.tidy,
-  builtin.diagnostics.trail_space,
-  builtin.diagnostics.zsh,
-  conditional_rubocop,
+  builtin.diagnostics.checkmake, -- makefile - via go/default_packages
+  builtin.diagnostics.editorconfig_checker, -- via go/default_packages
+  builtin.diagnostics.golangci_lint, -- go - via go/default_packages
+  builtin.diagnostics.luacheck, -- lua - via brew
+  builtin.diagnostics.markdownlint, -- markdown - via brew
+  builtin.diagnostics.shellcheck, -- shell - via brew
+  builtin.diagnostics.tidy, -- html - via brew
+  builtin.diagnostics.trail_space, -- null-ls builtin
+  builtin.diagnostics.zsh, -- zsh builtin
+  conditional_rubocop, -- via rubygems
 
   -- formatting
-  builtin.formatting.jq,
-  builtin.formatting.shfmt,
-  builtin.formatting.stylua,
-  builtin.formatting.tidy,
+  builtin.formatting.jq, -- via brew
+  builtin.formatting.shfmt, -- via brew
+  builtin.formatting.stylua, -- via brew
+  builtin.formatting.tidy, -- via brew
 
   -- hover
-  builtin.hover.dictionary,
+  builtin.hover.dictionary, -- web-api
+  builtin.hover.printenv, -- null-ls builtin
 }
 
 return {
