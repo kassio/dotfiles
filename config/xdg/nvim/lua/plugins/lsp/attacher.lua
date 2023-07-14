@@ -33,6 +33,6 @@ return function(client, bufnr)
   end)
 
   if client.server_capabilities.inlayHintProvider then
-    vim.lsp.buf.inlay_hint(bufnr, true)
+    lsp.inlay_hint(bufnr, false)
   end
 end
