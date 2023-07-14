@@ -4,15 +4,6 @@ return {
     dependencies = {
       -- generic LSP for diagnostic, formatting, etc
       'jose-elias-alvarez/null-ls.nvim',
-
-      -- required for null-ls refactoring module
-      {
-        'ThePrimeagen/refactoring.nvim',
-        dependencies = {
-          { 'nvim-lua/plenary.nvim' },
-          { 'nvim-treesitter/nvim-treesitter' },
-        },
-      },
     },
     config = function()
       require('plugins.lsp.handlers').setup()
