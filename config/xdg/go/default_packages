@@ -1,4 +1,5 @@
 golang.org/x/tools/gopls@latest
+github.com/grafana/jsonnet-language-server@latest
 github.com/go-delve/delve/cmd/dlv@latest
 
 gitlab.com/kassio/lserver@latest

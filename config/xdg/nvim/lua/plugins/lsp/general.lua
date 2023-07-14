@@ -1,4 +1,4 @@
-local nls = require('null-ls')
+local nullls = require('null-ls')
 local builtin = require('null-ls.builtins')
 local conditionals = require('null-ls.utils').make_conditional_utils()
 
@@ -42,16 +42,10 @@ local sources = {
 
 return {
   setup = function()
-    nls.setup({
+    nullls.setup({
       diagnostics_format = '[#{c}] #{m} (#{s})',
       sources = sources,
-      default_timeout = 20000,
-      debug = true,
-      log = {
-        enable = true,
-        level = 'trace',
-        use_console = 'sync',
-      },
+      default_timeout = 10000,
     })
   end,
 }

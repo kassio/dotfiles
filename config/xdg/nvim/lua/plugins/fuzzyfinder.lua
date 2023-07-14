@@ -63,6 +63,16 @@ return {
       desc = 'telescope: help tags',
     },
     {
+      '<leader>fH',
+      function()
+        require('telescope.builtin').help_tags({
+          default_text = vim.fn.expand('<cword>'),
+        })
+      end,
+      silent = true,
+      desc = 'telescope: help tags',
+    },
+    {
       '<leader>fb',
       function()
         require('telescope.builtin').buffers()

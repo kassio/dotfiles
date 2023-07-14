@@ -5,6 +5,9 @@ return {
   root_dir = util.root_pattern('.stylua.toml'),
   settings = {
     Lua = {
+      telemetry = {
+        enable = false,
+      },
       hint = {
         enable = true,
       },

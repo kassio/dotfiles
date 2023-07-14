@@ -75,7 +75,7 @@ local select_session = function(title, callback)
     end
 
     local file = sessions[index]
-   if vim.fn.filereadable(file) then
+    if vim.fn.filereadable(file) then
       callback(file)
 
       return file
