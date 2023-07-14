@@ -6,7 +6,7 @@ if [ "$1" = "--help" ]; then
 fi
 
 subtitle "global brewfile"
-brew bundle check --global --install
+brew bundle --global install
 
 title "[brew] system upgrade"
 subtitle "brew upgrade"
