@@ -5,14 +5,14 @@ if [ "$1" = "--help" ]; then
   exit
 fi
 
+subtitle "global brewfile"
+brew bundle check --global --install
+
 title "[brew] system upgrade"
 subtitle "brew upgrade"
 rm "${HOMEBREW_PREFIX}/var/homebrew/locks/update" 2>/dev/null
 brew update
 brew upgrade --ignore-pinned --fetch-HEAD
-
-subtitle "global brewfile"
-brew bundle check --global --all --verbose
 
 cleaned=$(brew cleanup --prune 7)
 if [ -n "${cleaned}" ]; then
