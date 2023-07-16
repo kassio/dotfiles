@@ -6,6 +6,8 @@ M.buffers = require('utils.buffers')
 M.snippets = require('utils.snippets')
 M.highlights = require('utils.highlights')
 M.symbols = require('utils.symbols')
+M.string = require('utils.string')
+M.table = require('utils.table')
 
 M.plugin_filetypes = {
   'FineCmdlinePrompt',
@@ -28,7 +30,7 @@ M.plugin_filetypes = {
 ---@return nil
 M.to_clipboard = function(text, system_clipboard)
   local reg = '"'
-  local fmt = string.trim([[
+  local fmt = M.string.trim([[
 "%s"
 copied to %s
 ]])
@@ -49,7 +51,7 @@ end
 M.augroup = function(name, autocmds)
   local group = api.nvim_create_augroup(name, { clear = true })
   for _, opts in ipairs(autocmds) do
-    local events = table.removekey(opts, 'events')
+    local events = M.table.removekey(opts, 'events')
     opts['group'] = group
     api.nvim_create_autocmd(events, opts)
   end

@@ -1,11 +1,12 @@
+local g = vim.g
 local opt = vim.opt
 
 -- Space as map leader
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+g.mapleader = ' '
+g.maplocalleader = ' '
 
 -- fix markdown indentation settings
-vim.g.markdown_recommended_style = 0
+g.markdown_recommended_style = 0
 
 opt.autowriteall = true
 opt.backup = false
@@ -35,8 +36,9 @@ opt.fileencodings = { 'utf8', 'nobomb' }
 opt.fileformats = { 'unix', 'mac' }
 opt.foldcolumn = '1'
 opt.foldenable = false
-opt.foldmethod = 'manual'
+opt.foldexpr = 'nvim_treesitter#foldexpr()'
 opt.foldlevel = 0
+opt.foldmethod = 'manual'
 opt.foldnestmax = 1
 opt.ignorecase = true
 opt.inccommand = 'nosplit'

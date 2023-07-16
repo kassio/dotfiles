@@ -1,3 +1,5 @@
+local utils = require('utils')
+
 local M = {}
 
 M.filename = function(case, sufix)
@@ -9,7 +11,7 @@ M.filename = function(case, sufix)
   end
 
   if case == 'camelcase' then
-    return string.camelcase(filename)
+    return utils.string.camelcase(filename)
   else
     return filename
   end
@@ -33,7 +35,7 @@ M.ruby_class = function()
 
     for dir in string.gmatch(filename, '(%w+)/') do
       if dir ~= 'lib' and dir ~= 'app' then
-        result = result .. '::' .. string.camelcase(dir)
+        result = result .. '::' .. utils.string.camelcase(dir)
       end
     end
 

@@ -1,4 +1,7 @@
 local keymap = vim.keymap
+local fn = vim.fn
+local utils = require('utils')
+
 ------------------------------------------------------------
 -- Operation pending maps need to be passed as string
 -- expressions to vim, hence the double quote
@@ -95,7 +98,7 @@ end, { desc = 'delete all buffers except current' })
 
 keymap.set('n', '<leader>dh', function() -- delete all hidden buffers
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    if vim.tbl_isempty(vim.fn.win_findbuf(buf)) and vim.api.nvim_buf_is_valid(buf) then
+    if vim.tbl_isempty(fn.win_findbuf(buf)) and vim.api.nvim_buf_is_valid(buf) then
       vim.api.nvim_buf_delete(buf, { force = true })
     end
   end
@@ -112,23 +115,23 @@ keymap.set('n', '<leader>wa', function()
 end, { desc = 'close floating windows' })
 
 keymap.set('n', 'gx', function()
-  vim.ui.open(vim.fn.expand('<cfile>'))
+  vim.ui.open(fn.expand('<cfile>'))
 end, { silent = true, desc = 'open the URL under the cursor' })
 
 keymap.set('x', 'gx', function()
   vim.cmd('normal! "vy')
-  local uri = vim.fn.getreg('v')
+  local uri = fn.getreg('v')
   vim.ui.open(string.gsub(uri, '%s', ''))
 end, { silent = true, desc = 'open the URL under the cursor' })
 
 keymap.set('n', 'g<c-p>_', function()
-  local value = vim.fn.getreg('"')
+  local value = fn.getreg('"')
 
-  vim.api.nvim_paste(string.snakecase(value), '', -1)
+  vim.api.nvim_paste(utils.string.snakecase(value), '', -1)
 end, { silent = true, desc = 'paste in snake_case' })
 
 keymap.set('n', 'g<c-p>c', function()
-  local value = vim.fn.getreg('"')
+  local value = fn.getreg('"')
 
-  vim.api.nvim_paste(string.camelcase(value), '', -1)
+  vim.api.nvim_paste(utils.string.camelcase(value), '', -1)
 end, { silent = true, desc = 'paste in CamelCase' })

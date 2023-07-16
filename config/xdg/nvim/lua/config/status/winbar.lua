@@ -1,5 +1,5 @@
 local hl = require('utils.highlights')
-local symbols = require('utils.symbols')
+local utils = require('utils')
 
 local function hlname(name, focused)
   if not focused then
@@ -46,7 +46,7 @@ local function get_todos(bufnr, focused)
   return string.format(
     '%%#%s#%s %s%%*',
     hlname('WinBar', focused),
-    symbols.todo,
+    utils.symbols.todo,
     count_limitter(#signs)
   )
 end
@@ -63,11 +63,11 @@ local function get_diagnositcs(bufnr, focused)
 
     return string.format(
       '%%#%s#%s %s%%*',
-      hlname(string.camelcase(level), focused),
-      symbols.diagnostics[level],
+      hlname(utils.string.camelcase(level), focused),
+      utils.symbols.diagnostics[level],
       count_limitter(count)
     )
-  end, vim.tbl_keys(symbols.diagnostics))
+  end, vim.tbl_keys(utils.symbols.diagnostics))
 
   diagnosticList = vim.tbl_filter(function(e)
     return e ~= ''
@@ -89,7 +89,7 @@ local function get_git_status(bufnr, focused)
     return string.format(
       '%%#%s#%s %s%%*',
       hlname(hl.git[name], focused),
-      symbols.git[name],
+      utils.symbols.git[name],
       count_limitter(count)
     )
   end, vim.tbl_keys(hl.git))

@@ -14,18 +14,13 @@ return {
       'andymass/vim-matchup',
     },
     config = function()
-      local treesitter = require('nvim-treesitter.configs')
-
-      require('plugins.treesitter.context')
-      require('plugins.treesitter.highlights')
-
-      vim.o.foldmethod = 'expr'
-      vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
-      vim.o.foldenable = false
-
       -- vim-matchup plugin, uses treesitter
       -- Do not show the not visible matching context on statusline
       vim.g.matchup_matchparen_offscreen = {}
+
+      local treesitter = require('nvim-treesitter.configs')
+
+      require('plugins.treesitter.context')
 
       treesitter.setup({
         ensure_installed = 'all',

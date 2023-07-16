@@ -1,9 +1,11 @@
-if not table.unpack then
-  table.unpack = unpack
+local M = {}
+
+if not M.unpack then
+  M.unpack = unpack
 end
 
-if not table.pack then
-  function table.pack(...)
+if not M.pack then
+  function M.pack(...)
     return { ... }
   end
 end
@@ -12,7 +14,7 @@ end
 ---@param tbl table
 ---@param key any
 ---@return any
-function table.removekey(tbl, key)
+function M.removekey(tbl, key)
   local element = tbl[key]
   tbl[key] = nil
   return element
@@ -22,7 +24,7 @@ end
 ---@param tbl table
 ---@param keys any[]
 ---@return table<any, any>
-function table.slice(tbl, keys)
+function M.slice(tbl, keys)
   local result = {}
 
   for key, value in pairs(tbl) do
@@ -33,3 +35,5 @@ function table.slice(tbl, keys)
 
   return result
 end
+
+return M
