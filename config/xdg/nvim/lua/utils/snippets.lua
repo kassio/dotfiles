@@ -1,24 +1,25 @@
-local utils = require('utils')
+local fn = vim.fn
+local S = require('utils.string')
 
 local M = {}
 
 M.filename = function(case, sufix)
   local filename = vim.api.nvim_buf_get_name(0)
-  filename = vim.fn.fnamemodify(filename, ':t:r')
+  filename = fn.fnamemodify(filename, ':t:r')
 
   if sufix ~= nil then
     filename = filename:gsub(sufix, '')
   end
 
   if case == 'camelcase' then
-    return utils.string.camelcase(filename)
+    return S.camelcase(filename)
   else
     return filename
   end
 end
 
 M.expand = function(fmt, default)
-  local path = vim.fn.expand(fmt)
+  local path = fn.expand(fmt)
 
   if path == '.' then
     return default or path
@@ -28,14 +29,14 @@ M.expand = function(fmt, default)
 end
 
 M.ruby_class = function()
-  local filename = vim.fn.expand('%:.')
+  local filename = fn.expand('%:.')
 
   if string.match(filename, '^lib/') or string.match(filename, '^app/') then
     local result = ''
 
     for dir in string.gmatch(filename, '(%w+)/') do
       if dir ~= 'lib' and dir ~= 'app' then
-        result = result .. '::' .. utils.string.camelcase(dir)
+        result = result .. '::' .. S.camelcase(dir)
       end
     end
 
