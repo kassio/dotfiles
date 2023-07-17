@@ -20,7 +20,7 @@ local servers = {
   'jsonnet_ls', -- jsonnet - via go/default_packages
   'jqls', -- jq - via go/default_packages
   'lua_ls', -- lua - via brew lua-language-server
-  'solargraph', -- ruby - via rubygems
+  'ruby_ls', -- ruby - via rubygems
   'sqlls', -- sql - via brew sql-language-server
   'yamlls', -- yaml - via brew yaml-language-server
 }

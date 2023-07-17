@@ -7,3 +7,6 @@ fi
 
 title "[ruby] updating ruby gems"
 for-each-ruby gem update --system
+
+title "[ruby] installing LS"
+for-each-ruby gem install ruby-lsp ruby-lsp-rails

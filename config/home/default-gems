@@ -3,7 +3,6 @@ bundler
 debug
 pry-shell
 
-neovim
 rcodetools
 fastri
 
@@ -14,3 +13,6 @@ gitlab-markup
 
 solargraph
 solargraph-rails
+
+ruby-lsp
+ruby-lsp-rails
