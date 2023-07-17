@@ -1,3 +1,14 @@
+local ruby_files = {
+  'rg',
+  '--files',
+  '--type',
+  'ruby',
+  '--type',
+  'haml',
+  '--type',
+  'erb',
+}
+
 return {
   'nvim-telescope/telescope.nvim',
   dependencies = {
@@ -182,7 +193,7 @@ return {
       '<leader>fr',
       function()
         require('telescope.builtin').find_files({
-          find_command = { 'rg', '--type', 'ruby', '--files' },
+          find_command = ruby_files,
           search_dirs = { 'app', 'lib', 'ee/app', 'ee/lib' },
           prompt_title = 'rails (app, lib)',
         })
@@ -194,7 +205,7 @@ return {
       '<leader>fR',
       function()
         require('telescope.builtin').find_files({
-          find_command = { 'rg', '--type', 'ruby', '--files' },
+          find_command = ruby_files,
           search_dirs = { 'app', 'lib', 'spec', 'ee/app', 'ee/lib', 'ee/spec' },
           prompt_title = 'rails (app, lib, spec)',
         })
