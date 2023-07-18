@@ -18,7 +18,6 @@ return {
     local cmp = require('cmp')
     local mapping = cmp.mapping
     local snippy = require('snippy')
-    local symbols = require('utils.symbols')
 
     snippy.setup({
       mappings = {
@@ -32,33 +31,8 @@ return {
       },
     })
 
-    local MAX_LABEL_WIDTH = 50
-    local function whitespace(max, len)
-      return (' '):rep(max - len)
-    end
-
     cmp.setup({
-      formatting = {
-        fields = { 'kind', 'abbr' },
-        format = function(entry, item)
-          -- Limit content width.
-          local content = item.abbr
-          if #content > MAX_LABEL_WIDTH then
-            item.abbr = vim.fn.strcharpart(content, 0, MAX_LABEL_WIDTH) .. '…'
-          else
-            item.abbr = content .. whitespace(MAX_LABEL_WIDTH, #content)
-          end
-
-          item.kind = string.format(
-            '%s │',
-            symbols.lspkind[item.kind] or symbols.lspsource[entry.source.name] or '  '
-          )
-
-          item.menu = nil
-
-          return item
-        end,
-      },
+      formatting = require('plugins.completion.formatting'),
 
       mapping = {
         ['<c-n>'] = mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
@@ -80,9 +54,9 @@ return {
       },
 
       sources = cmp.config.sources({
-        { name = 'snippy' },
         { name = 'nvim_lsp' },
         { name = 'nvim_lsp_signature_help' },
+        { name = 'snippy' },
       }, {
         { name = 'treesitter' },
         { name = 'buffer' },
