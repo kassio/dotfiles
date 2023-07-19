@@ -1,6 +1,6 @@
-local function syntax(name)
-  return function()
-    vim.opt_local.syntax = name
+local function filetype_syntax(ft, syntax)
+  return ft, function()
+    vim.opt_local.syntax = syntax
   end
 end
 
@@ -9,9 +9,7 @@ vim.filetype.add({
     ['config'] = 'config',
     ['libsonnet'] = 'jsonnet',
     ['jsonnet'] = 'jsonnet',
-    ['ndjson'] = function()
-      return 'ndjson', syntax('json')
-    end,
+    ['ndjson'] = filetype_syntax('ndjson', 'json'),
   },
   filename = {
     ['.simplecov'] = 'ruby',
@@ -23,11 +21,7 @@ vim.filetype.add({
     ['.*%.json.*'] = 'json',
     ['.*%.irbrc'] = 'ruby',
     ['.*%.pryrc'] = 'ruby',
-    ['.*_spec%.rb'] = function()
-      return 'ruby', syntax('rspec')
-    end,
-    ['gitconfig.*'] = function()
-      return 'config', syntax('dosini')
-    end,
+    ['.*_spec%.rb'] = filetype_syntax('ruby', 'rspec'),
+    ['gitconfig.*'] = filetype_syntax('config', 'dosini'),
   },
 })
