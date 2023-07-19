@@ -14,7 +14,7 @@ local function set_focus(focus)
 end
 
 utils.augroup('user:focus', {
-  {
+  { -- autosave file
     events = {
       'FocusGained',
       'TermClose',
@@ -22,7 +22,7 @@ utils.augroup('user:focus', {
     },
     command = 'checktime',
   },
-  {
+  { -- keep splits sizes
     events = { 'VimResized' },
     callback = function()
       local curtab = vim.api.nvim_tabpage_get_number(vim.api.nvim_get_current_tabpage())
@@ -30,7 +30,7 @@ utils.augroup('user:focus', {
       vim.cmd.tabnext(curtab)
     end,
   },
-  {
+  { -- lost focus
     events = {
       'WinLeave',
       'BufLeave',
@@ -40,7 +40,7 @@ utils.augroup('user:focus', {
       set_focus(false)
     end,
   },
-  {
+  { -- gain focus
     events = {
       'WinEnter',
       'BufEnter',
