@@ -23,7 +23,9 @@ vim.filetype.add({
     ['.*%.json.*'] = 'json',
     ['.*%.irbrc'] = 'ruby',
     ['.*%.pryrc'] = 'ruby',
-    ['.*_spec%.rb'] = 'rspec',
+    ['.*_spec%.rb'] = function()
+      return 'ruby', syntax('rspec')
+    end,
     ['gitconfig.*'] = function()
       return 'config', syntax('dosini')
     end,
