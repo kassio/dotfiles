@@ -42,7 +42,7 @@ return {
       desc = 'telescope: find files',
     },
     {
-      '<leader>fP',
+      '<leader>fp',
       function()
         require('telescope.builtin').resume()
       end,
