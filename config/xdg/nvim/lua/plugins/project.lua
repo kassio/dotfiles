@@ -6,7 +6,7 @@ return {
       ['*'] = {
         ['doc/*.txt'] = { type = 'doc' },
         ['doc/*.md'] = { type = 'doc' },
-        -- Go
+        -- go
         ['*.go'] = {
           alternate = '{}_test.go',
           type = 'source',
@@ -15,7 +15,7 @@ return {
           alternate = '{}.go',
           type = 'test',
         },
-        -- Ruby
+        -- ruby
         ['config/initializers/*.rb'] = {
           alternate = 'spec/initializers/{}_spec.rb',
           type = 'source',
@@ -23,6 +23,10 @@ return {
         ['spec/initializers/*_spec.rb'] = {
           alternate = 'config/initializers/{}.rb',
           type = 'test',
+        },
+        ['app/view/*.erb'] = {
+          alternate = 'spec/{}.erb_spec.rb',
+          type = 'source',
         },
         ['app/*.rb'] = {
           alternate = 'spec/{}_spec.rb',
