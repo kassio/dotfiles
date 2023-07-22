@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local telescope = require('telescope.builtin')
     local lsp = vim.lsp
-    local client = lsp.get_client_by_id(args.data.client_id)
+    -- local client = lsp.get_client_by_id(args.data.client_id)
     local bufnr = args.buf
 
     keymap(bufnr, 'hover', 'n', 'K', lsp.buf.hover)
@@ -38,8 +38,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
       telescope.lsp_implementations({ jump_type = 'never' })
     end)
 
-    if client.server_capabilities.inlayHintProvider then
-      lsp.inlay_hint(bufnr, false)
-    end
+    -- if client.server_capabilities.inlayHintProvider then
+    --   lsp.inlay_hint(bufnr, false)
+    -- end
   end,
 })
