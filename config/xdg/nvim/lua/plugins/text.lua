@@ -1,9 +1,4 @@
 return {
-  -- split/join code blocks
-  {
-    'AndrewRadev/splitjoin.vim',
-  },
-
   -- text aligning
   {
     'junegunn/vim-easy-align',

@@ -8,22 +8,18 @@ local ruby_cmd = function(name, replacer)
   end, { range = true })
 end
 
+-- { :a => 1 } to { a: 1}
 ruby_cmd('ModernizeHashSymbolKey', [[s/:\(\w\+\)\s*=>\s*\ze/\1:\ ]])
+-- { 'a' => 1 } to { a: 1 }
 ruby_cmd('ConvertHashStringKeyToSymbol', [[s/\(['"]\)\([^\1]\{-\}\)\1\s*\(=>\|:\)/\2:]])
+-- { a: 1 } to { 'a' => 1 }
 ruby_cmd('ConvertHashSymbolKeyToString', [[s/\(\w\+\)\%(:\|\s*=>\)/'\1' =>]])
+-- let(:foo) { value } to foo = value
 ruby_cmd('LetToVar', [[s/let\%(\w\+\)\?(:\(\w\+\))\s*{\s*\(.\{-\}\)\s*}/\1 = \2]])
+-- foo = value to let(:foo) { value }
 ruby_cmd('VarToLet', [[s/@\?\(\w\+\)\s*=\s*\(.*\)/let(:\1) { \2 }]])
 
-require('nvim-surround').buffer_setup({
-  surrounds = {
-    ['#'] = {
-      add = { '#{', '}' },
-      find = '(#{)[^}]-(})',
-      delete = '(#{)()[^}]-(})()',
-    },
-  },
-})
-
+-- Run rspec even when not in a test file
 vim.api.nvim_create_user_command('RSpec', function(c)
   local _, lnum, col = table.unpack(vim.fn.getcurpos())
   local file = c.args
@@ -37,8 +33,9 @@ vim.api.nvim_create_user_command('RSpec', function(c)
 
   vim.cmd.TestLast()
 end, { nargs = '?' })
-
 vim.cmd('cabbrev Rspec RSpec')
+
+-- Add rails standard(and gitlab) to the path for easy file jump
 vim.opt_local.path:append({
   'app/channels',
   'app/components',
@@ -59,4 +56,15 @@ vim.opt_local.path:append({
   'app/validators',
   'app/workers',
   'lib',
+})
+
+-- Make # add/find/remove #{,} pairs
+require('nvim-surround').buffer_setup({
+  surrounds = {
+    ['#'] = {
+      add = { '#{', '}' },
+      find = '(#{)[^}]-(})',
+      delete = '(#{)()[^}]-(})()',
+    },
+  },
 })
