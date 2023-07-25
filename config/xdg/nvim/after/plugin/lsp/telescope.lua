@@ -26,6 +26,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     keymap(bufnr, 'document symbols', 'n', 'gls', telescope.lsp_document_symbols)
     keymap(bufnr, 'workspace symbols', 'n', 'glS', telescope.lsp_dynamic_workspace_symbols)
 
+    keymap(bufnr, 'definitions', 'n', 'gd', lsp.buf.definition)
     keymap(bufnr, 'definitions', 'n', 'gld', function()
       telescope.lsp_definitions({ jump_type = 'never' })
     end)
