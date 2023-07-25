@@ -214,13 +214,13 @@ return {
       desc = 'telescope: rails (app, lib, spec)',
     },
     {
-      '<leader>as',
+      '<leader>fw',
       function()
         require('telescope.builtin').grep_string()
       end,
       mode = { 'n', 'v' },
       silent = true,
-      desc = 'telescope: grep string',
+      desc = 'telescope: grep word under cursor or selection',
     },
   },
   config = function()
