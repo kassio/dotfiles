@@ -1,6 +1,6 @@
 local M = {}
 
-if not M.unpack then
+if not table.unpack then
   M.unpack = unpack
 end
 
@@ -31,6 +31,15 @@ function M.slice(tbl, keys)
     if vim.tbl_contains(keys, key) then
       result[key] = value
     end
+  end
+
+  return result
+end
+
+function M.join_lists(tbl1, tbl2)
+  local result = { M.unpack(tbl1) }
+  for _, value in ipairs(tbl2) do
+    table.insert(result, value)
   end
 
   return result

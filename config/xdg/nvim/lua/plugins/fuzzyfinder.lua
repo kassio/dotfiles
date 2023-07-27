@@ -6,19 +6,17 @@ local find_command = {
   'symlink',
   '--hidden',
   '--no-ignore-vcs',
-  '--color', 'never'
+  '--color',
+  'never',
 }
 
-local ruby_find_command = vim.tbl_flatten({
-  find_command,
-  {
-    '--extension',
-    'rb',
-    '--extension',
-    'haml',
-    '--extension',
-    'erb',
-  },
+local ruby_find_command = require('utils.table').join_lists(find_command, {
+  '--extension',
+  'rb',
+  '--extension',
+  'haml',
+  '--extension',
+  'erb',
 })
 
 return {
@@ -35,7 +33,7 @@ return {
         require('telescope.builtin').find_files(require('telescope.themes').get_ivy())
       end,
       silent = true,
-      desc = 'telescope: files [non block]',
+      desc = 'telescope: files (theme: ivy)',
     },
     {
       '<leader>ff',
@@ -234,6 +232,7 @@ return {
     local telescope = require('telescope')
     local builtin = require('telescope.builtin')
     local actions = require('telescope.actions')
+    local layout_actions = require('telescope.actions.layout')
     local utils = require('utils')
 
     telescope.load_extension('fzf')
@@ -250,6 +249,7 @@ return {
 
       defaults = {
         dynamic_preview_title = true,
+        cycle_layout_list = { 'vertical', 'horizontal' },
         layout_config = {
           prompt_position = 'top',
           horizontal = {
@@ -259,8 +259,17 @@ return {
             preview_width = 0.65,
             width = 0.9,
           },
+          vertical = {
+            mirror = true,
+            width = 0.9,
+          },
+          flex = {
+            width = 0.8,
+            flip_columns = 180,
+            flip_lines = 30,
+          },
         },
-        layout_strategy = 'horizontal',
+        layout_strategy = 'flex',
         mappings = {
           i = {
             ['<C-j>'] = actions.move_selection_next,
@@ -270,6 +279,7 @@ return {
             ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
             ['<C-b>'] = actions.preview_scrolling_up,
             ['<C-f>'] = actions.preview_scrolling_down,
+            ['<C-l>'] = layout_actions.cycle_layout_next,
             ['<C-u>'] = { '<c-u>', type = 'command' }, -- delete inputted text
             ['<C-a>'] = { '<home>', type = 'command' }, -- move cursor to the beginning of input
             ['<C-e>'] = { '<end>', type = 'command' }, -- move cursor to the end of input
@@ -282,18 +292,22 @@ return {
             ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
             ['<C-b>'] = actions.preview_scrolling_up,
             ['<C-f>'] = actions.preview_scrolling_down,
+            ['<C-l>'] = layout_actions.cycle_layout_next,
             ['<C-u>'] = { '<c-u>', type = 'command' }, -- delete inputted text
             ['<C-a>'] = { '<home>', type = 'command' }, -- move cursor to the beginning of input
             ['<C-e>'] = { '<end>', type = 'command' }, -- move cursor to the end of input
           },
         },
-        path_display = { 'smart' },
+        path_display = { shorten = 3 },
         preview_title = '',
         prompt_prefix = '› ',
+        results_title = '',
+        scroll_strategy = 'limit', -- do not cycle results
         selection_caret = '› ',
         set_env = { ['COLORTERM'] = 'truecolor' },
         sorting_strategy = 'ascending',
         winblend = 0,
+        wrap_results = true,
       },
     })
     telescope.load_extension('fzf')
