@@ -1,13 +1,25 @@
-local ruby_files = {
-  'rg',
-  '--files',
+local find_command = {
+  'fd',
   '--type',
-  'ruby',
+  'file',
   '--type',
-  'haml',
-  '--type',
-  'erb',
+  'symlink',
+  '--hidden',
+  '--no-ignore-vcs',
+  '--color', 'never'
 }
+
+local ruby_find_command = vim.tbl_flatten({
+  find_command,
+  {
+    '--extension',
+    'rb',
+    '--extension',
+    'haml',
+    '--extension',
+    'erb',
+  },
+})
 
 return {
   'nvim-telescope/telescope.nvim',
@@ -30,12 +42,7 @@ return {
       function()
         require('telescope.builtin').find_files({
           -- include hidden files
-          find_command = {
-            'rg',
-            '--files',
-            '--hidden',
-            '--no-ignore-vcs',
-          },
+          find_command = find_command,
         })
       end,
       silent = true,
@@ -193,7 +200,7 @@ return {
       '<leader>fr',
       function()
         require('telescope.builtin').find_files({
-          find_command = ruby_files,
+          find_command = ruby_find_command,
           search_dirs = { 'app', 'lib', 'ee/app', 'ee/lib' },
           prompt_title = 'rails (app, lib)',
         })
@@ -205,7 +212,7 @@ return {
       '<leader>fR',
       function()
         require('telescope.builtin').find_files({
-          find_command = ruby_files,
+          find_command = ruby_find_command,
           search_dirs = { 'app', 'lib', 'spec', 'ee/app', 'ee/lib', 'ee/spec' },
           prompt_title = 'rails (app, lib, spec)',
         })
