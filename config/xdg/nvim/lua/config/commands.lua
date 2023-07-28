@@ -15,13 +15,6 @@ command('Trim', utils.buffers.trim, {})
 command('Dark', 'set bg=dark', {})
 command('Light', 'set bg=light', {})
 
--- Ensure path exists and writes the file
-command('WriteWithPath', function()
-  local path = vim.fn.expand('%:h')
-  vim.fn.mkdir(path, 'p')
-  vim.cmd('write!')
-end, {})
-
 -- copy filename
 command('CopyFilename', utils.copy_filename, {
   bang = true,
