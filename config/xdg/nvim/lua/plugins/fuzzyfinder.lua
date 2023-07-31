@@ -298,7 +298,6 @@ return {
             ['<C-e>'] = { '<end>', type = 'command' }, -- move cursor to the end of input
           },
         },
-        path_display = { shorten = 3 },
         preview_title = '',
         prompt_prefix = '› ',
         results_title = '',
