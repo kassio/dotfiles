@@ -19,7 +19,7 @@ return {
 
     vim.api.nvim_create_user_command('TestCommand', function(c)
       vim.g['test#last_strategy'] = 'neoterm'
-      vim.g['test#last_command'] = table.concat({ 'clear', c.args }, ' && ')
+      vim.g['test#last_command'] = c.args
 
       vim.cmd.TestLast()
     end, { nargs = '+' })
