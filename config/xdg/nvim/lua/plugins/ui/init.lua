@@ -119,10 +119,13 @@ return {
         input = {
           enabled = true,
           title_pos = 'center',
-          anchor = 'NW',
           relative = 'editor',
         },
-        select = { enabled = true },
+        select = {
+          enabled = true,
+          title_pos = 'center',
+          relative = 'editor',
+        },
       })
     end,
   },
