@@ -1,3 +1,4 @@
+local api = vim.api
 local hl = require('utils.highlights')
 local utils = require('utils')
 
@@ -18,8 +19,8 @@ local function count_limitter(counter, l)
   return counter
 end
 
-local function filename(bufnr)
-  local fullname = vim.api.nvim_buf_get_name(bufnr)
+local function get_filename(bufnr)
+  local fullname = api.nvim_buf_get_name(bufnr)
 
   if #fullname == 0 then
     return ''
@@ -34,6 +35,14 @@ local function filename(bufnr)
 
     return name
   end
+end
+
+local function get_modified(bufnr)
+  if api.nvim_buf_get_option(bufnr, 'modified') then
+    return '∙'
+  end
+
+  return ''
 end
 
 local function get_todos(bufnr, focused)
@@ -103,20 +112,24 @@ end
 
 return {
   render = function()
-    local focused = tonumber(vim.api.nvim_get_current_win()) == tonumber(vim.g.actual_curwin)
-    local bufnr = vim.api.nvim_get_current_buf()
+    local focused = tonumber(api.nvim_get_current_win()) == tonumber(vim.g.actual_curwin)
+    local bufnr = api.nvim_get_current_buf()
 
     return string.format(
       ' %s ',
       table.concat({
         '%n',
-        filename(bufnr),
-        '%m',
+        ' ',
+        get_filename(bufnr),
+        get_modified(bufnr),
+        ' ',
         '%=',
         get_todos(bufnr, focused),
+        ' ',
         get_diagnositcs(bufnr, focused),
+        ' ',
         get_git_status(bufnr, focused),
-      }, ' ')
+      }, '')
     )
   end,
 }
