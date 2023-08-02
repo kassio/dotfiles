@@ -47,6 +47,18 @@ return {
       desc = 'telescope: find files',
     },
     {
+      '<leader>fF',
+      function()
+        require('telescope.builtin').find_files({
+          -- include hidden files
+          find_command = find_command,
+          default_text = vim.fn.expand('<cword>'),
+        })
+      end,
+      silent = true,
+      desc = 'telescope: find files',
+    },
+    {
       '<leader>fp',
       function()
         require('telescope.builtin').resume()
