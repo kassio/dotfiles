@@ -13,7 +13,7 @@ end
 
 -- statuscolumn
 opt.number = true
-opt.relativenumber = true
+opt.relativenumber = false
 opt.numberwidth = 5
 
 -- statusline

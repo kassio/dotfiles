@@ -3,16 +3,6 @@ local utils = require('utils')
 vim.g.lastplace_ignore = 'gitcommit,gitrebase'
 vim.g.lastplace_ignore_buftype = 'quickfix,nofile,help'
 
-local function set_focus(focus)
-  local ft = vim.bo.filetype
-
-  if ft == '' or utils.plugin_filetype(ft) then
-    return
-  end
-
-  vim.opt_local.relativenumber = focus
-end
-
 utils.augroup('user:focus', {
   { -- autosave file
     events = {
@@ -28,26 +18,6 @@ utils.augroup('user:focus', {
       local curtab = vim.api.nvim_tabpage_get_number(vim.api.nvim_get_current_tabpage())
       vim.cmd.tabdo('wincmd =')
       vim.cmd.tabnext(curtab)
-    end,
-  },
-  { -- lost focus
-    events = {
-      'WinLeave',
-      'BufLeave',
-      'FocusLost',
-    },
-    callback = function()
-      set_focus(false)
-    end,
-  },
-  { -- gain focus
-    events = {
-      'WinEnter',
-      'BufEnter',
-      'FocusGained',
-    },
-    callback = function()
-      set_focus(true)
     end,
   },
   { -- used on statusline
