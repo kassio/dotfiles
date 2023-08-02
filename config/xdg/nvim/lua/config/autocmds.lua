@@ -69,7 +69,7 @@ utils.augroup('user:focus', {
   { -- autoformat
     events = 'BufWritePre',
     callback = function()
-      if not vim.bo.modifiable or vim.b.skip_format ~= nil then
+      if not vim.bo.modifiable or vim.b.skip_autoformat == true then
         return
       end
 

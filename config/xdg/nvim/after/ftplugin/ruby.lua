@@ -1,3 +1,5 @@
+vim.b.skip_autoformat = true
+
 local utils = require('utils')
 
 local ruby_cmd = function(name, replacer)

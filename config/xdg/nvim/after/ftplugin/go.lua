@@ -1,3 +1,5 @@
+vim.b.skip_autoformat = true
+
 vim.opt_local.tabstop = 4
 vim.opt_local.shiftwidth = 4
 vim.opt_local.softtabstop = 4
