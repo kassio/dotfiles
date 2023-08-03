@@ -1,0 +1,25 @@
+#!/usr/bin/env zsh
+
+source "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh"
+plugin="$1"; shift
+
+_cmd="$*"
+
+run() {
+  version="$1"
+
+  echo "» ASDF_${plugin:u}_VERSION=${version} ${_cmd}"
+  if ! eval "ASDF_${plugin:u}_VERSION=${version} ${_cmd}"; then
+    echo "${_cmd} failed for ${version}"
+    return 1
+  else
+    echo
+    return 0
+  fi
+}
+
+for version in $(asdf list "${plugin}" 2>/dev/null | xargs | tr -d '*'); do
+  if ! run ${version}; then
+    continue
+  fi
+done

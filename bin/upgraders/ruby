@@ -6,4 +6,4 @@ if [ "$1" = "--help" ]; then
 fi
 
 title "[ruby] updating ruby gems"
-for-each-ruby gem update --system
+for-each-asdf ruby gem update --system
