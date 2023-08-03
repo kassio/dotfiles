@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-target=".gitignore"
+target=".git/info/exclude"
 if ! cat "${target}" 2>/dev/null | grep -q "$1"; then
   touch "${target}"
   echo "$1" >> "${target}"
