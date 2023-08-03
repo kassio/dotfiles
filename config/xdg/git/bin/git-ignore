@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+if ! cat ".gitignore" 2>/dev/null | grep -q "$1"; then
+  touch .gitignore
+  echo "$1" >> .gitignore
+fi
