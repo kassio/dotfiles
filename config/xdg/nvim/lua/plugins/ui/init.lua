@@ -4,10 +4,10 @@ return {
     name = 'catppuccin',
     config = function()
       require('catppuccin').setup({
-        flavour = 'mocha',
+        flavour = 'frappe',
         bg = {
           light = 'latte',
-          dark = 'mocha',
+          dark = 'frappe',
         },
         color_overrides = {
           all = {
