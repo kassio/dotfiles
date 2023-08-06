@@ -6,7 +6,7 @@ require('globals')
 -- my config
 require('config')
 
--- To be removed with nvim 0.10
+-- To be removed with nvim0.10
 vim.ui.open = function(value)
   vim.fn.jobstart('open ' .. value)
 end
