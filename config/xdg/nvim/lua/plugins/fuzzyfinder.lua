@@ -75,6 +75,15 @@ return {
       desc = 'telescope: live grep',
     },
     {
+      '<leader>fY',
+      function()
+        require('telescope.builtin').grep_string()
+      end,
+      mode = { 'n', 'v' },
+      silent = true,
+      desc = 'telescope: grep word under cursor or selection',
+    },
+    {
       '<leader>fa',
       function()
         require('telescope.builtin').builtin({ previwer = false })
@@ -129,6 +138,16 @@ return {
       '<leader>fn',
       function()
         require('telescope.builtin').current_buffer_fuzzy_find()
+      end,
+      silent = true,
+      desc = 'telescope: current buffer finder',
+    },
+    {
+      '<leader>fN',
+      function()
+        require('telescope.builtin').current_buffer_fuzzy_find({
+          default_text = vim.fn.expand('<cword>'),
+        })
       end,
       silent = true,
       desc = 'telescope: current buffer finder',
@@ -229,15 +248,6 @@ return {
       end,
       silent = true,
       desc = 'telescope: rails (app, lib, spec)',
-    },
-    {
-      '<leader>fw',
-      function()
-        require('telescope.builtin').grep_string()
-      end,
-      mode = { 'n', 'v' },
-      silent = true,
-      desc = 'telescope: grep word under cursor or selection',
     },
   },
   config = function()
