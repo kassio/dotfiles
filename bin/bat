@@ -1,10 +1,3 @@
 #!/usr/bin/env zsh
 
-local bat="${HOMEBREW_PREFIX}/bin/bat"
-local bat_theme_name="gruvbox-dark"
-
-if [ "$(cat -s "${HOME}/.cache/iterm_profile")" = "light" ]; then
-  bat_theme_name="gruvbox-light"
-fi
-
-BAT_THEME="${bat_theme_name}" "${bat}" "$@"
+BAT_THEME="gruvbox-light" "${HOMEBREW_PREFIX}/bin/bat" "$@"

@@ -1,9 +1,0 @@
-#!/usr/bin/env zsh
-
-
-cached="$(cat -s "${HOME}/.cache/iterm_profile" 2> /dev/null)"
-current="$("${HOME}/.iterm2/it2profile" -g 2> /dev/null)"
-
-if [ "${cached}" != "${current}" ] && [ "${cached}" = "light" ]; then
-    "${HOME}/.iterm2/it2profile" -s light
-fi
