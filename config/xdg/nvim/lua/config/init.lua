@@ -5,6 +5,7 @@ require('config.keymaps')
 require('config.commands')
 require('config.diagnostic')
 require('config.autocmds')
+require('config.signs')
 
 -- community plugins
 require('config.plugins')

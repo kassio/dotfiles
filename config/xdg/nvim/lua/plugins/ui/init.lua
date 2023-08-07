@@ -34,8 +34,6 @@ return {
       })
 
       vim.cmd.colorscheme('catppuccin')
-
-      require('plugins.ui.colorscheme.signs').setup()
     end,
   },
 
