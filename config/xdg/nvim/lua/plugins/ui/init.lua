@@ -4,7 +4,7 @@ return {
     name = 'catppuccin',
     config = function()
       require('catppuccin').setup({
-        flavour = 'frappe',
+        flavour = 'latte',
         bg = {
           light = 'latte',
           dark = 'frappe',
