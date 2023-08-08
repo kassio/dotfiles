@@ -11,8 +11,12 @@ g.markdown_recommended_style = 0
 opt.autowriteall = true
 opt.backup = false
 opt.cindent = true
-opt.cmdheight = 1
-opt.colorcolumn = { 80, 100, 120 }
+opt.cmdheight = 0
+opt.colorcolumn = {
+  80,
+  100,
+  120,
+}
 opt.complete:remove('t')
 opt.completeopt = {
   'menu',
@@ -32,8 +36,17 @@ opt.diffopt = {
   'vertical',
 }
 opt.expandtab = true
-opt.fileencodings = { 'utf8', 'nobomb' }
-opt.fileformats = { 'unix', 'mac' }
+opt.fileencodings = {
+  'utf8',
+  'nobomb',
+}
+opt.fileformats = {
+  'unix',
+  'mac',
+}
+opt.fillchars:append({
+  eob = ' ',
+})
 opt.foldcolumn = '1'
 opt.foldenable = false
 opt.foldexpr = 'nvim_treesitter#foldexpr()'
@@ -44,6 +57,7 @@ opt.ignorecase = true
 opt.inccommand = 'nosplit'
 opt.infercase = true
 opt.jumpoptions = 'view'
+opt.laststatus = 3
 opt.list = true
 opt.listchars = {
   extends = '>',
@@ -55,11 +69,20 @@ opt.listchars = {
   trail = '·',
 }
 opt.mouse = 'a'
+opt.number = true
+opt.numberwidth = 5
+opt.relativenumber = false
+opt.scrolloff = 3
 opt.secure = true
-opt.sessionoptions = { 'winpos', 'tabpages', 'help' }
+opt.sessionoptions = {
+  'winpos',
+  'tabpages',
+  'help',
+}
 opt.shiftround = true
 opt.shiftwidth = 2
 opt.shortmess = 'filnxtToOFWIcC'
+opt.showcmdloc = 'statusline'
 opt.showmatch = true
 opt.showmode = false
 opt.showtabline = 2
@@ -70,10 +93,14 @@ opt.softtabstop = 2
 opt.spell = true
 opt.spelllang = 'en'
 opt.splitbelow = true
-opt.splitright = true
 opt.splitkeep = 'cursor'
+opt.splitright = true
 opt.swapfile = false
-opt.switchbuf = { 'useopen', 'usetab', 'split' }
+opt.switchbuf = {
+  'useopen',
+  'usetab',
+  'split',
+}
 opt.tabstop = 2
 opt.tags = ''
 opt.termguicolors = true
@@ -86,4 +113,3 @@ opt.virtualedit = 'block'
 opt.wildignorecase = true
 opt.wrap = false
 opt.writebackup = false
-opt.scrolloff = 3

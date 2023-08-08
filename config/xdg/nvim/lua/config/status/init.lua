@@ -11,16 +11,6 @@ local function render(name)
   end
 end
 
--- statuscolumn
-opt.number = true
-opt.relativenumber = false
-opt.numberwidth = 5
-
--- statusline
-opt.laststatus = 3
-opt.cmdheight = 0
-opt.showcmdloc = 'statusline'
-
 opt.statuscolumn = render('statuscolumn')
 opt.statusline = render('statusline')
 opt.tabline = render('tabline')
