@@ -1,13 +1,18 @@
 local api = vim.api
-local hl = require('utils.highlights')
 local utils = require('utils')
+
+local git_hl = {
+  added = 'Hint',
+  changed = 'Warn',
+  removed = 'Error',
+}
 
 local function hlname(name, focused)
   if not focused then
     return 'WinBarNC'
   end
 
-  return name
+  return 'Winbar.' .. name
 end
 
 local function count_limitter(counter, l)
@@ -97,11 +102,11 @@ local function get_git_status(bufnr, focused)
 
     return string.format(
       '%%#%s#%s %s%%*',
-      hlname(hl.git[name], focused),
+      hlname(git_hl[name], focused),
       utils.symbols.git[name],
       count_limitter(count)
     )
-  end, vim.tbl_keys(hl.git))
+  end, vim.tbl_keys(git_hl))
 
   statusList = vim.tbl_filter(function(e)
     return e ~= ''

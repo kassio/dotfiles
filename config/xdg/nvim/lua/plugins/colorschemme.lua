@@ -32,12 +32,16 @@ return {
         term_colors = false,
         custom_highlights = function(c)
           return {
-            -- globals
+            -- search
             ['IncSearch'] = { fg = c.base, bg = c.yellow },
             ['Search'] = { fg = c.base, bg = c.yellow },
             ['CurSearch'] = { fg = c.base, bg = c.blue, italic = true, bold = true },
 
-            ['@method'] = { link = '@funciton' },
+            -- UI
+            ['ColorColumn'] = { bg = c.dim },
+
+            -- treesitter
+            ['@method'] = { link = '@function' },
             ['@string'] = { fg = c.green },
             ['@string.specialecial'] = { fg = c.green, bold = true },
 
@@ -62,27 +66,27 @@ return {
             ['Statusline.Visual'] = { fg = c.base, bg = c.warn_light },
 
             -- git: diff
-            ['GitSignsDelete'] = { link = 'Error' },
-            ['GitSignsChange'] = { link = 'Warn' },
-            ['GitSignsAdd'] = { link = 'Hint' },
+            ['GitSignsDelete'] = { fg = c.error },
+            ['GitSignsChange'] = { fg = c.warn },
+            ['GitSignsAdd'] = { fg = c.hint },
 
             -- diagnostics
-            ['DiagnosticError'] = { link = 'Error' },
-            ['DiagnosticWarn'] = { link = 'Warn' },
-            ['DiagnosticInfo'] = { link = 'Info' },
-            ['DiagnosticHint'] = { link = 'Hint' },
+            ['DiagnosticError'] = { fg = c.error },
+            ['DiagnosticWarn'] = { fg = c.warn },
+            ['DiagnosticInfo'] = { fg = c.info },
+            ['DiagnosticHint'] = { fg = c.hint },
 
             -- diagnostics: sign
-            ['DiagnosticSignError'] = { link = 'Error' },
-            ['DiagnosticSignWarn'] = { link = 'Warn' },
-            ['DiagnosticSignInfo'] = { link = 'Info' },
-            ['DiagnosticSignHint'] = { link = 'Hint' },
+            ['DiagnosticSignError'] = { fg = c.error },
+            ['DiagnosticSignWarn'] = { fg = c.warn },
+            ['DiagnosticSignInfo'] = { fg = c.info },
+            ['DiagnosticSignHint'] = { fg = c.hint },
 
             -- diagnostics: floating
-            ['DiagnosticFloatingError'] = { link = 'Error' },
-            ['DiagnosticFloatingWarn'] = { link = 'Warn' },
-            ['DiagnosticFloatingInfo'] = { link = 'Info' },
-            ['DiagnosticFloatingHint'] = { link = 'Hint' },
+            ['DiagnosticFloatingError'] = { fg = c.error },
+            ['DiagnosticFloatingWarn'] = { fg = c.warn },
+            ['DiagnosticFloatingInfo'] = { fg = c.info },
+            ['DiagnosticFloatingHint'] = { fg = c.hint },
 
             -- diagnostics: underline
             ['DiagnosticUnderlineError'] = { special = c.error_light, undercurl = true },
@@ -101,12 +105,16 @@ return {
             ['StatusLineNC'] = { fg = c.surface1 },
 
             -- winbar
-            ['WinBar'] = { fg = c.blue },
-            ['WinBarNC'] = { bg = c.base, fg = c.surface1 },
+            ['WinBar'] = { bg = c.dim, fg = c.blue },
+            ['WinBarNC'] = { bg = c.dim, fg = c.surface1 },
+            ['Winbar.Error'] = { bg = c.dim, fg = c.error },
+            ['Winbar.Warn'] = { bg = c.dim, fg = c.warn },
+            ['Winbar.Info'] = { bg = c.dim, fg = c.info },
+            ['Winbar.Hint'] = { bg = c.dim, fg = c.hint },
 
             -- tabline
-            ['TabLine'] = { bg = c.base, fg = c.surface2 },
-            ['TabLineSel'] = { bg = c.base, fg = c.blue, bold = true },
+            ['TabLine'] = { bg = c.dim, fg = c.surface2 },
+            ['TabLineSel'] = { bg = c.dim, fg = c.blue, bold = true },
             ['TabLineFill'] = { bg = c.surface0, fg = c.surface0 },
 
             -- dap

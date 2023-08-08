@@ -1,11 +1,5 @@
 local M = {}
 
-M.git = {
-  added = 'Hint',
-  changed = 'Warn',
-  removed = 'Error',
-}
-
 M.def = function(group, color)
   local ok, msg = pcall(vim.api.nvim_set_hl, 0, group, color)
 
