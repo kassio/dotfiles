@@ -115,26 +115,56 @@ local function get_git_status(bufnr, focused)
   return table.concat(statusList, ' ')
 end
 
+local winbar = {}
+winbar['neoterm'] = function()
+  return 'neoterm-' .. vim.b.neoterm_id
+end
+
+winbar['help'] = function(bufnr)
+  return 'help: ' .. vim.fn.fnamemodify(get_filename(bufnr), ':t')
+end
+
+winbar['NvimTree'] = function()
+  return 'NvimTree'
+end
+
+setmetatable(winbar, {
+  __index = function()
+    return function(bufnr, focused)
+      return string.format(
+        ' %s ',
+        table.concat({
+          '%n',
+          ' ',
+          get_filename(bufnr),
+          get_modified(bufnr),
+          ' ',
+          '%=',
+          get_todos(bufnr, focused),
+          ' ',
+          get_diagnositcs(bufnr, focused),
+          ' ',
+          get_git_status(bufnr, focused),
+        }, '')
+      )
+    end
+  end,
+})
+
 return {
   render = function()
-    local focused = tonumber(api.nvim_get_current_win()) == tonumber(vim.g.actual_curwin)
     local bufnr = api.nvim_get_current_buf()
+    local focused = tonumber(api.nvim_get_current_win()) == tonumber(vim.g.actual_curwin)
+    local filetype = vim.bo[bufnr].filetype
 
-    return string.format(
-      ' %s ',
-      table.concat({
-        '%n',
-        ' ',
-        get_filename(bufnr),
-        get_modified(bufnr),
-        ' ',
-        '%=',
-        get_todos(bufnr, focused),
-        ' ',
-        get_diagnositcs(bufnr, focused),
-        ' ',
-        get_git_status(bufnr, focused),
-      }, '')
-    )
+    vim.print({
+      winbar,
+      filetype,
+      winbar[filetype],
+    })
+
+    local builder = winbar[filetype]
+
+    return builder(bufnr, focused)
   end,
 }
