@@ -157,12 +157,6 @@ return {
     local focused = tonumber(api.nvim_get_current_win()) == tonumber(vim.g.actual_curwin)
     local filetype = vim.bo[bufnr].filetype
 
-    vim.print({
-      winbar,
-      filetype,
-      winbar[filetype],
-    })
-
     local builder = winbar[filetype]
 
     return builder(bufnr, focused)
