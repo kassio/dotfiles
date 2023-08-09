@@ -3,19 +3,21 @@ local S = require('utils.string')
 
 local M = {}
 
-M.filename = function(case, sufix)
+M.filename = function(opts)
+  opts = opts or {}
+
   local filename = vim.api.nvim_buf_get_name(0)
   filename = fn.fnamemodify(filename, ':t:r')
 
-  if sufix ~= nil then
-    filename = filename:gsub(sufix, '')
+  if opts.filter ~= nil then
+    filename = string.gsub(filename, opts.filter, '')
   end
 
-  if case == 'camelcase' then
-    return S.camelcase(filename)
-  else
-    return filename
+  if opts.case == 'camelcase' then
+    filename = S.camelcase(filename)
   end
+
+  return filename
 end
 
 M.expand = function(fmt, default)

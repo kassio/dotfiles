@@ -5,13 +5,15 @@ snippet vim
 	# vim:${1:ft=${2:zsh}}:
 
 snippet hri
-  "--------------------------------------------------------------------------------"
+	"--------------------------------------------------------------------------------"
 
 snippet path
-  ${1:`!lua require('utils.snippets').expand('%:.:h')`}${2}
-snippet full_path
-  ${1:`!lua require('utils.snippets').expand('%:p:h')`}${2}
+	${1:`!lua require('utils.snippets').expand('%:.:h')`}${2}
+snippet path:full
+	${1:`!lua require('utils.snippets').expand('%:p:h')`}${2}
 snippet fname
-  ${1:`!lua require('utils.snippets').filename()`}${2}
-snippet fname_camelcase
-  ${1:`!lua require('utils.snippets').filename('camelcase')`}${2}
+	${1:`!lua require('utils.snippets').filename()`}${2}
+snippet fname:camelcase
+	${1:`!lua require('utils.snippets').filename({case = 'camelcase'})`}${2}
+snippet fname:camelcase:noprefixnumbers
+	${1:`!lua require('utils.snippets').filename({filter='^%d*_', case='camelcase'})`}${2}

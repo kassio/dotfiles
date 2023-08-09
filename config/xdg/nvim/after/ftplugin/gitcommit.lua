@@ -8,3 +8,5 @@ vim.opt_local.cindent = false
 vim.opt_local.scrolloff = 0
 vim.opt_local.spell = true
 vim.opt_local.undofile = false
+
+vim.opt_local.scrolloff = 0
