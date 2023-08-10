@@ -30,9 +30,8 @@ local function filename(bufnr)
   else
     local name = vim.fn.fnamemodify(fullname, ':t')
 
-    if #name > 70 then
-      local parts = vim.split(name, '/')
-      return '.../' .. table.concat(parts, '/', 2, #parts)
+    if #name >= 77 then
+      return '...' .. string.sub(name, #name - 74)
     end
 
     return name
