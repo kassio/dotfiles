@@ -8,6 +8,12 @@ local find_command = {
   '--no-ignore-vcs',
   '--color',
   'never',
+  '--exclude',
+  '*.png',
+  '--exclude',
+  '*.jpeg',
+  '--exclude',
+  '*.gif',
 }
 
 local ruby_find_command = require('utils.table').join_lists(find_command, {
