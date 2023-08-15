@@ -43,7 +43,7 @@ local function get_filename(bufnr)
 end
 
 local function get_modified(bufnr)
-  if api.nvim_buf_get_option(bufnr, 'modified') then
+  if vim.bo[bufnr].modified then
     return '∙'
   end
 

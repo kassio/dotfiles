@@ -19,7 +19,7 @@ M.trim = function()
 end
 
 M.name_and_type = function(bufnr)
-  return vim.api.nvim_buf_get_name(bufnr), vim.api.nvim_buf_get_option(bufnr, 'filetype')
+  return vim.api.nvim_buf_get_name(bufnr), vim.bo[bufnr].filetype
 end
 
 return M
