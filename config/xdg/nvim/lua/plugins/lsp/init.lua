@@ -26,7 +26,7 @@ return {
   {
     'j-hui/fidget.nvim',
     tag = 'legacy',
-    config = {
+    opts = {
       text = { spinner = 'dots' },
     },
   },

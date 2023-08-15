@@ -25,7 +25,7 @@ return {
 
   {
     'ThePrimeagen/refactoring.nvim',
-    requires = {
+    dependencies = {
       { 'nvim-lua/plenary.nvim' },
       { 'nvim-treesitter/nvim-treesitter' },
     },
