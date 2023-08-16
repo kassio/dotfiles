@@ -84,6 +84,15 @@ return {
         mods = 'SUPER',
         action = wezterm.action.ActivateCommandPalette,
       },
+      -- Scrollback
+      {
+        key = 'k',
+        mods = 'SUPER',
+        action = wezterm.action.Multiple({
+          wezterm.action.ClearScrollback('ScrollbackAndViewport'),
+          wezterm.action.SendKey({ key = 'L', mods = 'CTRL' }),
+        }),
+      },
     }
   end,
 }
