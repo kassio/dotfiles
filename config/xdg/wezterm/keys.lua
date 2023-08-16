@@ -93,6 +93,14 @@ return {
         mods = 'SUPER|SHIFT',
         action = act.TogglePaneZoomState,
       },
+      -- Window
+      {
+        key = 'Enter',
+        mods = 'SUPER',
+        action = wezterm.action_callback(function(win)
+          win:maximize()
+        end),
+      },
     }
   end,
 }
