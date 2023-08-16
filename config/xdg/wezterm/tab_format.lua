@@ -12,16 +12,20 @@ end
 return {
   setup = function(wezterm)
     wezterm.on('format-tab-title', function(tab)
+      local zoomed = ''
+      if tab.active_pane.is_zoomed then
+        zoomed = '󰖲 '
+      end
+
       -- get only the basename of the process (last part of the path)
       local process_name = tab.active_pane.foreground_process_name:gmatch('/([^/]*)$')()
 
-      local title = string.format('  %s | %s  ', get_current_working_dir(tab), process_name)
+      local title =
+        string.format(' %s %s | %s ', zoomed, get_current_working_dir(tab), process_name)
 
       wezterm.log_error(title)
 
-      return {
-        { Text = title },
-      }
+      return { { Text = title } }
     end)
   end,
 }

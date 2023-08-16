@@ -45,46 +45,25 @@ return {
         mods = 'SUPER|ALT',
         action = wezterm.action.ActivatePaneDirection('Right'),
       },
-      -- Panes focus
-      {
-        key = 'h',
-        mods = 'SUPER|CTRL',
-        action = wezterm.action.ActivatePaneDirection('Left'),
-      },
-      {
-        key = 'j',
-        mods = 'SUPER|CTRL',
-        action = wezterm.action.ActivatePaneDirection('Down'),
-      },
-      {
-        key = 'k',
-        mods = 'SUPER|CTRL',
-        action = wezterm.action.ActivatePaneDirection('Up'),
-      },
-      {
-        key = 'l',
-        mods = 'SUPER|CTRL',
-        action = wezterm.action.ActivatePaneDirection('Right'),
-      },
       -- Panes resize
       {
         key = 'h',
-        mods = 'SUPER|ALT',
+        mods = 'SUPER|CTRL',
         action = wezterm.action.AdjustPaneSize({ 'Left', 3 }),
       },
       {
         key = 'j',
-        mods = 'SUPER|ALT',
+        mods = 'SUPER|CTRL',
         action = wezterm.action.AdjustPaneSize({ 'Down', 3 }),
       },
       {
         key = 'k',
-        mods = 'SUPER|ALT',
+        mods = 'SUPER|CTRL',
         action = wezterm.action.AdjustPaneSize({ 'Up', 3 }),
       },
       {
         key = 'l',
-        mods = 'SUPER|ALT',
+        mods = 'SUPER|CTRL',
         action = wezterm.action.AdjustPaneSize({ 'Right', 3 }),
       },
       {
