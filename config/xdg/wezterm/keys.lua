@@ -69,7 +69,11 @@ return {
       {
         key = 'Enter',
         mods = 'SUPER|SHIFT',
-        action = wezterm.action.TogglePaneZoomState,
+        action = wezterm.action_callback(function(win, pane)
+          if #pane:tab():panes() > 1 then
+            win:perform_action(wezterm.action.TogglePaneZoomState, pane)
+          end
+        end),
       },
       -- Window
       {
@@ -81,7 +85,7 @@ return {
       },
       {
         key = 'p',
-        mods = 'SUPER',
+        mods = 'SUPER|SHIFT',
         action = wezterm.action.ActivateCommandPalette,
       },
       -- Scrollback
