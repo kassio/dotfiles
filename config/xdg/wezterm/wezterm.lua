@@ -6,8 +6,6 @@ if wezterm.gui.get_appearance():find('Dark') then
   return 'Catppuccin Mocha'
 end
 
--- local colorscheme = wezterm.color.get_builtin_schemes(colorscheme_name)
-
 config.color_scheme = colorscheme_name
 
 config.font = wezterm.font({
@@ -34,6 +32,10 @@ config.window_padding = {
   bottom = 0,
 }
 
+config.tab_max_width = 80
+
 config.keys = require('keys').setup(wezterm)
+
+require('tab_format').setup(wezterm)
 
 return config

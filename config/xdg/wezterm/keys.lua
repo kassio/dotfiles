@@ -49,22 +49,22 @@ return {
       -- Panes focus
       {
         key = 'h',
-        mods = 'SUPER|ALT',
+        mods = 'SUPER|CTRL',
         action = act.ActivatePaneDirection('Left'),
       },
       {
         key = 'j',
-        mods = 'SUPER|ALT',
+        mods = 'SUPER|CTRL',
         action = act.ActivatePaneDirection('Down'),
       },
       {
         key = 'k',
-        mods = 'SUPER|ALT',
+        mods = 'SUPER|CTRL',
         action = act.ActivatePaneDirection('Up'),
       },
       {
         key = 'l',
-        mods = 'SUPER|ALT',
+        mods = 'SUPER|CTRL',
         action = act.ActivatePaneDirection('Right'),
       },
       -- Panes resize
