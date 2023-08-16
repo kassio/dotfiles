@@ -114,8 +114,8 @@ return {
 
             -- tabline
             ['TabLine'] = { bg = c.dim, fg = c.surface2 },
-            ['TabLineSel'] = { bg = c.dim, fg = c.blue, bold = true },
-            ['TabLineFill'] = { bg = c.surface0, fg = c.surface0 },
+            ['TabLineSel'] = { bg = c.surface0, fg = c.blue, bold = true },
+            ['TabLineFill'] = { bg = c.dim, fg = c.surface0 },
 
             -- dap
             ['DapBreakpoint'] = { fg = c.red },
