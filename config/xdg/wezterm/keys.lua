@@ -1,97 +1,96 @@
 -- https://wezfurlong.org/wezterm/config/keys.html#configuring-key-assignments
 return {
   setup = function(wezterm)
-    local act = wezterm.action
     return {
-      -- Font
+      -- Font resize
       {
         key = '0',
         mods = 'SUPER',
-        action = act.ResetFontSize,
+        action = wezterm.action.ResetFontSize,
       },
       {
         key = '+',
         mods = 'SUPER',
-        action = act.IncreaseFontSize,
+        action = wezterm.action.IncreaseFontSize,
       },
       -- Panes create
       {
         key = 'd',
         mods = 'SUPER',
-        action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
+        action = wezterm.action.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
       },
       {
         key = 'd',
         mods = 'SUPER|SHIFT',
-        action = act.SplitVertical({ domain = 'CurrentPaneDomain' }),
+        action = wezterm.action.SplitVertical({ domain = 'CurrentPaneDomain' }),
       },
       -- Panes focus
       {
         key = 'h',
         mods = 'SUPER|ALT',
-        action = act.ActivatePaneDirection('Left'),
+        action = wezterm.action.ActivatePaneDirection('Left'),
       },
       {
         key = 'j',
         mods = 'SUPER|ALT',
-        action = act.ActivatePaneDirection('Down'),
+        action = wezterm.action.ActivatePaneDirection('Down'),
       },
       {
         key = 'k',
         mods = 'SUPER|ALT',
-        action = act.ActivatePaneDirection('Up'),
+        action = wezterm.action.ActivatePaneDirection('Up'),
       },
       {
         key = 'l',
         mods = 'SUPER|ALT',
-        action = act.ActivatePaneDirection('Right'),
+        action = wezterm.action.ActivatePaneDirection('Right'),
       },
       -- Panes focus
       {
         key = 'h',
         mods = 'SUPER|CTRL',
-        action = act.ActivatePaneDirection('Left'),
+        action = wezterm.action.ActivatePaneDirection('Left'),
       },
       {
         key = 'j',
         mods = 'SUPER|CTRL',
-        action = act.ActivatePaneDirection('Down'),
+        action = wezterm.action.ActivatePaneDirection('Down'),
       },
       {
         key = 'k',
         mods = 'SUPER|CTRL',
-        action = act.ActivatePaneDirection('Up'),
+        action = wezterm.action.ActivatePaneDirection('Up'),
       },
       {
         key = 'l',
         mods = 'SUPER|CTRL',
-        action = act.ActivatePaneDirection('Right'),
+        action = wezterm.action.ActivatePaneDirection('Right'),
       },
       -- Panes resize
       {
         key = 'h',
         mods = 'SUPER|ALT',
-        action = act.AdjustPaneSize({ 'Left', 1 }),
+        action = wezterm.action.AdjustPaneSize({ 'Left', 3 }),
       },
       {
         key = 'j',
         mods = 'SUPER|ALT',
-        action = act.AdjustPaneSize({ 'Down', 1 }),
+        action = wezterm.action.AdjustPaneSize({ 'Down', 3 }),
       },
       {
         key = 'k',
         mods = 'SUPER|ALT',
-        action = act.AdjustPaneSize({ 'Up', 1 }),
+        action = wezterm.action.AdjustPaneSize({ 'Up', 3 }),
       },
       {
         key = 'l',
         mods = 'SUPER|ALT',
-        action = act.AdjustPaneSize({ 'Right', 1 }),
+        action = wezterm.action.AdjustPaneSize({ 'Right', 3 }),
       },
       {
         key = 'Enter',
         mods = 'SUPER|SHIFT',
-        action = act.TogglePaneZoomState,
+        action = wezterm.action.TogglePaneZoomState,
       },
       -- Window
       {
@@ -100,6 +99,11 @@ return {
         action = wezterm.action_callback(function(win)
           win:maximize()
         end),
+      },
+      {
+        key = 'p',
+        mods = 'SUPER',
+        action = wezterm.action.ActivateCommandPalette,
       },
     }
   end,
