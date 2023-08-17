@@ -40,7 +40,7 @@ config.window_frame = {
     weight = 'ExtraBlack', -- really heavy
   }),
 
-  font_size = config.font_size * 0.7,
+  font_size = config.font_size * 0.6,
   active_titlebar_bg = colorscheme.background,
   inactive_titlebar_bg = colorscheme.ansi[1],
 }

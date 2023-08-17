@@ -3,7 +3,7 @@ local function get_zoomed(tab)
     return '󰖲 '
   end
 
-  return ''
+  return '  '
 end
 
 local function get_pwd(tab)
@@ -23,7 +23,13 @@ return {
       -- get only the basename of the process (last part of the path)
       local _, _, process_name = tab.active_pane.foreground_process_name:find('/([^/]*)$')
 
-      local title = string.format(' %s %s | %s ', get_zoomed(tab), get_pwd(tab), process_name)
+      local title = string.format(
+        '%s %s %s | %s ',
+        tab.tab_index + 1,
+        get_zoomed(tab),
+        get_pwd(tab),
+        process_name
+      )
 
       return { { Text = title } }
     end)
