@@ -1,4 +1,9 @@
 return {
+  { -- fix nvim borders to match nvim background theme
+    'typicode/bg.nvim',
+    lazy = false,
+  },
+
   {
     'catppuccin/nvim',
     name = 'catppuccin',

@@ -7,7 +7,7 @@ config.keys = require('keys').setup(wezterm)
 
 local colorscheme_name = 'Catppuccin Latte'
 if wezterm.gui.get_appearance():find('Dark') then
-  return 'Catppuccin Mocha'
+  colorscheme_name = 'Catppuccin Mocha'
 end
 
 local colorscheme = wezterm.color.get_builtin_schemes()[colorscheme_name]
@@ -42,7 +42,7 @@ config.window_frame = {
 
   font_size = config.font_size * 0.6,
   active_titlebar_bg = colorscheme.background,
-  inactive_titlebar_bg = colorscheme.ansi[1],
+  inactive_titlebar_bg = colorscheme.background,
 }
 
 config.use_fancy_tab_bar = true
