@@ -116,9 +116,20 @@ return {
     cabbrev('Gd', 'GitDiff')
     cabbrev('Gdm', 'GitDiff main')
 
-    vim.keymap.set('n', '<c-g>', function()
+    vim.keymap.set('n', '<c-g>d', function()
+      gitsigns.preview_hunk()
+    end, { desc = 'git: preview hunk' })
+    vim.keymap.set('n', '<c-g><c-d>', function()
+      gitsigns.preview_hunk()
+    end, { desc = 'git: preview hunk' })
+
+    vim.keymap.set('n', '<c-g>l', function()
       gitsigns.blame_line({ full = true, ignore_whitespace = true })
     end, { desc = 'git: blame current line' })
+    vim.keymap.set('n', '<c-g><c-l>', function()
+      gitsigns.blame_line({ full = true, ignore_whitespace = true })
+    end, { desc = 'git: blame current line' })
+
     command('GitBlame', function()
       gitsigns.blame_line({ full = true, ignore_whitespace = true })
     end, { desc = 'git: blame current line' })
