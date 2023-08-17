@@ -88,6 +88,11 @@ return {
         mods = 'SUPER|SHIFT',
         action = wezterm.action.ActivateCommandPalette,
       },
+      { -- do not close with cmd+q
+        key = 'q',
+        mods = 'CMD',
+        action = wezterm.action.DisableDefaultAssignment,
+      },
       -- Scrollback
       {
         key = 'k',
