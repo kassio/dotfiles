@@ -6,7 +6,7 @@ local function get_zoomed(tab)
   return ''
 end
 
-local function get_current_working_dir(tab)
+local function get_pwd(tab)
   local current_dir = tab.active_pane.current_working_dir:sub(8)
   local HOME_DIR = os.getenv('HOME')
 
@@ -19,12 +19,11 @@ end
 
 return {
   setup = function(wezterm)
-    wezterm.on('format-tab-title', function(tab)
+    wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
       -- get only the basename of the process (last part of the path)
-      local process_name = tab.active_pane.foreground_process_name:gmatch('/([^/]*)$')()
+      local _, _, process_name = tab.active_pane.foreground_process_name:find('/([^/]*)$')
 
-      local title =
-        string.format(' %s %s | %s ', get_zoomed(tab), get_current_working_dir(tab), process_name)
+      local title = string.format(' %s %s | %s ', get_zoomed(tab), get_pwd(tab), process_name)
 
       return { { Text = title } }
     end)
