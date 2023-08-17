@@ -45,6 +45,8 @@ config.window_frame = {
   inactive_titlebar_bg = colorscheme.background,
 }
 
+config.inactive_pane_hsb = { saturation = 0.8, brightness = 0.7 }
+
 config.use_fancy_tab_bar = true
 config.show_new_tab_button_in_tab_bar = false
 config.tab_max_width = 80
