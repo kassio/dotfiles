@@ -20,7 +20,7 @@ config.font = wezterm.font({
   family = 'JetBrains Mono',
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
   stretch = 'Expanded',
-  weight = 'Medium',
+  weight = 'Regular',
 })
 
 config.audible_bell = 'Disabled'
@@ -33,6 +33,13 @@ config.window_decorations = 'RESIZE'
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
 
 config.window_frame = {
+  font = wezterm.font({
+    family = 'JetBrains Mono',
+    harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
+    stretch = 'Expanded',
+    weight = 'ExtraBlack', -- really heavy
+  }),
+
   font_size = config.font_size * 0.7,
   active_titlebar_bg = colorscheme.background,
   inactive_titlebar_bg = colorscheme.ansi[1],
