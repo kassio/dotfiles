@@ -113,3 +113,5 @@ opt.virtualedit = 'block'
 opt.wildignorecase = true
 opt.wrap = false
 opt.writebackup = false
+
+opt.background = vim.env.TERM_BACKGROUND or 'light'
