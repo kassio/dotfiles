@@ -58,7 +58,7 @@ M.augroup = function(name, autocmds)
 end
 
 M.cabbrev = function(lhs, rhs)
-  vim.cmd(string.format('cabbrev %s %s', lhs, rhs))
+  vim.cmd.cabbrev(lhs .. ' ' .. rhs)
 end
 
 M.plugin_filetype = function(ft)

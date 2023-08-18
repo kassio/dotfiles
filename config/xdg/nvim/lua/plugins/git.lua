@@ -4,8 +4,8 @@ return {
     local gitsigns = require('gitsigns')
     local fn = vim.fn
     local command = vim.api.nvim_create_user_command
+    local keymap = vim.keymap.set
     local utils = require('utils')
-
     local cabbrev = utils.cabbrev
 
     local open = function(url)
@@ -76,15 +76,31 @@ return {
       numhl = true,
     })
 
-    vim.keymap.set('n', ']c', function()
+    keymap('n', ']c', function()
       gitsigns.next_hunk()
       vim.cmd.normal('zz')
     end, { desc = 'git: next hunk' })
 
-    vim.keymap.set('n', '[c', function()
+    keymap('n', '[c', function()
       gitsigns.prev_hunk()
       vim.cmd.normal('zz')
     end, { desc = 'git: previous hunk' })
+
+    keymap('n', '<c-g><c-a>', function()
+      gitsigns.stage_hunk()
+    end, { desc = 'git: stage hunk (add)' })
+
+    keymap('n', '<c-g><c-d>', function()
+      gitsigns.preview_hunk()
+    end, { desc = 'git: preview hunk (diff)' })
+
+    keymap('n', '<c-g><c-u>', function()
+      gitsigns.reset_hunk()
+    end, { desc = 'git: reset hunk (undo)' })
+
+    keymap('n', '<c-g><c-l>', function()
+      gitsigns.blame_line({ full = true, ignore_whitespace = true })
+    end, { desc = 'git: blame current line' })
 
     command('GitBrowseRepository', function()
       open(get_repository_url())
@@ -113,54 +129,33 @@ return {
     command('GitDiff', function(cmd)
       gitsigns.diffthis(cmd.args)
     end, { nargs = '?', desc = 'git: open diff in a split view' })
-    cabbrev('Gd', 'GitDiff')
-    cabbrev('Gdm', 'GitDiff main')
-
-    vim.keymap.set('n', '<c-g>d', function()
-      gitsigns.preview_hunk()
-    end, { desc = 'git: preview hunk' })
-    vim.keymap.set('n', '<c-g><c-d>', function()
-      gitsigns.preview_hunk()
-    end, { desc = 'git: preview hunk' })
-
-    vim.keymap.set('n', '<c-g>l', function()
-      gitsigns.blame_line({ full = true, ignore_whitespace = true })
-    end, { desc = 'git: blame current line' })
-    vim.keymap.set('n', '<c-g><c-l>', function()
-      gitsigns.blame_line({ full = true, ignore_whitespace = true })
-    end, { desc = 'git: blame current line' })
 
     command('GitBlame', function()
       gitsigns.blame_line({ full = true, ignore_whitespace = true })
     end, { desc = 'git: blame current line' })
-    cabbrev('Gblame', 'GitBlame')
-
-    command(
-      'GitBlameInLineToggle',
-      gitsigns.toggle_current_line_blame,
-      { desc = 'git: toggle inline blame' }
-    )
-
-    command('GitPreviewHunk', gitsigns.prev_hunk, { desc = 'git: preview hunk' })
 
     command('GitRestore', function()
       vim.cmd('execute "!git restore -- %" | mode')
     end, { nargs = '?', desc = 'git: restore file to last committed version' })
-    cabbrev('Grt', 'GitRestore')
 
     command('GitReset', function(cmd)
       local tree = cmd.args ~= '' and cmd.args or 'HEAD'
 
       vim.cmd('execute "!git reset ' .. tree .. ' -- %" | mode')
     end, { nargs = '?', desc = 'git: reset file to HEAD or given tree' })
-    cabbrev('Grt', 'GitRestore')
 
     command('GitWrite', function()
       local file = fn.expand('%:.')
       vim.cmd('update!')
       git('add ' .. file)
     end, { desc = 'git: add diff to stage' })
-    cabbrev('Gw', 'GitWrite')
+
     cabbrev('Ga', 'GitWrite')
+    cabbrev('Gblame', 'GitBlame')
+    cabbrev('Gd', 'GitDiff')
+    cabbrev('Gdm', 'GitDiff main')
+    cabbrev('Grt', 'GitRestore')
+    cabbrev('Grt', 'GitRestore')
+    cabbrev('Gw', 'GitWrite')
   end,
 }
