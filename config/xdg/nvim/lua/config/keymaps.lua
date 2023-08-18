@@ -96,23 +96,36 @@ keymap.set('n', '<leader>bo', function() -- delete all buffers but current
   end
 end, { desc = 'delete all buffers except current' })
 
-keymap.set('n', '<leader>dh', function() -- delete all hidden buffers
-  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    if vim.tbl_isempty(fn.win_findbuf(buf)) and vim.api.nvim_buf_is_valid(buf) then
-      vim.api.nvim_buf_delete(buf, { force = true })
+keymap.set('n', '<leader>ch', function() -- delete all hidden buffers
+  local deleted = 0
+  for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+    if
+      not vim.bo[bufnr].buflisted
+      or vim.bo[bufnr].bufhidden == 'hide'
+      or vim.bo[bufnr].buftype == 'nofile'
+      or vim.tbl_isempty(fn.win_findbuf(bufnr))
+    then
+      deleted = deleted + 1
+      vim.api.nvim_buf_delete(bufnr, { force = true })
     end
   end
-end, { desc = 'delete all hidden buffers' })
 
-keymap.set('n', '<leader>wa', function()
+  vim.notify(deleted .. ' unlisted buffers closed')
+end, { desc = 'close: hidden and unlisted buffers' })
+
+keymap.set('n', '<leader>cf', function()
+  local deleted = 0
   for _, win in ipairs(vim.api.nvim_list_wins()) do
     local ok, config = pcall(vim.api.nvim_win_get_config, win)
 
     if ok and config.relative ~= '' then
+      deleted = deleted + 1
       vim.api.nvim_win_close(win, true)
     end
   end
-end, { desc = 'close floating windows' })
+
+  vim.notify(deleted .. ' floating windows closed')
+end, { desc = 'close: floating windows' })
 
 keymap.set('n', 'gx', function()
   vim.ui.open(fn.expand('<cfile>'))
@@ -123,15 +136,3 @@ keymap.set('x', 'gx', function()
   local uri = fn.getreg('v')
   vim.ui.open(string.gsub(uri, '%s', ''))
 end, { silent = true, desc = 'open the URL under the cursor' })
-
-keymap.set('n', 'g<c-p>_', function()
-  local value = fn.getreg('"')
-
-  vim.api.nvim_paste(utils.string.snakecase(value), '', -1)
-end, { silent = true, desc = 'paste in snake_case' })
-
-keymap.set('n', 'g<c-p>c', function()
-  local value = fn.getreg('"')
-
-  vim.api.nvim_paste(utils.string.camelcase(value), '', -1)
-end, { silent = true, desc = 'paste in CamelCase' })
