@@ -17,6 +17,7 @@ config.color_scheme = colorscheme_name
 config.colors = colorscheme
 
 config.font_size = 16
+config.line_height = 1.2
 config.font = wezterm.font({
   family = 'JetBrains Mono',
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
