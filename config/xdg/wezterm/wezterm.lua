@@ -2,6 +2,7 @@ local wezterm = require('wezterm')
 local config = wezterm.config_builder()
 
 require('tab_format').setup(wezterm)
+require('appearance').setup(wezterm)
 
 config.keys = require('keys').setup(wezterm)
 

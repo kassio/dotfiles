@@ -114,4 +114,7 @@ opt.wildignorecase = true
 opt.wrap = false
 opt.writebackup = false
 
-opt.background = vim.env.TERM_BACKGROUND or 'light'
+local io = require('io')
+local dir = vim.env.XDG_CACHE_HOME or vim.env.HOME .. '/.cache'
+local file = dir .. '/term-profile'
+opt.background = io.input(file):read() or 'light'

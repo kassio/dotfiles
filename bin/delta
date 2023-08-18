@@ -1,3 +1,10 @@
 #!/usr/bin/env zsh
 
-"${HOMEBREW_PREFIX}/bin/delta" --syntax-theme="gruvbox-light" "$@"
+local delta="${HOMEBREW_PREFIX}/bin/delta"
+local delta_theme="gruvbox-dark"
+
+if [ "$(cat -s "${HOME}/.cache/term-profile")" = "light" ]; then
+  delta_theme="gruvbox-light"
+fi
+
+"${delta}" --syntax-theme="${delta_theme}" "$@"
