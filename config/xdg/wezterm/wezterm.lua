@@ -51,4 +51,6 @@ config.use_fancy_tab_bar = true
 config.show_new_tab_button_in_tab_bar = false
 config.tab_max_width = 80
 
+config.term = 'wezterm'
+
 return config
