@@ -62,7 +62,7 @@ grim() {
 
 gsw() {
   if [ $# -eq 0 ]; then
-    git switch "$(git branch | fzf | xargs)"
+    git switch "$(git branch | fzf | xargs)" 2> /dev/null
   else
     git switch "$@"
   fi
