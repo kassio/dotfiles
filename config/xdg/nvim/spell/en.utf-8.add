@@ -31,3 +31,5 @@ sidekiq
 rollout
 api
 arity
+autoreload
+statusline

@@ -96,11 +96,7 @@ opt.splitbelow = true
 opt.splitkeep = 'cursor'
 opt.splitright = true
 opt.swapfile = false
-opt.switchbuf = {
-  'useopen',
-  'usetab',
-  'split',
-}
+opt.switchbuf = { 'useopen', 'usetab', 'split' }
 opt.tabstop = 2
 opt.tags = ''
 opt.termguicolors = true
@@ -113,8 +109,3 @@ opt.virtualedit = 'block'
 opt.wildignorecase = true
 opt.wrap = false
 opt.writebackup = false
-
-local io = require('io')
-local dir = vim.env.XDG_CACHE_HOME or vim.env.HOME .. '/.cache'
-local file = dir .. '/term-profile'
-opt.background = io.input(file):read() or 'light'

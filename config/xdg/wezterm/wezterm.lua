@@ -2,7 +2,20 @@ local wezterm = require('wezterm')
 local config = wezterm.config_builder()
 
 require('tab_format').setup(wezterm)
-require('appearance').setup(wezterm)
+
+wezterm.on('window-config-reloaded', function()
+  local os = require('os')
+
+  local cmd = table.concat({
+    os.getenv('HOME'),
+    '.dotfiles',
+    'bin',
+    'update-nvim-appearance',
+  }, '/')
+  local r, s = os.execute(cmd)
+
+  wezterm.log_info(cmd, r, s)
+end)
 
 config.keys = require('keys').setup(wezterm)
 

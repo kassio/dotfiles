@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-cmd="<c-c>:$1<cr>"
-while read server; do
-  echo ">> executing '${cmd}' in ${server}"
+cmd="$1"
+while read -r server; do
+  echo ">> executing '${cmd}' in ${server}" >> /tmp/for-each-nvim.log
   /opt/homebrew/bin/nvim --server "${server}" --remote-send "${cmd}"
-done < <(find "${HOME}/.cache/nvim" -name "*.pipe")
+done < <(find "${XDG_CACHE_HOME}/nvim" -name "*.pipe")

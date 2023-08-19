@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+if [ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = "Dark" ]; then
+  echo "dark"
+  exit 0
+else
+  echo "light"
+  exit 1
+fi

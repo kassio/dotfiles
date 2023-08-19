@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+for-each-nvim "<C-\><C-N>:CheckAppearance<CR>"

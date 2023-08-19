@@ -4,13 +4,14 @@ vim.g.lastplace_ignore = 'gitcommit,gitrebase'
 vim.g.lastplace_ignore_buftype = 'quickfix,nofile,help'
 
 utils.augroup('user:focus', {
-  { -- autosave file
+  {
     events = {
+      'VimEnter',
       'FocusGained',
-      'TermClose',
-      'TermLeave',
+      'FocusLost',
+      'RemoteReply',
     },
-    command = 'checktime',
+    command = 'CheckAppearance',
   },
   { -- keep splits sizes
     events = { 'VimResized' },
@@ -36,6 +37,15 @@ utils.augroup('user:focus', {
       end, 3000)
     end,
   },
+  { -- autoreload the file
+    events = {
+      'FocusGained',
+      'TermClose',
+      'TermLeave',
+      'RemoteReply',
+    },
+    command = 'checktime',
+  },
   { -- autoformat
     events = 'BufWritePre',
     callback = function()
@@ -46,7 +56,7 @@ utils.augroup('user:focus', {
       vim.lsp.buf.format({ async = false })
     end,
   },
-  {
+  { -- autosave
     events = {
       'BufEnter',
       'BufLeave',
