@@ -31,7 +31,7 @@ config.adjust_window_size_when_changing_font_size = false
 
 config.window_close_confirmation = 'NeverPrompt'
 config.window_decorations = 'RESIZE'
-config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
+config.window_padding = { left = 5, right = 5, top = 0, bottom = 0 }
 
 config.window_frame = {
   font = wezterm.font({
