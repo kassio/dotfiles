@@ -7,6 +7,4 @@ if [ "$(macos-appearance)" = "dark" ]; then
   delta_theme="gruvbox-dark"
 fi
 
-macos-appearance
-
 "${delta}" --syntax-theme="${delta_theme}" "$@"
