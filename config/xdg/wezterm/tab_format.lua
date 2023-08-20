@@ -1,9 +1,17 @@
-local function get_zoomed(tab)
+local function get_zoomed(tab, wezterm)
   if tab.active_pane.is_zoomed then
-    return '󰖲 '
+    return wezterm.nerdfonts.fa_arrows_alt
   end
 
-  return '  '
+  return ' '
+end
+
+local function get_separator(tab)
+  if tab.tab_index >= 1 then
+    return '▏'
+  end
+
+  return ' '
 end
 
 local function get_pwd(tab)
@@ -17,19 +25,29 @@ local function get_pwd(tab)
   return current_dir
 end
 
+local function get_process(tab)
+  local process_name = tab.active_pane.foreground_process_name
+
+  -- Equivalent to POSIX basename(3)
+  -- Given "/foo/bar" returns "bar"
+  -- Given "c:\\foo\\bar" returns "bar"
+  -- https://wezfurlong.org/wezterm/config/lua/pane/get_foreground_process_name.html
+  local basename, _ = string.gsub(process_name, '(.*[/\\])(.*)', '%2')
+  return basename
+end
+
 return {
   setup = function(wezterm)
     wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
-      -- get only the basename of the process (last part of the path)
-      local _, _, process_name = tab.active_pane.foreground_process_name:find('/([^/]*)$')
-
-      local title = string.format(
-        '%s %s %s | %s ',
+      local title = table.concat({
+        get_separator(tab),
         tab.tab_index + 1,
-        get_zoomed(tab),
+        get_zoomed(tab, wezterm),
         get_pwd(tab),
-        process_name
-      )
+        '|',
+        get_process(tab),
+        ' ',
+      }, ' ')
 
       return { { Text = title } }
     end)
