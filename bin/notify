@@ -3,7 +3,6 @@
 msg="$1"
 title="$2"
 
-terminal-notifier \
-  -activate "com.googlecode.iterm2" \
-  -title "${title}" \
-  -message "${msg}"
+printf "\e]777;notify;%s;%s\e\\" \
+  "${title}" \
+  "${msg}"
