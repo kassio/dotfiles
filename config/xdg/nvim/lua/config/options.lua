@@ -50,9 +50,8 @@ opt.fillchars:append({
 opt.foldcolumn = '1'
 opt.foldenable = false
 opt.foldexpr = 'nvim_treesitter#foldexpr()'
-opt.foldlevel = 0
-opt.foldmethod = 'manual'
-opt.foldnestmax = 1
+opt.foldmethod = 'expr'
+opt.foldnestmax = 5
 opt.ignorecase = true
 opt.inccommand = 'nosplit'
 opt.infercase = true
