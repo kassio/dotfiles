@@ -55,6 +55,7 @@ return {
       diagnostics_format = '[#{c}] #{m} (#{s})',
       sources = sources,
       default_timeout = 10000,
+      fallback_severity = vim.diagnostic.severity.WARN,
     })
   end,
 }
