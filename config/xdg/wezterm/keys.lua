@@ -2,6 +2,34 @@
 return {
   setup = function(wezterm)
     return {
+      -- Window
+      {
+        key = 'Enter',
+        mods = 'SUPER',
+        action = wezterm.action_callback(function(win)
+          win:maximize()
+        end),
+      },
+      {
+        key = 'p',
+        mods = 'SUPER|SHIFT',
+        action = wezterm.action.ActivateCommandPalette,
+      },
+      { -- do not close window with cmd+q
+        key = 'q',
+        mods = 'CMD',
+        action = wezterm.action.Nop,
+      },
+      { -- do not close pane with cmd+w
+        key = 'w',
+        mods = 'CMD',
+        action = wezterm.action.Nop,
+      },
+      { -- close pane with cmd+shift+w
+        key = 'w',
+        mods = 'CMD|SHIFT',
+        action = wezterm.action.CloseCurrentPane({ confirm = false }),
+      },
       -- Font resize
       {
         key = '0',
@@ -74,24 +102,6 @@ return {
             win:perform_action(wezterm.action.TogglePaneZoomState, pane)
           end
         end),
-      },
-      -- Window
-      {
-        key = 'Enter',
-        mods = 'SUPER',
-        action = wezterm.action_callback(function(win)
-          win:maximize()
-        end),
-      },
-      {
-        key = 'p',
-        mods = 'SUPER|SHIFT',
-        action = wezterm.action.ActivateCommandPalette,
-      },
-      { -- do not close with cmd+q
-        key = 'q',
-        mods = 'CMD',
-        action = wezterm.action.DisableDefaultAssignment,
       },
       -- Scrollback
       {
