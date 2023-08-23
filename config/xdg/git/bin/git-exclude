@@ -1,7 +1,9 @@
 #!/usr/bin/env zsh
 
 target=".git/info/exclude"
-if ! cat "${target}" 2>/dev/null | grep -q "$1"; then
-  touch "${target}"
-  echo "$1" >> "${target}"
-fi
+for file in "$@"; do
+  if ! cat "${target}" 2>/dev/null | grep -q "${file}"; then
+    touch "${target}"
+    echo "${file}" >> "${target}"
+  fi
+done
