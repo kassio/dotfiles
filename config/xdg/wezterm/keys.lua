@@ -10,10 +10,15 @@ return {
           win:maximize()
         end),
       },
-      {
+      { -- Command palette
         key = 'p',
         mods = 'SUPER|SHIFT',
         action = wezterm.action.ActivateCommandPalette,
+      },
+      { -- Disable default Command palette
+        key = 'p',
+        mods = 'CTRL|SHIFT',
+        action = wezterm.action.Nop,
       },
       { -- do not close window with cmd+q
         key = 'q',
@@ -42,6 +47,13 @@ return {
         action = wezterm.action.IncreaseFontSize,
       },
       -- Panes create
+      { -- Swap Pane with Active one
+        key = 's',
+        mods = 'SUPER|SHIFT',
+        action = wezterm.action.PaneSelect({
+          mode = 'SwapWithActive',
+        }),
+      },
       {
         key = 'd',
         mods = 'SUPER',
