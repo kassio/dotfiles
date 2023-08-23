@@ -46,6 +46,17 @@ return {
         mods = 'SUPER',
         action = wezterm.action.IncreaseFontSize,
       },
+      -- Tabs
+      { -- move to right
+        key = 'RightArrow',
+        mods = 'SUPER|SHIFT',
+        action = wezterm.action.MoveTabRelative(1),
+      },
+      { -- move to left
+        key = 'LeftArrow',
+        mods = 'SUPER|SHIFT',
+        action = wezterm.action.MoveTabRelative(-1),
+      },
       -- Panes create
       { -- Swap Pane with Active one
         key = 's',
