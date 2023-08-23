@@ -44,7 +44,7 @@ return {
 
   -- Prettier qf/loc windows
   {
-    'https://gitlab.com/yorickpeterse/nvim-pqf.git',
+    'yorickpeterse/nvim-pqf',
     config = true,
   },
 
