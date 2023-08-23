@@ -6,50 +6,54 @@ class Object
   end
 end
 
-def __copy(obj)
-  msg = obj.is_a?(String) ? obj : obj.inspect
+module Kassio
+  extend self
 
-  `echo "#{msg}" | pbcopy`
+  def copy(obj)
+    msg = obj.is_a?(String) ? obj : obj.inspect
 
-  msg
-end
+    `echo "#{msg}" | pbcopy`
 
-def silence_rails_warnings!
-  return unless defined?(Rails)
-
-  ActiveSupport::Deprecation.silenced = true
-end
-
-def toggle_active_record_log!
-  return unless defined?(Rails)
-
-  current = ActiveRecord::Base.logger
-
-  if current != @__original_active_record_logger
-    ActiveRecord::Base.logger = @__original_active_record_logger
-    @__original_active_record_logger = current
+    msg
   end
 
-  ActiveRecord::Base.logger
-end
+  def silence_rails_warnings!
+    return unless defined?(Rails)
 
-def enable_active_record_log!
-  return unless defined?(Rails)
-
-  ActiveRecord::Base.logger = Logger.new($stdout)
-end
-
-def disable_active_record_log!
-  return unless defined?(Rails)
-
-  current = ActiveRecord::Base.logger
-
-  if current != nil
-    @__original_active_record_logger = current
+    ActiveSupport::Deprecation.silenced = true
   end
 
-  ActiveRecord::Base.logger = nil
+  def toggle_active_record_log!
+    return unless defined?(Rails)
+
+    current = ActiveRecord::Base.logger
+
+    if current != @__original_active_record_logger
+      ActiveRecord::Base.logger = @__original_active_record_logger
+      @__original_active_record_logger = current
+    end
+
+    ActiveRecord::Base.logger
+  end
+
+  def enable_active_record_log!
+    return unless defined?(Rails)
+
+    ActiveRecord::Base.logger = Logger.new($stdout)
+  end
+
+  def disable_active_record_log!
+    return unless defined?(Rails)
+
+    current = ActiveRecord::Base.logger
+
+    if current != nil
+      @__original_active_record_logger = current
+    end
+
+    ActiveRecord::Base.logger = nil
+  end
 end
 
-silence_rails_warnings!
-disable_active_record_log!
+Kassio.silence_rails_warnings!
+Kassio.disable_active_record_log!
