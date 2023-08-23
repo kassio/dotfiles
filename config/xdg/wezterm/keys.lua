@@ -133,7 +133,6 @@ return {
         action = wezterm.action.Multiple({
           wezterm.action.ClearScrollback('ScrollbackAndViewport'),
           wezterm.action.SendKey({ key = 'L', mods = 'CTRL' }),
-          wezterm.action.SendKey({ key = 'U', mods = 'CTRL' }),
         }),
       },
     }
