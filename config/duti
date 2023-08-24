@@ -8,6 +8,7 @@ com.microsoft.VSCode  .mk                        all
 com.microsoft.VSCode  .sass                      all
 com.microsoft.VSCode  .scss                      all
 com.microsoft.VSCode  .toml                      all
+com.microsoft.VSCode  .xlsx                      all
 com.microsoft.VSCode  public.yaml                all
 com.microsoft.VSCode  text/plain                 all
 com.microsoft.VSCode  text/x-java                all
