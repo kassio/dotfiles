@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+local lsd_theme_name="catppuccin-latte"
+
+if [ "$(macos-appearance)" = "dark" ]; then
+  lsd_theme_name="catppuccin-mocha"
+fi
+
+LS_COLORS="$(vivid generate ${lsd_theme_name})" lsd "$@"

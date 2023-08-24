@@ -2,6 +2,7 @@ color:
   when: always
 icons:
   when: always
+  theme: fancy
 sorting:
   column: name
   reverse: false
