@@ -29,7 +29,6 @@ return {
   'nvim-telescope/telescope.nvim',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   },
   cmd = 'Telescope',
   keys = {
@@ -263,18 +262,7 @@ return {
     local layout_actions = require('telescope.actions.layout')
     local utils = require('utils')
 
-    telescope.load_extension('fzf')
-
     telescope.setup({
-      extensions = {
-        fzf = {
-          case_mode = 'smart_case',
-          fuzzy = true,
-          override_file_sorter = true,
-          override_generic_sorter = true,
-        },
-      },
-
       defaults = {
         dynamic_preview_title = true,
         cycle_layout_list = { 'vertical', 'horizontal' },
@@ -337,7 +325,6 @@ return {
         wrap_results = true,
       },
     })
-    telescope.load_extension('fzf')
 
     vim.api.nvim_create_user_command('Grep', function(cmd)
       local prompt = 'grep: "%s"'
