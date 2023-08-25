@@ -15,9 +15,12 @@ command('Trim', utils.buffers.trim, {})
 command('Dark', 'set bg=dark', {})
 command('Light', 'set bg=light', {})
 command('CheckAppearance', function()
-  local obj = vim.system({ 'macos-appearance' }, { text = true }):wait()
+  local cmd = vim.system({ 'macos-appearance' }, { text = true }):wait()
+  local appearance = vim.trim(cmd.stdout) or 'light'
 
-  vim.opt.background = vim.trim(obj.stdout) or 'light'
+  if vim.o.background ~= appearance then
+    vim.o.background = appearance
+  end
 end, {})
 
 -- copy filename
