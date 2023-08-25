@@ -23,7 +23,7 @@ local tab_get_bufnr = function(tab_page)
 end
 
 local function filename(bufnr)
-  local fullname = vim.api.nvim_buf_get_name(bufnr)
+  local fullname = api.nvim_buf_get_name(bufnr)
 
   if #fullname == 0 then
     return '[No name]'

@@ -136,3 +136,21 @@ keymap.set('x', 'gx', function()
   local uri = fn.getreg('v')
   vim.ui.open(string.gsub(uri, '%s', ''))
 end, { silent = true, desc = 'open the URL under the cursor' })
+
+keymap.set('n', '<leader>fs', function()
+  local api = vim.api
+  local tab_pages = api.nvim_list_tabpages()
+
+  vim.ui.select(tab_pages, {
+    prompt = 'Select your tab',
+    format_item = function(item)
+      local winnr = api.nvim_tabpage_get_win(item)
+      local bufnr = api.nvim_win_get_buf(winnr)
+      local name = api.nvim_buf_get_name(bufnr)
+
+      return vim.fn.fnamemodify(name, ':.')
+    end,
+  }, function(choice)
+    vim.cmd.tabnext(vim.api.nvim_tabpage_get_number(choice))
+  end)
+end, { silent = true, desc = 'fuzzy: tab selector')
