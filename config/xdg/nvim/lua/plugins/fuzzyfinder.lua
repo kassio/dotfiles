@@ -296,6 +296,7 @@ return {
             ['<C-b>'] = actions.preview_scrolling_up,
             ['<C-f>'] = actions.preview_scrolling_down,
             ['<C-l>'] = layout_actions.cycle_layout_next,
+            ['<C-;>'] = layout_actions.toggle_preview,
             ['<C-u>'] = { '<c-u>', type = 'command' }, -- delete inputted text
             ['<C-a>'] = { '<home>', type = 'command' }, -- move cursor to the beginning of input
             ['<C-e>'] = { '<end>', type = 'command' }, -- move cursor to the end of input
@@ -309,6 +310,7 @@ return {
             ['<C-b>'] = actions.preview_scrolling_up,
             ['<C-f>'] = actions.preview_scrolling_down,
             ['<C-l>'] = layout_actions.cycle_layout_next,
+            ['<C-;>'] = layout_actions.toggle_preview,
             ['<C-u>'] = { '<c-u>', type = 'command' }, -- delete inputted text
             ['<C-a>'] = { '<home>', type = 'command' }, -- move cursor to the beginning of input
             ['<C-e>'] = { '<end>', type = 'command' }, -- move cursor to the end of input
