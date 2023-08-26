@@ -10,17 +10,21 @@ brew "bat" # cat replacement
 brew "coreutils"
 brew "dfu-programmer" # flash keyboard firmware
 brew "diffutils"
+brew "dnsmasq"
+brew "docker"
 brew "docutils"
 brew "dpkg"
 brew "duti"
 brew "exiftool"
 brew "fd" # file finding
+brew "ffmpeg"
 brew "fontconfig"
 brew "fzf"
 brew "gh" # github client, useful for neovim plugins
 brew "git"
 brew "git-delta" # fancy git diff
 brew "git-lfs"
+brew "gitleaks"
 brew "gnupg"
 brew "golangci-lint"
 brew "gpgme"
@@ -55,6 +59,7 @@ brew "stylua"
 brew "terminal-notifier"
 brew "tidy-html5"
 brew "tree"
+brew "tree-sitter"
 brew "vivid" # LS_COLORS generator
 brew "vscode-langservers-extracted"
 brew "watch"
@@ -78,6 +83,7 @@ cask "itsycal"
 cask "karabiner-elements"
 cask "keyboard-maestro"
 cask "monitorcontrol"
+cask "nordlayer"
 cask "qlmarkdown"
 cask "qmk-toolbox"
 cask "slack"
@@ -85,11 +91,31 @@ cask "spotify"
 cask "tableplus"
 cask "the-unarchiver"
 cask "visual-studio-code"
+cask "wezterm"
+cask "xbar"
 mas "1Password for Safari", id: 1569813296
 mas "Amphetamine", id: 937984704
+mas "Broadcasts", id: 1469995354
 mas "GarageBand", id: 682658836
 mas "Okta Extension App", id: 1439967473
 mas "Peek", id: 1554235898
 mas "Super Agent", id: 1568262835
-mas "Userscripts", id: 1463298887
+mas "Userscripts-Mac-App", id: 1463298887
 mas "Xcode", id: 497799835
+
+vscode "Catppuccin.catppuccin-vsc"
+vscode "GitLab.gitlab-workflow"
+vscode "Mebrahtom.plantumlpreviewer"
+vscode "castwide.solargraph"
+vscode "cweijan.vscode-office"
+vscode "davidnussio.vscode-jq-playground"
+vscode "george-alisson.html-preview-vscode"
+vscode "golang.go"
+vscode "jq-syntax-highlighting.jq-syntax-highlighting"
+vscode "ms-vscode.vscode-typescript-next"
+vscode "ms-vsliveshare.vsliveshare"
+vscode "rebornix.ruby"
+vscode "sumneko.lua"
+vscode "vscodevim.vim"
+vscode "will-wow.vscode-alternate-file"
+vscode "wingrunr21.vscode-ruby"
