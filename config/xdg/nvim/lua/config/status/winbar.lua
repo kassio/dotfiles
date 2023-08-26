@@ -116,38 +116,40 @@ local function get_git_status(bufnr, focused)
 end
 
 local winbar = {}
-winbar['neoterm'] = function()
+winbar.default = function(bufnr, focused)
+  return string.format(
+    ' %s ',
+    table.concat({
+      '%n',
+      ' ',
+      get_filename(bufnr),
+      get_modified(bufnr),
+      ' ',
+      '%=',
+      get_todos(bufnr, focused),
+      ' ',
+      get_diagnositcs(bufnr, focused),
+      ' ',
+      get_git_status(bufnr, focused),
+    }, '')
+  )
+end
+
+winbar.neoterm = function()
   return 'neoterm-' .. vim.b.neoterm_id
 end
 
-winbar['help'] = function(bufnr)
+winbar.help = function(bufnr)
   return 'help: ' .. vim.fn.fnamemodify(get_filename(bufnr), ':t')
 end
 
-winbar['NvimTree'] = function()
+winbar.NvimTree = function()
   return 'NvimTree'
 end
 
 setmetatable(winbar, {
   __index = function()
-    return function(bufnr, focused)
-      return string.format(
-        ' %s ',
-        table.concat({
-          '%n',
-          ' ',
-          get_filename(bufnr),
-          get_modified(bufnr),
-          ' ',
-          '%=',
-          get_todos(bufnr, focused),
-          ' ',
-          get_diagnositcs(bufnr, focused),
-          ' ',
-          get_git_status(bufnr, focused),
-        }, '')
-      )
-    end
+    return winbar.default
   end,
 })
 
