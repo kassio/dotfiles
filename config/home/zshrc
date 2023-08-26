@@ -13,9 +13,6 @@ export EDITOR="nvim"
 export GPG_TTY=$(tty)
 
 export HOMEBREW_PREFIX="/opt/homebrew"
-export HOMEBREW_NO_ANALYTICS=1
-export HOMEBREW_BOOTSNAP=1
-export HOMEBREW_NO_ENV_HINTS=1
 
 PATH="/usr/bin:/bin:/usr/sbin:/sbin" # system base PATH
 PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
