@@ -1,9 +1,12 @@
 #!/usr/bin/env zsh
 
 if [ "$1" = "--help" ]; then
-  echo "Upgrade nvim plugins with lazy.nvim"
+  echo "Upgrade nvim && plugins with lazy.nvim"
   exit
 fi
+
+title "[nvim] update nvim"
+"${DOTFILES}/installers/nvim-nightly"
 
 title "[nvim] update nvim plugins with lazy.nvim"
 nvim --headless "+Lazy! update" +qa
