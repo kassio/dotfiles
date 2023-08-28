@@ -33,14 +33,6 @@ return {
   cmd = 'Telescope',
   keys = {
     {
-      '<leader>f;',
-      function()
-        require('telescope.builtin').find_files(require('telescope.themes').get_ivy())
-      end,
-      silent = true,
-      desc = 'telescope: files (theme: ivy)',
-    },
-    {
       '<leader>ff',
       function()
         require('telescope.builtin').find_files({
@@ -265,7 +257,11 @@ return {
     telescope.setup({
       defaults = {
         dynamic_preview_title = true,
-        cycle_layout_list = { 'vertical', 'horizontal' },
+        cycle_layout_list = {
+          'horizontal',
+          'bottom_pane',
+          'vertical',
+        },
         layout_config = {
           prompt_position = 'top',
           horizontal = {
