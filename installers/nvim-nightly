@@ -1,18 +1,32 @@
 #!/usr/bin/env zsh
 
-target="${HOME}/src/nvim-nightly"
-mkdir -p "${target}"
-pushd "${target}"
+target_dir="${HOME}/src/nvim-nightly"
+target_file="${target_dir}/nvim-macos.tar.gz"
 
-curl \
-  --location \
-  --progress-bar \
-  --output "nvim-macos.tar.gz" \
-  "https://github.com/neovim/neovim/releases/download/nightly/nvim-macos.tar.gz"
+install() {
+  curl \
+    --url "https://github.com/neovim/neovim/releases/download/nightly/nvim-macos.tar.gz" \
+    --output "${target_file}" \
+    --progress-bar \
+    --location \
+    "$@"
 
-xattr -c "nvim-macos.tar.gz"
-tar xzf "nvim-macos.tar.gz"
-ln -sf "${target}/nvim-macos/bin/nvim" "${HOMEBREW_PREFIX}/bin/nvim"
-nvim -V1 -v
+  xattr -c "${target_file}"
+  tar xzf "${target_file}"
+  ln -sf "${target_dir}/nvim-macos/bin/nvim" "${HOMEBREW_PREFIX}/bin/nvim"
 
-popd
+  nvim -V1 -v
+}
+
+if [ -f "${target_file}" ]; then
+  file_date="$(stat -t "%s" -f "%SB" "${target_dir}/nvim-macos/bin/nvim")"
+  last_midnight="$(date -v "-$(date +"%H")H" +"%s")"
+  if [ "${file_date}" -gt "${last_midnight}" ]; then
+    echo "Already updated today"
+    return
+  fi
+fi
+
+mkdir -p "${target_dir}"
+echo "Installing nvim"
+install
