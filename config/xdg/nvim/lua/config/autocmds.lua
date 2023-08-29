@@ -4,18 +4,6 @@ vim.g.lastplace_ignore = 'gitcommit,gitrebase'
 vim.g.lastplace_ignore_buftype = 'quickfix,nofile,help'
 
 utils.augroup('user:focus', {
-  {
-    events = { 'VimEnter' },
-    callback = function()
-      vim.uv.new_timer():start(
-        0,
-        1000,
-        vim.schedule_wrap(function()
-          vim.cmd.CheckAppearance()
-        end)
-      )
-    end,
-  },
   { -- keep splits sizes
     events = { 'VimResized' },
     callback = function()
