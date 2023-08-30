@@ -6,7 +6,7 @@ if [ "$1" = "--help" ]; then
 fi
 
 subtitle "global brewfile"
-brew bundle --file="${DOTFILES}/config/xdg/homebrew/Brewfile"
+brew bundle --global install
 
 title "[brew] system upgrade"
 subtitle "brew upgrade"
