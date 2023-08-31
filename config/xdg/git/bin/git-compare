@@ -1,0 +1,32 @@
+#!/usr/bin/env zsh
+
+local project_url=$(git remote get-url origin | sed 's/\.git//')
+local target_branch="" # branch with the _changes_
+local source_branch="" # branch base
+
+case "$#" in
+  1)
+    case "$1" in
+      -h|--help)
+        echo 'Usage:
+  - `git compare`: compares current branch with main branch
+  - `git compare target`: compares current branch with given target branch
+  - `git compare source target`: compares given source branch with given target branch'
+        ;;
+      *)
+        target_branch="$(git symbolic-ref --short HEAD 2>/dev/null)"
+        source_branch="$1"
+        ;;
+    esac
+    ;;
+  2)
+    target_branch="$1"
+    source_branch="$2"
+    ;;
+  *)
+    target_branch="$(git symbolic-ref --short HEAD 2>/dev/null)"
+    source_branch="$(git branch-main)"
+    ;;
+esac
+
+open "${project_url}/-/compare?from=${source_branch}&to=${target_branch}"

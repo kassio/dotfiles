@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 
+# Returns the given reference or the main branch if main/master is given
 case "${1}" in
   master|main)
     echo "$(git branch-main)"
@@ -7,4 +8,4 @@ case "${1}" in
     ;;
 esac
 
-[ "$#" -gt 0 ] && echo "$@"
+echo "$@"
