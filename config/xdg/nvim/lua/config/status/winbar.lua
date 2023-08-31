@@ -121,10 +121,10 @@ winbar.default = function(bufnr, focused)
     ' %s ',
     table.concat({
       '%n',
-      ' ',
+      ' %<%(',
       get_filename(bufnr),
       get_modified(bufnr),
-      ' ',
+      '%) ',
       '%=',
       get_todos(bufnr, focused),
       ' ',
