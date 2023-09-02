@@ -11,6 +11,7 @@ return {
         'phpdoc',
         'r',
         'vala',
+        'wing',
       },
       highlight = {
         enable = true,

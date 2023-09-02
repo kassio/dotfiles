@@ -11,6 +11,7 @@ g.markdown_recommended_style = 0
 opt.autowriteall = true
 opt.backup = false
 opt.cindent = true
+opt.cdhome = true
 opt.cmdheight = 0
 opt.colorcolumn = {
   80,
