@@ -16,7 +16,11 @@ return {
 
       local todo = require('todo-comments')
 
-      todo.setup()
+      todo.setup({
+        keywords = {
+          DEPRECATED = { icon = '', color = 'warning' , alt = { "WARN" } },
+        },
+      })
 
       vim.keymap.set('n', ']t', function()
         todo.jump_next()
