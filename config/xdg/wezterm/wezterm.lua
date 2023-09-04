@@ -4,6 +4,7 @@ local config = wezterm.config_builder()
 require('tab_format').setup(wezterm)
 
 config.keys = require('keys').setup(wezterm)
+config.key_tables = require('key_tables').setup(wezterm)
 config.mouse_bindings = require('mouse').setup(wezterm)
 
 local colorscheme_name = 'Catppuccin Latte'
