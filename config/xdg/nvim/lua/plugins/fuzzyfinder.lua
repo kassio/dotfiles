@@ -53,7 +53,23 @@ return {
         })
       end,
       silent = true,
-      desc = 'telescope: find files',
+      desc = 'telescope: find files: current word/selection',
+    },
+    {
+      '<leader>fd',
+      function()
+        local word = tostring(vim.fn.expand('<cword>'))
+        word, _ = require('utils.string').snakecase(word)
+
+        require('telescope.builtin').find_files({
+          -- include hidden files
+          find_command = find_command,
+          default_text = word,
+        })
+      end,
+      mode = { 'n', 'v' },
+      silent = true,
+      desc = 'telescope: find file: current word/selection in underscore',
     },
     {
       '<leader>fp',
