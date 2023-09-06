@@ -7,32 +7,23 @@ config.keys = require('keys').setup(wezterm)
 config.key_tables = require('key_tables').setup(wezterm)
 config.mouse_bindings = require('mouse').setup(wezterm)
 
+local colorscheme_name = 'Catppuccin Latte'
 if wezterm.gui.get_appearance():find('Dark') then
-  config.color_scheme = 'rose-pine-moon'
-else
-  config.color_scheme = 'rose-pine-dawn'
+  colorscheme_name = 'Catppuccin Mocha'
 end
 
-local colorscheme = wezterm.color.get_builtin_schemes()[config.color_scheme]
-config.colors = {
-  tab_bar = {
-    background = colorscheme.background,
-    active_tab = {
-      bg_color = colorscheme.background,
-      fg_color = colorscheme.brights[5],
-    },
+local colorscheme = wezterm.color.get_builtin_schemes()[colorscheme_name]
 
-    inactive_tab = {
-      bg_color = colorscheme.background,
-      fg_color = colorscheme.brights[1], -- gray
-    },
+colorscheme.tab_bar.background = colorscheme.background
+colorscheme.tab_bar.active_tab.fg_color = colorscheme.tab_bar.active_tab.bg_color
+colorscheme.tab_bar.active_tab.bg_color = colorscheme.background
+colorscheme.tab_bar.inactive_tab.bg_color = colorscheme.background
+colorscheme.tab_bar.inactive_tab.fg_color = colorscheme.brights[1] -- gray
+colorscheme.tab_bar.inactive_tab_hover.fg_color = colorscheme.brights[5] -- blue
+colorscheme.tab_bar.inactive_tab_edge = colorscheme.background
 
-    inactive_tab_hover = {
-      bg_color = colorscheme.background,
-      fg_color = colorscheme.brights[3],
-    },
-  },
-}
+config.color_scheme = colorscheme_name
+config.colors = colorscheme
 
 config.font_size = 16
 config.line_height = 1.2
