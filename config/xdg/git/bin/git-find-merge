@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+# https://stackoverflow.com/questions/8475448/find-merge-commit-which-includes-a-specific-commit
+commit=$1
+branch=${2:-HEAD}
+
+{ git rev-list $commit..$branch --ancestry-path |
+  cat -n; git rev-list $commit..$branch --first-parent |
+  cat -n } |
+  sort -k2 -s |
+  uniq -f1 -d |
+  sort -n |
+  tail -1 |
+  cut -f2 |
+  xargs git show
