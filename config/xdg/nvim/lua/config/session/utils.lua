@@ -58,6 +58,9 @@ local session_options = function(list)
   return options
 end
 
+-- returns: session file, ok
+-- session file: string
+-- ok: if a session was selected
 local select_session = function(title, callback)
   local sessions = session_list()
 
@@ -70,15 +73,15 @@ local select_session = function(title, callback)
   vim.ui.select(options, { prompt = title }, function(_choice, index)
     -- confirm returns 0 for <esc>
     -- and the chose choice indexed on 1
-    if index == nil and index <= 0 then
-      return
+    if index == nil or index <= 0 then
+      return nil, false
     end
 
     local file = sessions[index]
     if vim.fn.filereadable(file) then
       callback(file)
 
-      return file
+      return file, true
     end
   end)
 end
@@ -121,10 +124,14 @@ M.save = function()
 end
 
 M.load = function()
-  local session = select_session('Available sessions', function(session)
+  local session, ok = select_session('Available sessions', function(session)
     vim.cmd(string.format('silent! source %s | redraw!', session))
     info(string.format('Session "%s" loaded', prefix_from(session)))
   end)
+
+  if not ok then
+    return
+  end
 
   if not session then
     warn('No sessions available!')
