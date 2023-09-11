@@ -36,6 +36,10 @@ function M.slice(tbl, keys)
   return result
 end
 
+--- Joins two list-like tables in a new list-like table
+---@param tbl1 table
+---@param tbl2 table
+---@return table<any>
 function M.join_lists(tbl1, tbl2)
   local result = { M.unpack(tbl1) }
   for _, value in ipairs(tbl2) do
@@ -43,6 +47,24 @@ function M.join_lists(tbl1, tbl2)
   end
 
   return result
+end
+
+--- Compacts the given list-like table, removing empty/0/false/nil values
+---@param tbl table
+---@return table<any>
+function M.compact_list(tbl)
+  return vim.tbl_filter(function(element)
+    local t = type(element)
+    if vim.tbl_contains({ 'string', 'table' }, t) then
+      return #element > 0
+    elseif t == 'number' then
+      return element ~= 0
+    elseif t == 'nil' then
+      return false
+    else
+      return element
+    end
+  end, tbl)
 end
 
 return M

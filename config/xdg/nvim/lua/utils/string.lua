@@ -27,4 +27,17 @@ function M.trim(str)
   return str:gsub('^%s*(.-)%s*$', '%1')
 end
 
+--- Trim spaces on both sides of the given string
+---@param str string
+---@param sep string (default = " ")
+---@return table
+function M.split(str, sep)
+  local result = {}
+  local regex = ('([^%s]+)'):format(sep)
+  for each in str:gmatch(regex) do
+    table.insert(result, each)
+  end
+  return result
+end
+
 return M

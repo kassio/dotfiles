@@ -42,7 +42,7 @@ copied to %s
   end
 
   fn.setreg(reg, text)
-  vim.notify(string.format(fmt, text, msg), vim.log.levels.INFO)
+  M.notify(string.format(fmt, text, msg))
 end
 
 --- Creates an autocommand group.
@@ -83,6 +83,16 @@ M.copy_filename = function(cmd)
   local filename = fn.expand(flag)
 
   M.to_clipboard(filename, cmd.bang)
+end
+
+--- Syntax sugar for vim.notify
+---@param msg string the message to notify
+---@param title string (default = "")
+---@param level number (default = 2)
+M.notify = function(msg, title, level)
+  level = level or vim.log.levels.INFO
+  title = title or ''
+  vim.notify(msg, level, { title = title })
 end
 
 return M

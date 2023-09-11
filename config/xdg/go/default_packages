@@ -1,6 +1,3 @@
-golang.org/x/tools/gopls@latest
-github.com/grafana/jsonnet-language-server@latest
-github.com/wader/jq-lsp@master
 github.com/mrtazz/checkmake/cmd/checkmake@latest
 github.com/editorconfig-checker/editorconfig-checker/cmd/editorconfig-checker@latest
 
