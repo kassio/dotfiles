@@ -25,16 +25,10 @@ return {
       }
 
       vim.system(cmd, { text = true }, function(obj)
-        local notify = function(msg)
-          vim.notify(msg, vim.log.levels.INFO, { title = 'vim-test' })
-        end
-
-        if #obj.stdout > 0 then
-          notify(obj.stdout)
-        end
-
-        if #obj.stderr > 0 then
-          notify(obj.stderr)
+        if obj.code == 0 and obj.signal == 0 then
+          vim.notify('Tests Passed', vim.log.levels.INFO)
+        else
+          vim.notify('Tests Failed', vim.log.levels.INFO)
         end
       end)
     end
