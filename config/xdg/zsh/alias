@@ -1,7 +1,8 @@
 # vim:ft=zsh:
 
-alias nvim="nvim --listen ${XDG_CACHE_HOME}/nvim/$$${RANDOM}.pipe"
-alias n="nvim"
+alias n="nvim --listen ${XDG_CACHE_HOME}/nvim/$$${RANDOM}.pipe"
+alias nvim-terminal-server="nvim --listen ${XDG_CACHE_HOME}/nvim/terminal_server.pipe +'Tnew' +'bw'"
+alias nts=nvim-terminal-server
 
 alias time="/usr/bin/time"
 

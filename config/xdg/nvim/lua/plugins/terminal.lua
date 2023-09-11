@@ -49,14 +49,14 @@ return {
       g.neoterm_autoscroll = 1
       g.neoterm_callbacks = {
         before_exec = function()
-          pcall(vim.cmd, 'wall')
+          vim.cmd.wall()
         end,
         before_create_window = function(instance)
           if string.match(instance.mod, 'vert') == nil then
-            local height = vim.fn.winheight('.')
+            local height = vim.fn.winheight(0)
             g.neoterm_size = math.floor(height / 3)
           else
-            local width = vim.fn.winwidth('.')
+            local width = vim.fn.winwidth(0)
             g.neoterm_size = math.floor(width / 2)
           end
 
