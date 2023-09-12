@@ -10,7 +10,7 @@ while read -r plugin; do
   subtitle "${plugin}"
   err="$(asdf plugin add "${plugin}" 2>&1)" # Ensure to have the plugin installed
   err_code=$?
-  if [ $err_code -ne 2 ]; then
+  if [ $err_code -ne 0 ]; then
     printc -c 1 "    ${err}\n"
   fi
   asdf plugin update "${plugin}" >/dev/null
