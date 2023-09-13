@@ -85,14 +85,18 @@ M.copy_filename = function(cmd)
   M.to_clipboard(filename, cmd.bang)
 end
 
---- Syntax sugar for vim.notify
----@param msg string the message to notify
----@param title string (default = "")
----@param level number (default = 2)
-M.notify = function(msg, title, level)
-  level = level or vim.log.levels.INFO
-  title = title or ''
-  vim.notify(msg, level, { title = title })
+M.logger = function(base, sep)
+  sep = sep or ': '
+  local n = { title = base }
+
+  for name, level in pairs(vim.log.levels) do
+    n[string.lower(name)] = function(msg, title)
+      local full_title = table.concat(M.table.compact_list({ n.title, title }), sep)
+      vim.notify(msg, level, { title = full_title })
+    end
+  end
+
+  return n
 end
 
 return M

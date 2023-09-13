@@ -72,9 +72,10 @@ return {
   end,
   install = function()
     local utils = require('utils')
+    local log = utils.logger('lsp')
 
     for server, cmd in pairs(servers) do
-      utils.notify(cmd.install, 'lsp: installing ' .. server)
+      log.info(cmd.install, 'installing ' .. server)
 
       vim.system(utils.string.split(cmd.install, ' '), { text = true }, function(obj)
         local code = obj.code or 0
@@ -91,9 +92,9 @@ return {
         end
 
         if code == 0 and sign == 0 then
-          utils.notify(msg('Installed'), 'lsp: ' .. server)
+          log.info(msg('Installed'), server)
         else
-          utils.notify(msg('Failed'), 'lsp: ' .. server, vim.log.levels.ERROR)
+          log.error(msg('Failed'), server)
         end
       end)
     end

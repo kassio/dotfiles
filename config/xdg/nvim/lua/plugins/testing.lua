@@ -15,6 +15,7 @@ return {
     'TestStrategy',
   },
   config = function()
+    local log = require('utils').logger('testing')
     local neoterm_server_addr = vim.fs.joinpath(vim.fn.stdpath('cache'), 'neoterm_server.pipe')
 
     local neoterm_server = function(c)
@@ -28,9 +29,9 @@ return {
 
       vim.system(cmd, { text = true }, function(obj)
         if obj.code == 0 and obj.signal == 0 then
-          vim.notify(c, vim.log.levels.INFO, { title = 'Testing: Succeed' })
+          log.info(c, 'succeed')
         else
-          vim.notify(c, vim.log.levels.ERROR, { title = 'Testing: Failed' })
+          log.error(c, 'failed')
         end
       end)
     end
@@ -57,7 +58,7 @@ return {
 
       if strategy == 'neoterm_server' then
         if vim.fn.filereadable(neoterm_server_addr) == 0 then
-          vim.notify('Server not running!', vim.log.levels.WARN, { title = 'Testing' })
+          log.warn('open another neovim and run :NeotermServerStart', 'server not running!')
         else
           vim.g['test#strategy'] = strategy
           neoterm_server('cd ' .. vim.fn.getcwd(0))
@@ -66,7 +67,7 @@ return {
       elseif strategy == 'neoterm' then
         vim.g['test#strategy'] = strategy
       else
-        vim.notify('Unknown strategy: ' .. strategy, vim.log.levels.ERROR, { title = 'Testing' })
+        log.error('unknown strategy: ' .. strategy)
       end
     end, {
       nargs = '+',
