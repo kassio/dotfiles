@@ -38,7 +38,7 @@ end
 
 return {
   setup = function(wezterm)
-    wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
+    wezterm.on('format-tab-title', function(tab, _tabs, _panes, _config, _hover, _max_width)
       local title = table.concat({
         get_separator(tab),
         tab.tab_index + 1,
