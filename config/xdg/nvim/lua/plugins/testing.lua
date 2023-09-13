@@ -15,11 +15,11 @@ return {
     'TestStrategy',
   },
   config = function()
-    local terminal_server = function(c)
+    local neoterm_server = function(c)
       local cmd = {
         'nvim',
         '--server',
-        vim.env.NVIM_TERMINAL_SERVER_PIPE,
+        vim.env.NVIM_NEOTERM_SERVER,
         '--remote-send',
         string.format([[<C-\><C-N>:Tclear | T %s<CR>]], c),
       }
@@ -34,7 +34,7 @@ return {
     end
 
     vim.g['test#custom_strategies'] = {
-      terminal_server = terminal_server,
+      neoterm_server = neoterm_server,
       neoterm = function(cmd)
         vim.cmd('Tclear | T ' .. cmd)
       end,
@@ -53,13 +53,13 @@ return {
     vim.api.nvim_create_user_command('TestStrategy', function(c)
       local strategy = c.args
 
-      if strategy == 'terminal_server' then
-        if vim.fn.filereadable(vim.env.NVIM_TERMINAL_SERVER_PIPE) == 0 then
+      if strategy == 'neoterm_server' then
+        if vim.fn.filereadable(vim.env.NVIM_NEOTERM_SERVER) == 0 then
           vim.notify('Server not running!', vim.log.levels.WARN, { title = 'Testing' })
         else
           vim.g['test#strategy'] = strategy
-          terminal_server('cd ' .. vim.fn.getcwd(0))
-          terminal_server('clear')
+          neoterm_server('cd ' .. vim.fn.getcwd(0))
+          neoterm_server('clear')
         end
       elseif strategy == 'neoterm' then
         vim.g['test#strategy'] = strategy
@@ -69,7 +69,7 @@ return {
     end, {
       nargs = '+',
       complete = function()
-        return { 'neoterm', 'terminal_server' }
+        return { 'neoterm', 'neoterm_server' }
       end,
     })
   end,

@@ -43,6 +43,12 @@ return {
       count_nkeymap('<leader>tL', '{{target}}Tclear!', 'erase buffer')
       count_nkeymap('<leader>tk', '{{target}}Tkill', 'kill (send ctrl_c)')
 
+      vim.api.nvim_create_user_command('NeotermServerStart', function()
+        vim.fn.serverstart(vim.env.NVIM_NEOTERM_SERVER)
+        vim.cmd.Tnew()
+        vim.cmd.bwipeout()
+      end, {})
+
       g.neoterm_default_mod = 'botright'
       g.neoterm_automap_keys = ''
       g.neoterm_use_relative_path = 1

@@ -1,3 +1,3 @@
 #!/usr/bin/env zsh
 
-export NVIM_TERMINAL_SERVER_PIPE="${XDG_CACHE_HOME}/nvim/terminal_server.pipe"
+export NVIM_NEOTERM_SERVER="${XDG_CACHE_HOME}/nvim/neoterm_server.pipe"
