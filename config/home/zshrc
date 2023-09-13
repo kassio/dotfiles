@@ -103,7 +103,6 @@ source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
 export GSINK_CONFIG_PATH="${HOME}/.config/repos.json"
 
 # personal libs
-source "${XDG_CONFIG_HOME}/nvim/env"
 source "${XDG_CONFIG_HOME}/ripgrep/env"
 source "${XDG_CONFIG_HOME}/ruby/env"
 source "${XDG_CONFIG_HOME}/go/env"

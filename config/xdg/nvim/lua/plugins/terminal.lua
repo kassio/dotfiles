@@ -44,7 +44,7 @@ return {
       count_nkeymap('<leader>tk', '{{target}}Tkill', 'kill (send ctrl_c)')
 
       vim.api.nvim_create_user_command('NeotermServerStart', function()
-        vim.fn.serverstart(vim.env.NVIM_NEOTERM_SERVER)
+        vim.fn.serverstart(vim.fs.joinpath(vim.fn.stdpath('cache'), 'neoterm_server.pipe'))
         vim.cmd.Tnew()
         vim.cmd.bwipeout()
       end, {})

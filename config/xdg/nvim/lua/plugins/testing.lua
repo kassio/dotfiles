@@ -15,11 +15,13 @@ return {
     'TestStrategy',
   },
   config = function()
+    local neoterm_server_addr = vim.fs.joinpath(vim.fn.stdpath('cache'), 'neoterm_server.pipe')
+
     local neoterm_server = function(c)
       local cmd = {
         'nvim',
         '--server',
-        vim.env.NVIM_NEOTERM_SERVER,
+        neoterm_server_addr,
         '--remote-send',
         string.format([[<C-\><C-N>:Tclear | T %s<CR>]], c),
       }
@@ -54,7 +56,7 @@ return {
       local strategy = c.args
 
       if strategy == 'neoterm_server' then
-        if vim.fn.filereadable(vim.env.NVIM_NEOTERM_SERVER) == 0 then
+        if vim.fn.filereadable(neoterm_server_addr) == 0 then
           vim.notify('Server not running!', vim.log.levels.WARN, { title = 'Testing' })
         else
           vim.g['test#strategy'] = strategy

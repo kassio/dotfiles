@@ -1,3 +1,0 @@
-#!/usr/bin/env zsh
-
-export NVIM_NEOTERM_SERVER="${XDG_CACHE_HOME}/nvim/neoterm_server.pipe"
