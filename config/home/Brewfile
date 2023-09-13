@@ -60,7 +60,6 @@ brew "terminal-notifier"
 brew "tidy-html5"
 brew "tree"
 brew "tree-sitter"
-brew "vivid" # LS_COLORS generator
 brew "vscode-langservers-extracted"
 brew "watch"
 brew "wget"

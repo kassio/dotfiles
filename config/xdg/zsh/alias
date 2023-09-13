@@ -8,6 +8,7 @@ alias time="/usr/bin/time"
 
 alias sudo="sudo "
 
+alias ls="lsd"
 alias la="ls -lA"
 alias l="ls -A"
 
