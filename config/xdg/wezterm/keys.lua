@@ -10,6 +10,11 @@ return {
           win:maximize()
         end),
       },
+      {
+        key = 'n',
+        mods = 'SUPER|ALT',
+        action = wezterm.action.SpawnWindow,
+      },
       { -- Command palette
         key = 'p',
         mods = 'SUPER|SHIFT',
