@@ -1,10 +1,6 @@
 return {
   {
     'neovim/nvim-lspconfig',
-    dependencies = {
-      -- generic LSP for diagnostic, formatting, etc
-      'jose-elias-alvarez/null-ls.nvim',
-    },
     config = function()
       local lsp = vim.lsp
       local handlers = lsp.handlers
@@ -18,7 +14,6 @@ return {
       })
 
       require('plugins.lsp.servers').setup()
-      require('plugins.lsp.general').setup()
     end,
   },
 

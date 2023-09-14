@@ -18,7 +18,7 @@ return {
 
       todo.setup({
         keywords = {
-          DEPRECATED = { icon = '', color = 'warning' , alt = { "WARN" } },
+          DEPRECATED = { icon = '', color = 'warning', alt = { 'WARN' } },
         },
       })
 
