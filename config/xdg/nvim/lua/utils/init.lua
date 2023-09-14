@@ -42,7 +42,7 @@ copied to %s
   end
 
   fn.setreg(reg, text)
-  M.notify(string.format(fmt, text, msg))
+  vim.notify(string.format(fmt, text, msg))
 end
 
 --- Creates an autocommand group.
