@@ -80,26 +80,25 @@ return {
     for title, cmd in pairs(commands) do
       log.info(cmd.install, 'installing ' .. title)
 
-      vim.system(utils.string.split(cmd.install, ' '), { text = true }, function(obj)
-        local code = obj.code or 0
-        local sign = obj.sign or 0
-        local msg = function(head)
-          return table.concat(
-            utils.table.compact_list({
-              head,
-              obj.stdout,
-              obj.stderr,
-            }),
-            '\n'
-          )
-        end
+      local obj = vim.system(utils.string.split(cmd.install, ' '), { text = true }):wait()
+      local code = obj.code or 0
+      local sign = obj.sign or 0
+      local msg = function(head)
+        return table.concat(
+          utils.table.compact_list({
+            head,
+            obj.stdout,
+            obj.stderr,
+          }),
+          '\n'
+        )
+      end
 
-        if code == 0 and sign == 0 then
-          log.info(msg('Installed'), title)
-        else
-          log.error(msg('Failed'), title)
-        end
-      end):wait()
+      if code == 0 and sign == 0 then
+        log.info(msg('Installed'), title)
+      else
+        log.error(msg('Failed'), title)
+      end
     end
   end,
 }
