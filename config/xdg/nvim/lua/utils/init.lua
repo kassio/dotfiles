@@ -89,10 +89,17 @@ M.logger = function(base, sep)
   sep = sep or ': '
   local n = { title = base }
 
+  local notifier = vim.notify
+  if vim.tbl_isempty(vim.api.nvim_list_uis()) then
+    notifier = function(msg, level, opts)
+      vim.print(string.format('[%s][%s] %s', M.table.key_for(vim.log.levels, level), opts.title, msg))
+    end
+  end
+
   for name, level in pairs(vim.log.levels) do
     n[string.lower(name)] = function(msg, title)
       local full_title = table.concat(M.table.compact_list({ n.title, title }), sep)
-      vim.notify(msg, level, { title = full_title })
+      notifier(msg, level, { title = full_title })
     end
   end
 

@@ -11,47 +11,38 @@ local function config(server, defaults)
   return vim.tbl_deep_extend('force', defaults, cfg)
 end
 
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 local servers = {
   bashls = {
     install = 'brew install bash-language-server',
-    description = 'bash',
   },
   cssls = {
     install = 'brew install vscode-langservers-extracted',
-    description = 'css',
   },
   gopls = {
     install = 'go install golang.org/x/tools/gopls@latest',
-    description = 'go',
   },
   jsonls = {
     install = 'brew install vscode-langservers-extracted',
-    description = 'json',
   },
   jsonnet_ls = {
     install = 'go install github.com/grafana/jsonnet-language-server@latest',
-    description = 'jsonnet',
   },
   jqls = {
     install = 'go install github.com/wader/jq-lsp@master',
-    description = 'jq',
   },
   lua_ls = {
     install = 'brew instal lua-language-server',
-    description = 'lua',
+    config = require('plugins.lsp.servers.lua_ls'),
   },
   solargraph = {
     install = 'brew install solargraph',
-    description = 'ruby',
+    config = require('plugins.lsp.servers.solargraph'),
   },
   sqlls = {
     install = 'brew install sql-language-server',
-    description = 'sql',
   },
   yamlls = {
     install = 'brew install yaml-language-server',
-    description = 'yaml',
   },
 }
 
@@ -61,21 +52,33 @@ return {
       require('plugins.lsp.servers').install()
     end, {})
 
-    for server, _ in pairs(servers) do
+    for server, opts in pairs(servers) do
       local cfgs = config(server, {
         single_file_support = true,
         capabilities = capabilities,
       })
 
-      lspconfig[server].setup(cfgs)
+      lspconfig[server].setup(vim.tbl_deep_extend('force', cfgs, opts.config or {}))
     end
   end,
+
   install = function()
     local utils = require('utils')
     local log = utils.logger('lsp')
+    local commands = vim.tbl_deep_extend('keep', servers, {
+      ['shell linter'] = {
+        install = 'brew install shellcheck',
+      },
+      ['shell formatter'] = {
+        install = 'brew install shfmt',
+      },
+      ['html formatter'] = {
+        install = ' brew install tidy-html5',
+      },
+    })
 
-    for server, cmd in pairs(servers) do
-      log.info(cmd.install, 'installing ' .. server)
+    for title, cmd in pairs(commands) do
+      log.info(cmd.install, 'installing ' .. title)
 
       vim.system(utils.string.split(cmd.install, ' '), { text = true }, function(obj)
         local code = obj.code or 0
@@ -92,11 +95,11 @@ return {
         end
 
         if code == 0 and sign == 0 then
-          log.info(msg('Installed'), server)
+          log.info(msg('Installed'), title)
         else
-          log.error(msg('Failed'), server)
+          log.error(msg('Failed'), title)
         end
-      end)
+      end):wait()
     end
   end,
 }

@@ -67,4 +67,16 @@ function M.compact_list(tbl)
   end, tbl)
 end
 
+--- Returns the key associated with the given value
+---@param tbl table
+---@param value any
+---@return any
+function M.key_for(tbl, value)
+  for k, v in pairs(tbl) do
+    if v == value then
+      return k
+    end
+  end
+end
+
 return M
