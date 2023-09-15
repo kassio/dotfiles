@@ -75,6 +75,9 @@ return {
       ['html formatter'] = {
         install = ' brew install tidy-html5',
       },
+      ['editorconfig linter'] = {
+        install = 'brew install editorconfig-checker',
+      },
     })
 
     for title, cmd in pairs(commands) do
