@@ -1,13 +1,15 @@
-local util = require('lspconfig.util')
-local fn = vim.fn
-
 return {
-  root_dir = util.root_pattern('.stylua.toml'),
   settings = {
     Lua = {
-      telemetry = { enable = false, },
-      hint = { enable = true, },
-      format = { enabled = false, },
+      telemetry = { enable = false },
+      hint = { enable = true },
+      format = {
+        enable = true,
+        defaultConfig = {
+          indent_style = 'space',
+          indent_size = '2',
+        },
+      },
       diagnostics = {
         globals = {
           'vim',
@@ -20,8 +22,8 @@ return {
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = {
-          [fn.expand('$VIMRUNTIME/lua')] = true,
-          [fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+          [vim.fs.joinpath(vim.env.VIMRUNTIME, 'lua')] = true,
+          [vim.fs.joinpath(vim.env.VIMRUNTIME, 'lua', 'vim', 'lsp')] = true,
         },
       },
     },

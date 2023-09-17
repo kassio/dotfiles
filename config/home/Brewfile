@@ -5,6 +5,8 @@ tap "homebrew/services"
 brew "asdf"
 brew "bash"
 brew "bash-completion"
+brew "bash-language-server" # lsp server bash
+brew "vscode-langservers-extracted" # lsp server css/json/sql
 brew "bat" # cat replacement
 brew "coreutils"
 brew "dfu-programmer" # flash keyboard firmware
@@ -14,6 +16,8 @@ brew "docker"
 brew "docutils"
 brew "dpkg"
 brew "duti"
+brew "editorconfig-checker" # linter generic
+brew "efm-langserver" # lsp server generic
 brew "exiftool"
 brew "fd" # file finding
 brew "ffmpeg"
@@ -26,6 +30,7 @@ brew "git-lfs"
 brew "gitleaks"
 brew "gnupg"
 brew "golangci-lint"
+brew "golangci-lint" # linter go
 brew "gpgme"
 brew "graphicsmagick"
 brew "grep"
@@ -39,6 +44,8 @@ brew "libffi"
 brew "libiconv"
 brew "libyaml"
 brew "lsd" # ls replacement
+brew "lua-language-server" # lsp server lua
+brew "luacheck" # linter lua
 brew "luajit", args: ["HEAD"]
 brew "markdownlint-cli"
 brew "mas"
@@ -49,11 +56,15 @@ brew "readline"
 brew "rename"
 brew "ripgrep"
 brew "sd" # sed replacement
+brew "shellcheck" # linter sh
+brew "shfmt" # formatter sh
+brew "stylua" # formatter lua
 brew "terminal-notifier"
 brew "tree"
 brew "tree-sitter"
 brew "watch"
 brew "wget"
+brew "yaml-language-server" # lsp server yaml
 brew "youtube-dl"
 brew "yq"
 brew "zlib"
@@ -90,7 +101,6 @@ mas "Peek", id: 1554235898
 mas "Super Agent", id: 1568262835
 mas "Userscripts-Mac-App", id: 1463298887
 mas "Xcode", id: 497799835
-
 vscode "Catppuccin.catppuccin-vsc"
 vscode "GitLab.gitlab-workflow"
 vscode "Mebrahtom.plantumlpreviewer"

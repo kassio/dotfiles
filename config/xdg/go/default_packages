@@ -1,6 +1,10 @@
-github.com/mrtazz/checkmake/cmd/checkmake@latest
+go install golang.org/x/tools/gopls@latest // lsp server
 
-github.com/go-delve/delve/cmd/dlv@latest
+github.com/grafana/jsonnet-language-server@latest // lsp server jsonnet
+github.com/mrtazz/checkmake/cmd/checkmake@latest // linter makefile
+github.com/wader/jq-lsp@master // lsp server jq
+
+github.com/go-delve/delve/cmd/dlv@latest // debugger
 
 gitlab.com/kassio/lserver@latest
 gitlab.com/kassio/gsink@latest

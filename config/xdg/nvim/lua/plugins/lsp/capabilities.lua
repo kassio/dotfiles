@@ -12,6 +12,7 @@ completionItem.documentationFormat = {
   'markdown',
   'plaintext',
 }
+
 completionItem.resolveSupport = {
   properties = {
     'documentation',
@@ -19,6 +20,7 @@ completionItem.resolveSupport = {
     'additionalTextEdits',
   },
 }
+
 completionItem.tagSupport = {
   valueSet = { 1 },
 }

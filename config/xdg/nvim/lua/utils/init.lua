@@ -92,7 +92,9 @@ M.logger = function(base, sep)
   local notifier = vim.notify
   if vim.tbl_isempty(vim.api.nvim_list_uis()) then
     notifier = function(msg, level, opts)
-      vim.print(string.format('[%s][%s] %s', M.table.key_for(vim.log.levels, level), opts.title, msg))
+      vim.print(
+        string.format('[%s][%s] %s', M.table.key_for(vim.log.levels, level), opts.title, msg)
+      )
     end
   end
 
