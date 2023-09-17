@@ -1,3 +1,4 @@
 # vim:ft=zsh:
 
 export LUA_PATH="${HOME}/src/lua"
+export PATH="${PATH}:${HOME}/.luarocks/bin"
