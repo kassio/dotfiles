@@ -16,6 +16,22 @@ return {
     config = function()
       require('plugins.lsp.handlers').setup()
       require('plugins.lsp.servers').setup()
+
+      vim.api.nvim_create_autocmd({'BufWritePre'}, {
+        callback = function()
+          if not vim.bo.modifiable or vim.b.skip_autoformat == true then
+            return
+          end
+
+          local efm = vim.lsp.get_clients({ name = 'efm' })
+
+          if vim.tbl_isempty(efm) then
+            vim.lsp.buf.format()
+          else
+            vim.lsp.buf.format({ name = 'efm' })
+          end
+        end,
+      })
     end,
   },
 }

@@ -28,6 +28,6 @@ return {
     logLevel = vim.lsp.log_levels.INFO,
     logFile = vim.lsp.get_log_path(),
     languages = languages,
-    rootMarkers = { '.git/' }
+    rootMarkers = { '.git/' },
   },
 }

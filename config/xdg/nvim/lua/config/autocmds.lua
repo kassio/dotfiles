@@ -50,16 +50,6 @@ return {
         },
         command = 'checktime',
       },
-      { -- autoformat
-        events = 'BufWritePre',
-        callback = function()
-          if not vim.bo.modifiable or vim.b.skip_autoformat == true then
-            return
-          end
-
-          vim.lsp.buf.format({ async = false })
-        end,
-      },
       { -- autosave
         events = {
           'BufEnter',

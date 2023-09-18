@@ -3,13 +3,7 @@ return {
     Lua = {
       telemetry = { enable = false },
       hint = { enable = true },
-      format = {
-        enable = true,
-        defaultConfig = {
-          indent_style = 'space',
-          indent_size = '2',
-        },
-      },
+      format = { enable = false },
       diagnostics = {
         globals = {
           'vim',
