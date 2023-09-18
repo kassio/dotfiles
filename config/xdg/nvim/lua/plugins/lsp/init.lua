@@ -7,8 +7,8 @@ return {
     },
   },
 
-  { -- default configuration
-    'neovim/nvim-lspconfig',
+  {
+  'neovim/nvim-lspconfig',
     dependencies = {
       'creativenull/efmls-configs-nvim',
     },
@@ -33,6 +33,10 @@ return {
           single_file_support = true,
           capabilities = capabilities,
         })
+
+        if server == 'efm' then
+          vim.fn.writefile( vim.split(vim.inspect(config), '\n') , vim.lsp.get_log_path())
+        end
 
         lspconfig[server].setup(config)
       end
