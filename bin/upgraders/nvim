@@ -10,5 +10,4 @@ title "[nvim] update nvim"
 
 title "[nvim] update nvim plugins with lazy.nvim"
 nvim --headless "+Lazy! update" +qa
-nvim --headless "+LspInstall" +qa
 nvim --headless "+TSUpdateSync" +qa
