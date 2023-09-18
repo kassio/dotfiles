@@ -3,10 +3,9 @@ require('config.options')
 require('config.filetype')
 require('config.keymaps')
 require('config.commands')
-require('config.autocmds')
 require('config.signs')
 
-require('config.autotheme').setup()
+require('config.autocmds').setup()
 require('config.diagnostics').setup()
 
 -- community plugins

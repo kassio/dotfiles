@@ -108,4 +108,13 @@ M.logger = function(base, sep)
   return n
 end
 
+M.update_appearance = function()
+  local cmd = vim.system({ 'macos-appearance' }, { text = true }):wait()
+  local appearance = vim.trim(cmd.stdout) or 'light'
+
+  if vim.o.background ~= appearance then
+    vim.o.background = appearance
+  end
+end
+
 return M
