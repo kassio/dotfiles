@@ -133,6 +133,16 @@ return {
       },
       -- Scrollback
       {
+        key = 'UpArrow',
+        mods = 'SHIFT',
+        action = wezterm.action.ScrollByLine(-3),
+      },
+      {
+        key = 'DownArrow',
+        mods = 'SHIFT',
+        action = wezterm.action.ScrollByLine(3),
+      },
+      {
         key = 'k',
         mods = 'SUPER',
         action = wezterm.action.Multiple({
