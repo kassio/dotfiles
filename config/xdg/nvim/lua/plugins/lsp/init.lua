@@ -19,6 +19,8 @@ return {
       local capabilities = require('plugins.lsp.capabilities')
       local servers = require('plugins.lsp.servers')
 
+      lsp.set_log_level(lsp.log_levels.WARN)
+
       handlers['textDocument/hover'] = lsp.with(handlers.hover, {
         border = 'rounded',
       })
