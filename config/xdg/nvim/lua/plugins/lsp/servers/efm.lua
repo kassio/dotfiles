@@ -16,11 +16,6 @@ local languages = {
 
 return {
   filetypes = vim.tbl_keys(languages),
-  settings = {
-    logLevel = vim.lsp.log_levels.ERROR,
-    logFile = vim.lsp.get_log_path(),
-    languages = languages,
-  },
   init_options = {
     codeAction = true,
     completion = true,
@@ -28,5 +23,11 @@ return {
     documentRangeFormatting = true,
     documentSymbol = true,
     hover = true,
+  },
+  settings = {
+    logLevel = vim.lsp.log_levels.INFO,
+    logFile = vim.lsp.get_log_path(),
+    languages = languages,
+    rootMarkers = { '.git/' }
   },
 }
