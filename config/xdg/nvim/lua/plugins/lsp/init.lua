@@ -17,9 +17,10 @@ return {
       require('plugins.lsp.handlers').setup()
       require('plugins.lsp.servers').setup()
 
-      vim.api.nvim_create_autocmd({'BufWritePre'}, {
-        callback = function()
-          if not vim.bo.modifiable or vim.b.skip_autoformat == true then
+      vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+        group = vim.api.nvim_create_augroup('user:lsp', { clear = false }),
+        callback = function(args)
+          if not vim.bo[args.buf].modifiable or vim.b[args.buf].skip_autoformat == true then
             return
           end
 

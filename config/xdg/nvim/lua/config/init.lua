@@ -5,12 +5,16 @@ require('config.keymaps')
 require('config.commands')
 require('config.signs')
 
-require('config.autocmds').setup()
+require('config.ui').setup()
+require('config.focus').setup()
 require('config.diagnostics').setup()
-
--- community plugins
-require('config.plugins')
 
 -- inhouse plugins
 require('config.session')
 require('config.status')
+
+-- community plugins
+require('config.plugins')
+
+-- User Tick autocommand (1s ticker)
+require('config.ticker').setup()

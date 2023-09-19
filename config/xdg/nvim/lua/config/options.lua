@@ -8,6 +8,10 @@ g.maplocalleader = ' '
 -- fix markdown indentation settings
 g.markdown_recommended_style = 0
 
+-- don't use lastplace on:
+g.lastplace_ignore = 'gitcommit,gitrebase'
+g.lastplace_ignore_buftype = 'quickfix,nofile,help'
+
 opt.autowriteall = true
 opt.backup = false
 opt.cindent = true
