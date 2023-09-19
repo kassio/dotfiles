@@ -9,44 +9,44 @@ return {
     'kassio/neoterm',
     config = function()
       local g = vim.g
-      local keymap = vim.keymap.set
       local utils = require('utils')
+      local log = utils.logger('neoterm')
+      local neoterm_server_addr = vim.fs.joinpath(vim.fn.stdpath('cache'), 'neoterm_server.pipe')
 
-      local numbered_cmd = function(cmd)
-        local number = vim.v.count
-        if number == 0 then
-          number = vim.b.neoterm_target or ''
+      local keymap = function(key, command, desc)
+        vim.keymap.set('n', key, command, { desc = 'neoterm: ' .. desc })
+      end
+
+      keymap('<leader>te', '<cmd>T exit<cr>', 'exit')
+      keymap('<leader>tg', '<cmd>Tredo<cr>', 'redo')
+      keymap('<leader>th', '<cmd>botright Ttoggle<cr>', 'horizontal toggle')
+      keymap('<leader>tk', '<cmd>Tkill<cr>', 'kill (send ctrl_c)')
+      keymap('<leader>tl', '<cmd>T clear<cr>', 'clear')
+      keymap('<leader>tm', vim.fn['neoterm#map_do'], 'run command saved with Tmap')
+      keymap('<leader>tt', '<cmd>Ttoggle<cr>', 'toggle')
+      keymap('<leader>tv', '<cmd>botright vertical Ttoggle<cr>', 'vertical toggle')
+
+      vim.api.nvim_create_user_command('T', function(opts)
+        if vim.g.neoterm_server == true or vim.fn.filereadable(neoterm_server_addr) == 0 then
+          vim.fn['neoterm#do']({ cmd = opts.args })
+        else
+          local cmd = {
+            'nvim',
+            '--server',
+            neoterm_server_addr,
+            '--remote-send',
+            string.format([[<C-\><C-N>:T %s<CR>]], opts.args),
+          }
+
+          vim.system(cmd, { text = true }):wait()
         end
-
-        vim.cmd(string.gsub(cmd, '{{target}}', number))
-      end
-
-      local count_nkeymap = function(key, command, desc)
-        keymap('n', key, function()
-          numbered_cmd(command)
-        end, { desc = 'neoterm: ' .. desc })
-      end
-
-      keymap('n', '<leader>tg', ':Tredo<cr>', { desc = 'neoterm: redo' })
-      keymap(
-        'n',
-        '<leader>tm',
-        vim.fn['neoterm#map_do'],
-        { desc = 'neoterm: run command saved with Tmap' }
-      )
-
-      count_nkeymap('<leader>tt', '{{target}}Ttoggle', 'toggle')
-      count_nkeymap('<leader>tv', 'botright vertical {{target}} Ttoggle', 'vertical toggle')
-      count_nkeymap('<leader>th', 'botright {{target}} Ttoggle', 'horizontal toggle')
-      count_nkeymap('<leader>te', '{{target}}T exit', 'exit')
-      count_nkeymap('<leader>tl', '{{target}}Tclear', 'clear')
-      count_nkeymap('<leader>tL', '{{target}}Tclear!', 'erase buffer')
-      count_nkeymap('<leader>tk', '{{target}}Tkill', 'kill (send ctrl_c)')
+      end, { nargs = '+' })
 
       vim.api.nvim_create_user_command('NeotermServerStart', function()
-        vim.fn.serverstart(vim.fs.joinpath(vim.fn.stdpath('cache'), 'neoterm_server.pipe'))
+        vim.fn.serverstart(neoterm_server_addr)
         vim.cmd.Tnew()
         vim.cmd.bwipeout()
+        vim.g.neoterm_server = true
       end, {})
 
       g.neoterm_default_mod = 'botright'
