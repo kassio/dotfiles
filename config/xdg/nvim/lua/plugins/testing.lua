@@ -16,6 +16,7 @@ return {
   },
   config = function()
     local log = require('utils').logger('testing')
+    local strategies = { 'neoterm', 'neoterm_server' }
     local neoterm_server_addr = vim.fs.joinpath(vim.fn.stdpath('cache'), 'neoterm_server.pipe')
 
     local neoterm_server = function(c)
@@ -56,23 +57,28 @@ return {
     vim.api.nvim_create_user_command('TestStrategy', function(c)
       local strategy = c.args
 
+      if not vim.tbl_contains(strategies, strategy) then
+        log.error('unknown strategy: ' .. strategy)
+        return
+      end
+
       if strategy == 'neoterm_server' then
         if vim.fn.filereadable(neoterm_server_addr) == 0 then
           log.warn('open another neovim and run :NeotermServerStart', 'server not running!')
         else
           vim.g['test#strategy'] = strategy
+          vim.g['test#last_strategy'] = strategy
           neoterm_server('cd ' .. vim.fn.getcwd(0))
           neoterm_server('clear')
         end
-      elseif strategy == 'neoterm' then
+      elseif strategy('neoterm') then
         vim.g['test#strategy'] = strategy
-      else
-        log.error('unknown strategy: ' .. strategy)
+        vim.g['test#last_strategy'] = strategy
       end
     end, {
       nargs = '+',
       complete = function()
-        return { 'neoterm', 'neoterm_server' }
+        return strategies
       end,
     })
   end,
