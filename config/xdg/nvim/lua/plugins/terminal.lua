@@ -10,7 +10,6 @@ return {
     config = function()
       local g = vim.g
       local utils = require('utils')
-      local log = utils.logger('neoterm')
       local neoterm_server_addr = vim.fs.joinpath(vim.fn.stdpath('cache'), 'neoterm_server.pipe')
 
       local keymap = function(key, command, desc)
@@ -26,6 +25,15 @@ return {
       keymap('<leader>tt', '<cmd>Ttoggle<cr>', 'toggle')
       keymap('<leader>tv', '<cmd>botright vertical Ttoggle<cr>', 'vertical toggle')
 
+      vim.api.nvim_create_user_command('Tcd', function(opts)
+        local pwd = vim.fn.getcwd()
+        if #opts.args > 0 then
+          pwd = opts.args
+        end
+
+        vim.cmd.T('cd ' .. pwd)
+      end, { nargs = '?' })
+
       vim.api.nvim_create_user_command('T', function(opts)
         if vim.g.neoterm_server == true or vim.fn.filereadable(neoterm_server_addr) == 0 then
           vim.fn['neoterm#do']({ cmd = opts.args })
@@ -38,7 +46,7 @@ return {
             string.format([[<C-\><C-N>:T %s<CR>]], opts.args),
           }
 
-          vim.system(cmd, { text = true }):wait()
+          vim.system(cmd)
         end
       end, { nargs = '+' })
 
