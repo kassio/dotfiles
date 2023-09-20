@@ -9,6 +9,7 @@ fastri
 
 rubocop
 solargraph
+ruby_ls
 
 gitlab-development-kit
 gitlab-markup
