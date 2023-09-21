@@ -55,6 +55,11 @@ return {
             ['Info.Light'] = { fg = c.info_light },
             ['Hint.Light'] = { fg = c.hint_light },
 
+            -- diff base
+            ['@diff.removed'] = { fg = c.error },
+            ['@diff.changed'] = { fg = c.warn },
+            ['@diff.added'] = { fg = c.hint },
+
             -- Statusline mode highlight
             ['Statusline.Command'] = { fg = c.base, bg = c.hint },
             ['Statusline.Insert'] = { fg = c.base, bg = c.warn },
@@ -106,10 +111,14 @@ return {
             -- winbar
             ['WinBar'] = { bg = c.dim, fg = c.blue },
             ['WinBarNC'] = { bg = c.dim, fg = c.surface1 },
+            ['Winbar.Diff.Added'] = { bg = c.dim, fg = c.hint },
+            ['Winbar.Diff.Changed'] = { bg = c.dim, fg = c.warn },
+            ['Winbar.Diff.Removed'] = { bg = c.dim, fg = c.error },
             ['Winbar.Error'] = { bg = c.dim, fg = c.error },
-            ['Winbar.Warn'] = { bg = c.dim, fg = c.warn },
-            ['Winbar.Info'] = { bg = c.dim, fg = c.info },
             ['Winbar.Hint'] = { bg = c.dim, fg = c.hint },
+            ['Winbar.Info'] = { bg = c.dim, fg = c.info },
+            ['Winbar.Todo'] = { bg = c.dim, fg = c.info },
+            ['Winbar.Warn'] = { bg = c.dim, fg = c.warn },
 
             -- tabline
             ['TabLine'] = { bg = c.dim, fg = c.surface2 },
