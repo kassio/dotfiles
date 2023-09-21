@@ -21,7 +21,8 @@ vim.api.nvim_create_autocmd({ 'LspAttach' }, {
     keymap(bufnr, 'hover', 'n', 'K', lsp.buf.hover)
     keymap(bufnr, 'signature help', 'n', '<c-k>', lsp.buf.signature_help)
     keymap(bufnr, 'rename', 'n', 'grr', lsp.buf.rename)
-    keymap(bufnr, 'format (sync)', 'n', 'glf', lsp.buf.format)
+    keymap(bufnr, 'format (sync)', 'n', 'glf', '<cmd>LspFormat<cr>')
+    keymap(bufnr, 'format (sync)', 'n', '<leader>f=', '<cmd>LspFormat<cr>')
     keymap(bufnr, 'code actions', { 'n', 'v', 'x' }, 'gla', lsp.buf.code_action)
     keymap(bufnr, 'declarations', 'n', 'glD', lsp.buf.declaration)
 
