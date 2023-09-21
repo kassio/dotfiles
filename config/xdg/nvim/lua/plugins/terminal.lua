@@ -16,6 +16,26 @@ return {
         vim.keymap.set('n', key, command, { desc = 'neoterm: ' .. desc })
       end
 
+      local neoterm = function(cmdRemote, cmdLocal)
+        if vim.g.neoterm_server == true or vim.fn.filereadable(neoterm_server_addr) == 0 then
+          if cmdLocal ~= nil then
+            cmdLocal()
+          else
+            vim.fn['neoterm#do']({ cmd = cmdRemote })
+          end
+        else
+          local cmd = {
+            'nvim',
+            '--server',
+            neoterm_server_addr,
+            '--remote-send',
+            string.format([[<C-\><C-N>:T %s<CR>]], cmdRemote),
+          }
+
+          vim.system(cmd)
+        end
+      end
+
       keymap('<leader>te', '<cmd>T exit<cr>', 'exit')
       keymap('<leader>tg', '<cmd>Tredo<cr>', 'redo')
       keymap('<leader>th', '<cmd>botright Ttoggle<cr>', 'horizontal toggle')
@@ -24,6 +44,18 @@ return {
       keymap('<leader>tm', vim.fn['neoterm#map_do'], 'run command saved with Tmap')
       keymap('<leader>tt', '<cmd>Ttoggle<cr>', 'toggle')
       keymap('<leader>tv', '<cmd>botright vertical Ttoggle<cr>', 'vertical toggle')
+
+      keymap('<leader>tL', function()
+        neoterm('clear', function()
+          local bufnr = vim.g.neoterm.instances['1'].buffer_id
+          local original = vim.api.nvim_get_option_value('scrollback', { buf = bufnr })
+          vim.api.nvim_set_option_value('scrollback', 0, { buf = bufnr })
+          vim.uv.sleep(100)
+          vim.cmd.T('clear')
+          vim.uv.sleep(100)
+          vim.api.nvim_set_option_value('scrollback', original, { buf = bufnr })
+        end)
+      end, 'clear buffer')
 
       vim.api.nvim_create_user_command('Tcd', function(opts)
         local pwd = vim.fn.getcwd()
@@ -35,19 +67,7 @@ return {
       end, { nargs = '?' })
 
       vim.api.nvim_create_user_command('T', function(opts)
-        if vim.g.neoterm_server == true or vim.fn.filereadable(neoterm_server_addr) == 0 then
-          vim.fn['neoterm#do']({ cmd = opts.args })
-        else
-          local cmd = {
-            'nvim',
-            '--server',
-            neoterm_server_addr,
-            '--remote-send',
-            string.format([[<C-\><C-N>:T %s<CR>]], opts.args),
-          }
-
-          vim.system(cmd)
-        end
+        neoterm(opts.args)
       end, { nargs = '+' })
 
       vim.api.nvim_create_user_command('NeotermServerStart', function()
