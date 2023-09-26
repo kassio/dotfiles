@@ -129,16 +129,16 @@ winbar.default = function(bufnr, focused)
   )
 end
 
-winbar.neoterm = function()
-  return 'neoterm-' .. vim.b.neoterm_id
+winbar.neoterm = function(bufnr)
+  return string.format('%s neoterm-', bufnr, vim.b.neoterm_id)
 end
 
 winbar.help = function(bufnr)
-  return 'help: ' .. vim.fn.fnamemodify(get_filename(bufnr), ':t')
+  return string.format('%s help: ', bufnr, vim.fn.fnamemodify(get_filename(bufnr), ':t'))
 end
 
-winbar.NvimTree = function()
-  return 'NvimTree'
+winbar.NvimTree = function(bufnr)
+  return string.format('%s NvimTree', bufnr)
 end
 
 setmetatable(winbar, {
