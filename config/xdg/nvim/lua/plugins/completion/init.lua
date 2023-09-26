@@ -1,19 +1,19 @@
 return {
   'hrsh7th/nvim-cmp',
   dependencies = {
+    'bydlw98/cmp-env',
     'f3fora/cmp-spell',
     'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-omni',
     'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-nvim-lua',
+    'hrsh7th/cmp-omni',
     'hrsh7th/cmp-path',
-    'bydlw98/cmp-env',
     'ray-x/cmp-treesitter',
     -- snippets
-    'dcampos/nvim-snippy',
     'dcampos/cmp-snippy',
+    'dcampos/nvim-snippy',
   },
   config = function()
     local cmp = require('cmp')
