@@ -17,8 +17,7 @@ return {
   config = function()
     vim.g['test#custom_strategies'] = {
       neoterm = function(cmd)
-        vim.cmd.T('clear')
-        vim.cmd.T(cmd)
+        vim.cmd.T('clear && ' .. cmd)
       end,
     }
 
