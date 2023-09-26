@@ -130,7 +130,7 @@ winbar.default = function(bufnr, focused)
 end
 
 winbar.neoterm = function(bufnr)
-  return string.format('%s neoterm-', bufnr, vim.b.neoterm_id)
+  return string.format('%s neoterm-%s', bufnr, vim.b[bufnr].neoterm_id)
 end
 
 winbar.help = function(bufnr)
