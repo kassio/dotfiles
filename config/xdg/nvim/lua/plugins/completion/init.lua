@@ -3,6 +3,7 @@ return {
   dependencies = {
     'f3fora/cmp-spell',
     'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-omni',
     'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-nvim-lsp-signature-help',
@@ -54,6 +55,7 @@ return {
       },
 
       sources = cmp.config.sources({
+        { name = 'omni' },
         { name = 'nvim_lsp' },
         { name = 'nvim_lsp_signature_help' },
         { name = 'snippy' },
