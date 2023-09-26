@@ -9,7 +9,6 @@ return {
     'kassio/neoterm',
     config = function()
       local g = vim.g
-      local utils = require('utils')
       local neoterm_server_addr = vim.fs.joinpath(vim.fn.stdpath('cache'), 'neoterm_server.pipe')
 
       local keymap = function(key, command, desc)
@@ -97,21 +96,6 @@ return {
           return instance
         end,
       }
-
-      utils.augroup('user:terminal', {
-        {
-          events = { 'TermOpen' },
-          pattern = '*',
-          command = 'setlocal ' .. table.concat({
-            'nonumber',
-            'scrolloff=0',
-            'nospell',
-            'norelativenumber',
-            'nocursorline',
-            'bufhidden=hide',
-          }, ' '),
-        },
-      })
     end,
   },
 }
