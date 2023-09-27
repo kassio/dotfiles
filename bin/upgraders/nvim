@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-if [ "$1" = "--help" ]; then
-  echo "Upgrade nvim && plugins with lazy.nvim"
+if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
+  echo "[nvim] upgrade nvim, nvim plugins with lazy.nvim and treesitter"
   exit
 fi
 

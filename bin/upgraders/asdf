@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-if [ "$1" = "--help" ]; then
-  echo "Update all asdf plugins"
+if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
+  echo "[asdf] update all asdf plugins"
   exit
 fi
 

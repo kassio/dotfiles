@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-if [ "$1" = "--help" ]; then
-  echo "Remove quarentine from apps"
+if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
+  echo "[quarentine] remove quarentine from apps"
   exit
 fi
 

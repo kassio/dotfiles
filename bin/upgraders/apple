@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-if [ "$1" = "--help" ]; then
-  echo "Upgrade apple stuff (softwareupdate)"
+if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
+  echo "[apple] upgrade apple stuff (softwareupdate)"
   exit
 fi
 

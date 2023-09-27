@@ -1,5 +1,11 @@
 #!/usr/bin/env zsh
 
+if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
+  echo "[wezterm] update wezterm \$TERM"
+  exit
+fi
+
+title "[wezterm] updating wezterm \$TERM"
 tempfile=$(mktemp) \
   && curl -o $tempfile https://raw.githubusercontent.com/wez/wezterm/main/termwiz/data/wezterm.terminfo \
   && tic -x -o ~/.terminfo $tempfile \

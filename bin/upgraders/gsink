@@ -1,4 +1,9 @@
 #!/usr/bin/env zsh
 
+if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
+  echo "[gsink] update repositories"
+  exit
+fi
+
 title "[gsink] updating repositories"
 ~/src/go/src/gsink/bin/gsink

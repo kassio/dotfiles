@@ -4,17 +4,57 @@ basepath="$(dirname "$(realpath "$0")")"
 
 clear-screen
 
-"${basepath}/upgraders/gsink" "$@"
-"${basepath}/upgraders/apple" "$@"
-"${basepath}/upgraders/duti" "$@"
-"${basepath}/upgraders/brew" "$@"
-"${basepath}/upgraders/zsh_plugins" "$@"
-"${basepath}/upgraders/asdf" "$@"
-"${basepath}/upgraders/ruby" "$@"
-"${basepath}/upgraders/golang" "$@"
-"${basepath}/upgraders/quarentine" "$@"
-"${basepath}/upgraders/nvim" "$@"
-"${basepath}/upgraders/wezterm" "$@"
-"${basepath}/upgraders/custom" "$@"
+only=""
+except=""
+parse_args() {
+  case "${1}" in
+    --only)
+      shift
+      only="${1}"
+      shift
+      return
+      ;;
+    --except)
+      shift
+      except="${1}"
+      shift
+      ;;
+    *)
+      return
+  esac
+
+  parse_args "$@"
+}; parse_args "$@"
+
+upgrader() {
+  local cmd="${1}"; shift
+
+  if [[ "${except}" != *"${cmd}"* ]]; then
+    "${basepath}/upgraders/${cmd}" "$@"
+  fi
+}
+
+if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
+  echo 'Usage: upgrade [--only "<upgrader>"|--except "<upgrader1:upgrader2:upgrader3:...>"]'
+  echo 'List of upgraders:'
+  echo
+fi
+
+if [ "${only}" != "" ]; then
+  upgrader "${only}" "$@"
+else
+  upgrader "gsink" "$@"
+  upgrader "apple" "$@"
+  upgrader "duti" "$@"
+  upgrader "brew" "$@"
+  upgrader "zsh_plugins" "$@"
+  upgrader "asdf" "$@"
+  upgrader "ruby" "$@"
+  upgrader "golang" "$@"
+  upgrader "quarentine" "$@"
+  upgrader "nvim" "$@"
+  upgrader "wezterm" "$@"
+  upgrader "custom" "$@"
+fi
 
 notify "Upgraded"

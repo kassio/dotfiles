@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-if [ "$1" = "--help" ]; then
-  echo "update ruby gems"
+if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
+  echo "[ruby] update ruby gems"
   exit
 fi
 

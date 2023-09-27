@@ -1,5 +1,10 @@
 #!/usr/bin/env zsh
 
+if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
+  echo "[duti] update custom file associations"
+  exit
+fi
+
 title "[duti] custom file associations"
 
 local duticonfig="${HOME}/.dotfiles/config/duti"

@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-if [ "$1" = "--help" ]; then
-  echo "update golang packages"
+if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
+  echo "[golang] update golang packages"
   exit
 fi
 
