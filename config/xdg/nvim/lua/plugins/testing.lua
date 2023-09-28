@@ -16,12 +16,12 @@ return {
   },
   config = function()
     vim.g['test#custom_strategies'] = {
-      neoterm = function(cmd)
+      terminal = function(cmd)
         vim.cmd.T('clear && ' .. cmd)
       end,
     }
 
-    vim.g['test#strategy'] = 'neoterm'
+    vim.g['test#strategy'] = 'terminal'
     vim.g['test#go#gotest#executable'] = 'GOFLAGS="-count=1" go test -v'
 
     vim.api.nvim_create_user_command('TestCommand', function(c)
