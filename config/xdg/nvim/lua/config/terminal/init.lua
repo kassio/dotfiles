@@ -5,17 +5,7 @@ return {
     require('config.terminal.autocmds').setup(manager)
 
     vim.api.nvim_create_user_command('TerminalServerStart', function()
-      vim.g.terminal_server = true
-      vim.fn.serverstart(manager.server.addr)
-      manager.new({
-        after_open = function(termdata)
-          vim.cmd.only()
-        end,
-      })
-    end, {})
-
-    vim.api.nvim_create_user_command('Tdebug', function(opts)
-      vim.print(manager)
+      manager.server_start()
     end, {})
 
     vim.api.nvim_create_user_command('T', function(opts)
@@ -36,11 +26,15 @@ return {
     end)
 
     vim.keymap.set('n', '<leader>th', function()
-      manager.toggle({ position = 'horizontal', mod = 'botright' })
+      manager.toggle({ position = 'horizontal' })
     end)
 
     vim.keymap.set('n', '<leader>tv', function()
       manager.toggle({ position = 'vertical' })
+    end)
+
+    vim.keymap.set('n', '<leader>to', function()
+      manager.only()
     end)
 
     vim.keymap.set('n', '<leader>te', function()
@@ -49,6 +43,16 @@ return {
 
     vim.keymap.set('n', '<leader>tl', function()
       manager.send('clear')
+    end)
+
+    vim.keymap.set('n', '<leader>tL', function()
+      manager.send('clear')
+
+      pcall(function()
+        local original = vim.bo[manager.active.bufnr].scrollback
+        vim.bo[manager.active.bufnr].scrollback = 1
+        vim.bo[manager.active.bufnr].scrollback = original
+      end)
     end)
 
     vim.keymap.set('n', '<leader>tk', function()
