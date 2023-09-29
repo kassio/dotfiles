@@ -374,5 +374,7 @@ return {
         command = 'setlocal nonumber norelativenumber',
       },
     })
+
+    require('telescope').load_extension('refactoring')
   end,
 }
