@@ -17,12 +17,13 @@ return {
   config = function()
     vim.g['test#custom_strategies'] = {
       terminal = function(cmd)
-        vim.cmd.T('clear && ' .. cmd)
+        vim.cmd.T(cmd)
       end,
     }
 
     vim.g['test#strategy'] = 'terminal'
     vim.g['test#go#gotest#executable'] = 'GOFLAGS="-count=1" go test -v'
+    vim.g['test#ruby#use_binstubs'] = 0
 
     vim.api.nvim_create_user_command('TestCommand', function(c)
       vim.g['test#last_strategy'] = vim.g['test#strategy']
