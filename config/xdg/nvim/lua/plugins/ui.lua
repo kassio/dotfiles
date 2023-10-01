@@ -1,6 +1,5 @@
 return {
-  -- Custom dev icons
-  {
+  { -- Custom dev icons
     'nvim-tree/nvim-web-devicons',
     config = function()
       local devicons = require('nvim-web-devicons')
@@ -36,20 +35,12 @@ return {
     end,
   },
 
-  -- Highlight color strings
-  {
-    'NvChad/nvim-colorizer.lua',
-    config = true,
-  },
-
-  -- Prettier qf/loc windows
-  {
+  { -- Prettier qf/loc windows
     'yorickpeterse/nvim-pqf',
     config = true,
   },
 
-  -- notifications
-  {
+  { -- notifications
     'rcarriga/nvim-notify',
     config = function()
       local notify = require('notify')
@@ -86,8 +77,7 @@ return {
     end,
   },
 
-  -- vim.ui.input & vim.ui.select
-  {
+  { -- vim.ui.input & vim.ui.select
     'stevearc/dressing.nvim',
     config = function()
       require('dressing').setup({
