@@ -15,10 +15,6 @@
       "remote": "https://gitlab.com/kassio/kassio",
       "local": "$HOME/src/blog"
     },
-    "trip budget": {
-      "remote": "https://gitlab.com/tripbudget/tripbudget.gitlab.io",
-      "local": "$HOME/src/tripbudget"
-    },
     "gdk": {
       "remote": "https://gitlab.com/gitlab-org/gitlab-development-kit",
       "local": "$HOME/src/gdk"
