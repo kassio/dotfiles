@@ -17,7 +17,7 @@ return {
       require('plugins.lsp.handlers').setup()
       require('plugins.lsp.servers').setup()
       require('plugins.lsp.autoformat').setup()
-      require('plugins.lsp.keymap').setup()
+      require('plugins.lsp.keymaps').setup()
     end
   },
 }
