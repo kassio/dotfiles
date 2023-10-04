@@ -11,7 +11,7 @@ vim.api.nvim_create_user_command('GoAcceptance', function(c)
     cmd = string.format("GOFLAGS='-count=1' go test -v -run '%s' ./test/acceptance", c.args)
   end
 
-  vim.g['test#last_strategy'] = 'neoterm'
+  vim.g['test#last_strategy'] = 'terminal'
   vim.g['test#last_command'] = table.concat({ 'clear', 'make', cmd }, ' && ')
 
   vim.cmd.TestLast()
@@ -23,7 +23,7 @@ vim.api.nvim_create_user_command('GoTest', function(c)
     cmd = string.format("GOFLAGS='-count=1' go test -v -run '%s' ./...", c.args)
   end
 
-  vim.g['test#last_strategy'] = 'neoterm'
+  vim.g['test#last_strategy'] = 'terminal'
   vim.g['test#last_command'] = cmd
 
   vim.cmd.TestLast()

@@ -19,7 +19,7 @@ M.plugin_filetypes = {
   'cmp_menu',
   'fzf',
   'help',
-  'neoterm',
+  'terminal',
   'notify',
   'packer',
 }

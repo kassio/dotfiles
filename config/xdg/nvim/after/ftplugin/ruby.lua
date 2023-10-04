@@ -30,7 +30,7 @@ vim.api.nvim_create_user_command('RSpec', function(c)
     file = vim.fn.expand('%')
   end
 
-  vim.g['test#last_strategy'] = 'neoterm'
+  vim.g['test#last_strategy'] = 'terminal'
   vim.g['test#last_command'] = string.format('bundle exec rspec %s:%s:%s', file, lnum, col)
 
   vim.cmd.TestLast()
