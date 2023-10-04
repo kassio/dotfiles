@@ -118,5 +118,6 @@ source "${ZSH_CONFIG_HOME}/ulimit"
 source "${ZSH_CONFIG_HOME}/p10k.zsh" 2>/dev/null # zsh theme
 source "${ZSH_CONFIG_HOME}/plugins/init"
 source "${ZSH_CONFIG_HOME}/completions"
+source "${ZSH_CONFIG_HOME}/title"
 source "${HOME}/.env" 2>/dev/null # Ephemeral stuff
 source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff
