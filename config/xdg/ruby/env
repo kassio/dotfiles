@@ -3,6 +3,8 @@
 # Spring enabled by default
 export DISABLE_SPRING=0
 
+export ASDF_GEM_DEFAULT_PACKAGES_FILE="${XDG_CONFIG_HOME}/ruby/default-gems"
+
 # Global solargraph configs
 export SOLARGRAPH_GLOBAL_CONFIG="${XDG_CONFIG_HOME}/solargraph/solargraph.yml"
 
