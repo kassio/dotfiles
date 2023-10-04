@@ -1,16 +1,22 @@
 local M = {}
 
+local new_terminal_cmd = {
+  cmd = 'new',
+  mods = {
+    split = 'botright',
+    silent = true,
+  },
+}
+
 local function open_window(termdata)
-  local opened_from = { win = vim.api.nvim_get_current_win(), pos = vim.fn.getcurpos() }
-  local cmd = {
-    cmd = 'new',
-    mods = {
-      split = 'botright',
-      silent = true,
-      vertical = termdata.opts.position == 'vertical',
-      horizontal = termdata.opts.position ~= 'vertical',
-    },
+  local opened_from = {
+    win = vim.api.nvim_get_current_win(),
+    pos = vim.fn.getcurpos(),
   }
+  local cmd = vim.deepcopy(new_terminal_cmd)
+
+  cmd.mods.vertical = termdata.opts.position == 'vertical'
+  cmd.mods.horizontal = termdata.opts.position ~= 'vertical'
 
   if termdata.bufnr ~= nil then
     cmd.cmd = 'split'
@@ -19,14 +25,16 @@ local function open_window(termdata)
   vim.cmd(cmd)
 
   termdata.winid = vim.api.nvim_get_current_win()
-  if termdata.bufnr ~= nil then
+
+  if termdata.bufnr ~= nil then -- when re-opening a terminal
     vim.api.nvim_win_set_buf(termdata.winid, termdata.bufnr)
-  else
+  else -- when creating a new terminal
     termdata.bufnr = vim.api.nvim_get_current_buf()
     vim.bo[termdata.bufnr].filetype = 'terminal'
   end
 
-  pcall(function() -- return to original window
+  -- return to original window
+  pcall(function()
     vim.api.nvim_set_current_win(opened_from.win)
     vim.fn.setpos('.', opened_from.pos)
   end)
@@ -66,7 +74,10 @@ function M.toggle(termdata, opts)
   end
 
   if vim.fn.bufwinid(termdata.bufnr) > 0 then
-    vim.api.nvim_win_hide(termdata.winid)
+    vim.api.nvim_win_call(termdata.winid, function()
+      vim.cmd.hide()
+    end)
+
     return termdata
   end
 
