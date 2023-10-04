@@ -12,7 +12,7 @@ export CDPATH="${CDPATH}:${GOPATH}/src"
 export GOTESTSUM_FORMAT="dots"
 
 # Default GO packages
-export ASDF_GOLANG_DEFAULT_PACKAGES_FILE="${HOME}/.config/go/default-packages"
+export ASDF_GOLANG_DEFAULT_PACKAGES_FILE="${XDG_CONFIG_HOME}/go/default-packages"
 
 # Allow asdf go to read go.mod/go.work
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
