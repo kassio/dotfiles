@@ -30,7 +30,6 @@ local function open_window(termdata)
     vim.api.nvim_win_set_buf(termdata.winid, termdata.bufnr)
   else -- when creating a new terminal
     termdata.bufnr = vim.api.nvim_get_current_buf()
-    vim.bo[termdata.bufnr].filetype = 'terminal'
   end
 
   -- return to original window

@@ -2,18 +2,10 @@ return {
   setup = function(manager)
     local group = vim.api.nvim_create_augroup('user:terminal', { clear = false })
 
-    vim.api.nvim_create_autocmd({ 'Filetype' }, {
-      pattern = 'Terminal',
+    vim.api.nvim_create_autocmd({ 'TermOpen' }, {
       group = group,
-      callback = function()
-        local opt = vim.opt_local
-
-        opt.bufhidden = 'hide'
-        opt.cursorline = false
-        opt.number = false
-        opt.relativenumber = false
-        opt.scrolloff = 0
-        opt.spell = false
+      callback = function(event)
+        vim.bo[event.buf].filetype = 'terminal'
       end,
     })
 

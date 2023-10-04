@@ -129,8 +129,8 @@ winbar.default = function(bufnr, focused)
   )
 end
 
-winbar.neoterm = function(bufnr)
-  return string.format('%s neoterm-%s', bufnr, vim.b[bufnr].neoterm_id)
+winbar.terminal = function(bufnr)
+  return string.format('%s %s', bufnr, vim.b[bufnr].term_title)
 end
 
 winbar.help = function(bufnr)
