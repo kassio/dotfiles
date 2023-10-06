@@ -11,6 +11,10 @@
       "remote": "https://github.com/kassio/sync",
       "local": "$HOME/src/sync"
     },
+    "gsink": {
+      "remote": "https://gitlab.com/kassio/gsink.git",
+      "local": "$HOME/src/go/src/gsink"
+    },
     "blog": {
       "remote": "https://gitlab.com/kassio/kassio",
       "local": "$HOME/src/blog"
