@@ -36,3 +36,5 @@ defaults write com.apple.finder NewWindowTarget -string "PfLo"
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}"
 # Prevent Photos from opening automatically when devices are plugged in
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -int 1
+# Disable slowmotion effects (when holding shift)
+defaults write com.apple.finder FXEnableSlowAnimation -bool false
