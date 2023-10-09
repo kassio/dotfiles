@@ -2,6 +2,14 @@
 
 source_file="nvim-macos.tar.gz"
 install_path="${HOME}/src/nvim-nighly"
+force=0
+
+case "$1" in
+  -f|--force)
+    force=1
+    shift
+  ;;
+esac
 
 install() {
   pushd "/tmp"
@@ -26,7 +34,7 @@ install() {
 if [ -f "${install_path}/bin/nvim" ]; then
   file_date="$(stat -t "%s" -f "%SB" "${install_path}/bin/nvim")"
   last_midnight="$(date -v "-$(date +"%H")H" +"%s")"
-  if [ "${file_date}" -gt "${last_midnight}" ]; then
+  if [ "${force}" -eq 0 ] && [ "${file_date}" -gt "${last_midnight}" ]; then
     echo "Already updated today"
     return
   fi
