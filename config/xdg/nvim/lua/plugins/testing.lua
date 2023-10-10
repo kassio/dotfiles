@@ -17,6 +17,7 @@ return {
   config = function()
     vim.g['test#custom_strategies'] = {
       terminal = function(cmd)
+        vim.g['test#last_command'] = cmd
         vim.cmd.T(cmd)
       end,
     }
