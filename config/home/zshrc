@@ -102,22 +102,23 @@ source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
 # repositories to keep synced locally
 export GSINK_CONFIG_PATH="${HOME}/.config/repos.json"
 
-# personal libs
+source "${XDG_CONFIG_HOME}/git/env"
+source "${XDG_CONFIG_HOME}/go/env"
 source "${XDG_CONFIG_HOME}/ripgrep/env"
 source "${XDG_CONFIG_HOME}/ruby/env"
-source "${XDG_CONFIG_HOME}/go/env"
-source "${XDG_CONFIG_HOME}/git/env"
-
-source "${ZSH_CONFIG_HOME}/bindkeys"
 source "${ZSH_CONFIG_HOME}/alias"
-source "${ZSH_CONFIG_HOME}/fzf"
-source "${ZSH_CONFIG_HOME}/lua"
 source "${ZSH_CONFIG_HOME}/autosuggest"
-source "${ZSH_CONFIG_HOME}/jq"
-source "${ZSH_CONFIG_HOME}/ulimit"
-source "${ZSH_CONFIG_HOME}/p10k.zsh" 2>/dev/null # zsh theme
-source "${ZSH_CONFIG_HOME}/plugins/init"
+source "${ZSH_CONFIG_HOME}/bindkeys"
 source "${ZSH_CONFIG_HOME}/completions"
+source "${ZSH_CONFIG_HOME}/fzf"
+source "${ZSH_CONFIG_HOME}/jq"
+source "${ZSH_CONFIG_HOME}/lua"
+source "${ZSH_CONFIG_HOME}/man"
 source "${ZSH_CONFIG_HOME}/title"
+source "${ZSH_CONFIG_HOME}/ulimit"
+
+source "${ZSH_CONFIG_HOME}/plugins/init"
+
+source "${ZSH_CONFIG_HOME}/p10k.zsh" 2>/dev/null # zsh theme
 source "${HOME}/.env" 2>/dev/null # Ephemeral stuff
 source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff
