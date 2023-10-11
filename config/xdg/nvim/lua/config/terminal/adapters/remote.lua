@@ -34,7 +34,7 @@ function M.send(addr, str)
 end
 
 function M.keycode(addr, str)
-  with_terminal(addr, 'send', str)
+  with_terminal(addr, 'keycode', str)
 end
 
 return M
