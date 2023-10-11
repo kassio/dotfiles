@@ -95,21 +95,21 @@ function M.only(termdata)
   return termdata
 end
 
-function M.send(termdata, str)
+function M.kill(termdata)
   termdata = termdata or new_terminal()
 
   scroll_after(termdata, function()
-    vim.api.nvim_chan_send(termdata.id, str .. '\n')
+    vim.api.nvim_chan_send(termdata.id, vim.keycode('<c-c>'))
   end)
 
   return termdata
 end
 
-function M.keycode(termdata, str)
+function M.send(termdata, str)
   termdata = termdata or new_terminal()
 
   scroll_after(termdata, function()
-    vim.api.nvim_chan_send(termdata.id, vim.keycode(str))
+    vim.api.nvim_chan_send(termdata.id, str .. '\n')
   end)
 
   return termdata

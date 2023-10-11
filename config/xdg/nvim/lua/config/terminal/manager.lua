@@ -30,12 +30,12 @@ function manager.only()
   manager.with_terminal('only')
 end
 
-function manager.send(str)
-  manager.with_terminal('send', str)
+function manager.kill()
+  manager.with_terminal('kill')
 end
 
-function manager.keycode(str)
-  manager.with_terminal('keycode', str)
+function manager.send(str)
+  manager.with_terminal('send', str)
 end
 
 function manager.server_start()

@@ -37,6 +37,10 @@ return {
       manager.only()
     end)
 
+    vim.keymap.set('n', '<leader>tk', function()
+      manager.kill()
+    end)
+
     vim.keymap.set('n', '<leader>te', function()
       manager.send('exit')
     end)
@@ -53,10 +57,6 @@ return {
         vim.bo[manager.active.bufnr].scrollback = 1
         vim.bo[manager.active.bufnr].scrollback = original
       end)
-    end)
-
-    vim.keymap.set('n', '<leader>tk', function()
-      manager.keycode('<c-c>')
     end)
   end,
 }

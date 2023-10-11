@@ -29,12 +29,12 @@ function M.only(addr)
   with_terminal(addr, 'only')
 end
 
-function M.send(addr, str)
-  with_terminal(addr, 'send', str)
+function M.kill(addr)
+  with_terminal(addr, 'kill')
 end
 
-function M.keycode(addr, str)
-  with_terminal(addr, 'keycode', str)
+function M.send(addr, str)
+  with_terminal(addr, 'send', str)
 end
 
 return M
