@@ -60,7 +60,7 @@ local function new_terminal(opts)
 end
 
 --- Toggle existing terminal window or create a new one
-function M.toggle(termdata, opts)
+function M.toggle(termdata, args)
   if termdata == nil then
     return new_terminal(opts)
   end
@@ -73,7 +73,8 @@ function M.toggle(termdata, opts)
     return termdata
   end
 
-  termdata.opts = vim.tbl_deep_extend('force', termdata.opts, opts or {})
+  local opts = args.opts or {}
+  termdata.opts = vim.tbl_deep_extend('force', termdata.opts, opts)
 
   return open_window(termdata)
 end
