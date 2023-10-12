@@ -41,13 +41,6 @@ local function open_window(termdata)
   return termdata
 end
 
-local function scroll_after(termdata, callback)
-  callback()
-  vim.api.nvim_buf_call(termdata.bufnr, function()
-    vim.cmd.normal('G')
-  end)
-end
-
 --- Create a new terminal window
 local function new_terminal(opts)
   local termdata = {
@@ -93,28 +86,23 @@ function M.only(termdata)
   return termdata
 end
 
-function M.kill(termdata)
-  scroll_after(termdata, function()
-    vim.api.nvim_chan_send(termdata.id, vim.keycode('<c-c>'))
-  end)
-
-  return termdata
-end
-
-function M.send(termdata, str)
-  scroll_after(termdata, function()
-    vim.api.nvim_chan_send(termdata.id, str .. '\n')
-  end)
-
-  return termdata
-end
-
-setmetatable(M, {
-  __call = function(native, termdata, cmd)
-    return native[cmd.fn](
-      termdata or new_terminal(),
-      cmd.args)
+function M.send(termdata, args)
+  local str = args.string
+  if not args.skip_break_line then
+    str = str .. '\n'
   end
-})
 
-return M
+  vim.api.nvim_chan_send(termdata.id, str)
+
+  vim.api.nvim_buf_call(termdata.bufnr, function()
+    vim.cmd.normal('G')
+  end)
+
+  return termdata
+end
+
+return setmetatable({}, {
+  __call = function(_, termdata, cmd)
+    return M[cmd.fn](termdata or new_terminal(), cmd.args)
+  end,
+})

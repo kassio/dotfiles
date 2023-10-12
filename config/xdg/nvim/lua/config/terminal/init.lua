@@ -22,7 +22,6 @@ return {
     end, { nargs = '?' })
 
     vim.keymap.set('n', '<leader>to', manager.only)
-    vim.keymap.set('n', '<leader>tk', manager.kill)
     vim.keymap.set('n', '<leader>tt', manager.toggle)
 
     vim.keymap.set('n', '<leader>th', function()
@@ -31,6 +30,10 @@ return {
 
     vim.keymap.set('n', '<leader>tv', function()
       manager.toggle({ position = 'vertical' })
+    end)
+
+    vim.keymap.set('n', '<leader>tk', function()
+      manager.send(vim.keycode('<c-c>'), true)
     end)
 
     vim.keymap.set('n', '<leader>te', function()
