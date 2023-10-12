@@ -86,8 +86,6 @@ function M.toggle(termdata, opts)
 end
 
 function M.only(termdata)
-  termdata = termdata or new_terminal()
-
   vim.api.nvim_win_call(termdata.winid, function()
     vim.cmd.only()
   end)
@@ -96,8 +94,6 @@ function M.only(termdata)
 end
 
 function M.kill(termdata)
-  termdata = termdata or new_terminal()
-
   scroll_after(termdata, function()
     vim.api.nvim_chan_send(termdata.id, vim.keycode('<c-c>'))
   end)
@@ -106,13 +102,19 @@ function M.kill(termdata)
 end
 
 function M.send(termdata, str)
-  termdata = termdata or new_terminal()
-
   scroll_after(termdata, function()
     vim.api.nvim_chan_send(termdata.id, str .. '\n')
   end)
 
   return termdata
 end
+
+setmetatable(M, {
+  __call = function(native, termdata, cmd)
+    return native[cmd.fn](
+      termdata or new_terminal(),
+      cmd.args)
+  end
+})
 
 return M

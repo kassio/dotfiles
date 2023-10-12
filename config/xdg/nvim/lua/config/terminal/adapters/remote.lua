@@ -1,40 +1,22 @@
-local M = {}
+local M = { addr = vim.fs.joinpath(vim.fn.stdpath('cache'), 'terminal_server.pipe') }
 
-local function cmd(fn, args)
-  local cmdstr = string.format([[require("config.terminal.manager").with_terminal('%s']], fn)
-  if args == nil then
-    cmdstr = cmdstr .. ')'
-  else
-    cmdstr = cmdstr .. string.format(", '%s')", args)
-  end
-
-  return string.format([[<C-\><C-N>:lua %s<CR>]], cmdstr)
+local function rpc(cmd)
+  return string.format(
+    [[<C-\><C-N>:lua require("config.terminal.manager").with_terminal(%s)<CR>]],
+    vim.inspect(cmd, { newline = '', indent = '' })
+  )
 end
 
-local function with_terminal(addr, fn, args)
-  vim.system({
-    'nvim',
-    '--server',
-    addr,
-    '--remote-send',
-    cmd(fn, args),
-  })
-end
-
-function M.toggle(addr)
-  M.only(addr)
-end
-
-function M.only(addr)
-  with_terminal(addr, 'only')
-end
-
-function M.kill(addr)
-  with_terminal(addr, 'kill')
-end
-
-function M.send(addr, str)
-  with_terminal(addr, 'send', str)
-end
+setmetatable(M, {
+  __call = function(remote, cmd)
+    vim.system({
+      'nvim',
+      '--server',
+      remote.addr,
+      '--remote-send',
+      rpc(cmd),
+    })
+  end,
+})
 
 return M
