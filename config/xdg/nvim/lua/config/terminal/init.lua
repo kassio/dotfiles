@@ -21,9 +21,9 @@ return {
       manager.send('cd ' .. pwd)
     end, { nargs = '?' })
 
-    vim.keymap.set('n', '<leader>tt', function()
-      manager.toggle()
-    end)
+    vim.keymap.set('n', '<leader>to', manager.only)
+    vim.keymap.set('n', '<leader>tk', manager.kill)
+    vim.keymap.set('n', '<leader>tt', manager.toggle)
 
     vim.keymap.set('n', '<leader>th', function()
       manager.toggle({ position = 'horizontal' })
@@ -31,14 +31,6 @@ return {
 
     vim.keymap.set('n', '<leader>tv', function()
       manager.toggle({ position = 'vertical' })
-    end)
-
-    vim.keymap.set('n', '<leader>to', function()
-      manager.only()
-    end)
-
-    vim.keymap.set('n', '<leader>tk', function()
-      manager.kill()
     end)
 
     vim.keymap.set('n', '<leader>te', function()
