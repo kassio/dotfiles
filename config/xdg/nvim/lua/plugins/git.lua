@@ -6,7 +6,6 @@ return {
     local command = vim.api.nvim_create_user_command
     local keymap = vim.keymap.set
     local utils = require('utils')
-    local cabbrev = utils.cabbrev
 
     local open = function(url)
       vim.ui.open(url)
@@ -150,12 +149,12 @@ return {
       git('add ' .. file)
     end, { desc = 'git: add diff to stage' })
 
-    cabbrev('Ga', 'GitWrite')
-    cabbrev('Gblame', 'GitBlame')
-    cabbrev('Gd', 'GitDiff')
-    cabbrev('Gdm', 'GitDiff main')
-    cabbrev('Grt', 'GitRestore')
-    cabbrev('Grt', 'GitRestore')
-    cabbrev('Gw', 'GitWrite')
+    vim.cmd.cabbrev('Ga GitWrite')
+    vim.cmd.cabbrev('Gblame GitBlame')
+    vim.cmd.cabbrev('Gd GitDiff')
+    vim.cmd.cabbrev('Gdm GitDiff main')
+    vim.cmd.cabbrev('Grt GitRestore')
+    vim.cmd.cabbrev('Grt GitRestore')
+    vim.cmd.cabbrev('Gw GitWrite')
   end,
 }

@@ -1,5 +1,28 @@
 vim.b.skip_autoformat = true
 
+-- Add rails standard(and gitlab) to the path for easy file jump
+vim.opt_local.path:append({
+  'app/channels',
+  'app/components',
+  'app/controllers',
+  'app/enums',
+  'app/events',
+  'app/experiments',
+  'app/finders',
+  'app/graphql',
+  'app/helpers',
+  'app/mailers',
+  'app/models',
+  'app/policies',
+  'app/presenters',
+  'app/serializers',
+  'app/services',
+  'app/uploaders',
+  'app/validators',
+  'app/workers',
+  'lib',
+})
+
 local utils = require('utils')
 
 local ruby_cmd = function(name, replacer)
@@ -35,30 +58,7 @@ vim.api.nvim_create_user_command('RSpec', function(c)
 
   vim.cmd.TestLast()
 end, { nargs = '?' })
-vim.cmd('cabbrev Rspec RSpec')
-
--- Add rails standard(and gitlab) to the path for easy file jump
-vim.opt_local.path:append({
-  'app/channels',
-  'app/components',
-  'app/controllers',
-  'app/enums',
-  'app/events',
-  'app/experiments',
-  'app/finders',
-  'app/graphql',
-  'app/helpers',
-  'app/mailers',
-  'app/models',
-  'app/policies',
-  'app/presenters',
-  'app/serializers',
-  'app/services',
-  'app/uploaders',
-  'app/validators',
-  'app/workers',
-  'lib',
-})
+vim.cmd.cabbrev('Rspec RSpec')
 
 -- Make # add/find/remove #{,} pairs
 require('nvim-surround').buffer_setup({

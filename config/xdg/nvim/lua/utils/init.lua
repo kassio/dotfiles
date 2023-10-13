@@ -57,10 +57,6 @@ M.augroup = function(name, autocmds)
   end
 end
 
-M.cabbrev = function(lhs, rhs)
-  vim.cmd.cabbrev(lhs .. ' ' .. rhs)
-end
-
 M.plugin_filetype = function(ft)
   return vim.tbl_contains(M.plugin_filetypes, ft or vim.bo.filetype)
 end
