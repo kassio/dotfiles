@@ -27,7 +27,7 @@ return {
   {
     '<leader>fd',
     function()
-      local word = tostring(vim.fn.expand('<cword>'))
+      local word = vim.fn.expand('<cfile>')
       word, _ = require('utils.string').snakecase(word)
 
       require('telescope.builtin').find_files({
