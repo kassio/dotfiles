@@ -41,7 +41,7 @@ local function open_window(termdata)
   return termdata
 end
 
---- Create a new terminal window
+---Create a new terminal window
 local function new_terminal(opts)
   local termdata = {
     opts = vim.tbl_deep_extend('keep', opts or {}, {
@@ -59,7 +59,7 @@ local function new_terminal(opts)
   return termdata
 end
 
---- Toggle existing terminal window or create a new one
+---Toggle existing terminal window or create a new one
 function M.toggle(termdata, args)
   if termdata == nil then
     return new_terminal(opts)
@@ -80,6 +80,8 @@ function M.toggle(termdata, args)
 end
 
 function M.only(termdata)
+  termdata = termdata or new_terminal()
+
   vim.api.nvim_win_call(termdata.winid, function()
     vim.cmd.only()
   end)
@@ -87,9 +89,14 @@ function M.only(termdata)
   return termdata
 end
 
+---Send the given string to the given terminal
+---@param termdata table the given terminal
+---@param args table { string = string, breakline = boolean }
 function M.send(termdata, args)
+  termdata = termdata or new_terminal()
+
   local str = args.string
-  if not args.skip_break_line then
+  if not args.breakline then
     str = str .. '\n'
   end
 
@@ -102,8 +109,10 @@ function M.send(termdata, args)
   return termdata
 end
 
-return setmetatable({}, {
-  __call = function(_, termdata, cmd)
-    return M[cmd.fn](termdata or new_terminal(), cmd.args)
-  end,
-})
+---Execute the given cmd on the given terminal
+--this function is a syntax-sugar to make the remote adapter simpler
+function M.cmd(termdata, cmd)
+  return M[cmd.fn](termdata, cmd.args)
+end
+
+return M

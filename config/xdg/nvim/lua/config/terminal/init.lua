@@ -33,7 +33,7 @@ return {
     end)
 
     vim.keymap.set('n', '<leader>tk', function()
-      manager.send(vim.keycode('<c-c>'), true)
+      manager.send(vim.keycode('<c-c>'), false)
     end)
 
     vim.keymap.set('n', '<leader>te', function()
