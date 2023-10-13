@@ -232,4 +232,3 @@ return {
     desc = 'telescope: rails (app, lib, spec)',
   },
 }
-

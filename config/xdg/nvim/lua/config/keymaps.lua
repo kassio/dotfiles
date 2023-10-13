@@ -127,15 +127,22 @@ keymap.set('n', '<leader>cf', function()
   vim.notify(deleted .. ' floating windows closed')
 end, { desc = 'close: floating windows' })
 
+local function openner(value)
+  if vim.regex([[^https\?://.*]]):match_str(value) ~= nil then
+    vim.ui.open(value)
+  else
+    vim.cmd.new(value)
+  end
+end
+
 keymap.set('n', 'gx', function()
-  vim.ui.open(fn.expand('<cfile>'))
-end, { silent = true, desc = 'open the URL under the cursor' })
+  openner(fn.expand('<cfile>', true))
+end, { silent = true, desc = 'open file or URL under the cursor' })
 
 keymap.set('x', 'gx', function()
   vim.cmd('normal! "vy')
-  local uri = fn.getreg('v')
-  vim.ui.open(string.gsub(uri, '%s', ''))
-end, { silent = true, desc = 'open the URL under the cursor' })
+  openner(string.gsub(fn.getreg('v'), '%s', ''))
+end, { silent = true, desc = 'open file or URL under the cursor' })
 
 keymap.set('n', '<leader>fs', function()
   local api = vim.api
