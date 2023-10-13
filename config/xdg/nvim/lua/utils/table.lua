@@ -10,7 +10,7 @@ if not M.pack then
   end
 end
 
---- Removes the given key from the table, returning its value.
+---Removes the given key from the table, returning its value.
 ---@param tbl table
 ---@param key any
 ---@return any
@@ -20,7 +20,7 @@ function M.removekey(tbl, key)
   return element
 end
 
---- Reduces the given table returning a new table with only the given key values.
+---Reduces the given table returning a new table with only the given key values.
 ---@param tbl table
 ---@param keys any[]
 ---@return table<any, any>
@@ -36,7 +36,7 @@ function M.slice(tbl, keys)
   return result
 end
 
---- Joins two list-like tables in a new list-like table
+---Joins two list-like tables in a new list-like table
 ---@param tbl1 table
 ---@param tbl2 table
 ---@return table<any>
@@ -49,7 +49,7 @@ function M.join_lists(tbl1, tbl2)
   return result
 end
 
---- Compacts the given list-like table, removing empty/0/false/nil values
+---Compacts the given list-like table, removing empty/0/false/nil values
 ---@param tbl table
 ---@return table<any>
 function M.compact_list(tbl)
@@ -67,7 +67,7 @@ function M.compact_list(tbl)
   end, tbl)
 end
 
---- Returns the key associated with the given value
+---Returns the key associated with the given value
 ---@param tbl table
 ---@param value any
 ---@return any
