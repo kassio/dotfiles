@@ -7,11 +7,11 @@ local function rpc(cmd)
   )
 end
 
-function M.execute(remote, cmd)
+function M.execute(cmd)
   vim.system({
     'nvim',
     '--server',
-    remote.addr,
+    M.addr,
     '--remote-send',
     rpc(cmd),
   })
