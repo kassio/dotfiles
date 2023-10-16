@@ -61,25 +61,22 @@ end
 
 ---Toggle existing terminal window or create a new one
 function M.toggle(termdata, opts)
-  if termdata == nil then
+  if termdata == nil then -- no active terminal
     return new_terminal(opts)
-  end
-
-  if vim.fn.bufwinid(termdata.bufnr) > 0 then
-    vim.api.nvim_win_call(termdata.winid, function()
-      vim.cmd.hide()
-    end)
+  elseif vim.tbl_get(termdata, 'winid') ~= nil then -- active & open terminal
+    M.cmd(termdata, { string = 'hide' })
+    termdata.winid = nil
 
     return termdata
+  else -- active & hidden terminal
+    termdata.opts = vim.tbl_deep_extend('force', termdata.opts or {}, opts)
+
+    return open_window(termdata)
   end
-
-  termdata.opts = vim.tbl_deep_extend('force', termdata.opts, opts)
-
-  return open_window(termdata)
 end
 
 function M.cmd(termdata, opts)
-  termdata = termdata or new_terminal()
+  termdata = termdata or new_terminal(opts)
 
   vim.api.nvim_win_call(termdata.winid, function()
     vim.cmd(opts.string)
@@ -101,9 +98,7 @@ function M.send(termdata, opts)
 
   vim.api.nvim_chan_send(termdata.id, str)
 
-  vim.api.nvim_buf_call(termdata.bufnr, function()
-    vim.cmd.normal('G')
-  end)
+  M.cmd(termdata, { string = 'normal G' })
 
   return termdata
 end
