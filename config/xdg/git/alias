@@ -28,11 +28,7 @@ gbd() {
     printf "%10s %s (%s)\n" \
       "$(g-main-diff ${branch})" \
       "${branch}" "$(g-upstream-diff ${branch})"
-  done < <(git branch-list | grep -v detached) |
-    column -ts ' ' |
-    fzf |
-    awk '{ print $2; }' |
-    xargs git switch 2> /dev/null
+  done < <(git branch-list | grep -v detached)
 }
 
 g-upstream-diff() {
@@ -66,7 +62,11 @@ grim() {
 
 gsw() {
   if [ $# -eq 0 ]; then
-    git branch | fzf | xargs git switch 2> /dev/null
+    gbd |
+      column -ts ' ' |
+      fzf |
+      awk '{ print $2; }' |
+      xargs git switch 2> /dev/null
   else
     git switch "$@"
   fi
