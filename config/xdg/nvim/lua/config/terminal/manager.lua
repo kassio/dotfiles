@@ -1,7 +1,7 @@
 local M = {
   active = nil,
   remote = require('config.terminal.adapters.remote'),
-  native = require('config.terminal.adapters.native')
+  native = require('config.terminal.adapters.native'),
 }
 
 ---Choose the right adapter to run the given function and arguments
@@ -47,7 +47,7 @@ function M.server_start()
   vim.fn.serverstart(M.remote.address)
   vim.g.terminal_server = true
 
-  M.active = M.native.only()
+  M.active = M.native.execute({ fn = 'only' })
 end
 
 return M
