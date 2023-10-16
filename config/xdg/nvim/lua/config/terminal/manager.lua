@@ -18,12 +18,12 @@ function M.with_terminal(cmd)
   end
 end
 
-function M.only()
-  M.with_terminal({ fn = 'only' })
-end
-
 function M.toggle(opts)
   M.with_terminal({ fn = 'toggle', opts = opts or {} })
+end
+
+function M.cmd(str)
+  M.with_terminal({ fn = 'cmd', opts = { string = str } })
 end
 
 ---Send command to the terminal
@@ -47,7 +47,7 @@ function M.server_start()
   vim.fn.serverstart(M.remote.address)
   vim.g.terminal_server = true
 
-  M.active = M.native.execute({ fn = 'only' })
+  M.active = M.native.execute({ fn = 'cmd', opts = { string = 'only' } })
 end
 
 return M

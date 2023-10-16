@@ -78,11 +78,11 @@ function M.toggle(termdata, opts)
   return open_window(termdata)
 end
 
-function M.only(termdata)
+function M.cmd(termdata, opts)
   termdata = termdata or new_terminal()
 
   vim.api.nvim_win_call(termdata.winid, function()
-    vim.cmd.only()
+    vim.cmd(opts.string)
   end)
 
   return termdata

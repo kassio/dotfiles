@@ -12,6 +12,10 @@ return {
       manager.send(opts.args)
     end, { nargs = '+' })
 
+    vim.api.nvim_create_user_command('Tcmd', function(opts)
+      manager.cmd(opts.args)
+    end, { nargs = '+' })
+
     vim.api.nvim_create_user_command('Tcd', function(opts)
       local pwd = vim.fn.getcwd()
       if #opts.args > 0 then
@@ -21,7 +25,10 @@ return {
       manager.send('cd ' .. pwd)
     end, { nargs = '?' })
 
-    vim.keymap.set('n', '<leader>to', manager.only)
+    vim.keymap.set('n', '<leader>to', function()
+      manager.cmd('only')
+    end)
+
     vim.keymap.set('n', '<leader>tt', manager.toggle)
 
     vim.keymap.set('n', '<leader>th', function()
