@@ -60,7 +60,7 @@ local function new_terminal(opts)
 end
 
 ---Toggle existing terminal window or create a new one
-function M.toggle(termdata, args)
+function M.toggle(termdata, opts)
   if termdata == nil then
     return new_terminal(opts)
   end
@@ -73,7 +73,6 @@ function M.toggle(termdata, args)
     return termdata
   end
 
-  local opts = args.opts or {}
   termdata.opts = vim.tbl_deep_extend('force', termdata.opts, opts)
 
   return open_window(termdata)
@@ -91,12 +90,12 @@ end
 
 ---Send the given string to the given terminal
 ---@param termdata table the given terminal
----@param args table { string = string, breakline = boolean }
-function M.send(termdata, args)
+---@param opts table { string = string, breakline = boolean }
+function M.send(termdata, opts)
   termdata = termdata or new_terminal()
 
-  local str = args.string
-  if not args.breakline then
+  local str = opts.string
+  if opts.breakline then
     str = str .. '\n'
   end
 
@@ -111,8 +110,8 @@ end
 
 ---Execute the given cmd on the given terminal
 --this function is a syntax-sugar to make the remote adapter simpler
-function M.cmd(termdata, cmd)
-  return M[cmd.fn](termdata, cmd.args)
+function M.execute(termdata, cmd)
+  return M[cmd.fn](termdata, cmd.opts)
 end
 
 return M

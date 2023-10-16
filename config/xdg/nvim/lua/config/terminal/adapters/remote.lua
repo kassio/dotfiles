@@ -7,16 +7,14 @@ local function rpc(cmd)
   )
 end
 
-setmetatable(M, {
-  __call = function(remote, cmd)
-    vim.system({
-      'nvim',
-      '--server',
-      remote.addr,
-      '--remote-send',
-      rpc(cmd),
-    })
-  end,
-})
+function M.execute(remote, cmd)
+  vim.system({
+    'nvim',
+    '--server',
+    remote.addr,
+    '--remote-send',
+    rpc(cmd),
+  })
+end
 
 return M

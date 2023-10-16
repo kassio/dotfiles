@@ -9,9 +9,9 @@ function manager.with_terminal(cmd)
     or vim.g.terminal_server == true -- this is the terminal server
     or manager.active ~= nil -- this neovim have a managed terminal
   then
-    manager.active = adapters.native.cmd(manager.active, cmd)
+    manager.active = adapters.native.execute(manager.active, cmd)
   else
-    adapters.remote(cmd)
+    adapters.remote.execute(cmd)
   end
 end
 
@@ -20,7 +20,7 @@ function manager.only()
 end
 
 function manager.toggle(opts)
-  manager.with_terminal({ fn = 'toggle', args = { opts = opts } })
+  manager.with_terminal({ fn = 'toggle', opts = opts or {} })
 end
 
 ---Send command to the terminal
@@ -33,7 +33,7 @@ function manager.send(str, breakline)
 
   manager.with_terminal({
     fn = 'send',
-    args = {
+    opts = {
       string = str,
       breakline = breakline,
     },
