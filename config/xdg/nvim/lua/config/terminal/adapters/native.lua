@@ -110,8 +110,8 @@ end
 
 ---Execute the given cmd on the given terminal
 --this function is a syntax-sugar to make the remote adapter simpler
-function M.execute(termdata, cmd)
-  return M[cmd.fn](termdata, cmd.opts)
+function M.execute(cmd)
+  return M[cmd.fn](cmd.termdata, cmd.opts)
 end
 
 return M

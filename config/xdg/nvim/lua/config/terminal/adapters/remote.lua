@@ -1,4 +1,13 @@
-local M = { addr = vim.fs.joinpath(vim.fn.stdpath('cache'), 'terminal_server.pipe') }
+local M = {}
+
+local function build_address()
+  local base = vim.fn.stdpath('cache')
+  if type(base) == 'table' then
+    base = base[1]
+  end
+
+  return vim.fs.joinpath(base, 'terminal_server.pipe')
+end
 
 local function rpc(cmd)
   return string.format(
@@ -7,11 +16,13 @@ local function rpc(cmd)
   )
 end
 
+M.address = build_address()
+
 function M.execute(cmd)
   vim.system({
     'nvim',
     '--server',
-    M.addr,
+    M.address,
     '--remote-send',
     rpc(cmd),
   })
