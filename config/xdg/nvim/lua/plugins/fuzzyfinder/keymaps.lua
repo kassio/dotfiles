@@ -27,8 +27,23 @@ return {
   {
     '<leader>fd',
     function()
-      local word = vim.fn.expand('<cfile>')
+      local word = vim.fn.expand('<cword>')
       word, _ = require('utils.string').snakecase(word)
+
+      require('telescope.builtin').find_files({
+        -- include hidden files
+        find_command = commands.find,
+        default_text = word,
+      })
+    end,
+    mode = { 'n', 'v' },
+    silent = true,
+    desc = 'telescope: find file: current word/selection in underscore',
+  },
+  {
+    '<leader>fx',
+    function()
+      local word = vim.fn.expand('<cfile>')
 
       require('telescope.builtin').find_files({
         -- include hidden files
