@@ -9,6 +9,13 @@ local new_terminal_cmd = {
 }
 
 local function open_window(termdata)
+  termdata = vim.tbl_deep_extend('keep', termdata or {}, {
+    opts = {
+      shell = vim.env.SHELL,
+      position = 'horizontal',
+    },
+  })
+
   local opened_from = {
     win = vim.api.nvim_get_current_win(),
     pos = vim.fn.getcurpos(),
@@ -24,11 +31,14 @@ local function open_window(termdata)
 
   vim.cmd(cmd)
 
-  termdata.winid = vim.api.nvim_get_current_win()
+  local winid = vim.api.nvim_get_current_win()
+  termdata.tabmap = vim.tbl_get(termdata, 'tabmap') or {}
+  termdata.tabmap[vim.api.nvim_get_current_tabpage()] = winid
 
   if termdata.bufnr ~= nil then -- when re-opening a terminal
-    vim.api.nvim_win_set_buf(termdata.winid, termdata.bufnr)
+    vim.api.nvim_win_set_buf(winid, termdata.bufnr)
   else -- when creating a new terminal
+    termdata.id = vim.fn.termopen(termdata.opts.shell)
     termdata.bufnr = vim.api.nvim_get_current_buf()
   end
 
@@ -41,46 +51,29 @@ local function open_window(termdata)
   return termdata
 end
 
----Create a new terminal window
-local function new_terminal(opts)
-  local termdata = {
-    opts = vim.tbl_deep_extend('keep', opts or {}, {
-      shell = vim.env.SHELL,
-      position = 'horizontal',
-    }),
-  }
-
-  termdata = open_window(termdata)
-
-  vim.api.nvim_win_call(termdata.winid, function()
-    termdata.id = vim.fn.termopen(termdata.opts.shell)
-  end)
-
-  return termdata
-end
-
 ---Toggle existing terminal window or create a new one
 function M.toggle(termdata, opts)
-  if termdata == nil then -- no active terminal
-    return new_terminal(opts)
-  elseif vim.tbl_get(termdata, 'winid') ~= nil then -- active & open terminal
+  termdata = termdata or {}
+  local tabpage = vim.api.nvim_get_current_tabpage()
+
+  if vim.tbl_get(termdata, 'tabmap', tabpage) == nil then -- active & hidden terminal
+    return open_window(vim.tbl_deep_extend('force', termdata, { opts = opts }))
+  else
     M.cmd(termdata, { string = 'hide' })
-    termdata.winid = nil
+    termdata.tabmap[tabpage] = nil
 
     return termdata
-  else -- active & hidden terminal
-    termdata.opts = vim.tbl_deep_extend('force', termdata.opts or {}, opts)
-
-    return open_window(termdata)
   end
 end
 
 function M.cmd(termdata, opts)
   termdata = termdata or new_terminal(opts)
 
-  vim.api.nvim_win_call(termdata.winid, function()
-    vim.cmd(opts.string)
-  end)
+  for _, winid in pairs(termdata.tabmap) do
+    vim.api.nvim_win_call(winid, function()
+      vim.cmd(opts.string)
+    end)
+  end
 
   return termdata
 end
