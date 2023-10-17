@@ -1,6 +1,6 @@
 local M = {}
 
-local new_terminal_cmd = {
+local default_terminal_cmd = {
   cmd = 'new',
   mods = {
     split = 'botright',
@@ -8,7 +8,7 @@ local new_terminal_cmd = {
   },
 }
 
-local function open_window(termdata)
+local function open_terminal_window(termdata)
   termdata = vim.tbl_deep_extend('keep', termdata or {}, {
     opts = {
       shell = vim.env.SHELL,
@@ -20,10 +20,12 @@ local function open_window(termdata)
     win = vim.api.nvim_get_current_win(),
     pos = vim.fn.getcurpos(),
   }
-  local cmd = vim.deepcopy(new_terminal_cmd)
-
-  cmd.mods.vertical = termdata.opts.position == 'vertical'
-  cmd.mods.horizontal = termdata.opts.position ~= 'vertical'
+  local cmd = vim.tbl_deep_extend('force', default_terminal_cmd, {
+    mods = {
+      vertical = termdata.opts.position == 'vertical',
+      horizontal = termdata.opts.position ~= 'vertical',
+    },
+  })
 
   if termdata.bufnr ~= nil then
     cmd.cmd = 'split'
@@ -57,7 +59,7 @@ function M.toggle(termdata, opts)
   local tabpage = vim.api.nvim_get_current_tabpage()
 
   if vim.tbl_get(termdata, 'tabmap', tabpage) == nil then -- active & hidden terminal
-    return open_window(vim.tbl_deep_extend('force', termdata, { opts = opts }))
+    return open_terminal_window(vim.tbl_deep_extend('force', termdata, { opts = opts }))
   else
     M.cmd(termdata, { string = 'hide' })
     termdata.tabmap[tabpage] = nil
@@ -67,7 +69,7 @@ function M.toggle(termdata, opts)
 end
 
 function M.cmd(termdata, opts)
-  termdata = termdata or new_terminal(opts)
+  termdata = termdata or open_terminal_window(opts)
 
   for _, winid in pairs(termdata.tabmap) do
     vim.api.nvim_win_call(winid, function()
@@ -82,7 +84,7 @@ end
 ---@param termdata table the given terminal
 ---@param opts table { string = string, breakline = boolean }
 function M.send(termdata, opts)
-  termdata = termdata or new_terminal()
+  termdata = termdata or open_terminal_window(opts)
 
   local str = opts.string
   if opts.breakline then
