@@ -12,6 +12,10 @@ return {
       manager.send(opts.args)
     end, { nargs = '+' })
 
+    vim.api.nvim_create_user_command('TDEBUG', function(opts)
+      vim.print(manager)
+    end, {})
+
     vim.api.nvim_create_user_command('Tcmd', function(opts)
       manager.cmd(opts.args)
     end, { nargs = '+' })

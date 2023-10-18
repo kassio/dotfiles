@@ -61,10 +61,15 @@ function M.toggle(termdata, opts)
   if vim.tbl_get(termdata, 'tabmap', tabpage) == nil then -- active & hidden terminal
     return open_terminal_window(vim.tbl_deep_extend('force', termdata, { opts = opts }))
   else
-    M.cmd(termdata, { string = 'hide' })
+    local ok, _ = pcall(M.cmd, termdata, { string = 'hide' })
     termdata.tabmap[tabpage] = nil
 
-    return termdata
+    if ok then
+      return termdata
+    end
+
+    termdata.bufnr = nil
+    return M.toggle(termdata)
   end
 end
 

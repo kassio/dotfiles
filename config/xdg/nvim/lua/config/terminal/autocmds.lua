@@ -11,9 +11,11 @@ return {
 
     vim.api.nvim_create_autocmd({ 'TermClose' }, {
       group = group,
-      callback = function(event)
-        vim.api.nvim_buf_delete(event.buf, { force = true })
-        manager.active = nil
+      callback = function()
+        pcall(function()
+          manager.cmd('quit!')
+          manager.active = nil
+        end)
       end,
     })
   end,
