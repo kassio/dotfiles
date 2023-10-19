@@ -9,7 +9,9 @@ return {
         severity = diagnostic.severity.ERROR,
         spacing = 8,
       },
-      underline = true,
+      underline = {
+        severity = diagnostic.severity.WARN,
+      },
       severity_sort = true,
       float = {
         focusable = false,
