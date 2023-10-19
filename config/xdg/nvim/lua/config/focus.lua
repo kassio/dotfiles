@@ -21,9 +21,7 @@ return {
     }, {
       group = group,
       callback = function()
-        if vim.bo.modifiable then
-          vim.cmd.wall({ bang = true })
-        end
+        pcall(vim.cmd, 'silent wall')
       end,
     })
 
