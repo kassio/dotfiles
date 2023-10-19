@@ -28,7 +28,7 @@ end
 
 ---Send command to the terminal
 ---@param str string string/command to send, can be a vim.keycode
----@param breakline boolean [default=true] send a breakline at the end of the given string
+---@param breakline boolean|nil [default=true] send a breakline at the end of the given string
 function M.send(str, breakline)
   if breakline == nil then
     breakline = true

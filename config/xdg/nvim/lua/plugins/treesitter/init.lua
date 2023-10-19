@@ -3,7 +3,6 @@ return {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     dependencies = {
-      'nvim-treesitter/nvim-treesitter-context',
       'nvim-treesitter/nvim-treesitter-refactor',
       'nvim-treesitter/nvim-treesitter-textobjects',
       'nvim-treesitter/playground',
@@ -18,7 +17,6 @@ return {
       -- Do not show the not visible matching context on statusline
       vim.g.matchup_matchparen_offscreen = {}
 
-      require('treesitter-context').setup()
       require('plugins.treesitter.config').setup()
     end,
   },

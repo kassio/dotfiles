@@ -34,3 +34,11 @@ arity
 autoreload
 statusline
 linters
+param
+tbl
+str
+CamelCase
+tbl1
+tbl2
+breakline
+termdata

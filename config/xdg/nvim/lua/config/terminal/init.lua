@@ -12,7 +12,7 @@ return {
       manager.send(opts.args)
     end, { nargs = '+' })
 
-    vim.api.nvim_create_user_command('TDEBUG', function(opts)
+    vim.api.nvim_create_user_command('TDEBUG', function()
       vim.print(manager)
     end, {})
 

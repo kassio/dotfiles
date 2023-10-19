@@ -29,7 +29,7 @@ end
 
 ---Trim spaces on both sides of the given string
 ---@param str string
----@param sep string (default = " ")
+---@param sep string|nil [default=" "]
 ---@return table
 function M.split(str, sep)
   local result = {}

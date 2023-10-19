@@ -36,6 +36,7 @@ vim.api.nvim_create_autocmd({ 'User' }, {
   callback = vim.cmd.redrawstatus,
 })
 
+opt.laststatus = 3 -- global statusline
 opt.statuscolumn = render('statuscolumn')
 opt.statusline = render('statusline')
 opt.tabline = render('tabline')
