@@ -19,34 +19,6 @@
       "remote": "https://gitlab.com/kassio/kassio",
       "local": "$HOME/src/blog"
     },
-    "gdk": {
-      "remote": "https://gitlab.com/gitlab-org/gitlab-development-kit",
-      "local": "$HOME/src/gdk"
-    },
-    "gitlab": {
-      "remote": "https://gitlab.com/gitlab-org/gitlab",
-      "local": "$HOME/src/gdk/gitlab"
-    },
-    "gitlab-pages": {
-      "remote": "https://gitlab.com/gitlab-org/gitlab-pages",
-      "local": "$HOME/src/gdk/gitlab-pages"
-    },
-    "gitlab runbooks": {
-      "remote": "https://gitlab.com/gitlab-com/runbooks.git",
-      "local": "$HOME/src/gdk/runbooks"
-    },
-    "triage ops": {
-      "remote": "https://gitlab.com/gitlab-org/quality/triage-ops.git",
-      "local": "$HOME/src/gdk/triage-ops"
-    },
-    "gitlab.vim": {
-      "remote": "https://gitlab.com/gitlab-org/editor-extensions/gitlab.vim.git",
-      "local": "$HOME/src/gdk/gitlab.vim"
-    },
-    "gitlab code suggestions lsp": {
-      "remote": "https://gitlab.com/gitlab-org/editor-extensions/experiments/gitlab-code-suggestions-language-server-experiment.git",
-      "local": "$HOME/src/gdk/code-suggestions-lsp"
-    },
     "gitlab xbar": {
       "remote": "https://gitlab.com/kassio/gitlab-xbar.git",
       "local": "$HOME/src/gdk/gitlab-xbar"
