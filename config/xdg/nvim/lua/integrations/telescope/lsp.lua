@@ -6,6 +6,11 @@ return {
     keymap(bufnr, 'workspace symbols', 'n', 'glS', telescope.lsp_dynamic_workspace_symbols)
 
     keymap(bufnr, 'definitions', 'n', 'gd', lsp.buf.definition)
+
+    keymap(bufnr, 'definitions', 'n', 'glt', function()
+      telescope.lsp_type_definitions({ jump_type = 'never' })
+    end)
+
     keymap(bufnr, 'definitions', 'n', 'gld', function()
       telescope.lsp_definitions({ jump_type = 'never' })
     end)
