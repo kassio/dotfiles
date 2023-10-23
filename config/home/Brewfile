@@ -6,7 +6,6 @@ brew "asdf"
 brew "bash"
 brew "bash-completion"
 brew "bash-language-server" # lsp server bash
-brew "vscode-langservers-extracted" # lsp server css/json/sql
 brew "bat" # cat replacement
 brew "coreutils"
 brew "dfu-programmer" # flash keyboard firmware
@@ -62,11 +61,12 @@ brew "stylua" # formatter lua
 brew "terminal-notifier"
 brew "tree"
 brew "tree-sitter"
+brew "vscode-langservers-extracted" # lsp server css/json/sql
 brew "watch"
 brew "wget"
 brew "yaml-language-server" # lsp server yaml
 brew "youtube-dl"
-brew "yq"
+brew "yq" # yaml jq
 brew "zlib"
 brew "zsh"
 cask "1password"
