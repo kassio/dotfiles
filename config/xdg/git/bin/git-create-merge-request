@@ -78,11 +78,9 @@ function parse_args() {
       git_options="${git_options} $*"
       ;;
   esac
-}
+}; parse_args "$@"
 
-parse_args "$@"
+git_options="$(printf '%s -o merge_request.title="%s"' "${git_options}" "${title}")"
 
-git_options="${git_options} -o merge_request.title='${title}'"
-command="git push -u ${git_options}"
-
-eval "${command}"
+set -x
+git push -u "${git_options}"
