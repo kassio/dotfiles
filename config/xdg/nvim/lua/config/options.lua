@@ -92,6 +92,7 @@ opt.showtabline = 2
 opt.signcolumn = 'yes'
 opt.smartcase = true
 opt.smartindent = true
+opt.smoothscroll = true
 opt.softtabstop = 2
 opt.spell = true
 opt.spelllang = 'en'
