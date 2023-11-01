@@ -66,23 +66,37 @@ return {
       on_attach = function(bufnr)
         local api = require('nvim-tree.api')
 
+        local function opts(desc)
+          return {
+            desc = 'nvim-tree: ' .. desc,
+            buffer = bufnr,
+            noremap = true,
+            silent = true,
+            nowait = true,
+          }
+        end
+
         api.config.mappings.default_on_attach(bufnr)
 
         vim.keymap.set('n', 'A', function()
           local winnr = vim.api.nvim_get_current_win()
           local width = vim.api.nvim_win_get_width(winnr)
           if width <= 32 then
-            vim.cmd('NvimTreeResize +50')
+            vim.cmd('NvimTreeResize +60')
           else
             vim.cmd('NvimTreeResize 32')
           end
-        end, {
-          desc = 'nvim-tree: toggle size',
-          buffer = bufnr,
-          noremap = true,
-          silent = true,
-          nowait = true,
-        })
+        end, opts('Toggle Expand Window'))
+
+        vim.keymap.set('n', 'D', function()
+          local node = api.tree.get_node_under_cursor()
+          local filename = node.absolute_path
+          local bufnr = vim.fn.bufnr(filename)
+
+          if bufnr > 0 then
+            vim.api.nvim_buf_delete(bufnr, { force = true })
+          end
+        end, opts('Delete Buffer'))
       end,
     })
   end,
