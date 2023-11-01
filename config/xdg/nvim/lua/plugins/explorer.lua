@@ -78,6 +78,9 @@ return {
 
         api.config.mappings.default_on_attach(bufnr)
 
+        vim.keymap.set('n', '<CR>', api.node.open.drop, opts('Open'))
+        vim.keymap.set('n', '<C-T>', api.node.open.tab_drop, opts('Open: Tab'))
+
         vim.keymap.set('n', 'A', function()
           local winnr = vim.api.nvim_get_current_win()
           local width = vim.api.nvim_win_get_width(winnr)
@@ -90,11 +93,10 @@ return {
 
         vim.keymap.set('n', 'D', function()
           local node = api.tree.get_node_under_cursor()
-          local filename = node.absolute_path
-          local bufnr = vim.fn.bufnr(filename)
+          local nodebuf = vim.fn.bufnr(node.absolute_path)
 
-          if bufnr > 0 then
-            vim.api.nvim_buf_delete(bufnr, { force = true })
+          if nodebuf > 0 then
+            vim.api.nvim_buf_delete(nodebuf, { force = true })
           end
         end, opts('Delete Buffer'))
       end,
