@@ -42,3 +42,5 @@ tbl1
 tbl2
 breakline
 termdata
+rubocop
+ModuleWithInstanceVariables
