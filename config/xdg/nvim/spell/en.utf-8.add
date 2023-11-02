@@ -44,3 +44,4 @@ breakline
 termdata
 rubocop
 ModuleWithInstanceVariables
+LSP
