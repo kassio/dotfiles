@@ -17,11 +17,12 @@ return {
         focusable = false,
         style = 'minimal',
         border = 'rounded',
-        source = 'always',
+        source = false,
         header = '',
+        suffix = '',
         prefix = '',
         format = function(value)
-          return string.format('%s [%s]\n%s', value.source, value.code, value.message)
+          return string.format('%s: %s', value.source, value.message)
         end,
       },
     })
