@@ -8,9 +8,7 @@ return {
         local bufnr = args.buf
         if utils.plugin_filetype(vim.bo[bufnr].filetype) then
           -- Ensure to not run LSP on plugin buffers
-          vim.cmd.LspStop()
-
-          return
+          return vim.cmd.LspStop()
         end
 
         local lsp = vim.lsp
