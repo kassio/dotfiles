@@ -53,7 +53,7 @@ nvim-diff() {
   diff-to "${ref}" | to-nvim
 }
 alias nd="nvim-diff"
-alias ndf="git diff --name-only --relative | to-nvim"
+ndm() { nvim-diff "$(git branch-main)..."; }
 
 rubocop-diff() {
   ref="$(git ref "$1")"
@@ -77,16 +77,13 @@ alias truncate0="truncate -c -s 0"
 
 source "${XDG_CONFIG_HOME}/git/alias"
 
-alias remove-quarentine-chromedriver="remove-quarentine chromedriver"
-
 # Tail a json file parsing it with jq
 #
 # Example:
 #    jtail log/importer.log 'del(.severity, .time, .correlation_id)'
 jtail() {
-  local file="$1"
   local cmd=""
-  shift
+  local file="$1"; shift
 
   if [ $# -gt 0 ]; then
     cmd="| $@"
