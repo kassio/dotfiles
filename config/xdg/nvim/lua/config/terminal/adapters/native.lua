@@ -8,6 +8,16 @@ local default_terminal_cmd = {
   },
 }
 
+local function get_size(tabpage, termdata)
+  local win = termdata.tabmap[tabpage]
+
+  if termdata.opts.position == 'vertical' then
+    return vim.api.nvim_win_get_width(win)
+  else
+    return vim.api.nvim_win_get_height(win)
+  end
+end
+
 local function open_terminal_window(termdata)
   termdata = vim.tbl_deep_extend('keep', termdata or {}, {
     opts = {
@@ -26,6 +36,10 @@ local function open_terminal_window(termdata)
       horizontal = termdata.opts.position ~= 'vertical',
     },
   })
+
+  if termdata.opts.size ~= nil then
+    cmd.range = { termdata.opts.size }
+  end
 
   if termdata.bufnr ~= nil then
     cmd.cmd = 'split'
@@ -54,20 +68,27 @@ local function open_terminal_window(termdata)
 end
 
 ---Toggle existing terminal window or create a new one
+---If a terminal exists but it's not open on the current tab,
+---opens the terminal in current tab
 function M.toggle(termdata, opts)
   termdata = termdata or {}
   local tabpage = vim.api.nvim_get_current_tabpage()
 
-  if vim.tbl_get(termdata, 'tabmap', tabpage) == nil then -- active & hidden terminal
+  -- active & hidden terminal
+  if vim.tbl_get(termdata, 'tabmap', tabpage) == nil then
     return open_terminal_window(vim.tbl_deep_extend('force', termdata, { opts = opts }))
   else
+    -- save terminal size to reopen in the same size
+    termdata.opts.size = get_size(tabpage, termdata)
     local ok, _ = pcall(M.cmd, termdata, { string = 'hide' })
     termdata.tabmap[tabpage] = nil
 
+    -- hide terminal
     if ok then
       return termdata
     end
 
+    -- terminal doesn't exist, retry to create a new one
     termdata.bufnr = nil
     return M.toggle(termdata)
   end
