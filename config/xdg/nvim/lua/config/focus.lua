@@ -21,9 +21,7 @@ return {
     }, {
       group = aug,
       callback = function()
-        pcall(function()
-          vim.cmd.silent('wall')
-        end)
+        vim.cmd.wall()
       end,
     })
 
