@@ -16,6 +16,6 @@ return {
     keymap(bufnr, 'code actions', { 'n', 'v', 'x' }, 'gla', lsp.buf.code_action)
     keymap(bufnr, 'declarations', 'n', 'glD', lsp.buf.declaration)
 
-    require('integrations.telescope.lsp').setup(lsp, bufnr, keymap)
+    require('plugins.fuzzyfinder.lsp').setup(lsp, bufnr, keymap)
   end,
 }
