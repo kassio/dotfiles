@@ -23,7 +23,7 @@ node_modules
 vendor/bundle
 vendor/ruby
 .solargraph.yml
-.ruby_console.local
+.console.local.rb
 *.rdb
 .GOPATH
 

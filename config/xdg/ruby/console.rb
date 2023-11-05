@@ -8,4 +8,4 @@ require "pp"
 load File.expand_path("extensions.rb", __dir__)
 # Avoid defining global functions to avoid confusion!!
 # Ideally, define a Kassio::Helper, module with the helper functions
-load ".ruby_console.local" if File.exist?(".ruby_console.local")
+load ".console.local.rb" if File.exist?(".console.local.rb")
