@@ -7,13 +7,11 @@ sudo xcodebuild -license accept
 basepath="$(dirname "$(realpath "$0")")"
 scripts="${basepath}/macos"
 
-# Hide unused default folders on finder
-chflags hidden "${HOME}/Music"
-chflags hidden "${HOME}/Movies"
-chflags hidden "${HOME}/Public"
-
 # Disable Resume system-wide
 defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -int 0
+
+# Automatically quit printer app once the print jobs complete
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
 for script in $(find "${scripts}" -type file -depth 1); do
   zsh "${script}"

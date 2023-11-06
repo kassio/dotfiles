@@ -1,0 +1,7 @@
+# vim:ft=sh:
+# Set computer name (as done via System Preferences → Sharing)
+compname="kassioborges"
+sudo scutil --set ComputerName "${compname}"
+sudo scutil --set HostName "${compname}"
+sudo scutil --set LocalHostName "${compname}"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "${compname}"
