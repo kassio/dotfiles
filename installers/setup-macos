@@ -7,6 +7,11 @@ sudo xcodebuild -license accept
 basepath="$(dirname "$(realpath "$0")")"
 scripts="${basepath}/macos"
 
+# Hide unused default folders on finder
+chflags hidden "${HOME}/Music"
+chflags hidden "${HOME}/Movies"
+chflags hidden "${HOME}/Public"
+
 # Disable Resume system-wide
 defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -int 0
 
