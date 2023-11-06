@@ -104,4 +104,20 @@ M.logger = function(base, sep)
   return n
 end
 
+--- Returns <cword> or selection
+---@return string|string[]
+M.cword = function()
+  if vim.fn.mode() == 'v' then
+    local former_value = vim.fn.getreg('v')
+    vim.cmd([[noautocmd silent normal "vy]])
+
+    local selection = vim.fn.getreg('v')
+    vim.fn.setreg('v', former_value)
+
+    return selection
+  else
+    return vim.fn.expand('<cword>')
+  end
+end
+
 return M

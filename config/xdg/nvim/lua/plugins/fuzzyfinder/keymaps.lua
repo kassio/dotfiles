@@ -18,16 +18,17 @@ return {
       require('telescope.builtin').find_files({
         -- include hidden files
         find_command = commands.find,
-        default_text = vim.fn.expand('<cword>'),
+        default_text = require('utils').cword(),
       })
     end,
     silent = true,
+    mode = { 'n', 'v' },
     desc = 'telescope: find files: current word/selection',
   },
   {
-    '<leader>fd',
+    '<leader>f_',
     function()
-      local word = vim.fn.expand('<cword>')
+      local word = require('utils').cword()
       word, _ = require('utils.string').snakecase(word)
 
       require('telescope.builtin').find_files({
@@ -36,23 +37,8 @@ return {
         default_text = word,
       })
     end,
-    mode = { 'n', 'v' },
     silent = true,
-    desc = 'telescope: find file: current word/selection in underscore',
-  },
-  {
-    '<leader>fx',
-    function()
-      local word = vim.fn.expand('<cfile>')
-
-      require('telescope.builtin').find_files({
-        -- include hidden files
-        find_command = commands.find,
-        default_text = word,
-      })
-    end,
     mode = { 'n', 'v' },
-    silent = true,
     desc = 'telescope: find file: current word/selection in underscore',
   },
   {
@@ -76,8 +62,8 @@ return {
     function()
       require('telescope.builtin').grep_string()
     end,
-    mode = { 'n', 'v' },
     silent = true,
+    mode = { 'n', 'v' },
     desc = 'telescope: grep word under cursor or selection',
   },
   {
@@ -100,10 +86,11 @@ return {
     '<leader>fH',
     function()
       require('telescope.builtin').help_tags({
-        default_text = vim.fn.expand('<cword>'),
+        default_text = require('utils').cword(),
       })
     end,
     silent = true,
+    mode = { 'n', 'v' },
     desc = 'telescope: help tags',
   },
   {
@@ -127,8 +114,8 @@ return {
     function()
       require('telescope.builtin').keymaps()
     end,
-    mode = { 'n', 'v' },
     silent = true,
+    mode = { 'n', 'v' },
     desc = 'telescope: keymaps',
   },
   {
@@ -143,20 +130,11 @@ return {
     '<leader>fN',
     function()
       require('telescope.builtin').current_buffer_fuzzy_find({
-        default_text = vim.fn.expand('<cword>'),
+        default_text = require('utils').cword(),
       })
     end,
     silent = true,
-    desc = 'telescope: current buffer finder',
-  },
-  {
-    '<leader>fi',
-    function()
-      require('telescope.builtin').current_buffer_fuzzy_find({
-        default_text = vim.fn.expand('<cword>'),
-      })
-    end,
-    silent = true,
+    mode = { 'n', 'v' },
     desc = 'telescope: find current word in current buffer',
   },
   {
@@ -180,8 +158,8 @@ return {
     function()
       require('telescope.builtin').commands()
     end,
-    mode = { 'n', 'v' },
     silent = true,
+    mode = { 'n', 'v' },
     desc = 'telescope: commands',
   },
   {

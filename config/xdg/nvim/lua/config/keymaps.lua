@@ -1,5 +1,6 @@
 local keymap = vim.keymap
 local fn = vim.fn
+local utils = require('utils')
 
 ------------------------------------------------------------
 -- Operation pending maps need to be passed as string
@@ -45,44 +46,30 @@ keymap.set('n', '9gt', '<cmd>tablast<cr>', { desc = 'move to the last tab' })
 
 keymap.set('v', '<leader>p', '"_dP', { desc = 'paste without replacing the " register' })
 
-keymap.set('n', '!', '"vyiw/<c-r>v<cr>N', { desc = 'search current word' })
-keymap.set('x', '!', '"vy/<c-r>v<cr>N', { desc = 'search current selection' })
+keymap.set({ 'n', 'x' }, '!', function()
+  local cword = utils.cword()
+  vim.fn.setreg('/', cword)
+  vim.api.nvim_feedkeys('nN', 'n', false)
+end, { desc = 'search current word' })
 
-keymap.set(
-  'n',
-  '<leader>!',
-  '"vyiw/\\c<c-r>v<cr>N',
-  { desc = 'search current word case insensitive' }
-)
-keymap.set(
-  'x',
-  '<leader>!',
-  '"vy/\\c<c-r>v<cr>N',
-  { desc = 'search current selection case insensitive' }
-)
+keymap.set({ 'n', 'x' }, '<leader>!', function()
+  local cword = utils.cword()
+  vim.fn.setreg('/', '\\c' .. cword)
+  vim.api.nvim_feedkeys('nN', 'n', false)
+end, { desc = 'search current word case insensitive' })
 
-keymap.set('n', 'g!', '"vyiw/\\<<c-r>v\\><cr>N', { desc = 'search current word exclusive' })
-keymap.set('x', 'g!', '"vy/\\<<c-r>v\\><cr>N', { desc = 'search current selection exclusive' })
-
-keymap.set(
-  'n',
-  '<leader>g!',
-  '"vyiw/\\c\\<<c-r>v\\><cr>N',
-  { desc = 'search current word case insensitive exclusive' }
-)
-keymap.set(
-  'x',
-  '<leader>g!',
-  '"vy/\\c\\<<c-r>v\\><cr>N',
-  { desc = 'search current selection case insensitive exclusive' }
-)
+keymap.set({ 'n', 'x' }, 'g!', function()
+  local cword = utils.cword()
+  vim.fn.setreg('/', '\\<' .. cword .. '\\>')
+  vim.api.nvim_feedkeys('nN', 'n', false)
+end, { desc = 'search current word exclusive' })
 
 keymap.set('n', '<leader>bd', '<cmd>bw!<cr>', { desc = 'delete current buffer' })
 keymap.set('n', '<leader>da', '<cmd>bufdo bw!<cr>', { desc = 'delete all buffers' })
 
 -- can be overwritten by lsp
 keymap.set('n', '<leader>f=', function()
-  require('utils.buffers').preserve(function()
+  utils.buffers.preserve(function()
     vim.cmd([[normal! gg=G]])
   end)
 end, { desc = 'indent current buffert text' })
@@ -127,33 +114,15 @@ keymap.set('n', '<leader>cf', function()
   vim.notify(deleted .. ' floating windows closed')
 end, { desc = 'close: floating windows' })
 
-local function openner(value)
-  if vim.regex([[^https\?://.*]]):match_str(value) ~= nil then
-    vim.ui.open(value)
-  else
-    vim.cmd.new(value)
-  end
-end
-
-keymap.set('n', 'gx', function()
-  openner(fn.expand('<cfile>', true))
-end, { silent = true, desc = 'open file or URL under the cursor' })
-
-keymap.set('x', 'gx', function()
-  vim.cmd('normal! "vy')
-  openner(string.gsub(fn.getreg('v'), '%s', ''))
-end, { silent = true, desc = 'open file or URL under the cursor' })
-
 keymap.set('n', '<leader>fs', function()
-  local api = vim.api
-  local tab_pages = api.nvim_list_tabpages()
+  local tab_pages = vim.api.nvim_list_tabpages()
 
   vim.ui.select(tab_pages, {
     prompt = 'Select your tab',
     format_item = function(item)
-      local winnr = api.nvim_tabpage_get_win(item)
-      local bufnr = api.nvim_win_get_buf(winnr)
-      local name = api.nvim_buf_get_name(bufnr)
+      local winnr = vim.api.nvim_tabpage_get_win(item)
+      local bufnr = vim.api.nvim_win_get_buf(winnr)
+      local name = vim.api.nvim_buf_get_name(bufnr)
 
       return vim.fn.fnamemodify(name, ':.')
     end,
