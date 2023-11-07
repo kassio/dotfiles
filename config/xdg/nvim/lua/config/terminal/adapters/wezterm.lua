@@ -15,7 +15,10 @@ function adapter.start(args)
   vim.g.wezterm = args
 end
 
-function adapter.can_execute()
+function adapter.can_execute(has_native)
+  if has_native ~= nil then
+    return false
+  end
   return vim.g.wezterm ~= nil or not vim.fn.empty(vim.g.wezterm)
 end
 

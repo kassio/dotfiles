@@ -50,6 +50,7 @@ return {
       manager.toggle({ position = 'vertical' })
     end)
 
+    -- send ctrl+c (kill)
     vim.keymap.set('n', '<leader>tk', function()
       manager.send(vim.keycode('<c-c>'), false)
     end)

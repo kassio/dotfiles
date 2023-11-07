@@ -9,19 +9,15 @@ local M = {
 
 ---Choose the right adapter to run the given function and arguments
 function M.with_terminal(cmd)
-  -- this neovim have a managed terminal
-  if M.active ~= nil then
-    cmd.termdata = M.active
-    M.active = M.native.execute(cmd)
-    return
-  end
-
   for _, adapter in ipairs(M.remote_adapters) do
-    if adapter.can_execute() then
+    if adapter.can_execute(M.active) then
       adapter.execute(cmd)
       return
     end
   end
+
+  cmd.termdata = M.active
+  M.active = M.native.execute(cmd)
 end
 
 function M.toggle(opts)

@@ -1,13 +1,5 @@
+local address = vim.fs.joinpath(vim.fn.stdpath('cache'), 'terminal_server.pipe')
 local M = { name = 'remote_neovim' }
-
-local function build_address()
-  local base = vim.fn.stdpath('cache')
-  if type(base) == 'table' then
-    base = base[1]
-  end
-
-  return vim.fs.joinpath(base, 'terminal_server.pipe')
-end
 
 local function rpc(cmd)
   return string.format(
@@ -16,10 +8,8 @@ local function rpc(cmd)
   )
 end
 
-M.address = build_address()
-
 function M.start()
-  vim.fn.serverstart(M.address)
+  vim.fn.serverstart(address)
   vim.g.terminal_server = true
 
   return require('config.terminal.adapters.native').execute({
@@ -28,15 +18,19 @@ function M.start()
   })
 end
 
-function M.can_execute()
-  return vim.fn.filereadable(M.address) == 1
+function M.can_execute(has_native)
+  if has_native ~= nil then
+    return false
+  end
+
+  return vim.fn.filereadable(address) == 1
 end
 
 function M.execute(cmd)
   vim.system({
     'nvim',
     '--server',
-    M.address,
+    address,
     '--remote-send',
     rpc(cmd),
   })
