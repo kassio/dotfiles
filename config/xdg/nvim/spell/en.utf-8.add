@@ -45,3 +45,4 @@ termdata
 rubocop
 ModuleWithInstanceVariables
 LSP
+module/!
