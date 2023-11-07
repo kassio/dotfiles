@@ -1,7 +1,12 @@
 local M = {}
 
+function send(value)
+  vim.system({ 'wts', vim.g.wezterm, value }):wait()
+end
+
 function M.send(opts)
-  vim.system({ 'wts', vim.g.wezterm, opts.string }):wait()
+  send(opts.string)
+  send(vim.keycode('<c-f7>'))
 end
 
 local adapter = { name = 'wezterm' }

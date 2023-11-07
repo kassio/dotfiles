@@ -40,6 +40,16 @@ return {
         mods = 'CMD|SHIFT',
         action = wezterm.action.CloseCurrentPane({ confirm = false }),
       },
+      { -- scroll to bottom
+        key = 'F7',
+        mods = 'CTRL',
+        action = wezterm.action.ScrollToBottom,
+      },
+      { -- scroll to top
+        key = 'F8',
+        mods = 'CTRL',
+        action = wezterm.action.ScrollToTop,
+      },
       -- Font resize
       {
         key = '0',
