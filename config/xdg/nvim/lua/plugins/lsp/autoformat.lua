@@ -1,7 +1,15 @@
+local utils = require('utils')
+
 return {
   setup = function()
     local function lsp_format(bufnr)
-      if not vim.bo[bufnr].modifiable or vim.b[bufnr].skip_autoformat == true then
+      local filetype = vim.bo[bufnr].filetype
+      if
+        not vim.bo[bufnr].modifiable
+        or filetype == ''
+        or utils.plugin_filetype(filetype)
+        or vim.b[bufnr].skip_autoformat == true
+      then
         return
       end
 

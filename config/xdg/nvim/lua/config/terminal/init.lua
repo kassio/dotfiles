@@ -5,8 +5,12 @@ return {
     require('config.terminal.autocmds').setup(manager)
 
     vim.api.nvim_create_user_command('TerminalServerStart', function()
-      manager.server_start()
+      manager.active = require('config.terminal.adapters.remote_neovim').start()
     end, {})
+
+    vim.api.nvim_create_user_command('TerminalWeztermPane', function(opts)
+      require('config.terminal.adapters.wezterm').start(opts.args)
+    end, { nargs = 1 })
 
     vim.api.nvim_create_user_command('T', function(opts)
       manager.send(opts.args)
@@ -16,10 +20,12 @@ return {
       vim.print(manager)
     end, {})
 
+    -- run nvim command
     vim.api.nvim_create_user_command('Tcmd', function(opts)
-      manager.cmd(opts.args)
+      manager.nvim_cmd(opts.args)
     end, { nargs = '+' })
 
+    -- Navigate terminal to the given path of current path of current buffer
     vim.api.nvim_create_user_command('Tcd', function(opts)
       local pwd = vim.fn.getcwd()
       if #opts.args > 0 then
@@ -29,8 +35,9 @@ return {
       manager.send('cd ' .. pwd)
     end, { nargs = '?' })
 
+    -- Set terminal as only buffer
     vim.keymap.set('n', '<leader>to', function()
-      manager.cmd('only')
+      manager.nvim_cmd('only')
     end)
 
     vim.keymap.set('n', '<leader>tt', manager.toggle)

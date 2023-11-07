@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+pane="$1"; shift
+echo "$*" | wezterm cli send-text --no-paste --pane-id "${pane}"

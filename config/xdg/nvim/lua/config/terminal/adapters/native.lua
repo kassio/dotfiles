@@ -80,7 +80,7 @@ function M.toggle(termdata, opts)
   else
     -- save terminal size to reopen in the same size
     termdata.opts.size = get_size(tabpage, termdata)
-    local ok, _ = pcall(M.cmd, termdata, { string = 'hide' })
+    local ok, _ = pcall(M.nvim_cmd, termdata, { string = 'hide' })
     termdata.tabmap[tabpage] = nil
 
     -- hide terminal
@@ -94,7 +94,7 @@ function M.toggle(termdata, opts)
   end
 end
 
-function M.cmd(termdata, opts)
+function M.nvim_cmd(termdata, opts)
   termdata = termdata or open_terminal_window(opts)
 
   for _, winid in pairs(termdata.tabmap) do
@@ -119,15 +119,23 @@ function M.send(termdata, opts)
 
   vim.api.nvim_chan_send(termdata.id, str)
 
-  M.cmd(termdata, { string = 'normal G' })
+  M.nvim_cmd(termdata, { string = 'normal G' })
 
   return termdata
 end
 
-return {
-  ---Execute the given cmd on the given terminal
-  --this function is a syntax-sugar to make the remote adapter simpler
-  execute = function(cmd)
-    return M[cmd.fn](cmd.termdata, cmd.opts)
-  end,
-}
+local adapter = { name = 'native' }
+
+---Execute the given cmd on the given terminal
+--this function is a syntax-sugar to make the remote adapter simpler
+function adapter.execute(cmd)
+  local fn = M[cmd.fn]
+  if fn == nil then
+    vim.print(string.format('[%s] %s not supported', adapter.name, cmd.fn))
+    return
+  end
+
+  return fn(cmd.termdata, cmd.opts)
+end
+
+return adapter

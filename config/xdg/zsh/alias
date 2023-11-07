@@ -1,8 +1,8 @@
 # vim:ft=zsh:
 
 alias n="nvim --listen ${XDG_CACHE_HOME}/nvim/$$${RANDOM}.pipe"
-alias nvim-terminal-server="nvim +TerminalServerStart"
-alias nts=nvim-terminal-server
+nts() { nvim -c "TerminalServerStart"; }
+ntw() { nvim -c "TerminalWeztermPane $1"; }
 
 alias time="/usr/bin/time"
 
