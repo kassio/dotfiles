@@ -15,10 +15,12 @@ return {
 
       local efm = vim.lsp.get_clients({ name = 'efm' })
 
-      if vim.tbl_isempty(efm) then
-        vim.lsp.buf.format()
-      else
+      if not vim.tbl_isempty(efm) then
         vim.lsp.buf.format({ name = 'efm' })
+      else
+        for _, client in ipairs(vim.lsp.get_clients()) do
+          vim.lsp.buf.format({ name = client.name })
+        end
       end
     end
 
