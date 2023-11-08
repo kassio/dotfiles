@@ -1,10 +1,11 @@
 local M = {}
 
-function send(value)
+local function send(value)
   vim.system({ 'wts', vim.g.wezterm, value }):wait()
 end
 
 function M.send(opts)
+  send(vim.keycode('<c-f7>'))
   send(opts.string)
   send(vim.keycode('<c-f7>'))
 end
