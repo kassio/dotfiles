@@ -101,19 +101,3 @@ mas "Peek", id: 1554235898
 mas "Super Agent", id: 1568262835
 mas "Userscripts-Mac-App", id: 1463298887
 mas "Xcode", id: 497799835
-vscode "Catppuccin.catppuccin-vsc"
-vscode "GitLab.gitlab-workflow"
-vscode "Mebrahtom.plantumlpreviewer"
-vscode "castwide.solargraph"
-vscode "cweijan.vscode-office"
-vscode "davidnussio.vscode-jq-playground"
-vscode "george-alisson.html-preview-vscode"
-vscode "golang.go"
-vscode "jq-syntax-highlighting.jq-syntax-highlighting"
-vscode "ms-vscode.vscode-typescript-next"
-vscode "ms-vsliveshare.vsliveshare"
-vscode "rebornix.ruby"
-vscode "sumneko.lua"
-vscode "vscodevim.vim"
-vscode "will-wow.vscode-alternate-file"
-vscode "wingrunr21.vscode-ruby"
