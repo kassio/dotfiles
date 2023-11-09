@@ -13,9 +13,9 @@ return {
       group = group,
       callback = function(event)
         if event.buf == vim.tbl_get(manager, 'active', 'bufnr') then
-          vim.cmd.bwipe(event.buf)
           manager.active = nil
         end
+        pcall(vim.cmd.bwipe, event.buf)
       end,
     })
   end,
