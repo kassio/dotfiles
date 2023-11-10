@@ -6,12 +6,12 @@ require('config.commands')
 require('config.signs')
 
 require('config.session')
-require('config.status')
 
-require('config.ui').setup()
-require('config.focus').setup()
 require('config.diagnostics').setup()
+require('config.focus').setup()
+require('config.status').setup()
 require('config.terminal').setup()
+require('config.ui').setup()
 
 -- plugins
 require('config.plugins')
