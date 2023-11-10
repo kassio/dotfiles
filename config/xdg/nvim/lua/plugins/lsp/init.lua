@@ -1,11 +1,5 @@
 return {
-  { -- Show LSP loading information
-    'j-hui/fidget.nvim',
-    tag = 'legacy',
-    opts = {
-      text = { spinner = 'dots' },
-    },
-  },
+  require('plugins.lsp.notifiation'),
 
   {
     'neovim/nvim-lspconfig',

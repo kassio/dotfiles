@@ -72,7 +72,7 @@ keymap.set('n', '<leader>f=', function()
   utils.buffers.preserve(function()
     vim.cmd([[normal! gg=G]])
   end)
-end, { desc = 'indent current buffert text' })
+end, { desc = 'format (sync)' })
 
 keymap.set('n', '<leader>bo', function() -- delete all buffers but current
   local current = vim.api.nvim_win_get_buf(0)
