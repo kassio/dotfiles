@@ -8,11 +8,17 @@ return {
       })
     end
 
+    local function buffer_format()
+      vim.cmd([[normal! gg=G]])
+      vim.cmd.LspFormat()
+    end
+
     keymap('hover', 'n', 'K', lsp.buf.hover)
     keymap('signature help', 'n', '<c-k>', lsp.buf.signature_help)
+    keymap('format (sync)', 'n', '<leader>f=', buffer_format)
+
     keymap('rename', 'n', 'grr', lsp.buf.rename)
-    keymap('format (sync)', 'n', 'glf', '<cmd>LspFormat<cr>')
-    keymap('format (sync)', 'n', '<leader>f=', '<cmd>LspFormat<cr>')
+
     keymap('code actions', { 'n', 'v', 'x' }, 'gla', lsp.buf.code_action)
     keymap('declarations', 'n', 'glD', lsp.buf.declaration)
 
