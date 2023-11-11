@@ -67,13 +67,6 @@ end, { desc = 'search current word exclusive' })
 keymap.set('n', '<leader>bd', '<cmd>bw!<cr>', { desc = 'delete current buffer' })
 keymap.set('n', '<leader>da', '<cmd>bufdo bw!<cr>', { desc = 'delete all buffers' })
 
--- can be overwritten by lsp
-keymap.set('n', '<leader>f=', function()
-  utils.buffers.preserve(function()
-    vim.cmd([[normal! gg=G]])
-  end)
-end, { desc = 'format (sync)' })
-
 keymap.set('n', '<leader>bo', function() -- delete all buffers but current
   local current = vim.api.nvim_win_get_buf(0)
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
@@ -83,7 +76,8 @@ keymap.set('n', '<leader>bo', function() -- delete all buffers but current
   end
 end, { desc = 'delete all buffers except current' })
 
-keymap.set('n', '<leader>ch', function() -- delete all hidden buffers
+-- close/delete all hidden buffers
+keymap.set('n', '<leader>ch', function()
   local deleted = 0
   for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
     if
@@ -100,20 +94,15 @@ keymap.set('n', '<leader>ch', function() -- delete all hidden buffers
   vim.notify(deleted .. ' unlisted buffers closed')
 end, { desc = 'close: hidden and unlisted buffers' })
 
-keymap.set('n', '<leader>cf', function()
-  local deleted = 0
-  for _, win in ipairs(vim.api.nvim_list_wins()) do
-    local ok, config = pcall(vim.api.nvim_win_get_config, win)
+-- format current buffer
+-- can be overwritten by lsp
+keymap.set('n', '<leader>f=', function()
+  utils.buffers.preserve(function()
+    vim.cmd([[normal! gg=G]])
+  end)
+end, { desc = 'format (sync)' })
 
-    if ok and config.relative ~= '' then
-      deleted = deleted + 1
-      vim.api.nvim_win_close(win, true)
-    end
-  end
-
-  vim.notify(deleted .. ' floating windows closed')
-end, { desc = 'close: floating windows' })
-
+-- fuzzy select tab by name
 keymap.set('n', '<leader>fs', function()
   local tab_pages = vim.api.nvim_list_tabpages()
 
@@ -127,6 +116,8 @@ keymap.set('n', '<leader>fs', function()
       return vim.fn.fnamemodify(name, ':.')
     end,
   }, function(choice)
-    vim.cmd.tabnext(vim.api.nvim_tabpage_get_number(choice))
+    if choice ~= nil then
+      vim.cmd.tabnext(vim.api.nvim_tabpage_get_number(choice))
+    end
   end)
 end, { silent = true, desc = 'fuzzy: tab selector' })

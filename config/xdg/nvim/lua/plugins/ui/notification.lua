@@ -15,8 +15,5 @@ return {
     })
 
     vim.notify = notify
-
-    -- Also used on lsp/notificaton
-    vim.keymap.set('n', '<leader>nn', notify.dismiss, { desc = 'notification: dismiss' })
   end,
 }
