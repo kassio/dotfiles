@@ -1,32 +1,24 @@
 local session = require('config.session.utils')
-local command = vim.api.nvim_create_user_command
-local keymap = vim.keymap
 
-command('SessionSave', session.save, {
-  desc = 'session: save',
-  nargs = '?',
-})
-keymap.set('n', '<leader>ss', session.save, {
-  desc = 'session: save',
-})
+local function defaults(desc, opts)
+  return vim.tbl_extend('force', { desc = 'session: ' .. desc }, opts or {})
+end
 
-command('SessionLoad', session.load, {
-  desc = 'session: load',
-})
-keymap.set('n', '<leader>sl', session.load, {
-  desc = 'session: load',
-})
+local function keymap_and_coammand(desc, cmd, key, fn, opts)
+  vim.api.nvim_create_user_command(cmd, fn, defaults(desc, opts))
+  vim.keymap.set('n', key, fn, defaults(desc))
+end
 
-command('SessionDestroy', session.destroy, {
-  desc = 'session: destroy',
-})
-keymap.set('n', '<leader>sd', session.destroy, {
-  desc = 'session: destroy',
-})
-
-command('SessionDestroyAll', session.destroy_all, {
-  desc = 'session: destroy all sessions',
-})
-keymap.set('n', '<leader>sD', session.destroy_all, {
-  desc = 'session: destroy all sessions',
-})
+return {
+  setup = function()
+    keymap_and_coammand('save', 'SessionSave', '<leader>ss', session.save, { nargs = '?' })
+    keymap_and_coammand('load', 'SessionLoad', '<leader>sl', session.load)
+    keymap_and_coammand('destry', 'SessionDestroy', '<leader>sd', session.destroy)
+    keymap_and_coammand(
+      'destroy all sessions',
+      'SessionDestroyAll',
+      '<leader>sD',
+      session.destroy_all
+    )
+  end,
+}
