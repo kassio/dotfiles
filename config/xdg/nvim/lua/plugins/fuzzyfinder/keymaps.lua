@@ -156,6 +156,15 @@ return {
   {
     '<leader>fm',
     function()
+      require('telescope.builtin').marks()
+    end,
+    silent = true,
+    mode = { 'n', 'v' },
+    desc = 'telescope: marks',
+  },
+  {
+    '<leader>fc',
+    function()
       require('telescope.builtin').commands()
     end,
     silent = true,
