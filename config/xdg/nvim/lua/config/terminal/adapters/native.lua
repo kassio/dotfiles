@@ -97,11 +97,13 @@ end
 function M.nvim_cmd(termdata, opts)
   termdata = termdata or open_terminal_window(opts)
 
-  for _, winid in pairs(termdata.tabmap) do
-    vim.api.nvim_win_call(winid, function()
-      vim.cmd(opts.string)
-    end)
+  if termdata.bufnr == nil then
+    return termdata
   end
+
+  pcall(vim.api.nvim_buf_call, termdata.bufnr, function()
+    vim.cmd(opts.string)
+  end)
 
   return termdata
 end
