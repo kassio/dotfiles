@@ -1,4 +1,5 @@
 return {
+  cmd = { vim.env.HOME .. '/src/go/bin/gopls' },
   settings = {
     gopls = {
       experimentalPostfixCompletions = true, -- experimental
