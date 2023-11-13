@@ -63,6 +63,14 @@ return {
       manager.send('clear')
     end)
 
+    vim.keymap.set('n', '<leader>tg', function()
+      manager.nvim_cmd('normal gg')
+    end)
+
+    vim.keymap.set('n', '<leader>tG', function()
+      manager.nvim_cmd('normal G')
+    end)
+
     vim.keymap.set('n', '<leader>tL', function()
       manager.send('clear')
 
