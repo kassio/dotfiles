@@ -1,13 +1,17 @@
-# frozen_string_literal: true
-
-class Object
-  def __local_methods
-    methods - self.class.superclass.instance_methods
-  end
-end
+# frozen_string_literal: true.execute
 
 module Kassio
   extend self
+
+  def load!
+    # Avoid defining global functions to avoid confusion!!
+    # Ideally, define a Kassio::Helper, module with the helper functions
+    load ".console.local.rb" if File.exist?(".console.local.rb")
+  end
+
+  def reload
+    load!
+  end
 
   def copy(obj)
     msg = obj.is_a?(String) ? obj : obj.inspect
@@ -23,19 +27,6 @@ module Kassio
     ActiveSupport::Deprecation.silenced = true
   end
 
-  def toggle_active_record_log!
-    return unless defined?(Rails)
-
-    current = ActiveRecord::Base.logger
-
-    if current != @__original_active_record_logger
-      ActiveRecord::Base.logger = @__original_active_record_logger
-      @__original_active_record_logger = current
-    end
-
-    ActiveRecord::Base.logger
-  end
-
   def enable_active_record_log!
     return unless defined?(Rails)
 
@@ -44,12 +35,6 @@ module Kassio
 
   def disable_active_record_log!
     return unless defined?(Rails)
-
-    current = ActiveRecord::Base.logger
-
-    if current != nil
-      @__original_active_record_logger = current
-    end
 
     ActiveRecord::Base.logger = nil
   end
