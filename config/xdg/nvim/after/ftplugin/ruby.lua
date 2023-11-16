@@ -40,7 +40,7 @@ ruby_cmd('ConvertHashStringKeyToSymbol', [[s/\(['"]\)\([^\1]\{-\}\)\1\s*\(=>\|:\
 -- { a: 1 } to { 'a' => 1 }
 ruby_cmd('ConvertHashSymbolKeyToString', [[s/\(\w\+\)\%(:\|\s*=>\)/'\1' =>]])
 -- let(:foo) { value } to foo = value
-ruby_cmd('LetToVar', [[s/let\%(\w\+\)\?(:\(\w\+\))\s*{\s*\(.\{-\}\)\s*}/\1 = \2]])
+ruby_cmd('LetToVar', [[s/\<let\%(!\|\w\+\)\?(:\(\w\+\))\s*{\s*\(.\{-\}\)\s*}/\1 = \2]])
 -- foo = value to let(:foo) { value }
 ruby_cmd('VarToLet', [[s/@\?\(\w\+\)\s*=\s*\(.*\)/let(:\1) { \2 }]])
 
