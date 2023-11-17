@@ -49,7 +49,7 @@ return {
     end
 
     local function get_filepath()
-      local roots = vim.fs.find('.git', { upward = true, stop = vim.uv.os_homedir() })
+      local roots = vim.fs.find('.git', { upward = true, stop = vim.env.HOME })
       local filepath = vim.fn.expand('%:p')
 
       return table.concat(
