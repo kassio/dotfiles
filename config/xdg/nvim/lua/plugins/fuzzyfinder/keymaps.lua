@@ -1,23 +1,14 @@
-local commands = require('plugins.fuzzyfinder.commands')
-
 return {
   {
     '<leader>ff',
-    function()
-      require('telescope.builtin').find_files({
-        -- include hidden files
-        find_command = commands.find,
-      })
-    end,
+    require('plugins.fuzzyfinder.commands').find_files,
     silent = true,
     desc = 'telescope: find files',
   },
   {
     '<leader>fF',
     function()
-      require('telescope.builtin').find_files({
-        -- include hidden files
-        find_command = commands.find,
+      require('plugins.fuzzyfinder.commands').find_files({
         default_text = require('utils').cword(),
       })
     end,
@@ -31,9 +22,7 @@ return {
       local word = require('utils').cword()
       word, _ = require('utils.string').snakecase(word)
 
-      require('telescope.builtin').find_files({
-        -- include hidden files
-        find_command = commands.find,
+      require('plugins.fuzzyfinder.commands').find_files({
         default_text = word,
       })
     end,
@@ -184,7 +173,7 @@ return {
     function()
       local main = vim.fn.system('git-branch-main')
 
-      require('telescope.builtin').find_files({
+      require('plugins.fuzzyfinder.commands').find_files({
         find_command = {
           'git',
           'diff',
@@ -201,7 +190,7 @@ return {
   {
     '<leader>fgd',
     function()
-      require('telescope.builtin').find_files({
+      require('plugins.fuzzyfinder.commands').find_files({
         find_command = { 'git', 'ls-files', '--modified' },
         prompt_title = 'git: modified files',
       })
@@ -211,25 +200,13 @@ return {
   },
   {
     '<leader>fr',
-    function()
-      require('telescope.builtin').find_files({
-        find_command = commands.find_ruby,
-        search_dirs = { 'app', 'lib', 'ee/app', 'ee/lib' },
-        prompt_title = 'rails (app, lib)',
-      })
-    end,
+    require('plugins.fuzzyfinder.commands').find_rails,
     silent = true,
     desc = 'telescope: rails (app, lib)',
   },
   {
     '<leader>fR',
-    function()
-      require('telescope.builtin').find_files({
-        find_command = commands.find_ruby,
-        search_dirs = { 'app', 'lib', 'spec', 'ee/app', 'ee/lib', 'ee/spec' },
-        prompt_title = 'rails (app, lib, spec)',
-      })
-    end,
+    require('plugins.fuzzyfinder.commands').find_rails_tests,
     silent = true,
     desc = 'telescope: rails (app, lib, spec)',
   },
