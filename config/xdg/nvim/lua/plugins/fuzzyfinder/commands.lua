@@ -52,4 +52,10 @@ function M.find_rails_tests(opts)
   }))
 end
 
-return M
+return setmetatable(M, {
+  __index = function(_table, key)
+    return function(opts)
+      require('telescope.builtin')[key](opts)
+    end
+  end,
+})

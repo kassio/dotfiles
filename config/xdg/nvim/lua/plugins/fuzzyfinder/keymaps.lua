@@ -32,25 +32,19 @@ return {
   },
   {
     '<leader>fp',
-    function()
-      require('telescope.builtin').resume()
-    end,
+    require('plugins.fuzzyfinder.commands').resume,
     silent = true,
     desc = 'telescope: resume fuzzyfinder',
   },
   {
     '<leader>fy',
-    function()
-      require('telescope.builtin').live_grep()
-    end,
+    require('plugins.fuzzyfinder.commands').live_grep,
     silent = true,
     desc = 'telescope: live grep',
   },
   {
     '<leader>fY',
-    function()
-      require('telescope.builtin').grep_string()
-    end,
+    require('plugins.fuzzyfinder.commands').grep_string,
     silent = true,
     mode = { 'n', 'v' },
     desc = 'telescope: grep word under cursor or selection',
@@ -65,9 +59,7 @@ return {
   },
   {
     '<leader>fh',
-    function()
-      require('telescope.builtin').help_tags()
-    end,
+    require('plugins.fuzzyfinder.commands').help_tags,
     silent = true,
     desc = 'telescope: help tags',
   },
@@ -84,34 +76,26 @@ return {
   },
   {
     '<leader>fb',
-    function()
-      require('telescope.builtin').buffers()
-    end,
+    require('plugins.fuzzyfinder.commands').buffers,
     silent = true,
     desc = 'telescope: buffers',
   },
   {
     '<leader>fl',
-    function()
-      require('telescope.builtin').highlights()
-    end,
+    require('plugins.fuzzyfinder.commands').highlights,
     silent = true,
     desc = 'telescope: highlights',
   },
   {
     '<leader>fk',
-    function()
-      require('telescope.builtin').keymaps()
-    end,
+    require('plugins.fuzzyfinder.commands').keymaps,
     silent = true,
     mode = { 'n', 'v' },
     desc = 'telescope: keymaps',
   },
   {
     '<leader>fn',
-    function()
-      require('telescope.builtin').current_buffer_fuzzy_find()
-    end,
+    require('plugins.fuzzyfinder.commands').current_buffer_fuzzy_find,
     silent = true,
     desc = 'telescope: current buffer finder',
   },
@@ -128,43 +112,33 @@ return {
   },
   {
     '<leader>fo',
-    function()
-      require('telescope.builtin').oldfiles()
-    end,
+    require('plugins.fuzzyfinder.commands').oldfiles,
     silent = true,
     desc = 'telescope: oldfiles',
   },
   {
     '<leader>ft',
-    function()
-      require('telescope.builtin').treesitter()
-    end,
+    require('plugins.fuzzyfinder.commands').treesitter,
     silent = true,
     desc = 'telescope: treesitter',
   },
   {
     '<leader>fm',
-    function()
-      require('telescope.builtin').marks()
-    end,
+    require('plugins.fuzzyfinder.commands').marks,
     silent = true,
     mode = { 'n', 'v' },
     desc = 'telescope: marks',
   },
   {
     '<leader>fc',
-    function()
-      require('telescope.builtin').commands()
-    end,
+    require('plugins.fuzzyfinder.commands').commands,
     silent = true,
     mode = { 'n', 'v' },
     desc = 'telescope: commands',
   },
   {
     '<leader>fgg',
-    function()
-      require('telescope.builtin').git_files()
-    end,
+    require('plugins.fuzzyfinder.commands').git_files,
     silent = true,
     desc = 'telescope: git files',
   },
