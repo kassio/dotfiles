@@ -34,16 +34,19 @@ function M.find_files(opts)
 end
 
 function M.find_rails(opts)
-  require('telescope.builtin').find_files(vim.tbl_deep_extend('keep', opts or {}, {
-    find_command = find_command_rails,
-    search_dirs = { 'app', 'lib', 'ee/app', 'ee/lib' },
-    prompt_title = 'rails (app, lib)',
-  }))
+  if vim.fn.filereadable('Gemfile') > 0 then
+    M.find_files(vim.tbl_deep_extend('keep', opts or {}, {
+      find_command = find_command_rails,
+      search_dirs = { 'app', 'lib', 'ee/app', 'ee/lib' },
+      prompt_title = 'rails (app, lib)',
+    }))
+  else
+    M.find_files()
+  end
 end
 
 function M.find_rails_tests(opts)
-  require('telescope.builtin').find_files(vim.tbl_deep_extend('keep', opts or {}, {
-    find_command = find_command_rails,
+  M.find_rails(vim.tbl_deep_extend('keep', opts or {}, {
     search_dirs = { 'app', 'lib', 'spec', 'ee/app', 'ee/lib', 'ee/spec' },
     prompt_title = 'rails (app, lib, spec)',
   }))
