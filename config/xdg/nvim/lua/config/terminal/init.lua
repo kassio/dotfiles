@@ -20,6 +20,10 @@ return {
       vim.print(manager)
     end, {})
 
+    vim.api.nvim_create_user_command('Tmap', function(opts)
+      manager.mapped_command = opts.args
+    end, { nargs = '+' })
+
     -- run nvim command
     vim.api.nvim_create_user_command('Tcmd', function(opts)
       manager.nvim_cmd(opts.args)
@@ -69,6 +73,12 @@ return {
 
     vim.keymap.set('n', '<leader>tG', function()
       manager.nvim_cmd('normal G')
+    end)
+
+    vim.keymap.set('n', '<leader>tm', function()
+      if manager.mapped_command ~= nil then
+        manager.send(manager.mapped_command)
+      end
     end)
 
     vim.keymap.set('n', '<leader>tL', function()
