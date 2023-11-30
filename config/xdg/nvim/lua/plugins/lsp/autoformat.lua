@@ -13,15 +13,7 @@ return {
         return
       end
 
-      local efm = vim.lsp.get_clients({ name = 'efm' })
-
-      if not vim.tbl_isempty(efm) then
-        vim.lsp.buf.format({ name = 'efm' })
-      else
-        for _, client in ipairs(vim.lsp.get_clients()) do
-          vim.lsp.buf.format({ name = client.name })
-        end
-      end
+      vim.lsp.buf.format({ async = false })
     end
 
     vim.api.nvim_create_user_command('LspFormat', function()
