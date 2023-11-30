@@ -1,12 +1,4 @@
 return {
-  debugger = {
-    DapBreakpoint = '●',
-    DapBreakpointCondition = '◆',
-    DapLogPoint = 'Ξ',
-    DapStopped = '▶',
-    DapBreakpointRejected = '◎',
-  },
-
   diagnostics = {
     error = '',
     warn = '',

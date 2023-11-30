@@ -7,7 +7,3 @@ for name, symbol in pairs(utils.symbols.diagnostics) do
 
   def_sign('DiagnosticSign' .. utils.string.camelcase(name), symbol)
 end
-
-for name, symbol in pairs(utils.symbols.debugger) do
-  def_sign(name, symbol)
-end

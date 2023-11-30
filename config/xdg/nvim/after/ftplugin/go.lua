@@ -3,8 +3,6 @@ vim.b.skip_autoformat = true
 local dap_go = require('dap-go')
 dap_go.setup()
 
-vim.api.nvim_create_user_command('GoDebugTest', dap_go.debug_test, {})
-
 vim.api.nvim_create_user_command('GoAcceptance', function(c)
   local cmd = string.format("GOFLAGS='-count=1' go test -v ./test/acceptance", c.args)
   if #c.args > 0 then
