@@ -124,13 +124,6 @@ return {
             ['TabLine'] = { bg = c.dim, fg = c.surface2 },
             ['TabLineSel'] = { bg = c.surface0, fg = c.blue, bold = true },
             ['TabLineFill'] = { bg = c.dim, fg = c.surface0 },
-
-            -- dap
-            ['DapBreakpoint'] = { fg = c.red },
-            ['DapLogPoint'] = { fg = c.blue },
-            ['DapStopped'] = { fg = c.green },
-            ['DapBreakpointRejected'] = { fg = c.peach },
-            ['DapBreakpointCondition'] = { link = 'Number' },
           }
         end,
       })
