@@ -16,8 +16,6 @@ return {
   'lambdalisue/suda.vim',
 
   -- Better language support
-  -- Lua
-  'euclidianAce/BetterLua.vim',
   -- Jsonnet
   'google/vim-jsonnet',
   -- Graphql
