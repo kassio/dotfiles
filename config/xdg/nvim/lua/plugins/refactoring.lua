@@ -8,7 +8,7 @@ return {
     config = function()
       local refactoring = require('refactoring')
 
-      local refactoring_cmd = function(name)
+      local function refactoring_cmd(name)
         local cmd_name = 'Refactoring' .. string.gsub(name, '%s', '')
 
         vim.api.nvim_create_user_command(cmd_name, function()

@@ -5,23 +5,23 @@ local M = {
 
 local escaped_file_path = string.gsub(vim.fn.getcwd(), '[/%.]', M.path_replacer)
 
-local notify = function(msg, level)
+local function notify(msg, level)
   vim.notify(msg, level, { title = 'Session Manager' })
 end
 
-local info = function(msg)
+local function info(msg)
   notify(msg, vim.log.levels.INFO)
 end
 
-local warn = function(msg)
+local function warn(msg)
   notify(msg, vim.log.levels.WARN)
 end
 
-local error = function(msg)
+local function error(msg)
   notify(msg, vim.log.levels.ERROR)
 end
 
-local prefix_from = function(session)
+local function prefix_from(session)
   session = vim.fn.split(session or '', '/')
 
   if #session > 0 then
@@ -33,15 +33,15 @@ local prefix_from = function(session)
   end
 end
 
-local session_for = function(prefix)
+local function session_for(prefix)
   return string.format('%s/%s+%s', M.session_dir, prefix, escaped_file_path)
 end
 
-local session_list = function()
+local function session_list()
   return vim.fn.glob(session_for('*'), false, true)
 end
 
-local session_options = function(list)
+local function session_options(list)
   local options = {}
 
   for i, path in ipairs(list) do
@@ -61,7 +61,7 @@ end
 -- returns: session file, ok
 -- session file: string
 -- ok: if a session was selected
-local select_session = function(title, callback)
+local function select_session(title, callback)
   local sessions = session_list()
 
   if #sessions <= 0 then
@@ -86,11 +86,11 @@ local select_session = function(title, callback)
   end)
 end
 
-local delete_session = function(session)
+local function delete_session(session)
   vim.fn.delete(session, 'rf')
 end
 
-local save_session = function(prefix, default)
+local function save_session(prefix, default)
   if string.len(prefix or '') == 0 and string.len(default or '') > 0 then
     prefix = default
   end
@@ -110,7 +110,7 @@ local save_session = function(prefix, default)
   end
 end
 
-M.save = function()
+function M.save()
   local default = prefix_from(vim.api.nvim_get_vvar('this_session'))
 
   vim.ui.input({
@@ -123,7 +123,7 @@ M.save = function()
   end)
 end
 
-M.load = function()
+function M.load()
   local session, ok = select_session('Available sessions', function(session)
     vim.cmd(string.format('silent! source %s | redraw!', session))
     info(string.format('Session "%s" loaded', prefix_from(session)))
@@ -138,14 +138,14 @@ M.load = function()
   end
 end
 
-M.destroy = function()
+function M.destroy()
   return select_session('Existing sessions', function(session)
     delete_session(session)
     error(string.format('Session "%s" deleted', prefix_from(session)))
   end)
 end
 
-M.destroy_all = function()
+function M.destroy_all()
   for _, session in ipairs(session_list()) do
     delete_session(session)
   end

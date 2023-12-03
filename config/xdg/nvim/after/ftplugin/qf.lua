@@ -10,7 +10,7 @@ opt.signcolumn = 'no'
 opt.foldcolumn = '0'
 opt.colorcolumn = {}
 
-local buf_keymap = function(mode, lhs, rhs)
+local function buf_keymap(mode, lhs, rhs)
   vim.keymap.set(mode, lhs, rhs, { buffer = 0, silent = true })
 end
 

@@ -4,7 +4,7 @@ return {
     local devicons = require('nvim-web-devicons')
     local icons = devicons.get_icons()
 
-    local ext = function(source, target)
+    local function ext(source, target)
       vim.tbl_extend('force', icons[source], { name = target })
     end
 

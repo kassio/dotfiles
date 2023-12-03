@@ -28,7 +28,7 @@ M.plugin_filetypes = {
 ---@param text string
 ---@param system_clipboard boolean
 ---@return nil
-M.to_clipboard = function(text, system_clipboard)
+function M.to_clipboard(text, system_clipboard)
   local reg = '"'
   local fmt = M.string.trim([[
 "%s"
@@ -48,7 +48,7 @@ end
 --- Creates an autocommand group.
 ---@param name string
 ---@param autocmds any[]
-M.augroup = function(name, autocmds)
+function M.augroup(name, autocmds)
   local group = api.nvim_create_augroup(name, { clear = true })
   for _, opts in ipairs(autocmds) do
     local events = M.table.removekey(opts, 'events')
@@ -57,15 +57,15 @@ M.augroup = function(name, autocmds)
   end
 end
 
-M.plugin_filetype = function(ft)
+function M.plugin_filetype(ft)
   return vim.tbl_contains(M.plugin_filetypes, ft or vim.bo.filetype)
 end
 
-local valid_flag = function(flag)
+local function valid_flag(flag)
   return vim.tbl_contains({ 'p', 'h', 't', 'r', 'e', '.', '~' }, flag)
 end
 
-local ensure_valid_file_flag = function(flag)
+local function ensure_valid_file_flag(flag)
   flag = string.gsub(string.lower(tostring(flag)), '[:%%]', '')
   if valid_flag(flag) then
     return '%:' .. flag
@@ -74,14 +74,14 @@ local ensure_valid_file_flag = function(flag)
   end
 end
 
-M.copy_filename = function(cmd)
+function M.copy_filename(cmd)
   local flag = ensure_valid_file_flag(cmd.args)
   local filename = fn.expand(flag)
 
   M.to_clipboard(filename, cmd.bang)
 end
 
-M.logger = function(base, sep)
+function M.logger(base, sep)
   sep = sep or ': '
   local n = { title = base }
 
@@ -106,7 +106,7 @@ end
 
 --- Returns <cword> or selection
 ---@return string|string[]
-M.cword = function()
+function M.cword()
   if vim.fn.mode() == 'v' then
     local former_value = vim.fn.getreg('v')
     vim.cmd([[noautocmd silent normal "vy]])

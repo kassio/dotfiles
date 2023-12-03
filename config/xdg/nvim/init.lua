@@ -6,4 +6,4 @@ require('globals')
 -- my config
 require('config')
 
-pcall(vim.cmd.source, vim.env.HOME .. '/.nvim.lua')
+pcall(vim.cmd.source, vim.fs.joinpath(vim.env.HOME, '.nvim.lua'))

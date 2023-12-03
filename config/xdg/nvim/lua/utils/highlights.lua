@@ -1,6 +1,6 @@
 local M = {}
 
-M.def = function(group, color)
+function M.def(group, color)
   local ok, msg = pcall(vim.api.nvim_set_hl, 0, group, color)
 
   if not ok then
@@ -16,18 +16,18 @@ M.def = function(group, color)
   end
 end
 
-M.extend = function(target, source, opts)
+function M.extend(target, source, opts)
   M.def(target, vim.tbl_extend('force', M.get(source), opts or {}))
 end
 
-M.def_sign = function(name, icon)
+function M.def_sign(name, icon)
   vim.fn.sign_define(name, {
     text = icon,
     texthl = name,
   })
 end
 
-M.get_sign_icon = function(name)
+function M.get_sign_icon(name)
   local sign = vim.fn.sign_getdefined(name)[1]
 
   if sign == nil then

@@ -3,7 +3,7 @@ local S = require('utils.string')
 
 local M = {}
 
-M.filename = function(opts)
+function M.filename(opts)
   opts = opts or {}
 
   local filename = vim.api.nvim_buf_get_name(0)
@@ -20,7 +20,7 @@ M.filename = function(opts)
   return filename
 end
 
-M.expand = function(fmt, default)
+function M.expand(fmt, default)
   local path = fn.expand(fmt)
 
   if path == '.' then
@@ -30,7 +30,7 @@ M.expand = function(fmt, default)
   end
 end
 
-M.ruby_class = function()
+function M.ruby_class()
   local filename = fn.expand('%:.')
 
   if string.match(filename, '^lib/') or string.match(filename, '^app/') then

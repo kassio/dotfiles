@@ -1,12 +1,12 @@
 local M = {}
 
-M.preserve = function(callback)
+function M.preserve(callback)
   local saved_view = vim.fn.winsaveview()
   callback()
   vim.fn.winrestview(saved_view)
 end
 
-M.trim = function()
+function M.trim()
   local hlsearch = vim.opt_global.hlsearch:get()
   vim.opt.hlsearch = false
 
@@ -18,7 +18,7 @@ M.trim = function()
   vim.opt.hlsearch = hlsearch
 end
 
-M.name_and_type = function(bufnr)
+function M.name_and_type(bufnr)
   return vim.api.nvim_buf_get_name(bufnr), vim.bo[bufnr].filetype
 end
 

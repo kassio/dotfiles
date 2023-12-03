@@ -1,11 +1,11 @@
 local utils = require('utils')
 
-local cmd = function(str)
+local function cmd(str)
   local cmd_str = vim.api.nvim_replace_termcodes(str, true, true, true)
   vim.cmd(cmd_str)
 end
 
-local brew_sort = function()
+local function brew_sort()
   utils.buffers.preserve(function()
     cmd('normal ggV/^brew<CR>k:sort<CR>')
     cmd('normal gg/^brew<CR>V/^cask<CR>k:sort<CR>')

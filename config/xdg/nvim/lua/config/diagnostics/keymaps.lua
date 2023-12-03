@@ -1,7 +1,7 @@
 return {
   setup = function()
     local diagnostic = vim.diagnostic
-    local keymap = function(mode, lhr, rhr, desc)
+    local function keymap(mode, lhr, rhr, desc)
  vim.keymap.set(mode, lhr, rhr, { desc = 'diagnostics: '..desc})
     end
 

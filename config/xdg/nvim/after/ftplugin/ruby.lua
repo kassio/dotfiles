@@ -25,7 +25,7 @@ vim.opt_local.path:append({
 
 local utils = require('utils')
 
-local ruby_cmd = function(name, replacer)
+local function ruby_cmd(name, replacer)
   vim.api.nvim_create_user_command('Ruby' .. name, function(cmd)
     utils.buffers.preserve(function()
       vim.cmd(string.format('silent %s,%s%s/e', cmd.line1, cmd.line2, replacer))

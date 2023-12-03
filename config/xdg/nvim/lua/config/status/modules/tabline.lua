@@ -1,7 +1,7 @@
 local api = vim.api
 local SEP = ' '
 
-local get_limit = function(labels, columns)
+local function get_limit(labels, columns)
   local curtab_page = 0
   local limit = 0
 
@@ -17,7 +17,7 @@ local get_limit = function(labels, columns)
   return limit
 end
 
-local tab_get_bufnr = function(tab_page)
+local function tab_get_bufnr(tab_page)
   local winnr = api.nvim_tabpage_get_win(tab_page)
   return api.nvim_win_get_buf(winnr)
 end
@@ -38,7 +38,7 @@ local function filename(bufnr)
   end
 end
 
-local tab_label = function(opts)
+local function tab_label(opts)
   local tabnr = api.nvim_tabpage_get_number(opts.tab_page)
   local components = {
     SEP,
@@ -67,7 +67,7 @@ local tab_label = function(opts)
   return table.concat(components, '')
 end
 
-local fix_relative_position = function(labels, curtab_nr)
+local function fix_relative_position(labels, curtab_nr)
   local labels_text = table.concat(labels)
   local parsed_text = vim.api.nvim_eval_statusline(labels_text, { use_tabline = true })
 
