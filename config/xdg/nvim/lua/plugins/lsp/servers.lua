@@ -10,6 +10,7 @@ local servers = {
   jsonnet_ls = {},
   lua_ls = require('plugins.lsp.servers.lua_ls'),
   -- ruby_ls = {},
+  rubocop = {},
   solargraph = require('plugins.lsp.servers.solargraph'),
   sqlls = {},
   yamlls = require('plugins.lsp.servers.yamlls'),

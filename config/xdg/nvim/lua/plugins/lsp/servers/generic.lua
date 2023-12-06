@@ -22,7 +22,6 @@ local sources = {
   builtin.diagnostics.tidy, -- html - install:brew
   builtin.diagnostics.trail_space, -- null-ls builtin
   builtin.diagnostics.zsh, -- zsh builtin
-  require('plugins.lsp.servers.generic.rubocop'),
 
   -- formatting
   builtin.formatting.jq, -- install:brew

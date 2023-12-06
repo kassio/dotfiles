@@ -12,7 +12,7 @@ return {
       references = true,
       rename = true,
       useBundler = true,
-      reporters = { 'rubocop' },
+      reporters = {},
     },
   },
 }
