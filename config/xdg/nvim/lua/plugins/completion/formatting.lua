@@ -47,7 +47,7 @@ end
 local function icon(item, entry)
   local label = kind_labels[item.kind] or source_labels[entry.source.name] or ' '
 
-  return string.format(' │ %s ', label)
+  return string.format('%s │ ', label)
 end
 
 local function format(entry, item)
@@ -59,6 +59,6 @@ local function format(entry, item)
 end
 
 return {
-  fields = { 'abbr', 'kind' },
+  fields = { 'kind', 'abbr' },
   format = format,
 }
