@@ -32,6 +32,7 @@ return {
       },
     })
 
+    require('plugins.completion.rubocop').setup()
     cmp.setup({
       formatting = require('plugins.completion.formatting'),
 
@@ -60,6 +61,7 @@ return {
         { name = 'nvim_lsp_signature_help' },
         { name = 'snippy' },
       }, {
+        { name = 'rubocop' },
         {
           name = 'buffer',
           option = {
