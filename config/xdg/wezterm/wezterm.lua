@@ -12,6 +12,12 @@ if wezterm.gui.get_appearance():find('Dark') then
   config.color_scheme = 'Catppuccin Mocha'
 else
   config.color_scheme = 'Catppuccin Latte'
+  config.color_schemes = {
+    ['Catppuccin Latte'] = {
+      foreground = '#65686D',
+      background = '#DFE4ED',
+    },
+  }
 end
 
 local colorscheme = wezterm.color.get_builtin_schemes()[config.color_scheme]
