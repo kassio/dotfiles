@@ -21,7 +21,7 @@ return {
     }, {
       group = aug,
       callback = function()
-        vim.cmd.wall()
+        vim.cmd.write()
       end,
     })
 
