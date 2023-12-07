@@ -1,15 +1,23 @@
-local rules = {
-  loaded = false,
-  list = {},
+local M = {
+  rules = {
+    loaded = false,
+    list = {},
+    error = '',
+  },
 }
-local M = {}
 
 local function build_rules_list()
-  if rules.loaded then
+  if M.rules.loaded then
     return
   end
 
-  local function handler(obj)
+  local function parser(obj)
+    if obj.code ~= 0 or obj.stderr ~= '' then
+      M.rules.loaded = true
+      M.rules.error = obj.stderr
+      return
+    end
+
     local list = {}
     for _, row in ipairs(vim.split(obj.stdout, '\n')) do
       if string.match(row, '^%w') ~= nil then
@@ -18,15 +26,15 @@ local function build_rules_list()
       end
     end
 
-    rules.list = list
-    rules.loaded = true
+    M.rules.list = list
+    M.rules.loaded = true
   end
 
-  vim.system({ 'bundle', 'exec', 'rubocop', '--show-cops' }, { text = true }, handler)
+  vim.system({ 'bundle', 'exec', 'rubocop', '--show-cops' }, { text = true }, parser)
 end
 
 function M:is_available()
-  return vim.bo.filetype == 'ruby' and rules.loaded
+  return vim.bo.filetype == 'ruby' and M.rules.loaded
 end
 
 function M:get_debug_name()
@@ -34,7 +42,7 @@ function M:get_debug_name()
 end
 
 function M:get_keyword_pattern()
-  return [[\k\+\/\?\k*]]
+  return [[\(\k\|\/\)\+]]
 end
 
 function M:get_trigger_characters()
@@ -42,13 +50,10 @@ function M:get_trigger_characters()
 end
 
 function M:complete(_params, callback)
-  callback(rules.list)
+  callback(M.rules.list)
 end
 
 return {
-  rules = function()
-    return rules
-  end,
   setup = function()
     build_rules_list() -- async
     require('cmp').register_source('rubocop', M)
