@@ -9,11 +9,6 @@ return {
           dark = 'frappe',
         },
         color_overrides = {
-          latte = {
-            base = '#DFE4ED',
-            mantle = '#D9DFEA',
-            dim = '#D3DAE7',
-          },
           all = {
             error = '#CA1243',
             warn = '#F7C154',
