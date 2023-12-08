@@ -18,11 +18,5 @@ return {
         end, 3000)
       end,
     })
-
-    vim.api.nvim_create_autocmd({ 'User' }, {
-      pattern = { 'Tick' },
-      group = group,
-      callback = vim.cmd.redrawstatus,
-    })
   end,
 }

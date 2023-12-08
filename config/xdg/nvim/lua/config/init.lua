@@ -10,10 +10,6 @@ require('config.diagnostics').setup()
 require('config.focus').setup()
 require('config.status').setup()
 require('config.terminal').setup()
-require('config.ui').setup()
 
 -- plugins
 require('config.plugins')
-
--- User Tick autocommand (1s ticker)
-require('config.ticker').setup()
