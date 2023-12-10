@@ -88,12 +88,12 @@ return {
       numhl = true,
     })
 
-    keymap('n', ']c', function()
+    keymap('n', ']g', function()
       gitsigns.next_hunk()
       vim.cmd.normal('zz')
     end, { desc = 'git: next hunk' })
 
-    keymap('n', '[c', function()
+    keymap('n', '[g', function()
       gitsigns.prev_hunk()
       vim.cmd.normal('zz')
     end, { desc = 'git: previous hunk' })

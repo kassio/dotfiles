@@ -1,4 +1,5 @@
 return {
+  require('plugins.ui.todos'),
   require('plugins.ui.icons'),
   require('plugins.ui.input'),
   require('plugins.ui.marks'),
