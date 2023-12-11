@@ -58,32 +58,33 @@ local function session_options(list)
   return options
 end
 
--- returns: session file, ok
--- session file: string
--- ok: if a session was selected
+--- @return string|nil session, boolean exists
 local function select_session(title, callback)
   local sessions = session_list()
 
   if #sessions <= 0 then
-    return
+    return nil, false
   end
 
   local options = session_options(sessions)
 
+  local selected = nil
   vim.ui.select(options, { prompt = title }, function(_choice, index)
     -- confirm returns 0 for <esc>
     -- and the chose choice indexed on 1
     if index == nil or index <= 0 then
-      return nil, false
+      return
     end
 
     local file = sessions[index]
     if vim.fn.filereadable(file) then
       callback(file)
 
-      return file, true
+      selected = file
     end
   end)
+
+  return selected, selected ~= nil
 end
 
 local function delete_session(session)
@@ -104,7 +105,7 @@ local function save_session(prefix, default)
     vim.api.nvim_set_vvar('this_session', session)
 
     vim.cmd(string.format('silent! mksession! %s | redraw!', session))
-    info(string.format('Session "%s" created', prefix))
+    info(string.format('Session "%s" saved', prefix))
   else
     error('Session prefix required!')
   end
