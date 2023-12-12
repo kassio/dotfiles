@@ -1,3 +1,12 @@
+local utils = require('utils')
+
+local function buffer_format()
+  utils.buffers.preserve(function()
+    vim.cmd([[normal! gg=G]])
+  end)
+  vim.cmd.LspFormat()
+end
+
 return {
   setup = function(lsp, bufnr)
     local function keymap(desc, mode, lhs, rhs)
@@ -6,11 +15,6 @@ return {
         buffer = bufnr,
         desc = 'lsp: ' .. desc,
       })
-    end
-
-    local function buffer_format()
-      vim.cmd([[normal! gg=G]])
-      vim.cmd.LspFormat()
     end
 
     keymap('hover', 'n', 'K', lsp.buf.hover)
