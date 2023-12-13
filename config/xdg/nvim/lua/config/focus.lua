@@ -21,6 +21,7 @@ return {
     }, {
       group = aug,
       callback = function()
+        vim.cmd('silent! bufdo Trim')
         vim.cmd('silent! wall')
       end,
     })
