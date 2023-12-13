@@ -10,6 +10,7 @@ vim.filetype.add({
     ['libsonnet'] = 'jsonnet',
     ['jsonnet'] = 'jsonnet',
     ['ndjson'] = filetype_syntax('ndjson', 'json'),
+    ['keymap'] = 'c',
   },
   filename = {
     ['.simplecov'] = 'ruby',
