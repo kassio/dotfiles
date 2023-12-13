@@ -6,7 +6,6 @@ function M.preserve(callback)
   vim.fn.winrestview(saved_view)
 end
 
-
 function M.name_and_type(bufnr)
   return vim.api.nvim_buf_get_name(bufnr), vim.bo[bufnr].filetype
 end

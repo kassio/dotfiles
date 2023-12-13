@@ -21,7 +21,9 @@ return {
     }, {
       group = aug,
       callback = function()
-        vim.cmd('silent! bufdo Trim')
+        require('utils').on_each_non_plugin_buffer(function()
+          vim.cmd.Trim()
+        end)
         vim.cmd('silent! wall')
       end,
     })

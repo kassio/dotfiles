@@ -61,6 +61,14 @@ function M.plugin_filetype(ft)
   return vim.tbl_contains(M.plugin_filetypes, ft or vim.bo.filetype)
 end
 
+function M.on_each_non_plugin_buffer(callback)
+  for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+    if not M.plugin_filetype(vim.bo[bufnr].filetype) then
+      vim.api.nvim_buf_call(bufnr, callback)
+    end
+  end
+end
+
 local function valid_flag(flag)
   return vim.tbl_contains({ 'p', 'h', 't', 'r', 'e', '.', '~' }, flag)
 end
