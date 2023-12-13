@@ -28,7 +28,7 @@ local utils = require('utils')
 local function ruby_cmd(name, replacer, desc)
   vim.api.nvim_create_user_command(name, function(cmd)
     utils.buffers.preserve(function()
-      vim.cmd(string.format('silent %s,%s%s/e', cmd.line1, cmd.line2, replacer))
+      vim.cmd(string.format('keeppatterns silent! %s,%s%s/e', cmd.line1, cmd.line2, replacer))
     end)
   end, { range = true, desc = desc })
 end
