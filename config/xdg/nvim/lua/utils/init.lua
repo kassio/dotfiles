@@ -61,10 +61,12 @@ function M.plugin_filetype(ft)
   return vim.tbl_contains(M.plugin_filetypes, ft or vim.bo.filetype)
 end
 
-function M.on_each_non_plugin_buffer(callback)
-  for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+function M.on_each_non_plugin_window(callback)
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local bufnr = vim.api.nvim_win_get_buf(win)
+
     if not M.plugin_filetype(vim.bo[bufnr].filetype) then
-      vim.api.nvim_buf_call(bufnr, callback)
+      vim.api.nvim_win_call(win, callback)
     end
   end
 end
@@ -126,6 +128,18 @@ function M.cword()
   else
     return vim.fn.expand('<cword>')
   end
+end
+
+function M.trim()
+  local hlsearch = vim.opt_global.hlsearch:get()
+  vim.opt.hlsearch = false
+
+  M.buffers.preserve(function()
+    vim.cmd([[keeppatterns silent! %s/\v\s+$//e]])
+    vim.cmd([[keeppatterns silent! %s/\v($\n\s*)+%$//e]])
+  end)
+
+  vim.opt.hlsearch = hlsearch
 end
 
 return M

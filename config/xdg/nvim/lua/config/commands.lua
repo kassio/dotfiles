@@ -9,17 +9,7 @@ command('Preserve', function(cmd)
 end, { nargs = '?' })
 
 -- trim the file
-command('Trim', function()
-  local hlsearch = vim.opt_global.hlsearch:get()
-  vim.opt.hlsearch = false
-
-  utils.buffers.preserve(function()
-    vim.cmd([[keeppatterns silent! %s/\v\s+$//e]])
-    vim.cmd([[keeppatterns silent! %s/\v($\n\s*)+%$//e]])
-  end)
-
-  vim.opt.hlsearch = hlsearch
-end, {})
+command('Trim', utils.trim, {})
 
 -- change background
 command('Dark', 'set bg=dark', {})

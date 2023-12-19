@@ -1,3 +1,4 @@
+local utils = require('utils')
 return {
   setup = function()
     local aug = vim.api.nvim_create_augroup('user:focus', { clear = false })
@@ -21,11 +22,8 @@ return {
     }, {
       group = aug,
       callback = function()
-        require('utils').on_each_non_plugin_buffer(function()
-          vim.cmd('silent! Trim')
-        end)
+        utils.on_each_non_plugin_window(utils.trim)
         vim.cmd('silent! wall')
-        vim.cmd.stopinsert()
       end,
     })
 
