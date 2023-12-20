@@ -2,13 +2,6 @@ local M = {}
 local api = vim.api
 local fn = vim.fn
 
-M.buffers = require('utils.buffers')
-M.snippets = require('utils.snippets')
-M.highlights = require('utils.highlights')
-M.symbols = require('utils.symbols')
-M.string = require('utils.string')
-M.table = require('utils.table')
-
 M.plugin_filetypes = {
   'FineCmdlinePrompt',
   'NvimTree',
@@ -141,5 +134,18 @@ function M.trim()
 
   vim.opt.hlsearch = hlsearch
 end
+
+setmetatable(M, {
+  __index = function(utils, key)
+    local ok, module = pcall(require, 'utils.' .. key)
+
+    if ok then
+      utils[key] = module
+      return module
+    end
+
+    return nil
+  end,
+})
 
 return M
