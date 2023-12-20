@@ -72,7 +72,12 @@ end, { nargs = '?', desc = 'Run rspec tests' })
 vim.cmd.cabbrev('Rspec RSpec')
 
 vim.api.nvim_create_user_command('CopyFileNamespace', function(cmd)
-  utils.to_clipboard(utils.ruby.file_namespace(), cmd.bang)
+  local file_namespace = utils.ruby.file_namespace()
+  if file_namespace ~= '' then
+    utils.to_clipboard(file_namespace, cmd.bang)
+  else
+    vim.notify("Can't find current file namespace", vim.log.levels.WARN, { title = 'ruby' })
+  end
 end, { bang = true })
 
 -- Make # add/find/remove #{,} pairs
