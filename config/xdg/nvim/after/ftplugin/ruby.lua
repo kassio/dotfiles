@@ -71,6 +71,10 @@ vim.api.nvim_create_user_command('RSpec', function(c)
 end, { nargs = '?', desc = 'Run rspec tests' })
 vim.cmd.cabbrev('Rspec RSpec')
 
+vim.api.nvim_create_user_command('CopyFileNamespace', function(cmd)
+  utils.to_clipboard(utils.ruby.file_namespace(), cmd.bang)
+end, { bang = true })
+
 -- Make # add/find/remove #{,} pairs
 require('nvim-surround').buffer_setup({
   surrounds = {

@@ -30,25 +30,4 @@ function M.expand(fmt, default)
   end
 end
 
-function M.ruby_namespace(opts)
-  opts = opts or {}
-
-  local prestart = false
-  local start = false
-  local path = ''
-
-  for dir in vim.gsplit(vim.api.nvim_buf_get_name(0), '/', { plain = true, trimempty = true }) do
-    if start == true then
-      dir = fn.fnamemodify(dir, ':t:r')
-      path = path .. '::' .. camelcase(dir)
-    elseif dir == 'lib' or dir == 'app' then
-      prestart = true
-    elseif prestart == true then
-      start = true
-    end
-  end
-
-  return path
-end
-
 return M
