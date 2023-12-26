@@ -9,32 +9,11 @@ local source_labels = {
   treesitter = '',
 }
 
-local kind_labels = {
-  Text = '',
-  Method = '',
-  Function = '󰊕',
-  Constructor = '',
-  Field = '',
-  Variable = '',
-  Class = '󰠱',
-  Interface = '',
-  Module = '󰏓',
-  Property = '',
-  Unit = '',
-  Enum = '',
-  EnumMember = '',
-  Keyword = '󰌋',
-  Snippet = '󰲋',
-  Color = '',
-  File = '',
-  Reference = '',
-  Folder = '',
-  Constant = '󰏿',
-  Struct = '󰠱',
-  Event = '',
-  Operator = '',
-  TypeParameter = '󰘦',
-}
+setmetatable(source_labels, {
+  __index = function()
+    return ' '
+  end,
+})
 
 local function ensure_lengh(content, length)
   if #content > length then
@@ -45,11 +24,7 @@ local function ensure_lengh(content, length)
 end
 
 local function icon(entry, item)
-  local default = ' '
-  local source = source_labels[entry.source.name] or default
-  local kind = kind_labels[item.kind] or source
-
-  return string.format('%s │ ', kind)
+  return string.format('│ %s %s', source_labels[entry.source.name], item.kind)
 end
 
 local function format(entry, item)
@@ -61,6 +36,6 @@ local function format(entry, item)
 end
 
 return {
-  fields = { 'kind', 'abbr' },
+  fields = { 'abbr', 'kind' },
   format = format,
 }
