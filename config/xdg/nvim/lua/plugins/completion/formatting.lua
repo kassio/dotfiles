@@ -1,19 +1,30 @@
-local source_labels = {
-  buffer = '',
-  bug = '',
-  nvim_lsp = '󰒍',
-  nvim_lua = '',
-  path = '󰇐',
-  snippy = '',
-  spell = '',
-  treesitter = '',
+local kind_icons = {
+  Text = '',
+  Method = '󰆧',
+  Function = '󰊕',
+  Constructor = '',
+  Field = '󰇽',
+  Variable = '󰂡',
+  Class = '󰠱',
+  Interface = '',
+  Module = '',
+  Property = '󰜢',
+  Unit = '',
+  Value = '󰎠',
+  Enum = '',
+  Keyword = '󰌋',
+  Snippet = '',
+  Color = '󰏘',
+  File = '󰈙',
+  Reference = '',
+  Folder = '󰉋',
+  EnumMember = '',
+  Constant = '󰏿',
+  Struct = '',
+  Event = '',
+  Operator = '󰆕',
+  TypeParameter = '󰅲',
 }
-
-setmetatable(source_labels, {
-  __index = function()
-    return ' '
-  end,
-})
 
 local function ensure_lengh(content, length)
   if #content > length then
@@ -23,19 +34,13 @@ local function ensure_lengh(content, length)
   return content .. string.rep(' ', length - #content)
 end
 
-local function icon(entry, item)
-  return string.format('│ %s %s', source_labels[entry.source.name], item.kind)
-end
-
-local function format(entry, item)
-  return vim.tbl_extend('force', item, {
-    menu = nil,
-    abbr = ensure_lengh(item.abbr or '', 50),
-    kind = icon(entry, item),
-  })
-end
-
 return {
   fields = { 'abbr', 'kind' },
-  format = format,
+  format = function(_entry, item)
+    return vim.tbl_extend('force', item, {
+      menu = nil,
+      abbr = ensure_lengh(item.abbr or '', 50),
+      kind = string.format('%s %s', kind_icons[item.kind], item.kind),
+    })
+  end,
 }
