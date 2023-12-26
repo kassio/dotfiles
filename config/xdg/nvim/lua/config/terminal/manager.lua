@@ -9,6 +9,8 @@ local M = {
 
 ---Choose the right adapter to run the given function and arguments
 function M.with_terminal(cmd)
+  vim.cmd('doautocmd User TermSend')
+
   for _, adapter in ipairs(M.remote_adapters) do
     if adapter.can_execute(M.active) then
       adapter.execute(cmd)

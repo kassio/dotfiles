@@ -3,6 +3,7 @@ return {
   setup = function()
     local aug = vim.api.nvim_create_augroup('user:focus', { clear = false })
 
+    -- keep window sizes
     vim.api.nvim_create_autocmd({ 'VimResized' }, {
       group = aug,
       callback = function()
@@ -12,22 +13,40 @@ return {
       end,
     })
 
-    vim.api.nvim_create_autocmd({ -- autosave
-      'BufEnter',
+    -- autotrim
+    vim.api.nvim_create_autocmd({
       'BufLeave',
       'FocusLost',
-      'TextChanged',
       'VimLeavePre',
-      'VimSuspend',
     }, {
       group = aug,
       callback = function()
-        utils.on_each_non_plugin_window(utils.trim)
-        vim.cmd('silent! wall')
+        vim.cmd.Trim()
       end,
     })
 
-    vim.api.nvim_create_autocmd({ -- autoreload
+    -- autosave
+    vim.api.nvim_create_autocmd({
+      'BufLeave',
+      'FocusLost',
+      'VimLeavePre',
+    }, {
+      group = aug,
+      callback = function()
+        vim.cmd('silent! write')
+      end,
+    })
+
+    vim.api.nvim_create_autocmd({ 'User' }, {
+      pattern = 'TermSend',
+      group = aug,
+      callback = function()
+        vim.cmd('silent! write')
+      end,
+    })
+
+    -- autoreload
+    vim.api.nvim_create_autocmd({
       'FocusGained',
       'TermClose',
       'TermLeave',
