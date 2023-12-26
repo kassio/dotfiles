@@ -21,7 +21,8 @@ return {
     end, {})
 
     vim.api.nvim_create_user_command('Tmap', function(opts)
-      manager.mapped_command = opts.args
+      manager.mapped_command = string.gsub(opts.args, '%%', vim.fn.expand('%:.'))
+      manager.send(manager.mapped_command)
     end, { nargs = '+' })
 
     -- run nvim command
