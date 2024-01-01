@@ -46,3 +46,11 @@ rubocop
 ModuleWithInstanceVariables
 LSP
 module/!
+sudo
+jsonnet
+graphql
+postcss
+gitcommit
+gitconfig
+gitrebase
+gitsendemail
