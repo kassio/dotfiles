@@ -1,44 +1,65 @@
+local function command(name, callback, opts)
+  vim.api.nvim_create_user_command(
+    name,
+    callback,
+    vim.tbl_deep_extend('force', opts, {
+      desc = 'terminal: ' .. opts.desc,
+    })
+  )
+end
+
 return {
   setup = function()
     local manager = require('config.terminal.manager')
 
     require('config.terminal.autocmds').setup(manager)
 
-    vim.api.nvim_create_user_command('TerminalServerStart', function()
+    command('TerminalServerStart', function()
       manager.active = require('config.terminal.adapters.remote_neovim').start()
-    end, {})
+    end, { desc = 'start remote terminal server' })
 
-    vim.api.nvim_create_user_command('TerminalWeztermPane', function(opts)
+    command('TerminalWeztermPane', function(opts)
       require('config.terminal.adapters.wezterm').start(opts.args)
-    end, { nargs = 1 })
+    end, { nargs = 1, desc = 'define which wezterm pane use as terminal target' })
 
-    vim.api.nvim_create_user_command('T', function(opts)
+    command('T', function(opts)
       manager.send(opts.args)
-    end, { nargs = '+' })
+    end, { nargs = '+', desc = 'send the argument as a terminal command' })
 
-    vim.api.nvim_create_user_command('TDEBUG', function()
+    command('TDEBUG', function()
       vim.print(manager)
-    end, {})
+    end, { desc = 'print current terminal manager information' })
 
-    vim.api.nvim_create_user_command('Tmap', function(opts)
+    command('Tmap', function(opts)
       manager.mapped_command = string.gsub(opts.args, '%%', vim.fn.expand('%:.'))
       manager.send(manager.mapped_command)
-    end, { nargs = '+' })
+    end, { nargs = '+', desc = 'map the given command to be executed with <leader>tm' })
+
+    command('Tmapexec', function()
+      if manager.mapped_command ~= nil then
+        manager.send(manager.mapped_command)
+      end
+    end, { desc = 'execute the mapped command with Tmap' })
 
     -- run nvim command
-    vim.api.nvim_create_user_command('Tcmd', function(opts)
+    command('Tcmd', function(opts)
       manager.nvim_cmd(opts.args)
-    end, { nargs = '+' })
+    end, { nargs = '+', desc = 'execute a nvim command' })
+
+    -- run last terminal command
+    command('Tredo', function()
+      manager.send('!!' .. vim.keycode('<cr>'))
+    end, { desc = 'runs last terminal command (!!)' })
 
     -- Navigate terminal to the given path of current path of current buffer
-    vim.api.nvim_create_user_command('Tcd', function(opts)
+    command('Tcd', function(opts)
       local pwd = vim.fn.getcwd()
       if #opts.args > 0 then
         pwd = opts.args
       end
 
       manager.send('cd ' .. pwd)
-    end, { nargs = '?' })
+    end, { nargs = '?', desc = 'changes terminal path (defaults to current pwd)' })
 
     -- Set terminal as only buffer
     vim.keymap.set('n', '<leader>to', function()
@@ -76,11 +97,7 @@ return {
       manager.nvim_cmd('normal G')
     end)
 
-    vim.keymap.set('n', '<leader>tm', function()
-      if manager.mapped_command ~= nil then
-        manager.send(manager.mapped_command)
-      end
-    end)
+    vim.keymap.set('n', '<leader>tm', '<cmd>Tmapexec<cr>')
 
     vim.keymap.set('n', '<leader>tL', function()
       manager.send('clear')
