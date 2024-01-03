@@ -44,8 +44,6 @@ keymap.set(
 
 keymap.set('n', '9gt', '<cmd>tablast<cr>', { desc = 'move to the last tab' })
 
-keymap.set('v', '<leader>p', '"_dP', { desc = 'paste without replacing the " register' })
-
 keymap.set({ 'n', 'x' }, '!', function()
   local cword = utils.cword()
   vim.fn.setreg('/', cword)
