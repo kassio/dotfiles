@@ -33,7 +33,7 @@ return {
     }, {
       group = aug,
       callback = function()
-        vim.cmd('silent! write')
+        vim.cmd('silent! update')
       end,
     })
 
