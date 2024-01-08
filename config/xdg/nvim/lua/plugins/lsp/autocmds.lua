@@ -1,5 +1,3 @@
-local utils = require('utils')
-
 return {
   setup = function()
     local aug = vim.api.nvim_create_augroup('user:lsp', { clear = false })
@@ -14,7 +12,7 @@ return {
         end
 
         require('plugins.lsp.keymaps').setup(lsp, args.buf)
-        require('plugins.lsp.autoformat').setup()
+        require('plugins.lsp.autoformat').setup(client)
       end,
     })
   end,

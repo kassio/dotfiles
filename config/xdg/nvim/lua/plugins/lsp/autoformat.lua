@@ -1,5 +1,6 @@
 local utils = require('utils')
-local function lsp_format(bufnr, async)
+
+local function lsp_format(client, bufnr, async)
   local filetype = vim.bo[bufnr].filetype
   if
     not vim.bo[bufnr].modifiable
@@ -10,19 +11,24 @@ local function lsp_format(bufnr, async)
     return
   end
 
-  vim.lsp.buf.format({ async = async })
+  vim.lsp.buf.format({
+    async = async,
+    filter = function(c)
+      return c.name == client.name
+    end,
+  })
 end
 
 return {
-  setup = function()
+  setup = function(client)
     vim.api.nvim_create_user_command('LspFormat', function()
-      lsp_format(vim.api.nvim_get_current_buf(), true)
+      lsp_format(client, vim.api.nvim_get_current_buf(), true)
     end, {})
 
     vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
       group = vim.api.nvim_create_augroup('user:lsp', { clear = false }),
       callback = function(args)
-        lsp_format(args.buf, false)
+        lsp_format(client, args.buf, false)
       end,
     })
   end,
