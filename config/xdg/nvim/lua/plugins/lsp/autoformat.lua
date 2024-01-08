@@ -20,16 +20,23 @@ local function lsp_format(client, bufnr, async)
 end
 
 return {
-  setup = function(client)
+  setup = function(client, bufnr)
+    if vim.b[bufnr].lsp_format_set then
+      return
+    end
+
     vim.api.nvim_create_user_command('LspFormat', function()
-      lsp_format(client, vim.api.nvim_get_current_buf(), true)
+      lsp_format(client, bufnr, true)
     end, {})
 
     vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
       group = vim.api.nvim_create_augroup('user:lsp', { clear = false }),
-      callback = function(args)
-        lsp_format(client, args.buf, false)
+      buffer = bufnr,
+      callback = function()
+        lsp_format(client, bufnr, false)
       end,
     })
+
+    vim.b[bufnr].lsp_format_set = true
   end,
 }

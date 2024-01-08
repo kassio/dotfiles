@@ -12,7 +12,7 @@ return {
         end
 
         require('plugins.lsp.keymaps').setup(lsp, args.buf)
-        require('plugins.lsp.autoformat').setup(client)
+        require('plugins.lsp.autoformat').setup(client, args.buf)
       end,
     })
   end,
