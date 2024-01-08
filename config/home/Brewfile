@@ -59,6 +59,7 @@ brew "shellcheck" # linter sh
 brew "shfmt" # formatter sh
 brew "stylua" # formatter lua
 brew "terminal-notifier"
+brew "tidy-html5" # formatter html
 brew "tree"
 brew "tree-sitter"
 brew "vscode-langservers-extracted" # lsp server css/json/sql
