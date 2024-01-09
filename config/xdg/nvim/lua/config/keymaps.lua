@@ -89,7 +89,9 @@ keymap.set('n', '<leader>ch', function()
     end
   end
 
-  vim.notify(deleted .. ' unlisted buffers closed')
+  if deleted > 0 then
+    vim.notify(deleted .. ' unlisted buffers closed')
+  end
 end, { desc = 'close: hidden and unlisted buffers' })
 
 -- format current buffer
