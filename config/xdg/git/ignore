@@ -16,6 +16,7 @@ tags.*
 .svn
 .ignore
 .userbin
+.userql
 .projections.json
 .vscode
 node_modules
