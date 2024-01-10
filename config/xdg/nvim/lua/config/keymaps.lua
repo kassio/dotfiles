@@ -52,9 +52,9 @@ end, { desc = 'search current word' })
 
 keymap.set({ 'n', 'x' }, '<leader>!', function()
   local cword = utils.cword()
-  vim.fn.setreg('/', '\\c' .. cword)
+  vim.fn.setreg('/', '\\C' .. cword)
   vim.api.nvim_feedkeys('nN', 'n', false)
-end, { desc = 'search current word case insensitive' })
+end, { desc = 'search current word case sensitive' })
 
 keymap.set({ 'n', 'x' }, 'g!', function()
   local cword = utils.cword()
