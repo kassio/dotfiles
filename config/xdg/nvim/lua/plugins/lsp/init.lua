@@ -1,5 +1,5 @@
 return {
-  require('plugins.lsp.notifiation'),
+  require('plugins.lsp.progress'),
 
   {
     'neovim/nvim-lspconfig',
