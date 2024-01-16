@@ -58,6 +58,7 @@ return {
             ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
             ['<C-b>'] = actions.preview_scrolling_up,
             ['<C-f>'] = actions.preview_scrolling_down,
+            ['<C-d>'] = actions.delete_buffer,
             ['<C-l>'] = layout_actions.cycle_layout_next,
             ['<C-;>'] = layout_actions.toggle_preview,
             ['<C-u>'] = { '<c-u>', type = 'command' }, -- delete inputted text
@@ -72,6 +73,7 @@ return {
             ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
             ['<C-b>'] = actions.preview_scrolling_up,
             ['<C-f>'] = actions.preview_scrolling_down,
+            ['<C-d>'] = actions.delete_buffer,
             ['<C-l>'] = layout_actions.cycle_layout_next,
             ['<C-;>'] = layout_actions.toggle_preview,
             ['<C-u>'] = { '<c-u>', type = 'command' }, -- delete inputted text
