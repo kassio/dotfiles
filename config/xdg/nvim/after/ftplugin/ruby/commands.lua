@@ -1,7 +1,7 @@
 local utils = require('utils')
 
 local function S(pattern, replace)
-  return string.format('s/%s/%s/e', pattern, replace)
+  return string.format('s/%s/%s/ge', pattern, replace)
 end
 
 local function builder(cmd)
