@@ -23,8 +23,6 @@ vim.opt_local.path:append({
   'lib',
 })
 
-local utils = require('utils')
-
 -- Run rspec even when not in a test file
 vim.api.nvim_create_user_command('RSpec', function(c)
   local _, lnum, col = table.unpack(vim.fn.getcurpos())
@@ -40,15 +38,6 @@ vim.api.nvim_create_user_command('RSpec', function(c)
   vim.cmd.TestLast()
 end, { nargs = '?', desc = 'Run rspec tests' })
 vim.cmd.cabbrev('Rspec RSpec')
-
-vim.api.nvim_create_user_command('CopyFileNamespace', function(cmd)
-  local file_namespace = utils.ruby.file_namespace()
-  if file_namespace ~= '' then
-    utils.to_clipboard(file_namespace, cmd.bang)
-  else
-    vim.notify("Can't find current file namespace", vim.log.levels.WARN, { title = 'ruby' })
-  end
-end, { bang = true })
 
 -- Make # add/find/remove #{,} pairs
 require('nvim-surround').buffer_setup({
