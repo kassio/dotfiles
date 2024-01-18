@@ -44,34 +44,8 @@ alias tailf="tail -f"
 alias to-nvim="tr \\\n \\\0 | xargs -0 nvim -p"
 alias tn="to-nvim"
 
-diff-to() { git diff --name-only --relative --diff-filter=d "${1:-.}"; }
-
-nvim-diff() {
-  ref="$(git ref "$1")"
-  [ "$#" -gt 0 ] && shift
-
-  diff-to "${ref}" | to-nvim
-}
 alias nd="nvim-diff"
 ndm() { nvim-diff "$(git branch-main)..."; }
-
-rubocop-diff() {
-  ref="$(git ref "$1")"
-  [ "$#" -gt 0 ] && shift
-
-  diff-to "${ref}" |
-    grep '.rb' |
-    xargs bundle exec rubocop --parallel "$@"
-}
-
-rspec-diff() {
-  ref="$(git ref "$1")"
-  [ "$#" -gt 0 ] && shift
-
-  diff-to "${ref}" |
-    grep '_spec.rb' |
-    xargs bundle exec rspec "$@"
-}
 
 alias truncate0="truncate -c -s 0"
 

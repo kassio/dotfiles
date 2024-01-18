@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+ref=""
+if [ "$#" -gt 0 ]; then
+  ref="$1"
+  shift
+fi
+
+git-diff-names-to "${ref}" |
+  grep '_spec.rb' |
+  xargs bundle exec rspec "$@"

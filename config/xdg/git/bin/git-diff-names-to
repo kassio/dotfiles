@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+ref="$1";
+if [ "${ref}" = "" ]; then
+  ref="."
+elif [ "${ref}" = "master" ] || [ "${ref}" = "main" ]; then
+  ref="$(git branch-main)"
+fi
+
+git diff --name-only --relative --diff-filter=d "${ref}"
