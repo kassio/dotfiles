@@ -19,7 +19,8 @@ function M.start()
 end
 
 function M.can_execute(has_native)
-  if has_native ~= nil then
+  -- if current nvim instance is the server, it cannot execute a remote terminal
+  if has_native ~= nil or vim.g.terminal_server == true then
     return false
   end
 
