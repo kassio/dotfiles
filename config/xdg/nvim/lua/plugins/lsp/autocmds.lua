@@ -24,8 +24,8 @@ return {
           lsp.inlay_hint(args.buf, false)
         end
 
-        require('plugins.lsp.keymaps').setup(lsp, args.buf)
-        require('plugins.lsp.autoformat').setup(client, args.buf)
+        require('plugins.lsp.keymaps').setup(args.buf, lsp)
+        require('plugins.lsp.formatting').setup(args.buf)
       end,
     })
   end,

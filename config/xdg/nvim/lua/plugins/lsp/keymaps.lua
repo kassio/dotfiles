@@ -8,7 +8,7 @@ local function buffer_format()
 end
 
 return {
-  setup = function(lsp, bufnr)
+  setup = function(bufnr, lsp)
     local function keymap(desc, mode, lhs, rhs)
       vim.keymap.set(mode, lhs, rhs, {
         silent = true,
