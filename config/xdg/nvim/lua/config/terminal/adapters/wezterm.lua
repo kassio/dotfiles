@@ -1,7 +1,8 @@
 local M = {}
 
 local function send(value)
-  vim.system({ 'wts', vim.g.wezterm, value }):wait()
+  -- vim.system({ 'wts', vim.g.wezterm, value }):wait()
+  vim.fn.system({ 'wts', vim.g.wezterm, value })
 end
 
 function M.send(opts)

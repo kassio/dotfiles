@@ -1,8 +1,9 @@
-local address = vim.fs.joinpath(vim.fn.stdpath('cache'), 'terminal_server.pipe')
+-- local address = vim.fs.joinpath(vim.fn.stdpath('cache'), 'terminal_server.pipe')
+local address = vim.fn.join({ vim.fn.stdpath('cache'), 'terminal_server.pipe' }, '/')
 local M = { name = 'remote_neovim' }
 
 local function remote_send(cmd)
-  vim.system({
+  vim.fn.system({
     'nvim',
     '--server',
     address,

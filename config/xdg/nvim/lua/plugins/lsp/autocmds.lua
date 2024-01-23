@@ -7,7 +7,8 @@ return {
     vim.api.nvim_create_autocmd({ 'BufEnter', 'BufNewFile' }, {
       group = aug,
       callback = function(args)
-        local clients = vim.lsp.get_clients({ bufnr = args.buf })
+        -- local clients = vim.lsp.get_clients({ bufnr = args.buf })
+        local clients = vim.lsp.buf_get_clients(args.buf)
 
         if utils.plugin_filetype() then
           vim.lsp.stop_client(clients)

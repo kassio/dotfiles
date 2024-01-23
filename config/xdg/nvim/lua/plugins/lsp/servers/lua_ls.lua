@@ -16,8 +16,10 @@ return {
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = {
-          [vim.fs.joinpath(vim.env.VIMRUNTIME, 'lua')] = true,
-          [vim.fs.joinpath(vim.env.VIMRUNTIME, 'lua', 'vim', 'lsp')] = true,
+          -- [vim.fs.joinpath(vim.env.VIMRUNTIME, 'lua')] = true,
+          -- [vim.fs.joinpath(vim.env.VIMRUNTIME, 'lua', 'vim', 'lsp')] = true,
+          [vim.fn.join({ vim.env.VIMRUNTIME, 'lua' }, '/')] = true,
+          [vim.fn.join({ vim.env.VIMRUNTIME, 'lua', 'vim', 'lsp' }, '/')] = true,
         },
       },
     },
