@@ -181,7 +181,7 @@ return {
     desc = 'telescope: rails (all)',
   },
   {
-    '<leader>frr',
+    '<leader>fra',
     function()
       require('plugins.fuzzyfinder.commands').find_rails({ 'app', 'lib', 'ee/app', 'ee/lib' })
     end,
@@ -189,7 +189,7 @@ return {
     desc = 'telescope: rails (app, lib)',
   },
   {
-    '<leader>frM',
+    '<leader>frm',
     function()
       require('plugins.fuzzyfinder.commands').find_rails({ 'app/models', 'ee/app/models' })
     end,
@@ -197,7 +197,7 @@ return {
     desc = 'telescope: rails (models)',
   },
   {
-    '<leader>frC',
+    '<leader>frc',
     function()
       require('plugins.fuzzyfinder.commands').find_rails({ 'app/controllers', 'ee/app/controllers' })
     end,
@@ -205,7 +205,7 @@ return {
     desc = 'telescope: rails (controllers)',
   },
   {
-    '<leader>frV',
+    '<leader>frv',
     function()
       require('plugins.fuzzyfinder.commands').find_rails({ 'app/views', 'ee/app/views' })
     end,
@@ -213,7 +213,15 @@ return {
     desc = 'telescope: rails (views)',
   },
   {
-    '<leader>frF',
+    '<leader>fre',
+    function()
+      require('plugins.fuzzyfinder.commands').find_rails({ 'app/events', 'ee/app/events' })
+    end,
+    silent = true,
+    desc = 'telescope: rails (events)',
+  },
+  {
+    '<leader>frf',
     function()
       require('plugins.fuzzyfinder.commands').find_rails({ 'app/finders', 'ee/app/finders' })
     end,
@@ -221,7 +229,7 @@ return {
     desc = 'telescope: rails (finders)',
   },
   {
-    '<leader>frS',
+    '<leader>frs',
     function()
       require('plugins.fuzzyfinder.commands').find_rails({ 'app/services', 'ee/app/services' })
     end,
@@ -229,7 +237,7 @@ return {
     desc = 'telescope: rails (services)',
   },
   {
-    '<leader>frL',
+    '<leader>frl',
     function()
       require('plugins.fuzzyfinder.commands').find_rails({ 'app/lib', 'ee/app/lib' })
     end,
