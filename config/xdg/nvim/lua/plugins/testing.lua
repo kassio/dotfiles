@@ -13,12 +13,13 @@ return {
     'TestLast',
     'TestCommand',
     'TestStrategy',
-    'WeztermTest'
+    'WeztermTest',
   },
   config = function()
     vim.g['test#custom_strategies'] = {
       terminal = function(cmd)
-        vim.g['test#last_command'] = cmd
+        vim.cmd.Tcmd(string.format('let g:test#last_strategy = "terminal"'))
+        vim.cmd.Tcmd(string.format('let g:test#last_command = %q', cmd))
         vim.cmd.T(cmd)
       end,
     }
