@@ -26,6 +26,11 @@ return {
       manager.send(opts.args)
     end, { nargs = '+', desc = 'send the argument as a terminal command' })
 
+    -- run nvim command
+    command('Tcmd', function(opts)
+      manager.nvim_cmd(opts.args)
+    end, { nargs = '+', desc = 'execute a nvim command' })
+
     command('TDEBUG', function()
       vim.print(manager)
     end, { desc = 'print current terminal manager information' })
@@ -40,11 +45,6 @@ return {
         manager.send(manager.mapped_command)
       end
     end, { desc = 'execute the mapped command with Tmap' })
-
-    -- run nvim command
-    command('Tcmd', function(opts)
-      manager.nvim_cmd(opts.args)
-    end, { nargs = '+', desc = 'execute a nvim command' })
 
     -- run last terminal command
     command('Tredo', function()

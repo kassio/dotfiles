@@ -25,9 +25,6 @@ return {
     }
 
     vim.g['test#strategy'] = 'terminal'
-    vim.g['test#go#gotest#executable'] = 'GOFLAGS="-count=1" go test -v'
-    vim.g['test#ruby#use_binstubs'] = 0
-    vim.g['test#ruby#use_spring_binstub'] = 1
 
     vim.api.nvim_create_user_command('TestCommand', function(c)
       vim.g['test#last_strategy'] = vim.g['test#strategy']

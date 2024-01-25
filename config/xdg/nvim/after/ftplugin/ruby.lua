@@ -23,6 +23,10 @@ vim.opt_local.path:append({
   'lib',
 })
 
+-- Testing
+vim.g['test#ruby#use_binstubs'] = 0
+vim.g['test#ruby#use_spring_binstub'] = 1
+
 -- Run rspec even when not in a test file
 vim.api.nvim_create_user_command('RSpec', function(c)
   local _, lnum, col = table.unpack(vim.fn.getcurpos())

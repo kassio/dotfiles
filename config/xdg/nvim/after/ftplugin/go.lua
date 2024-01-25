@@ -1,5 +1,8 @@
 vim.b.skip_autoformat = true
 
+-- Testing
+vim.g['test#go#gotest#executable'] = 'GOFLAGS="-count=1" go test -v'
+
 vim.api.nvim_create_user_command('GoAcceptance', function(c)
   local cmd = string.format("GOFLAGS='-count=1' go test -v ./test/acceptance", c.args)
   if #c.args > 0 then
