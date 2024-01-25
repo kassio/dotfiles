@@ -33,23 +33,23 @@ function M.find_files(opts)
   }))
 end
 
-function M.find_rails(opts)
+function M.find_rails(dirs)
+  dirs = dirs or {}
+
+  local title = 'rails'
+  if #dirs > 0 then
+    title = string.format('rails (%s)', table.concat(dirs, ', '))
+  end
+
   if vim.fn.filereadable('Gemfile') > 0 then
-    M.find_files(vim.tbl_deep_extend('keep', opts or {}, {
+    M.find_files({
       find_command = find_command_rails,
-      search_dirs = { 'app', 'lib', 'ee/app', 'ee/lib' },
-      prompt_title = 'rails (app, lib)',
-    }))
+      search_dirs = dirs,
+      prompt_title = title,
+    })
   else
     M.find_files()
   end
-end
-
-function M.find_rails_tests(opts)
-  M.find_rails(vim.tbl_deep_extend('keep', opts or {}, {
-    search_dirs = { 'app', 'lib', 'spec', 'ee/app', 'ee/lib', 'ee/spec' },
-    prompt_title = 'rails (app, lib, spec)',
-  }))
 end
 
 return setmetatable(M, {

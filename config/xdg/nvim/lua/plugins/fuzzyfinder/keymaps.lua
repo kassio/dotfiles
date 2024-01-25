@@ -173,15 +173,75 @@ return {
     desc = 'telescope: git branch diff',
   },
   {
-    '<leader>fr',
-    require('plugins.fuzzyfinder.commands').find_rails,
+    '<leader>fra',
+    function()
+      require('plugins.fuzzyfinder.commands').find_rails()
+    end,
+    silent = true,
+    desc = 'telescope: rails (all)',
+  },
+  {
+    '<leader>frr',
+    function()
+      require('plugins.fuzzyfinder.commands').find_rails({ 'app', 'lib', 'ee/app', 'ee/lib' })
+    end,
     silent = true,
     desc = 'telescope: rails (app, lib)',
   },
   {
-    '<leader>fR',
-    require('plugins.fuzzyfinder.commands').find_rails_tests,
+    '<leader>frM',
+    function()
+      require('plugins.fuzzyfinder.commands').find_rails({ 'app/models', 'ee/app/models' })
+    end,
     silent = true,
-    desc = 'telescope: rails (app, lib, spec)',
+    desc = 'telescope: rails (models)',
+  },
+  {
+    '<leader>frC',
+    function()
+      require('plugins.fuzzyfinder.commands').find_rails({ 'app/controllers', 'ee/app/controllers' })
+    end,
+    silent = true,
+    desc = 'telescope: rails (controllers)',
+  },
+  {
+    '<leader>frV',
+    function()
+      require('plugins.fuzzyfinder.commands').find_rails({ 'app/views', 'ee/app/views' })
+    end,
+    silent = true,
+    desc = 'telescope: rails (views)',
+  },
+  {
+    '<leader>frF',
+    function()
+      require('plugins.fuzzyfinder.commands').find_rails({ 'app/finders', 'ee/app/finders' })
+    end,
+    silent = true,
+    desc = 'telescope: rails (finders)',
+  },
+  {
+    '<leader>frS',
+    function()
+      require('plugins.fuzzyfinder.commands').find_rails({ 'app/services', 'ee/app/services' })
+    end,
+    silent = true,
+    desc = 'telescope: rails (services)',
+  },
+  {
+    '<leader>frL',
+    function()
+      require('plugins.fuzzyfinder.commands').find_rails({ 'app/lib', 'ee/app/lib' })
+    end,
+    silent = true,
+    desc = 'telescope: rails (lib)',
+  },
+  {
+    '<leader>frt',
+    function()
+      require('plugins.fuzzyfinder.commands').find_rails({ 'spec', 'ee/spec' })
+    end,
+    silent = true,
+    desc = 'telescope: rails (spec)',
   },
 }
