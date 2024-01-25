@@ -252,4 +252,12 @@ return {
     silent = true,
     desc = 'telescope: rails (spec)',
   },
+  {
+    '<leader>frw',
+    function()
+      require('plugins.fuzzyfinder.commands').find_rails({ 'app/workers', 'ee/app/workers' })
+    end,
+    silent = true,
+    desc = 'telescope: rails (spec)',
+  },
 }
