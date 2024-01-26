@@ -9,9 +9,7 @@ module Kassio
     load ".console.local.rb" if File.exist?(".console.local.rb")
   end
 
-  def reload
-    load!
-  end
+  def reload = load!
 
   def copy(obj)
     msg = obj.is_a?(String) ? obj : obj.inspect
