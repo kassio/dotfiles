@@ -173,7 +173,7 @@ return {
     desc = 'telescope: git branch diff',
   },
   {
-    '<leader>fra',
+    '<leader>frr',
     function()
       require('plugins.fuzzyfinder.commands').find_rails()
     end,
