@@ -31,7 +31,7 @@ local function get_pwd(tab, wezterm)
     current_dir = '~' .. current_dir:sub(#HOME_DIR + 1)
   end
 
-  current_dir, reduced = limit_pwd_size(current_dir)
+  local current_dir, reduced = limit_pwd_size(current_dir)
   if reduced then
     return '.../' .. current_dir
   end
