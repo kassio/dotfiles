@@ -221,6 +221,14 @@ return {
     desc = 'telescope: rails (events)',
   },
   {
+    '<leader>frg',
+    function()
+      require('plugins.fuzzyfinder.commands').find_rails({ 'app/graphql', 'ee/app/graphql' })
+    end,
+    silent = true,
+    desc = 'telescope: rails (graphql)',
+  },
+  {
     '<leader>frf',
     function()
       require('plugins.fuzzyfinder.commands').find_rails({ 'app/finders', 'ee/app/finders' })
