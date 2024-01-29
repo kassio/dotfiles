@@ -35,7 +35,7 @@ config.colors = {
   },
 }
 
-config.font_size = 16
+config.font_size = 14
 config.line_height = 1.2
 config.allow_square_glyphs_to_overflow_width = 'Never'
 config.font = wezterm.font({
