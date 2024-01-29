@@ -1,6 +1,6 @@
-local function get_zoomed(tab, wezterm)
+local function get_zoomed(tab, icon)
   if tab.active_pane.is_zoomed then
-    return wezterm.nerdfonts.fa_arrows_alt
+    return icon
   end
 
   return ' '
@@ -15,23 +15,24 @@ local function get_separator(tab)
 end
 
 local function limit_pwd_size(value, counter)
+  counter = counter or 0
   if #value > 60 then
     local i, _ = string.find(value, '/')
-    return limit_pwd_size(string.sub(value, i + 1), (counter or 0) + 1), true
+    return limit_pwd_size(string.sub(value, i + 1), counter + 1), true
   end
 
   return value, false
 end
 
-local function get_pwd(tab, wezterm)
-  local current_dir = tab.active_pane.current_working_dir:sub(8)
-  local HOME_DIR = os.getenv('HOME')
+local function get_pwd(tab)
+  local pane_dir = tostring(tab.active_pane.current_working_dir):sub(8)
+  local HOME_DIR = os.getenv('HOME') or '/Users/kassioborges'
 
-  if current_dir:match(HOME_DIR) then
-    current_dir = '~' .. current_dir:sub(#HOME_DIR + 1)
+  if pane_dir:match(HOME_DIR) ~= nil then
+    pane_dir = '~' .. pane_dir:sub(#HOME_DIR + 1)
   end
 
-  local current_dir, reduced = limit_pwd_size(current_dir)
+  local current_dir, reduced = limit_pwd_size(pane_dir)
   if reduced then
     return '.../' .. current_dir
   end
@@ -55,12 +56,11 @@ return {
     wezterm.on('format-tab-title', function(tab, _tabs, _panes, _config, _hover, _max_width)
       local title = table.concat({
         get_separator(tab),
-        tab.tab_index + 1,
-        string.format('[%s]', tab.active_pane.pane_id),
-        get_pwd(tab, wezterm),
-        '-',
+        string.format('[%s:%s]', tab.tab_index + 1, tab.active_pane.pane_id),
+        get_pwd(tab),
+        ':',
         get_process(tab),
-        get_zoomed(tab, wezterm),
+        get_zoomed(tab, wezterm.nerdfonts.fa_arrows_alt),
       }, ' ')
 
       return { { Text = title } }
