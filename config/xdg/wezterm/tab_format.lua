@@ -1,6 +1,6 @@
 local function get_zoomed(tab, icon)
   if tab.active_pane.is_zoomed then
-    return icon
+    return ' ' .. icon
   end
 
   return ' '
@@ -56,12 +56,12 @@ return {
     wezterm.on('format-tab-title', function(tab, _tabs, _panes, _config, _hover, _max_width)
       local title = table.concat({
         get_separator(tab),
-        string.format('[%s:%s]', tab.tab_index + 1, tab.active_pane.pane_id),
+        string.format('[%s:%s] ', tab.tab_index + 1, tab.active_pane.pane_id),
         get_pwd(tab),
-        ':',
+        '$ ',
         get_process(tab),
         get_zoomed(tab, wezterm.nerdfonts.fa_arrows_alt),
-      }, ' ')
+      }, '')
 
       return { { Text = title } }
     end)
