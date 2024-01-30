@@ -24,8 +24,8 @@ local function limit_pwd_size(value, counter)
   return value, false
 end
 
-local function get_pwd(tab)
-  local pane_dir = tostring(tab.active_pane.current_working_dir):sub(8)
+local function get_pwd(dir)
+  local pane_dir = tostring(dir):sub(8)
   local HOME_DIR = os.getenv('HOME') or '/Users/kassioborges'
 
   if pane_dir:match(HOME_DIR) ~= nil then
@@ -51,19 +51,29 @@ local function get_process(tab)
   return basename
 end
 
+local function get_title(tab)
+  local pane_dir = tab.active_pane.current_working_dir
+
+  if pane_dir == nil then
+    return tab.active_pane.title
+  end
+
+  return string.format('%s> %s', get_pwd(pane_dir), get_process(tab))
+end
+
 return {
   setup = function(wezterm)
     wezterm.on('format-tab-title', function(tab, _tabs, _panes, _config, _hover, _max_width)
-      local title = table.concat({
-        get_separator(tab),
-        string.format('[%s:%s] ', tab.tab_index + 1, tab.active_pane.pane_id),
-        get_pwd(tab),
-        '$ ',
-        get_process(tab),
-        get_zoomed(tab, wezterm.nerdfonts.fa_arrows_alt),
-      }, '')
-
-      return { { Text = title } }
+      return {
+        {
+          Text = table.concat({
+            get_separator(tab),
+            string.format('[%s:%s] ', tab.tab_index + 1, tab.active_pane.pane_id),
+            get_title(tab),
+            get_zoomed(tab, wezterm.nerdfonts.fa_arrows_alt),
+          }, ''),
+        },
+      }
     end)
   end,
 }
