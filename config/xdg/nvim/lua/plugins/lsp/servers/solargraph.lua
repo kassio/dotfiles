@@ -12,7 +12,30 @@ return {
       references = true,
       rename = true,
       useBundler = true,
-      reporters = {},
+      maxFiles = 20000,
+      include = {
+        '**/*.rb',
+      },
+      exclude = {
+        '**/spec/**/*',
+        'qa/qa/specs/features/**/*',
+        'vendor/**/*',
+        '.bundle/**/*',
+      },
+      reporters = {
+        'require_not_found',
+      },
+      require = {
+        'actioncable',
+        'actionmailer',
+        'actionpack',
+        'actionview',
+        'activejob',
+        'activemodel',
+        'activerecord',
+        'activestorage',
+        'activesupport',
+      },
     },
   },
 }
