@@ -2,7 +2,7 @@ snippet #f
 	# frozen_string_literal: true
 
 snippet lint
-	# rubocop: disable ${1:CodeReuse/ActiveRecord}
+	# rubocop: disable ${1:`!lua require('utils.ruby').rubocop_code()`}
 snippet namespace
 	`!lua require('utils.ruby').file_namespace()`
 snippet class
@@ -54,4 +54,4 @@ snippet JSON
 snippet tap
 	tap { |$1| ${2:p $1} }
 snippet then
-	then { |$1| ${2:p $1} }
+	then { |$1| $1 }

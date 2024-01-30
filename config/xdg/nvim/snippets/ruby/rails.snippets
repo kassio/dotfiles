@@ -1,3 +1,5 @@
+snippet pa
+	params[:${1:id}]
 snippet anaf
 	accepts_nested_attributes_for :${1:object}
 snippet bt
@@ -8,5 +10,5 @@ snippet hmany
 	has_many :${1:object}
 snippet hone
 	has_one :${1:object}
-snippet params
-	params[:${1:id}]
+snippet prep
+	`!lua require('utils.ruby').file_namespace()`.prepend_mod
