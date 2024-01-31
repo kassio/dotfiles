@@ -1,3 +1,5 @@
+local utils = require('utils')
+
 vim.b.skip_autoformat = true
 
 -- Add rails standard(and gitlab) to the path for easy file jump
@@ -29,7 +31,7 @@ vim.g['test#ruby#use_spring_binstub'] = 1
 
 -- Run rspec even when not in a test file
 vim.api.nvim_create_user_command('RSpec', function(c)
-  local _, lnum, col = table.unpack(vim.fn.getcurpos())
+  local _, lnum, col = utils.table.unpack(vim.fn.getcurpos())
   local file = c.args
 
   if file == '' then
