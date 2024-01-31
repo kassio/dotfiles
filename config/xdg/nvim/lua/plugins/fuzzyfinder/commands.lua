@@ -18,22 +18,41 @@ local find_command = {
   '*.gif',
 }
 
-local find_command_rails = require('utils.table').join_lists(find_command, {
-  '--extension',
-  'rb',
-  '--extension',
-  'haml',
-  '--extension',
-  'erb',
-})
-
 function M.find_files(opts)
-  require('telescope.builtin').find_files(vim.tbl_deep_extend('keep', opts or {}, {
-    find_command = find_command,
-  }))
+  opts = opts or {}
+
+  local finder = find_command
+  local title = 'find files'
+
+  if opts['extensions'] ~= nil then
+    local extensions = vim.tbl_flatten({ opts.extensions })
+    opts.extensions = nil
+
+    finder = vim.fn.reduce(extensions, function(result, ext)
+      table.insert(result, '--extension')
+      table.insert(result, ext)
+      return result
+    end, find_command)
+
+    title = string.format('%s (%s)', title, table.concat(extensions, ', '))
+  end
+
+  local new_opts = vim.tbl_deep_extend('keep', opts or {}, {
+    find_command = finder,
+    prompt_title = title,
+  })
+
+  vim.print(new_opts)
+
+  require('telescope.builtin').find_files(new_opts)
 end
 
 function M.find_rails(dirs)
+  if vim.fn.filereadable('Gemfile') <= 0 then
+    M.find_files()
+    return
+  end
+
   dirs = dirs or {}
 
   local title = 'rails'
@@ -41,15 +60,11 @@ function M.find_rails(dirs)
     title = string.format('rails (%s)', table.concat(dirs, ', '))
   end
 
-  if vim.fn.filereadable('Gemfile') > 0 then
-    M.find_files({
-      find_command = find_command_rails,
-      search_dirs = dirs,
-      prompt_title = title,
-    })
-  else
-    M.find_files()
-  end
+  M.find_files({
+    extensions = { 'rb', 'haml', 'erb' },
+    search_dirs = dirs,
+    prompt_title = title,
+  })
 end
 
 return setmetatable(M, {

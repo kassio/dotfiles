@@ -17,6 +17,50 @@ return {
     desc = 'telescope: find files: current word/selection',
   },
   {
+    '<leader>fey',
+    function()
+      require('plugins.fuzzyfinder.commands').find_files({
+        extensions = 'yml',
+      })
+    end,
+    silent = true,
+    mode = { 'n', 'v' },
+    desc = 'telescope: find files yml',
+  },
+  {
+    '<leader>fem',
+    function()
+      require('plugins.fuzzyfinder.commands').find_files({
+        extensions = 'md',
+      })
+    end,
+    silent = true,
+    mode = { 'n', 'v' },
+    desc = 'telescope: find files markdown (md)',
+  },
+  {
+    '<leader>fer',
+    function()
+      require('plugins.fuzzyfinder.commands').find_files({
+        extensions = { 'rb', 'erb' },
+      })
+    end,
+    silent = true,
+    mode = { 'n', 'v' },
+    desc = 'telescope: find files ruby (rb, erb)',
+  },
+  {
+    '<leader>feg',
+    function()
+      require('plugins.fuzzyfinder.commands').find_files({
+        extensions = 'go',
+      })
+    end,
+    silent = true,
+    mode = { 'n', 'v' },
+    desc = 'telescope: find files golang (go)',
+  },
+  {
     '<leader>f_',
     function()
       local word = require('utils').cword()
@@ -211,6 +255,17 @@ return {
     end,
     silent = true,
     desc = 'telescope: rails (views)',
+  },
+  {
+    '<leader>frd',
+    function()
+      require('plugins.fuzzyfinder.commands').find_files({
+        search_dirs = 'doc',
+        title = 'rails (doc)',
+      })
+    end,
+    silent = true,
+    desc = 'telescope: rails (doc)',
   },
   {
     '<leader>fre',
