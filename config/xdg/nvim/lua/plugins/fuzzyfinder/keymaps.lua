@@ -260,8 +260,8 @@ return {
     '<leader>frd',
     function()
       require('plugins.fuzzyfinder.commands').find_files({
-        search_dirs = 'doc',
-        title = 'rails (doc)',
+        search_dirs = { 'doc' },
+        prompt_title = 'rails (doc)',
       })
     end,
     silent = true,
