@@ -19,7 +19,6 @@ return {
       },
       indent = {
         enable = true,
-        disable = { 'ruby' },
       },
       incremental_selection = {
         enable = true,
