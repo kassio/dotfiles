@@ -302,7 +302,7 @@ return {
   {
     '<leader>frl',
     function()
-      require('plugins.fuzzyfinder.commands').find_rails({ 'app/lib', 'ee/app/lib' })
+      require('plugins.fuzzyfinder.commands').find_rails({ 'lib', 'ee/lib' })
     end,
     silent = true,
     desc = 'telescope: rails (lib)',
