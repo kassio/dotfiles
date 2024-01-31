@@ -160,6 +160,15 @@ return {
           wezterm.action.SendKey({ key = 'L', mods = 'CTRL' }),
         }),
       },
+      {
+        key = 'k',
+        mods = 'SUPER|SHIFT',
+        action = wezterm.action.Multiple({
+          wezterm.action.ClearScrollback('ScrollbackAndViewport'),
+          wezterm.action.SendKey({ key = 'L', mods = 'CTRL' }),
+          wezterm.action.SendKey({ key = 'U', mods = 'CTRL' }),
+        }),
+      },
     }
   end,
 }
