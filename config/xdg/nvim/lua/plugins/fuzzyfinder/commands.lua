@@ -42,8 +42,6 @@ function M.find_files(opts)
     prompt_title = title,
   })
 
-  vim.print(new_opts)
-
   require('telescope.builtin').find_files(new_opts)
 end
 
