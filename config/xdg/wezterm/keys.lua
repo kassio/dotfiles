@@ -40,16 +40,6 @@ return {
         mods = 'CMD|SHIFT',
         action = wezterm.action.CloseCurrentPane({ confirm = false }),
       },
-      { -- scroll to bottom
-        key = 'F7',
-        mods = 'CTRL',
-        action = wezterm.action.ScrollToBottom,
-      },
-      { -- scroll to top
-        key = 'F8',
-        mods = 'CTRL',
-        action = wezterm.action.ScrollToTop,
-      },
       -- Font resize
       {
         key = '0',
@@ -151,6 +141,26 @@ return {
         key = 'DownArrow',
         mods = 'SHIFT',
         action = wezterm.action.ScrollByLine(3),
+      },
+      {
+        key = 'UpArrow',
+        mods = 'SHIFT|CMD',
+        action = wezterm.action.ScrollByLine(-20),
+      },
+      {
+        key = 'DownArrow',
+        mods = 'SHIFT|CMD',
+        action = wezterm.action.ScrollByLine(20),
+      },
+      {
+        key = 'UpArrow',
+        mods = 'SHIFT|ALT|CMD',
+        action = wezterm.action.ScrollToTop,
+      },
+      {
+        key = 'DownArrow',
+        mods = 'SHIFT|ALT|CMD',
+        action = wezterm.action.ScrollToBottom,
       },
       {
         key = 'k',
