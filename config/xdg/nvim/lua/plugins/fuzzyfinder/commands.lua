@@ -70,6 +70,7 @@ function M.current_dir(opts)
   local path = vim.tbl_get(opts, 'search_dirs', 1) or '.'
 
   M.find_files(vim.tbl_deep_extend('keep', opts, {
+    _type = 'current_dir',
     prompt_title = 'find in ' .. path,
     find_command = {
       'fd',

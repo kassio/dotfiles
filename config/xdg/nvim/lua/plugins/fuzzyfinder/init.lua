@@ -22,6 +22,14 @@ return {
           case_mode = 'smart_case',
         },
       },
+      pickers = {
+        current_dir = {
+          mappings = {
+            i = { ['<cr>'] = user_actions.navigate_or_select },
+            n = { ['<cr>'] = user_actions.navigate_or_select },
+          },
+        },
+      },
       defaults = {
         dynamic_preview_title = true,
         cycle_layout_list = {
@@ -51,8 +59,7 @@ return {
         layout_strategy = 'flex',
         mappings = {
           i = {
-            ['<cr>'] = user_actions.select,
-            ['<c-o>'] = user_actions.select,
+            ['<c-o>'] = user_actions.navigate_or_select,
             ['<C-j>'] = actions.move_selection_next,
             ['<C-k>'] = actions.move_selection_previous,
             ['<C-n>'] = actions.cycle_history_next,
@@ -68,8 +75,7 @@ return {
             ['<C-e>'] = { '<end>', type = 'command' }, -- move cursor to the end of input
           },
           n = {
-            ['<cr>'] = user_actions.select,
-            ['<c-o>'] = user_actions.select,
+            ['<c-o>'] = user_actions.navigate_or_select,
             ['<C-j>'] = actions.move_selection_next,
             ['<C-k>'] = actions.move_selection_previous,
             ['<C-n>'] = actions.cycle_history_next,
