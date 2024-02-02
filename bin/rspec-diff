@@ -6,6 +6,35 @@ if [ "$#" -gt 0 ]; then
   shift
 fi
 
-git-diff-names-to "${ref}" |
-  grep '_spec.rb' |
-  xargs bundle exec rspec "$@"
+not_found=()
+specs=(
+  $(git-diff-names-to "${ref}" |
+    grep '_spec.rb')
+  )
+possible_specs=(
+  $(git-diff-names-to "${ref}" |
+    grep -v spec |
+    xargs -I{} echo {} | sed 's;^app;spec;' |
+    xargs -I{} echo {} | sed 's;^ee/app;ee/spec;' |
+    xargs -I{} echo {} | sed 's;^lib;spec/lib;' |
+    xargs -I{} echo {} | sed 's;^ee/lib;ee/spec/lib;' |
+    xargs -I{} echo {} | sed 's;.rb;_spec.rb;')
+  )
+
+for file in "${possible_specs[@]}"; do
+  if [ -f "${file}" ]; then
+    specs+=( "${file}" )
+  else
+    not_found+=( "${file}" )
+  fi
+done
+
+if [ "${#not_found[@]}" -gt 0 ]; then
+  echo "Missing specs:"
+
+  for file in "${not_found[@]}"; do
+    echo "\t- ${file}"
+  done
+fi
+
+bundle exec rspec "$@" "${specs[@]}"
