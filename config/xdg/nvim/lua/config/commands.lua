@@ -9,7 +9,12 @@ command('Preserve', function(cmd)
 end, { nargs = '?' })
 
 -- trim the file
-command('Trim', utils.trim, {})
+command('Trim', function()
+  utils.buffers.preserve(function()
+    vim.cmd([[keeppatterns silent! %s/\v\s+$//e]])
+    vim.cmd([[keeppatterns silent! %s/\v($\n\s*)+%$//e]])
+  end)
+end, {})
 
 -- change background
 command('Dark', 'set bg=dark', {})

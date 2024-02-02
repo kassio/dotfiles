@@ -123,18 +123,6 @@ function M.cword()
   end
 end
 
-function M.trim()
-  local hlsearch = vim.opt_global.hlsearch:get()
-  vim.opt.hlsearch = false
-
-  M.buffers.preserve(function()
-    vim.cmd([[keeppatterns silent! %s/\v\s+$//e]])
-    vim.cmd([[keeppatterns silent! %s/\v($\n\s*)+%$//e]])
-  end)
-
-  vim.opt.hlsearch = hlsearch
-end
-
 setmetatable(M, {
   __index = function(utils, key)
     local ok, module = pcall(require, 'utils.' .. key)
