@@ -174,6 +174,13 @@ return {
     desc = 'telescope: marks',
   },
   {
+    '<leader>fD',
+    require('plugins.fuzzyfinder.commands').current_dir,
+    silent = true,
+    mode = { 'n', 'v' },
+    desc = 'telescope: dirs',
+  },
+  {
     '<leader>fc',
     require('plugins.fuzzyfinder.commands').commands,
     silent = true,

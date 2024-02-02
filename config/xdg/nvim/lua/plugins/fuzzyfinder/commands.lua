@@ -65,6 +65,16 @@ function M.find_rails(dirs)
   })
 end
 
+function M.current_dir(opts)
+  M.find_files(vim.tbl_deep_extend('keep', opts or {}, {
+    find_command = {
+      'fd',
+      '--max-depth',
+      '1',
+    },
+  }))
+end
+
 return setmetatable(M, {
   __index = function(_table, key)
     return function(opts)
