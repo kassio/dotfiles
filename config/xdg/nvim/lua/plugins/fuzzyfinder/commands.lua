@@ -66,7 +66,11 @@ function M.find_rails(dirs)
 end
 
 function M.current_dir(opts)
-  M.find_files(vim.tbl_deep_extend('keep', opts or {}, {
+  opts = opts or {}
+  local path = vim.tbl_get(opts, 'search_dirs', 1) or '.'
+
+  M.find_files(vim.tbl_deep_extend('keep', opts, {
+    prompt_title = 'find in ' .. path,
     find_command = {
       'fd',
       '--max-depth',
