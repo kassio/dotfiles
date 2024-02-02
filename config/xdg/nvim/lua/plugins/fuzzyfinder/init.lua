@@ -8,7 +8,6 @@ return {
   keys = require('plugins.fuzzyfinder.keymaps'),
   config = function()
     local telescope = require('telescope')
-    local builtin = require('telescope.builtin')
     local actions = require('telescope.actions')
     local user_actions = require('plugins.fuzzyfinder.actions')
     local layout_actions = require('telescope.actions.layout')
@@ -96,28 +95,6 @@ return {
         winblend = 0,
         wrap_results = true,
       },
-    })
-
-    vim.api.nvim_create_user_command('Grep', function(cmd)
-      local prompt = 'grep: "%s"'
-      local str = cmd.fargs[1]
-      local search_args = {
-        search = str,
-        prompt_title = string.format(prompt, str),
-      }
-
-      local dirs = vim.split(cmd.fargs[2] or '', ',', { trimempty = true, plain = true })
-      if #dirs > 0 then
-        search_args.search_dirs = dirs
-        search_args.prompt_title =
-          string.format(prompt .. ' (in: %s)', str, table.concat(dirs, ','))
-      end
-
-      builtin.grep_string(search_args)
-    end, {
-      range = 0,
-      nargs = '*',
-      desc = 'telescope: search the given string `:Grep <string> [dir1,dir2]`',
     })
 
     utils.augroup('user:fuzzyfinder', {
