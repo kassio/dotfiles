@@ -24,7 +24,7 @@ module Kassio
   def copy(obj)
     `echo "#{obj.is_a?(String) ? obj : obj.inspect}" | pbcopy`
 
-    msg
+    obj
   end
 
   def silence_rails_warnings!
