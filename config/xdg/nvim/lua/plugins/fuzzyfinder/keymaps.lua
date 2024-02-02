@@ -184,7 +184,7 @@ return {
     desc = 'telescope: marks',
   },
   {
-    '<leader>fD',
+    '<leader>fd',
     require('plugins.fuzzyfinder.commands').current_dir,
     silent = true,
     mode = { 'n', 'v' },
