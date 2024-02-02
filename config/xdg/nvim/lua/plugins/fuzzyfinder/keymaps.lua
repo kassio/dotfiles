@@ -8,8 +8,11 @@ return {
   {
     '<leader>fF',
     function()
+      local word = require('utils').cword()
+
       require('plugins.fuzzyfinder.commands').find_files({
-        default_text = require('utils').cword(),
+        default_text = word,
+        prompt_title = string.format('find files (%s)', word),
       })
     end,
     silent = true,
@@ -68,6 +71,7 @@ return {
 
       require('plugins.fuzzyfinder.commands').find_files({
         default_text = word,
+        prompt_title = string.format('find files (%s)', word),
       })
     end,
     silent = true,
@@ -110,8 +114,11 @@ return {
   {
     '<leader>fH',
     function()
+      local word = require('utils').cword()
+
       require('telescope.builtin').help_tags({
-        default_text = require('utils').cword(),
+        default_text = word,
+        prompt_title = string.format('help (%s)', word),
       })
     end,
     silent = true,
@@ -146,8 +153,11 @@ return {
   {
     '<leader>fN',
     function()
+      local word = require('utils').cword()
+
       require('telescope.builtin').current_buffer_fuzzy_find({
-        default_text = require('utils').cword(),
+        default_text = word,
+        prompt_title = string.format('current buffer fuzzy (%s)', word),
       })
     end,
     silent = true,
