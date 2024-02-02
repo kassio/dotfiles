@@ -7,7 +7,8 @@ if [ "$#" -gt 0 ]; then
 fi
 
 not_found=()
-specs=(
+not_modified=()
+changed_specs=(
   $(git-diff-names-to "${ref}" |
     grep '_spec.rb')
   )
@@ -21,20 +22,34 @@ possible_specs=(
     xargs -I{} echo {} | sed 's;.rb;_spec.rb;')
   )
 
+specs+=( "${changed_specs[@]}" )
 for file in "${possible_specs[@]}"; do
   if [ -f "${file}" ]; then
+    if [ "${specs[(Ie)${file}]}" -le 0 ]; then
+      not_modified+=( "${file}" )
+    fi
+
     specs+=( "${file}" )
   else
     not_found+=( "${file}" )
   fi
 done
 
-if [ "${#not_found[@]}" -gt 0 ]; then
-  echo "Missing specs:"
+echo "${#changed_specs[@]} specs changed"
+for file in "${changed_specs[@]}"; do
+  echo "\t- ${file}"
+done
+echo "---"
+echo "${#not_modified[@]} specs not updated"
+for file in "${not_modified[@]}"; do
+  echo "\t- ${file}"
+done
+echo "---"
+echo "${#not_found[@]} missing specs:"
+for file in "${not_found[@]}"; do
+  echo "\t- ${file}"
+done
+echo "---"
 
-  for file in "${not_found[@]}"; do
-    echo "\t- ${file}"
-  done
-fi
-
+set -x
 bundle exec rspec "$@" "${specs[@]}"
