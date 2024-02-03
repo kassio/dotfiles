@@ -1,15 +1,35 @@
 #!/usr/bin/env zsh
 
+local dry=0
 local ref=""
-if [ "$#" -gt 0 ]; then
-  ref="$1"
-  shift
-fi
+
+parse_args() {
+  case $1 in
+    -h | --help)
+      echo "Usage: rspec-diff [options] [ref]
+      Options:
+        -h | --help           Show this menu
+        -d | --dry            Do not run the tests, only report on stats"
+      exit 0
+      ;;
+    -d | --dry)
+      dry=1
+      ;;
+    *)
+      ref="$1"
+      ;;
+  esac
+
+  if [ "$#" -gt 1 ]; then
+    shift
+    parse_args "$@"
+  fi
+}; parse_args "$@"
 
 report() {
   title="$1"; shift
 
-  printf "%s %s\n" "${#@[@]}" "$title"
+  printf "%s %s\n" "${#@}" "${title}"
   for file in "${@[@]}"; do
     echo "\t- ${file}"
   done
@@ -46,8 +66,14 @@ for file in "${files[@]}"; do
   fi
 done
 
+echo "${#files} files changed"
+echo "---"
 report "specs changed" "${modified[@]}"
 report "specs not update" "${not_modified[@]}"
 report "specs missing" "${not_found[@]}"
 
-bundle exec rspec "$@" "${specs[@]}"
+if [ "${dry}" -gt 0 ]; then
+  exit 0
+fi
+
+bundle exec rspec "${specs[@]}"
