@@ -1,55 +1,53 @@
 #!/usr/bin/env zsh
 
-ref=""
+local ref=""
 if [ "$#" -gt 0 ]; then
   ref="$1"
   shift
 fi
 
-not_found=()
-not_modified=()
-changed_specs=(
-  $(git-diff-names-to "${ref}" |
-    grep '_spec.rb')
-  )
-possible_specs=(
-  $(git-diff-names-to "${ref}" |
-    grep -v spec |
-    xargs -I{} echo {} | sed 's;^app;spec;' |
-    xargs -I{} echo {} | sed 's;^ee/app;ee/spec;' |
-    xargs -I{} echo {} | sed 's;^lib;spec/lib;' |
-    xargs -I{} echo {} | sed 's;^ee/lib;ee/spec/lib;' |
-    xargs -I{} echo {} | sed 's;.rb;_spec.rb;')
-  )
+report() {
+  title="$1"; shift
 
-specs+=( "${changed_specs[@]}" )
-for file in "${possible_specs[@]}"; do
-  if [ -f "${file}" ]; then
-    if [ "${specs[(Ie)${file}]}" -le 0 ]; then
-      not_modified+=( "${file}" )
-    fi
+  printf "%s %s\n" "${#@[@]}" "$title"
+  for file in "${@[@]}"; do
+    echo "\t- ${file}"
+  done
+  echo "---"
+}
 
+local files=( "${(@f)$(git-diff-names-to "${ref}")}" )
+local specs=()
+local modified=()
+local not_modified=()
+local not_found=()
+
+for file in "${files[@]}"; do
+  if [[ "${file}" =~ ".*_spec.rb" ]]; then
     specs+=( "${file}" )
-  else
-    not_found+=( "${file}" )
+    modified+=( "${file}" )
+  elif [[ ! "${file}" =~ ".*spec/.*" ]]; then
+    possible_spec="$(echo "${file}" |
+      sed 's;^app;spec;' |
+      sed 's;^ee/app;ee/spec;' |
+      sed 's;^lib;spec/lib;' |
+      sed 's;^ee/lib;ee/spec/lib;' |
+      sed 's;.rb;_spec.rb;')"
+
+    if [ -f "${possible_spec}" ]; then
+      specs+=( "${possible_spec}" )
+
+      if [ "${files[(Ie)${possible_spec}]}" -le 0 ]; then
+        not_modified+=( "${possible_spec}" )
+      fi
+    else
+      not_found+=( "${possible_spec}" )
+    fi
   fi
 done
 
-echo "${#changed_specs[@]} specs changed"
-for file in "${changed_specs[@]}"; do
-  echo "\t- ${file}"
-done
-echo "---"
-echo "${#not_modified[@]} specs not updated"
-for file in "${not_modified[@]}"; do
-  echo "\t- ${file}"
-done
-echo "---"
-echo "${#not_found[@]} missing specs:"
-for file in "${not_found[@]}"; do
-  echo "\t- ${file}"
-done
-echo "---"
+report "specs changed" "${modified[@]}"
+report "specs not update" "${not_modified[@]}"
+report "specs missing" "${not_found[@]}"
 
-set -x
 bundle exec rspec "$@" "${specs[@]}"
