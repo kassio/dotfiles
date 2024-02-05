@@ -5,7 +5,12 @@
   "repositories": {
     "dotfiles": {
       "remote": "https://github.com/kassio/dotfiles",
-      "local": "$HOME/.dotfiles"
+      "local": "$HOME/.dotfiles",
+      "afterSync": [
+        "git",
+        "switch",
+        "main"
+      ]
     },
     "syncer": {
       "remote": "https://github.com/kassio/sync",
