@@ -36,7 +36,7 @@ report() {
   echo "---"
 }
 
-local files=( "${(@f)$(git-diff-names-to "${ref}")}" )
+local files=( "${(@f)$(git-diff-names-to "${ref}" | grep '.rb')}" )
 local specs=()
 local modified=()
 local not_modified=()
