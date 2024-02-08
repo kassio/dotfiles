@@ -1,6 +1,5 @@
 local M = {}
-
-local find_command = {
+local default_find_command = {
   'fd',
   '--type',
   'file',
@@ -18,50 +17,45 @@ local find_command = {
   '*.gif',
 }
 
+local function find_command(extra)
+  return vim.fn.reduce(extra, function(result, ext)
+    table.insert(result, '--extension')
+    table.insert(result, ext)
+    return result
+  end, default_find_command)
+end
+
 function M.find_files(opts)
   opts = opts or {}
 
-  local finder = find_command
+  local extensions = vim.tbl_flatten({ opts.extensions })
+  opts.extensions = nil
+
   local title = 'find files'
+  if #extensions == 1 then
+    title = string.format('find *.%s', extensions[1])
+  elseif #extensions > 1 then
+    title = string.format('find [%s]', table.concat(extensions, ', '))
+  end
 
-  if opts['extensions'] ~= nil then
-    local extensions = vim.tbl_flatten({ opts.extensions })
-    opts.extensions = nil
-
-    finder = vim.fn.reduce(extensions, function(result, ext)
-      table.insert(result, '--extension')
-      table.insert(result, ext)
-      return result
-    end, find_command)
-
-    title = string.format('%s (%s)', title, table.concat(extensions, ', '))
+  local search_dirs = vim.tbl_flatten({ opts.search_dirs })
+  if #search_dirs > 0 then
+    title = string.format('%s in (%s)', title, table.concat(search_dirs, ', '))
   end
 
   local new_opts = vim.tbl_deep_extend('keep', opts or {}, {
-    find_command = finder,
+    find_command = find_command(extensions),
+    search_dirs = search_dirs,
     prompt_title = title,
   })
 
-  require('telescope.builtin').find_files(new_opts)
+  return require('telescope.builtin').find_files(new_opts)
 end
 
-function M.find_rails(dirs)
-  if vim.fn.filereadable('Gemfile') <= 0 then
-    M.find_files()
-    return
-  end
-
-  dirs = dirs or {}
-
-  local title = 'rails'
-  if #dirs > 0 then
-    title = string.format('rails (%s)', table.concat(dirs, ', '))
-  end
-
+function M.find_rails(search_dirs)
   M.find_files({
     extensions = { 'rb', 'haml', 'erb' },
-    search_dirs = dirs,
-    prompt_title = title,
+    search_dirs = search_dirs,
   })
 end
 
