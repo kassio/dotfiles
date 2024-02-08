@@ -6,7 +6,8 @@ return {
       ['*'] = {
         ['doc/*.txt'] = { type = 'doc' },
         ['doc/*.md'] = { type = 'doc' },
-        -- go
+      },
+      ['go.mod'] = {
         ['*.go'] = {
           alternate = '{}_test.go',
           type = 'source',
@@ -15,7 +16,8 @@ return {
           alternate = '{}.go',
           type = 'test',
         },
-        -- ruby
+      },
+      ['Gemfile'] = {
         ['config/initializers/*.rb'] = {
           alternate = 'spec/initializers/{}_spec.rb',
           type = 'source',
