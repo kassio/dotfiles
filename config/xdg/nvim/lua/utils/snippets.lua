@@ -9,8 +9,8 @@ function M.filename(opts)
   local filename = vim.api.nvim_buf_get_name(0)
   filename = fn.fnamemodify(filename, ':t:r')
 
-  if opts.filter ~= nil then
-    filename = string.gsub(filename, opts.filter, '')
+  if opts.remove ~= nil then
+    filename = string.gsub(filename, opts.remove, '')
   end
 
   if opts.case == 'camelcase' then

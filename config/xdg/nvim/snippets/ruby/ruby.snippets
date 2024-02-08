@@ -2,11 +2,11 @@ snippet #f
 	# frozen_string_literal: true
 
 snippet lint
-	# rubocop: disable ${1:`!lua require('utils.ruby').rubocop_code()`}
+	# rubocop: disable ${1:`!lua require("utils.ruby").rubocop_code()`}
 snippet namespace
-	`!lua require('utils.ruby').file_namespace()`
+	`!lua require("utils.ruby").file_namespace()`
 snippet class
-	class ${1:`!lua require('utils.ruby').file_namespace()`}${2}
+	class ${1:`!lua require("utils.ruby").file_namespace()`}${2}
 		${0:$VISUAL}
 	end
 snippet aa
@@ -20,7 +20,7 @@ snippet defi
 		${0:$VISUAL}
 	end
 snippet debug
-	require 'byebug'; byebug
+	require "byebug"; byebug
 snippet pry
 	binding.pry
 snippet prys "pry shell"
@@ -38,13 +38,13 @@ snippet dop
 		${0:$VISUAL}
 	end
 snippet module
-	module ${1:`!lua require('utils.ruby').file_namespace()`}$2
+	module ${1:`!lua require("utils.ruby").file_namespace()`}$2
 		${0:$VISUAL}
 	end
 snippet hr
-	puts '${1:*}' * 80
+	puts "${1:*}" * 80
 	p ${0:$VISUAL}
-	puts '$1' * 80
+	puts "$1" * 80
 snippet if
 	if $1
 		${0:$VISUAL}

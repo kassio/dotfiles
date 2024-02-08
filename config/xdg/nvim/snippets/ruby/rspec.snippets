@@ -39,9 +39,9 @@ snippet leti
 snippet rspec
 	# frozen_string_literal: true
 
-	require 'spec_helper'
+	require "spec_helper"
 
-	RSpec.describe ${1:`!lua require("utils.snippets").filename({filter='_spec$', case='camelcase'})`}${2} do $0
+	RSpec.describe ${1:`!lua require("utils.snippets").filename({remove="_spec$", case="camelcase"})`}${2} do $0
 	end
 snippet ssopen
 	screenshot_and_open_image
