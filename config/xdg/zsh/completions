@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
 
+for file in $(find "${XDG_CONFIG_HOME}/completions" -type f); do
+  source "$file"
+done
+
 _branches() { _arguments "1: :( ${(@f)$(git branch-list | xargs)} )"; }
 _other-branches() { _arguments "1: :( ${(@f)$(git branch-others | xargs)} )"; }
 
