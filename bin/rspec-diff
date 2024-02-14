@@ -49,12 +49,13 @@ for file in "${files[@]}"; do
   if [[ "${file}" =~ ".*_spec.rb" ]]; then
     specs+=( "${file}" )
     modified+=( "${file}" )
-  elif [[ ! "${file}" =~ ".*spec/.*" ]]; then
+  else
     possible_spec="$(echo "${file}" |
       sed 's;^app;spec;' |
       sed 's;^ee/app;ee/spec;' |
       sed 's;^lib;spec/lib;' |
       sed 's;^ee/lib;ee/spec/lib;' |
+      sed 's;spec/support;spec/support_specs;' |
       sed 's;.rb;_spec.rb;')"
 
     if [ -f "${possible_spec}" ]; then
