@@ -2,7 +2,6 @@ local address = vim.fs.joinpath(vim.fn.stdpath('cache'), 'terminal_server.pipe')
 local M = { name = 'remote_neovim' }
 
 local function remote_send(cmd)
-  vim.print({ remote_send = cmd })
   vim.system({
     'nvim',
     '--server',
@@ -13,7 +12,6 @@ local function remote_send(cmd)
 end
 
 local function with_terminal(cmd)
-  vim.print({ with_terminal = cmd })
   return string.format(
     [[<C-\><C-N>:lua require("config.terminal.manager").with_terminal(%s)<CR>]],
     vim.inspect(cmd, { newline = '', indent = '' })
