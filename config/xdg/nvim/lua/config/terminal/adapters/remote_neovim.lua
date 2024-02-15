@@ -1,15 +1,42 @@
 local address = vim.fs.joinpath(vim.fn.stdpath('cache'), 'terminal_server.pipe')
 local M = { name = 'remote_neovim' }
 
-local function rpc(cmd)
+local function remote_send(cmd)
+  vim.print({ remote_send = cmd })
+  vim.system({
+    'nvim',
+    '--server',
+    address,
+    '--remote-send',
+    cmd,
+  })
+end
+
+local function with_terminal(cmd)
+  vim.print({ with_terminal = cmd })
   return string.format(
     [[<C-\><C-N>:lua require("config.terminal.manager").with_terminal(%s)<CR>]],
     vim.inspect(cmd, { newline = '', indent = '' })
   )
 end
 
+local function server_start()
+  local ok = pcall(vim.fn.serverstart, address)
+  if not ok then
+    local answer =
+      vim.fn.confirm('Server already running, force restart?', '&Yes\n&No', vim.v.t_number)
+    if answer == 1 then
+      os.remove(address)
+      vim.fn.serverstart(address)
+    else
+      vim.cmd.qall()
+    end
+  end
+end
+
 function M.start()
-  vim.fn.serverstart(address)
+  server_start()
+
   vim.g.terminal_server = true
 
   return require('config.terminal.adapters.native').execute({
@@ -28,13 +55,7 @@ function M.can_execute(has_native)
 end
 
 function M.execute(cmd)
-  vim.system({
-    'nvim',
-    '--server',
-    address,
-    '--remote-send',
-    rpc(cmd),
-  })
+  remote_send(with_terminal(cmd))
 end
 
 return M
