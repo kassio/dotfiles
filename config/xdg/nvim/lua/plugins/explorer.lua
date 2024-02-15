@@ -78,8 +78,7 @@ return {
 
         api.config.mappings.default_on_attach(bufnr)
 
-        vim.keymap.set('n', '<CR>', api.node.open.drop, opts('Open'))
-        vim.keymap.set('n', '<C-T>', api.node.open.tab_drop, opts('Open: Tab'))
+        vim.keymap.set('n', '<S-CR>', api.node.open.drop, opts('Open'))
 
         vim.keymap.set('n', 'A', function()
           local winnr = vim.api.nvim_get_current_win()
