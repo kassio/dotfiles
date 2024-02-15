@@ -8,6 +8,8 @@
   defaultBranch = main
 [credential]
   helper = osxkeychain
+[branch]
+  sort = -committerdate
 [tag]
   sort = -creatordate
 [remote "origin"]
