@@ -39,6 +39,7 @@ report() {
 local files=(
   "${(@f)$(git-diff-names-to "${ref}" |
     grep -ve '^db/' | # skip migration
+    grep -ve '^app/events' | # skip events
     grep '.rb')}" )
 local specs=()
 local modified=()
