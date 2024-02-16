@@ -20,50 +20,6 @@ return {
     desc = 'telescope: find files: current word/selection',
   },
   {
-    '<leader>fey',
-    function()
-      require('plugins.fuzzyfinder.commands').find_files({
-        extensions = 'yml',
-      })
-    end,
-    silent = true,
-    mode = { 'n', 'v' },
-    desc = 'telescope: find files yml',
-  },
-  {
-    '<leader>fem',
-    function()
-      require('plugins.fuzzyfinder.commands').find_files({
-        extensions = 'md',
-      })
-    end,
-    silent = true,
-    mode = { 'n', 'v' },
-    desc = 'telescope: find files markdown (md)',
-  },
-  {
-    '<leader>fer',
-    function()
-      require('plugins.fuzzyfinder.commands').find_files({
-        extensions = { 'rb', 'erb' },
-      })
-    end,
-    silent = true,
-    mode = { 'n', 'v' },
-    desc = 'telescope: find files ruby (rb, erb)',
-  },
-  {
-    '<leader>feg',
-    function()
-      require('plugins.fuzzyfinder.commands').find_files({
-        extensions = 'go',
-      })
-    end,
-    silent = true,
-    mode = { 'n', 'v' },
-    desc = 'telescope: find files golang (go)',
-  },
-  {
     '<leader>f_',
     function()
       local word = require('utils').cword()
@@ -132,7 +88,7 @@ return {
     desc = 'telescope: buffers',
   },
   {
-    '<leader>fl',
+    '<leader>fL',
     require('plugins.fuzzyfinder.commands').highlights,
     silent = true,
     desc = 'telescope: highlights',
@@ -196,6 +152,62 @@ return {
     silent = true,
     mode = { 'n', 'v' },
     desc = 'telescope: commands',
+  },
+  {
+    '<leader>fq',
+    require('plugins.fuzzyfinder.commands').quickfix,
+    silent = true,
+    desc = 'telescope: quickfix',
+  },
+  {
+    '<leader>fl',
+    require('plugins.fuzzyfinder.commands').loclist,
+    silent = true,
+    desc = 'telescope: quickfix',
+  },
+  {
+    '<leader>fey',
+    function()
+      require('plugins.fuzzyfinder.commands').find_files({
+        extensions = 'yml',
+      })
+    end,
+    silent = true,
+    mode = { 'n', 'v' },
+    desc = 'telescope: find files yml',
+  },
+  {
+    '<leader>fem',
+    function()
+      require('plugins.fuzzyfinder.commands').find_files({
+        extensions = 'md',
+      })
+    end,
+    silent = true,
+    mode = { 'n', 'v' },
+    desc = 'telescope: find files markdown (md)',
+  },
+  {
+    '<leader>fer',
+    function()
+      require('plugins.fuzzyfinder.commands').find_files({
+        extensions = { 'rb', 'erb' },
+      })
+    end,
+    silent = true,
+    mode = { 'n', 'v' },
+    desc = 'telescope: find files ruby (rb, erb)',
+  },
+  {
+    '<leader>feg',
+    function()
+      require('plugins.fuzzyfinder.commands').find_files({
+        extensions = 'go',
+      })
+    end,
+    silent = true,
+    mode = { 'n', 'v' },
+    desc = 'telescope: find files golang (go)',
   },
   {
     '<leader>fgg',
