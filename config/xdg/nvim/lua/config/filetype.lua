@@ -15,6 +15,7 @@ vim.filetype.add({
   filename = {
     ['.simplecov'] = 'ruby',
     ['Dangerfile'] = 'ruby',
+    ['Guardfile'] = 'ruby',
     ['Brewfile'] = 'brewfile',
     ['go.mod'] = 'gomod',
   },
