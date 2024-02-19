@@ -6,6 +6,7 @@ end
 
 vim.filetype.add({
   extension = {
+    ['conf'] = 'config',
     ['config'] = 'config',
     ['libsonnet'] = 'jsonnet',
     ['jsonnet'] = 'jsonnet',
