@@ -3,23 +3,8 @@ local M = {
   path_replacer = '_',
 }
 
+local logger = require('utils').logger('session')
 local escaped_file_path = string.gsub(vim.fn.getcwd(), '[/%.]', M.path_replacer)
-
-local function notify(msg, level)
-  vim.notify(msg, level, { title = 'Session Manager' })
-end
-
-local function info(msg)
-  notify(msg, vim.log.levels.INFO)
-end
-
-local function warn(msg)
-  notify(msg, vim.log.levels.WARN)
-end
-
-local function error(msg)
-  notify(msg, vim.log.levels.ERROR)
-end
 
 local function prefix_from(session)
   session = vim.fn.split(session or '', '/')
@@ -105,9 +90,9 @@ local function save_session(prefix, default)
     vim.api.nvim_set_vvar('this_session', session)
 
     vim.cmd(string.format('silent! mksession! %s | redraw!', session))
-    info(string.format('Session "%s" saved', prefix))
+    logger.info(string.format('"%s" saved', prefix))
   else
-    error('Session prefix required!')
+    logger.error('prefix required!')
   end
 end
 
@@ -127,7 +112,7 @@ end
 function M.load()
   local session, ok = select_session('Available sessions', function(session)
     vim.cmd(string.format('silent! source %s | redraw!', session))
-    info(string.format('Session "%s" loaded', prefix_from(session)))
+    logger.info(string.format('"%s" loaded', prefix_from(session)))
   end)
 
   if not ok then
@@ -135,14 +120,14 @@ function M.load()
   end
 
   if not session then
-    warn('No sessions available!')
+    logger.warn('No sessions available!')
   end
 end
 
 function M.destroy()
   return select_session('Existing sessions', function(session)
     delete_session(session)
-    error(string.format('Session "%s" deleted', prefix_from(session)))
+    logger.info(string.format('"%s" deleted', prefix_from(session)))
   end)
 end
 

@@ -85,24 +85,26 @@ function M.copy_filename(cmd)
 end
 
 function M.logger(base, sep)
-  sep = sep or ': '
-  local n = { title = base }
+  local n = { title = base, sep = (sep or ':') }
 
-  local notifier = vim.notify
-  if vim.tbl_isempty(vim.api.nvim_list_uis()) then
-    notifier = function(msg, level, opts)
-      vim.print(
-        string.format('[%s][%s] %s', M.table.key_for(vim.log.levels, level), opts.title, msg)
-      )
-    end
-  end
+  setmetatable(n, {
+    __index = function(tbl, key)
+      if not vim.tbl_contains(vim.tbl_keys(vim.log.levels), string.upper(key)) then
+        vim.print(key .. ': log level not found')
+        return
+      end
 
-  for name, level in pairs(vim.log.levels) do
-    n[string.lower(name)] = function(msg, title)
-      local full_title = table.concat(M.table.compact_list({ n.title, title }), sep)
-      notifier(msg, level, { title = full_title })
-    end
-  end
+      return function(msg, title)
+        if vim.tbl_isempty(vim.api.nvim_list_uis()) then
+          local fullmsg = table.concat(M.table.compact_list({ title, msg }), tbl.sep)
+          vim.print(string.format('[%s][%s] %s', string.upper(key), fullmsg))
+        else
+          local fulltitle = table.concat(M.table.compact_list({ tbl.title, title }), sep)
+          vim.notify(msg, key, { title = fulltitle })
+        end
+      end
+    end,
+  })
 
   return n
 end
