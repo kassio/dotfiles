@@ -5,9 +5,7 @@ local function send(value)
 end
 
 function M.send(opts)
-  send(vim.keycode('<c-f7>'))
   send(opts.string)
-  send(vim.keycode('<c-f7>'))
 end
 
 local adapter = { name = 'wezterm' }

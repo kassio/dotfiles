@@ -1,4 +1,8 @@
 #!/usr/bin/env zsh
 
 pane="$1"; shift
-echo "$*" | wezterm cli send-text --no-paste --pane-id "${pane}"
+# Use echo to ensure the correct end-of-line (<cr> char)
+echo "$*" |
+  wezterm cli send-text \
+  --no-paste \
+  --pane-id "${pane}"
