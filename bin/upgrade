@@ -54,6 +54,7 @@ else
   upgrader "quarentine" "$@"
   upgrader "nvim" "$@"
   upgrader "wezterm" "$@"
+  upgrader "1password" "$@"
   upgrader "custom" "$@"
 fi
 
