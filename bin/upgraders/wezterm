@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
-  echo "[wezterm] update wezterm \$TERM"
+  echo "[wezterm] update wezterm \$TERM and completion"
   exit
 fi
 
@@ -10,3 +10,7 @@ tempfile=$(mktemp) \
   && curl -o $tempfile https://raw.githubusercontent.com/wez/wezterm/main/termwiz/data/wezterm.terminfo \
   && tic -x -o ~/.terminfo $tempfile \
   && rm $tempfile
+
+title "[wezterm] updating wezterm completions"
+mkdir -p "${ZSH_CONFIG_HOME}/completions"
+wezterm shell-completion --shell zsh > "${ZSH_CONFIG_HOME}/completions/wezterm.zsh"
