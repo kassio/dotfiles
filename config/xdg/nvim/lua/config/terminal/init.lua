@@ -100,7 +100,10 @@ return {
     vim.keymap.set('n', '<leader>tm', '<cmd>Tmapexec<cr>')
 
     vim.keymap.set('n', '<leader>tL', function()
-      manager.send('clear')
+      manager.send('clear-screen')
+
+      -- redraw current window to avoid any weird state
+      vim.cmd.mode()
 
       pcall(function()
         local original = vim.bo[manager.active.bufnr].scrollback

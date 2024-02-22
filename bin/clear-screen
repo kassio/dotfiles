@@ -1,4 +1,4 @@
 #!/usr/bin/env zsh
 
-printf '\033[2J\033[3J\033[1;1H' # clear screen
-print
+printf '\033[2J\033[3J\033[1;1H' && # clear screen buffer
+  clear
