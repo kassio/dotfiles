@@ -18,9 +18,9 @@ return {
   config = function()
     vim.g['test#custom_strategies'] = {
       terminal = function(cmd)
-        vim.cmd.Tcmd(string.format('let g:test#last_strategy = "terminal"'))
-        vim.cmd.Tcmd(string.format('let g:test#last_command = %q', cmd))
-        vim.cmd.T(cmd)
+        vim.cmd(string.format('silent! Tcmd let g:test#last_strategy = "terminal"'))
+        vim.cmd(string.format('silent! Tcmd let g:test#last_command = %q', cmd))
+        vim.cmd(string.format('silent! T %s', cmd))
       end,
     }
 
