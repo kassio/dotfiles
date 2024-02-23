@@ -1,14 +1,17 @@
+local NAME = 'ruby_ls'
+local logger = require('utils').logger(NAME)
+
 local function request(bufnr, method, cb)
-  local client = vim.lsp.get_clients({ name = 'ruby_ls' })[1]
+  local client = vim.lsp.get_clients({ name = NAME })[1]
   local params = vim.lsp.util.make_text_document_params(bufnr)
+  if client == nil then
+    logger.error(NAME .. ' client not found')
+    return
+  end
 
   client.request(method, params, function(error, response)
     if error ~= nil then
-      vim.notify(
-        string.format('%s\n%s', error.message, error.data.backtrace),
-        vim.log.levels.ERROR,
-        { title = 'Ruby LSP' }
-      )
+      logger.error(string.format('%s\n%s', error.message, error.data.backtrace))
     end
 
     cb(response, error, client)
@@ -22,11 +25,11 @@ return {
       request(bufnr, 'rubyLsp/workspace/dependencies', function(response)
         local include_indirect = opts.args == INCLUDE_INDIRECT_OPTION
         local dependencies = vim.fn.reduce(response, function(result, item)
-          local label = string.format('%s (%s)', item.name, item.version.version)
           if not include_indirect and not item.dependency then
             return result
           end
 
+          local label = string.format('%s (%s)', item.name, item.version.version)
           if not item.dependency then
             label = '[indirect] ' .. label
           end
