@@ -20,7 +20,7 @@ return {
       callback = function(args)
         local client = vim.lsp.get_client_by_id(args.data.client_id) or {}
         if client.server_capabilities.inlayHintProvider then
-          vim.lsp.inlay_hint.enable(args.buf, true)
+          vim.lsp.inlay_hint.enable(args.buf, vim.b[args.buf]['inlay_enabled'])
         end
 
         vim.api.nvim_create_autocmd({ 'BufWritePre' }, {

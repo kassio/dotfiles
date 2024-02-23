@@ -24,7 +24,10 @@ return {
     end, { bang = true, desc = 'lsp: async format document. [! for sync format]' })
 
     vim.api.nvim_buf_create_user_command(bufnr, 'LspToggleInlayHint', function()
-      vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled())
+      local inlay_enabled = not vim.lsp.inlay_hint.is_enabled()
+
+      vim.lsp.inlay_hint.enable(bufnr, inlay_enabled)
+      vim.b[bufnr].inlay_enabled = inlay_enabled
     end, {})
   end,
 }
