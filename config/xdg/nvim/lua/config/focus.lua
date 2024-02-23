@@ -33,7 +33,7 @@ return {
     }, {
       group = aug,
       callback = function()
-        vim.cmd('silent! update')
+        vim.cmd('silent! noconfirm update')
       end,
     })
 
@@ -41,7 +41,7 @@ return {
       pattern = 'TermSend',
       group = aug,
       callback = function()
-        vim.cmd('silent! write')
+        vim.cmd('silent! noconfirm write')
       end,
     })
 
