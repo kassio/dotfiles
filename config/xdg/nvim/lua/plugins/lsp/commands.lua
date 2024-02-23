@@ -1,6 +1,6 @@
 local utils = require('utils')
 
-function format(bufnr, async)
+local function format(bufnr, async)
   local filetype = vim.bo[bufnr].filetype
   if
     not vim.bo[bufnr].modifiable

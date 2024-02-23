@@ -22,8 +22,8 @@ return {
   {
     '<leader>f_',
     function()
-      local word = require('utils').cword()
-      word, _ = require('utils.string').snakecase(word):gsub('::', '/')
+      local original_word = require('utils').cword()
+      local word, _ = require('utils.string').snakecase(original_word):gsub('::', '/')
 
       require('plugins.fuzzyfinder.commands').find_files({
         default_text = word,

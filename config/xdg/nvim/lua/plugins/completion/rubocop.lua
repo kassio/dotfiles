@@ -33,23 +33,23 @@ local function build_rules_list()
   vim.system({ 'bundle', 'exec', 'rubocop', '--show-cops' }, { text = true }, parser)
 end
 
-function M:is_available()
+function M.is_available()
   return vim.bo.filetype == 'ruby' and M.rules.loaded
 end
 
-function M:get_debug_name()
+function M.get_debug_name()
   return 'rubocop'
 end
 
-function M:get_keyword_pattern()
+function M.get_keyword_pattern()
   return [[\(\k\|\/\)\+]]
 end
 
-function M:get_trigger_characters()
+function M.get_trigger_characters()
   return { '/' }
 end
 
-function M:complete(_params, callback)
+function M.complete(_params, callback)
   callback(M.rules.list)
 end
 
