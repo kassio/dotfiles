@@ -1,4 +1,3 @@
-local utils = require('utils')
 return {
   setup = function()
     local aug = vim.api.nvim_create_augroup('user:focus', { clear = false })
