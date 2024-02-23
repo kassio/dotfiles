@@ -101,6 +101,7 @@ return {
 
     vim.keymap.set('n', '<leader>tL', function()
       manager.send('clear-screen')
+      manager.send('clear')
 
       -- redraw current window to avoid any weird state
       vim.cmd.mode()
