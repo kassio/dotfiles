@@ -32,7 +32,6 @@ return {
       },
     })
 
-    require('plugins.completion.rubocop').setup()
     cmp.setup({
       formatting = require('plugins.completion.formatting'),
 
