@@ -32,7 +32,9 @@ return {
     }, {
       group = aug,
       callback = function()
-        pcall(vim.api.nvim_cmd, { cmd = 'update', mods = { confirm = false, silent = true } })
+        pcall(function()
+          vim.cmd({ cmd = 'update', mods = { confirm = false, silent = true } }, {})
+        end)
       end,
     })
 
@@ -40,7 +42,9 @@ return {
       pattern = 'TermSend',
       group = aug,
       callback = function()
-        pcall(vim.api.nvim_cmd, { cmd = 'write', mods = { confirm = false, silent = true } })
+        pcall(function()
+          vim.cmd({ cmd = 'write', mods = { confirm = false, silent = true } }, {})
+        end)
       end,
     })
 
