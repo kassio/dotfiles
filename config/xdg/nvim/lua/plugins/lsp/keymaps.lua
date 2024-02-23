@@ -8,7 +8,7 @@ local function buffer_format()
 end
 
 return {
-  setup = function(bufnr, lsp)
+  setup = function(bufnr)
     local function keymap(desc, mode, lhs, rhs)
       vim.keymap.set(mode, lhs, rhs, {
         silent = true,
@@ -17,15 +17,15 @@ return {
       })
     end
 
-    keymap('hover', 'n', 'K', lsp.buf.hover)
-    keymap('signature help', 'n', '<c-k>', lsp.buf.signature_help)
+    keymap('hover', 'n', 'K', vim.lsp.buf.hover)
+    keymap('signature help', 'n', '<c-k>', vim.lsp.buf.signature_help)
     keymap('format (sync)', 'n', '<leader>f=', buffer_format)
 
-    keymap('rename', 'n', 'grr', lsp.buf.rename)
+    keymap('rename', 'n', 'grr', vim.lsp.buf.rename)
 
-    keymap('code actions', { 'n', 'v', 'x' }, 'gla', lsp.buf.code_action)
-    keymap('declarations', 'n', 'glD', lsp.buf.declaration)
+    keymap('code actions', { 'n', 'v', 'x' }, 'gla', vim.lsp.buf.code_action)
+    keymap('declarations', 'n', 'glD', vim.lsp.buf.declaration)
 
-    require('plugins.fuzzyfinder.lsp').setup(lsp, keymap)
+    require('plugins.fuzzyfinder.lsp').setup(vim.lsp, keymap)
   end,
 }

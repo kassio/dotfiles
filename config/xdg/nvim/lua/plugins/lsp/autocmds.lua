@@ -18,14 +18,21 @@ return {
     vim.api.nvim_create_autocmd({ 'LspAttach' }, {
       group = aug,
       callback = function(args)
-        local lsp = vim.lsp
         local client = vim.lsp.get_client_by_id(args.data.client_id) or {}
-        if vim.tbl_get(client, { 'server_capabilities', 'inlayHintProvider' }) ~= nil then
-          lsp.inlay_hint(args.buf, false)
+        if client.server_capabilities.inlayHintProvider then
+          vim.lsp.inlay_hint.enable(args.buf, true)
         end
 
-        require('plugins.lsp.keymaps').setup(args.buf, lsp)
-        require('plugins.lsp.formatting').setup(args.buf)
+        vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+          group = vim.api.nvim_create_augroup('user:lsp', { clear = false }),
+          buffer = args.buf,
+          callback = function()
+            vim.cmd.LspFormat()
+          end,
+        })
+
+        require('plugins.lsp.commands').setup(args.buf)
+        require('plugins.lsp.keymaps').setup(args.buf)
       end,
     })
   end,
