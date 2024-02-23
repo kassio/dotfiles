@@ -2,14 +2,15 @@ return {
   cmd = { vim.env.HOME .. '/src/go/bin/gopls' },
   settings = {
     gopls = {
-      experimentalPostfixCompletions = true, -- experimental
       gofumpt = false,
       usePlaceholders = true,
-      staticcheck = true, -- experimental
       codelenses = {
-        generate = true,
         gc_details = true,
-        tide = true,
+        generate = true,
+        regenerate_cgo = true,
+        tidy = true,
+        upgrade_dependency = true,
+        vendor = true,
       },
       hints = {
         assignVariableTypes = true,
