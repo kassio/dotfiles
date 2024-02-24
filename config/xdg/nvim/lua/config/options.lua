@@ -12,6 +12,9 @@ g.markdown_recommended_style = 0
 g.lastplace_ignore = 'gitcommit,gitrebase'
 g.lastplace_ignore_buftype = 'quickfix,nofile,help'
 
+-- disable default menu
+vim.cmd.aunmenu('*')
+
 opt.autowriteall = true
 opt.backup = false
 opt.cindent = true
