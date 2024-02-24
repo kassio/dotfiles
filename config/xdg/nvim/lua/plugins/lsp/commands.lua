@@ -15,7 +15,7 @@ local function format(bufnr, async)
 end
 
 return {
-  setup = function(bufnr)
+  setup = function(bufnr, client)
     require('plugins.lsp.servers.ruby_ls.commands').setup(bufnr)
 
     vim.api.nvim_buf_create_user_command(bufnr, 'LspFormat', function(opts)
@@ -23,11 +23,14 @@ return {
       format(bufnr, not sync)
     end, { bang = true, desc = 'lsp: async format document. [! for sync format]' })
 
-    vim.api.nvim_buf_create_user_command(bufnr, 'LspToggleInlayHint', function()
-      local inlay_enabled = not vim.lsp.inlay_hint.is_enabled()
+    if client.server_capabilities.inlayHintProvider and vim.b[bufnr].lsp_inlay_command_exists ~= true then
+      vim.api.nvim_buf_create_user_command(bufnr, 'LspToggleInlayHint', function()
+        local inlay_enabled = not vim.lsp.inlay_hint.is_enabled()
 
-      vim.lsp.inlay_hint.enable(bufnr, inlay_enabled)
-      vim.b[bufnr].inlay_enabled = inlay_enabled
-    end, {})
+        vim.lsp.inlay_hint.enable(bufnr, inlay_enabled)
+        vim.b[bufnr].inlay_enabled = inlay_enabled
+        vim.b[bufnr].lsp_inlay_command_exists = true
+      end, {})
+    end
   end,
 }
