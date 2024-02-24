@@ -1,9 +1,9 @@
 local NAME = 'ruby_ls'
 local logger = require('utils').logger(NAME)
 
-local function request(bufnr, method, cb)
+local function request(method, cb)
   local client = vim.lsp.get_clients({ name = NAME })[1]
-  local params = vim.lsp.util.make_text_document_params(bufnr)
+  local params = vim.lsp.util.make_text_document_params(0)
   if client == nil then
     logger.error(NAME .. ' client not found')
     return
@@ -15,14 +15,14 @@ local function request(bufnr, method, cb)
     end
 
     cb(response, error, client)
-  end, bufnr)
+  end, 0)
 end
 
 return {
-  setup = function(bufnr)
+  setup = function()
     local INCLUDE_INDIRECT_OPTION = 'include_indirect'
-    vim.api.nvim_buf_create_user_command(bufnr, 'LspRubyShowDependencies', function(opts)
-      request(bufnr, 'rubyLsp/workspace/dependencies', function(response)
+    vim.api.nvim_create_user_command('LspRubyShowDependencies', function(opts)
+      request('rubyLsp/workspace/dependencies', function(response)
         local include_indirect = opts.args == INCLUDE_INDIRECT_OPTION
         local dependencies = vim.fn.reduce(response, function(result, item)
           if not include_indirect and not item.dependency then
@@ -47,6 +47,7 @@ return {
       complete = function()
         return { INCLUDE_INDIRECT_OPTION }
       end,
+      desc = 'lsp: show ruby dependencies',
     })
   end,
 }

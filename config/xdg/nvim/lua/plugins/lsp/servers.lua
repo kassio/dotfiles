@@ -4,6 +4,7 @@ local capabilities = require('plugins.lsp.capabilities')
 local servers = {
   bashls = {},
   cssls = {},
+  efm = require('plugins.lsp.servers.efm'),
   gopls = require('plugins.lsp.servers.gopls'),
   jqls = {},
   jsonls = {},

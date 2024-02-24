@@ -1,36 +1,36 @@
 local utils = require('utils')
 
-local function format(bufnr, async)
-  local filetype = vim.bo[bufnr].filetype
-  if
-    not vim.bo[bufnr].modifiable
-    or filetype == ''
-    or utils.plugin_filetype(filetype)
-    or vim.b[bufnr].skip_autoformat == true
-  then
-    return
-  end
+local function can_format()
+  local filetype = vim.bo.filetype
 
-  vim.lsp.buf.format({ async = async == true })
+  return vim.bo.modifiable
+    and filetype ~= ''
+    and not utils.plugin_filetype(filetype)
+    and vim.b.skip_autoformat ~= true
 end
 
 return {
-  setup = function(bufnr, client)
-    require('plugins.lsp.servers.ruby_ls.commands').setup(bufnr)
+  setup = function()
+    require('plugins.lsp.servers.ruby_ls.commands').setup()
 
-    vim.api.nvim_buf_create_user_command(bufnr, 'LspFormat', function(opts)
-      local sync = opts.bang
-      format(bufnr, not sync)
-    end, { bang = true, desc = 'lsp: async format document. [! for sync format]' })
+    vim.api.nvim_create_user_command('LspFormat', function()
+      if not can_format() then
+        return
+      end
 
-    if client.server_capabilities.inlayHintProvider and vim.b[bufnr].lsp_inlay_command_exists ~= true then
-      vim.api.nvim_buf_create_user_command(bufnr, 'LspToggleInlayHint', function()
-        local inlay_enabled = not vim.lsp.inlay_hint.is_enabled()
+      for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+        vim.lsp.buf.format({ name = client.name, async = false })
+      end
+    end, { desc = 'lsp: format document' })
 
-        vim.lsp.inlay_hint.enable(bufnr, inlay_enabled)
-        vim.b[bufnr].inlay_enabled = inlay_enabled
-        vim.b[bufnr].lsp_inlay_command_exists = true
-      end, {})
-    end
+    vim.api.nvim_create_user_command('LspToggleInlayHint', function()
+      local has_inlay = vim.tbl_contains(vim.lsp.get_clients({ bufnr = 0 }), function(client)
+        return client.server_capabilities.inlayHintProvider
+      end)
+
+      if has_inlay then
+        vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+      end
+    end, { desc = 'lsp: toggle inlay hints' })
   end,
 }
