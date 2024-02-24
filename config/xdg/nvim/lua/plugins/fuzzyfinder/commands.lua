@@ -12,6 +12,8 @@ local default_find_command = {
   '--exclude',
   '.git',
   '--exclude',
+  '.DS_Store',
+  '--exclude',
   '*.png',
   '--exclude',
   '*.jpeg',
