@@ -10,6 +10,8 @@ local default_find_command = {
   '--color',
   'never',
   '--exclude',
+  '.git',
+  '--exclude',
   '*.png',
   '--exclude',
   '*.jpeg',
