@@ -15,6 +15,7 @@ return {
     -- autotrim
     vim.api.nvim_create_autocmd({
       'BufLeave',
+      'BufWrite',
       'FocusLost',
       'VimLeavePre',
     }, {
