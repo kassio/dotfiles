@@ -19,9 +19,9 @@ local function request(method, cb)
 end
 
 return {
-  setup = function()
+  setup = function(command)
     local INCLUDE_INDIRECT_OPTION = 'include_indirect'
-    vim.api.nvim_create_user_command('LspRubyShowDependencies', function(opts)
+    command('LspRubyShowDependencies', function(opts)
       request('rubyLsp/workspace/dependencies', function(response)
         local include_indirect = opts.args == INCLUDE_INDIRECT_OPTION
         local dependencies = vim.fn.reduce(response, function(result, item)
@@ -47,7 +47,7 @@ return {
       complete = function()
         return { INCLUDE_INDIRECT_OPTION }
       end,
-      desc = 'lsp: show ruby dependencies',
+      desc = 'show ruby dependencies',
     })
   end,
 }
