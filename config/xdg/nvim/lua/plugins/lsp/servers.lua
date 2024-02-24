@@ -17,8 +17,6 @@ local servers = {
 
 return {
   setup = function()
-    require('plugins.lsp.servers.generic').setup()
-
     for server, opts in pairs(servers) do
       local config = vim.tbl_deep_extend('force', opts or {}, {
         single_file_support = true,
