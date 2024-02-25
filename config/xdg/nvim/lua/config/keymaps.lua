@@ -101,23 +101,3 @@ keymap.set('n', '<leader>f=', function()
     vim.cmd([[normal! gg=G]])
   end)
 end, { desc = 'format (sync)' })
-
--- fuzzy select tab by name
-keymap.set('n', '<leader>fs', function()
-  local tab_pages = vim.api.nvim_list_tabpages()
-
-  vim.ui.select(tab_pages, {
-    prompt = 'Select your tab',
-    format_item = function(item)
-      local winnr = vim.api.nvim_tabpage_get_win(item)
-      local bufnr = vim.api.nvim_win_get_buf(winnr)
-      local name = vim.api.nvim_buf_get_name(bufnr)
-
-      return vim.fn.fnamemodify(name, ':.')
-    end,
-  }, function(choice)
-    if choice ~= nil then
-      vim.cmd.tabnext(vim.api.nvim_tabpage_get_number(choice))
-    end
-  end)
-end, { silent = true, desc = 'fuzzy: tab selector' })

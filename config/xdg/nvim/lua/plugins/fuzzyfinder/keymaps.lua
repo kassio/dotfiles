@@ -62,6 +62,12 @@ return {
     desc = 'telescope: finders',
   },
   {
+    '<leader>fs',
+    require('plugins.fuzzyfinder.commands').find_tabs,
+    silent = true,
+    desc = 'telescope: finders',
+  },
+  {
     '<leader>fh',
     require('plugins.fuzzyfinder.commands').help_tags,
     silent = true,

@@ -78,6 +78,30 @@ function M.current_dir(opts)
   }))
 end
 
+function M.find_tabs()
+  local tab_pages = vim.api.nvim_list_tabpages()
+
+  if #tab_pages <= 1 then
+    vim.notify('No tabs to select', vim.log.levels.INFO, { title = 'fuzzyfinder: tab finder' })
+    return
+  end
+
+  vim.ui.select(tab_pages, {
+    prompt = 'Select your tab',
+    format_item = function(item)
+      local winnr = vim.api.nvim_tabpage_get_win(item)
+      local bufnr = vim.api.nvim_win_get_buf(winnr)
+      local name = vim.api.nvim_buf_get_name(bufnr)
+
+      return vim.fn.fnamemodify(name, ':.')
+    end,
+  }, function(choice)
+    if choice ~= nil then
+      vim.cmd.tabnext(vim.api.nvim_tabpage_get_number(choice))
+    end
+  end)
+end
+
 return setmetatable(M, {
   __index = function(_table, key)
     return function(opts)

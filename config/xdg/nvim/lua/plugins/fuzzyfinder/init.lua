@@ -116,7 +116,7 @@ return {
       },
     })
 
-    require('telescope').load_extension('refactoring')
-    require('telescope').load_extension('fzf')
+    telescope.load_extension('refactoring')
+    telescope.load_extension('fzf')
   end,
 }
