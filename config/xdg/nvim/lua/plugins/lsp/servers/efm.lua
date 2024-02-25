@@ -22,16 +22,8 @@ return {
     hover = true,
   },
   settings = {
-    logLevel = vim.lsp.log_levels.INFO,
     logFile = vim.lsp.get_log_path(),
     languages = languages,
     rootMarkers = { '.git/' },
-    commands = {
-      {
-        command = [[echo '{"${INPUT}":"works"}']],
-        arguments = { '${INPUT}' },
-        title = 'ACTION',
-      },
-    },
   },
 }
