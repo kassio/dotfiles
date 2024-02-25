@@ -1,4 +1,6 @@
-local M = {}
+local M = {
+  finders_list = {},
+}
 local default_find_command = {
   'fd',
   '--type',
@@ -98,6 +100,28 @@ function M.find_tabs()
   }, function(choice)
     if choice ~= nil then
       vim.cmd.tabnext(vim.api.nvim_tabpage_get_number(choice))
+    end
+  end)
+end
+
+function M.find_finders()
+  if #M.finders_list == 0 then
+    local builtin_pickers = require('telescope.builtin')
+    local extensions_pickers = require('telescope._extensions')
+    M.finders_list = vim.tbl_flatten({
+      vim.tbl_keys(builtin_pickers),
+      vim.tbl_keys(extensions_pickers.manager),
+      { 'notify' },
+    })
+  end
+
+  table.sort(M.finders_list)
+
+  vim.ui.select(M.finders_list, {
+    prompt = 'Finders',
+  }, function(choice)
+    if choice ~= nil then
+      vim.cmd('Telescope ' .. choice)
     end
   end)
 end

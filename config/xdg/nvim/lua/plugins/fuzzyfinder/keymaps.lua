@@ -55,9 +55,7 @@ return {
   },
   {
     '<leader>fa',
-    function()
-      require('telescope.builtin').builtin({ previwer = false })
-    end,
+    require('plugins.fuzzyfinder.commands').find_finders,
     silent = true,
     desc = 'telescope: finders',
   },
