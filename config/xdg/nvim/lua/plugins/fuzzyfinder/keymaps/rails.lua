@@ -1,19 +1,24 @@
 local rails = require('plugins.fuzzyfinder.rails')
 
-local function keymap(key, category)
-  return {
-    '<leader>fr' .. key,
-    function()
-      rails.find(category)
-    end,
-    silent = true,
-    desc = 'telescope:rails: find' .. (category or ''),
-  }
+local function railsmap(keymap, key, name, category)
+  return keymap('r' .. key, 'rails:' .. (name or ''), function()
+    rails.find(category)
+  end)
 end
 
-local keymaps = { keymap('r') }
-for name, category in pairs(rails.categories) do
-  table.insert(keymaps, keymap(category.key, name))
-end
+return {
+  setup = function(keymap)
+    local keymaps = { railsmap(keymap, 'r') }
 
-return keymaps
+    for name, category in pairs(rails.categories) do
+      table.insert(
+        keymaps,
+        railsmap(keymap, category.key, name, function()
+          rails.find(category)
+        end)
+      )
+    end
+
+    return keymaps
+  end,
+}

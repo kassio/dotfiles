@@ -11,7 +11,7 @@ if not M.pack then
 end
 
 ---Removes the given key from the table, returning its value.
----@param tbl table
+---@param tbl table<any>
 ---@param key any
 ---@return any
 function M.removekey(tbl, key)
@@ -21,7 +21,7 @@ function M.removekey(tbl, key)
 end
 
 ---Reduces the given table returning a new table with only the given key values.
----@param tbl table
+---@param tbl table<any>
 ---@param keys any[]
 ---@return table<any, any>
 function M.slice(tbl, keys)
@@ -37,7 +37,7 @@ function M.slice(tbl, keys)
 end
 
 ---Compacts the given list-like table, removing empty/0/false/nil values
----@param tbl table
+---@param tbl table<any>
 ---@return table<any>
 function M.compact_list(tbl)
   return vim.tbl_filter(function(element)
@@ -55,7 +55,7 @@ function M.compact_list(tbl)
 end
 
 ---Returns the key associated with the given value
----@param tbl table
+---@param tbl table<any>
 ---@param value any
 ---@return any
 function M.key_for(tbl, value)
@@ -67,13 +67,15 @@ function M.key_for(tbl, value)
 end
 
 ---Returns a new table with all the elements from the given two tables
----@param tbl1 table
----@param tbl2 table
----@return table
-function M.join(tbl1, tbl2)
+---@param tbl1 table<any>
+---@param others table<any> {...}
+---@return table<any>
+function M.join(tbl1, ...)
   local result = vim.deepcopy(tbl1)
-  for _, value in ipairs(tbl2) do
-    table.insert(result, value)
+  for _, tbl in ipairs({ ... }) do
+    for _, value in ipairs(tbl) do
+      table.insert(result, value)
+    end
   end
 
   return result

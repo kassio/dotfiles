@@ -1,6 +1,6 @@
-local M = {
-  finders_list = {},
-}
+local utils = require('utils')
+
+local M = { finders_list = {} }
 local default_find_command = {
   'fd',
   '--type',
