@@ -66,4 +66,17 @@ function M.key_for(tbl, value)
   end
 end
 
+---Returns a new table with all the elements from the given two tables
+---@param tbl1 table
+---@param tbl2 table
+---@return table
+function M.join(tbl1, tbl2)
+  local result = vim.deepcopy(tbl1)
+  for _, value in ipairs(tbl2) do
+    table.insert(result, value)
+  end
+
+  return result
+end
+
 return M

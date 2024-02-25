@@ -58,13 +58,6 @@ function M.find_files(opts)
   return require('telescope.builtin').find_files(new_opts)
 end
 
-function M.find_rails(search_dirs)
-  M.find_files({
-    extensions = { 'rb', 'haml', 'erb' },
-    search_dirs = search_dirs,
-  })
-end
-
 function M.current_dir(opts)
   opts = opts or {}
   local path = vim.tbl_get(opts, 'search_dirs', 1) or '.'
