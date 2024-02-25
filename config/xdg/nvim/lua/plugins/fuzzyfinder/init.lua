@@ -116,7 +116,6 @@ return {
       },
     })
 
-    telescope.load_extension('refactoring')
-    telescope.load_extension('fzf')
+    require('plugins.fuzzyfinder.extensions').setup(telescope)
   end,
 }

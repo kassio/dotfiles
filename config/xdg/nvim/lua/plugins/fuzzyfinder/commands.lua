@@ -97,15 +97,16 @@ function M.find_tabs()
   end)
 end
 
-function M.find_finders()
+function M.finders()
   if #M.finders_list == 0 then
     local builtin_pickers = require('telescope.builtin')
     local extensions_pickers = require('telescope._extensions')
-    M.finders_list = vim.tbl_flatten({
+    local list = vim.tbl_flatten({
       vim.tbl_keys(builtin_pickers),
       vim.tbl_keys(extensions_pickers.manager),
-      { 'notify' },
     })
+    vim.fn.uniq(list)
+    M.finders_list = list
   end
 
   table.sort(M.finders_list)
@@ -115,6 +116,16 @@ function M.find_finders()
   }, function(choice)
     if choice ~= nil then
       vim.cmd('Telescope ' .. choice)
+    end
+  end)
+end
+
+function M.find_by_ext()
+  vim.ui.input({ prompt = 'What extensions? (separated by space)' }, function(values)
+    if #values > 0 then
+      local extensions = vim.split(values, ' ', { plain = true, trimempty = true })
+
+      M.find_files({ extensions = extensions })
     end
   end)
 end

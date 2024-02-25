@@ -52,15 +52,16 @@ local M = {
   },
 }
 
-function M.find(key)
-  local finder = function(category)
-    require('plugins.fuzzyfinder.commands').find_files({
-      extensions = category.extensions or { 'rb', 'haml', 'erb' },
-      search_dirs = category.dirs,
-    })
-  end
+local finder = function(category)
+  require('plugins.fuzzyfinder.commands').find_files({
+    extensions = category.extensions or { 'rb', 'haml', 'erb' },
+    search_dirs = category.dirs,
+  })
+end
 
-  if key ~= nil then
+function M.find(key)
+  vim.print(key, vim.fn.empty(key))
+  if not vim.fn.empty(key) then
     finder(M.categories[key])
   else
     vim.ui.select(vim.tbl_keys(M.categories), {

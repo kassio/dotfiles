@@ -33,7 +33,7 @@ return require('utils.table').join({
   keymap('p', 'resume', require('plugins.fuzzyfinder.commands').resume),
   keymap('y', 'live grep', require('plugins.fuzzyfinder.commands').live_grep),
   keymap('Y', 'live grep: current word', require('plugins.fuzzyfinder.commands').grep_string),
-  keymap('a', 'finders', require('plugins.fuzzyfinder.commands').find_finders),
+  keymap('a', 'finders', require('plugins.fuzzyfinder.commands').finders),
   keymap('s', 'tabs', require('plugins.fuzzyfinder.commands').find_tabs),
   keymap('h', 'help', require('plugins.fuzzyfinder.commands').help_tags),
   keymap('H', 'help: current word', function()
@@ -72,26 +72,7 @@ return require('utils.table').join({
   keymap('c', 'commands', require('plugins.fuzzyfinder.commands').commands, {
     mode = { 'n', 'v' },
   }),
-  keymap('ey', 'extension:yml', function()
-    require('plugins.fuzzyfinder.commands').find_files({
-      extensions = 'yml',
-    })
-  end, { mode = { 'n', 'v' } }),
-  keymap('em', 'extension:md', function()
-    require('plugins.fuzzyfinder.commands').find_files({
-      extensions = 'md',
-    })
-  end, { mode = { 'n', 'v' } }),
-  keymap('er', 'extension:[rb, erb]', function()
-    require('plugins.fuzzyfinder.commands').find_files({
-      extensions = { 'rb', 'erb' },
-    })
-  end, { mode = { 'n', 'v' } }),
-  keymap('eg', 'extension:go', function()
-    require('plugins.fuzzyfinder.commands').find_files({
-      extensions = 'go',
-    })
-  end, { mode = { 'n', 'v' } }),
+  keymap('e', 'extensions', require('plugins.fuzzyfinder.commands').find_by_ext),
   keymap('gg', 'git:files', require('plugins.fuzzyfinder.commands').git_files),
   keymap('gm', 'git:modified', function()
     local main = vim.fn.system('git-branch-main')
