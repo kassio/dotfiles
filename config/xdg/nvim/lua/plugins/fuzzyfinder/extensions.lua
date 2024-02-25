@@ -1,9 +1,13 @@
+local function load(telescope, ext)
+  pcall(telescope.load_extension, ext)
+end
+
 return {
   setup = function(telescope)
-    telescope.load_extension('refactoring')
-    telescope.load_extension('fzf')
-    telescope.load_extension('notify')
-    telescope.load_extension('ext')
-    telescope.load_extension('rails')
+    load(telescope, 'refactoring')
+    load(telescope, 'fzf')
+    load(telescope, 'notify')
+    load(telescope, 'ext')
+    load(telescope, 'rails')
   end,
 }
