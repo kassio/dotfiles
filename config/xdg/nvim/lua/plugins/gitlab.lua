@@ -15,7 +15,7 @@ return {
       return vim.env.GITLAB_TOKEN ~= nil and vim.env.GITLAB_TOKEN ~= ''
     end,
     opts = {
-      minimal_message_level = vim.lsp.log_levels.WARN,
+      minimal_message_level = vim.lsp.log_levels.ERROR,
       statusline = {
         enabled = false,
       },
