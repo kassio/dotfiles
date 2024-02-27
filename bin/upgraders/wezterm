@@ -12,5 +12,5 @@ tempfile=$(mktemp) \
   && rm $tempfile
 
 title "[wezterm] updating wezterm completions"
-mkdir -p "${ZSH_CONFIG_HOME}/completions"
+mkdir -p "${XDG_CONFIG_HOME}/completions"
 wezterm shell-completion --shell zsh > "${ZSH_CONFIG_HOME}/completions/wezterm.zsh"
