@@ -3,7 +3,7 @@ local function keymap(key, desc, cb, opts)
     '<leader>f' .. key,
     cb,
     silent = true,
-    desc = 'fuzzyfinder:' .. desc,
+    desc = 'find:' .. desc,
   })
 end
 
@@ -32,7 +32,7 @@ return require('utils.table').join(
 
       require('telescope.builtin').help_tags({
         default_text = word,
-        prompt_title = string.format('help: %s', word),
+        prompt_title = string.format('help:%s', word),
       })
     end, { mode = { 'n', 'v' } }),
 
@@ -47,7 +47,7 @@ return require('utils.table').join(
 
       require('telescope.builtin').current_buffer_fuzzy_find({
         default_text = word,
-        prompt_title = string.format('current buffer: %s', word),
+        prompt_title = string.format('buffer:%s', word),
       })
     end, { mode = { 'n', 'v' } }),
   },

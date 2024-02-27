@@ -1,4 +1,4 @@
-local M = {
+return {
   categories = {
     controllers = {
       key = 'c',
@@ -51,27 +51,3 @@ local M = {
     },
   },
 }
-
-local finder = function(category)
-  require('plugins.fuzzyfinder.commands').find_files({
-    extensions = category.extensions or { 'rb', 'haml', 'erb' },
-    search_dirs = category.dirs,
-  })
-end
-
-function M.find(key)
-  vim.print(key, vim.fn.empty(key))
-  if not vim.fn.empty(key) then
-    finder(M.categories[key])
-  else
-    vim.ui.select(vim.tbl_keys(M.categories), {
-      prompt = 'Finder in Rails',
-    }, function(choice)
-      if choice ~= nil then
-        finder(M.categories[choice])
-      end
-    end)
-  end
-end
-
-return M

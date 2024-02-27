@@ -1,12 +1,8 @@
-local function gitmap(keymap, key, name, cb, opts)
-  return keymap(key, table.concat({ 'git', name }, ':'), cb, opts)
-end
-
 return {
   setup = function(keymap)
     return {
-      gitmap(keymap, 'gg', 'files', require('plugins.fuzzyfinder.commands').git_files),
-      gitmap(keymap, 'gm', 'diff', function()
+      keymap('gg', 'git:files', require('plugins.fuzzyfinder.commands').git_files),
+      keymap('gm', 'git:diff', function()
         local main = vim.fn.system('git-branch-main')
 
         require('plugins.fuzzyfinder.commands').find_files({
@@ -20,7 +16,7 @@ return {
           prompt_title = 'git:diff',
         })
       end),
-      gitmap(keymap, 'gd', 'modified', function()
+      keymap('gd', 'git:modified', function()
         require('plugins.fuzzyfinder.commands').find_files({
           find_command = { 'git', 'ls-files', '--modified' },
           prompt_title = 'git:modified',
