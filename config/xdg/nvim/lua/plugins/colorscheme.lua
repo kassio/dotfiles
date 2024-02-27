@@ -4,7 +4,7 @@ return {
     name = 'catppuccin',
     config = function()
       require('catppuccin').setup({
-        bg = {
+        background = {
           light = 'latte',
           dark = 'frappe',
         },
