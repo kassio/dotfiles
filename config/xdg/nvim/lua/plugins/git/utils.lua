@@ -1,18 +1,7 @@
-local utils = require('utils')
 local M = {}
 
 local function open(url)
   vim.ui.open(url)
-end
-
-local function git(args, callback)
-  local output = vim.trim(vim.fn.system('git ' .. args .. ' 2>/dev/null'))
-
-  if callback ~= nil then
-    return callback(output)
-  else
-    return output
-  end
 end
 
 local function get_filepath()
@@ -31,18 +20,18 @@ local function get_ref(file, line, use_main)
     local pathspec = string.format('-L "%s,%s:%s"', line, line, file)
     local cmd = string.format('log -1 --no-patch --pretty=format:"%%H" %s', pathspec)
 
-    local ref = git(cmd)
+    local ref = M.git(cmd)
 
     if ref ~= '' then
       return ref
     end
   end
 
-  return git('branch-main')
+  return M.git('branch-main')
 end
 
 local function repository_url()
-  return git('remote get-url origin', function(url)
+  return M.git('remote get-url origin', function(url)
     url = string.gsub(url, '^git@', 'https://')
     url = string.gsub(url, '%.git$', '')
 
@@ -57,6 +46,16 @@ local function file_remote_url(arg)
   local ref = get_ref(filepath, line, use_main)
 
   return (string.format('%s/blob/%s/%s#L%s', repository_url(), ref, filepath, line))
+end
+
+function M.git(args, callback)
+  local output = vim.trim(vim.fn.system('git ' .. args .. ' 2>/dev/null'))
+
+  if callback ~= nil then
+    return callback(output)
+  else
+    return output
+  end
 end
 
 function M.open_repository_url()
