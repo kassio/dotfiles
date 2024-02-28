@@ -48,6 +48,7 @@ local function select_session(title, callback)
   local sessions = session_list()
 
   if #sessions <= 0 then
+    logger.info('no sessions available')
     return nil, false
   end
 
