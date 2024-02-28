@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
+  echo "[bat] update bat theme"
+  exit
+fi
+
+title "[bat] update bat theme"
+themes_dir="$(bat --config-dir)/themes"
+for theme in tokyonight_day tokyonight_moon tokyonight_night tokyonight_storm; do
+  subtitle "download ${theme}"
+  curl "https://raw.githubusercontent.com/folke/tokyonight.nvim/main/extras/sublime/${theme}.tmTheme" \
+    --silent \
+    --create-dirs \
+    --output "${themes_dir}/${theme}.tmTheme"
+done
+
+subtitle "update the cache"
+bat cache --build > /dev/null

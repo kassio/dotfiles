@@ -1,10 +1,10 @@
 #!/usr/bin/env zsh
 
 local bat="${HOMEBREW_PREFIX}/bin/bat"
-local bat_theme_name="gruvbox-light"
+local bat_theme="tokyonight_day"
 
 if [ "$(macos-appearance)" = "dark" ]; then
-  bat_theme_name="gruvbox-dark"
+  bat_theme="tokyonight_night"
 fi
 
-BAT_THEME="${bat_theme_name}" "${bat}" "$@"
+BAT_THEME="${bat_theme}" "${bat}" "$@"

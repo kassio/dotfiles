@@ -47,6 +47,8 @@ else
   upgrader "apple" "$@"
   upgrader "duti" "$@"
   upgrader "brew" "$@"
+  upgrader "bat" "$@"
+  upgrader "delta" "$@"
   upgrader "zsh_plugins" "$@"
   upgrader "asdf" "$@"
   upgrader "ruby" "$@"

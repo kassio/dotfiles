@@ -1,6 +1,7 @@
 # vim: set filetype=gitconfig:
 [include]
   path = ~/.dotfiles.private/gitconfig
+  path = ~/.config/delta/themes.gitconfig
 [user]
   name = Kassio Borges
   email = kassioborgesm@gmail.com

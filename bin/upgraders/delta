@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
+  echo "[delta] update delta themes"
+  exit
+fi
+
+title "[delta] update delta themes"
+themes_dir="${XDG_CONFIG_HOME}/delta"
+mkdir -p "${themes_dir}"
+
+themes_file="${themes_dir}/themes.gitconfig"
+echo > "${themes_dir}/themes.gitconfig"
+for theme in tokyonight_day tokyonight_moon tokyonight_night tokyonight_storm; do
+  subtitle "download ${theme}"
+  curl "https://raw.githubusercontent.com/folke/tokyonight.nvim/main/extras/delta/${theme}.gitconfig" \
+    --silent |
+  sed "s;\[delta\];[delta \"${theme}\"];" >> "${themes_file}"
+done
