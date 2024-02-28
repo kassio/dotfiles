@@ -5,6 +5,7 @@ return {
     priority = 1000,
     config = function()
       require('tokyonight').setup({
+        style = 'night',
         light_style = 'day',
         on_colors = function(colors)
           colors.error = '#CA1243'
