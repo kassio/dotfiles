@@ -17,8 +17,8 @@ command('Trim', function()
 end, {})
 
 -- change background
-command('Dark', 'set bg=dark', {})
-command('Light', 'set bg=light', {})
+command('Dark', 'set background=dark', {})
+command('Light', 'set background=light', {})
 
 -- copy filename
 command('CopyFilename', utils.copy_filename, {

@@ -1,146 +1,118 @@
 return {
   {
-    'catppuccin/nvim',
-    name = 'catppuccin',
+    'folke/tokyonight.nvim',
+    lazy = false,
+    priority = 1000,
     config = function()
-      require('catppuccin').setup({
-        background = {
-          light = 'latte',
-          dark = 'frappe',
-        },
-        color_overrides = {
-          all = {
-            error = '#CA1243',
-            warn = '#F7C154',
-            info = '#6699CC',
-            hint = '#50A14F',
-            error_light = '#FD83A1',
-            warn_light = '#FFF4A8',
-            info_light = '#A5D0FF',
-            hint_light = '#B5E6CE',
-          },
-        },
-        integrations = {
-          cmp = true,
-          mason = true,
-          notify = true,
-          nvimtree = true,
-          telescope = true,
-        },
-        show_end_of_buffer = false,
-        term_colors = false,
-        custom_highlights = function(c)
-          return {
-            -- search
-            ['IncSearch'] = { fg = c.base, bg = c.yellow },
-            ['Search'] = { fg = c.base, bg = c.yellow },
-            ['CurSearch'] = { fg = c.base, bg = c.blue, italic = true, bold = true },
+      require('tokyonight').setup({
+        light_style = 'day',
+        on_colors = function(colors)
+          colors.error = '#CA1243'
+          colors.warn = '#F7C154'
+          colors.info = '#6699CC'
+          colors.hint = '#50A14F'
+          colors.error_light = '#FD83A1'
+          colors.warn_light = '#FFF4A8'
+          colors.info_light = '#A5D0FF'
+          colors.hint_light = '#B5E6CE'
+        end,
+        on_highlights = function(hl, c)
+          -- search
+          hl['IncSearch'] = { fg = c.bg, bg = c.warn }
+          hl['Search'] = { fg = c.bg, bg = c.warn }
+          hl['CurSearch'] = { fg = c.bg, bg = c.blue, italic = true, bold = true }
 
-            -- UI
-            ['ColorColumn'] = { bg = c.dim },
+          -- UI
+          hl['ColorColumn'] = { bg = c.bg_highlight }
 
-            -- treesitter
-            ['@method'] = { link = '@function' },
-            ['@string'] = { fg = c.green },
-            ['@string.specialecial'] = { fg = c.green, bold = true },
+          -- treesitter
+          hl['@method'] = { link = '@function' }
+          hl['@string'] = { fg = c.green }
+          hl['@string.specialecial'] = { fg = c.green, bold = true }
 
-            -- msg level
-            ['Error'] = { fg = c.error },
-            ['Warn'] = { fg = c.warn },
-            ['Info'] = { fg = c.info },
-            ['Hint'] = { fg = c.hint },
+          -- msg level
+          hl['Error'] = { fg = c.error }
+          hl['Warn'] = { fg = c.warn }
+          hl['Info'] = { fg = c.info }
+          hl['Hint'] = { fg = c.hint }
 
-            ['Error.Light'] = { fg = c.error_light },
-            ['Warn.Light'] = { fg = c.warn_light },
-            ['Info.Light'] = { fg = c.info_light },
-            ['Hint.Light'] = { fg = c.hint_light },
+          hl['Error.Light'] = { fg = c.error_light }
+          hl['Warn.Light'] = { fg = c.warn_light }
+          hl['Info.Light'] = { fg = c.info_light }
+          hl['Hint.Light'] = { fg = c.hint_light }
 
-            -- diff base
-            ['@diff.removed'] = { fg = c.error },
-            ['@diff.changed'] = { fg = c.warn },
-            ['@diff.added'] = { fg = c.hint },
+          -- diff base
+          hl['@diff.removed'] = { fg = c.error }
+          hl['@diff.changed'] = { fg = c.warn }
+          hl['@diff.added'] = { fg = c.hint }
 
-            -- Statusline mode highlight
-            ['Statusline.Command'] = { fg = c.base, bg = c.hint },
-            ['Statusline.Insert'] = { fg = c.base, bg = c.warn },
-            ['Statusline.Normal'] = { fg = c.base, bg = c.info },
-            ['Statusline.Replace'] = { fg = c.base, bg = c.warn_light },
-            ['Statusline.Search'] = { fg = c.base, bg = c.info_light },
-            ['Statusline.Terminal'] = { fg = c.base, bg = c.hint },
-            ['Statusline.Visual'] = { fg = c.base, bg = c.warn_light },
+          -- git: diff
+          hl['GitSignsDelete'] = { fg = c.error }
+          hl['GitSignsChange'] = { fg = c.warn }
+          hl['GitSignsAdd'] = { fg = c.hint }
 
-            -- git: diff
-            ['GitSignsDelete'] = { fg = c.error },
-            ['GitSignsChange'] = { fg = c.warn },
-            ['GitSignsAdd'] = { fg = c.hint },
+          -- diagnostics
+          hl['DiagnosticError'] = { fg = c.error }
+          hl['DiagnosticWarn'] = { fg = c.warn }
+          hl['DiagnosticInfo'] = { fg = c.info }
+          hl['DiagnosticHint'] = { fg = c.hint }
 
-            -- diagnostics
-            ['DiagnosticError'] = { fg = c.error },
-            ['DiagnosticWarn'] = { fg = c.warn },
-            ['DiagnosticInfo'] = { fg = c.info },
-            ['DiagnosticHint'] = { fg = c.hint },
+          -- diagnostics: sign
+          hl['DiagnosticSignError'] = { fg = c.error }
+          hl['DiagnosticSignWarn'] = { fg = c.warn }
+          hl['DiagnosticSignInfo'] = { fg = c.info }
+          hl['DiagnosticSignHint'] = { fg = c.hint }
 
-            -- diagnostics: sign
-            ['DiagnosticSignError'] = { fg = c.error },
-            ['DiagnosticSignWarn'] = { fg = c.warn },
-            ['DiagnosticSignInfo'] = { fg = c.info },
-            ['DiagnosticSignHint'] = { fg = c.hint },
+          -- diagnostics: floating
+          hl['DiagnosticFloatingError'] = { fg = c.error }
+          hl['DiagnosticFloatingWarn'] = { fg = c.warn }
+          hl['DiagnosticFloatingInfo'] = { fg = c.info }
+          hl['DiagnosticFloatingHint'] = { fg = c.hint }
 
-            -- diagnostics: floating
-            ['DiagnosticFloatingError'] = { fg = c.error },
-            ['DiagnosticFloatingWarn'] = { fg = c.warn },
-            ['DiagnosticFloatingInfo'] = { fg = c.info },
-            ['DiagnosticFloatingHint'] = { fg = c.hint },
+          -- diagnostics: underline
+          hl['DiagnosticUnderlineError'] = { special = c.error_light, undercurl = true }
+          hl['DiagnosticUnderlineWarn'] = { special = c.warn_light, undercurl = true }
+          hl['DiagnosticUnderlineInfo'] = { special = c.info_light, undercurl = true }
+          hl['DiagnosticUnderlineHint'] = { special = c.hint_light, undercurl = true }
 
-            -- diagnostics: underline
-            ['DiagnosticUnderlineError'] = { special = c.error_light, undercurl = true },
-            ['DiagnosticUnderlineWarn'] = { special = c.warn_light, undercurl = true },
-            ['DiagnosticUnderlineInfo'] = { special = c.info_light, undercurl = true },
-            ['DiagnosticUnderlineHint'] = { special = c.hint_light, undercurl = true },
+          -- diagnostics: virtual text
+          hl['DiagnosticVirtualTextError'] = { fg = c.error_light, italic = true }
+          hl['DiagnosticVirtualTextWarn'] = { fg = c.warn_light, italic = true }
+          hl['DiagnosticVirtualTextInfo'] = { fg = c.info_light, italic = true }
+          hl['DiagnosticVirtualTextHint'] = { fg = c.hint_light, italic = true }
 
-            -- diagnostics: virtual text
-            ['DiagnosticVirtualTextError'] = { fg = c.error_light, italic = true },
-            ['DiagnosticVirtualTextWarn'] = { fg = c.warn_light, italic = true },
-            ['DiagnosticVirtualTextInfo'] = { fg = c.info_light, italic = true },
-            ['DiagnosticVirtualTextHint'] = { fg = c.hint_light, italic = true },
+          -- statusline
+          hl['StatusLine'] = { fg = c.blue }
 
-            -- statusline
-            ['StatusLine'] = { fg = c.blue },
-            ['StatusLineNC'] = { fg = c.surface1 },
+          -- Statusline mode highlight
+          hl['Statusline.Command'] = { fg = c.bg, bg = c.hint }
+          hl['Statusline.Insert'] = { fg = c.bg, bg = c.warn }
+          hl['Statusline.Normal'] = { fg = c.bg, bg = c.info }
+          hl['Statusline.Replace'] = { fg = c.bg, bg = c.warn_light }
+          hl['Statusline.Search'] = { fg = c.bg, bg = c.info_light }
+          hl['Statusline.Terminal'] = { fg = c.bg, bg = c.hint }
+          hl['Statusline.Visual'] = { fg = c.bg, bg = c.warn_light }
 
-            -- winbar
-            ['WinBar'] = { bg = c.dim, fg = c.blue },
-            ['WinBarNC'] = { bg = c.dim, fg = c.surface1 },
-            ['Winbar.Diff.Added'] = { bg = c.dim, fg = c.hint },
-            ['Winbar.Diff.Changed'] = { bg = c.dim, fg = c.warn },
-            ['Winbar.Diff.Removed'] = { bg = c.dim, fg = c.error },
-            ['Winbar.Error'] = { bg = c.dim, fg = c.error },
-            ['Winbar.Hint'] = { bg = c.dim, fg = c.hint },
-            ['Winbar.Info'] = { bg = c.dim, fg = c.info },
-            ['Winbar.Todo'] = { bg = c.dim, fg = c.info },
-            ['Winbar.Warn'] = { bg = c.dim, fg = c.warn },
+          -- winbar
+          hl['WinBar'] = { fg = c.blue }
+          hl['WinBarNC'] = { fg = c.comment }
+          hl['Winbar.Diff.Added'] = { fg = c.hint }
+          hl['Winbar.Diff.Changed'] = { fg = c.warn }
+          hl['Winbar.Diff.Removed'] = { fg = c.error }
+          hl['Winbar.Error'] = { fg = c.error }
+          hl['Winbar.Hint'] = { fg = c.hint }
+          hl['Winbar.Info'] = { fg = c.info }
+          hl['Winbar.Todo'] = { fg = c.info }
+          hl['Winbar.Warn'] = { fg = c.warn }
 
-            -- tabline
-            ['TabLine'] = { bg = c.dim, fg = c.surface2 },
-            ['TabLineSel'] = { bg = c.surface0, fg = c.blue, bold = true },
-            ['TabLineFill'] = { bg = c.dim, fg = c.surface0 },
-          }
+          -- tabline
+          hl['TabLine'] = { fg = c.comment }
+          hl['TabLineSel'] = { bg = c.bg_highlight, fg = c.blue, bold = true }
+          hl['TabLineFill'] = { fg = c.bg_highlight }
         end,
       })
 
-      vim.cmd.colorscheme('catppuccin')
+      vim.cmd.colorscheme('tokyonight')
     end,
-  },
-
-  -- Highlight color strings
-  {
-    'NvChad/nvim-colorizer.lua',
-    config = true,
-  },
-
-  -- Fix terminal colors
-  {
-    'norcalli/nvim-terminal.lua',
-    config = true,
   },
 }
