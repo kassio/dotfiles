@@ -16,4 +16,4 @@ snippet fname
 snippet fname:camelcase
 	${1:`!lua require('utils.snippets').filename({case = 'camelcase'})`}${2}
 snippet fname:camelcase:noprefixnumbers
-	${1:`!lua require('utils.snippets').filename({filter='^%d*_', case='camelcase'})`}${2}
+	${1:`!lua require('utils.snippets').filename({remove = '^%d*_', case = 'camelcase'})`}${2}
