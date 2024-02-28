@@ -15,8 +15,8 @@ return require('utils.table').join(
     keymap('s', 'tabs', require('plugins.fuzzyfinder.commands').find_tabs),
     keymap('b', 'buffers', require('plugins.fuzzyfinder.commands').buffers),
 
-    keymap('y', 'grep', require('plugins.fuzzyfinder.commands').live_grep),
-    keymap('Y', 'grep:word', require('plugins.fuzzyfinder.commands').grep_string, {
+    keymap('w', 'grep', require('plugins.fuzzyfinder.commands').live_grep),
+    keymap('W', 'grep:word', require('plugins.fuzzyfinder.commands').grep_string, {
       mode = { 'n', 'v' },
     }),
 
