@@ -103,7 +103,7 @@
 
     if (( $1 )); then
       local    default='%f'     # default foreground
-      local      green='%76F'   # green foreground
+      local      green='%28F'   # green foreground
       local     yellow='%178F'  # yellow foreground
       local       blue='%39F'   # blue foreground
       local        red='%196F'  # red foreground
