@@ -14,10 +14,11 @@ return require('utils.table').join(
 
     keymap('s', 'tabs', require('plugins.fuzzyfinder.commands').find_tabs),
     keymap('b', 'buffers', require('plugins.fuzzyfinder.commands').buffers),
-    keymap('y', 'grep', require('plugins.fuzzyfinder.commands').live_grep),
-    keymap('Y', 'grep: current word', require('plugins.fuzzyfinder.commands').grep_string),
 
-    keymap('m', 'marks', require('plugins.fuzzyfinder.commands').marks, { mode = { 'n', 'v' } }),
+    keymap('y', 'grep', require('plugins.fuzzyfinder.commands').live_grep),
+    keymap('Y', 'grep:word', require('plugins.fuzzyfinder.commands').grep_string, {
+      mode = { 'n', 'v' },
+    }),
 
     keymap('k', 'keymaps', require('plugins.fuzzyfinder.commands').keymaps, {
       mode = { 'n', 'v' },
@@ -37,12 +38,9 @@ return require('utils.table').join(
     end, { mode = { 'n', 'v' } }),
 
     keymap('t', 'treesitter', require('plugins.fuzzyfinder.commands').treesitter),
-    keymap(
-      'n',
-      'current buffer',
-      require('plugins.fuzzyfinder.commands').current_buffer_fuzzy_find
-    ),
-    keymap('N', 'current buffer:current word', function()
+
+    keymap('n', 'buffer', require('plugins.fuzzyfinder.commands').current_buffer_fuzzy_find),
+    keymap('N', 'buffer:word', function()
       local word = require('utils').cword()
 
       require('telescope.builtin').current_buffer_fuzzy_find({
@@ -51,6 +49,7 @@ return require('utils.table').join(
       })
     end, { mode = { 'n', 'v' } }),
   },
+
   require('plugins.fuzzyfinder.keymaps.files').setup(keymap),
   require('plugins.fuzzyfinder.keymaps.git').setup(keymap),
   require('plugins.fuzzyfinder.keymaps.rails').setup(keymap)
