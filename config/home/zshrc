@@ -1,7 +1,7 @@
 # vim:ft=zsh:
 
 # global
-export DOTFILES="${HOME}/.DOTFILES"
+export DOTFILES="${HOME}/.dotfiles"
 export XDG_BIN_HOME="${DOTFILES}/bin"
 export XDG_CACHE_HOME="${HOME}/.cache"
 export XDG_CONFIG_HOME="${HOME}/.config"
