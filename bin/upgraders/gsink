@@ -6,4 +6,4 @@ if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
 fi
 
 title "[gsink] updating repositories"
-~/src/go/src/gsink/bin/gsink
+${HOME}/src/repo_syncer/bin/repo_sync
