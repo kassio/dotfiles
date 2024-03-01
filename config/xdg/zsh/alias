@@ -2,7 +2,10 @@
 
 alias n="nvim --listen ${XDG_CACHE_HOME}/nvim/$$${RANDOM}.pipe"
 nts() { nvim -c "TerminalServerStart"; }
-ntw() { nvim -c "TerminalWeztermPane $1"; }
+ntw() {
+  pane="$1"; shift
+  nvim -c "TerminalWeztermPane ${pane}" "$@"
+}
 
 alias time="/usr/bin/time"
 
