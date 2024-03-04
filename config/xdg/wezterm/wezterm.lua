@@ -1,5 +1,23 @@
 local wezterm = require('wezterm')
 local config = wezterm.config_builder()
+local font_config = {
+  main = wezterm.font_with_fallback({
+    {
+      family = 'JetBrains Mono',
+      harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
+      stretch = 'Expanded',
+    },
+    {
+      family = 'Apple Color Emoji',
+      assume_emoji_presentation = true,
+    },
+  }),
+  frame = wezterm.font({
+    family = 'JetBrains Mono',
+    harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
+    weight = 'Bold',
+  }),
+}
 
 require('tab_format').setup(wezterm)
 require('palette').setup(wezterm)
@@ -38,16 +56,10 @@ config.colors = {
 config.front_end = 'WebGpu'
 config.webgpu_power_preference = 'HighPerformance'
 
+config.font = font_config.main
 config.font_size = 14
 config.line_height = 1.2
-config.allow_square_glyphs_to_overflow_width = 'Never'
-config.font = wezterm.font({
-  family = 'JetBrains Mono',
-  harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
-  stretch = 'Expanded',
-  weight = 'Regular',
-})
-
+config.allow_square_glyphs_to_overflow_width = 'Always'
 config.audible_bell = 'Disabled'
 
 config.native_macos_fullscreen_mode = false
@@ -57,12 +69,7 @@ config.window_close_confirmation = 'NeverPrompt'
 config.window_decorations = 'RESIZE'
 config.window_padding = { left = 5, right = 5, top = 0, bottom = 0 }
 config.window_frame = {
-  font = wezterm.font({
-    family = 'JetBrains Mono',
-    harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
-    weight = 'Bold',
-  }),
-
+  font = font_config.window_frame,
   font_size = config.font_size * 0.7,
   active_titlebar_bg = colorscheme.background,
   inactive_titlebar_bg = colorscheme.background,
