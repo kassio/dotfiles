@@ -1,4 +1,9 @@
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = vim.tbl_deep_extend(
+  'keep',
+  require('cmp_nvim_lsp').default_capabilities(),
+  vim.lsp.protocol.make_client_capabilities()
+)
+
 local completionItem = capabilities.textDocument.completion.completionItem
 
 completionItem.commitCharactersSupport = true
