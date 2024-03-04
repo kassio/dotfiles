@@ -1,7 +1,4 @@
 {
-  "settings": {
-    "colors": true
-  },
   "repositories": {
     "dotfiles": {
       "remote": "https://github.com/kassio/dotfiles",
@@ -19,6 +16,10 @@
     "gsink": {
       "remote": "https://gitlab.com/kassio/gsink.git",
       "local": "$HOME/src/go/src/gsink"
+    },
+    "repo_syncer": {
+      "remote": "https://gitlab.com/kassio/repo_syncer.git",
+      "local": "$HOME/src/repo_syncer"
     },
     "blog": {
       "remote": "https://gitlab.com/kassio/kassio",
