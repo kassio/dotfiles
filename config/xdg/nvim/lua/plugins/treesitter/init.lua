@@ -40,10 +40,8 @@ return {
         desc = 'ts: join block',
       },
     },
-    config = function()
-      require('treesj').setup({
-        check_syntax_error = false,
-      })
-    end,
+    opts = {
+      check_syntax_error = false,
+    },
   },
 }
