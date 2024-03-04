@@ -24,7 +24,7 @@ return {
           hl['CurSearch'] = { fg = c.bg, bg = c.blue, italic = true, bold = true }
 
           -- UI
-          hl['ColorColumn'] = { bg = c.bg_highlight }
+          hl['ColorColumn'] = { bg = c.bg_sidebar }
 
           -- treesitter
           hl['@method'] = { link = '@function' }
@@ -83,33 +83,33 @@ return {
           hl['DiagnosticVirtualTextHint'] = { fg = c.hint_light, italic = true }
 
           -- statusline
-          hl['StatusLine'] = { fg = c.blue }
+          hl['StatusLine'] = { bg = c.bg_statusline, fg = c.blue }
 
           -- Statusline mode highlight
-          hl['Statusline.Command'] = { fg = c.bg, bg = c.hint }
-          hl['Statusline.Insert'] = { fg = c.bg, bg = c.warn }
-          hl['Statusline.Normal'] = { fg = c.bg, bg = c.info }
-          hl['Statusline.Replace'] = { fg = c.bg, bg = c.warn_light }
-          hl['Statusline.Search'] = { fg = c.bg, bg = c.info_light }
-          hl['Statusline.Terminal'] = { fg = c.bg, bg = c.hint }
-          hl['Statusline.Visual'] = { fg = c.bg, bg = c.warn_light }
+          hl['Statusline.Command'] = { fg = c.bg_statusline, bg = c.hint }
+          hl['Statusline.Insert'] = { fg = c.bg_statusline, bg = c.warn }
+          hl['Statusline.Normal'] = { fg = c.bg_statusline, bg = c.info }
+          hl['Statusline.Replace'] = { fg = c.bg_statusline, bg = c.warn_light }
+          hl['Statusline.Search'] = { fg = c.bg_statusline, bg = c.info_light }
+          hl['Statusline.Terminal'] = { fg = c.bg_statusline, bg = c.hint }
+          hl['Statusline.Visual'] = { fg = c.bg_statusline, bg = c.warn_light }
 
           -- winbar
-          hl['WinBar'] = { fg = c.blue }
-          hl['WinBarNC'] = { fg = c.comment }
-          hl['Winbar.Diff.Added'] = { fg = c.hint }
-          hl['Winbar.Diff.Changed'] = { fg = c.warn }
-          hl['Winbar.Diff.Removed'] = { fg = c.error }
-          hl['Winbar.Error'] = { fg = c.error }
-          hl['Winbar.Hint'] = { fg = c.hint }
-          hl['Winbar.Info'] = { fg = c.info }
-          hl['Winbar.Todo'] = { fg = c.info }
-          hl['Winbar.Warn'] = { fg = c.warn }
+          hl['WinBar'] = { bg = c.bg_statusline, fg = c.blue }
+          hl['WinBarNC'] = { bg = c.bg_statusline, fg = c.comment }
+          hl['Winbar.Diff.Added'] = { bg = c.bg_statusline, fg = c.hint }
+          hl['Winbar.Diff.Changed'] = { bg = c.bg_statusline, fg = c.warn }
+          hl['Winbar.Diff.Removed'] = { bg = c.bg_statusline, fg = c.error }
+          hl['Winbar.Error'] = { bg = c.bg_statusline, fg = c.error }
+          hl['Winbar.Hint'] = { bg = c.bg_statusline, fg = c.hint }
+          hl['Winbar.Info'] = { bg = c.bg_statusline, fg = c.info }
+          hl['Winbar.Todo'] = { bg = c.bg_statusline, fg = c.info }
+          hl['Winbar.Warn'] = { bg = c.bg_statusline, fg = c.warn }
 
           -- tabline
-          hl['TabLine'] = { fg = c.comment }
+          hl['TabLine'] = { bg = c.bg_statusline, fg = c.comment }
           hl['TabLineSel'] = { bg = c.bg_highlight, fg = c.blue, bold = true }
-          hl['TabLineFill'] = { fg = c.bg_highlight }
+          hl['TabLineFill'] = { bg = c.bg_statusline }
         end,
       })
 
