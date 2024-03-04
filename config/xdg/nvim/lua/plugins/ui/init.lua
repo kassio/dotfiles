@@ -2,7 +2,6 @@ return {
   require('plugins.ui.todos'),
   require('plugins.ui.icons'),
   require('plugins.ui.input'),
-  require('plugins.ui.marks'),
   require('plugins.ui.notification'),
   require('plugins.ui.quickfix'),
   require('plugins.ui.system-background'),
