@@ -7,6 +7,9 @@ return {
       require('tokyonight').setup({
         style = 'night',
         light_style = 'day',
+        terminal_colors = true,
+        sidebars = { 'qf', 'help', 'terminal' },
+        day_brightness = 0.3,
         on_colors = function(colors)
           colors.error = '#CA1243'
           colors.warn = '#F7C154'
