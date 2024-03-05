@@ -1,10 +1,9 @@
 #!/usr/bin/env zsh
 
 local delta="${HOMEBREW_PREFIX}/bin/delta"
-local delta_theme="tokyonight_day"
 
 if [ "$(macos-appearance)" = "dark" ]; then
-  delta_theme="tokyonight_night"
+  "${delta}" "$@"
+else
+  "${delta}" --light "$@"
 fi
-
-"${delta}" --syntax-theme="${delta_theme}" "$@"
