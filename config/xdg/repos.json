@@ -17,9 +17,9 @@
       "remote": "https://gitlab.com/kassio/gsink.git",
       "local": "$HOME/src/go/src/gsink"
     },
-    "repo_syncer": {
-      "remote": "https://gitlab.com/kassio/repo_syncer.git",
-      "local": "$HOME/src/repo_syncer"
+    "repos_syncer": {
+      "remote": "https://gitlab.com/kassio/repos_syncer.git",
+      "local": "$HOME/src/repos_syncer"
     },
     "blog": {
       "remote": "https://gitlab.com/kassio/kassio",

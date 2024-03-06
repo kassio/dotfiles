@@ -43,7 +43,7 @@ fi
 if [ "${only}" != "" ]; then
   upgrader "${only}" "$@"
 else
-  upgrader "gsink" "$@"
+  upgrader "repos_sync" "$@"
   upgrader "apple" "$@"
   upgrader "duti" "$@"
   upgrader "brew" "$@"

@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
+  echo "[repos sync] update repositories"
+  exit
+fi
+
+title "[repos sync] updating repositories"
+${HOME}/src/repos_syncer/bin/repos_sync
