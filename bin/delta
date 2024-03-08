@@ -3,7 +3,7 @@
 local delta="${HOMEBREW_PREFIX}/bin/delta"
 
 if [ "$(macos-appearance)" = "dark" ]; then
-  "${delta}" "$@"
+  "${delta}" --syntax-theme "tokyonight_night" "$@"
 else
-  "${delta}" --light "$@"
+  "${delta}" --light --syntax-theme "tokyonight_day" "$@"
 fi
