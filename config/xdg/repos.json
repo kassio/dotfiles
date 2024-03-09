@@ -3,11 +3,7 @@
     "dotfiles": {
       "remote": "https://github.com/kassio/dotfiles",
       "local": "$HOME/.dotfiles",
-      "afterSync": [
-        "git",
-        "switch",
-        "main"
-      ]
+      "afterSync": "git switch main"
     },
     "data backup": {
       "remote": "https://github.com/kassio/sync",
