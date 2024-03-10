@@ -14,7 +14,7 @@ local function prefix_from(session)
 
     return vim.fn.split(session, '+')[1]
   else
-    return ''
+    return vim.g['gitsigns_head']
   end
 end
 
