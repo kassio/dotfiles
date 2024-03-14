@@ -6,4 +6,4 @@ if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
 fi
 
 title "[repos sync] updating repositories"
-${HOME}/src/repos_syncer/bin/repos_sync
+{ cd ${HOME}/src/repos_syncer; ./bin/repos_sync; }

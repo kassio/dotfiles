@@ -11,7 +11,8 @@
     },
     "repos_syncer": {
       "remote": "https://gitlab.com/kassio/repos_syncer.git",
-      "local": "$HOME/src/repos_syncer"
+      "local": "$HOME/src/repos_syncer",
+      "afterSync": "bundle install"
     },
     "blog": {
       "remote": "https://gitlab.com/kassio/kassio",
