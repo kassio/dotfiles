@@ -9,7 +9,10 @@ module Kassio
     load ".console.local.rb" if File.exist?(".console.local.rb")
   end
 
-  def reload = load!
+  def reload
+    load!
+    self
+  end
 
   def self.log(*args)
     File.open('log/kassio.log', 'a') do |f|
