@@ -29,11 +29,13 @@ parse_args() {
 report() {
   title="$1"; shift
 
-  printf "%s %s\n" "${#@}" "${title}"
-  for file in "${@[@]}"; do
-    echo "\t- ${file}"
-  done
-  echo "---"
+  if [ "${#@}" -gt 0 ]; then
+    printf "%s %s\n" "${#@}" "${title}"
+    for file in "${@[@]}"; do
+      echo "\t- ${file}"
+    done
+    echo "---"
+  fi
 }
 
 local files=(
