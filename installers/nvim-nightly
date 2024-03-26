@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-source_file="nvim-macos.tar.gz"
+source_file="/tmp/nvim-macos.tar.gz"
 install_path="${HOME}/src/nvim-nightly"
 force=0
 
@@ -12,16 +12,18 @@ case "$1" in
 esac
 
 install() {
-  rm -rf "/tmp/${source_file}"
+  rm -rf "${source_file}"
+  rm -rf "${install_path}"
+
   curl \
     --url "https://github.com/neovim/neovim/releases/download/nightly/nvim-macos-arm64.tar.gz" \
-    --output "/tmp/${source_file}" \
+    --output "${source_file}" \
     --progress-bar \
     --location
 
   xattr -c "${source_file}"
   pushd "${HOME}/src" &&
-    tar xzf "/tmp/${source_file}" &&
+    tar xzf "${source_file}" &&
     mv "nvim-macos-arm64" "${install_path}"
   popd
 
