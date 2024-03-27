@@ -29,7 +29,7 @@ config.mouse_bindings = require('mouse').setup(wezterm)
 if wezterm.gui.get_appearance():find('Dark') then
   config.color_scheme = 'Tokyo Night (Gogh)'
 else
-  config.color_scheme = 'Tokyo Night Light (Gogh)'
+  config.color_scheme = 'Tokyo Night Day'
 end
 
 local colorscheme = wezterm.color.get_builtin_schemes()[config.color_scheme]
