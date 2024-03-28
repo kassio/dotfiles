@@ -28,6 +28,6 @@ return {
     keymap('code actions', { 'n', 'v', 'x' }, 'gla', vim.lsp.buf.code_action)
     keymap('declarations', 'n', 'glD', vim.lsp.buf.declaration)
 
-    require('plugins.fuzzyfinder.lsp').setup(vim.lsp, keymap)
+    require('plugins.fuzzyfinder.keymaps.lsp').setup(vim.lsp, keymap)
   end,
 }
