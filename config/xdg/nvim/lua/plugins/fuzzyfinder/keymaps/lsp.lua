@@ -22,5 +22,9 @@ return {
     keymap('implementations', 'n', 'gli', function()
       telescope.lsp_implementations({ jump_type = 'never' })
     end)
+
+    keymap('diagnostics', 'n', 'glea', function()
+      telescope.diagnostics({ layout_strategy = 'vertical' })
+    end)
   end,
 }
