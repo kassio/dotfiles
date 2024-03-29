@@ -18,9 +18,7 @@ return {
     vim.api.nvim_create_autocmd({ 'LspAttach' }, {
       group = aug,
       callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id) or {}
-
-        require('plugins.lsp.commands').setup(args.buf, client)
+        require('plugins.lsp.commands').setup()
         require('plugins.lsp.keymaps').setup(args.buf)
 
         vim.api.nvim_create_autocmd({ 'BufWritePre' }, {

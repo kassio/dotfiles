@@ -1,8 +1,8 @@
 return {
   setup = function(keymap)
     return {
-      keymap('gg', 'git:files', require('plugins.fuzzyfinder.commands').git_files),
-      keymap('gm', 'git:diff', function()
+      keymap('gg', require('plugins.fuzzyfinder.commands').git_files, 'git:files'),
+      keymap('gm', function()
         local main = vim.fn.system('git-branch-main')
 
         require('plugins.fuzzyfinder.commands').find_files({
@@ -15,13 +15,13 @@ return {
           },
           prompt_title = 'git:diff',
         })
-      end),
-      keymap('gd', 'git:modified', function()
+      end, 'git:diff'),
+      keymap('gd', function()
         require('plugins.fuzzyfinder.commands').find_files({
           find_command = { 'git', 'ls-files', '--modified' },
           prompt_title = 'git:modified',
         })
-      end),
+      end, 'git:modified'),
     }
   end,
 }

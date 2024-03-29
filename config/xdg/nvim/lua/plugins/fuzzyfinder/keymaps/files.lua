@@ -1,18 +1,18 @@
 return {
   setup = function(keymap)
     return {
-      keymap('f', '', require('plugins.fuzzyfinder.commands').find_files),
-      keymap('F', 'files:word', function()
+      keymap('f', require('plugins.fuzzyfinder.commands').find_files),
+      keymap('F', function()
         local word = require('utils').cword()
 
         require('plugins.fuzzyfinder.commands').find_files({
           default_text = word,
           prompt_title = string.format('files:%s', word),
         })
-      end, {
+      end, 'files:word', {
         mode = { 'n', 'v' },
       }),
-      keymap('_', 'files:word:underscore', function()
+      keymap('_', function()
         local original_word = require('utils').cword()
         local word, _ = require('utils.string').snakecase(original_word):gsub('::', '/')
 
@@ -20,12 +20,12 @@ return {
           default_text = word,
           prompt_title = string.format('files:%s', word),
         })
-      end, {
+      end, 'files:word:underscore', {
         mode = { 'n', 'v' },
       }),
-      keymap('e', 'files:extension', require('plugins.fuzzyfinder.commands').find_by_ext),
-      keymap('o', 'files:old', require('plugins.fuzzyfinder.commands').oldfiles),
-      keymap('d', 'files:directory', require('plugins.fuzzyfinder.commands').current_dir, {
+      keymap('e', require('plugins.fuzzyfinder.commands').find_by_ext, 'files:extension'),
+      keymap('o', require('plugins.fuzzyfinder.commands').oldfiles, 'files:old'),
+      keymap('d', require('plugins.fuzzyfinder.commands').current_dir, 'files:directory', {
         mode = { 'n', 'v' },
       }),
     }

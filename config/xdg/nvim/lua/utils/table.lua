@@ -68,7 +68,7 @@ end
 
 ---Returns a new table with all the elements from the given two tables
 ---@param tbl1 table<any>
----@param others table<any> {...}
+---@param ... table<any> {...}
 ---@return table<any>
 function M.join(tbl1, ...)
   local result = vim.deepcopy(tbl1)

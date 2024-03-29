@@ -1,27 +1,27 @@
-local function keymap(desc, mode, keys, cb)
+local function keymap(mode, keys, cb, desc)
   vim.keymap.set(mode, keys, cb, { desc = 'git: ' .. desc })
 end
 
 return {
   setup = function(gitsigns)
-    keymap('next hunk', 'n', ']g', function()
+    keymap('n', ']g', function()
       gitsigns.next_hunk()
       vim.cmd.normal('zz')
-    end)
+    end, 'next hunk')
 
-    keymap('previous hunk', 'n', '[g', function()
+    keymap('n', '[g', function()
       gitsigns.prev_hunk()
       vim.cmd.normal('zz')
-    end)
+    end, 'previous hunk')
 
-    keymap('stage hunk (add)', 'n', '<c-g><c-a>', gitsigns.stage_hunk)
+    keymap('n', '<c-g><c-a>', gitsigns.stage_hunk, 'stage hunk (add)')
 
-    keymap('preview hunk (diff)', 'n', '<c-g><c-d>', gitsigns.preview_hunk)
+    keymap('n', '<c-g><c-d>', gitsigns.preview_hunk, 'preview hunk (diff)')
 
-    keymap('reset hunk (undo)', 'n', '<c-g><c-u>', gitsigns.reset_hunk)
+    keymap('n', '<c-g><c-u>', gitsigns.reset_hunk, 'reset hunk (undo)')
 
-    keymap('blame current line', 'n', '<c-g><c-l>', function()
+    keymap('n', '<c-g><c-l>', function()
       gitsigns.blame_line({ full = true, ignore_whitespace = true })
-    end)
+    end, 'blame current line')
   end,
 }

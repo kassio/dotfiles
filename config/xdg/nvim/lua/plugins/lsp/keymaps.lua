@@ -8,7 +8,7 @@ local function buffer_format()
 end
 
 local function keymapper(bufnr)
-  return function(desc, mode, lhs, rhs)
+  return function(mode, lhs, rhs, desc)
     vim.keymap.set(mode, lhs, rhs, {
       silent = true,
       buffer = bufnr,
@@ -21,13 +21,37 @@ return {
   setup = function(bufnr)
     local keymap = keymapper(bufnr)
 
-    keymap('hover', 'n', 'K', vim.lsp.buf.hover)
-    keymap('signature help', 'n', '<c-k>', vim.lsp.buf.signature_help)
-    keymap('format (sync)', 'n', '<leader>f=', buffer_format)
-    keymap('rename', 'n', 'grr', vim.lsp.buf.rename)
-    keymap('code actions', { 'n', 'v', 'x' }, 'gla', vim.lsp.buf.code_action)
-    keymap('declarations', 'n', 'glD', vim.lsp.buf.declaration)
+    keymap('n', 'K', vim.lsp.buf.hover, 'hover')
+    keymap('n', '<c-k>', vim.lsp.buf.signature_help, 'signature help')
+    keymap('n', '<leader>f=', buffer_format, 'format (sync)')
+    keymap('n', 'grr', vim.lsp.buf.rename, 'rename')
+    keymap({ 'n', 'v', 'x' }, 'gla', vim.lsp.buf.code_action, 'code actions')
+    keymap('n', 'glD', vim.lsp.buf.declaration, 'declarations')
 
-    require('plugins.fuzzyfinder.keymaps.lsp').setup(vim.lsp, keymap)
+    keymap('n', 'gls', require('telescope.builtin').lsp_document_symbols, 'document symbols')
+    keymap(
+      'n',
+      'glS',
+      require('telescope.builtin').lsp_dynamic_workspace_symbols,
+      'workspace symbols'
+    )
+
+    keymap('n', 'gd', vim.lsp.buf.definition, 'definitions')
+
+    keymap('n', 'glt', function()
+      require('telescope.builtin').lsp_type_definitions({ jump_type = 'never' })
+    end, 'definitions')
+
+    keymap('n', 'gld', function()
+      require('telescope.builtin').lsp_definitions({ jump_type = 'never' })
+    end, 'definitions')
+
+    keymap('n', 'glr', function()
+      require('telescope.builtin').lsp_references({ jump_type = 'never' })
+    end, 'references')
+
+    keymap('n', 'gli', function()
+      require('telescope.builtin').lsp_implementations({ jump_type = 'never' })
+    end, 'implementations')
   end,
 }

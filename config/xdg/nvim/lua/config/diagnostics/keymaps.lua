@@ -36,11 +36,11 @@ return {
     keymap('n', 'glea', function()
       vim.cmd('silent! cclose')
       diagnostic.setloclist()
-    end, 'show all diagnostics from buffer')
+    end, 'buffer diagnostics')
 
     keymap('n', 'gleA', function()
       vim.cmd('silent! cclose')
       diagnostic.setqflist()
-    end, 'show all diagnostics from workspace')
+    end, 'workspace diagnostics')
   end,
 }

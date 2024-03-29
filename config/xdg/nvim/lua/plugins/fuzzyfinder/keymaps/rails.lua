@@ -10,7 +10,7 @@ end
 return {
   setup = function(keymap)
     local keymaps = {
-      keymap('rr', 'rails', function()
+      keymap('rr', function()
         vim.ui.select(vim.tbl_keys(rails.categories), {
           prompt = 'Finder in Rails',
         }, function(choice)
@@ -18,15 +18,15 @@ return {
             finder(rails.categories[choice])
           end
         end)
-      end),
+      end, 'rails'),
     }
 
     for name, category in pairs(rails.categories) do
       table.insert(
         keymaps,
-        keymap('r' .. category.key, 'rails:' .. name, function()
+        keymap('r' .. category.key, function()
           finder(category)
-        end)
+        end, 'rails:' .. name)
       )
     end
 
