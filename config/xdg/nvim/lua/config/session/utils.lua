@@ -111,7 +111,7 @@ function M.save()
 end
 
 function M.load()
-  local session, ok = select_session('Available sessions', function(session)
+  local session, ok = select_session('Choose a session to load', function(session)
     vim.cmd(string.format('silent! source %s | redraw!', session))
     logger.info(string.format('"%s" loaded', prefix_from(session)))
   end)
@@ -126,7 +126,7 @@ function M.load()
 end
 
 function M.destroy()
-  return select_session('Existing sessions', function(session)
+  return select_session('Choose a session to delete', function(session)
     delete_session(session)
     logger.info(string.format('"%s" deleted', prefix_from(session)))
   end)
