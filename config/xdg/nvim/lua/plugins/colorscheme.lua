@@ -29,10 +29,18 @@ return {
           -- UI
           hl['ColorColumn'] = { bg = c.bg_sidebar }
 
+          -- semantic
+          hl['@boolean'] = { fg = c.red }
+
           -- treesitter
           hl['@method'] = { link = '@function' }
           hl['@string'] = { fg = c.green }
-          hl['@string.specialecial'] = { fg = c.green, bold = true }
+          hl['@string.special'] = { fg = c.green, bold = true }
+
+          -- lsp:ruby
+          hl['@lsp.type.namespace.ruby'] = { link = '@constant' }
+          hl['@boolean.ruby'] = { link = '@boolean' }
+          hl['@string.escape.ruby'] = { link = '@string.special' }
 
           -- msg level
           hl['Error'] = { fg = c.error }
