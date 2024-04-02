@@ -13,15 +13,15 @@ return {
             '--relative',
             string.format('%s...', vim.trim(main)),
           },
-          prompt_title = 'git:diff',
+          prompt_title = 'git:main',
         })
-      end, 'git:diff'),
+      end, 'git:main'),
       keymap('gd', function()
         require('plugins.fuzzyfinder.commands').find_files({
           find_command = { 'git', 'ls-files', '--modified' },
-          prompt_title = 'git:modified',
+          prompt_title = 'git:diff',
         })
-      end, 'git:modified'),
+      end, 'git:diff'),
     }
   end,
 }
