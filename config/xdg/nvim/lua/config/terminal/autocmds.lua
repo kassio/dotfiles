@@ -16,6 +16,10 @@ return {
           manager.active = nil
         end
         pcall(vim.cmd.bwipe, event.buf)
+
+        if vim.g.terminal_server then
+          vim.cmd.qall()
+        end
       end,
     })
   end,
