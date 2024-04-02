@@ -16,6 +16,9 @@ return {
 
     command('TerminalServerStart', function()
       manager.active = require('config.terminal.adapters.remote_neovim').start()
+      vim.opt.laststatus = 0
+      vim.opt.showtabline = 0
+      vim.opt.winbar = ''
     end, { desc = 'start remote terminal server' })
 
     command('TerminalWeztermPane', function(opts)
