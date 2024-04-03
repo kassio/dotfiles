@@ -4,22 +4,26 @@ local M = {
 }
 
 local logger = require('utils').logger('session')
-local escaped_file_path = string.gsub(vim.fn.getcwd(), '[/%.]', M.path_replacer)
 
-local function prefix_from(session)
-  session = vim.fn.split(session or '', '/')
+local function format_session_name(str)
+  return string.gsub(str, '[/%.]', M.path_replacer)
+end
 
-  if #session > 0 then
-    session = session[#session]
+local function escaped_file_path()
+  return format_session_name(vim.fn.getcwd())
+end
 
-    return vim.fn.split(session, '+')[1]
+local function prefix_from(path)
+  if #path > 0 then
+    local filename = string.gsub(path, M.session_dir .. '/', '')
+    return vim.split(filename, '+')[1]
   else
-    return vim.g['gitsigns_head']
+    return format_session_name(vim.g['gitsigns_head'])
   end
 end
 
 local function session_for(prefix)
-  return string.format('%s/%s+%s', M.session_dir, prefix, escaped_file_path)
+  return string.format('%s/%s+%s', M.session_dir, prefix, escaped_file_path())
 end
 
 local function session_list()
