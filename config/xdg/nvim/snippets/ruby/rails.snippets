@@ -14,3 +14,5 @@ snippet prep
 	`!lua require("utils.ruby").file_namespace()`.prepend_mod
 snippet active_record_logger
 	ActiveRecord::Base.logger = Logger.new($stdout)
+snippet extend_concern
+	extend ActiveSupport::Concern
