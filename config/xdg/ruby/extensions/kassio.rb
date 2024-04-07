@@ -16,9 +16,12 @@ module Kassio
 
   def self.log(*args)
     File.open('log/kassio.log', 'a') do |f|
-      f << "» " << caller(3, 1)[0] << "\n"
-      args.each { |arg| f << arg.inspect << "\n" }
-      f << "──────────────────────────────────────────────────" << "\n"
+      msg = <<~EOF.tap { puts _1 }.tap { f << _1 }
+        » << #{caller(3, 1)[0]} <<
+        #{args.inspect}
+        ──────────────────────────────────────────────────
+
+      EOF
     end
 
     args
