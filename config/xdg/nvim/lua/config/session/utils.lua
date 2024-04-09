@@ -18,7 +18,8 @@ local function prefix_from(path)
     local filename = string.gsub(path, M.session_dir .. '/', '')
     return vim.split(filename, '+')[1]
   else
-    return format_session_name(vim.g['gitsigns_head'])
+    local branch = vim.g['gitsigns_head']
+    return format_session_name(vim.fn.fnamemodify(branch, ':t'))
   end
 end
 
