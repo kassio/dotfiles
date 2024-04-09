@@ -1,10 +1,22 @@
 snippet feature_category
 	feature_category: :${1|pages,wiki,team_planning,portfolio_management|}
+
+# strong memoize
 snippet include_strong_memoize
 	include ::Gitlab::Utils::StrongMemoize
 snippet strong_memoize_attr
 	strong_memoize_attr :${1}
+
+# overrides
 snippet include_override
 	extend ::Gitlab::Utils::Override
 snippet override
 	override :${1}
+
+# redis
+snippet redis_shared_state
+	:clean_gitlab_redis_shared_state
+snippet redis_cache
+	:clean_gitlab_redis_cache
+snippet redis_rate_limit
+	:clean_gitlab_redis_rate_limiting
