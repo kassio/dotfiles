@@ -120,9 +120,7 @@ end
 
 function M.find_by_ext()
   vim.ui.input({ prompt = 'What extensions? (separated by space)' }, function(values)
-    values = values or {}
-
-    if #values > 0 then
+    if values ~= nil and #values > 0 then
       local extensions = vim.split(values, ' ', { plain = true, trimempty = true })
 
       M.find_files({ extensions = extensions })
