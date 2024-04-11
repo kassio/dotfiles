@@ -14,6 +14,7 @@ return require('utils.table').join(
 
     keymap('s', require('plugins.fuzzyfinder.commands').find_tabs, 'tabs'),
     keymap('b', require('plugins.fuzzyfinder.commands').buffers, 'buffers'),
+    keymap('m', require('plugins.fuzzyfinder.commands').marks, 'marks'),
 
     keymap('w', require('plugins.fuzzyfinder.commands').live_grep, 'grep'),
     keymap('W', require('plugins.fuzzyfinder.commands').grep_string, 'grep:word', {
