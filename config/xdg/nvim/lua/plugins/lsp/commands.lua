@@ -11,7 +11,7 @@ end
 
 return {
   setup = function()
-    require('plugins.lsp.servers.ruby_ls.commands').setup(command)
+    require('plugins.lsp.servers.ruby_lsp.commands').setup(command)
 
     command('LspFormat', function()
       local filetype = vim.bo.filetype

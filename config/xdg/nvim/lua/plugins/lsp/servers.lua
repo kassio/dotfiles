@@ -11,7 +11,7 @@ local servers = {
   jsonnet_ls = {},
   lua_ls = require('plugins.lsp.servers.lua_ls'),
   rubocop = {},
-  ruby_ls = require('plugins.lsp.servers.ruby_ls'),
+  ruby_lsp = require('plugins.lsp.servers.ruby_lsp'),
   sqlls = {},
   yamlls = require('plugins.lsp.servers.yamlls'),
 }

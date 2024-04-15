@@ -1,4 +1,4 @@
-local NAME = 'ruby_ls'
+local NAME = 'ruby_lsp'
 local logger = require('utils').logger(NAME)
 
 local function request(method, cb)
