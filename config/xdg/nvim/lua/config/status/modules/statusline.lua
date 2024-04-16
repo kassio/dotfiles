@@ -93,6 +93,10 @@ local function macromsg()
   return ''
 end
 
+local function treesitter_context()
+  return require('config.status.modules.treesitter_context').render()
+end
+
 return {
   render = function()
     local mode, hl = get_mode()
@@ -106,6 +110,7 @@ return {
       macromsg(),
       '%=',
       '%S',
+      treesitter_context(),
       get_git_branch(hl),
     })
 
