@@ -31,3 +31,5 @@ command('Draft', function()
   vim.opt_local.bufhidden = 'hide'
   vim.opt_local.buflisted = false
 end, {})
+
+vim.cmd.cabbrev('w silent w')

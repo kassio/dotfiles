@@ -34,16 +34,5 @@ return {
         vim.opt.cmdheight = 0
       end,
     })
-
-    vim.api.nvim_create_autocmd('BufWritePost', {
-      group = group,
-      desc = 'Get rid of message after writing a file',
-      pattern = { '*' },
-      callback = function()
-        vim.defer_fn(function()
-          vim.cmd.redrawstatus()
-        end, 500)
-      end,
-    })
   end,
 }
