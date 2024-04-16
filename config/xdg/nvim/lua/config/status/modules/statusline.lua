@@ -94,7 +94,14 @@ local function macromsg()
 end
 
 local function treesitter_context()
-  return require('config.status.modules.treesitter_context').render()
+  local options = vim.b.treesitter_statusline_options or {}
+
+  local ok, ts = pcall(require, 'nvim-treesitter.statusline')
+  if not ok then
+    return ''
+  end
+
+  return ts.statusline(options)
 end
 
 return {
