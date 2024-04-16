@@ -33,3 +33,8 @@ command('Draft', function()
 end, {})
 
 vim.cmd.cabbrev('w silent w')
+
+command('Reverse', function(opts)
+  vim.cmd(string.format('%s,%s g/^/move %s', opts.line1, opts.line2, opts.line1 - 1))
+  vim.cmd.nohls()
+end, { range = '%' })
