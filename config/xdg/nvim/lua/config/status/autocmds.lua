@@ -1,6 +1,6 @@
 return {
   setup = function()
-    local group = vim.api.nvim_create_augroup('user:statusline', { clear = false })
+    local group = vim.api.nvim_create_augroup('user:statusline', { clear = true })
     vim.api.nvim_create_autocmd({ 'RecordingEnter' }, {
       group = group,
       callback = function()
@@ -16,6 +16,33 @@ return {
         vim.defer_fn(function()
           vim.g.macromsg = ''
         end, 3000)
+      end,
+    })
+
+    vim.api.nvim_create_autocmd('CmdlineEnter', {
+      group = group,
+      desc = 'Do not hide the status line when typing a command',
+      callback = function()
+        vim.opt.cmdheight = 1
+      end,
+    })
+
+    vim.api.nvim_create_autocmd('CmdlineLeave', {
+      group = group,
+      desc = 'Hide cmdline when not typing a command',
+      callback = function()
+        vim.opt.cmdheight = 0
+      end,
+    })
+
+    vim.api.nvim_create_autocmd('BufWritePost', {
+      group = group,
+      desc = 'Get rid of message after writing a file',
+      pattern = { '*' },
+      callback = function()
+        vim.defer_fn(function()
+          vim.cmd.redrawstatus()
+        end, 500)
       end,
     })
   end,
