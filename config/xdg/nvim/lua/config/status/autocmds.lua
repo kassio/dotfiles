@@ -18,21 +18,5 @@ return {
         end, 3000)
       end,
     })
-
-    vim.api.nvim_create_autocmd('CmdlineEnter', {
-      group = group,
-      desc = 'Do not hide the status line when typing a command',
-      callback = function()
-        vim.opt.cmdheight = 1
-      end,
-    })
-
-    vim.api.nvim_create_autocmd('CmdlineLeave', {
-      group = group,
-      desc = 'Hide cmdline when not typing a command',
-      callback = function()
-        vim.opt.cmdheight = 0
-      end,
-    })
   end,
 }
