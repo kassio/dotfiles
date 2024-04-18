@@ -11,9 +11,9 @@ end
 local adapter = { name = 'wezterm' }
 
 function adapter.start(id)
-  id = tonumber(id) or 0
+  id = tonumber(id) or -1
 
-  if id <= 0 then
+  if id < 0 then
     vim.g.wezterm = nil
   else
     vim.g.wezterm = id
