@@ -54,6 +54,12 @@ local commands = {
     opts = { range = true },
   },
   {
+    name = 'UseBlockChange',
+    callback = S([[change(\([^,]\+\), :\([^)]\+\))]], [[change { \1.\2 }]]),
+    desc = 'change(Foo, :bar) to change { Foo.bar }',
+    opts = { range = true },
+  },
+  {
     name = 'CopyFileNamespace',
     callback = function(opts)
       local file_namespace = utils.ruby.file_namespace()
