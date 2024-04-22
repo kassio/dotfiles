@@ -1,19 +1,38 @@
---- treesitter statusline
+local function second_parent_type(node, counter)
+  counter = counter or 2
+  if counter == 0 then
+    return node ~= nil and node:type() or nil
+  end
+
+  node = node:parent()
+  if node == nil then
+    return
+  end
+
+  return second_parent_type(node, counter - 1)
+end
+
 vim.b.treesitter_statusline_options = {
-  type_patterns = { 'class', 'module' },
+  type_patterns = { 'class', 'module', 'method' },
   separator = '',
   transform_fn = function(value, node)
-    value, _ = string.gsub(value, '%s*def%s*', '')
-    value, _ = string.gsub(value, '%s*class%s*', '')
-    value, _ = string.gsub(value, '%s*module%s*', '')
-    value, _ = string.gsub(value, '%s*<.*', '')
+    -- methods
+    value = string.gsub(value, '%s*def%s+(%w+)%.(%w+)', '.%2') -- prefix singleton method with .
 
-    if node:type() == 'class' then
-      return '::' .. value
-    elseif node:type() == 'singleton_class' then
-      return ''
+    if second_parent_type(node) == 'singleton_class' then
+      value = string.gsub(value, '%s*def%s*', '.')
     else
-      return '::' .. value
+      value = string.gsub(value, '%s*def%s*', '#')
     end
+
+    -- class
+    value = string.gsub(value, '%s*class%s+<<.*', '') -- prefix constants ::
+    value = string.gsub(value, '%s*class%s*', '::') -- prefix constants ::
+    value = string.gsub(value, '%s*<.*', '') -- remove inheritance
+
+    -- module
+    value = string.gsub(value, '%s*module%s*', '::') -- prefix constants ::
+
+    return value
   end,
 }
