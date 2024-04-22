@@ -17,6 +17,7 @@ vim.b.treesitter_statusline_options = {
   separator = '',
   transform_fn = function(value, node)
     -- methods
+    value = string.gsub(value, '%([^)]*%)', '') -- prefix singleton method with .
     value = string.gsub(value, '%s*def%s+(%w+)%.(%w+)', '.%2') -- prefix singleton method with .
 
     if second_parent_type(node) == 'singleton_class' then
