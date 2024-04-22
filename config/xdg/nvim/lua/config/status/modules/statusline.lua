@@ -94,7 +94,9 @@ local function macromsg()
 end
 
 local function treesitter_context()
-  local options = vim.b.treesitter_statusline_options or {}
+  local options = vim.tbl_deep_extend('keep', vim.b.treesitter_statusline_options or {}, {
+    separator = ' 〉',
+  })
 
   local ok, ts = pcall(require, 'nvim-treesitter.statusline')
   if not ok then
