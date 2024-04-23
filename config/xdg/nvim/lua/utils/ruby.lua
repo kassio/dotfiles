@@ -2,16 +2,17 @@ local utils = require('utils')
 
 local M = {}
 
-function M.file_namespace()
+function M.file_namespace(kind)
   local prestart = false
   local start = false
-  local path = ''
   local base = vim.fn.expand('%:p:r')
 
+  local dirs = {}
   for dir in vim.gsplit(base, '/', { plain = true, trimempty = true }) do
     if start == true then
       dir = vim.fn.fnamemodify(dir, ':t:r')
-      path = path .. '::' .. utils.string.camelcase(dir)
+      dir = utils.string.camelcase(dir)
+      table.insert(dirs, dir)
     elseif dir == 'lib' then
       start = true
     elseif dir == 'app' then -- on rails we don't use models/controllers/etc on namespace
@@ -21,7 +22,21 @@ function M.file_namespace()
     end
   end
 
-  return path
+  vim.print(dirs)
+
+  local namespace = ''
+  for i, dir in ipairs(dirs) do
+    local indent = string.rep(' ', (i - 1) * 2)
+    if i == 1 and #dirs ~= 1 then
+      namespace = string.format('module %s', dir)
+    elseif i == #dirs then
+      namespace = string.format('%s\n%s%s %s', namespace, indent, kind, dir)
+    else
+      namespace = string.format('%s\n%smodule %s', namespace, indent, dir)
+    end
+  end
+
+  return vim.trim(namespace)
 end
 
 function M.rubocop_code()

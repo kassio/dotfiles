@@ -6,9 +6,11 @@ snippet lint
 snippet namespace
 	`!lua require("utils.ruby").file_namespace()`
 snippet class
-	class ${1:`!lua require("utils.ruby").file_namespace()`}${2}
+	${1:`!lua require("utils.ruby").file_namespace('class')`}${2}
 		${0:$VISUAL}
-	end
+snippet module
+	${1:`!lua require("utils.ruby").file_namespace('module')`}$2
+		${0:$VISUAL}
 snippet aa
 	attr_accessor ${1}
 snippet aw
@@ -35,10 +37,6 @@ snippet do
 	end
 snippet dop
 	do |${1:param}|
-		${0:$VISUAL}
-	end
-snippet module
-	module ${1:`!lua require("utils.ruby").file_namespace()`}$2
 		${0:$VISUAL}
 	end
 snippet hr
