@@ -60,13 +60,13 @@ local commands = {
     opts = { range = true },
   },
   {
-    name = 'CopyFileNamespace',
+    name = 'CopyNamespace',
     callback = function(opts)
-      local file_namespace = utils.ruby.treesitter_namespace()
-      if file_namespace ~= '' then
-        utils.to_clipboard(file_namespace, opts.bang)
+      local namespace = utils.ruby.treesitter_namespace()
+      if namespace ~= '' then
+        utils.to_clipboard(namespace, opts.bang)
       else
-        vim.notify("Can't find current file namespace", vim.log.levels.WARN, { title = 'ruby' })
+        vim.notify("Can't find current namespace", vim.log.levels.WARN, { title = 'ruby' })
       end
     end,
     desc = 'copy namespace based on the file path',
