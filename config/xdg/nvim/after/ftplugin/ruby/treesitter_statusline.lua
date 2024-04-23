@@ -27,7 +27,7 @@ vim.b.treesitter_statusline_options = {
     end
 
     -- class
-    value = string.gsub(value, '%s*class%s+<<.*', '') -- prefix constants ::
+    value = string.gsub(value, '%s*class%s+<<.*', '') -- remove singleton_class
     value = string.gsub(value, '%s*class%s*', '::') -- prefix constants ::
     value = string.gsub(value, '%s*<.*', '') -- remove inheritance
 

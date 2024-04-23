@@ -39,6 +39,16 @@ function M.file_namespace(kind)
   return vim.trim(namespace)
 end
 
+function M.treesitter_namespace()
+  if vim.bo.filetype ~= 'ruby' then
+    return ''
+  end
+
+  local options = vim.b.treesitter_statusline_options or {}
+
+  return require('nvim-treesitter.statusline').statusline(options)
+end
+
 function M.rubocop_code()
   local _, lnum, _ = utils.table.unpack(vim.fn.getcurpos())
   local all_diagnostics = vim.diagnostic.get(0, { lnum = lnum })
