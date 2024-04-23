@@ -1,38 +1,47 @@
-local function second_parent_type(node, counter)
-  counter = counter or 2
-  if counter == 0 then
-    return node ~= nil and node:type() or nil
-  end
+local function tsparent(node, counter)
+  counter = counter or 1
+  repeat
+    if node == nil then
+      return
+    end
 
-  node = node:parent()
-  if node == nil then
-    return
-  end
+    node = node:parent()
+    counter = counter - 1
+  until counter < 1
 
-  return second_parent_type(node, counter - 1)
+  return node
 end
 
 vim.b.treesitter_statusline_options = {
   type_patterns = { 'class', 'module', 'method' },
   separator = '',
-  transform_fn = function(value, node)
-    -- methods
-    value = string.gsub(value, '%([^)]*%)', '') -- prefix singleton method with .
-    value = string.gsub(value, '%s*def%s+(%w+)%.(%w+)', '.%2') -- prefix singleton method with .
-
-    if second_parent_type(node) == 'singleton_class' then
-      value = string.gsub(value, '%s*def%s*', '.')
-    else
-      value = string.gsub(value, '%s*def%s*', '#')
+  transform_fn = function(_line, node)
+    local value
+    for child in node:iter_children() do
+      local type = child:type()
+      if type == 'identifier' or type == 'constant' then
+        value = vim.treesitter.get_node_text(child, 0)
+      end
     end
 
-    -- class
-    value = string.gsub(value, '%s*class%s+<<.*', '') -- remove singleton_class
-    value = string.gsub(value, '%s*class%s*', '::') -- prefix constants ::
-    value = string.gsub(value, '%s*<.*', '') -- remove inheritance
+    local type = node:type()
+    local second_parent = tsparent(node, 2)
+    local second_parent_type
+    if second_parent ~= nil then
+      second_parent_type = second_parent:type()
+    end
 
-    -- module
-    value = string.gsub(value, '%s*module%s*', '::') -- prefix constants ::
+    if type == 'method' and second_parent_type == 'singleton_class' then
+      value = '.' .. value
+    elseif type == 'singleton_method' then
+      value = '.' .. value
+    elseif type == 'method' then
+      value = '#' .. value
+    elseif type == 'singleton_class' then
+      value = '' -- this is required to avoid empty `::` with class << self
+    else
+      value = '::' .. value
+    end
 
     return value
   end,
