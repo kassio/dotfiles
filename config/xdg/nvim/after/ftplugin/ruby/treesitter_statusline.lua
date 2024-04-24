@@ -1,4 +1,4 @@
-local function tsparent(node, counter)
+local function get_parent(node, counter)
   counter = counter or 1
   repeat
     if node == nil then
@@ -12,37 +12,42 @@ local function tsparent(node, counter)
   return node
 end
 
+local function get_parent_type(node, counter)
+  local parent_node = get_parent(node, counter)
+
+  if parent_node ~= nil then
+    return parent_node:type()
+  end
+end
+
+local function next_children_text(node, types)
+  for child in node:iter_children() do
+    if vim.tbl_contains(types, child:type()) then
+      return vim.treesitter.get_node_text(child, 0)
+    end
+  end
+end
+
 vim.b.treesitter_statusline_options = {
   type_patterns = { 'class', 'module', 'method' },
   separator = '',
   transform_fn = function(_line, node)
-    local value
-    for child in node:iter_children() do
-      local type = child:type()
-      if type == 'identifier' or type == 'constant' then
-        value = vim.treesitter.get_node_text(child, 0)
-      end
-    end
-
     local type = node:type()
-    local second_parent = tsparent(node, 2)
-    local second_parent_type
-    if second_parent ~= nil then
-      second_parent_type = second_parent:type()
-    end
+    local text = next_children_text(node, { 'identifier', 'constant' }) or ''
+    local parent_type = get_parent_type(node, 2)
 
-    if type == 'method' and second_parent_type == 'singleton_class' then
-      value = '.' .. value
+    if type == 'method' and parent_type == 'singleton_class' then
+      text = '.' .. text
     elseif type == 'singleton_method' then
-      value = '.' .. value
+      text = '.' .. text
     elseif type == 'method' then
-      value = '#' .. value
+      text = '#' .. text
     elseif type == 'singleton_class' then
-      value = '' -- this is required to avoid empty `::` with class << self
+      text = '' -- this is required to avoid empty `::` with class << self
     else
-      value = '::' .. value
+      text = '::' .. text
     end
 
-    return value
+    return text
   end,
 }
