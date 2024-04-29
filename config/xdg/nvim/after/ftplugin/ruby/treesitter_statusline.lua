@@ -9,25 +9,33 @@ local function get_parent_type(node, counter)
 end
 
 vim.b.treesitter_statusline_options = {
-  type_patterns = { 'class', 'module', 'method' },
+  type_patterns = { 'assignment', 'class', 'module', 'method' },
   separator = '',
   transform_fn = function(_line, node)
     local type = node:type()
-    local text = tsutils.next_children_text(node, { 'identifier', 'constant' }) or ''
-    local parent_type = get_parent_type(node, 2)
 
-    if type == 'method' and parent_type == 'singleton_class' then
-      text = '.' .. text
-    elseif type == 'singleton_method' then
-      text = '.' .. text
-    elseif type == 'method' then
-      text = '#' .. text
-    elseif type == 'singleton_class' then
-      text = '' -- this is required to avoid empty `::` with class << self
-    else
-      text = '::' .. text
+    local text
+    if vim.tbl_contains({ 'assignment', 'class', 'module' }, type) then
+      text = tsutils.next_children_text(node, { 'constant' })
+    elseif vim.tbl_contains({ 'method', 'singleton_method' }, type) then
+      text = tsutils.next_children_text(node, { 'identifier' })
     end
 
-    return text
+    if not text then
+      -- Remove connection symbols from non-constant assignment and singleton_class
+      return ''
+    elseif get_parent_type(node, 1) == 'program' then
+      -- Remove first `::`
+      return text
+    elseif type == 'method' and get_parent_type(node, 2) == 'singleton_class' then
+      -- When inside a class << self block
+      return '.' .. text
+    elseif type == 'singleton_method' then
+      return '.' .. text
+    elseif type == 'method' then
+      return '#' .. text
+    else
+      return '::' .. text
+    end
   end,
 }
