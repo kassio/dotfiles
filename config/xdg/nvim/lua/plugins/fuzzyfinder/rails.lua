@@ -4,10 +4,15 @@ return {
       key = 'c',
       dirs = { 'app/controllers', 'ee/app/controllers' },
     },
-    docs = {
+    database = {
       key = 'd',
       extensions = {},
-      dirs = { 'doc' },
+      dirs = { 'db' },
+    },
+    docs = {
+      key = 'D',
+      extensions = {},
+      dirs = { 'docs' },
     },
     events = {
       key = 'e',
