@@ -32,7 +32,7 @@ end
 function M.find_files(opts)
   opts = opts or {}
 
-  local extensions = vim.tbl_flatten({ opts.extensions })
+  local extensions = vim.iter({ opts.extensions }):flatten():totable()
   opts.extensions = nil
 
   local title = 'find files'
@@ -42,7 +42,7 @@ function M.find_files(opts)
     title = string.format('find [%s]', table.concat(extensions, ', '))
   end
 
-  local search_dirs = vim.tbl_flatten({ opts.search_dirs })
+  local search_dirs = vim.iter({ opts.search_dirs }):flatten():totable()
   if #search_dirs > 0 then
     title = string.format('%s in (%s)', title, table.concat(search_dirs, ', '))
   end
@@ -99,10 +99,13 @@ function M.finders()
   if #M.finders_list == 0 then
     local builtin_pickers = require('telescope.builtin')
     local extensions_pickers = require('telescope._extensions')
-    local list = vim.tbl_flatten({
-      vim.tbl_keys(builtin_pickers),
-      vim.tbl_keys(extensions_pickers.manager),
-    })
+    local list = vim
+      .iter({
+        vim.tbl_keys(builtin_pickers),
+        vim.tbl_keys(extensions_pickers.manager),
+      })
+      :flatten()
+      :totable()
     vim.fn.uniq(list)
     M.finders_list = list
   end

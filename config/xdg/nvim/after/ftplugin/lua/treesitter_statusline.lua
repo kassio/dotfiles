@@ -1,4 +1,4 @@
-local tsutils = R('plugins.treesitter.utils')
+local tsutils = require('plugins.treesitter.utils')
 
 vim.b.treesitter_statusline_options = {
   type_patterns = {
