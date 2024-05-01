@@ -34,18 +34,22 @@ return {
           goto_next_start = {
             [']F'] = '@function.outer',
             [']C'] = '@class.outer',
+            [']B'] = '@block.outer',
           },
           goto_next_end = {
             [']f'] = '@function.outer',
             [']c'] = '@class.outer',
+            [']b'] = '@block.outer',
           },
           goto_previous_start = {
             ['[f'] = '@function.outer',
             ['[c'] = '@class.outer',
+            ['[b'] = '@block.outer',
           },
           goto_previous_end = {
             ['[F'] = '@function.outer',
             ['[C'] = '@class.outer',
+            ['[B'] = '@block.outer',
           },
         },
         pairs = {
