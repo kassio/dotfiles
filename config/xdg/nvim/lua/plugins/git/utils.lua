@@ -6,7 +6,7 @@ end
 
 local function get_filepath()
   local filename = vim.fn.expand('%:p')
-  local root = vim.fs.root(0, '.git')
+  local root = vim.fs.root(filename, '.git')
 
   return string.gsub(filename, '^' .. root .. '/', '')
 end
