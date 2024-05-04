@@ -1,4 +1,5 @@
 # vim:ft=zsh:
 
+eval "$(fzf --zsh)"
 export FZF_DEFAULT_OPTS="--reverse --tiebreak=begin,length,index"
 export FZF_DEFAULT_COMMAND="files"
