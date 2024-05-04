@@ -1,4 +1,4 @@
 return {
-  'yorickpeterse/nvim-pqf',
-  config = true,
+  'kevinhwang91/nvim-bqf',
+  ft = 'qf',
 }
