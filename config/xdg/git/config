@@ -50,7 +50,7 @@
   autoupdate = true
 [diff]
   tool = nvim
-  noprefix = true
+  noprefix = false
   renameLimit = 5000
 [difftool]
   prompt = false
