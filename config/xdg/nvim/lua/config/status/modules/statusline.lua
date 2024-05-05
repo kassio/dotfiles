@@ -86,7 +86,7 @@ end
 local function macromsg()
   local msg = vim.g.macromsg
 
-  if msg ~= nil and msg ~= '' then
+  if (msg or '') ~= '' then
     return '| ' .. msg
   end
 
@@ -106,6 +106,19 @@ local function treesitter_context()
   return ts.statusline(options)
 end
 
+local function explorer_filename()
+  if vim.bo.filetype ~= 'NvimTree' then
+    return ''
+  end
+
+  local node = require('nvim-tree.api').tree.get_node_under_cursor()
+  if node == nil then
+    return 'no nodes'
+  end
+
+  return vim.fs.basename(node.absolute_path)
+end
+
 return {
   render = function()
     local mode, hl = get_mode()
@@ -114,12 +127,13 @@ return {
       return value ~= ''
     end, {
       mode,
-      '%3l:%-3c %3p%%',
-      get_search_count(),
+      explorer_filename(),
+      treesitter_context(),
       macromsg(),
       '%=',
       '%S',
-      treesitter_context(),
+      get_search_count(),
+      '%3l:%-3c %3p%%',
       get_git_branch(hl),
     })
 
