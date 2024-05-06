@@ -6,16 +6,20 @@ vim.b.treesitter_statusline_options = {
     'variable_list',
     'function_declaration',
   },
-  transform_fn = function(_line, node)
-    local text = tsutils.next_children_text(node, { 'identifier' }) or ''
+  transform_fn = function(node)
+    local text = tsutils.get_node_text(node:field('name')[1]) or ''
+    if text == '' then
+      return
+    end
 
-    if node:type() == 'variable_list' then
+    local type = node:type()
+    if type == 'variable_list' then
       return '󰂡 ' .. text
-    elseif node:type() == 'function_declaration' then
+    elseif type == 'function_declaration' then
       return '󰊕 ' .. text
-    elseif node:type() == 'function_definition' then
+    elseif type == 'function_definition' then
       return '󰊕 ' .. text
-    elseif node:type() == 'field' then
+    elseif type == 'field' then
       return '󰇽 ' .. text
     else
       return text

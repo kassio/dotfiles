@@ -9,16 +9,16 @@ local function get_parent_type(node, counter)
 end
 
 vim.b.treesitter_statusline_options = {
-  type_patterns = { 'assignment', 'class', 'module', 'method' },
+  type_patterns = { 'comment', 'assignment', 'class', 'module', 'method' },
   separator = '',
-  transform_fn = function(_line, node)
+  transform_fn = function(node)
     local type = node:type()
 
     local text
     if vim.tbl_contains({ 'assignment', 'class', 'module' }, type) then
-      text = tsutils.next_children_text(node, { 'constant' })
+      text = tsutils.next_children_text(node, '::', { 'constant' })
     elseif vim.tbl_contains({ 'method', 'singleton_method' }, type) then
-      text = tsutils.next_children_text(node, { 'identifier' })
+      text = tsutils.next_children_text(node, '::', { 'identifier' })
     end
 
     if not text then

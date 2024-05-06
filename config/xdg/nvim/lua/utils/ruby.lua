@@ -46,7 +46,7 @@ function M.treesitter_namespace()
 
   local options = vim.b.treesitter_statusline_options or {}
 
-  return require('nvim-treesitter.statusline').statusline(options)
+  return require('plugins.treesitter.fetcher').fetch(options)
 end
 
 function M.rubocop_code()

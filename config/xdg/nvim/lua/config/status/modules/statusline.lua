@@ -94,16 +94,20 @@ local function macromsg()
 end
 
 local function treesitter_context()
-  local options = vim.tbl_deep_extend('keep', vim.b.treesitter_statusline_options or {}, {
-    separator = ' 〉',
-  })
+  return require('plugins.treesitter.fetcher').fetch(vim.b.treesitter_statusline_options)
+end
 
-  local ok, ts = pcall(require, 'nvim-treesitter.statusline')
-  if not ok then
+local function explorer_filename()
+  if vim.bo.filetype ~= 'NvimTree' then
     return ''
   end
 
-  return ts.statusline(options)
+  local node = require('nvim-tree.api').tree.get_node_under_cursor()
+  if node == nil then
+    return 'no nodes'
+  end
+
+  return vim.fs.basename(node.absolute_path)
 end
 
 local function explorer_filename()
