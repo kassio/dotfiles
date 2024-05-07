@@ -30,6 +30,14 @@ command('Draft', function()
   vim.opt_local.buftype = 'nofile'
   vim.opt_local.bufhidden = 'hide'
   vim.opt_local.buflisted = false
+  vim.cmd.cabbrev('<buffer> w wa')
+end, {})
+
+command('UnDraft', function()
+  vim.opt_local.buftype = nil
+  vim.opt_local.bufhidden = nil
+  vim.opt_local.buflisted = nil
+  vim.cmd.cunabbrev('<buffer> w')
 end, {})
 
 command('Reverse', function(opts)
