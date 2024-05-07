@@ -2,6 +2,8 @@
 
 local bat="${HOMEBREW_PREFIX}/bin/bat"
 
+export BAT_STYLE=numbers
+
 if [ "$(macos-appearance)" = "dark" ]; then
   BAT_THEME="tokyonight_night" "${bat}" "$@"
 else
