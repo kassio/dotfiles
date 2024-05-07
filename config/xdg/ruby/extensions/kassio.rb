@@ -14,17 +14,25 @@ module Kassio
     self
   end
 
-  def self.log(*args)
-    File.open('log/kassio.log', 'a') do |f|
-      msg = <<~EOF.tap { puts _1 }.tap { f << _1 }
+  def log(*args)
+    args.tap do
+      File.open('log/kassio.log', 'a') do |f|
+        <<~EOF.tap { puts _1 }.tap { f << _1 }
         » << #{caller(3, 1)[0]} <<
         #{args.inspect}
         ──────────────────────────────────────────────────
 
-      EOF
+        EOF
+      end
     end
+  end
 
-    args
+  def log_active_record
+    return yield unless defined?(Rails)
+
+    ActiveRecord::Base.logger = Logger.new($stdout)
+
+    yield.tap { ActiveRecord::Base.logger = nil }
   end
 
   def copy(obj)
