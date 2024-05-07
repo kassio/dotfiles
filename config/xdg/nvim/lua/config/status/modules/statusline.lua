@@ -1,3 +1,5 @@
+local SEP = '│'
+
 local mode_map = {
   [''] = 'V',
   ['!'] = '!',
@@ -70,7 +72,7 @@ local function get_search_count()
     total = '??'
   end
 
-  return string.format('| /%s [%s/%s]', term, current, total)
+  return string.format('/%s [%s/%s] %s', term, current, total, SEP)
 end
 
 local function get_git_branch(hl)
@@ -87,7 +89,7 @@ local function macromsg()
   local msg = vim.g.macromsg
 
   if (msg or '') ~= '' then
-    return '| ' .. msg
+    return SEP .. ' ' .. msg
   end
 
   return ''
@@ -104,20 +106,7 @@ local function explorer_filename()
 
   local node = require('nvim-tree.api').tree.get_node_under_cursor()
   if node == nil then
-    return 'no nodes'
-  end
-
-  return vim.fs.basename(node.absolute_path)
-end
-
-local function explorer_filename()
-  if vim.bo.filetype ~= 'NvimTree' then
     return ''
-  end
-
-  local node = require('nvim-tree.api').tree.get_node_under_cursor()
-  if node == nil then
-    return 'no nodes'
   end
 
   return vim.fs.basename(node.absolute_path)
@@ -136,8 +125,9 @@ return {
       macromsg(),
       '%=',
       '%S',
+      SEP,
       get_search_count(),
-      '%3l:%-3c %3p%%',
+      '%3l:%-3c' .. SEP .. ' %3p%%',
       get_git_branch(hl),
     })
 
