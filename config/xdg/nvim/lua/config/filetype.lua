@@ -26,5 +26,6 @@ vim.filetype.add({
     ['.*%.pryrc'] = 'ruby',
     ['.*_spec%.rb'] = filetype_syntax('ruby', 'rspec'),
     ['gitconfig.*'] = filetype_syntax('config', 'dosini'),
+    ['brewfile.*'] = 'brewfile',
   },
 })

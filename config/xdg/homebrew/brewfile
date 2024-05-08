@@ -5,7 +5,6 @@ tap "homebrew/services"
 brew "asdf"
 brew "bash"
 brew "bash-completion"
-brew "bash-language-server" # lsp server bash
 brew "bat" # cat replacement
 brew "coreutils"
 brew "dfu-programmer" # flash keyboard firmware
@@ -16,7 +15,6 @@ brew "docutils"
 brew "dpkg"
 brew "duti"
 brew "editorconfig-checker" # linter generic
-brew "efm-langserver" # lsp server generic
 brew "exiftool"
 brew "fd" # file finding
 brew "ffmpeg"
@@ -43,7 +41,6 @@ brew "libffi"
 brew "libiconv"
 brew "libyaml"
 brew "lsd" # ls replacement
-brew "lua-language-server" # lsp server lua
 brew "luacheck" # linter lua
 brew "luajit", args: ["HEAD"]
 brew "markdownlint-cli"
@@ -62,10 +59,8 @@ brew "terminal-notifier"
 brew "tidy-html5" # formatter html
 brew "tree"
 brew "tree-sitter"
-brew "vscode-langservers-extracted" # lsp server css/json/sql
 brew "watch"
 brew "wget"
-brew "yaml-language-server" # lsp server yaml
 brew "youtube-dl"
 brew "yq" # yaml jq
 brew "zlib"

@@ -18,6 +18,10 @@ return {
       -- Do not show the not visible matching context on statusline
       vim.g.matchup_matchparen_offscreen = {}
 
+      require('treesitter-context').setup({
+        min_window_height = 1,
+        separator = '─',
+      })
       require('plugins.treesitter.config').setup()
     end,
   },

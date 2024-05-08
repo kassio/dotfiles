@@ -102,6 +102,7 @@ source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
 # repositories to keep synced locally
 export GSINK_CONFIG_PATH="${HOME}/.config/repos.json"
 
+source "${XDG_CONFIG_HOME}/homebrew/env"
 source "${XDG_CONFIG_HOME}/git/env"
 source "${XDG_CONFIG_HOME}/go/env"
 source "${XDG_CONFIG_HOME}/ripgrep/env"

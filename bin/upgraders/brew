@@ -5,14 +5,18 @@ if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
   exit
 fi
 
-subtitle "global brewfile"
-brew bundle --global install
-
 title "[brew] system upgrade"
 subtitle "brew upgrade"
 rm "${HOMEBREW_PREFIX}/var/homebrew/locks/update" 2>/dev/null
 brew update
 brew upgrade --fetch-HEAD
+
+
+subtitle "global dependencies"
+brew bundle --global check
+
+subtitle "LSPs"
+brew bundle check --file="$XDG_CONFIG_HOME/homebrew/brewfile.lsp"
 
 cleaned=$(brew cleanup --prune 7)
 if [ -n "${cleaned}" ]; then
