@@ -3,6 +3,8 @@
 module Kassio
   extend self
 
+  KASSIO_LOG_FILE = defined?(Rails) ? 'log/kassio.log' : '/tmp/kassio.log'
+
   def load!
     # Avoid defining global functions to avoid confusion!!
     # Ideally, define a Kassio::Helper, module with the helper functions
@@ -16,7 +18,7 @@ module Kassio
 
   def log(*args)
     args.tap do
-      File.open('log/kassio.log', 'a') do |f|
+      File.open(KASSIO_LOG_FILE, 'a') do |f|
         <<~EOF.tap { puts _1 }.tap { f << _1 }
         » << #{caller(3, 1)[0]} <<
         #{args.inspect}
@@ -30,7 +32,12 @@ module Kassio
   def log_active_record
     return yield unless defined?(Rails)
 
-    ActiveRecord::Base.logger = Logger.new($stdout)
+    ActiveRecord::Base.logger = Class.new(Logger) do
+      def add(severity, message = nil, progname = nil)
+        File.write(KASSIO_LOG_FILE, message)
+        super
+      end
+    end.new($stdout)
 
     yield.tap { ActiveRecord::Base.logger = nil }
   end
