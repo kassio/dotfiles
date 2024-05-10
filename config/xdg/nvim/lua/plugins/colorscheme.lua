@@ -11,6 +11,10 @@ return {
         sidebars = { 'qf', 'help', 'terminal' },
         day_brightness = 0.3,
         on_colors = function(colors)
+          local bg_dark = colors.bg
+          local bg = colors.bg_sidebar
+          colors.bg = bg
+          colors.bg_sidebar = bg_dark
           colors.error = '#CA1243'
           colors.warn = '#F7C154'
           colors.info = '#6699CC'
@@ -21,13 +25,13 @@ return {
           colors.hint_light = '#B5E6CE'
         end,
         on_highlights = function(hl, c)
+          -- UI
+          hl['ColorColumn'] = { bg = c.bg_sidebar }
+
           -- search
           hl['IncSearch'] = { fg = c.bg, bg = c.warn }
           hl['Search'] = { fg = c.bg, bg = c.warn }
           hl['CurSearch'] = { fg = c.bg, bg = c.blue, italic = true, bold = true }
-
-          -- UI
-          hl['ColorColumn'] = { bg = c.bg_sidebar }
 
           -- semantic
           hl['@boolean'] = { fg = c.red }
