@@ -13,6 +13,8 @@ module Kassio
 
   def reload
     load!
+
+    _reload if respond_to?(:_reload)
     self
   end
 
