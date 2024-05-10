@@ -11,10 +11,11 @@ return {
         sidebars = { 'qf', 'help', 'terminal' },
         day_brightness = 0.3,
         on_colors = function(colors)
-          local bg_dark = colors.bg
-          local bg = colors.bg_sidebar
-          colors.bg = bg
-          colors.bg_sidebar = bg_dark
+          if vim.opt.background:get() == 'light' then
+            colors.bg = colors.bg_sidebar
+            colors.bg_sidebar = require('tokyonight.util').darken(colors.bg, 0.3)
+          end
+
           colors.error = '#CA1243'
           colors.warn = '#F7C154'
           colors.info = '#6699CC'
