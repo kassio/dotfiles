@@ -5,6 +5,8 @@ if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
   exit
 fi
 
+title "[language servers] update language servers dependencies"
+
 subtitle "homebrew dependencies"
 brew bundle install --file="$XDG_CONFIG_HOME/homebrew/brewfile.lsp"
 
