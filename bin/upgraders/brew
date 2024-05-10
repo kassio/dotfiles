@@ -15,9 +15,6 @@ brew upgrade --fetch-HEAD
 subtitle "global dependencies"
 brew bundle --global check
 
-subtitle "LSPs"
-brew bundle check --file="$XDG_CONFIG_HOME/homebrew/brewfile.lsp"
-
 cleaned=$(brew cleanup --prune 7)
 if [ -n "${cleaned}" ]; then
   subtitle "cleaning up old brews"

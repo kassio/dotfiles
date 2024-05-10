@@ -1,13 +1,24 @@
+local function formatter(name)
+  require('efmls-configs.formatters.' .. name)
+end
+
+local function linter(name)
+  require('efmls-configs.linters.' .. name)
+end
+
 local languages = {
   lua = {
-    require('efmls-configs.formatters.stylua'),
+    formatter('stylua'),
   },
   go = {
-    require('efmls-configs.linters.golangci_lint'),
+    linter('golangci_lint'),
   },
   sh = {
-    require('efmls-configs.formatters.shfmt'),
-    require('efmls-configs.linters.shellcheck'),
+    formatter('shfmt'),
+    linter('shellcheck'),
+  },
+  sql = {
+    formatter('sql-formatter'),
   },
 }
 

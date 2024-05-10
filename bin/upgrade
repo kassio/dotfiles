@@ -54,6 +54,7 @@ else
   upgrader "ruby" "$@"
   upgrader "golang" "$@"
   upgrader "quarentine" "$@"
+  upgrader "language-servers" "$@"
   upgrader "nvim" "$@"
   upgrader "wezterm" "$@"
   upgrader "1password" "$@"

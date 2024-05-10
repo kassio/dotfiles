@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+
+if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
+  echo "[language servers] update language servers dependencies"
+  exit
+fi
+
+subtitle "homebrew dependencies"
+brew bundle install --file="$XDG_CONFIG_HOME/homebrew/brewfile.lsp"
+
+subtitle "go dependencies"
+go install golang.org/x/tools/gopls@latest # lsp server
+go install github.com/grafana/jsonnet-language-server@latest # lsp server jsonnet
+go install github.com/wader/jq-lsp@master # lsp server jq
+go install github.com/mrtazz/checkmake/cmd/checkmake@latest # linter makefile
+
+subtitle "ruby dependencies"
+for-each-asdf ruby gem install \
+  rubocop \
+  solargraph \
+  ruby_ls
+
+subtitle "node dependencies"
+npm -g install sql-formatter
