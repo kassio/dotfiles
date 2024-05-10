@@ -20,7 +20,7 @@ return {
 
       require('treesitter-context').setup({
         min_window_height = 1,
-        separator = '─',
+        separator = '―',
       })
       require('plugins.treesitter.config').setup()
     end,
