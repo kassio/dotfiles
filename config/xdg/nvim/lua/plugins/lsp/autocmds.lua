@@ -25,7 +25,7 @@ return {
           group = vim.api.nvim_create_augroup('user:lsp', { clear = false }),
           buffer = args.buf,
           callback = function()
-            vim.cmd.LspFormat()
+            vim.lsp.buf.format({ async = false })
           end,
         })
       end,

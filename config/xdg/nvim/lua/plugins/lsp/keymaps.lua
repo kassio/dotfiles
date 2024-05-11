@@ -3,7 +3,7 @@ local utils = require('utils')
 local function buffer_format()
   utils.buffers.preserve(function()
     vim.cmd([[normal! gg=G]])
-    vim.cmd.LspFormat()
+    vim.lsp.buf.format({ async = false })
   end)
 end
 
