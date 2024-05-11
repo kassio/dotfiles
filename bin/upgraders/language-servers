@@ -8,19 +8,33 @@ fi
 title "[language servers] update language servers dependencies"
 
 subtitle "homebrew dependencies"
-brew bundle install --file="$XDG_CONFIG_HOME/homebrew/brewfile.lsp"
+brew_dependencies=(
+ "bash-language-server" # lsp server bash
+ "efm-langserver" # lsp server generic
+ "lua-language-server" # lsp server lua
+ "sql-language-server" # lsp server sql
+ "vscode-langservers-extracted" # lsp server html/css/json/eslint
+ "yaml-language-server" # lsp server yaml
+)
+brew install --quiet "${brew_dependencies[@]}"
 
 subtitle "go dependencies"
-go install golang.org/x/tools/gopls@latest # lsp server
-go install github.com/grafana/jsonnet-language-server@latest # lsp server jsonnet
-go install github.com/wader/jq-lsp@master # lsp server jq
-go install github.com/mrtazz/checkmake/cmd/checkmake@latest # linter makefile
+go_dependencies=(
+  "golang.org/x/tools/gopls@latest" # lsp server
+  "github.com/grafana/jsonnet-language-server@latest" # lsp server jsonnet
+  "github.com/wader/jq-lsp@master" # lsp server jq
+  "github.com/mrtazz/checkmake/cmd/checkmake@latest" # linter makefile
+)
+for dependency in "${go_dependencies[@]}"; do
+  go install "${dependency}"
+done
 
 subtitle "ruby dependencies"
-for-each-asdf ruby gem install \
-  rubocop \
-  solargraph \
-  ruby_ls
+ruby_dependencies=(
+  "rubocop" # linting
+  "ruby_ls" # main ruby language server
+)
+for-each-asdf ruby gem install "${ruby_dependencies[@]}"
 
 subtitle "node dependencies"
 npm -g install sql-formatter
