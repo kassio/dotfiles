@@ -15,15 +15,6 @@ return {
       end,
     })
 
-    vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-      group = aug,
-      callback = function(args)
-        if vim.b[args.buf].autoformat or true then
-          vim.lsp.buf.format({ async = false })
-        end
-      end,
-    })
-
     vim.api.nvim_create_autocmd({ 'LspAttach' }, {
       group = aug,
       callback = function(args)
@@ -34,7 +25,9 @@ return {
           group = vim.api.nvim_create_augroup('user:lsp', { clear = false }),
           buffer = args.buf,
           callback = function()
-            vim.lsp.buf.format({ async = false })
+            if vim.b[args.buf].autoformat ~= false then
+              vim.lsp.buf.format({ async = false })
+            end
           end,
         })
       end,
