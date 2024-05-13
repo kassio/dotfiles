@@ -1,11 +1,10 @@
+local wezterm = require('config.terminal.adapters.wezterm')
 local function command(name, callback, opts)
-  vim.api.nvim_create_user_command(
-    name,
-    callback,
-    vim.tbl_deep_extend('force', opts, {
-      desc = 'terminal: ' .. opts.desc,
-    })
-  )
+  if opts.desc then
+    opts.desc = 'terminal: ' .. opts.desc
+  end
+
+  vim.api.nvim_create_user_command(name, callback, opts)
 end
 
 return {
@@ -22,8 +21,13 @@ return {
     end, { desc = 'start remote terminal server' })
 
     command('TerminalWeztermPane', function(opts)
-      require('config.terminal.adapters.wezterm').start(opts.args)
-    end, { nargs = 1, desc = 'define which wezterm pane use as terminal target' })
+      local pane_id = string.match(opts.args, '%[%d+:(%d+)%].*')
+      wezterm.start(pane_id)
+    end, {
+      nargs = 1,
+      desc = 'define which wezterm pane use as terminal target',
+      complete = wezterm.list_panes,
+    })
 
     command('T', function(opts)
       manager.send(opts.args)

@@ -10,6 +10,25 @@ end
 
 local adapter = { name = 'wezterm' }
 
+function adapter.list_panes()
+  local result = vim
+    .system({ 'wezterm', 'cli', 'list', '--format', 'json' }, {
+      text = true,
+    })
+    :wait()
+
+  return vim.iter(vim.fn.json_decode(result.stdout)):fold({}, function(acc, v)
+    table.insert(acc, string.format(
+      '[%s:%s] %s',
+      v.tab_id,
+      v.pane_id,
+      v.title
+    ))
+
+    return acc
+  end)
+end
+
 function adapter.start(id)
   id = tonumber(id) or -1
 

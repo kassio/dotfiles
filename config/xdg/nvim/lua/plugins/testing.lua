@@ -13,7 +13,6 @@ return {
     'TestLast',
     'TestCommand',
     'TestStrategy',
-    'WeztermTest',
   },
   config = function()
     vim.g['test#custom_strategies'] = {
