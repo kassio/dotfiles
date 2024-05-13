@@ -1,4 +1,4 @@
-vim.b.skip_autoformat = true
+vim.b.autoformat = false
 
 -- Testing
 vim.g['test#go#gotest#executable'] = 'GOFLAGS="-count=1" go test -v'

@@ -1,6 +1,6 @@
 local utils = require('utils')
 
-vim.b.skip_autoformat = true
+vim.b.autoformat = false
 
 -- Add rails standard(and gitlab) to the path for easy file jump
 vim.opt_local.path:append({

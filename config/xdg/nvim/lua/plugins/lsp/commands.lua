@@ -11,6 +11,10 @@ return {
   setup = function()
     require('plugins.lsp.servers.ruby_lsp.commands').setup(command)
 
+    command('LspFormat', function()
+      vim.lsp.buf.format({ async = false })
+    end, { desc = 'format current buffer' })
+
     command('LspToggleInlayHint', function()
       local has_inlay = vim.tbl_contains(vim.lsp.get_clients({ bufnr = 0 }), function(client)
         return client.server_capabilities.inlayHintProvider
