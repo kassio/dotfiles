@@ -6,7 +6,7 @@ return {
     notify.setup({
       timeout = 1500,
       top_down = false,
-      stages = 'no_animation'
+      stages = 'no_animation',
     })
 
     vim.notify = notify
