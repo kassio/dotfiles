@@ -4,7 +4,6 @@ return {
   setup = function()
     require('config.diagnostics.keymaps').setup()
 
-    diagnostic.toqflist = require('config.diagnostics.toqflist')
     diagnostic.config({
       virtual_text = {
         severity = diagnostic.severity.ERROR,
