@@ -9,12 +9,19 @@ title "[language servers] update language servers dependencies"
 
 subtitle "homebrew dependencies"
 brew_dependencies=(
- "bash-language-server" # lsp server bash
- "efm-langserver" # lsp server generic
- "lua-language-server" # lsp server lua
- "sql-language-server" # lsp server sql
- "vscode-langservers-extracted" # lsp server html/css/json/eslint
- "yaml-language-server" # lsp server yaml
+  "bash-language-server" # ls server bash
+  "lua-language-server" # ls server lua
+  "sql-language-server" # ls server sql
+  "yaml-language-server" # ls server yaml
+  "pgformatter" # formatter postgresql
+  "shellcheck" # linter sh
+  "shfmt" # formatter sh
+  "stylua" # formatter lua
+  "tidy-html5" # formatter html
+  "luacheck" # linter lua
+  "golangci-lint" # linter go
+  "editorconfig-checker" # linter generic
+  "markdownlint-cli" # linter markdown
 )
 brew install --quiet "${brew_dependencies[@]}"
 
@@ -35,6 +42,3 @@ ruby_dependencies=(
   "ruby-lsp" # main ruby language server
 )
 for-each-asdf ruby gem install "${ruby_dependencies[@]}"
-
-subtitle "node dependencies"
-npm -g install sql-formatter

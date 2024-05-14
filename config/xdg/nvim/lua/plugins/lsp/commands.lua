@@ -10,7 +10,11 @@ end
 return {
   setup = function()
     command('LspFormat', function()
-      vim.lsp.buf.format({ async = false })
+      for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+        if vim.bo.modifiable then
+          vim.lsp.buf.format({ id = client.id })
+        end
+      end
     end, { desc = 'format current buffer' })
 
     command('LspToggleInlayHint', function()

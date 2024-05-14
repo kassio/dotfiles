@@ -4,7 +4,10 @@ return {
   {
     'neovim/nvim-lspconfig',
     dependencies = {
-      'creativenull/efmls-configs-nvim',
+      'nvimtools/none-ls.nvim',
+      'nvimtools/none-ls-extras.nvim',
+      'gbprod/none-ls-luacheck.nvim',
+      'gbprod/none-ls-shellcheck.nvim',
     },
     config = function()
       require('plugins.lsp.handlers').setup()

@@ -10,10 +10,7 @@ local servers = {
   jsonnet_ls = {},
   lua_ls = require('plugins.lsp.servers.lua_ls'),
   ruby_lsp = require('plugins.lsp.servers.ruby_lsp'),
-  sqlls = {},
   yamlls = require('plugins.lsp.servers.yamlls'),
-  -- generic server for linters and formatters
-  efm = require('plugins.lsp.servers.efm'),
 }
 
 return {
@@ -26,5 +23,7 @@ return {
 
       lspconfig[server].setup(config)
     end
+
+    require('plugins.lsp.servers.generic').setup()
   end,
 }

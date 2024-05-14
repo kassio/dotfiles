@@ -7,14 +7,12 @@ brew "bash"
 brew "bash-completion"
 brew "bat" # cat replacement
 brew "coreutils"
-brew "dfu-programmer" # flash keyboard firmware
 brew "diffutils"
 brew "dnsmasq"
 brew "docker"
 brew "docutils"
 brew "dpkg"
 brew "duti"
-brew "editorconfig-checker" # linter generic
 brew "exiftool"
 brew "fd" # file finding
 brew "ffmpeg"
@@ -26,8 +24,6 @@ brew "git-delta" # fancy git diff
 brew "git-lfs"
 brew "gitleaks"
 brew "gnupg"
-brew "golangci-lint"
-brew "golangci-lint" # linter go
 brew "gpgme"
 brew "graphicsmagick"
 brew "grep"
@@ -41,9 +37,7 @@ brew "libffi"
 brew "libiconv"
 brew "libyaml"
 brew "lsd" # ls replacement
-brew "luacheck" # linter lua
 brew "luajit", args: ["HEAD"]
-brew "markdownlint-cli"
 brew "mas"
 brew "mike-engel/jwt-cli/jwt-cli"
 brew "pstree"
@@ -52,11 +46,7 @@ brew "readline"
 brew "rename"
 brew "ripgrep"
 brew "sd" # sed replacement
-brew "shellcheck" # linter sh
-brew "shfmt" # formatter sh
-brew "stylua" # formatter lua
 brew "terminal-notifier"
-brew "tidy-html5" # formatter html
 brew "tree"
 brew "tree-sitter"
 brew "watch"
