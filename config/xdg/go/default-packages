@@ -1,4 +1,1 @@
-github.com/go-delve/delve/cmd/dlv@latest // debugger
-
 gitlab.com/kassio/lserver@latest
-gitlab.com/kassio/gsink@latest
