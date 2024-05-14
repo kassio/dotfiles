@@ -1,53 +1,54 @@
 local utils = require('plugins.git.utils')
 
-local function command(desc, name, cb, opts)
+local function command(name, callback, opts)
   opts = opts or {}
-  opts.desc = 'git: ' .. desc
+  if opts.desc then
+    opts.desc = 'git: ' .. opts.desc
+  end
+  name = 'Git' .. name
 
-  vim.api.nvim_create_user_command('Git' .. name, function(cmdopts)
-    cb(cmdopts)
-  end, opts)
+  vim.api.nvim_create_user_command(name, callback, opts)
 end
 
 return {
   setup = function(gitsigns)
-    command('open origin in the browser', 'BrowseRepository', utils.open_repository_url)
+    command('BrowseRepository', utils.open_repository_url, { desc = 'open origin in the browser' })
 
-    command('open merge request in the browser', 'BrowseMergeRequest', function()
+    command('BrowseMergeRequest', function()
       vim.fn.jobstart({ 'git-browse-merge-request' })
-    end)
+    end, { desc = 'open merge request in the browser' })
 
-    command('open remote file in the browser', 'BrowseFileRemoteUrl', function(cmd)
+    command('BrowseFileRemoteUrl', function(cmd)
       utils.open_remote_url(cmd.args)
-    end, { nargs = '?' })
+    end, { nargs = '?', desc = 'open remote file in the browser' })
 
-    command('copy remote file url', 'CopyFileRemoteURL', function(cmd)
+    command('CopyFileRemoteURL', function(cmd)
       utils.copy_remote_url(cmd.args)
-    end, { nargs = '?', bang = true })
+    end, { nargs = '?', bang = true, desc = 'copy remote file url' })
 
-    command('open diff in a split view', 'Diff', function(cmd)
+    command('Diff', function(cmd)
       gitsigns.diffthis(cmd.args)
-    end, { nargs = '?' })
+    end, { nargs = '?', desc = 'open diff in a split view' })
 
-    command('blame current line', 'Blame', function()
+    command('Blame', function()
       gitsigns.blame_line({ full = true, ignore_whitespace = true })
-    end)
+    end, { desc = 'blame current line' })
 
-    command('restore file to last committed version', 'Restore', function()
+    command('Restore', function()
       vim.cmd('execute "!git restore -- %" | mode')
-    end, { nargs = '?' })
+    end, { nargs = '?', desc = 'restore file to last committed version' })
 
-    command('reset file to HEAD or given tree', 'Reset', function(cmd)
+    command('Reset', function(cmd)
       local tree = cmd.args ~= '' and cmd.args or 'HEAD'
 
       vim.cmd(string.format('execute "!git reset %s -- %%" | mode', tree))
-    end, { nargs = '?' })
+    end, { nargs = '?', desc = 'reset file to HEAD or given tree' })
 
-    command('add diff to stage', 'Write', function()
+    command('Write', function()
       local file = vim.fn.expand('%:.')
       vim.cmd('update!')
       utils.git('add ' .. file)
-    end)
+    end, { desc = 'add diff to stage' })
 
     vim.cmd.cabbrev('Ga GitWrite')
     vim.cmd.cabbrev('ga GitWrite')

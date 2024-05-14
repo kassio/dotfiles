@@ -1,16 +1,14 @@
-local function command(name, cb, opts)
-  local desc = opts.desc
-  opts.desc = 'lsp: ' .. desc
+local function command(name, callback, opts)
+  opts = opts or {}
+  if opts.desc then
+    opts.desc = 'lsp: ' .. opts.desc
+  end
 
-  vim.api.nvim_create_user_command(name, function()
-    cb(opts)
-  end, opts)
+  vim.api.nvim_create_user_command(name, callback, opts)
 end
 
 return {
   setup = function()
-    require('plugins.lsp.servers.ruby_lsp.commands').setup(command)
-
     command('LspFormat', function()
       vim.lsp.buf.format({ async = false })
     end, { desc = 'format current buffer' })
@@ -24,5 +22,7 @@ return {
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
       end
     end, { desc = 'toggle inlay hints' })
+
+    require('plugins.lsp.servers.ruby_lsp.commands').setup(command)
   end,
 }

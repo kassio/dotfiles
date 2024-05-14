@@ -1,5 +1,6 @@
 local wezterm = require('config.terminal.adapters.wezterm')
 local function command(name, callback, opts)
+  opts = opts or {}
   if opts.desc then
     opts.desc = 'terminal: ' .. opts.desc
   end

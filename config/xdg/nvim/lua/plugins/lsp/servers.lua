@@ -4,7 +4,6 @@ local capabilities = require('plugins.lsp.capabilities')
 local servers = {
   bashls = {},
   cssls = {},
-  efm = require('plugins.lsp.servers.efm'),
   gopls = require('plugins.lsp.servers.gopls'),
   jqls = {},
   jsonls = {},
@@ -13,6 +12,8 @@ local servers = {
   ruby_lsp = require('plugins.lsp.servers.ruby_lsp'),
   sqlls = {},
   yamlls = require('plugins.lsp.servers.yamlls'),
+  -- generic server for linters and formatters
+  efm = require('plugins.lsp.servers.efm'),
 }
 
 return {
