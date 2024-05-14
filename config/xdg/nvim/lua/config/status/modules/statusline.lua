@@ -60,11 +60,12 @@ local function get_search_count()
 
   local maxcount = 999
   local term = vim.fn.getreg('/')
-  local result = vim.fn.searchcount({ maxcount = maxcount, timeout = 500 })
-  local current = result.current
-  local total = result.total
+  local result = vim.fn.searchcount({ maxcount = maxcount, timeout = 500 }) or {}
+  local current = result.current or 0
+  local total_count = result.total or 0
+  local total = tostring(total_count)
 
-  if total > result.maxcount then
+  if total_count > (result.maxcount or 0) then
     total = '>' .. maxcount
   end
 
