@@ -32,7 +32,7 @@ done
 subtitle "ruby dependencies"
 ruby_dependencies=(
   "rubocop" # linting
-  "ruby_ls" # main ruby language server
+  "ruby-lsp" # main ruby language server
 )
 for-each-asdf ruby gem install "${ruby_dependencies[@]}"
 
