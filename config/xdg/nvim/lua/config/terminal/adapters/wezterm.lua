@@ -1,7 +1,7 @@
 local M = {}
 
 local function send(value)
-  vim.system({ 'wts', vim.g.wezterm, value }):wait()
+  vim.system({ 'wts', vim.g.wezterm_pane_id, value }):wait()
 end
 
 function M.send(opts)
@@ -28,9 +28,11 @@ function adapter.start(id)
   id = tonumber(id) or -1
 
   if id < 0 then
-    vim.g.wezterm = nil
+    vim.notify('Desconnecting with wezterm pane id: ' .. vim.g.wezterm_pane_id)
+    vim.g.wezterm_pane_id = nil
   else
-    vim.g.wezterm = id
+    vim.notify('Connecting with wezterm pane id: ' .. id)
+    vim.g.wezterm_pane_id = id
   end
 end
 
@@ -39,7 +41,7 @@ function adapter.can_execute(has_native)
     return false
   end
 
-  return vim.g.wezterm ~= nil or not vim.fn.empty(vim.g.wezterm)
+  return vim.g.wezterm_pane_id ~= nil or not vim.fn.empty(vim.g.wezterm_pane_id)
 end
 
 function adapter.execute(cmd)

@@ -9,7 +9,7 @@ title "[language servers] update language servers dependencies"
 
 subtitle "homebrew dependencies"
 brew_dependencies=(
-  "bash-language-server" # ls server bash
+  "bash-language-server" # ls
   "lua-language-server" # ls server lua
   "sql-language-server" # ls server sql
   "yaml-language-server" # ls server yaml

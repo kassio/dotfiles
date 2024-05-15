@@ -23,6 +23,10 @@ return {
 
     command('TerminalWeztermPane', function(opts)
       local pane_id = string.match(opts.args, '%[%d+:(%d+)%].*')
+      if not pane_id and string.find(opts.args, '%d+') then
+        pane_id = opts.args
+      end
+
       wezterm.start(pane_id)
     end, {
       nargs = 1,
