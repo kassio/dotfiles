@@ -5,10 +5,10 @@ local utils = require('utils')
 ------------------------------------------------------------
 -- Operation pending maps need to be passed as string
 -- expressions to vim, hence the double quote
-keymap.set('x', 'il', ':<c-u>normal! g_v_<cr>', { desc = 'select current line (inner)' })
+keymap.set('x', 'il', ':<c-u>keepjumps normal! g_v_<cr>', { desc = 'select current line (inner)' })
 keymap.set('o', 'il', '":normal vil<cr>"', { expr = true, desc = 'select current line (inner)' })
 
-keymap.set('x', 'al', ':<c-u>normal! g_v0<cr>', { desc = 'select current line (outer)' })
+keymap.set('x', 'al', ':<c-u>keepjumps normal! g_v0<cr>', { desc = 'select current line (outer)' })
 keymap.set('o', 'al', '":normal val<cr>"', { expr = true, desc = 'select current line (outer)' })
 
 keymap.set('x', 'aF', ':<c-u>keepjumps normal! GVgg0<cr>', { desc = 'select all lines' })
@@ -76,7 +76,8 @@ end, { desc = 'delete all buffers except current' })
 
 -- close/delete all hidden buffers
 keymap.set('n', '<leader>ch', function()
-  local deleted = 0
+  local total = #vim.api.nvim_list_bufs()
+  vim.cmd('fclose!')
   for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
     if
       not vim.bo[bufnr].buflisted
@@ -84,13 +85,13 @@ keymap.set('n', '<leader>ch', function()
       or vim.bo[bufnr].buftype == 'nofile'
       or vim.tbl_isempty(fn.win_findbuf(bufnr))
     then
-      deleted = deleted + 1
       vim.api.nvim_buf_delete(bufnr, { force = true })
     end
   end
 
+  local deleted = total - #vim.api.nvim_list_bufs()
   if deleted > 0 then
-    vim.notify(deleted .. ' unlisted buffers closed')
+    vim.notify(deleted .. ' buffers closed')
   end
 end, { desc = 'close: hidden and unlisted buffers' })
 

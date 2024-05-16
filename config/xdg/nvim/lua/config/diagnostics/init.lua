@@ -6,8 +6,9 @@ return {
 
     diagnostic.config({
       virtual_text = {
-        severity = diagnostic.severity.ERROR,
+        severity = diagnostic.severity.WARN,
         spacing = 8,
+        virt_text_pos = 'right_align',
       },
       underline = {
         severity = diagnostic.severity.WARN,

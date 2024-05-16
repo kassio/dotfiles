@@ -1,10 +1,10 @@
 return {
   'vim-test/vim-test',
   keys = {
-    { '<leader>ta', '<cmd>TestSuite<cr>' },
-    { '<leader>tf', '<cmd>TestFile<cr>' },
-    { '<leader>tc', '<cmd>TestNearest<cr>' },
-    { '<leader>tr', '<cmd>TestLast<cr>' },
+    { '<leader>ta', vim.cmd.TestSuite },
+    { '<leader>tf', vim.cmd.TestFile },
+    { '<leader>tc', vim.cmd.TestNearest },
+    { '<leader>tr', vim.cmd.TestLast },
   },
   cmd = {
     'TestSuite',

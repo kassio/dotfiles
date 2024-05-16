@@ -3,16 +3,15 @@ return {
   keys = {
     {
       '<leader>ee',
-      '<cmd>NvimTreeToggle<cr>',
+      vim.cmd.NvimTreeToggle,
       silent = true,
       desc = 'explorer: toggle',
     },
-
     {
       '<leader>ef',
       function()
-        vim.cmd('NvimTreeFindFile')
-        vim.cmd('NvimTreeFocus')
+        vim.cmd.NvimTreeFindFile()
+        vim.cmd.NvimTreeFocus()
       end,
       silent = true,
       desc = 'explorer: find file',

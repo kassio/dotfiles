@@ -14,7 +14,6 @@ return {
   setup = function(bufnr)
     local keymap = keymap_generator(bufnr)
 
-    keymap('n', 'K', vim.lsp.buf.hover, 'hover')
     keymap('n', '<c-k>', vim.lsp.buf.signature_help, 'signature help')
 
     keymap('n', 'grr', vim.lsp.buf.rename, 'rename')
