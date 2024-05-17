@@ -22,6 +22,7 @@ brew_dependencies=(
   "golangci-lint" # linter go
   "editorconfig-checker" # linter generic
   "markdownlint-cli" # linter markdown
+  "tailwindcss-language-server" # lsp for tailwind
 )
 brew install --quiet "${brew_dependencies[@]}"
 

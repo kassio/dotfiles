@@ -10,6 +10,7 @@ local servers = {
   jsonnet_ls = {},
   lua_ls = require('plugins.lsp.servers.lua_ls'),
   ruby_lsp = require('plugins.lsp.servers.ruby_lsp'),
+  tailwindcss = {},
   yamlls = require('plugins.lsp.servers.yamlls'),
 }
 
