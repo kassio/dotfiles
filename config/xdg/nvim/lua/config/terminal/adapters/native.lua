@@ -18,18 +18,16 @@ local function get_size(tabpage, termdata)
   end
 end
 
-local function open_terminal_window(termdata)
-  termdata = vim.tbl_deep_extend('keep', termdata or {}, {
+local function build_termdata(termdata)
+  return vim.tbl_deep_extend('keep', termdata or {}, {
     opts = {
       shell = vim.env.SHELL,
       position = 'horizontal',
     },
   })
+end
 
-  local opened_from = {
-    win = vim.api.nvim_get_current_win(),
-    pos = vim.fn.getcurpos(),
-  }
+local function build_terminal_cmd(termdata)
   local cmd = vim.tbl_deep_extend('force', default_terminal_cmd, {
     mods = {
       vertical = termdata.opts.position == 'vertical',
@@ -44,6 +42,19 @@ local function open_terminal_window(termdata)
   if termdata.bufnr ~= nil then
     cmd.cmd = 'split'
   end
+
+  return cmd
+end
+
+local function open_terminal_window(termdata)
+  termdata = build_termdata(termdata)
+
+  local cmd = build_terminal_cmd(termdata)
+
+  local opened_from = {
+    win = vim.api.nvim_get_current_win(),
+    pos = vim.fn.getcurpos(),
+  }
 
   vim.cmd(cmd)
 
@@ -73,11 +84,17 @@ end
 function M.toggle(termdata, opts)
   termdata = termdata or {}
   local tabpage = vim.api.nvim_get_current_tabpage()
+  local saved_winid = vim.tbl_get(termdata, 'tabmap', tabpage)
 
-  -- active & hidden terminal
-  if vim.tbl_get(termdata, 'tabmap', tabpage) == nil then
+  if saved_winid == nil then
+    -- CASE: active & hidden terminal
+    return open_terminal_window(vim.tbl_deep_extend('force', termdata, { opts = opts }))
+  elseif not vim.api.nvim_win_is_valid(saved_winid) then
+    -- CASE: invalid hidden terminal
+    termdata.tabmap[tabpage] = nil
     return open_terminal_window(vim.tbl_deep_extend('force', termdata, { opts = opts }))
   else
+    -- CASE: not opened terminal
     -- save terminal size to reopen in the same size
     termdata.opts.size = get_size(tabpage, termdata)
     local ok, _ = pcall(M.nvim_cmd, termdata, { string = 'hide' })
