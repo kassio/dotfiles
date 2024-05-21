@@ -4,6 +4,18 @@ snippet #!
 snippet vim
 	# vim:${1:ft=${2:zsh}}:
 
+snippet date:timestamp
+	`!lua os.date('%Y%m%d%H%M%S')`
+
+snippet date:iso8601
+	`!lua os.date('%Y-%m-%d')`
+
+snippet date:timestamp:utc
+	`!lua os.date('!%Y%m%d%H%M%S')`
+
+snippet date:iso8601:utc
+	`!lua os.date('!%Y-%m-%d')`
+
 snippet hri
 	"--------------------------------------------------------------------------------"
 
