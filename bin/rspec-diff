@@ -67,7 +67,7 @@ for file in "${files[@]}"; do
       if [ "${files[(Ie)${possible_spec}]}" -le 0 ]; then
         not_modified+=( "${possible_spec}" )
       fi
-    else
+    elif [ "${#possible_spec}" -gt 0 ]; then
       not_found+=( "${possible_spec}" )
     fi
   fi
@@ -83,4 +83,8 @@ if [ "${dry}" -gt 0 ]; then
   exit 0
 fi
 
-bundle exec rspec "${specs[@]}"
+if [ "${#specs}" -gt 0 ]; then
+  bundle exec rspec "${specs[@]}"
+else
+  echo "no rspecs to run"
+fi
