@@ -23,14 +23,15 @@ function M.next_children_text(node, separator, types)
     return ''
   end
 
-  local list = {}
-  for child in node:iter_children() do
-    if vim.tbl_contains(types, child:type()) then
-      table.insert(list, M.get_node_text(child))
-    end
-  end
-
-  return table.concat(list, separator)
+  return vim
+    .iter(node:iter_children())
+    :filter(function(child)
+      return vim.tbl_contains(types, child:type())
+    end)
+    :map(function(child)
+      return M.get_node_text(child)
+    end)
+    :join(separator)
 end
 
 function M.ancestors_by_type(node, types)

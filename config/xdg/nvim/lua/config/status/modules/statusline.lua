@@ -96,10 +96,6 @@ local function macromsg()
   return ''
 end
 
-local function treesitter_context()
-  return require('plugins.treesitter.fetcher').fetch(vim.b.treesitter_statusline_options)
-end
-
 local function explorer_filename()
   if vim.bo.filetype ~= 'NvimTree' then
     return ''
@@ -117,21 +113,22 @@ return {
   render = function()
     local mode, hl = get_mode()
 
-    local components = vim.tbl_filter(function(value)
-      return value ~= ''
-    end, {
-      mode,
-      explorer_filename(),
-      treesitter_context(),
-      macromsg(),
-      '%=',
-      '%S',
-      SEP,
-      get_search_count(),
-      '%3l:%-3c' .. SEP .. ' %3p%%',
-      get_git_branch(hl),
-    })
-
-    return string.format('%s', table.concat(components, ' '))
+    return vim
+      .iter({
+        mode,
+        explorer_filename(),
+        require('plugins.treesitter.fetcher').fetch(),
+        macromsg(),
+        '%=',
+        '%S',
+        SEP,
+        get_search_count(),
+        '%3l:%-3c' .. SEP .. ' %3p%%',
+        get_git_branch(hl),
+      })
+      :filter(function(value)
+        return value ~= ''
+      end)
+      :join(' ')
   end,
 }

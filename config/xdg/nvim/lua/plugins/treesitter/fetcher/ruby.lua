@@ -8,7 +8,7 @@ local function get_parent_type(node, counter)
   end
 end
 
-vim.b.treesitter_statusline_options = {
+return {
   type_patterns = { 'comment', 'assignment', 'class', 'module', 'method' },
   separator = '',
   transform_fn = function(node)

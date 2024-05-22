@@ -1,6 +1,6 @@
 local tsutils = require('plugins.treesitter.utils')
 
-vim.b.treesitter_statusline_options = {
+return {
   type_patterns = {
     'field',
     'variable_list',
