@@ -19,14 +19,24 @@ tags.*
 .userql
 .projections.json
 .vscode
+
+# js
 node_modules
+
+# ruby
 .byebug_history
 vendor/bundle
 vendor/ruby
 .solargraph.yml
 .console.local.rb
+
+# go
 *.rdb
 .GOPATH
 
+# postgresql
 .psqlrc.local
 .psqlrc.local.d
+
+# git
+.git-worktree

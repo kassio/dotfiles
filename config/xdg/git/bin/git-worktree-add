@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+gbd |
+  column -ts ' ' |
+  fzf |
+  awk '{ print $2; }' |
+  xargs -I{} git worktree add .git-worktree/{} {}
