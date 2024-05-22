@@ -20,13 +20,6 @@ function M.extend(target, source, opts)
   M.def(target, vim.tbl_extend('force', M.get(source), opts or {}))
 end
 
-function M.def_sign(name, icon)
-  vim.fn.sign_define(name, {
-    text = icon,
-    texthl = name,
-  })
-end
-
 function M.get_sign_icon(name)
   local sign = vim.fn.sign_getdefined(name)[1]
 
