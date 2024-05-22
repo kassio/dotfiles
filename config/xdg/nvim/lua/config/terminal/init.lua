@@ -22,7 +22,7 @@ return {
     end, { desc = 'start remote terminal server' })
 
     command('TerminalWeztermPane', function(opts)
-      local pane_id = string.match(opts.args, '%[%d+:(%d+)%].*')
+      local pane_id = string.match(opts.args, '(%d+) - .*')
       if not pane_id and string.find(opts.args, '%d+') then
         pane_id = opts.args
       end
@@ -31,7 +31,14 @@ return {
     end, {
       nargs = 1,
       desc = 'define which wezterm pane use as terminal target',
-      complete = wezterm.list_panes,
+      complete = function()
+        return vim
+          .iter(wezterm.list_panes())
+          :map(function(item)
+            return string.format('%s - %s', item.pane_id, item.title)
+          end)
+          :totable()
+      end,
     })
 
     command('T', function(opts)

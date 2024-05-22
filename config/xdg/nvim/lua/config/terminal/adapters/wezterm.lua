@@ -17,11 +17,7 @@ function adapter.list_panes()
     })
     :wait()
 
-  return vim.iter(vim.fn.json_decode(result.stdout)):fold({}, function(acc, v)
-    table.insert(acc, string.format('[%s:%s] %s', v.tab_id, v.pane_id, v.title))
-
-    return acc
-  end)
+  return vim.fn.json_decode(result.stdout)
 end
 
 function adapter.start(id)
