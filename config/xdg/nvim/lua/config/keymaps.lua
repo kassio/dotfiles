@@ -35,13 +35,6 @@ keymap.set('n', 'J', 'mzJ`z', { desc = 'keep the cursor centered while moving' }
 keymap.set('n', '}', '}zzzv', { desc = 'keep the cursor centered while moving' })
 keymap.set('n', '{', '{zzzv', { desc = 'keep the cursor centered while moving' })
 
-keymap.set(
-  't',
-  [[<esc><esc>]],
-  [[<c-\><c-n>]],
-  { desc = 'escape from terminal mode with double <esc>' }
-)
-
 keymap.set('n', '9gt', '<cmd>tablast<cr>', { desc = 'move to the last tab' })
 
 keymap.set({ 'n', 'x' }, '!', function()
