@@ -44,24 +44,30 @@ function M.treesitter_namespace()
     return ''
   end
 
-  local options = vim.b.treesitter_statusline_options or {}
+  return require('plugins.treesitter.fetcher').fetch()
+end
 
-  return require('plugins.treesitter.fetcher').fetch(options)
+local function get_rubocop_codes(lnum)
+  return vim
+    .iter(vim.diagnostic.get(0, { lnum = lnum }))
+    :filter(function(diagnostic)
+      return string.lower(diagnostic.source) == 'rubocop'
+    end)
+    :map(function(diagnostic)
+      return diagnostic.code
+    end)
 end
 
 function M.rubocop_code()
-  local _, lnum, _ = utils.table.unpack(vim.fn.getcurpos())
-  local all_diagnostics = vim.diagnostic.get(0, { lnum = lnum })
+  return '# rubocop: disable ' .. get_rubocop_codes(vim.fn.line('.') - 1):pop()
+end
 
-  if #all_diagnostics == 0 then
-    return ''
-  end
-
-  local diagnostics = vim.tbl_filter(function(diagnostic)
-    return diagnostic.source == 'rubocop'
-  end, all_diagnostics)
-
-  return vim.tbl_get(diagnostics, 1, 'code') or 'CodeReuse/ActiveRecord'
+function M.rubocop_codes()
+  return get_rubocop_codes(vim.fn.line('.'))
+    :map(function(code)
+      return '# rubocop: disable ' .. code
+    end)
+    :join('\n')
 end
 
 return M

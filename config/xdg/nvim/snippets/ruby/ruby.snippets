@@ -2,7 +2,9 @@ snippet #f
 	# frozen_string_literal: true
 
 snippet lint
-	# rubocop: disable ${1:`!lua require("utils.ruby").rubocop_code()`}
+	`!lua require("utils.ruby").rubocop_code()`
+snippet lint:next_line
+	`!lua require("utils.ruby").rubocop_codes()`
 snippet namespace
 	`!lua require("utils.ruby").file_namespace()`
 snippet class
