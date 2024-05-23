@@ -22,12 +22,8 @@ return {
 
     snippy.setup({
       mappings = {
-        is = {
-          ['<tab>'] = 'expand_or_advance',
-          ['<s-tab>'] = 'previous',
-        },
         nx = {
-          ['<tab>'] = 'cut_text',
+          ['<c-s>'] = 'cut_text',
         },
       },
     })

@@ -17,10 +17,6 @@ keymap.set('o', 'aF', '":normal vaF<cr>"', { expr = true, desc = 'select all lin
 
 keymap.set('n', 'Q', '<nop>', { desc = 'disable ex mode' })
 
--- remap jumps
-keymap.set('n', '<leader>jn', '<c-i>', { desc = 'jump: newer cursor position' })
-keymap.set('n', '<leader>jp', '<c-o>', { desc = 'jump: older cursor position' })
-
 keymap.set('n', 'j', 'gj', { silent = true })
 keymap.set('n', 'k', 'gk', { silent = true })
 
