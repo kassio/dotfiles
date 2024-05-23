@@ -19,16 +19,16 @@ module Kassio
   end
 
   def log(*args)
-    args.tap do
-      File.open(KASSIO_LOG_FILE, 'a') do |f|
-        <<~EOF.tap { puts _1 }.tap { f << _1 }
-        » << #{caller(3, 1)[0]} <<
-        #{args.inspect}
-        ──────────────────────────────────────────────────
+    File.open(KASSIO_LOG_FILE, 'a') do |f|
+      <<~EOF.then { |message| puts message; f << message }
+      » << #{caller(3, 1)} >>
+      #{args.inspect}
+      ──────────────────────────────────────────────────
 
-        EOF
-      end
+      EOF
     end
+
+    args
   end
 
   def log_active_record
