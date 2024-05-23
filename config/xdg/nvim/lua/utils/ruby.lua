@@ -22,21 +22,24 @@ function M.file_namespace(kind)
     end
   end
 
-  vim.print(dirs)
-
-  local namespace = ''
-  for i, dir in ipairs(dirs) do
-    local indent = string.rep(' ', (i - 1) * 2)
-    if i == 1 and #dirs ~= 1 then
-      namespace = string.format('module %s', dir)
-    elseif i == #dirs then
-      namespace = string.format('%s\n%s%s %s', namespace, indent, kind, dir)
-    else
-      namespace = string.format('%s\n%smodule %s', namespace, indent, dir)
-    end
+  if #dirs == 0 then
+    local namespace, _ = utils.string.camelcase(vim.fn.expand('%:t:r'))
+    return string.format('%s %s', kind, namespace)
   end
 
-  return vim.trim(namespace)
+  return vim
+    .iter(ipairs(dirs))
+    :map(function(i, dir)
+      local indent = string.rep(' ', (i - 1) * 2)
+      if i == 1 and #dirs ~= 1 then
+        return string.format('module %s', dir)
+      elseif i == #dirs then
+        return string.format('%s%s %s', indent, kind, dir)
+      else
+        return string.format('%smodule %s', indent, dir)
+      end
+    end)
+    :join('\n')
 end
 
 function M.treesitter_namespace()
