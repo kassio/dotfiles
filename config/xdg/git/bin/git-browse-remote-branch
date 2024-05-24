@@ -1,20 +1,13 @@
 #!/usr/bin/env zsh
 
-local branch="$(git symbolic-ref --short HEAD 2>/dev/null)"
-
-if [ $# -gt 0 ]; then
-  branch="$1"
-  shift
-fi
-
-
-local branch_remote
-if [ $# -gt 0 ]; then
-  branch_remote="$1"
-  shift
+local branch=""
+if [ $# -le 0 ]; then
+  branch="$(git branch-list | fzf)"
 else
-  branch_remote="$(git config --get "branch.${branch}.remote")"
+  branch="$1"
 fi
+
+branch_remote="$(git config --get "branch.${branch}.remote")"
 
 local remote_url="$(git remote get-url "${branch_remote}" | sed 's/\.git//')"
 
