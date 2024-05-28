@@ -31,7 +31,7 @@ return {
     end, { nargs = '?', desc = 'open diff in a split view' })
 
     command('Blame', function()
-      gitsigns.blame_line({ full = true, ignore_whitespace = true })
+      vim.cmd.BlameToggle()
     end, { desc = 'blame current line' })
 
     command('Restore', function()

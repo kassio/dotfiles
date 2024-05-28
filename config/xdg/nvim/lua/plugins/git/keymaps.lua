@@ -20,8 +20,6 @@ return {
 
     keymap('n', '<c-g><c-u>', gitsigns.reset_hunk, 'reset hunk (undo)')
 
-    keymap('n', '<c-g><c-l>', function()
-      gitsigns.blame_line({ full = true, ignore_whitespace = true })
-    end, 'blame current line')
+    keymap('n', '<c-g><c-l>', vim.cmd.GitBlame, 'blame current line')
   end,
 }

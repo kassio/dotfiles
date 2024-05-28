@@ -1,7 +1,13 @@
 return {
+
   'lewis6991/gitsigns.nvim',
+  dependencies = {
+    'FabijanZulj/blame.nvim',
+  },
   config = function()
     local gitsigns = require('gitsigns')
+
+    require('blame').setup()
 
     gitsigns.setup({
       signs = {
@@ -23,7 +29,7 @@ return {
       numhl = true,
     })
 
-    require('plugins.git.keymaps').setup(gitsigns)
     require('plugins.git.commands').setup(gitsigns)
+    require('plugins.git.keymaps').setup(gitsigns)
   end,
 }
