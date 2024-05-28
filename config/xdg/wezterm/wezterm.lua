@@ -22,6 +22,8 @@ local font_config = {
 require('tab_format').setup(wezterm)
 require('palette').setup(wezterm)
 
+config.send_composed_key_when_left_alt_is_pressed = true
+config.send_composed_key_when_right_alt_is_pressed = true
 config.keys = require('keys').setup(wezterm)
 config.key_tables = require('key_tables').setup(wezterm)
 config.mouse_bindings = require('mouse').setup(wezterm)
