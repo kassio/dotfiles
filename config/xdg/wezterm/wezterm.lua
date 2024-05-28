@@ -3,7 +3,7 @@ local config = wezterm.config_builder()
 local font_config = {
   main = wezterm.font_with_fallback({
     {
-      family = 'JetBrains Mono',
+      family = '0xProto Nerd Font Mono',
       harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
       stretch = 'Expanded',
     },
@@ -13,7 +13,7 @@ local font_config = {
     },
   }),
   frame = wezterm.font({
-    family = 'JetBrains Mono',
+    family = '0xProto Nerd Font Mono',
     harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
     weight = 'Bold',
   }),
