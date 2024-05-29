@@ -52,8 +52,8 @@ return {
 
     vim.cmd.cabbrev('Ga GitWrite')
     vim.cmd.cabbrev('ga GitWrite')
-    vim.cmd.cabbrev('Gblame GitBlame')
-    vim.cmd.cabbrev('gblame GitBlame')
+    vim.cmd.cabbrev('Gblame BlameToggle')
+    vim.cmd.cabbrev('gblame BlameToggle')
     vim.cmd.cabbrev('Gd GitDiff')
     vim.cmd.cabbrev('gd GitDiff')
     vim.cmd.cabbrev('Gdm GitDiff main')

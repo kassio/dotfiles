@@ -7,7 +7,12 @@ return {
   config = function()
     local gitsigns = require('gitsigns')
 
-    require('blame').setup()
+    require('blame').setup({
+      date_format = '%Y%m%d',
+      views = {
+        default = require('blame.views.window_view'),
+      },
+    })
 
     gitsigns.setup({
       signs = {
