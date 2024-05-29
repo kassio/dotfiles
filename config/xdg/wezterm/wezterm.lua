@@ -1,22 +1,23 @@
 local wezterm = require('wezterm')
 local config = wezterm.config_builder()
+local main_font_config = {
+  family = 'JetBrains Mono',
+  -- family = '0xProto',
+  harfbuzz_features = {
+    'calt=0', -- disable all ligatures by default
+    'zero', -- slashed zero 0
+  },
+  italic = false,
+}
 local font_config = {
   main = wezterm.font_with_fallback({
-    {
-      family = '0xProto Nerd Font Mono',
-      harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
-      stretch = 'Expanded',
-    },
+    main_font_config,
     {
       family = 'Apple Color Emoji',
       assume_emoji_presentation = true,
     },
   }),
-  frame = wezterm.font({
-    family = '0xProto Nerd Font Mono',
-    harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
-    weight = 'Bold',
-  }),
+  frame = wezterm.font(main_font_config),
 }
 
 require('tab_format').setup(wezterm)
