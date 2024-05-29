@@ -38,7 +38,7 @@ config.send_composed_key_when_left_alt_is_pressed = true
 config.send_composed_key_when_right_alt_is_pressed = true
 
 config.font = wezterm.font_with_fallback({ fonts.main, fonts.emoji })
-config.font_size = fonts.main.size
+config.font_size = fonts.size
 config.line_height = 1.2
 config.allow_square_glyphs_to_overflow_width = 'Always'
 
@@ -59,7 +59,7 @@ config.window_decorations = 'RESIZE'
 config.window_padding = { left = 5, right = 5, top = 0, bottom = 0 }
 config.window_frame = {
   font = wezterm.font(fonts.main({ weight = 'ExtraBold' })),
-  font_size = fonts.main.size * 0.7,
+  font_size = fonts.size * 0.7,
   active_titlebar_bg = colors.background,
   inactive_titlebar_bg = colors.background,
 }

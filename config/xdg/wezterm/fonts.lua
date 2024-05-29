@@ -18,8 +18,8 @@ function overridable(tbl)
 end
 
 return {
+  size = 16,
   main = overridable({
-    size = 16,
     family = 'JetBrains Mono',
     weight = 'DemiBold',
     harfbuzz_features = {
