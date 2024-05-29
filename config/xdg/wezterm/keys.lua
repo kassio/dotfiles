@@ -162,7 +162,7 @@ return {
         mods = 'SHIFT|ALT|CMD',
         action = wezterm.action.ScrollToBottom,
       },
-      {
+      { -- clear scrolback
         key = 'k',
         mods = 'SUPER',
         action = wezterm.action.Multiple({
@@ -170,7 +170,7 @@ return {
           wezterm.action.SendKey({ key = 'L', mods = 'CTRL' }),
         }),
       },
-      {
+      { -- clear scrollback and current line
         key = 'k',
         mods = 'SUPER|SHIFT',
         action = wezterm.action.Multiple({
@@ -178,6 +178,12 @@ return {
           wezterm.action.SendKey({ key = 'L', mods = 'CTRL' }),
           wezterm.action.SendKey({ key = 'U', mods = 'CTRL' }),
         }),
+      },
+      -- search
+      { -- search for things that look like git hashes
+        key = 'H',
+        mods = 'SHIFT|CMD',
+        action = wezterm.action.Search({ Regex = '[a-f0-9]{6,}' }),
       },
     }
   end,

@@ -8,7 +8,7 @@ end
 
 local function get_separator(tab)
   if tab.tab_index >= 1 then
-    return '▏'
+    return ''
   end
 
   return ' '
