@@ -1,23 +1,10 @@
 local wezterm = require('wezterm')
 local config = wezterm.config_builder()
 
-local MAIN_FONT_SIZE = 16
-local main_font = {
-  family = 'JetBrains Mono',
-  weight = 'DemiBold',
-  harfbuzz_features = {
-    'calt=0', -- disable all ligatures by default
-    'zero', -- slashed zero 0
-  },
-}
-
-local emoji_font = {
-  family = 'Apple Color Emoji',
-  assume_emoji_presentation = true,
-}
-
 require('tab_format').setup(wezterm)
 require('palette').setup(wezterm)
+
+local fonts = require('fonts')
 
 if wezterm.gui.get_appearance():find('Dark') then
   config.color_scheme = 'tokyonight_storm'
@@ -50,8 +37,8 @@ config.colors = {
 config.send_composed_key_when_left_alt_is_pressed = true
 config.send_composed_key_when_right_alt_is_pressed = true
 
-config.font = wezterm.font_with_fallback({ main_font, emoji_font })
-config.font_size = MAIN_FONT_SIZE
+config.font = wezterm.font_with_fallback({ fonts.main, fonts.emoji })
+config.font_size = fonts.main.size
 config.line_height = 1.2
 config.allow_square_glyphs_to_overflow_width = 'Always'
 
@@ -71,8 +58,8 @@ config.window_close_confirmation = 'NeverPrompt'
 config.window_decorations = 'RESIZE'
 config.window_padding = { left = 5, right = 5, top = 0, bottom = 0 }
 config.window_frame = {
-  font = wezterm.font(main_font),
-  font_size = MAIN_FONT_SIZE * 0.7,
+  font = wezterm.font(fonts.main({ weight = 'ExtraBold' })),
+  font_size = fonts.main.size * 0.7,
   active_titlebar_bg = colors.background,
   inactive_titlebar_bg = colors.background,
 }
