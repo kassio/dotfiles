@@ -11,6 +11,7 @@ return {
     'hrsh7th/cmp-omni',
     'hrsh7th/cmp-path',
     'ray-x/cmp-treesitter',
+    'JMarkin/cmp-diag-codes',
     -- snippets
     'dcampos/cmp-snippy',
     'dcampos/nvim-snippy',
@@ -80,6 +81,9 @@ return {
       }, {
         { name = 'path' },
         { name = 'env' },
+      }, {
+        name = 'diag-codes',
+        option = { in_comment = true },
       }),
 
       window = {
