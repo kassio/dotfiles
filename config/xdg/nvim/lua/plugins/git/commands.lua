@@ -45,9 +45,8 @@ return {
     end, { nargs = '?', desc = 'reset file to HEAD or given tree' })
 
     command('Write', function()
-      local file = vim.fn.expand('%:.')
       vim.cmd('update!')
-      utils.git('add ' .. file)
+      gitsigns.stage_buffer()
     end, { desc = 'add diff to stage' })
 
     vim.cmd.cabbrev('Ga GitWrite')
