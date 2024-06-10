@@ -20,6 +20,7 @@ return {
   setup = function()
     local diagnostic = vim.diagnostic
 
+    keymap('n', '<leader>dd', vim.cmd.DiagnosticsToggle, 'toggle')
     keymap('n', ']d', goto_next(diagnostic), 'next')
     keymap('n', '[d', goto_prev(diagnostic), 'previous')
     keymap('n', ']h', goto_next(diagnostic, diagnostic.severity.HINT), 'next')

@@ -2,6 +2,16 @@ local diagnostic = vim.diagnostic
 
 return {
   setup = function()
+    vim.api.nvim_create_user_command('DiagnosticsToggle', function()
+      local is_enabled = vim.diagnostic.is_enabled()
+      vim.diagnostic.enable(not is_enabled)
+      if is_enabled then
+        vim.notify('Diagnostics are now disabled')
+      else
+        vim.notify('Diagnostics are now enabled')
+      end
+    end, {})
+
     require('config.diagnostics.keymaps').setup()
 
     local symbols = require('utils.symbols')
