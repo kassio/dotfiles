@@ -33,7 +33,7 @@ return {
       formatting = require('plugins.completion.formatting'),
 
       mapping = {
-        ['<c-n>'] = cmp.mapping(function()
+        ['<c-n>'] = mapping(function()
           if cmp.visible() then
             cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
           else
@@ -46,7 +46,7 @@ return {
         ['<c-f>'] = mapping.scroll_docs(4),
         ['<c-y>'] = mapping.confirm(),
         ['<c-e>'] = mapping.abort(),
-        ['<cr>'] = cmp.mapping.confirm({ select = false }),
+        ['<cr>'] = mapping.confirm({ select = false }),
       },
 
       snippet = {
