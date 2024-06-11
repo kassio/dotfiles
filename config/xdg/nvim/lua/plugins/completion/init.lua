@@ -21,6 +21,18 @@ return {
     local mapping = cmp.mapping
     local snippy = require('snippy')
 
+    local has_words_before = function()
+      local unpack = require('utils.table').unpack
+
+      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+      if col == 0 then
+        return
+      end
+
+      local text = vim.api.nvim_buf_get_lines(0, line - 1, line, true)
+      return text[1]:sub(col, col):match('%s') == nil
+    end
+
     snippy.setup({
       mappings = {
         nx = {
@@ -33,15 +45,26 @@ return {
       formatting = require('plugins.completion.formatting'),
 
       mapping = {
-        ['<c-n>'] = mapping(function()
+        ['<c-n>'] = mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-          else
+            cmp.select_next_item()
+          elseif snippy.can_expand_or_advance() then
+            snippy.expand_or_advance()
+          elseif has_words_before() then
             cmp.complete()
-            cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+          else
+            fallback()
           end
-        end, { 'i', 'c' }),
-        ['<c-p>'] = mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+        end, { 'i', 's' }),
+        ['<c-p>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif snippy.can_jump(-1) then
+            snippy.previous()
+          else
+            fallback()
+          end
+        end, { 'i', 's' }),
         ['<c-d>'] = mapping.scroll_docs(-4),
         ['<c-f>'] = mapping.scroll_docs(4),
         ['<c-y>'] = mapping.confirm(),
