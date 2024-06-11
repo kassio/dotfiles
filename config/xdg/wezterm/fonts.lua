@@ -1,4 +1,4 @@
-function overridable(tbl)
+local function overridable(tbl)
   return setmetatable(tbl, {
     __call = function(t, opts)
       opts = opts or {}
