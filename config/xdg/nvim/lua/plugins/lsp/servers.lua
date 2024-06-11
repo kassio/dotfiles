@@ -17,7 +17,7 @@ local servers = {
 return {
   setup = function()
     for server, opts in pairs(servers) do
-      local config = vim.tbl_deep_extend('force', opts or {}, {
+      local config = vim.tbl_deep_extend('force', opts, {
         single_file_support = true,
         capabilities = capabilities,
       })
