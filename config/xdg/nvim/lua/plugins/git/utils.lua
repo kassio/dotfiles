@@ -47,13 +47,15 @@ local function file_remote_url(arg)
   return (string.format('%s/blob/%s/%s#L%s', repository_url(), ref, filepath, line))
 end
 
-function M.git(args, callback)
-  local output = vim.trim(vim.fn.system('git ' .. args .. ' 2>/dev/null'))
+function M.git(cmd, callback)
+  table.insert(cmd or {}, 1, 'git')
+  local output = vim.system(cmd):wait()
+  local stdout = vim.trim(output.stdout)
 
   if callback ~= nil then
-    return callback(output)
+    return callback(stdout)
   else
-    return output
+    return stdout
   end
 end
 

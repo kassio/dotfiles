@@ -3,7 +3,9 @@ return {
     return {
       keymap('gg', require('plugins.fuzzyfinder.commands').git_files, 'git:files'),
       keymap('gm', function()
-        local main = vim.fn.system('git-branch-main')
+        local output = vim.system({ 'git-branch-main' }):wait()
+        local main = output.stdout or ''
+        main = vim.trim(main)
 
         require('plugins.fuzzyfinder.commands').find_files({
           find_command = {
