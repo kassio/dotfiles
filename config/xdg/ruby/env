@@ -3,12 +3,8 @@
 # Spring enabled by default
 export DISABLE_SPRING=0
 
+# Ensure default gems are installed in all ruby versions
 export ASDF_GEM_DEFAULT_PACKAGES_FILE="${XDG_CONFIG_HOME}/ruby/default-gems"
-
-# Global solargraph configs
-export SOLARGRAPH_GLOBAL_CONFIG="${XDG_CONFIG_HOME}/solargraph/solargraph.yml"
 
 # cache rubocop stuff in /tmp
 export RUBOCOP_CACHE_ROOT="/private/tmp/rubocop-cache"
-
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
