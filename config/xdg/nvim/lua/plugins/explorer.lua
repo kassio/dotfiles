@@ -54,6 +54,7 @@ return {
           return '» ' .. vim.fn.fnamemodify(path, ':t')
         end,
       },
+      sync_root_with_cwd = true,
       view = {
         number = false,
         preserve_window_proportions = true,
