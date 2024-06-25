@@ -48,6 +48,9 @@ local function file_remote_url(arg)
 end
 
 function M.git(cmd, callback)
+  if type(cmd) == 'string' then
+    cmd = vim.split(cmd, ' ')
+  end
   table.insert(cmd or {}, 1, 'git')
   local output = vim.system(cmd):wait()
   local stdout = vim.trim(output.stdout)
