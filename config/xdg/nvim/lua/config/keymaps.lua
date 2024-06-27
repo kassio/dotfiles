@@ -22,8 +22,10 @@ keymap.set('n', 'k', 'gk', { silent = true })
 
 keymap.set('i', '<esc>', '<c-c>', { desc = 'faster esc' })
 
+keymap.set('i', '.', '.<c-g>u', { desc = 'undo breakpoints' })
 keymap.set('i', ',', ',<c-g>u', { desc = 'undo breakpoints' })
-keymap.set('i', '.', '.<c-g>u')
+keymap.set('i', '!', ',<c-g>u', { desc = 'undo breakpoints' })
+keymap.set('i', '?', '.<c-g>u', { desc = 'undo breakpoints' })
 
 keymap.set('n', 'n', 'nzzzv', { desc = 'keep the cursor centered while moving' })
 keymap.set('n', 'N', 'Nzzzv', { desc = 'keep the cursor centered while moving' })
