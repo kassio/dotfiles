@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+name="${1}"
+bundle update "${name}" &&
+  bundle exec rails test &&
+  git commit -am"update ${name} gem"
