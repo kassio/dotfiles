@@ -3,6 +3,7 @@ local tsutils = require('plugins.treesitter.utils')
 local ts = vim.treesitter
 
 local default_options = {
+  enabled = true,
   indicator_size = 100,
   type_patterns = { 'class', 'function', 'method' },
   transform_fn = tsutils.get_node_text,
@@ -25,12 +26,15 @@ end
 local M = {}
 
 function M.fetch()
+  local opts = options_by_filetype(vim.bo.ft)
+  if opts.enabled == false then
+    return ''
+  end
+
   local ok, parser = pcall(ts.get_parser, 0)
   if not ok or not parser then
     return ''
   end
-
-  local opts = options_by_filetype(vim.bo.ft)
 
   local current_node = ts.get_node()
   if not current_node then
