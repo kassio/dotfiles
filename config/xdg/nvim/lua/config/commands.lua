@@ -20,6 +20,11 @@ end, {})
 command('Dark', 'set background=dark', {})
 command('Light', 'set background=light', {})
 
+-- copy current server name
+command('CopyServername', function(cmd)
+  utils.to_clipboard(vim.v.servername, cmd.bang)
+end, { bang = true })
+
 -- copy filename
 command('CopyFilename', utils.copy_filename, {
   bang = true,
