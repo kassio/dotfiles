@@ -49,6 +49,14 @@ return {
       gitsigns.stage_buffer()
     end, { desc = 'add diff to stage' })
 
+    command('OpenNewFiles', function()
+      utils.git('ls-files --others --exclude-standard', function(files)
+        for _, file in ipairs(vim.split(files, '\n', { trimempty = true })) do
+          vim.cmd.tabnew(file)
+        end
+      end)
+    end, { desc = 'open unstaged files' })
+
     vim.cmd.cabbrev('Ga GitWrite')
     vim.cmd.cabbrev('ga GitWrite')
     vim.cmd.cabbrev('Gblame BlameToggle')
