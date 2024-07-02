@@ -10,23 +10,26 @@ local default_options = {
   separator = ' 〉',
 }
 
-local options = {}
-local function options_by_filetype(ft)
-  local ok, opts = pcall(require, 'plugins.treesitter.fetcher.' .. ft)
+local filetype_options = setmetatable({}, {
+  __index = function(tbl, ft)
+    local ok, opts = pcall(require, 'plugins.treesitter.fetcher.' .. ft)
+    local result
 
-  if ok then
-    options[ft] = vim.tbl_deep_extend('keep', opts, default_options)
-  else
-    options[ft] = default_options
-  end
+    if ok then
+      result = vim.tbl_deep_extend('keep', opts, default_options)
+    else
+      result = default_options
+    end
 
-  return options[ft]
-end
+    tbl[ft] = result
+    return result
+  end,
+})
 
 local M = {}
 
 function M.fetch()
-  local opts = options_by_filetype(vim.bo.ft)
+  local opts = filetype_options[vim.bo.filetype]
   if opts.enabled == false then
     return ''
   end

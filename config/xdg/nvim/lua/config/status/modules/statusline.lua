@@ -1,3 +1,4 @@
+local utils = require('utils')
 local SEP = '│'
 
 local mode_map = {
@@ -109,6 +110,15 @@ local function explorer_filename()
   return vim.fs.basename(node.absolute_path)
 end
 
+local function get_treesitter_location()
+  local ft = vim.bo.filetype or ''
+  if ft == '' or utils.plugin_filetype(ft) then
+    return ''
+  end
+
+  return require('plugins.treesitter.fetcher').fetch()
+end
+
 return {
   render = function()
     local mode, hl = get_mode()
@@ -117,7 +127,7 @@ return {
       .iter({
         mode,
         explorer_filename(),
-        require('plugins.treesitter.fetcher').fetch(),
+        get_treesitter_location(),
         macromsg(),
         '%=',
         '%S',
