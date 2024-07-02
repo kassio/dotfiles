@@ -8,14 +8,9 @@ return {
         style = 'storm',
         light_style = 'day',
         terminal_colors = true,
-        sidebars = { 'qf', 'help', 'terminal' },
         day_brightness = 0.3,
+        plugins = { all = 'auto' },
         on_colors = function(colors)
-          if vim.opt.background:get() == 'light' then
-            colors.bg = colors.bg_sidebar
-            colors.bg_sidebar = require('tokyonight.util').darken(colors.bg, 0.3)
-          end
-
           colors.error = '#CA1243'
           colors.warn = '#F7C154'
           colors.info = '#6699CC'
