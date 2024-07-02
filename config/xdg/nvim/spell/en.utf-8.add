@@ -55,3 +55,7 @@ gitconfig
 gitrebase
 gitsendemail
 treesitter
+expect/!
+subject/!
+#rozen_string_literal/!
+frozen_string_literal/!
