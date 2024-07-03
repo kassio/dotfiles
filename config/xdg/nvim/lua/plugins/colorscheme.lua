@@ -23,6 +23,8 @@ return {
         on_highlights = function(hl, c)
           -- UI
           hl['ColorColumn'] = { bg = c.bg_sidebar }
+          hl['WinSeparator'] = { bg = c.bg_sidebar }
+          hl['FloatBorder'] = { link = 'NotifyInfoBorder' }
 
           -- search
           hl['IncSearch'] = { fg = c.bg, bg = c.warn }
