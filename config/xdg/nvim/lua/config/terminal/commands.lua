@@ -39,7 +39,7 @@ return {
     })
 
     command('T', function(opts)
-      manager.send(opts.args)
+      manager.send(vim.fn.expandcmd(opts.args))
     end, { nargs = '+', desc = 'send the argument as a terminal command' })
 
     -- run nvim command
