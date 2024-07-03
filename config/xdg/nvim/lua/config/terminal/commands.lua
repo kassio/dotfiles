@@ -43,7 +43,7 @@ return {
     end, { nargs = '+', desc = 'send the argument as a terminal command' })
 
     -- run nvim command
-    command('Tcmd', function(opts)
+    command('Tnvim', function(opts)
       manager.nvim_cmd(opts.args)
     end, { nargs = '+', desc = 'execute a nvim command' })
 
