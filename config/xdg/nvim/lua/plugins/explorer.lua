@@ -72,6 +72,7 @@ return {
       },
       on_attach = function(bufnr)
         local api = require('nvim-tree.api')
+        local autocmd_group = vim.api.nvim_create_augroup('user:explorer', { clear = false })
 
         local function opts(desc)
           return {
@@ -105,6 +106,13 @@ return {
             vim.api.nvim_buf_delete(nodebuf, { force = true })
           end
         end, opts('Delete Buffer'))
+
+        vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
+          group = autocmd_group,
+          callback = function()
+            vim.api.nvim_buf_delete(bufnr, { force = true })
+          end,
+        })
       end,
     })
   end,
