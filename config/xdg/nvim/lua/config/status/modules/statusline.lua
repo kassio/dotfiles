@@ -107,7 +107,7 @@ local function explorer_filename()
     return ''
   end
 
-  return vim.fs.basename(node.absolute_path)
+  return './' .. vim.fn.fnamemodify(node.absolute_path, ':.')
 end
 
 local function get_treesitter_location()

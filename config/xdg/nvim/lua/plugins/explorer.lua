@@ -23,6 +23,13 @@ return {
     require('nvim-tree').setup({
       disable_netrw = true,
       hijack_netrw = true,
+      filesystem_watchers = {
+        ignore_dirs = {
+          'node_modules',
+          'vendor',
+          '.vscode',
+        },
+      },
       hijack_directories = {
         enable = true,
         auto_open = true,
