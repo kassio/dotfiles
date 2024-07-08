@@ -110,7 +110,9 @@ return {
         vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
           group = autocmd_group,
           callback = function()
-            vim.api.nvim_buf_delete(bufnr, { force = true })
+            pcall(function()
+              vim.api.nvim_buf_delete(bufnr, { force = true })
+            end)
           end,
         })
       end,
