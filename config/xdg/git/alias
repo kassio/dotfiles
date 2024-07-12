@@ -3,6 +3,8 @@
 alias NGP="GIT_PAGER=cat"
 alias g="git"
 
+alias -g noci="-o ci.skip"
+
 grt() {
   if [ $# -eq 0 ]; then
     git restore -- .
