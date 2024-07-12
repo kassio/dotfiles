@@ -17,6 +17,7 @@ alias l="ls -A"
 
 alias watch="watch --color"
 
+alias cd-="cd -"
 alias ..="cd .."
 alias ...="cd ../.."
 
