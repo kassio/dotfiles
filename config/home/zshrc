@@ -44,6 +44,12 @@ autoload -Uz bashcompinit && bashcompinit
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:||=*'
 zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
+# Ignore parent directories on cd
+zstyle ':completion:*:cd:*' ignore-parents parent pwd
+
+# Menu style completion for kill command
+zstyle ':completion:*:*:kill:*' menu yes select
+zstyle ':completion:*:kill:*'   force-list always
 
 # load colors
 autoload -Uz colors && colors
