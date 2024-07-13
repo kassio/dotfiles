@@ -4,7 +4,6 @@ local fn = vim.fn
 
 M.plugin_filetypes = {
   'FineCmdlinePrompt',
-  'NvimTree',
   'Outline',
   'TelescopePrompt',
   'TelescopeResults',
@@ -12,9 +11,10 @@ M.plugin_filetypes = {
   'cmp_menu',
   'fzf',
   'help',
-  'terminal',
+  'neo-tree',
   'notify',
   'packer',
+  'terminal',
 }
 
 --- Copy given text to clipboard.

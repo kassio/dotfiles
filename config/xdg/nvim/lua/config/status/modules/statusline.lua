@@ -97,19 +97,6 @@ local function macromsg()
   return ''
 end
 
-local function explorer_filename()
-  if vim.bo.filetype ~= 'NvimTree' then
-    return ''
-  end
-
-  local node = require('nvim-tree.api').tree.get_node_under_cursor()
-  if node == nil then
-    return ''
-  end
-
-  return './' .. vim.fn.fnamemodify(node.absolute_path, ':.')
-end
-
 local function get_treesitter_location()
   local ft = vim.bo.filetype or ''
   if ft == '' or utils.plugin_filetype(ft) then
@@ -126,7 +113,6 @@ return {
     return vim
       .iter({
         mode,
-        explorer_filename(),
         get_treesitter_location(),
         macromsg(),
         '%=',

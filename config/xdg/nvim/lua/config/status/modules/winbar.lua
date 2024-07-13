@@ -137,8 +137,8 @@ winbar.help = function(bufnr)
   return string.format('%s help: ', bufnr, vim.fn.fnamemodify(get_filename(bufnr), ':t'))
 end
 
-winbar.NvimTree = function(bufnr)
-  return string.format('%s NvimTree', bufnr)
+winbar['neo-tree'] = function(bufnr)
+  return string.format('%s explorer', bufnr)
 end
 
 setmetatable(winbar, {
