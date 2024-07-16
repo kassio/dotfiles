@@ -56,7 +56,7 @@ return {
             flip_lines = 30,
           },
         },
-        layout_strategy = 'flex',
+        layout_strategy = 'vertical',
         mappings = {
           i = {
             ['<c-o>'] = user_actions.navigate_or_select,
