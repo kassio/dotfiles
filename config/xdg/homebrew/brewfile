@@ -76,7 +76,7 @@ cask "spotify"
 cask "tableplus"
 cask "the-unarchiver"
 cask "visual-studio-code"
-cask "wezterm"
+cask "wezterm@nightly"
 cask "xbar"
 mas "1Password for Safari", id: 1569813296
 mas "Amphetamine", id: 937984704
