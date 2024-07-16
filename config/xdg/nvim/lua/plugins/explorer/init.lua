@@ -5,6 +5,17 @@ return {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons',
     'MunifTanjim/nui.nvim',
+    {
+      's1n7ax/nvim-window-picker',
+      name = 'window-picker',
+      event = 'VeryLazy',
+      version = '2.*',
+      config = function()
+        require('window-picker').setup({
+          hint = 'statusline-winbar',
+        })
+      end,
+    },
   },
   keys = {
     {
@@ -30,70 +41,57 @@ return {
     },
   },
   config = function()
+    local symbols = require('utils.symbols')
+
     require('neo-tree').setup({
       close_if_last_window = true,
       enable_git_status = true,
       enable_diagnostics = true,
       open_files_do_not_replace_types = { 'terminal', 'trouble', 'qf' },
       window = { position = 'right', width = 40 },
-      commands = {
-        print_me = function(state)
-          local node = state.tree:get_node()
-          return node.name
-        end,
+      filesystem = {
+        window = {
+          mappings = {
+            ['<cr>'] = 'open_with_window_picker',
+            ['<c-x>'] = 'split_with_window_picker',
+            ['<c-v>'] = 'vsplit_with_window_picker',
+            ['<c-t>'] = 'open_tabnew',
+          },
+        },
       },
       mappings = {
         ['<space>'] = { 'toggle_node', nowait = false },
         ['<2-LeftMouse>'] = 'open',
-        ['<cr>'] = 'open',
-        ['<esc>'] = 'cancel',
         ['<c-p>'] = {
           'toggle_preview',
           config = { use_float = true, use_image_nvim = true },
         },
-        ['l'] = 'focus_preview',
-        ['<c-x>'] = 'open_split',
-        ['<c-v>'] = 'open_vsplit',
-        ['<c-t>'] = 'open_tabnew',
-        ['w'] = 'open_with_window_picker',
-        ['C'] = 'close_node',
-        ['z'] = 'close_all_nodes',
-        ['a'] = {
-          'add',
-          config = {
-            show_path = 'none',
-          },
-        },
-        ['A'] = 'add_directory',
-        ['d'] = 'delete',
-        ['r'] = 'rename',
-        ['y'] = 'copy_to_clipboard',
-        ['x'] = 'cut_to_clipboard',
-        ['p'] = 'paste_from_clipboard',
-        ['c'] = 'copy',
-        ['m'] = 'move',
-        ['q'] = 'close_window',
-        ['R'] = 'refresh',
-        ['?'] = 'show_help',
-        ['<'] = 'prev_source',
-        ['>'] = 'next_source',
         ['K'] = 'show_file_details',
+      },
+
+      event_handlers = {
+        {
+          event = 'neo_tree_window_after_open',
+          handler = function()
+            vim.cmd.wincmd('=')
+          end,
+        },
       },
 
       default_component_configs = {
         git_status = {
           symbols = {
             -- Change type
-            added = '✚',
-            deleted = '✖',
-            modified = '',
-            renamed = '󰁕',
+            added = symbols.git.added,
+            deleted = symbols.git.removed,
+            modified = symbols.git.changed,
+            renamed = symbols.git.changed,
             -- Status type
-            untracked = '',
-            ignored = '',
-            unstaged = '󰄱',
-            staged = '',
-            conflict = '',
+            untracked = '',
+            ignored = '',
+            unstaged = '',
+            staged = '',
+            conflict = '',
           },
         },
       },
