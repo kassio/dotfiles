@@ -17,10 +17,6 @@
     "blog": {
       "remote": "https://gitlab.com/kassio/kassio",
       "local": "$HOME/src/blog"
-    },
-    "gitlab xbar": {
-      "remote": "https://gitlab.com/kassio/gitlab-xbar.git",
-      "local": "$HOME/src/gdk/gitlab-xbar"
     }
   }
 }
