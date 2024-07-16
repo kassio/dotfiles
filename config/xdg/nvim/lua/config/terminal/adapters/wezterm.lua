@@ -1,16 +1,6 @@
-local M = {}
+local M = { name = 'wezterm' }
 
-local function send(value)
-  vim.system({ 'wts', vim.g.wezterm_pane_id, value }):wait()
-end
-
-function M.send(opts)
-  send(opts.string)
-end
-
-local adapter = { name = 'wezterm' }
-
-function adapter.list_panes()
+function M.list_panes()
   local result = vim
     .system({ 'wezterm', 'cli', 'list', '--format', 'json' }, {
       text = true,
@@ -20,7 +10,7 @@ function adapter.list_panes()
   return vim.fn.json_decode(result.stdout)
 end
 
-function adapter.start(id)
+function M.start(id)
   id = tonumber(id) or -1
 
   if id < 0 then
@@ -32,7 +22,7 @@ function adapter.start(id)
   end
 end
 
-function adapter.can_execute(has_native)
+function M.can_execute(has_native)
   if has_native ~= nil then
     return false
   end
@@ -40,14 +30,13 @@ function adapter.can_execute(has_native)
   return vim.g.wezterm_pane_id ~= nil or not vim.fn.empty(vim.g.wezterm_pane_id)
 end
 
-function adapter.execute(cmd)
-  local fn = M[cmd.fn]
-  if fn == nil then
-    vim.print(string.format('[%s] %s not supported', adapter.name, cmd.fn))
+function M.execute(cmd)
+  if cmd.fn ~= 'send' then
+    vim.print(string.format('[%s] %s not supported', M.name, cmd.fn))
     return
   end
 
-  fn(cmd.opts)
+  vim.system({ 'wts', vim.g.wezterm_pane_id, cmd.opts.string }):wait()
 end
 
-return adapter
+return M
