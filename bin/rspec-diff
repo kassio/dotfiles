@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
 local dry=0
+local list=0
 local ref=""
 
 parse_args() {
@@ -14,6 +15,9 @@ parse_args() {
       ;;
     -d | --dry)
       dry=1
+      ;;
+    -l | --list)
+      list=1
       ;;
     *)
       ref="$1"
@@ -72,6 +76,13 @@ for file in "${files[@]}"; do
     fi
   fi
 done
+
+if [ "${list}" -gt 0 ]; then
+  for file in "${specs[@]}"; do
+    echo "${file}"
+  done
+  exit 0
+fi
 
 echo "${#files} files changed"
 echo "---"
