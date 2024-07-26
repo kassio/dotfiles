@@ -2,8 +2,13 @@
 
 require 'irb'
 
-Dir.glob(File.expand_path(File.join(Dir.pwd, 'lib', '**', '*.rb'))).each do |file|
-  require file
-end
+Dir
+  .pwd
+  .then { |base| File.join(base, 'lib', '**', '*.rb') }
+  .then { |path| File.expand_path(path) }
+  .then { |fullpath| Dir.glob(fullpath) }.tap { p _1 }
+  .each do |file|
+    require file
+  end
 
 IRB.start
