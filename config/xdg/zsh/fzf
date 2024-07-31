@@ -1,5 +1,7 @@
 # vim:ft=zsh:
 
+source "${HOMEBREW_PREFIX}/opt/fzf/shell/key-bindings.zsh"
+
 eval "$(fzf --zsh)"
-export FZF_DEFAULT_OPTS="--reverse --tiebreak=begin,length,index"
-export FZF_DEFAULT_COMMAND="files"
+
+source "${XDG_CONFIG_HOME}/fzf/env"
