@@ -44,7 +44,7 @@ module Kassio
     yield.tap { ActiveRecord::Base.logger = nil }
   end
 
-  def copy(obj)
+  def pbcopy(obj)
     `echo "#{obj.is_a?(String) ? obj : obj.inspect}" | pbcopy`
 
     obj
