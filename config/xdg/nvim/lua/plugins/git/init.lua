@@ -1,17 +1,10 @@
 return {
   'lewis6991/gitsigns.nvim',
   dependencies = {
-    'FabijanZulj/blame.nvim',
+    'tpope/vim-fugitive',
   },
   config = function()
     local gitsigns = require('gitsigns')
-
-    require('blame').setup({
-      date_format = '%Y%m%d',
-      views = {
-        default = require('blame.views.window_view'),
-      },
-    })
 
     gitsigns.setup({
       signs = {
@@ -33,7 +26,7 @@ return {
       numhl = true,
     })
 
-    require('plugins.git.commands').setup(gitsigns)
+    require('plugins.git.commands').setup()
     require('plugins.git.keymaps').setup(gitsigns)
   end,
 }

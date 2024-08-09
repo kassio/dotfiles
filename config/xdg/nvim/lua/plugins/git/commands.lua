@@ -11,7 +11,7 @@ local function command(name, callback, opts)
 end
 
 return {
-  setup = function(gitsigns)
+  setup = function()
     command('BrowseRepository', utils.open_repository_url, { desc = 'open origin in the browser' })
 
     command('BrowseMergeRequest', function()
@@ -26,29 +26,6 @@ return {
       utils.copy_remote_url(cmd.args)
     end, { nargs = '?', bang = true, desc = 'copy remote file url' })
 
-    command('Diff', function(cmd)
-      gitsigns.diffthis(cmd.args)
-    end, { nargs = '?', desc = 'open diff in a split view' })
-
-    command('Blame', function()
-      vim.cmd.BlameToggle()
-    end, { desc = 'blame current line' })
-
-    command('Restore', function()
-      vim.cmd('execute "!git restore -- %" | mode')
-    end, { nargs = '?', desc = 'restore file to last committed version' })
-
-    command('Reset', function(cmd)
-      local tree = cmd.args ~= '' and cmd.args or 'HEAD'
-
-      vim.cmd(string.format('execute "!git reset %s -- %%" | mode', tree))
-    end, { nargs = '?', desc = 'reset file to HEAD or given tree' })
-
-    command('Write', function()
-      vim.cmd('update!')
-      gitsigns.stage_buffer()
-    end, { desc = 'add diff to stage' })
-
     command('OpenNewFiles', function()
       utils.git('ls-files --others --exclude-standard', function(files)
         for _, file in ipairs(vim.split(files, '\n', { trimempty = true })) do
@@ -57,17 +34,9 @@ return {
       end)
     end, { desc = 'open unstaged files' })
 
-    vim.cmd.cabbrev('Ga GitWrite')
-    vim.cmd.cabbrev('ga GitWrite')
-    vim.cmd.cabbrev('Gblame BlameToggle')
-    vim.cmd.cabbrev('gblame BlameToggle')
-    vim.cmd.cabbrev('Gd GitDiff')
-    vim.cmd.cabbrev('gd GitDiff')
-    vim.cmd.cabbrev('Gdm GitDiff main')
-    vim.cmd.cabbrev('gdm GitDiff main')
-    vim.cmd.cabbrev('Grt GitRestore')
-    vim.cmd.cabbrev('grt GitRestore')
-    vim.cmd.cabbrev('Gw GitWrite')
-    vim.cmd.cabbrev('gw GitWrite')
+    vim.cmd.cabbrev('Gblame Git blame')
+    vim.cmd.cabbrev('Gd Gvdiffsplit')
+    vim.cmd.cabbrev('Grt Git restore %')
+    vim.cmd.cabbrev('Gw Gwrite')
   end,
 }
