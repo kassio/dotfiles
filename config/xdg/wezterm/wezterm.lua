@@ -7,9 +7,9 @@ require('palette').setup(wezterm)
 local fonts = require('fonts')
 
 if wezterm.gui.get_appearance():find('Dark') then
-  config.color_scheme = 'tokyonight_storm'
+  config.color_scheme = 'Catppuccin Mocha'
 else
-  config.color_scheme = 'tokyonight_day'
+  config.color_scheme = 'Catppuccin Latte'
 end
 
 local colors = wezterm.color.get_builtin_schemes()[config.color_scheme]
