@@ -21,9 +21,8 @@ module Kassio
   def log(*args)
     File.open(KASSIO_LOG_FILE, 'a') do |f|
       <<~EOF.then { |message| puts message; f << message }
-      » << #{caller(3, 1)} >>
+      » #{caller(3, 1)}
       #{args.inspect}
-      ──────────────────────────────────────────────────
 
       EOF
     end
