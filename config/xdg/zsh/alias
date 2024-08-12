@@ -40,6 +40,20 @@ alias RT="RAILS_ENV=test"
 alias RS="RAILS_ENV=staging"
 alias RP="RAILS_ENV=production"
 alias DS="DISABLE_SPRING=1"
+webdriver_headless() {
+  case "$1" in
+    true|enabled|on)
+      export WEBDRIVER_HEADLESS=1
+      ;;
+    false|disabled|off)
+      export WEBDRIVER_HEADLESS=0
+      ;;
+    *)
+      echo "Option required: <on|off>"
+      return 1
+      ;;
+  esac
+}
 
 alias vsc="code"
 
