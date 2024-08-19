@@ -31,6 +31,10 @@ local directories = {
     key = 'm',
     dirs = { 'app/models', 'ee/app/models' },
   },
+  mailers = {
+    key = 'M',
+    dirs = { 'app/mailers', 'ee/app/mailers' },
+  },
   services = {
     key = 's',
     dirs = { 'app/services', 'ee/app/services' },
