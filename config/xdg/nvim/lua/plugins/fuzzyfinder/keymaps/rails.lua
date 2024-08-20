@@ -1,4 +1,9 @@
 local directories = {
+  config = {
+    key = 'C',
+    dirs = { 'config' },
+    extensions = {},
+  },
   controllers = {
     key = 'c',
     dirs = { 'app/controllers', 'ee/app/controllers' },
