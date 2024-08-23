@@ -40,6 +40,10 @@ local directories = {
     key = 'M',
     dirs = { 'app/mailers', 'ee/app/mailers' },
   },
+  policies = {
+    key = 'p',
+    dirs = { 'app/policies', 'ee/app/policies' },
+  },
   services = {
     key = 's',
     dirs = { 'app/services', 'ee/app/services' },
