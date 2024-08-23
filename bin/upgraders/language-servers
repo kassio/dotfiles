@@ -10,28 +10,29 @@ title "[language servers] update language servers dependencies"
 subtitle "homebrew dependencies"
 brew_dependencies=(
   "bash-language-server" # ls
+  "dockerfile-language-server" # dockerfile
+  "editorconfig-checker" # linter generic
+  "golangci-lint" # linter go
   "lua-language-server" # ls server lua
-  "sql-language-server" # ls server sql
-  "yaml-language-server" # ls server yaml
+  "luacheck" # linter lua
+  "markdownlint-cli" # linter markdown
   "pgformatter" # formatter postgresql
   "shellcheck" # linter sh
   "shfmt" # formatter sh
+  "sql-language-server" # ls server sql
   "stylua" # formatter lua
-  "tidy-html5" # formatter html
-  "luacheck" # linter lua
-  "golangci-lint" # linter go
-  "editorconfig-checker" # linter generic
-  "markdownlint-cli" # linter markdown
   "tailwindcss-language-server" # lsp for tailwind
+  "tidy-html5" # formatter html
+  "yaml-language-server" # ls server yaml
 )
 brew install --quiet "${brew_dependencies[@]}"
 
 subtitle "go dependencies"
 go_dependencies=(
-  "golang.org/x/tools/gopls@latest" # lsp server
   "github.com/grafana/jsonnet-language-server@latest" # lsp server jsonnet
-  "github.com/wader/jq-lsp@master" # lsp server jq
   "github.com/mrtazz/checkmake/cmd/checkmake@latest" # linter makefile
+  "github.com/wader/jq-lsp@master" # lsp server jq
+  "golang.org/x/tools/gopls@latest" # lsp server
 )
 for dependency in "${go_dependencies[@]}"; do
   go install "${dependency}"
@@ -43,3 +44,9 @@ ruby_dependencies=(
   "ruby-lsp" # main ruby language server
 )
 for-each-asdf ruby gem install "${ruby_dependencies[@]}"
+
+subtitle "node dependencies"
+node_dependencies=(
+  "@vue/language-server"
+)
+for-each-asdf nodejs npm install -g "${node_dependencies[@]}"

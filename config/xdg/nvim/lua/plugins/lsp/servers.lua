@@ -4,6 +4,7 @@ local capabilities = require('plugins.lsp.capabilities')
 local servers = {
   bashls = {},
   cssls = {},
+  dockerls = {},
   gopls = require('plugins.lsp.servers.gopls'),
   jqls = {},
   jsonls = {},
@@ -11,6 +12,7 @@ local servers = {
   lua_ls = require('plugins.lsp.servers.lua_ls'),
   ruby_lsp = require('plugins.lsp.servers.ruby_lsp'),
   tailwindcss = {},
+  volar = require('plugins.lsp.servers.volar'), -- vuejs
   yamlls = require('plugins.lsp.servers.yamlls'),
 }
 
