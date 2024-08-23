@@ -1,7 +1,7 @@
 local directories = {
   config = {
     key = 'C',
-    dirs = { 'config' },
+    dirs = { 'config', 'ee/config' },
     extensions = {},
   },
   controllers = {
