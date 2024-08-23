@@ -16,7 +16,7 @@ return {
 
     keymap('n', '<c-g><c-w>', gitsigns.stage_hunk, 'stage hunk (add)')
     keymap('n', '<c-g><c-u>', gitsigns.reset_hunk, 'reset hunk (undo)')
-    keymap('n', '<c-g><c-U>', function()
+    keymap('n', '<c-g><c-c>', function()
       vim.cmd.Git('restore %')
     end, 'restore file')
 
