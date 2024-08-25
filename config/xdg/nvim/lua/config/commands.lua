@@ -1,6 +1,13 @@
 local command = vim.api.nvim_create_user_command
 local utils = require('utils')
 
+command('Pager', function()
+  vim.opt.laststatus = 0
+  vim.opt.showtabline = 0
+  vim.opt.winbar = ''
+  vim.keymap.set('n', '<esc><esc>', ':qall!<cr>', { buffer = 0 })
+end, {})
+
 -- run given command without change current view
 command('Preserve', function(cmd)
   utils.preserve(function()

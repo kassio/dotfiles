@@ -1,12 +1,5 @@
 # vim:ft=zsh:
 
-alias n="nvim --listen ${XDG_CACHE_HOME}/nvim/$$${RANDOM}.pipe"
-nts() { nvim --noplugin -c "TerminalServerStart"; }
-ntw() {
-  pane="$1"; shift
-  nvim -c "TerminalWeztermPane ${pane}" "$@"
-}
-
 alias time="/usr/bin/time"
 
 alias sudo="sudo "
@@ -66,6 +59,15 @@ alias tn="to-nvim"
 
 alias nd="nvim-diff"
 ndm() { nvim-diff "$(git branch-main)..."; }
+
+alias n="nvim --listen ${XDG_CACHE_HOME}/nvim/$$${RANDOM}.pipe"
+nts() { nvim --noplugin -c "TerminalServerStart"; }
+ntw() {
+  pane="$1"; shift
+  nvim -c "TerminalWeztermPane ${pane}" "$@"
+}
+
+alias nvim-pager="nvim -R +Pager"
 
 alias truncate0="truncate -c -s 0"
 
