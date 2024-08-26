@@ -56,6 +56,8 @@ return {
             ['<c-x>'] = 'split_with_window_picker',
             ['<c-v>'] = 'vsplit_with_window_picker',
             ['<c-t>'] = 'open_tabnew',
+            ['<c-f>'] = 'fuzzy_finder',
+            ['/'] = 'noop',
           },
         },
       },
