@@ -65,6 +65,11 @@ for file in "${files[@]}"; do
       sed 's;spec/support;spec/support_specs;' |
       sed 's;.rb;_spec.rb;')"
 
+    if [ "${FOSS_ONLY:-0}" -ge "1" ] && [ "${file:0:2}" = "ee" ]; then
+      echo "Excluding EE ${file}"
+      continue
+    fi
+
     if [ -f "${possible_spec}" ]; then
       specs+=( "${possible_spec}" )
 
