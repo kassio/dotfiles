@@ -26,6 +26,10 @@ return {
       utils.copy_remote_url(cmd.args)
     end, { nargs = '?', bang = true, desc = 'copy remote file url' })
 
+    command('Blame', function()
+      vim.cmd.Git('blame')
+    end, { desc = 'blame file' })
+
     command('OpenNewFiles', function()
       utils.git('ls-files --others --exclude-standard', function(files)
         for _, file in ipairs(vim.split(files, '\n', { trimempty = true })) do
