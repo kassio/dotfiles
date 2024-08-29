@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+
+local commit="$1"
+local remote_url="$(git remote get-url "origin" | sed 's/\.git$//')"
+
+case "${remote_url}" in
+  *gitlab*)
+    open "${remote_url}/-/commits/${commit}"
+    ;;
+
+  *github*)
+    open "${remote_url}/commit/${commit}"
+    ;;
+esac

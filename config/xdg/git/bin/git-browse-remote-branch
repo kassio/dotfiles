@@ -1,15 +1,12 @@
 #!/usr/bin/env zsh
 
-local branch=""
+local branch="$1"
 if [ $# -le 0 ]; then
   branch="$(git branch-list | fzf)"
-else
-  branch="$1"
 fi
 
-branch_remote="$(git config --get "branch.${branch}.remote")"
-
-local remote_url="$(git remote get-url "${branch_remote}" | sed 's/\.git//')"
+local branch_remote="$(git config --get "branch.${branch}.remote")"
+local remote_url="$(git remote get-url "${branch_remote}" | sed 's/\.git$//')"
 
 case "${remote_url}" in
   *gitlab*)
