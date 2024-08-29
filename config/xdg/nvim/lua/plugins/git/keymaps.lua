@@ -14,13 +14,11 @@ return {
       vim.cmd.normal('zz')
     end, 'previous hunk')
 
-    keymap('n', '<c-g><c-w>', gitsigns.stage_hunk, 'stage hunk (add)')
-    keymap('n', '<c-g><c-u>', gitsigns.reset_hunk, 'reset hunk (undo)')
-    keymap('n', '<c-g><c-c>', function()
-      vim.cmd.Git('restore %')
-    end, 'restore file')
+    keymap('n', '<c-g><c-l>', vim.cmd.GitBlame, 'blame current file')
 
     keymap('n', '<c-g><c-d>', gitsigns.preview_hunk, 'preview hunk (diff)')
-    keymap('n', '<c-g><c-l>', vim.cmd.GitBlame, 'blame current file')
+    keymap('n', '<c-g><c-w>', gitsigns.stage_hunk, 'stage hunk (add)')
+    keymap('n', '<c-g><c-u>', gitsigns.reset_hunk, 'reset hunk (undo)')
+    keymap('n', '<c-g><c-c>', vim.cmd.GitRestoreFile, 'restore file')
   end,
 }

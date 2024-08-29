@@ -38,6 +38,10 @@ return {
       end)
     end, { desc = 'open unstaged files' })
 
+    command('RestoreFile', function()
+      vim.cmd.Git('restore %')
+    end, { desc = 'restore current file' })
+
     vim.cmd.cabbrev('Gblame Git blame')
     vim.cmd.cabbrev('Gd Gvdiffsplit')
     vim.cmd.cabbrev('Grt Git restore %')
