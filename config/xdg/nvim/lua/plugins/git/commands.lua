@@ -30,10 +30,6 @@ return {
       vim.cmd.Git('blame')
     end, { desc = 'blame file' })
 
-    command('Diff', function(cmd)
-      vim.cmd('leftabove Gdiffsplit ' .. cmd.args)
-    end, { nargs = '*', desc = 'open the file diff' })
-
     command('OpenNewFiles', function()
       utils.git('ls-files --others --exclude-standard', function(files)
         for _, file in ipairs(vim.split(files, '\n', { trimempty = true })) do

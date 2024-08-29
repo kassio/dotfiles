@@ -21,7 +21,6 @@ return {
     end, 'restore file')
 
     keymap('n', '<c-g><c-d>', gitsigns.preview_hunk, 'preview hunk (diff)')
-    keymap('n', '<c-g><c-v>', vim.cmd.GitDiff, 'preview file diff')
     keymap('n', '<c-g><c-l>', vim.cmd.GitBlame, 'blame current file')
   end,
 }
