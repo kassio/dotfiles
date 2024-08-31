@@ -41,7 +41,8 @@ return {
     },
   },
   config = function()
-    local symbols = require('utils.symbols')
+    local utils = require('utils')
+    local symbols = utils.symbols
 
     require('neo-tree').setup({
       close_if_last_window = true,
@@ -58,6 +59,20 @@ return {
             ['<c-t>'] = 'open_tabnew',
             ['<c-f>'] = 'fuzzy_finder',
             ['/'] = 'noop',
+            ['Y'] = {
+              function(state)
+                local node = state.tree:get_node()
+                utils.to_clipboard(node.path, true)
+              end,
+              desc = 'copy file path',
+            },
+            ['gp'] = {
+              function(state)
+                local node = state.tree:get_node()
+                require('neo-tree.ui.renderer').focus_node(state, node:get_parent_id())
+              end,
+              desc = 'go to parent',
+            },
           },
         },
       },
@@ -93,7 +108,7 @@ return {
             ignored = '',
             unstaged = '',
             staged = '',
-            conflict = '',
+            conflict = symbols.diagnostics.warn,
           },
         },
       },
