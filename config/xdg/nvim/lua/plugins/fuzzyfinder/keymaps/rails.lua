@@ -1,56 +1,72 @@
 local directories = {
+  app_code = {
+    key = 'a',
+    dirs = { 'app', 'lib', 'ee/app', 'ee/lib' },
+  },
   config = {
-    key = 'C',
     dirs = { 'config', 'ee/config' },
     extensions = {},
+  },
+  database = {
+    dirs = { 'db' },
+  },
+  assets = {
+    dirs = { 'app/assets', 'ee/app/assets' },
+    extensions = {},
+  },
+  channels = {
+    dirs = { 'app/channels', 'ee/app/channels' },
+  },
+  components = {
+    dirs = { 'app/components', 'ee/app/components' },
   },
   controllers = {
     key = 'c',
     dirs = { 'app/controllers', 'ee/app/controllers' },
   },
-  database = {
-    key = 'd',
-    dirs = { 'db' },
+  enums = {
+    dirs = { 'app/enums', 'ee/app/enums' },
   },
   events = {
     key = 'e',
     dirs = { 'app/events', 'ee/app/events' },
   },
+  experiments = {
+    dirs = { 'app/experiments', 'ee/app/experiments' },
+  },
   finders = {
     key = 'f',
     dirs = { 'app/finders', 'ee/app/finders' },
-  },
-  geral = {
-    key = 'a',
-    dirs = { 'app', 'lib', 'ee/app', 'ee/lib' },
   },
   graphql = {
     key = 'g',
     dirs = { 'app/graphql', 'ee/app/graphql' },
   },
-  lib = {
-    key = 'l',
-    dirs = { 'lib', 'ee/lib' },
+  helpers = {
+    dirs = { 'app/helpers', 'ee/app/helpers' },
+  },
+  mailers = {
+    dirs = { 'app/mailers', 'ee/app/mailers' },
   },
   models = {
     key = 'm',
     dirs = { 'app/models', 'ee/app/models' },
   },
-  mailers = {
-    key = 'M',
-    dirs = { 'app/mailers', 'ee/app/mailers' },
-  },
   policies = {
-    key = 'p',
     dirs = { 'app/policies', 'ee/app/policies' },
+  },
+  presenters = {
+    dirs = { 'app/presenters', 'ee/app/presenters' },
   },
   services = {
     key = 's',
     dirs = { 'app/services', 'ee/app/services' },
   },
-  spec = {
-    key = 't',
-    dirs = { 'spec', 'ee/spec' },
+  uploaders = {
+    dirs = { 'app/uploaders', 'ee/app/uploaders' },
+  },
+  validators = {
+    dirs = { 'app/validators', 'ee/app/validators' },
   },
   views = {
     key = 'v',
@@ -60,6 +76,14 @@ local directories = {
     key = 'w',
     dirs = { 'app/workers', 'ee/app/workers' },
   },
+  lib = {
+    key = 'l',
+    dirs = { 'lib', 'ee/lib' },
+  },
+  spec = {
+    key = 't',
+    dirs = { 'spec', 'ee/spec' },
+  },
   docs = {
     key = 'D',
     extensions = {},
@@ -67,7 +91,7 @@ local directories = {
   },
 }
 
-local finder = function(category)
+local function finder(category)
   require('plugins.fuzzyfinder.commands').find_files({
     extensions = category.extensions or { 'rb', 'haml', 'erb' },
     search_dirs = category.dirs,
@@ -89,12 +113,14 @@ return {
     }
 
     for name, category in pairs(directories) do
-      table.insert(
-        keymaps,
-        keymap('r' .. category.key, function()
-          finder(category)
-        end, 'rails:' .. name)
-      )
+      if category.key then
+        table.insert(
+          keymaps,
+          keymap('r' .. category.key, function()
+            finder(category)
+          end, 'rails:' .. name)
+        )
+      end
     end
 
     return keymaps
