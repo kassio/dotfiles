@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+if [ "$(git branch --show-current)" != "$(git branch-main)" ]; then
+  git switch "$(git branch-main)"
+fi
