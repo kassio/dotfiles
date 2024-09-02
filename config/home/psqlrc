@@ -6,6 +6,7 @@
 \set HISTFILE ~/.cache/psql-history- :DBNAME
 \set HISTCONTROL ignoredups
 
+\pset linestyle unicode
 \pset pager off
 \pset tuples_only off
 \pset null '(null)'
