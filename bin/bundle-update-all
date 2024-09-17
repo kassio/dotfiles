@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+bundle outdated --porcelain |
+  awk '{print $1}' |
+  xargs -I{} bundle-update {}
