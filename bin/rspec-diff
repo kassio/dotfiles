@@ -52,7 +52,17 @@ local modified=()
 local not_modified=()
 local not_found=()
 
+
+if [ "${FOSS_ONLY:-0}" -ne "0" ]; then
+  echo "⚠️ FOSS ONLY⚠️"
+fi
+
 for file in "${files[@]}"; do
+  if [ "${FOSS_ONLY:-0}" -ne "0" ] && [ "${file:0:2}" = "ee" ]; then
+    echo "» ignoring: ${file}"
+    continue
+  fi
+
   if [[ "${file}" =~ ".*_spec.rb" ]]; then
     specs+=( "${file}" )
     modified+=( "${file}" )
@@ -64,11 +74,6 @@ for file in "${files[@]}"; do
       sed 's;^ee/lib;ee/spec/lib;' |
       sed 's;spec/support;spec/support_specs;' |
       sed 's;.rb;_spec.rb;')"
-
-    if [ "${FOSS_ONLY:-0}" -ge "1" ] && [ "${file:0:2}" = "ee" ]; then
-      echo "Excluding EE ${file}"
-      continue
-    fi
 
     if [ -f "${possible_spec}" ]; then
       specs+=( "${possible_spec}" )
@@ -89,7 +94,7 @@ if [ "${list}" -gt 0 ]; then
   exit 0
 fi
 
-echo "${#files} files changed"
+echo "\n${#files} files changed"
 echo "---"
 report "specs changed" "${modified[@]}"
 report "specs not update" "${not_modified[@]}"
