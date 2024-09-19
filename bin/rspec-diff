@@ -3,6 +3,7 @@
 local dry=0
 local list=0
 local ref=""
+local ignored=0
 
 parse_args() {
   case $1 in
@@ -53,12 +54,11 @@ local not_modified=()
 local not_found=()
 
 
-if [ "${FOSS_ONLY:-0}" -ne "0" ]; then
-  echo "⚠️ FOSS ONLY⚠️"
-fi
+[ "${FOSS_ONLY:-0}" -ne "0" ] && echo "⚠️ FOSS ONLY⚠️"
 
 for file in "${files[@]}"; do
   if [ "${FOSS_ONLY:-0}" -ne "0" ] && [ "${file:0:2}" = "ee" ]; then
+    ignored=1
     echo "» ignoring: ${file}"
     continue
   fi
@@ -94,7 +94,8 @@ if [ "${list}" -gt 0 ]; then
   exit 0
 fi
 
-echo "\n${#files} files changed"
+[ "${ignored}" -ne "0" ] && echo ""
+echo "${#files} files changed"
 echo "---"
 report "specs changed" "${modified[@]}"
 report "specs not update" "${not_modified[@]}"
@@ -105,6 +106,7 @@ if [ "${dry}" -gt 0 ]; then
 fi
 
 if [ "${#specs}" -gt 0 ]; then
+  bundle exec spring stop 2>/dev/null
   bundle exec rspec "${specs[@]}"
 else
   echo "no rspecs to run"
