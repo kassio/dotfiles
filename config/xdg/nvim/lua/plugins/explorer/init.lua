@@ -33,12 +33,13 @@ return {
       '<leader>ef',
       function()
         local function ensure_path(path)
+          path = path or ''
           if path == '' then
             return vim.fn.getcwd()
           end
 
-          local stat = vim.uv.fs_stat(path)
-          if stat == nil or vim.fn.filereadable(path) ~= 0 then
+          local stat = vim.uv.fs_stat(path) or {}
+          if stat == {} or (stat.type ~= 'directory' and vim.fn.filereadable(path) == 0) then
             return ensure_path(vim.fs.dirname(path))
           end
 
@@ -50,7 +51,8 @@ return {
         require('neo-tree.command').execute({
           action = 'focus',
           source = 'filesystem',
-          filepath = filepath,
+          reveal_force_cwd = false,
+          reveal_file = filepath,
         })
       end,
       desc = 'Open neo-tree at current file or working directory',
