@@ -68,10 +68,11 @@ return {
       enable_diagnostics = true,
       open_files_do_not_replace_types = { 'terminal', 'trouble', 'qf' },
       window = { position = 'right', width = 40 },
-      use_defaut_mappings = false,
+      use_default_mappings = false,
       filesystem = {
         window = {
           mappings = {
+            ['?'] = 'show_help',
             ['<cr>'] = 'open_with_window_picker',
             ['<c-x>'] = 'split_with_window_picker',
             ['<c-v>'] = 'vsplit_with_window_picker',
@@ -83,14 +84,20 @@ return {
             ['p'] = 'paste_from_clipboard',
             ['r'] = 'rename',
             ['A'] = 'add_directory',
+            ['H'] = 'toggle_hidden',
+            ['R'] = 'refresh',
             ['K'] = 'show_file_details',
-            ['P'] = 'preview',
+            ['P'] = { 'toggle_preview', config = { use_float = true, use_image_nvim = true } },
+            ['l'] = 'focus_preview',
+            ['<C-b>'] = { 'scroll_preview', config = { direction = 10 } },
+            ['<C-f>'] = { 'scroll_preview', config = { direction = -10 } },
+            ['<esc>'] = 'revert_preview',
             ['Y'] = {
               function(state)
                 local node = state.tree:get_node()
                 utils.to_clipboard(node.path, true)
               end,
-              desc = 'copy file path',
+              desc = 'copy file path to clipboard',
             },
             ['gp'] = {
               function(state)
