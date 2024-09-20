@@ -32,9 +32,25 @@ return {
     {
       '<leader>ef',
       function()
+        local function ensure_path(path)
+          if path == '' then
+            return vim.fn.getcwd()
+          end
+
+          local stat = vim.uv.fs_stat(path)
+          if stat == nil or vim.fn.filereadable(path) ~= 0 then
+            return ensure_path(vim.fs.dirname(path))
+          end
+
+          return path
+        end
+
+        local filepath = ensure_path(vim.fn.expand('%:p'))
+
         require('neo-tree.command').execute({
           action = 'focus',
-          reveal_force_cwd = true,
+          source = 'filesystem',
+          filepath = filepath,
         })
       end,
       desc = 'Open neo-tree at current file or working directory',
@@ -50,6 +66,7 @@ return {
       enable_diagnostics = true,
       open_files_do_not_replace_types = { 'terminal', 'trouble', 'qf' },
       window = { position = 'right', width = 40 },
+      use_defaut_mappings = false,
       filesystem = {
         window = {
           mappings = {
@@ -57,8 +74,15 @@ return {
             ['<c-x>'] = 'split_with_window_picker',
             ['<c-v>'] = 'vsplit_with_window_picker',
             ['<c-t>'] = 'open_tabnew',
-            ['<c-f>'] = 'fuzzy_finder',
-            ['/'] = 'noop',
+            ['e/'] = 'fuzzy_finder',
+            ['a'] = 'add',
+            ['c'] = 'copy',
+            ['d'] = 'delete',
+            ['p'] = 'paste_from_clipboard',
+            ['r'] = 'rename',
+            ['A'] = 'add_directory',
+            ['K'] = 'show_file_details',
+            ['P'] = 'preview',
             ['Y'] = {
               function(state)
                 local node = state.tree:get_node()
