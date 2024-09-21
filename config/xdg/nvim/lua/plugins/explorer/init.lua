@@ -83,6 +83,7 @@ return {
             ['d'] = 'delete',
             ['p'] = 'paste_from_clipboard',
             ['r'] = 'rename',
+            ['x'] = 'cut_to_clipboard',
             ['A'] = 'add_directory',
             ['H'] = 'toggle_hidden',
             ['R'] = 'refresh',
