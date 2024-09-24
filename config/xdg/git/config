@@ -34,7 +34,6 @@
   rebase = true
 [rebase]
   autosquash = true
-  instructionFormat = (%ar) %<|(120)%s <%an>
 [grep]
   extendRegexp = true
   lineNumber = true
