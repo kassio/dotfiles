@@ -12,6 +12,11 @@ return {
     'hrsh7th/cmp-path',
     'ray-x/cmp-treesitter',
     'JMarkin/cmp-diag-codes',
+    {
+      'kristijanhusak/vim-dadbod-completion',
+      ft = { 'sql', 'mysql', 'plsql' },
+      lazy = true,
+    },
     -- snippets
     'dcampos/cmp-snippy',
     'dcampos/nvim-snippy',
@@ -118,6 +123,13 @@ return {
           scrollbar = true,
           max_width = 80,
         }),
+      },
+    })
+
+    cmp.setup.filetype({ 'sql' }, {
+      sources = {
+        { name = 'vim-dadbod-completion' },
+        { name = 'buffer' },
       },
     })
 
