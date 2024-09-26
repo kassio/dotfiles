@@ -35,6 +35,7 @@
     # os_icon                 # os identifier
     dir                     # current directory
     vcs                     # git status
+    extra                   # custom extra segment
     # =========================[ Line #2 ]=========================
     newline                 # \n
     prompt_char             # prompt symbol
@@ -186,6 +187,16 @@
     # End filler on the edge of the screen if there are no right segments on the first line.
     typeset -g POWERLEVEL9K_EMPTY_LINE_RIGHT_PROMPT_FIRST_SEGMENT_START_SYMBOL='%{%}'
   fi
+
+  ########################[ prompt_extra: dynamic information by user ]#########################
+  function prompt_extra() {
+    p10k segment -t "$(__ps1_extra 2>/dev/null)"
+  }
+
+  # do not load prompt extra in the prompt load
+  function instant_prompt_extra() {
+    p10k segment -t ""
+  }
 
   #################################[ os_icon: os identifier ]##################################
   # OS identifier color.
