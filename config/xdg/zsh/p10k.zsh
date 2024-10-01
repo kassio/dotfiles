@@ -401,19 +401,24 @@
 
     local res
     local branch="${(V)VCS_STATUS_LOCAL_BRANCH}"
+    local remote="$(git config --get "branch.${branch}.remote")"
+
+    local prefix="${green}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}"
+    local wrap_color="${yellow}"
+    if [[ "${remote}" == "security" ]]; then
+      wrap_color="${red}"
+      prefix="${wrap_color}🔐"
+    fi
+
     if [[ "${branch}" != "" ]]; then
-      res="${green}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
+      res="${prefix}${branch//\%/%%}"
     else
-      res="${grey}${VCS_STATUS_COMMIT[1,8]}${green}"
+      res="${grey}${VCS_STATUS_COMMIT[1,8]}"
     fi
 
     local tag="${(V)VCS_STATUS_TAG}"
     if [[ "${tag}" != "" ]]; then
       res+=" ${pink}${tag}"
-    fi
-
-    if [[ "$(git config --get "branch.${branch}.remote")" == "security" ]]; then
-      res="${red}SECURITY/${green}${res}"
     fi
 
     if [[ "${res}" != "" ]]; then
@@ -448,7 +453,7 @@
 
     [[ -n ${VCS_STATUS_ACTION} ]] && res+="${grey} ${VCS_STATUS_ACTION}"
 
-    typeset -g my_git_format="${yellow}(${res}${yellow})"
+    typeset -g my_git_format="${wrap_color}(${res}${wrap_color})"
   }
   functions -M my_git_formatter 2>/dev/null
 
