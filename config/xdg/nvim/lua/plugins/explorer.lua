@@ -72,7 +72,7 @@ return {
       filesystem = {
         window = {
           mappings = {
-            ['?'] = 'show_help',
+            ['g?'] = 'show_help',
             ['<cr>'] = 'open_with_window_picker',
             ['<c-x>'] = 'split_with_window_picker',
             ['<c-v>'] = 'vsplit_with_window_picker',
