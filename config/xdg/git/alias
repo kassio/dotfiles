@@ -27,16 +27,31 @@ gdfm() {
 
 gbd() {
   while read -r branch; do
+    local remote="$(git get-branch-remote ${branch})"
+    local prefix=""
+
+    if [ "${remote}" = "security" ]; then
+      prefix="🔐"
+    fi
+
     printf "%10s %s (%s)\n" \
-      "$(g-main-diff ${branch})" \
-      "${branch}" "$(g-upstream-diff ${branch})"
+      "$(g-main-diff "${branch}")" \
+      "${prefix}${branch}" \
+      "$(g-upstream-diff "${branch}" "${remote}")"
   done < <(git branch-list | grep -v detached)
 }
 
 g-upstream-diff() {
-  local remote="$(git get-branch-remote ${branch})"
+  local remote="$2"
+  if [ "$2" = "" ]; then
+    remote="$(git get-branch-remote ${branch})"
+  fi
 
-  echo "${remote}$(g-diff-count "$1" "$(git get-branch-remote $1)/$1")"
+  if [ "${remote}" = "security" ]; then
+    printc -c 001 "${remote}$(g-diff-count "$1" "$(git get-branch-remote $1)/$1")"
+  else
+    echo "${remote}$(g-diff-count "$1" "$(git get-branch-remote $1)/$1")"
+  fi
 }
 
 g-main-diff() {
