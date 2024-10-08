@@ -3,7 +3,7 @@
 module Kassio
   extend self
 
-  KASSIO_LOG_FILE = defined?(Rails) ? 'log/kassio.log' : '/tmp/kassio.log'
+  KASSIO_LOG_FILE = defined?(Rails) ? Rails.root.join('log/kassio.log') : '/tmp/kassio.log'
 
   def load!
     # Avoid defining global functions to avoid confusion!!
