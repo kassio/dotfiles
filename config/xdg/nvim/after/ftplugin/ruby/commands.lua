@@ -60,6 +60,15 @@ local commands = {
     opts = { range = true },
   },
   {
+    name = 'MatchTap',
+    callback = function()
+      vim.fn.setreg('/', [[.tap\s*{[^}]*}]])
+      vim.api.nvim_feedkeys('nN', 'n', false)
+    end,
+    desc = 'match .tap { .* }',
+    opts = { range = true },
+  },
+  {
     name = 'CopyNamespace',
     callback = function(opts)
       local namespace = utils.ruby.treesitter_namespace()
