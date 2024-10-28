@@ -42,15 +42,16 @@ gbd() {
 }
 
 g-upstream-diff() {
+  local branch="$1"
   local remote="$2"
   if [ "$2" = "" ]; then
     remote="$(git get-branch-remote ${branch})"
   fi
 
   if [ "${remote}" = "security" ]; then
-    printc -c 001 "${remote}$(g-diff-count "$1" "$(git get-branch-remote $1)/$1")"
+    printc -c 001 "${remote}$(g-diff-count "${branch}" "${remote}/${branch}")"
   else
-    echo "${remote}$(g-diff-count "$1" "$(git get-branch-remote $1)/$1")"
+    echo "${remote}$(g-diff-count "${branch}" "${remote}/${branch}")"
   fi
 }
 
