@@ -48,6 +48,12 @@ for-each-asdf ruby gem install "${ruby_dependencies[@]}"
 subtitle "node dependencies"
 node_dependencies=(
   "@vue/language-server"
+  "eslint_d"
+  "--save-dev eslint-config-prettier"
+  "--save-dev eslint-plugin-prettier"
+  "--save-dev --save-exact prettier"
   "stimulus-language-server"
 )
-for-each-asdf nodejs npm install -g "${node_dependencies[@]}"
+for n in "${node_dependencies[@]}"; do
+  for-each-asdf nodejs npm install -g "${n}"
+done

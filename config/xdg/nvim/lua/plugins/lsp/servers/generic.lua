@@ -19,13 +19,15 @@ local sources = {
   }),
   builtins.diagnostics.markdownlint,
 
-  require('none-ls-shellcheck.diagnostics'),
   builtins.diagnostics.tidy,
   builtins.diagnostics.trail_space,
   builtins.diagnostics.zsh,
+  require('none-ls.diagnostics.eslint'),
+  require('none-ls-shellcheck.diagnostics'),
 
   -- formatting
   builtins.formatting.pg_format,
+  builtins.formatting.prettier,
   builtins.formatting.shfmt,
   builtins.formatting.stylua,
   builtins.formatting.tidy,
