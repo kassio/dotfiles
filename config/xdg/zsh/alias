@@ -16,6 +16,9 @@ alias ...="cd ../.."
 
 alias brews="brew services"
 
+# avoid wezterm TERM over ssh
+alias ssh="TERM=xterm-256color /usr/bin/ssh"
+
 # Searching
 alias grep="grep -v 'grep --color=auto -i' | grep --color=auto -i"
 alias psg="ps aux | grep"
