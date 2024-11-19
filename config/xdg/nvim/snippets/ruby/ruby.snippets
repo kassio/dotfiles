@@ -53,3 +53,7 @@ snippet tap
 	tap { $1 }
 snippet then
 	then { |$1| $1 }
+snippet method_params
+	method(__method__).parameters.each_with_object({}) do |(_, name), result|
+		result[name] = binding.local_variable_get(name)
+	end
