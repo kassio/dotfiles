@@ -9,12 +9,6 @@
   defaultBranch = main
 [credential]
   helper = osxkeychain
-[branch]
-  sort = -committerdate
-[tag]
-  sort = -creatordate
-[remote "origin"]
-  prune = true
 [core]
   excludesfile = ~/.config/git/ignore
   attributesfile = ~/.config/git/attributes
@@ -22,8 +16,20 @@
   ignorecase = false
   pager = less --tabs=2 -RFX
   fsmonitor = true
+[feature]
+  manyFiles = true
+[help]
+  autocorrect = 1
+[branch]
+  sort = -committerdate
+[tag]
+  sort = -creatordate
+[remote "origin"]
+  prune = true
+[remote "security"]
+  prune = true
 [fetch]
-  parallel = 4
+  parallel = 8
   prune = true
   showForcedUpdates = true
 [apply]
@@ -37,8 +43,6 @@
 [grep]
   extendRegexp = true
   lineNumber = true
-[help]
-  autocorrect = 1
 [color "diff"]
   frag = cyan dim
   meta = cyan dim
@@ -56,7 +60,7 @@
   prompt = false
   keepBackup = false
 [difftool "nvim"]
-  cmd = nvim -d -c "wincmd l" -c "norm ]c" "$LOCAL" "$MERGED" "$REMOTE"
+  cmd = nvim -d "${LOCAL}" "${MERGED}" "${REMOTE}" -c "wincmd l" -c "norm ]c"
 [merge]
   ff = false
   conflictstyle = diff3
@@ -65,7 +69,7 @@
   prompt = false
   keepBackup = false
 [mergetool "nvim"]
-  cmd = "nvim -d $MERGED $LOCAL $BASE $REMOTE -c 'wincmd J | wincmd ='"
+  cmd = nvim -d "${MERGED}" "${LOCAL}" "${BASE}" "${REMOTE}" -c 'wincmd J | wincmd ='
 [log]
   date = format-local:"%F %R"
 [pretty]
