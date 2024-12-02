@@ -26,8 +26,6 @@
   sort = -creatordate
 [remote "origin"]
   prune = true
-[remote "security"]
-  prune = true
 [fetch]
   parallel = 8
   prune = true
