@@ -1,0 +1,25 @@
+#!/usr/bin/env zsh
+
+set -x
+count=100
+case "${1}" in
+  -h|--help)
+    echo "Usage: until-success [-n|--limit] <cmd>
+
+    -n | --limit number of retries
+    "
+    exit 0
+    ;;
+  -n|--count)
+    shift
+    count=${1}
+    shift
+    ;;
+esac
+
+current=0
+while [ "${current}" -lt "${count}" ] && ! "${@}" >/dev/null; do
+  clear
+  current=$((current + 1))
+  echo "» retry ${current}/${count}: ${*}"
+done

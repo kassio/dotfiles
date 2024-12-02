@@ -14,13 +14,6 @@ alias cd-="cd -"
 alias ..="cd .."
 alias ...="cd ../.."
 
-test-ping() {
-  server="${1:-google.com}"
-  while ! ping "${server}" -c 4 2>/dev/null; do
-    echo 'Not connected' && sleep 2
-  done
-}
-
 alias brews="brew services"
 
 # avoid wezterm TERM over ssh
