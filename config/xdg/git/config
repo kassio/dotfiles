@@ -16,8 +16,6 @@
   ignorecase = false
   pager = less --tabs=2 -RFX
   fsmonitor = true
-[feature]
-  manyFiles = true
 [help]
   autocorrect = 1
 [branch]
