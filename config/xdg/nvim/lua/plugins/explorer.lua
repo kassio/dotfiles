@@ -70,6 +70,10 @@ return {
       window = { position = 'right', width = 40 },
       use_default_mappings = false,
       filesystem = {
+        filtered_items = {
+          hide_by_name = { '.DS_Store' },
+        },
+
         window = {
           mappings = {
             ['g?'] = 'show_help',
