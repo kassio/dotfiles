@@ -14,6 +14,9 @@ alias cd-="cd -"
 alias ..="cd .."
 alias ...="cd ../.."
 
+alias until-fail="till fail"
+alias until-succeed="till succeed"
+
 alias brews="brew services"
 
 # avoid wezterm TERM over ssh

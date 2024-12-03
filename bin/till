@@ -1,0 +1,69 @@
+#!/usr/bin/env zsh
+
+count=100
+current=0
+cond=""
+cmd=""
+
+help() {
+  echo "Usage: till [-n|--limit] <succeed|fail> <cmd>
+
+  -n | --limit number of retries
+  "
+}
+
+parse_args() {
+  if [ "$#" -eq 0 ]; then
+    help
+    exit 0
+  fi
+
+  case "${1}" in
+    -h|--help)
+      help
+      exit 0
+      ;;
+    fail)
+      if [ "${cond}" = "" ]; then
+        cond="failed"; shift
+        parse_args "${@}"
+      else
+        echo "Condition already set as ${cond}"
+        exit 1
+      fi
+      ;;
+    succeed)
+      if [ "${cond}" = "" ]; then
+        cond="succeed"; shift
+        parse_args "${@}"
+      else
+        echo "Condition already set as ${cond}"
+        exit 1
+      fi
+      ;;
+    -n|--count)
+      shift
+      count=${1}
+      shift
+      parse_args "${@}"
+      ;;
+    *)
+      cmd="${@}"
+      ;;
+  esac
+};
+
+parse_args "${@}"
+
+while [ "${current}" -lt "${count}" ]; do
+  if eval "${cmd[@]}" && [ "${cond}" = "failed" ]; then
+    clear
+    current=$((current + 1))
+    echo "» retry ${current}/${count}: ${cmd}"
+  else
+    echo "» ${cond} after ${current} tries"
+    exit 1
+  fi
+done
+
+echo "» Did not ${cond} after ${current}"
