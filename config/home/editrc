@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+bind "^r" em-inc-search-prev
+bind "^a" ed-move-to-beg
+bind "^e" ed-move-to-end
