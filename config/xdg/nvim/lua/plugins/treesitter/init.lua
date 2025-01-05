@@ -19,7 +19,8 @@ return {
       vim.g.matchup_matchparen_offscreen = {}
 
       require('treesitter-context').setup({
-        min_window_height = 1,
+        min_window_height = 30,
+        max_lines = 3,
         separator = '―',
       })
       require('plugins.treesitter.config').setup()
