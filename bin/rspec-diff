@@ -4,6 +4,7 @@ local dry=0
 local list=0
 local ref=""
 local ignored=0
+local dbchanges=0
 
 parse_args() {
   case $1 in
@@ -43,23 +44,36 @@ report() {
   fi
 }
 
-local files=(
-  "${(@f)$(git-diff-names-to "${ref}" |
-    grep -ve '^db/' | # skip migration
-    grep -ve '^app/events' | # skip events
-    grep '.rb')}" )
+local files=( "${(@f)$(git-diff-names-to "${ref}" | grep '.rb')}" )
 local specs=()
 local modified=()
 local not_modified=()
 local not_found=()
 
-
 [ "${FOSS_ONLY:-0}" -ne "0" ] && echo "⚠️ FOSS ONLY⚠️"
 
 for file in "${files[@]}"; do
+  if [[ "${file}" =~ "app/events/" ]] || # skip events
+    [[ "${file}" =~ "spec/factories/" ]] # skip factories
+  then
+    continue
+  fi
+
+  # skip EE files when FOSS_ONLY is set
   if [ "${FOSS_ONLY:-0}" -ne "0" ] && [ "${file:0:2}" = "ee" ]; then
     ignored=1
     echo "» ignoring: ${file}"
+    continue
+  fi
+
+  # when commit include migrations
+  # - skip migration files and
+  # - test the schema changes
+  if [[ "${file}" =~ "db/" ]]; then
+    if [ "${dbchanges}" -eq 0 ]; then
+      dbchanges=1
+      specs+=( "spec/db/schema_spec.rb" )
+    fi
     continue
   fi
 
@@ -76,8 +90,11 @@ for file in "${files[@]}"; do
       sed 's;.rb;_spec.rb;')"
 
     if [ -f "${possible_spec}" ]; then
-      specs+=( "${possible_spec}" )
+      if [ ! "${specs[(Ie)${possible_spec}]}" -le 0 ]; then
+        specs+=( "${possible_spec}" )
+      fi
 
+      # check if possible_spec is not in files
       if [ "${files[(Ie)${possible_spec}]}" -le 0 ]; then
         not_modified+=( "${possible_spec}" )
       fi
@@ -100,6 +117,7 @@ echo "---"
 report "specs changed" "${modified[@]}"
 report "specs not update" "${not_modified[@]}"
 report "specs missing" "${not_found[@]}"
+report "specs to run" "${specs[@]}"
 
 if [ "${dry}" -gt 0 ]; then
   exit 0
