@@ -49,7 +49,7 @@ return require('utils.table').join(
     keymap('N', function()
       local word = require('utils').cword()
 
-      require('telescope.builtin').current_buffer_fuzzy_find({
+      require('plugins.fuzzyfinder.commands').current_buffer_fuzzy_find({
         default_text = word,
         prompt_title = string.format('buffer:%s', word),
       })

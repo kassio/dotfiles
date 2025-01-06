@@ -21,6 +21,18 @@ local default_find_command = {
   '*.gif',
 }
 
+local function tiebreak_lnum(entry1, entry2, _prompt)
+  if not entry1 then
+    return false
+  end
+
+  if not entry2 then
+    return false
+  end
+
+  return entry1.lnum <= entry2.lnum
+end
+
 local function find_command(extra)
   return vim.fn.reduce(extra, function(result, ext)
     table.insert(result, '--extension')
@@ -132,6 +144,14 @@ function M.find_by_ext()
       M.find_files({ extensions = extensions })
     end
   end)
+end
+
+function M.current_buffer_fuzzy_find(opts)
+  return require('telescope.builtin').current_buffer_fuzzy_find(
+    vim.tbl_deep_extend('keep', opts or {}, {
+      tiebreak = tiebreak_lnum,
+    })
+  )
 end
 
 return setmetatable(M, {
