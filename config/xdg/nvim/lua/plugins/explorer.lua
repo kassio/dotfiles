@@ -61,13 +61,14 @@ return {
   config = function()
     local utils = require('utils')
     local symbols = utils.symbols
+    local initial_width = 40
 
     require('neo-tree').setup({
       close_if_last_window = true,
       enable_git_status = true,
       enable_diagnostics = true,
       open_files_do_not_replace_types = { 'terminal', 'trouble', 'qf' },
-      window = { position = 'right', width = 40 },
+      window = { position = 'right', width = initial_width },
       use_default_mappings = false,
       filesystem = {
         filtered_items = {
@@ -88,7 +89,6 @@ return {
             ['p'] = 'paste_from_clipboard',
             ['r'] = 'rename',
             ['x'] = 'cut_to_clipboard',
-            ['A'] = 'add_directory',
             ['H'] = 'toggle_hidden',
             ['R'] = 'refresh',
             ['K'] = 'show_file_details',
@@ -110,6 +110,16 @@ return {
                 require('neo-tree.ui.renderer').focus_node(state, node:get_parent_id())
               end,
               desc = 'go to parent',
+            },
+            ['A'] = {
+              function()
+                if tostring(vim.fn.winwidth(0)) == tostring(initial_width) then
+                  vim.cmd('vertical resize ' .. initial_width * 2)
+                else
+                  vim.cmd('vertical resize ' .. initial_width)
+                end
+              end,
+              desc = 'toggle window size',
             },
           },
         },
