@@ -106,6 +106,7 @@ return {
         local options = vim
           .iter(directories)
           :map(function(key, val)
+            -- use label[key] as choice labels
             local label = key
             if val.key then
               label = label .. '[' .. val.key .. ']'
@@ -119,7 +120,8 @@ return {
           prompt = 'Finder in Rails',
         }, function(choice)
           if choice ~= nil then
-            finder(directories[choice])
+            local key = vim.split(choice, '[', { plain = true })[1]
+            finder(directories[key])
           end
         end)
       end, 'rails'),
