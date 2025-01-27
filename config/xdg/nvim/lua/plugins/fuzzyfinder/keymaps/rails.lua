@@ -8,6 +8,7 @@ local directories = {
     extensions = {},
   },
   database = {
+    key = 'd',
     dirs = { 'db' },
   },
   assets = {
@@ -102,7 +103,19 @@ return {
   setup = function(keymap)
     local keymaps = {
       keymap('rr', function()
-        vim.ui.select(vim.tbl_keys(directories), {
+        local options = vim
+          .iter(directories)
+          :map(function(key, val)
+            local label = key
+            if val.key then
+              label = label .. '[' .. val.key .. ']'
+            end
+
+            return label
+          end)
+          :totable()
+
+        vim.ui.select(options, {
           prompt = 'Finder in Rails',
         }, function(choice)
           if choice ~= nil then
