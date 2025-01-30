@@ -10,17 +10,7 @@ return {
         },
         action = wezterm.action.Nop,
       },
-      { -- open link
-        event = {
-          Up = {
-            streak = 1,
-            button = 'Left',
-          },
-        },
-        mods = 'CMD',
-        action = wezterm.action.OpenLinkAtMouseCursor,
-      },
-      { -- open any selection
+      { -- quicklook selection
         event = {
           Up = {
             streak = 1,
@@ -29,7 +19,27 @@ return {
         },
         mods = 'CMD|SHIFT',
         action = wezterm.action_callback(function(window, pane)
-          wezterm.open_with(window:get_selection_text_for_pane(pane))
+          local selection = window:get_selection_text_for_pane(pane)
+          if selection ~= '' then
+            wezterm.run_child_process({ 'qlmanage', '-p', selection })
+          end
+        end),
+      },
+      { -- open selection/link
+        event = {
+          Up = {
+            streak = 1,
+            button = 'Left',
+          },
+        },
+        mods = 'CMD',
+        action = wezterm.action_callback(function(window, pane)
+          local selection = window:get_selection_text_for_pane(pane)
+          if selection ~= '' then
+            wezterm.open_with(selection)
+          else
+            wezterm.action.OpenLinkAtMouseCursor()
+          end
         end),
       },
     }
