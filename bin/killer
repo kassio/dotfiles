@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+
+if [ "$#" -gt 1 ]; then
+  /bin/kill $@
+else
+  source "$(dirname "$0")/../config/xdg/fzf/env"
+
+  pid=$(ps -ef |
+    sed 1d |
+    fzf -m |
+    awk '{print $2}')
+
+  if [ "${pid}" != "" ]; then
+    set -x
+    /bin/kill "${1:-9}" "${pid}"
+  fi
+fi
