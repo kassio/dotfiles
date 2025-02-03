@@ -15,6 +15,8 @@ function show_help() {
   -d --draft                Set the Merge Request as Draft and skip the CI
   -f --force                Add '--force-with-lease' to the git push
   -F --force-without-lease  Add '--force-without-lease' to the git push
+  -C --skip-ci              Skip CI
+  -s --squash               Disable squash on merge
   *any git push option      Any other option will be passed to git push
   "
 }
@@ -70,6 +72,20 @@ function parse_args() {
       title="${1}"
 
       shift 1
+
+      parse_args "$@"
+      ;;
+    -C|--skip-ci)
+      shift 1
+
+      git_options="-o ci.skip"
+
+      parse_args "$@"
+      ;;
+    -s|--squash)
+      shift 1
+
+      git_options="-o merge_request.squash"
 
       parse_args "$@"
       ;;
