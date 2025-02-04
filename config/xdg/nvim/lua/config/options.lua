@@ -55,7 +55,7 @@ opt.fileformats = {
 opt.fillchars:append({
   eob = ' ',
 })
-opt.foldcolumn = '1'
+opt.foldcolumn = '0'
 opt.foldenable = false
 opt.foldexpr = 'nvim_treesitter#foldexpr()'
 opt.foldmethod = 'expr'
