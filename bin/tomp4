@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
 
-new_name="${1%.*}.mp4"
 
-ffmpeg -i "$1" -crf 30 "${new_name}"
+for original in "$@"; do
+  new_name="${original%.*}.mp4"
+  title "Converting ${original} to ${new_name}"
+
+  ffmpeg -i "${original}" -crf 30 "${new_name}"
+done
