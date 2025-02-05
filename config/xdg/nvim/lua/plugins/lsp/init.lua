@@ -1,5 +1,6 @@
 return {
   require('plugins.lsp.progress'),
+  require('plugins.lsp.installer'),
 
   {
     'neovim/nvim-lspconfig',

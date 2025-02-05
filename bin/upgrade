@@ -14,7 +14,6 @@ tools=(
   "ruby"
   "golang"
   "quarentine"
-  "language-servers"
   "nvim"
   "wezterm"
   "1password"

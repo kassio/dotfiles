@@ -11,3 +11,4 @@ title "[nvim] update nvim"
 title "[nvim] update nvim plugins with lazy.nvim"
 nvim --headless "+Lazy! update" +qa
 nvim --headless "+TSUpdateSync" +qa
+nvim --headless "+MasonUpdate" +qa
