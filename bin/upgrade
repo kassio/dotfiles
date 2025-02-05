@@ -45,7 +45,7 @@ parse_args() {
 upgrade_with() {
   local tool="${1}"; shift
 
-  echo "${basepath}/upgraders/${tool}" "$@"
+  "${basepath}/upgraders/${tool}" "$@"
 }
 
 if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
