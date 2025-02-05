@@ -75,7 +75,7 @@ return function(c)
 
   -- winbar
   hl['WinBar'] = { fg = c.blue }
-  hl['WinBarNC'] = { fg = c.comment }
+  hl['WinBarNC'] = { link = 'Comment' }
   hl['Winbar.Diff.Added'] = { fg = c.hint }
   hl['Winbar.Diff.Changed'] = { fg = c.warn }
   hl['Winbar.Diff.Removed'] = { fg = c.error }
