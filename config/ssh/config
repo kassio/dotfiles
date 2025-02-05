@@ -1,2 +1,7 @@
+## START GITPOD INTEGRATION
+## This section is managed by Gitpod. Any manual changes will be lost.
+Include "code_gitpod.d/config"
+## END GITPOD INTEGRATION
+
 # vim:ft=sshconfig:
 Include config.d/*
