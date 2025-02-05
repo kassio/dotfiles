@@ -2,7 +2,24 @@
 
 basepath="$(dirname "$(realpath "$0")")"
 
-clear-screen
+tools=(
+  "repos_sync"
+  "apple"
+  "duti"
+  "brew"
+  "bat"
+  "delta"
+  "zsh_plugins"
+  "asdf"
+  "ruby"
+  "golang"
+  "quarentine"
+  "language-servers"
+  "nvim"
+  "wezterm"
+  "1password"
+  "custom"
+)
 
 only=""
 except=""
@@ -26,12 +43,10 @@ parse_args() {
   parse_args "$@"
 }; parse_args "$@"
 
-upgrader() {
-  local cmd="${1}"; shift
+upgrade_with() {
+  local tool="${1}"; shift
 
-  if [[ "${except}" != *"${cmd}"* ]]; then
-    "${basepath}/upgraders/${cmd}" "$@"
-  fi
+  echo "${basepath}/upgraders/${tool}" "$@"
 }
 
 if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
@@ -41,24 +56,14 @@ if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
 fi
 
 if [ "${only}" != "" ]; then
-  upgrader "${only}" "$@"
+  upgrade_with "${only}" "$@"
 else
-  upgrader "repos_sync" "$@"
-  upgrader "apple" "$@"
-  upgrader "duti" "$@"
-  upgrader "brew" "$@"
-  upgrader "bat" "$@"
-  upgrader "delta" "$@"
-  upgrader "zsh_plugins" "$@"
-  upgrader "asdf" "$@"
-  upgrader "ruby" "$@"
-  upgrader "golang" "$@"
-  upgrader "quarentine" "$@"
-  upgrader "language-servers" "$@"
-  upgrader "nvim" "$@"
-  upgrader "wezterm" "$@"
-  upgrader "1password" "$@"
-  upgrader "custom" "$@"
+  for tool in "${tools[@]}"; do
+    if [[ "${except}" != *"${tool}"* ]]; then
+      upgrade_with "${tool}"
+    fi
+  done
 fi
 
 notify "Upgraded"
+clear-screen
