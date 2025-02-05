@@ -10,16 +10,16 @@ function M.list_panes()
   return vim.fn.json_decode(result.stdout)
 end
 
-function M.start(id)
-  id = tonumber(id) or -1
+function M.disconnect()
+  vim.notify('Desconnecting from wezterm')
+  vim.g.wezterm_pane_id = nil
+end
 
-  if id < 0 then
-    vim.notify('Desconnecting with wezterm pane id: ' .. vim.g.wezterm_pane_id)
-    vim.g.wezterm_pane_id = nil
-  else
-    vim.notify('Connecting with wezterm pane id: ' .. id)
-    vim.g.wezterm_pane_id = id
-  end
+function M.start(id)
+  id = tonumber(id)
+
+  vim.notify('Connecting with wezterm pane id: ' .. id)
+  vim.g.wezterm_pane_id = id
 end
 
 function M.can_execute(has_native)

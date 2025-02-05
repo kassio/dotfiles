@@ -38,6 +38,10 @@ return {
       end,
     })
 
+    command('TerminalWeztermDisconnect', wezterm.disconnect, {
+      desc = 'desconnect from wezterm as a terminal target',
+    })
+
     command('T', function(opts)
       manager.send(vim.fn.expandcmd(opts.args))
     end, { nargs = '+', desc = 'send the argument as a terminal command' })
