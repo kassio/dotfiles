@@ -78,14 +78,14 @@ function parse_args() {
     -C|--skip-ci)
       shift 1
 
-      git_options="-o ci.skip"
+      git_options="${git_options} -o ci.skip"
 
       parse_args "$@"
       ;;
     -s|--squash)
       shift 1
 
-      git_options="-o merge_request.squash"
+      git_options="${git_options} -o merge_request.squash"
 
       parse_args "$@"
       ;;
