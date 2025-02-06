@@ -54,6 +54,7 @@ if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
   echo
 fi
 
+initial_ts=$(date +%s)
 if [ "${only}" != "" ]; then
   upgrade_with "${only}" "$@"
 else
@@ -64,5 +65,6 @@ else
   done
 fi
 
-notify "Upgraded"
+execution=$(echo "${initial_ts} - $(date +%s)" | bc -l)
+notify "Upgraded in ${execution} seconds"
 clear-screen

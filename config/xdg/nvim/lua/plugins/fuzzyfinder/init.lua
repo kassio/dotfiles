@@ -2,6 +2,7 @@ return {
   'nvim-telescope/telescope.nvim',
   dependencies = {
     'nvim-lua/plenary.nvim',
+    'nvim-telescope/telescope-frecency.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   },
   cmd = 'Telescope',
@@ -117,5 +118,6 @@ return {
     })
 
     require('plugins.fuzzyfinder.extensions').setup(telescope)
+    require('plugins.fuzzyfinder.frecency').setup(telescope)
   end,
 }
