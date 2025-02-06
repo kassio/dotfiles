@@ -27,7 +27,7 @@ function M.file_namespace(kind)
     return string.format('%s %s', kind, namespace)
   end
 
-  return vim
+  local headers = vim
     .iter(ipairs(dirs))
     :map(function(i, dir)
       local indent = string.rep(' ', (i - 1) * 2)
@@ -39,7 +39,21 @@ function M.file_namespace(kind)
         return string.format('%smodule %s', indent, dir)
       end
     end)
-    :join('\n')
+    :totable()
+
+  local tails = vim
+    .iter(ipairs(headers))
+    :map(function(i, _)
+      local indent = string.rep(' ', (i - 1) * 2)
+      return string.format('%send', indent)
+    end)
+    :totable()
+
+  return string.format(
+    '%s\n\n%s',
+    table.concat(headers, '\n'),
+    table.concat(vim.fn.reverse(tails), '\n')
+  )
 end
 
 function M.treesitter_namespace()

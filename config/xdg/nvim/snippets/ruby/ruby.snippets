@@ -6,11 +6,9 @@ snippet lint
 snippet lint:next_line
 	`!lua require("utils.ruby").rubocop_codes()`
 snippet class
-	${1:`!lua require("utils.ruby").file_namespace('class')`}${2}
-		${0:$VISUAL}
+	`!lua require("utils.ruby").file_namespace('class')`
 snippet module
-	${1:`!lua require("utils.ruby").file_namespace('module')`}$2
-		${0:$VISUAL}
+	`!lua require("utils.ruby").file_namespace('module')`
 snippet aa
 	attr_accessor ${1}
 snippet aw
