@@ -101,12 +101,10 @@ unsetopt flow_control
 unsetopt hist_ignore_space # ignore space prefixed commands
 unsetopt menu_complete # do not navigate completion with arrows
 
-# load libs stuff
-source "${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh"
-
 # repositories to keep synced locally
 export GSINK_CONFIG_PATH="${HOME}/.config/repos.json"
 
+# load libs
 source "${XDG_CONFIG_HOME}/homebrew/env"
 source "${XDG_CONFIG_HOME}/git/env"
 source "${XDG_CONFIG_HOME}/go/env"
