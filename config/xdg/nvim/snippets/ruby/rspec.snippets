@@ -47,9 +47,20 @@ snippet ssopen
 	screenshot_and_open_image
 snippet sssave
 	screenshot_and_save_page
+snippet parameterized
+	using RSpec::Parameterized::TableSyntax
+
+	where($1) do
+		$2
+	end
+
+	with_them do
+		$3
+	end
+
 snippet aggregate_failures
 	:aggregate_failures
 snippet sidekiq_inline
 	:sidekiq_inline
-snippet parameterized
-	using RSpec::Parameterized::TableSyntax
+snippet freeze_time
+  :freeze_time

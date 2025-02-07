@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+count="${1}"
+spec="${2}"
+
+for i in {1..${count}}; do
+  if bundle exec rspec ${spec} >/dev/null 2>&1; then
+    printc --color 34 "."
+  else
+    printc --color 196 "F"
+  fi
+done
