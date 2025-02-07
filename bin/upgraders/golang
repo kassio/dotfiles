@@ -7,5 +7,3 @@ fi
 
 title "[golang] updating golang packages"
 go clean -cache
-cat "${ASDF_GOLANG_DEFAULT_PACKAGES_FILE}" |
-  xargs -t -P 4 -Ipkg go install pkg

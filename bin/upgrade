@@ -10,7 +10,6 @@ tools=(
   "bat"
   "delta"
   "zsh_plugins"
-  "asdf"
   "ruby"
   "golang"
   "quarentine"

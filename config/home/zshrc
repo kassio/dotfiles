@@ -19,7 +19,6 @@ PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
 PATH="${HOMEBREW_PREFIX}/opt/python@3.9/bin:${PATH}"
 PATH="${XDG_BIN_HOME}:${PATH}"
 PATH="${XDG_CONFIG_HOME}/git/bin:${PATH}" # git helpers
-PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 PATH=".userbin:${PATH}"
 typeset -U PATH
 export PATH
@@ -106,6 +105,9 @@ unsetopt menu_complete # do not navigate completion with arrows
 export GSINK_CONFIG_PATH="${HOME}/.config/repos.json"
 
 # load libs
+
+# tool management
+source "${XDG_CONFIG_HOME}/tool_manager/env"
 source "${XDG_CONFIG_HOME}/homebrew/env"
 source "${XDG_CONFIG_HOME}/git/env"
 source "${XDG_CONFIG_HOME}/go/env"

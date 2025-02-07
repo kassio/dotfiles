@@ -2,7 +2,6 @@ tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/services"
-brew "asdf"
 brew "bash"
 brew "bash-completion"
 brew "bat" # cat replacement
@@ -40,6 +39,7 @@ brew "lsd" # ls replacement
 brew "luajit", args: ["HEAD"]
 brew "mas"
 brew "mike-engel/jwt-cli/jwt-cli"
+brew "mise"
 brew "pstree"
 brew "re2"
 brew "readline"

@@ -3,8 +3,5 @@
 # Spring enabled by default
 export DISABLE_SPRING=0
 
-# Ensure default gems are installed in all ruby versions
-export ASDF_GEM_DEFAULT_PACKAGES_FILE="${XDG_CONFIG_HOME}/ruby/default-gems"
-
 # cache rubocop stuff in /tmp
 export RUBOCOP_CACHE_ROOT="/private/tmp/rubocop-cache"

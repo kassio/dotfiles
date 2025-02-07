@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
+  echo "[tool_manager] ensure miso autocomplete"
+  exit
+fi
+
+# This requires bash-completion to be installed
+mkdir -p /etc/bash_completion.d/
+mise completion bash --include-bash-completion-lib > /etc/bash_completion.d/mise
