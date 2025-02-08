@@ -39,7 +39,7 @@ parse_args() {
   parse_args "$@"
 }; parse_args "$@"
 
-upgrade_with() {
+execute() {
   local tool="${1}"; shift
 
   "${basepath}/upgraders/${tool}" "$@"
@@ -49,22 +49,21 @@ if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
   echo 'Usage: upgrade [--only "<upgrader>"|--except "<upgrader1:upgrader2:upgrader3:...>"]'
   echo 'List of upgraders:'
   for tool in "${tools[@]}"; do
-    upgrade_with "${tool}" -h
+    execute "${tool}" -h
   done
   exit
 fi
 
 initial_ts=$(date +%s)
 if [ "${only}" != "" ]; then
-  upgrade_with "${only}" "$@"
+  execute "${only}" "$@"
 else
   for tool in "${tools[@]}"; do
     if [[ "${except}" != *"${tool}"* ]]; then
-      upgrade_with "${tool}" "$@"
+      execute "${tool}" "$@"
     fi
   done
 fi
 
 execution=$(echo "${initial_ts} - $(date +%s)" | bc -l)
 notify "Upgraded in ${execution} seconds"
-clear-screen
