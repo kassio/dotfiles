@@ -1,9 +1,0 @@
-#!/usr/bin/env zsh
-
-if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
-  echo "[golang] update golang packages"
-  exit
-fi
-
-title "[golang] updating golang packages"
-go clean -cache

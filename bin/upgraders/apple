@@ -1,9 +1,8 @@
 #!/usr/bin/env zsh
 
+title "[apple] apple upgrade"
 if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
-  echo "[apple] upgrade apple stuff (softwareupdate)"
   exit
 fi
 
-title "[apple] apple upgrade"
 softwareupdate --all --install --force

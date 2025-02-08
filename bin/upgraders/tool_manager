@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
+title "[tool_manager] ensure miso autocomplete"
 if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
-  echo "[tool_manager] ensure miso autocomplete"
   exit
 fi
 

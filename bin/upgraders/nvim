@@ -1,14 +1,18 @@
 #!/usr/bin/env zsh
 
+title "[nvim] update nvim"
 if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
-  echo "[nvim] upgrade nvim, nvim plugins with lazy.nvim and treesitter"
   exit
 fi
 
-title "[nvim] update nvim"
+subtitme "install nvim-nightly"
 "${DOTFILES}/installers/nvim-nightly"
 
-title "[nvim] update nvim plugins with lazy.nvim"
+subtitle "update nvim plugins"
 nvim --headless "+Lazy! update" +qa
+
+subtitle "update treesitter"
 nvim --headless "+TSUpdateSync" +qa
+
+subtitle "update lsp/lint/formatter/debugger tools"
 nvim --headless "+MasonUpdate" +qa

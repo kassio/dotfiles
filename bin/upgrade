@@ -10,8 +10,6 @@ tools=(
   "bat"
   "delta"
   "zsh_plugins"
-  "ruby"
-  "golang"
   "quarentine"
   "nvim"
   "wezterm"
@@ -50,7 +48,10 @@ upgrade_with() {
 if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
   echo 'Usage: upgrade [--only "<upgrader>"|--except "<upgrader1:upgrader2:upgrader3:...>"]'
   echo 'List of upgraders:'
-  echo
+  for tool in "${tools[@]}"; do
+    upgrade_with "${tool}" -h
+  done
+  exit
 fi
 
 initial_ts=$(date +%s)
@@ -59,7 +60,7 @@ if [ "${only}" != "" ]; then
 else
   for tool in "${tools[@]}"; do
     if [[ "${except}" != *"${tool}"* ]]; then
-      upgrade_with "${tool}"
+      upgrade_with "${tool}" "$@"
     fi
   done
 fi

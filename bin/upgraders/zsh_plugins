@@ -1,11 +1,9 @@
 #!/usr/bin/env zsh
 
+title "[zsh_plugins] updating zsh_plugins"
 if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
-  echo "[zsh] upgrade zsh_plugins"
   exit
 fi
-
-title "[zsh] updating zsh_plugins"
 
 source "${XDG_CONFIG_HOME}/antidote/antidote.zsh"
 

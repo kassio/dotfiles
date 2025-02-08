@@ -1,12 +1,11 @@
 #!/usr/bin/env zsh
 
+title "[brew] upgrade and cleanup all brews"
 if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
-  echo "[brew] upgrade all your brews (and clean them up)"
   exit
 fi
 
-title "[brew] system upgrade"
-subtitle "brew upgrade"
+subtitle " system upgrade"
 rm "${HOMEBREW_PREFIX}/var/homebrew/locks/update" 2>/dev/null
 brew update
 brew upgrade --fetch-HEAD

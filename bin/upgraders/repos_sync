@@ -1,9 +1,8 @@
 #!/usr/bin/env zsh
 
+title "[repos_sync] updating repositories"
 if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
-  echo "[repos sync] update repositories"
   exit
 fi
 
-title "[repos sync] updating repositories"
 { cd ${HOME}/src/repos_syncer; ./bin/repos_sync; }

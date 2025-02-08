@@ -1,11 +1,10 @@
 #!/usr/bin/env zsh
 
+title "[delta] update delta themes"
 if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
-  echo "[delta] update delta themes"
   exit
 fi
 
-title "[delta] update delta themes"
 themes_dir="${XDG_CONFIG_HOME}/delta"
 mkdir -p "${themes_dir}"
 

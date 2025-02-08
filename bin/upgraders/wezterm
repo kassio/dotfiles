@@ -1,17 +1,17 @@
 #!/usr/bin/env zsh
 
+title "[wezterm] updating wezterm"
 if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
-  echo "[wezterm] update wezterm \$TERM and completion"
   exit
 fi
 
-title "[wezterm] updating wezterm \$TERM"
+subtitle "update \$TERM"
 tempfile=$(mktemp) \
   && curl -o $tempfile https://raw.githubusercontent.com/wez/wezterm/main/termwiz/data/wezterm.terminfo \
   && tic -x -o ~/.terminfo $tempfile \
   && rm $tempfile
 
-title "[wezterm] updating wezterm completions"
+subtitle "update completions"
 completion_path="${XDG_CONFIG_HOME}/completions"
 mkdir -p "${completion_path}"
 wezterm shell-completion --shell zsh > "${completion_path}/wezterm.zsh"

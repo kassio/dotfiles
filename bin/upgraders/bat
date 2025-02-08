@@ -1,11 +1,10 @@
 #!/usr/bin/env zsh
 
+title "[bat] update bat theme"
 if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
-  echo "[bat] update bat theme"
   exit
 fi
 
-title "[bat] update bat theme"
 themes_dir="$(bat --config-dir)/themes"
 for theme in tokyonight_day tokyonight_moon tokyonight_night tokyonight_storm; do
   subtitle "download ${theme}"
