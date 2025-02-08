@@ -65,5 +65,5 @@ else
   done
 fi
 
-execution=$(echo "${initial_ts} - $(date +%s)" | bc -l)
+execution=$(echo "$(date +%s) - ${initial_ts}" | bc -l)
 notify "Upgraded in ${execution} seconds"
