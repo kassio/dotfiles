@@ -11,6 +11,7 @@ return {
           find_command = {
             'git',
             'diff',
+            '--diff-filter=d',
             '--name-only',
             '--relative',
             string.format('%s...', vim.trim(main)),
