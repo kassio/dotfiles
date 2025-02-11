@@ -66,7 +66,7 @@ function M.key_for(tbl, value)
   end
 end
 
----Returns a new table with all the elements from the given two tables
+---Returns a new table with all the elements from the given tables
 ---@param tbl1 table<any>
 ---@param ... table<any> {...}
 ---@return table<any>

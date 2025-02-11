@@ -1,7 +1,7 @@
 return {
   setup = function(keymap)
     return {
-      keymap('f', require('plugins.fuzzyfinder.commands').find_files),
+      keymap('f', require('plugins.fuzzyfinder.commands').find_files, 'files'),
       keymap(
         'F',
         function()
@@ -35,9 +35,6 @@ return {
       ),
       keymap('e', require('plugins.fuzzyfinder.commands').find_by_ext, 'files:extension'),
       keymap('o', require('plugins.fuzzyfinder.commands').oldfiles, 'files:old'),
-      keymap('d', require('plugins.fuzzyfinder.commands').current_dir, 'files:directory', {
-        mode = { 'n', 'v' },
-      }),
     }
   end,
 }

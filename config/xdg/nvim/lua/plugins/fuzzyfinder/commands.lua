@@ -68,21 +68,6 @@ function M.find_files(opts)
   return require('telescope.builtin').find_files(new_opts)
 end
 
-function M.current_dir(opts)
-  opts = opts or {}
-  local path = vim.tbl_get(opts, 'search_dirs', 1) or '.'
-
-  M.find_files(vim.tbl_deep_extend('keep', opts, {
-    _type = 'current_dir',
-    prompt_title = 'find in ' .. path,
-    find_command = {
-      'fd',
-      '--max-depth',
-      '1',
-    },
-  }))
-end
-
 function M.find_tabs()
   local tab_pages = vim.api.nvim_list_tabpages()
 
