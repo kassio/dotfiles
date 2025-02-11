@@ -8,7 +8,7 @@ return {
     load(telescope, 'refactoring')
     load(telescope, 'fzf')
     load(telescope, 'notify')
-    load(telescope, 'frecency')
+    load(telescope, 'recent_files')
 
     -- local extensions from
     -- lua/telescope/_extensions

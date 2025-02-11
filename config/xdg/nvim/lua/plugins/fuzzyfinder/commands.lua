@@ -139,6 +139,10 @@ function M.current_buffer_fuzzy_find(opts)
   )
 end
 
+function M.oldfiles(opts)
+  require('telescope').extensions.recent_files.pick(opts)
+end
+
 return setmetatable(M, {
   __index = function(_table, key)
     return function(opts)
