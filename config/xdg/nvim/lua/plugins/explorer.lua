@@ -93,7 +93,7 @@ return {
             ['R'] = 'refresh',
             ['K'] = 'show_file_details',
             ['P'] = { 'toggle_preview', config = { use_float = true, use_image_nvim = true } },
-            ['l'] = 'focus_preview',
+            ['<C-p>'] = 'focus_preview',
             ['<C-b>'] = { 'scroll_preview', config = { direction = 10 } },
             ['<C-f>'] = { 'scroll_preview', config = { direction = -10 } },
             ['<esc>'] = 'revert_preview',
