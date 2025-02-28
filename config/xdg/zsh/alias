@@ -27,9 +27,7 @@ alias grep="grep -v 'grep --color=auto -i' | grep --color=auto -i"
 alias psg="ps aux | grep"
 
 # Ruby and Rails
-r() {
-  rails "$@" 2>/dev/null || bundle exec rails "$@"
-}
+r() { rails "$@" 2>/dev/null || bundle exec rails "$@"; }
 
 alias sr="bin/spring rails"
 alias be="bundle exec"
@@ -39,22 +37,6 @@ alias RT="RAILS_ENV=test"
 alias RS="RAILS_ENV=staging"
 alias RP="RAILS_ENV=production"
 alias DS="DISABLE_SPRING=1"
-webdriver_headless() {
-  case "$1" in
-    true|enabled|on)
-      export WEBDRIVER_HEADLESS=1
-      ;;
-    false|disabled|off)
-      export WEBDRIVER_HEADLESS=0
-      ;;
-    *)
-      echo "Option required: <on|off>"
-      return 1
-      ;;
-  esac
-}
-
-alias vsc="code"
 
 alias tailf="tail -f"
 retail() { echo > "$1"; tail -f "$1"; }
@@ -67,17 +49,10 @@ alias nd="nvim-diff"
 ndm() { nvim-diff "$(git branch-main)..."; }
 
 alias n="nvim --listen ${XDG_CACHE_HOME}/nvim/$$${RANDOM}.pipe"
-nts() { nvim --noplugin -c "TerminalServerStart"; }
-ntw() {
-  pane="$1"; shift
-  nvim -c "TerminalWeztermPane ${pane}" "$@"
-}
 
 alias nvim-pager="nvim -R +Pager"
 
 alias truncate0="truncate -c -s 0"
-
-source "${XDG_CONFIG_HOME}/git/alias"
 
 # Tail a json file parsing it with jq
 #
@@ -93,3 +68,5 @@ jtail() {
 
   tail -f "${file}" | jq -cCR "fromjson? ${cmd}"
 }
+
+source "${XDG_CONFIG_HOME}/git/alias"
