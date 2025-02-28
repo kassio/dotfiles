@@ -18,17 +18,32 @@ module Kassio
     self
   end
 
-  def log(*args)
-    body = args.length > 1 ? args.inspect : args.first
+  def log(*args, **kwargs)
     File.open(KASSIO_LOG_FILE, 'a') do |f|
-      <<~EOF.then { |message| puts message; f << message }
-      » #{caller(3, 1).join}
-      #{body}
-
-      EOF
+      format(args, kwargs).then { |message| puts message; f << message }
     end
 
-    args
+    [args, kwargs]
+  end
+
+  def write(*args, **kwargs)
+    File.open(KASSIO_LOG_FILE, 'a') do |f|
+      format(args, kwargs)
+    end
+
+    [args, kwargs]
+  end
+
+  def format(*args, **kwargs)
+    args_body = args.length > 1 ? args.inspect : args.first
+    kwargs_body = kwargs.inspect
+
+    <<~EOF
+    » #{caller(3, 1).join}
+    #{args_body}
+    #{kwargs_body}
+
+    EOF
   end
 
   def log_active_record
