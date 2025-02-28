@@ -25,8 +25,10 @@
 [remote "origin"]
   prune = true
 [fetch]
+  all = true
   parallel = 8
   prune = true
+  pruneTags = true
   showForcedUpdates = true
 [apply]
   whitespace = fix
