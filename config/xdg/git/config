@@ -18,6 +18,8 @@
   fsmonitor = true
 [help]
   autocorrect = 1
+[commit]
+  verbose = true
 [branch]
   sort = -committerdate
 [tag]
@@ -34,6 +36,8 @@
   whitespace = fix
 [push]
   default = current
+  autoSetupRemote = true
+  followTags = true
 [pull]
   rebase = true
 [rebase]
@@ -51,9 +55,12 @@
   enabled = true
   autoupdate = true
 [diff]
-  tool = nvim
+  colorMoved = plain
+  mnemonicPrefix = true
   noprefix = false
   renameLimit = 5000
+  renames = true
+  tool = nvim
 [difftool]
   prompt = false
   keepBackup = false
