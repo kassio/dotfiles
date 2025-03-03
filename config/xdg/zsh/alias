@@ -48,7 +48,9 @@ alias tn="to-nvim"
 alias nd="nvim-diff"
 ndm() { nvim-diff "$(git branch-main)..."; }
 
-alias n="nvim --listen ${XDG_CACHE_HOME}/nvim/$$${RANDOM}.pipe"
+n() {
+  nvim --listen "${XDG_CACHE_HOME}/nvim/$$${RANDOM}.pipe"
+}
 
 alias nvim-pager="nvim -R +Pager"
 
