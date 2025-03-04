@@ -20,7 +20,9 @@ module Kassio
 
   def log(*args, **kwargs)
     File.open(KASSIO_LOG_FILE, 'a') do |f|
-      format(args, kwargs).then { |message| puts message; f << message }
+      format(*args, **kwargs)
+        .tap { |message| f << message }
+        .tap { |message| puts message }
     end
 
     [args, kwargs]
@@ -28,7 +30,8 @@ module Kassio
 
   def write(*args, **kwargs)
     File.open(KASSIO_LOG_FILE, 'a') do |f|
-      format(args, kwargs)
+      format(*args, **kwargs)
+        .tap { |message| f << message }
     end
 
     [args, kwargs]
@@ -36,14 +39,11 @@ module Kassio
 
   def format(*args, **kwargs)
     args_body = args.length > 1 ? args.inspect : args.first
-    kwargs_body = kwargs.inspect
 
-    <<~EOF
-    » #{caller(4, 1).join}
-    #{args_body}
-    #{kwargs_body}
-
-    EOF
+    ["» #{caller(4, 1).join}"]
+      .tap { |rows| rows << args_body if args.length > 0 }
+      .tap { |rows| rows << kwargs.inspect if kwargs.length > 0 }
+      .then { |rows| "#{rows.join("\n")}\n\n" }
   end
 
   def log_active_record
