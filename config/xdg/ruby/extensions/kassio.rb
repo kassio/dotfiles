@@ -39,7 +39,7 @@ module Kassio
     kwargs_body = kwargs.inspect
 
     <<~EOF
-    » #{caller(3, 1).join}
+    » #{caller(4, 1).join}
     #{args_body}
     #{kwargs_body}
 
