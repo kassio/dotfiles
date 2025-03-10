@@ -77,6 +77,7 @@ cask "tableplus"
 cask "the-unarchiver"
 cask "visual-studio-code"
 cask "wezterm@nightly"
+cask "zed"
 mas "1Password for Safari", id: 1569813296
 mas "Amphetamine", id: 937984704
 mas "Broadcasts", id: 1469995354
