@@ -17,6 +17,26 @@ M.plugin_filetypes = {
   'terminal',
 }
 
+function M.is_present(value)
+  return not M.is_blank(value)
+end
+
+function M.is_blank(value)
+  if type(value) == 'nil' then
+    return true
+  elseif type(value) == 'number' and value == 0 then
+    return true
+  elseif type(value) == 'string' and value == '' then
+    return true
+  elseif type(value) == 'boolean' and value == false then
+    return true
+  elseif type(value) == 'table' and value == {} then
+    return true
+  end
+
+  return false
+end
+
 --- Copy given text to clipboard.
 ---@param text string
 ---@param system_clipboard boolean

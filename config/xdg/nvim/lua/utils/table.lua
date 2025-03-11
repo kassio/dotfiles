@@ -41,15 +41,10 @@ end
 ---@return table<any>
 function M.compact_list(tbl)
   return vim.tbl_filter(function(element)
-    local t = type(element)
-    if vim.tbl_contains({ 'string', 'table' }, t) then
-      return #element > 0
-    elseif t == 'number' then
-      return element ~= 0
-    elseif t == 'nil' then
-      return false
+    if require('utils').is_present(element) then
+      return true
     else
-      return element
+      return false
     end
   end, tbl)
 end
