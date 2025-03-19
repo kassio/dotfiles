@@ -80,8 +80,9 @@ grim() {
 
 gsw() {
   if [ $# -eq 0 ]; then
-    git branch-list |
+    gbd |
       fzf |
+      awk '{print $2}' |
       xargs git switch 2> /dev/null
   else
     git switch "$@"
