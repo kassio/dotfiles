@@ -15,6 +15,7 @@ tools=(
   "wezterm"
   "1password"
   "custom"
+  "gitlab"
 )
 
 only=""

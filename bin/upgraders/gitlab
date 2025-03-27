@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+title "[gitlab] upgrade your gitlab components"
+if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
+  exit
+fi
+
+if type gitlab-upgrade &>/dev/null; then
+  gitlab-upgrade
+fi

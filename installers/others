@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+if type gitlab-install &>/dev/null; then
+  gitlab-install
+fi

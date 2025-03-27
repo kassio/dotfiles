@@ -129,3 +129,4 @@ source "${ZSH_CONFIG_HOME}/plugins/init"
 source "${ZSH_CONFIG_HOME}/p10k.zsh" 2>/dev/null # zsh prompt
 source "${HOME}/.env" 2>/dev/null # Ephemeral stuff
 source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff
+source "${HOME}/.gitlab.extensions/env" 2>/dev/null # GitLab stuff

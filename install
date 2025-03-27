@@ -12,6 +12,6 @@ export PATH
 "${DOTFILES}/installers/hosts"
 "${DOTFILES}/installers/setup-macos"
 "${DOTFILES}/installers/config"
-"${DOTFILES}/installers/brew"
+"${DOTFILES}/installers/others"
 
 "${DOTFILES}/bin/upgrade"
