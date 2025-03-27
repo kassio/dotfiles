@@ -9,13 +9,15 @@ local servers = {
   jqls = {},
   jsonls = {},
   jsonnet_ls = {},
-  lua_ls = require('plugins.lsp.servers.lua_ls'),
-  ruby_lsp = require('plugins.lsp.servers.ruby_lsp'),
   stimulus_ls = {},
   tailwindcss = {},
   volar = require('plugins.lsp.servers.volar'), -- vuejs
   yamlls = require('plugins.lsp.servers.yamlls'),
 }
+
+vim.lsp.config('*', {
+  root_markers = { '.git' },
+})
 
 return {
   setup = function()
@@ -29,5 +31,10 @@ return {
     end
 
     require('plugins.lsp.servers.generic').setup()
+
+    vim.lsp.enable({
+      'lua_ls',
+      'ruby_lsp',
+    })
   end,
 }
