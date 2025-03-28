@@ -1,6 +1,6 @@
 # vim: set filetype=gitconfig:
 [includeIf "gitdir:~/src/gdk/"]
-  path = ~/.gitlab.extensions/git/config
+  path = ~/.gitlab-extensions/git/config
 [include]
   path = ~/.config/delta/themes.gitconfig
 [user]
