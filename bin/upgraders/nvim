@@ -5,7 +5,7 @@ if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
   exit
 fi
 
-subtitme "install nvim-nightly"
+subtitle "install nvim-nightly"
 "${DOTFILES}/installers/nvim-nightly"
 
 subtitle "update nvim plugins"
