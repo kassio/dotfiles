@@ -7,4 +7,4 @@ if [ "$#" -gt 0 ]; then
 fi
 
 git-diff-names-to "${ref}" |
-  xargs nvim -p
+  xargs -If nvim -p "f"
