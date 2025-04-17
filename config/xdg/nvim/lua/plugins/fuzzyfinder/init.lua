@@ -53,9 +53,9 @@ return {
         layout_strategy = 'vertical',
         mappings = {
           i = {
-            ['<c-x>'] = user_actions.open('new'),
-            ['<c-v>'] = user_actions.open('vnew'),
-            ['<c-t>'] = user_actions.open('tabedit'),
+            ['<c-x>'] = user_actions.open_with('new'),
+            ['<c-v>'] = user_actions.open_with('vnew'),
+            ['<c-t>'] = user_actions.open_with('tabedit'),
             ['<C-j>'] = actions.move_selection_next,
             ['<C-k>'] = actions.move_selection_previous,
             ['<C-n>'] = actions.cycle_history_next,
@@ -71,9 +71,9 @@ return {
             ['<C-e>'] = { '<end>', type = 'command' }, -- move cursor to the end of input
           },
           n = {
-            ['<c-x>'] = user_actions.open('new'),
-            ['<c-v>'] = user_actions.open('vnew'),
-            ['<c-t>'] = user_actions.open('tabedit'),
+            ['<c-x>'] = user_actions.open_with('new'),
+            ['<c-v>'] = user_actions.open_with('vnew'),
+            ['<c-t>'] = user_actions.open_with('tabedit'),
             ['<C-j>'] = actions.move_selection_next,
             ['<C-k>'] = actions.move_selection_previous,
             ['<C-n>'] = actions.cycle_history_next,
