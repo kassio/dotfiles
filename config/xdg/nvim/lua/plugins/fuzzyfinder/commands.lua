@@ -145,6 +145,14 @@ end
 
 function M.grep(opts)
   opts = opts or {}
+
+  local actions = require('telescope-live-grep-args.actions')
+
+  opts.attach_mappings = function(_, map)
+    map({ 'n', 'i' }, '<C-s>', actions.quote_prompt())
+
+    return true
+  end
   opts['prompt_title'] = opts['prompt_title'] or 'grep'
   require('telescope').extensions.live_grep_args.live_grep_args(opts)
 end
