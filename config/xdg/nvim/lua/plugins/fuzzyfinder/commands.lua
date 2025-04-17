@@ -143,6 +143,12 @@ function M.oldfiles(opts)
   require('telescope').extensions.recent_files.pick(opts)
 end
 
+function M.grep(opts)
+  opts = opts or {}
+  opts['prompt_title'] = opts['prompt_title'] or 'grep'
+  require('telescope').extensions.live_grep_args.live_grep_args(opts)
+end
+
 return setmetatable(M, {
   __index = function(_table, key)
     return function(opts)

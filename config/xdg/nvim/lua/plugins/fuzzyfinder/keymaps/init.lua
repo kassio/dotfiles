@@ -21,11 +21,6 @@ return require('utils.table').join(
       require('plugins.fuzzyfinder.commands').marks({ mark_type = 'all' })
     end, 'marks'),
 
-    keymap('w', require('plugins.fuzzyfinder.commands').live_grep, 'grep'),
-    keymap('W', require('plugins.fuzzyfinder.commands').grep_string, 'grep:word', {
-      mode = { 'n', 'v' },
-    }),
-
     keymap('k', require('plugins.fuzzyfinder.commands').keymaps, 'keymaps', {
       mode = { 'n', 'v' },
     }),
@@ -44,19 +39,10 @@ return require('utils.table').join(
     end, 'help: current word', { mode = { 'n', 'v' } }),
 
     keymap('t', require('plugins.fuzzyfinder.commands').treesitter, 'treesitter'),
-
-    keymap('n', require('plugins.fuzzyfinder.commands').current_buffer_fuzzy_find, 'buffer'),
-    keymap('N', function()
-      local word = require('utils').cword()
-
-      require('plugins.fuzzyfinder.commands').current_buffer_fuzzy_find({
-        default_text = word,
-        prompt_title = string.format('buffer:%s', word),
-      })
-    end, 'buffer:word', { mode = { 'n', 'v' } }),
   },
 
   require('plugins.fuzzyfinder.keymaps.files').setup(keymap),
+  require('plugins.fuzzyfinder.keymaps.grep').setup(keymap),
   require('plugins.fuzzyfinder.keymaps.git').setup(keymap),
   require('plugins.fuzzyfinder.keymaps.rails').setup(keymap)
 )

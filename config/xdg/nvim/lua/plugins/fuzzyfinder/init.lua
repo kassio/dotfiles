@@ -4,6 +4,7 @@ return {
     'nvim-lua/plenary.nvim',
     'smartpde/telescope-recent-files',
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    { 'nvim-telescope/telescope-live-grep-args.nvim', version = '^1.0.0' },
   },
   cmd = 'Telescope',
   keys = require('plugins.fuzzyfinder.keymaps'),

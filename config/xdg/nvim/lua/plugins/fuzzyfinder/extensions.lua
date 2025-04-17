@@ -1,18 +1,19 @@
-local function load(telescope, ext)
-  pcall(telescope.load_extension, ext)
-end
-
 return {
   setup = function(telescope)
+    local function load(ext)
+      pcall(telescope.load_extension, ext)
+    end
+
     -- extension from plugins
-    load(telescope, 'refactoring')
-    load(telescope, 'fzf')
-    load(telescope, 'notify')
-    load(telescope, 'recent_files')
+    load('refactoring')
+    load('fzf')
+    load('notify')
+    load('recent_files')
+    load('live_grep_args')
 
     -- local extensions from
     -- lua/telescope/_extensions
-    load(telescope, 'ext')
-    load(telescope, 'rails')
+    load('ext')
+    load('rails')
   end,
 }
