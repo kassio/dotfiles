@@ -15,4 +15,4 @@ subtitle "update treesitter"
 nvim --headless "+TSUpdateSync" +qa
 
 subtitle "update lsp/lint/formatter/debugger tools"
-nvim --headless "+MasonUpdate" +qa
+nvim --headless "+LspToolsUpdate" +qa

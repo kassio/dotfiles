@@ -8,3 +8,5 @@ fi
 # This requires bash-completion to be installed
 mkdir -p /etc/bash_completion.d/
 mise completion bash --include-bash-completion-lib > /etc/bash_completion.d/mise
+
+mise use -g ruby@latest

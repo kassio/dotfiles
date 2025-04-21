@@ -9,9 +9,15 @@ return {
     })
 
     vim.lsp.enable({
+      'bashls',
+      'cssls',
+      'dockerls',
       'gopls',
+      'jqls',
+      'jsonls',
       'lua_ls',
       'ruby_lsp',
+      'tailwindcss',
       'volar',
       'yamlls',
     })
