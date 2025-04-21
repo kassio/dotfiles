@@ -1,9 +1,9 @@
 return {
   setup = function()
-    local aug = vim.api.nvim_create_augroup('user:lsp', { clear = false })
+    local autogroup = vim.api.nvim_create_augroup('user:lsp', { clear = false })
 
     vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-      group = vim.api.nvim_create_augroup('user:lsp', { clear = false }),
+      group = autogroup,
       callback = function(opts)
         if vim.b[opts.buf].autoformat ~= false then
           vim.cmd('silent! LspFormat')
@@ -12,9 +12,8 @@ return {
     })
 
     vim.api.nvim_create_autocmd({ 'LspAttach' }, {
-      group = aug,
+      group = autogroup,
       callback = function(opts)
-        require('plugins.lsp.commands').setup()
         require('plugins.lsp.keymaps').setup(opts.buf)
       end,
     })

@@ -21,7 +21,6 @@ return {
 
     keymap('n', '<leader>f=', function()
       utils.buffers.preserve(function()
-        vim.cmd([[normal! gg=G]])
         vim.cmd.LspFormat()
       end)
     end, 'format (sync)')
