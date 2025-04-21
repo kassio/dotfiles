@@ -11,7 +11,6 @@ return {
   config = function()
     local telescope = require('telescope')
     local actions = require('telescope.actions')
-    local user_actions = require('plugins.fuzzyfinder.actions')
     local layout_actions = require('telescope.actions.layout')
     local utils = require('utils')
 
@@ -53,9 +52,6 @@ return {
         layout_strategy = 'vertical',
         mappings = {
           i = {
-            ['<c-x>'] = user_actions.open_with('new'),
-            ['<c-v>'] = user_actions.open_with('vnew'),
-            ['<c-t>'] = user_actions.open_with('tabedit'),
             ['<C-j>'] = actions.move_selection_next,
             ['<C-k>'] = actions.move_selection_previous,
             ['<C-n>'] = actions.cycle_history_next,
@@ -71,9 +67,6 @@ return {
             ['<C-e>'] = { '<end>', type = 'command' }, -- move cursor to the end of input
           },
           n = {
-            ['<c-x>'] = user_actions.open_with('new'),
-            ['<c-v>'] = user_actions.open_with('vnew'),
-            ['<c-t>'] = user_actions.open_with('tabedit'),
             ['<C-j>'] = actions.move_selection_next,
             ['<C-k>'] = actions.move_selection_previous,
             ['<C-n>'] = actions.cycle_history_next,

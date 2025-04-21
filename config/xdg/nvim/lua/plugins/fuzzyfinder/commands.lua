@@ -21,6 +21,27 @@ local default_find_command = {
   '*.gif',
 }
 
+-- If multiple entries are selected, open using given command tabs
+local function open_with(cmd)
+  local action_state = require('telescope.actions.state')
+
+  return function(prompt_bufnr)
+    local picker = action_state.get_current_picker(prompt_bufnr)
+
+    local selected = picker:get_multi_selection()
+    if #selected == 0 then
+      selected = { picker:get_selection() }
+    end
+
+    for _, entry in ipairs(selected) do
+      vim.print(entry.cwd)
+      vim.cmd[cmd](entry[1])
+    end
+
+    vim.cmd.stopinsert()
+  end
+end
+
 local function tiebreak_lnum(entry1, entry2, _prompt)
   if not entry1 then
     return false
@@ -63,6 +84,13 @@ function M.find_files(opts)
     find_command = find_command(extensions),
     search_dirs = search_dirs,
     prompt_title = title,
+    attach_mappings = function(_, map)
+      map({ 'n', 'i' }, '<C-x>', open_with('new'))
+      map({ 'n', 'i' }, '<C-v>', open_with('vnew'))
+      map({ 'n', 'i' }, '<C-t>', open_with('tabedit'))
+
+      return true
+    end,
   })
 
   return require('telescope.builtin').find_files(new_opts)
