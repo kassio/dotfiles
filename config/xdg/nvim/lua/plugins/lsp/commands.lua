@@ -9,14 +9,15 @@ return {
     end, { desc = 'lsp: update tools' })
 
     vim.api.nvim_create_user_command('LspFormat', function()
-      vim.cmd([[normal! gg=G]])
-      for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
-        vim.print({client.id, client.name})
-        if vim.bo.modifiable then
-          vim.lsp.buf.format({ id = client.id })
+      require('utils.buffers').preserve(function()
+        vim.cmd([[normal! gg=G]])
+        for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+          vim.print({ client.id, client.name })
+          if vim.bo.modifiable then
+            vim.lsp.buf.format({ id = client.id })
+          end
         end
-      end
-      vim.cmd([[normal! zz]])
+      end)
     end, { desc = 'lsp: format current buffer' })
-  end
+  end,
 }
