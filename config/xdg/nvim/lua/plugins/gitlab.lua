@@ -25,6 +25,12 @@ return {
         -- clients using UTF-16
         offset_encoding = 'utf-16',
       },
+      ghost_text = {
+        enabled = false,
+        toggle_enabled = '<C-h>',
+        accept_suggestion = '<C-l>',
+        clear_suggestions = '<C-k>',
+      },
     },
   },
 }
