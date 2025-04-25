@@ -12,21 +12,16 @@ return {
       end, 'grep:word', { mode = { 'n', 'v' } }),
 
       keymap('n', function()
-        local search_dir = { vim.fn.expand('%') }
-
-        require('plugins.fuzzyfinder.commands').grep({
-          search_dirs = search_dir,
+        require('plugins.fuzzyfinder.commands').current_buffer_fuzzy_find({
           prompt_title = 'buffer',
         })
-      end, 'buffer'),
+      end, 'buffer', { mode = { 'n', 'v' } }),
 
       keymap('N', function()
-        local search_dir = { vim.fn.expand('%') }
         local word = require('utils').cword()
 
-        require('plugins.fuzzyfinder.commands').grep({
+        require('plugins.fuzzyfinder.commands').current_buffer_fuzzy_find({
           default_text = word,
-          search_dirs = search_dir,
           prompt_title = string.format('buffer:%s', word),
         })
       end, 'buffer:word', { mode = { 'n', 'v' } }),
