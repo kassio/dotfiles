@@ -3,7 +3,7 @@ return {
     vim.api.nvim_create_user_command('LspToolsUpdate', function()
       vim.cmd.MasonUpdate()
 
-      for _, package in ipairs(require('mason-registry').get_all_package_names()) do
+      for _, package in ipairs(require('mason-registry').get_installed_packages()) do
         vim.cmd.MasonInstall(package)
       end
     end, { desc = 'lsp: update tools' })
