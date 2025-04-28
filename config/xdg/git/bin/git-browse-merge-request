@@ -9,10 +9,15 @@ else
   branch="$1"
 fi
 
-if [ "${branch}" != "" ] && [ "${branch}" != "$(git branch-main)" ]; then
-  mr_iid="$(gl-prd "merge_requests?source_branch=${branch}" | jq -j '.[0].iid')"
-
-  open "${project_url}/merge_requests/${mr_iid}"
-else
+if [ "${branch}" = "" ] || [ "${branch}" = "$(git branch-main)" ]; then
   echo "not in a feature branch"
+  exit
+fi
+
+mr_iid="$(gl-prd "merge_requests?source_branch=${branch}" | jq -j '.[0].iid')"
+
+if [ "${mr_iid}" = "null" ] || [ "${mr_iid}" = "" ]; then
+  git-browse-remote-branch "${branch}"
+else
+  open "${project_url}/merge_requests/${mr_iid}"
 fi
