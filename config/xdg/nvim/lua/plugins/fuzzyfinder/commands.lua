@@ -35,7 +35,7 @@ local function open_with(cmd)
 
     for _, entry in ipairs(selected) do
       vim.print(entry.cwd)
-      vim.cmd[cmd](entry[1])
+      vim.cmd(string.format('%s %s', cmd, entry[1]))
     end
 
     vim.cmd.stopinsert()
@@ -114,10 +114,10 @@ function M.find_tabs()
       return vim.fn.fnamemodify(name, ':.')
     end,
   }, function(choice)
-    if choice ~= nil then
-      vim.cmd.tabnext(vim.api.nvim_tabpage_get_number(choice))
-    end
-  end)
+      if choice ~= nil then
+        vim.cmd.tabnext(vim.api.nvim_tabpage_get_number(choice))
+      end
+    end)
 end
 
 function M.finders()
@@ -140,10 +140,10 @@ function M.finders()
   vim.ui.select(M.finders_list, {
     prompt = 'Finders',
   }, function(choice)
-    if choice ~= nil then
-      vim.cmd('Telescope ' .. choice)
-    end
-  end)
+      if choice ~= nil then
+        vim.cmd('Telescope ' .. choice)
+      end
+    end)
 end
 
 function M.find_by_ext()
