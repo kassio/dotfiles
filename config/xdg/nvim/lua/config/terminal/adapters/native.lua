@@ -131,7 +131,7 @@ end
 function M.send(termdata, opts)
   termdata = termdata or open_terminal_window(opts)
 
-  local str = opts.string
+  local str = string.gsub(opts.string, '%%', vim.fn.expand('%:.'))
   if opts.breakline then
     str = str .. '\n'
   end

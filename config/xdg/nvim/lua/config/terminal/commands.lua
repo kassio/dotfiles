@@ -56,7 +56,7 @@ return {
     end, { desc = 'print current terminal manager information' })
 
     command('Tmap', function(opts)
-      manager.mapped_command = string.gsub(opts.args, '%%', vim.fn.expand('%:.'))
+      manager.mapped_command = opts.args
       manager.send(manager.mapped_command)
     end, { nargs = '+', desc = 'map the given command to be executed with <leader>tm' })
 

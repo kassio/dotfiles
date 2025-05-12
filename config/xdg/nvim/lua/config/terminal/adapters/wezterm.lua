@@ -36,7 +36,8 @@ function M.execute(cmd)
     return
   end
 
-  vim.system({ 'wts', vim.g.wezterm_pane_id, cmd.opts.string }):wait()
+  local str = string.gsub(cmd.opts.string, '%%', vim.fn.expand('%:.'))
+  vim.system({ 'wts', vim.g.wezterm_pane_id, str }):wait()
 end
 
 return M
