@@ -1,5 +1,6 @@
 # vim:ft=zsh:
 
+alias reload="source ${HOME}/.zshrc"
 alias time="/usr/bin/time"
 
 alias sudo="sudo "
