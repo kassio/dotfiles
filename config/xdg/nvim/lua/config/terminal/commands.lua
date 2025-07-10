@@ -60,6 +60,13 @@ return {
       manager.send(manager.mapped_command)
     end, { nargs = '+', desc = 'map the given command to be executed with <leader>tm' })
 
+    command('Tprefix', function(opts)
+      manager.set_prefix(opts.args or '')
+    end, {
+      nargs = '?',
+      desc = 'give a global prefix to all commands send to terminal, like ENV_VAR=1',
+    })
+
     command('Tmapexec', function()
       if manager.mapped_command ~= nil then
         manager.send(manager.mapped_command)

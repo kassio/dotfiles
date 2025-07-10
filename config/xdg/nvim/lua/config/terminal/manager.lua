@@ -30,6 +30,10 @@ function M.nvim_cmd(str)
   M.with_terminal({ fn = 'nvim_cmd', opts = { string = str } })
 end
 
+function M.set_prefix(str)
+  vim.g.terminal_command_prefix = str
+end
+
 ---Send command to the terminal
 ---@param str string string/command to send, can be a vim.keycode
 ---@param breakline boolean|nil [default=true] send a breakline at the end of the given string
@@ -38,10 +42,13 @@ function M.send(str, breakline)
     breakline = true
   end
 
+  local command_prefix = vim.g.terminal_command_prefix or ''
+  local command = vim.trim(command_prefix .. ' ' .. str)
+
   M.with_terminal({
     fn = 'send',
     opts = {
-      string = str,
+      string = command,
       breakline = breakline,
     },
   })
