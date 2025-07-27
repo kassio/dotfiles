@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+
+if [ "$#" -eq 0 ]; then
+  echo "Usage: rma <where> - to remove all from a folder (except .gitkeep)"
+  echo
+fi
+
+remove_all() {
+  gitkeep=0
+  if [ -f ".gitkeep" ]; then
+    gitkeep=1
+  fi
+
+  setopt EXTENDED_GLOB
+  rm -rf .* 2>/dev/null
+  unset EXTENDED_GLOB
+
+  if [ "${gitkeep}" -gt 0 ]; then
+    echo > .gitkeep
+  fi
+}
+
+pushd "$1" && remove_all
+popd
