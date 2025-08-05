@@ -22,7 +22,7 @@ local default_find_command = {
 }
 
 -- If multiple entries are selected, open using given command tabs
-local function open_with(cmd)
+local function open_with(previous_buf, cmd)
   local action_state = require('telescope.actions.state')
 
   return function(prompt_bufnr)
@@ -33,9 +33,12 @@ local function open_with(cmd)
       selected = { picker:get_selection() }
     end
 
-    for _, entry in ipairs(selected) do
-      vim.print(entry.cwd)
-      vim.cmd(string.format('%s %s', cmd, entry[1]))
+    for i, entry in ipairs(selected) do
+      if i == 1 and vim.api.nvim_buf_get_name(previous_buf) == '' then
+        vim.cmd(string.format('edit! %s', entry[1]))
+      else
+        vim.cmd(string.format('%s %s', cmd, entry[1]))
+      end
     end
 
     vim.cmd.stopinsert()
@@ -80,14 +83,15 @@ function M.find_files(opts)
     title = string.format('%s in (%s)', title, table.concat(search_dirs, ', '))
   end
 
+  local previous_buf = vim.api.nvim_get_current_buf()
   local new_opts = vim.tbl_deep_extend('keep', opts or {}, {
     find_command = find_command(extensions),
     search_dirs = search_dirs,
     prompt_title = title,
     attach_mappings = function(_, map)
-      map({ 'n', 'i' }, '<C-x>', open_with('new'))
-      map({ 'n', 'i' }, '<C-v>', open_with('vnew'))
-      map({ 'n', 'i' }, '<C-t>', open_with('tabedit'))
+      map({ 'n', 'i' }, '<C-x>', open_with(previous_buf, 'new'))
+      map({ 'n', 'i' }, '<C-v>', open_with(previous_buf, 'vnew'))
+      map({ 'n', 'i' }, '<C-t>', open_with(previous_buf, 'tabedit'))
 
       return true
     end,
@@ -114,10 +118,10 @@ function M.find_tabs()
       return vim.fn.fnamemodify(name, ':.')
     end,
   }, function(choice)
-      if choice ~= nil then
-        vim.cmd.tabnext(vim.api.nvim_tabpage_get_number(choice))
-      end
-    end)
+    if choice ~= nil then
+      vim.cmd.tabnext(vim.api.nvim_tabpage_get_number(choice))
+    end
+  end)
 end
 
 function M.finders()
@@ -140,10 +144,10 @@ function M.finders()
   vim.ui.select(M.finders_list, {
     prompt = 'Finders',
   }, function(choice)
-      if choice ~= nil then
-        vim.cmd('Telescope ' .. choice)
-      end
-    end)
+    if choice ~= nil then
+      vim.cmd('Telescope ' .. choice)
+    end
+  end)
 end
 
 function M.find_by_ext()
