@@ -22,6 +22,7 @@ vim.filetype.add({
   },
   pattern = {
     ['.*%.json.*'] = 'json',
+    ['.*%.ruby'] = 'ruby',
     ['.*%.irbrc'] = 'ruby',
     ['.*%.pryrc'] = 'ruby',
     ['.*_spec%.rb'] = filetype_syntax('ruby', 'rspec'),
