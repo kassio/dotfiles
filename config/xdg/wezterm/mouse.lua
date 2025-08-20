@@ -3,6 +3,12 @@ return {
     return {
       { -- disable click
         event = { Up = { streak = 1, button = 'Left' } },
+        mods = 'NONE',
+        action = wezterm.action.Nop,
+      },
+      { -- disable click
+        event = { Down = { streak = 1, button = 'Left' } },
+        mods = 'NONE',
         action = wezterm.action.Nop,
       },
       { -- always copy selection
@@ -10,18 +16,15 @@ return {
         mods = 'NONE',
         action = wezterm.action({ CompleteSelectionOrOpenLinkAtMouseCursor = 'Clipboard' }),
       },
-      { -- paste on ctrl+click
-        event = { Up = { streak = 1, button = 'Left' } },
-        mods = 'CTRL',
-        action = wezterm.action.PasteFrom('Clipboard'),
-      },
       { -- quicklook selection
         event = { Up = { streak = 1, button = 'Left' } },
         mods = 'CMD|SHIFT',
         action = wezterm.action_callback(function(window, pane)
           local selection = window:get_selection_text_for_pane(pane)
+
           if selection ~= '' then
-            wezterm.run_child_process({ 'qlmanage', '-p', selection })
+            local filepath = pane:get_current_working_dir().file_path .. '/' .. selection
+            wezterm.run_child_process({ 'qlmanage', '-p', filepath })
           end
         end),
       },
@@ -30,8 +33,10 @@ return {
         mods = 'CMD',
         action = wezterm.action_callback(function(window, pane)
           local selection = window:get_selection_text_for_pane(pane)
+
           if selection ~= '' then
-            wezterm.open_with(selection)
+            local filepath = pane:get_current_working_dir().file_path .. '/' .. selection
+            wezterm.open_with(filepath)
           else
             wezterm.action.OpenLinkAtMouseCursor()
           end
