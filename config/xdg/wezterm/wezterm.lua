@@ -73,7 +73,7 @@ config.show_new_tab_button_in_tab_bar = false
 config.tab_max_width = 80
 config.show_close_tab_button_in_tabs = false
 
-config.scrollback_lines = 10000
+config.scrollback_lines = 100000
 
 config.term = 'wezterm'
 

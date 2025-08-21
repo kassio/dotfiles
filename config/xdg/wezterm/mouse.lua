@@ -11,6 +11,18 @@ return {
         mods = 'NONE',
         action = wezterm.action.Nop,
       },
+      -- Scrolling up
+      {
+        event = { Down = { streak = 1, button = { WheelUp = 1 } } },
+        mods = 'NONE',
+        action = wezterm.action.ScrollByLine(-20),
+      },
+      -- Scrolling down
+      {
+        event = { Down = { streak = 1, button = { WheelDown = 1 } } },
+        mods = 'NONE',
+        action = wezterm.action.ScrollByLine(20),
+      },
       { -- always copy selection
         event = { Up = { streak = 1, button = 'Left' } },
         mods = 'NONE',
