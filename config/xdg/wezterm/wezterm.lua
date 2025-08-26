@@ -45,7 +45,7 @@ config.allow_square_glyphs_to_overflow_width = 'Always'
 config.keys = require('keys').setup(wezterm)
 config.key_tables = require('key_tables').setup(wezterm)
 
-config.disable_default_mouse_bindings = true
+-- config.disable_default_mouse_bindings = true
 config.mouse_bindings = require('mouse').setup(wezterm)
 
 config.front_end = 'WebGpu'
