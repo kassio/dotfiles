@@ -5,17 +5,29 @@ if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
   exit
 fi
 
+_nvim() {
+  nvim \
+    --cmd "lua vim.deprecate = function() end" \
+    --cmd "lua vim.notify_once = vim.notify_once or function() end" \
+    "$@"
+}
+
+echo ""
 subtitle "install nvim-nightly"
 "${DOTFILES}/installers/nvim-nightly"
 
+echo ""
 subtitle "update nvim plugins"
-nvim --headless "+Lazy! update" +qa
+_nvim --headless "+Lazy! update" +qa
 
+echo ""
 subtitle "update treesitter"
-nvim --headless "+TSUpdateSync" +qa
+_nvim --headless "+TSUpdateSync" +qa
 
+echo ""
 subtitle "update lsp/lint/formatter/debugger tools"
-nvim --headless "+LspToolsUpdate" +qa
+_nvim --headless "+LspToolsUpdate" +qa
 
+echo ""
 subtitle "ensure Gitlab.vim is installed"
-nvim --headless "+setf ruby" "+GitLabCodeSuggestionsInstallLanguageServer" +qa
+_nvim --headless "+setf ruby" "+GitLabCodeSuggestionsInstallLanguageServer" +qa
