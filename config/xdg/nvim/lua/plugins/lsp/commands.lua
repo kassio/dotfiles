@@ -4,7 +4,7 @@ return {
       vim.cmd.MasonUpdate()
 
       for _, package in ipairs(require('mason-registry').get_installed_packages()) do
-        vim.cmd.MasonInstall(package)
+        vim.cmd.MasonInstall(package.name)
       end
     end, { desc = 'lsp: update tools' })
 
