@@ -7,5 +7,9 @@ git clone https://gitlab.com/kassio/repos_syncer.git "${HOME}/src/repos_syncer"
 cd ${HOME}/src/repos_syncer;
 
 mise install &&
-bin/setup &&
-bin/repos_sync
+  source "${HOME}/.zshrc" >/dev/null 2>&1 &&
+  ruby -v
+
+gem update &&
+  bin/setup &&
+  bin/repos_sync
