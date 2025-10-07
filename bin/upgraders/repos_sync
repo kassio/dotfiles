@@ -5,4 +5,7 @@ if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
   exit
 fi
 
-{ cd ${HOME}/src/repos_syncer; ./bin/repos_sync; }
+cd ${HOME}/src/repos_syncer
+
+mise exec ruby@latest -- bundle &&
+  mise exec ruby@latest -- ./bin/repos_sync

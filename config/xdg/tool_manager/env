@@ -2,5 +2,5 @@
 
 export MISE_RUBY_DEFAULT_PACKAGES_FILE="${XDG_CONFIG_HOME}/ruby/default-gems"
 
-eval "$(mise activate zsh --shims)"
+eval "$(/opt/homebrew/bin/mise activate zsh)"
 eval "$(mise hook-env)"
