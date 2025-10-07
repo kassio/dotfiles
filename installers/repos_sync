@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+mkdir -p "${HOME}/src"
+
+git clone https://gitlab.com/kassio/repos_syncer.git "${HOME}/src/repos_syncer"
+
+cd ${HOME}/src/repos_syncer;
+
+mise install &&
+bin/setup &&
+bin/repos_sync

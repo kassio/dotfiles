@@ -47,7 +47,6 @@ brew "tree"
 brew "tree-sitter"
 brew "watch"
 brew "wget"
-brew "youtube-dl"
 brew "yq" # yaml jq
 brew "zlib"
 brew "zsh"
