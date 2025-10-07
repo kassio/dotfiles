@@ -10,6 +10,9 @@
 # ensure git is installed
 $ softwareupdate --all --install --force
 
+# ensure dev tools
+$ xcode-select --install
+
 # check git version
 # which will install git if not installed
 $ git --version
