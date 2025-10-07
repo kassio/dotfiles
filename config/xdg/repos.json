@@ -5,6 +5,11 @@
       "local": "$HOME/.dotfiles",
       "afterSync": "git switch main"
     },
+    "private dotfiles": {
+      "remote": "https://github.com/kassio/dotfiles.private.git",
+      "local": "$HOME/.dotfiles.private",
+      "afterSync": "git switch main"
+    },
     "gitlab-extensions": {
       "remote": "https://gitlab.com/kassio/gitlab-extensions.git",
       "local": "$HOME/.gitlab-extensions"
