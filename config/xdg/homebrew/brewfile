@@ -1,5 +1,4 @@
 brew "bash"
-brew "1password-cli"
 brew "bash-completion"
 brew "bat" # cat replacement
 brew "coreutils"
@@ -52,6 +51,7 @@ brew "yq" # yaml jq
 brew "zlib"
 brew "zsh"
 cask "1password"
+cask "1password-cli"
 cask "alfred"
 cask "appcleaner"
 cask "dash"
