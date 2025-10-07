@@ -1,4 +1,5 @@
 brew "bash"
+brew "1password-cli"
 brew "bash-completion"
 brew "bat" # cat replacement
 brew "coreutils"
