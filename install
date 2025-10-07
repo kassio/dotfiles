@@ -8,10 +8,10 @@ PATH="${PATH}:/opt/homebrew/bin"     # M1 homebrew
 PATH="${PATH}:${DOTFILES}/bin"       # my stuff
 export PATH
 
-"${DOTFILES}/installers/nvim-nightly"
-"${DOTFILES}/installers/hosts"
-"${DOTFILES}/installers/setup-macos"
-"${DOTFILES}/installers/config"
-"${DOTFILES}/installers/others"
-
-"${DOTFILES}/bin/upgrade"
+"${DOTFILES}/installers/brew" &&
+"${DOTFILES}/installers/nvim-nightly" &&
+"${DOTFILES}/installers/hosts" &&
+"${DOTFILES}/installers/setup-macos" &&
+"${DOTFILES}/installers/config" &&
+"${DOTFILES}/installers/others" &&
+"${DOTFILES}/bin/upgrade" &&
