@@ -4,6 +4,7 @@ return {
       ensure_installed = 'all',
       ignore_install = {
         'agda',
+        'ipkg',
         'kotlin',
         'latex',
         'norg',

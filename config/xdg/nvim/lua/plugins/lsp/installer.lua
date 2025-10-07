@@ -7,22 +7,7 @@ return {
     require('mason').setup()
     require('mason-lspconfig').setup({
       automatic_installation = false,
-      ensure_installed = {
-        'bashls',
-        'dockerls',
-        'golangci_lint_ls',
-        'gopls',
-        'jqls',
-        'jsonls',
-        'jsonnet_ls',
-        'rubocop',
-        'ruby_lsp',
-        'sqlls',
-        'sqls',
-        'stimulus_ls',
-        'tailwindcss',
-        'vuels',
-      },
+      ensure_installed = vim.tbl_keys(require('plugins.lsp.servers').servers)
     })
   end,
 }
