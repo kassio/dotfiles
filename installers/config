@@ -47,4 +47,5 @@ mkdir -p "${HOME}/.docker"
 link_all "${DOTFILES}/config/docker" "${HOME}/.docker/%s"
 
 link "${HOME}/src/gitlab-xbar/gitlab.5m.sh" \
-  "${HOME}/Library/Application Support/xbar/plugins"
+  "${HOME}/Library/Application Support/xbar/plugins" ||
+  echo  "xbar not installed yet"
