@@ -5,6 +5,7 @@ return {
     local ffinder = require("fzf-lua")
     ffinder.setup({
       lsp = {
+        jump1 = false,
         code_actions = {
           winopts = {
             preview = { hidden = true },

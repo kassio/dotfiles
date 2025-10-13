@@ -25,31 +25,23 @@ return {
       end)
     end, 'format (sync)')
 
+    keymap('n', 'glD', vim.lsp.buf.declaration, 'declarations')
+    keymap('n', 'gd', vim.lsp.buf.definition, 'definitions')
+
     keymap('n', 'gls', function()
-      require('telescope.builtin').lsp_document_symbols()
+      require('plugins.fuzzyfinder.commands').lsp_document_symbols()
     end, 'document symbols')
 
-    keymap('n', 'glS', function()
-      require('telescope.builtin').lsp_dynamic_workspace_symbols()
-    end, 'workspace symbols')
-
-    keymap('n', 'glD', vim.lsp.buf.declaration, 'declarations')
-
-    keymap('n', 'gd', vim.lsp.buf.definition, 'definitions')
     keymap('n', 'gld', function()
-      require('telescope.builtin').lsp_definitions({ jump_type = 'never' })
-    end, 'definitions')
-
-    keymap('n', 'glt', function()
-      require('telescope.builtin').lsp_type_definitions({ jump_type = 'never' })
+      require('plugins.fuzzyfinder.commands').lsp_definitions()
     end, 'definitions')
 
     keymap('n', 'glr', function()
-      require('telescope.builtin').lsp_references({ jump_type = 'never' })
+      require('plugins.fuzzyfinder.commands').lsp_references()
     end, 'references')
 
     keymap('n', 'gli', function()
-      require('telescope.builtin').lsp_implementations({ jump_type = 'never' })
+      require('plugins.fuzzyfinder.commands').lsp_implementations()
     end, 'implementations')
   end,
 }
