@@ -11,7 +11,6 @@ local servers = {
   rubocop = {},
   ruby_lsp = require('plugins.lsp.servers.ruby_lsp'),
   sqlls = {},
-  volar = require('plugins.lsp.servers.volar'), -- vuejs
   yamlls = require('plugins.lsp.servers.yamlls'),
 }
 
