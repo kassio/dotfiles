@@ -10,6 +10,7 @@ brew "docker"
 brew "docutils"
 brew "dpkg"
 brew "duti"
+brew "efm-langserver" # generic lsp server
 brew "exiftool"
 brew "fd"
 brew "ffmpeg"

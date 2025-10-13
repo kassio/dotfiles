@@ -7,11 +7,12 @@ local servers = {
   jqls = {},
   jsonls = {},
   jsonnet_ls = {},
-  lua_ls = require('plugins.lsp.servers.lua_ls'),
+  lua_ls = require('plugins.lsp.servers.lua'),
   rubocop = {},
-  ruby_lsp = require('plugins.lsp.servers.ruby_lsp'),
+  ruby_lsp = require('plugins.lsp.servers.ruby'),
   sqlls = {},
-  yamlls = require('plugins.lsp.servers.yamlls'),
+  yamlls = require('plugins.lsp.servers.yaml'),
+  efm = require('plugins.lsp.servers.efm'),
 }
 
 return {
@@ -25,7 +26,5 @@ return {
 
       vim.lsp.config(server, config)
     end
-
-    require('plugins.lsp.servers.generic').setup()
   end,
 }
