@@ -9,4 +9,8 @@ fi
 mkdir -p /etc/bash_completion.d/
 mise completion bash --include-bash-completion-lib > /etc/bash_completion.d/mise
 
+# Some global tooling for lsp and other tools
 mise use -g ruby@latest
+mise use -g rust@latest
+mise use -g node@latest
+mise use -g go@latest
