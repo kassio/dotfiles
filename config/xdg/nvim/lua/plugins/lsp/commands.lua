@@ -12,7 +12,6 @@ return {
       require('utils.buffers').preserve(function()
         vim.cmd([[normal! gg=G]])
         for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
-          vim.print({ client.id, client.name })
           if vim.bo.modifiable then
             vim.lsp.buf.format({ id = client.id })
           end
