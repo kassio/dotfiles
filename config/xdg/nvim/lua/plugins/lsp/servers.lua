@@ -22,8 +22,7 @@ M.servers = {
 }
 
 M.setup = function()
-  for server, opts in pairs(M.servers) do
-
+  for server, config in pairs(M.servers) do
     local ok, default = pcall(require, 'lspconfig.configs.'..server)
     if not ok then
       default = {}
@@ -33,7 +32,7 @@ M.setup = function()
       'force',
       default, -- Default configuration per server
       globals, -- Personal global configuration for all servers
-      opts -- Custom configuration per server
+      config -- Custom configuration per server
     ))
 
     vim.lsp.enable(server)
