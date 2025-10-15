@@ -1,10 +1,9 @@
 return {
-  require('plugins.lsp.progress'),
-  require('plugins.lsp.installer'),
-
   {
     'neovim/nvim-lspconfig',
     dependencies = {
+      require('plugins.lsp.progress'),
+      require('plugins.lsp.installer'),
       'creativenull/efmls-configs-nvim',
     },
     config = function()
