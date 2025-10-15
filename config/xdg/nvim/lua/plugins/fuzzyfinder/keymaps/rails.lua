@@ -17,7 +17,7 @@ return {
     rails_keymap('c', {"ee/app/controllers", "app/controllers"}, "controllers")
     rails_keymap('f', {"ee/app/finders", "app/finders"}, "finders")
     rails_keymap('g', {"ee/app/graphql", "app/graphql"}, "graphql")
-    rails_keymap('l', {"ee/app/lib", "app/lib"}, "library")
+    rails_keymap('l', {"ee/lib", "lib"}, "library")
     rails_keymap('m', {"ee/app/models", "app/models"}, "models")
     rails_keymap('s', {"ee/app/services", "app/services"}, "services")
     rails_keymap('v', {"ee/app/views", "app/views"}, "views")
