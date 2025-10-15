@@ -10,6 +10,19 @@ if not M.pack then
   end
 end
 
+function M.keys_except(tbl, ...)
+  local except = {...}
+  local result = {}
+
+  for key, _ in pairs(tbl) do
+    if not vim.tbl_contains(except, key) then
+      table.insert(result, key)
+    end
+  end
+
+  return result
+end
+
 ---Removes the given key from the table, returning its value.
 ---@param tbl table<any>
 ---@param key any
