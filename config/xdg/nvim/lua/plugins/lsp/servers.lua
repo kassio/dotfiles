@@ -8,17 +8,17 @@ M.servers = {
   bashls = {},
   cssls = {},
   dockerls = {},
-  efm = require('plugins.lsp.servers.efm'),
+  efm = require('plugins.lsp.servers.efm_ls'),
   gitlab_ci_ls = {},
-  gitlab_lsp = require('plugins.lsp.servers.gitlab'),
+  gitlab_lsp = require('plugins.lsp.servers.gitlab_lsp'),
   jqls = {},
   jsonls = {},
   jsonnet_ls = {},
-  lua_ls = require('plugins.lsp.servers.lua'),
+  lua_ls = require('plugins.lsp.servers.lua_ls'),
   rubocop = {},
-  ruby_lsp = require('plugins.lsp.servers.ruby'),
+  ruby_lsp = require('plugins.lsp.servers.ruby_lsp'),
   sqlls = {},
-  yamlls = require('plugins.lsp.servers.yaml'),
+  yamlls = require('plugins.lsp.servers.yamlls'),
 }
 
 M.setup = function()
