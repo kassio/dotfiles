@@ -1,6 +1,8 @@
 return {
   'saghen/blink.cmp',
-  dependencies = { 'rafamadriz/friendly-snippets' },
+  dependencies = {
+    'rafamadriz/friendly-snippets',
+  },
   version = '1.*',
   opts = {
     appearance = {
@@ -17,9 +19,22 @@ return {
     keymap = {
       preset = 'default',
 
+      ['<C-space>'] = {
+        function(cmp)
+          cmp.show({
+            providers = { 'snippets' },
+          })
+        end,
+      },
+      ['<C-p>'] = {
+        'show',
+        'select_prev',
+        'fallback',
+      },
       ['<C-n>'] = {
         'show',
-        'select_next'
+        'select_next',
+        'fallback',
       },
       ['<C-k>'] = {
         'show_signature',
@@ -43,6 +58,13 @@ return {
             end,
           },
         },
+        snippets = {
+          opts = {
+            search_paths = {
+              vim.fn.stdpath('config') .. '/snippets'
+            }
+          }
+        }
       },
     },
   },
