@@ -5,10 +5,12 @@ if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
   exit
 fi
 
+subtitle "[tool_manager] ensure autocompletion"
 # This requires bash-completion to be installed
 mkdir -p /etc/bash_completion.d/
 mise completion bash --include-bash-completion-lib > /etc/bash_completion.d/mise
 
+subtitle "[tool_manager] ensure basic required tools"
 # Some global tooling for lsp and other tools
 mise use -g ruby@latest
 mise use -g rust@latest
