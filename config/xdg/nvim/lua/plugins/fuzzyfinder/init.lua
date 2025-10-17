@@ -6,6 +6,7 @@ return {
     ffinder.setup({
       lsp = {
         jump1 = false,
+        async_or_timeout = 100000,
         code_actions = {
           winopts = {
             preview = { hidden = true },
