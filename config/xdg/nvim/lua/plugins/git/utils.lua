@@ -1,4 +1,17 @@
-local M = {}
+local function git(cmd, callback)
+  if type(cmd) == 'string' then
+    cmd = vim.split(cmd, ' ')
+  end
+  table.insert(cmd or {}, 1, 'git')
+  local output = vim.system(cmd):wait()
+  local stdout = vim.trim(output.stdout)
+
+  if callback ~= nil then
+    return callback(stdout)
+  else
+    return stdout
+  end
+end
 
 local function open(url)
   vim.ui.open(url)
@@ -19,18 +32,18 @@ local function get_ref(file, line, use_main)
     local pathspec = string.format('-L "%s,%s:%s"', line, line, file)
     local cmd = string.format('log -1 --no-patch --pretty=format:"%%H" %s', pathspec)
 
-    local ref = M.git(cmd)
+    local ref = git(cmd)
 
     if ref ~= '' then
       return ref
     end
   end
 
-  return M.git('branch-main')
+  return git('branch-main')
 end
 
 local function repository_url()
-  return M.git('remote get-url origin', function(url)
+  return git('remote get-url origin', function(url)
     url = string.gsub(url, '^git@', 'https://')
     url = string.gsub(url, '%.git$', '')
 
@@ -47,19 +60,24 @@ local function file_remote_url(arg)
   return (string.format('%s/blob/%s/%s#L%s', repository_url(), ref, filepath, line))
 end
 
-function M.git(cmd, callback)
-  if type(cmd) == 'string' then
-    cmd = vim.split(cmd, ' ')
-  end
-  table.insert(cmd or {}, 1, 'git')
-  local output = vim.system(cmd):wait()
-  local stdout = vim.trim(output.stdout)
+local gitsigns = R('gitsigns')
+local M = {
+  git = git,
+  blame = gitsigns.blame,
+  reset_buffer = gitsigns.reset_buffer,
+  preview_hunk = gitsigns.preview_hunk,
+  stage_hunk = gitsigns.stage_hunk,
+  reset_hunk = gitsigns.reset_hunk,
+}
 
-  if callback ~= nil then
-    return callback(stdout)
-  else
-    return stdout
-  end
+function M.prev_hunk()
+  gitsigns.prev_hunk()
+  vim.cmd.normal('zz')
+end
+
+function M.next_hunk()
+  gitsigns.next_hunk()
+  vim.cmd.normal('zz')
 end
 
 function M.open_repository_url()
@@ -72,6 +90,14 @@ end
 
 function M.copy_remote_url(arg)
   open(file_remote_url(arg))
+end
+
+function M.open_new_files()
+  git('ls-files --others --exclude-standard', function(files)
+    for _, file in ipairs(vim.split(files, '\n', { trimempty = true })) do
+      vim.cmd.tabnew(file)
+    end
+  end)
 end
 
 return M

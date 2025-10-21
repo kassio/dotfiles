@@ -13,6 +13,9 @@ end
 return {
   setup = function()
     command('BrowseRepository', utils.open_repository_url, { desc = 'open origin in the browser' })
+    command('Blame', utils.blame, { desc = 'blame file' })
+    command('OpenNewFiles', utils.open_new_files, { desc = 'open unstaged files' })
+    command('ResetBuffer', utils.reset_buffer, { desc = 'restore current file' })
 
     command('BrowseMergeRequest', function()
       vim.fn.jobstart({ 'git-browse-merge-request' })
@@ -26,25 +29,9 @@ return {
       utils.copy_remote_url(cmd.args)
     end, { nargs = '?', bang = true, desc = 'copy remote file url' })
 
-    command('Blame', function()
-      vim.cmd.Git('blame')
-    end, { desc = 'blame file' })
-
-    command('OpenNewFiles', function()
-      utils.git('ls-files --others --exclude-standard', function(files)
-        for _, file in ipairs(vim.split(files, '\n', { trimempty = true })) do
-          vim.cmd.tabnew(file)
-        end
-      end)
-    end, { desc = 'open unstaged files' })
-
-    command('RestoreFile', function()
-      vim.cmd.Git('restore %')
-    end, { desc = 'restore current file' })
-
     vim.cmd.cabbrev('Gblame Git blame')
     vim.cmd.cabbrev('Gd Gvdiffsplit')
-    vim.cmd.cabbrev('Grt Git restore %')
+    vim.cmd.cabbrev('Grt GitResetBuffer')
     vim.cmd.cabbrev('Gw Gwrite')
   end,
 }

@@ -1,8 +1,5 @@
 return {
   'lewis6991/gitsigns.nvim',
-  dependencies = {
-    'tpope/vim-fugitive',
-  },
   config = function()
     local gitsigns = require('gitsigns')
 
@@ -27,6 +24,6 @@ return {
     })
 
     require('plugins.git.commands').setup()
-    require('plugins.git.keymaps').setup(gitsigns)
+    require('plugins.git.keymaps').setup()
   end,
 }
