@@ -1,14 +1,11 @@
-M = {}
-
-local globals = {
+local global_config = {
   single_file_support = true
 }
 
-M.servers = {
+local servers = {
   bashls = {},
   cssls = {},
   dockerls = {},
-  efm = require('plugins.lsp.servers.efm_ls'),
   gitlab_ci_ls = {},
   gitlab_lsp = require('plugins.lsp.servers.gitlab_lsp'),
   jqls = {},
@@ -21,18 +18,18 @@ M.servers = {
   yamlls = require('plugins.lsp.servers.yamlls'),
 }
 
-M.setup = function()
-  for server, config in pairs(M.servers) do
-    local ok, default = pcall(require, 'lspconfig.configs.'..server)
+local setup = function()
+  for server, user_config in pairs(servers) do
+    local ok, default_config = pcall(require, 'lspconfig.configs.'..server)
     if not ok then
-      default = {}
+      default_config = {}
     end
 
     vim.lsp.config(server, vim.tbl_deep_extend(
       'force',
-      default, -- Default configuration per server
-      globals, -- Personal global configuration for all servers
-      config -- Custom configuration per server
+      default_config, -- Default configuration per server
+      global_config, -- Personal global configuration for all servers
+      user_config -- Custom configuration per server
     ))
 
     vim.lsp.enable(server)
@@ -43,4 +40,7 @@ M.setup = function()
   })
 end
 
-return M
+return {
+  servers = servers,
+  setup = setup
+}
