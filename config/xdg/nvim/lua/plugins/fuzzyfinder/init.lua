@@ -4,17 +4,6 @@ return {
   config = function()
     local ffinder = require("fzf-lua")
     ffinder.setup({
-      keymap = {
-        builtin = {
-          ["<c-;>"] = "toggle-preview",
-        },
-      },
-      actions = {
-        files = {
-          ["ctrl-q"] = ffinder.actions.file_sel_to_qf,
-          ["ctrl-x"] = ffinder.actions.file_split
-        }
-      },
       lsp = {
         jump1 = false,
         async_or_timeout = 100000,
