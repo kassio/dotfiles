@@ -10,8 +10,6 @@ return {
           vim.lsp.inline_completion.enable(true)
         end
 
-        vim.print(bufnr, client and client.name)
-
         require('plugins.lsp.keymaps').setup(client, bufnr)
 
         if vim.bo[bufnr].modifiable and
