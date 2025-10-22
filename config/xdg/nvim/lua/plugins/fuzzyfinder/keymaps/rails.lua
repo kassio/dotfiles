@@ -22,5 +22,6 @@ return {
     rails_keymap('s', {"ee/app/services", "app/services"}, "services")
     rails_keymap('v', {"ee/app/views", "app/views"}, "views")
     rails_keymap('w', {"ee/app/workers", "app/workers"}, "workers")
+    rails_keymap('t', {"app/test", "ee/spec", "spec"}, "tests")
   end
 }
