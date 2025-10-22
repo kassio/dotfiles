@@ -19,7 +19,7 @@ return {
           client:supports_method(lsp_methods.textDocument_formatting) then
 
           vim.api.nvim_create_autocmd('BufWritePre', {
-            bufnr = bufnr,
+            buffer = bufnr,
             callback = function()
               require('plugins.lsp.utils').format(bufnr)
             end,
