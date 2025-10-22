@@ -60,7 +60,8 @@ local function file_remote_url(arg)
   return (string.format('%s/blob/%s/%s#L%s', repository_url(), ref, filepath, line))
 end
 
-local gitsigns = R('gitsigns')
+local gitsigns = require('gitsigns')
+
 local M = {
   git = git,
   blame = gitsigns.blame,
@@ -90,6 +91,14 @@ end
 
 function M.copy_remote_url(arg)
   open(file_remote_url(arg))
+end
+
+function M.diff_this(ref)
+  if not ref or ref == '' then
+    ref = git('branch-main')
+  end
+
+  gitsigns.diffthis(ref, { vertical = true, split = 'rightbelow' })
 end
 
 function M.open_new_files()
