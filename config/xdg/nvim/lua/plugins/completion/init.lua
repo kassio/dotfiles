@@ -42,6 +42,9 @@ return {
         'fallback',
       },
     },
+    signature = {
+      enabled = true,
+    },
     sources = {
       default = {
         'snippets',
