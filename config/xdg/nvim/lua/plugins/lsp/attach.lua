@@ -6,10 +6,6 @@ return {
         local bufnr = opts.buf
         local client = vim.lsp.get_client_by_id(opts.data.client_id)
 
-        if client and client:supports_method(lsp_methods.textDocument_inlineCompletion) then
-          vim.lsp.inline_completion.enable(true)
-        end
-
         require('plugins.lsp.keymaps').setup(client, bufnr)
 
         if vim.bo[bufnr].modifiable and
