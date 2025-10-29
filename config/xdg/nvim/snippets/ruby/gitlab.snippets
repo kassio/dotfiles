@@ -26,3 +26,5 @@ snippet redis_cache
 	:clean_gitlab_redis_cache
 snippet redis_rate_limit
 	:clean_gitlab_redis_rate_limiting
+snippet prep
+	`!lua require("utils.ruby").file_namespace()`.prepend_mod

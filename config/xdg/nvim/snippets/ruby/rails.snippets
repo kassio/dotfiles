@@ -10,8 +10,6 @@ snippet hmany
 	has_many :${1:object}
 snippet hone
 	has_one :${1:object}
-snippet prep
-	`!lua require("utils.ruby").file_namespace()`.prepend_mod
 snippet active_record_logger
 	ActiveRecord::Base.logger = Logger.new($stdout)
 snippet extend_concern
