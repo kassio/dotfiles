@@ -3,4 +3,4 @@
 main="$(git branch-main)"
 
 echo "${main}"
-git branch --format='%(refname:short)' | grep -v "${main}" | sort
+git branch --format='%(refname:short)' | grep -v "^${main}$" | sort
