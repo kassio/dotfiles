@@ -63,12 +63,13 @@ end
 local gitsigns = require('gitsigns')
 
 local M = {
-  git = git,
   blame = gitsigns.blame,
-  reset_buffer = gitsigns.reset_buffer,
+  git = git,
   preview_hunk = gitsigns.preview_hunk,
-  stage_hunk = gitsigns.stage_hunk,
+  reset_buffer = gitsigns.reset_buffer,
   reset_hunk = gitsigns.reset_hunk,
+  stage_buffer = gitsigns.stage_buffer,
+  stage_hunk = gitsigns.stage_hunk,
 }
 
 function M.prev_hunk()

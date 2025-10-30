@@ -16,6 +16,7 @@ return {
     command('Blame', git.blame, { desc = 'blame file' })
     command('OpenNewFiles', git.open_new_files, { desc = 'open unstaged files' })
     command('ResetBuffer', git.reset_buffer, { desc = 'restore current file' })
+    command('Write', git.stage_buffer, { desc = 'restore current file' })
 
     command('Diff', function(cmd)
       git.diff_this(cmd.args)
