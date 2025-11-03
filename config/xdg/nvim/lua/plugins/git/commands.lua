@@ -34,9 +34,9 @@ return {
       git.copy_remote_url(cmd.args)
     end, { nargs = '?', bang = true, desc = 'copy remote file url' })
 
-    vim.cmd.cabbrev('Gblame GitBlame')
+    vim.cmd.cabbrev('Gb GitBlame')
     vim.cmd.cabbrev('Gd GitDiff')
     vim.cmd.cabbrev('Grt GitResetBuffer')
-    vim.cmd.cabbrev('Gw Gwrite')
+    vim.cmd.cabbrev('Gw GitWrite')
   end,
 }
