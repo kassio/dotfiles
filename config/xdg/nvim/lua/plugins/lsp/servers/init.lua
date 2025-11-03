@@ -8,6 +8,7 @@ local servers = {
   dockerls = {},
   gitlab_ci_ls = {},
   gitlab_lsp = require('plugins.lsp.servers.gitlab_lsp'),
+  gitlab_duo = {},
   jqls = {},
   jsonls = {},
   jsonnet_ls = {},
