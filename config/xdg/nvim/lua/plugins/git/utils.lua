@@ -68,7 +68,6 @@ local M = {
   preview_hunk = gitsigns.preview_hunk,
   reset_buffer = gitsigns.reset_buffer,
   reset_hunk = gitsigns.reset_hunk,
-  stage_buffer = gitsigns.stage_buffer,
   stage_hunk = gitsigns.stage_hunk,
 }
 
@@ -108,6 +107,11 @@ function M.open_new_files()
       vim.cmd.tabnew(file)
     end
   end)
+end
+
+function M.stage_buffer()
+  vim.cmd.write()
+  gitsigns.stage_buffer()
 end
 
 return M
