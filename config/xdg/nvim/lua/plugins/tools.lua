@@ -13,5 +13,13 @@ return {
         'gitlab_duo'
       )
     })
+
+    vim.api.nvim_create_user_command('ToolsUpdate', function()
+      vim.cmd.MasonUpdate()
+
+      for server, _ in pairs(require('plugins.lsp.servers').servers) do
+        vim.cmd.MasonInstall(server)
+      end
+    end, { desc = 'lsp: update tools' })
   end,
 }
