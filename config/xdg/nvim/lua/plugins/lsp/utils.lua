@@ -13,14 +13,8 @@ end
 
 local function format_with(client, bufnr)
   require('utils.buffers').preserve(function()
-    vim.cmd('messages clear')
-    vim.print('>> ' .. client.name)
-    vim.print('is a formattable server? ' .. tostring(vim.tbl_contains(formattable_servers, client.name)))
-    vim.print('server format? ' .. tostring(client:supports_method(lsp_methods.textDocument_formatting)))
-    vim.print('buf is modifiable? ' .. tostring(vim.bo[bufnr].modifiable))
-    vim.cmd('messages')
-
     vim.cmd([[silent! normal! gg=G]])
+
     if can_format(client, bufnr) then
       vim.lsp.buf.format({ id = client.id, bufnr = 0 })
     end

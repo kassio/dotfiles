@@ -22,6 +22,12 @@ return {
 
       local lsp_utils = require('plugins.lsp.utils')
 
+      vim.api.nvim_create_autocmd({ 'LspAttach' }, {
+        callback = function(opts)
+          require('plugins.lsp.keymaps').setup(opts.buf)
+        end
+      })
+
       vim.api.nvim_create_user_command('LspFormat', function()
         lsp_utils.format()
       end, { desc = 'lsp: format current buffer'})
