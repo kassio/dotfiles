@@ -19,7 +19,20 @@ return {
     },
     config = function()
       require('plugins.lsp.servers').setup()
-      require('plugins.lsp.attach').setup()
+
+      local lsp_utils = require('plugins.lsp.utils')
+
+      vim.api.nvim_create_user_command('LspFormat', function()
+        lsp_utils.format()
+      end, { desc = 'lsp: format current buffer'})
+
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        callback = function(opts)
+          if vim.b[opts.buf].autoformat ~= false then
+            lsp_utils.format()
+          end
+        end,
+      })
     end,
   },
 }

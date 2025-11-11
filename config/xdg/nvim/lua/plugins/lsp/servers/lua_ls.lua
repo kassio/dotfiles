@@ -7,7 +7,7 @@ return {
     Lua = {
       telemetry = { enable = false },
       hint = { enable = true },
-      format = { enable = false },
+      format = { enable = true },
       diagnostics = {
         globals = {
           'vim',

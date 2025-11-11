@@ -1,3 +1,4 @@
+local utils = require('utils')
 local global_config = {
   single_file_support = true
 }
@@ -18,7 +19,6 @@ local servers = {
   sqlls = {},
   yamlls = require('plugins.lsp.servers.yamlls'),
 }
-
 local setup = function()
   for server, user_config in pairs(servers) do
     local ok, default_config = pcall(require, 'lspconfig.configs.'..server)
@@ -42,6 +42,15 @@ local setup = function()
 end
 
 return {
+  installable = utils.table.keys_except(
+    servers,
+    'gitlab_lsp',
+    'gitlab_duo'
+  ),
+  formattable = utils.table.keys_except(
+    servers,
+    'gitlab_lsp'
+  ),
   servers = servers,
   setup = setup
 }

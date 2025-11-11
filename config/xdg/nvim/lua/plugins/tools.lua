@@ -7,11 +7,7 @@ return {
     require('mason').setup()
     require('mason-lspconfig').setup({
       automatic_installation = false,
-      ensure_installed = require('utils.table').keys_except(
-        require('plugins.lsp.servers').servers,
-        'gitlab_lsp',
-        'gitlab_duo'
-      )
+      ensure_installed = require('plugins.lsp.servers').installable
     })
 
     vim.api.nvim_create_user_command('ToolsUpdate', function()

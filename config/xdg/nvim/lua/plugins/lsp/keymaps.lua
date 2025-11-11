@@ -9,16 +9,18 @@ local function keymap_generator(bufnr)
 end
 
 return {
-  setup = function(client, bufnr)
+  setup = function(bufnr)
     local lsp_utils = require('plugins.lsp.utils')
     local keymap = keymap_generator(bufnr)
+
+    keymap('n', '<leader>f=', function()
+      lsp_utils.format(bufnr)
+    end, 'format')
 
     keymap('n', '<c-k>', vim.lsp.buf.signature_help, 'signature help')
 
     keymap('n', 'grr', vim.lsp.buf.rename, 'rename')
     keymap({ 'n', 'v', 'x' }, 'gla', vim.lsp.buf.code_action, 'code actions')
-
-    keymap('n', '<leader>f=', lsp_utils.format, 'format')
 
     keymap('n', 'glD', vim.lsp.buf.declaration, 'declarations')
     keymap('n', 'gd', vim.lsp.buf.definition, 'definitions')
