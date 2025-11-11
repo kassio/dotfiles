@@ -3,7 +3,18 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     local ffinder = require("fzf-lua")
+    local actions = require("fzf-lua.actions")
+
     ffinder.setup({
+      actions = {
+        files = {
+          ["default"] = actions.file_edit,
+          ["ctrl-x"] = actions.file_split,
+          ["ctrl-v"] = actions.file_vsplit,
+          ["ctrl-t"] = actions.file_tabedit,
+          ["ctrl-q"] = actions.file_sel_to_qf,
+        },
+      },
       lsp = {
         jump1 = false,
         async_or_timeout = 100000,
