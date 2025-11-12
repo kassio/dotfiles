@@ -25,6 +25,8 @@ return {
       vim.api.nvim_create_autocmd({ 'LspAttach' }, {
         callback = function(opts)
           require('plugins.lsp.keymaps').setup(opts.buf)
+
+          vim.bo[opts.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
         end
       })
 

@@ -2,75 +2,76 @@ return {
   'saghen/blink.cmp',
   dependencies = {
     'rafamadriz/friendly-snippets',
+    {
+      "L3MON4D3/LuaSnip",
+      run = "make install_jsregexp",
+    },
   },
-  version = '1.*',
-  opts = {
-    appearance = {
-      nerd_font_variant = 'mono'
-    },
-    fuzzy = {
-      implementation = "prefer_rust_with_warning",
-    },
-    completion = {
-      documentation = {
-        auto_show = true,
-      },
-    },
-    keymap = {
-      preset = 'default',
+  config = function()
+    require('plugins.completion.snippets').setup()
 
-      ['<C-space>'] = {
-        function(cmp)
-          cmp.show({
-            providers = { 'snippets' },
-          })
-        end,
+    require('blink.cmp').setup({
+      appearance = {
+        nerd_font_variant = 'mono'
       },
-      ['<C-p>'] = {
-        'show',
-        'select_prev',
-        'fallback',
+      fuzzy = {
+        implementation = "prefer_rust_with_warning",
       },
-      ['<C-n>'] = {
-        'show',
-        'select_next',
-        'fallback',
+      completion = {
+        documentation = {
+          auto_show = true,
+        },
       },
-      ['<C-k>'] = {
-        'show_signature',
-        'hide_signature',
-        'fallback',
+      snippets = { preset = 'luasnip' },
+      keymap = {
+        preset = 'default',
+
+        ['<C-space>'] = {
+          function(cmp)
+            cmp.show({
+              providers = { 'snippets' },
+            })
+          end,
+        },
+        ['<C-p>'] = {
+          'show',
+          'select_prev',
+          'fallback',
+        },
+        ['<C-n>'] = {
+          'show',
+          'select_next',
+          'fallback',
+        },
+        ['<C-k>'] = {
+          'show_signature',
+          'hide_signature',
+          'fallback',
+        },
       },
-    },
-    signature = {
-      enabled = true,
-    },
-    sources = {
-      default = {
-        'snippets',
-        'lsp',
-        'path',
-        'buffer',
+      signature = {
+        enabled = true,
       },
-      min_keyword_length = 0,
-      providers = {
-        path = {
-          opts = {
-            get_cwd = function(_)
-              return vim.fn.getcwd()
-            end,
+      sources = {
+        default = {
+          'buffer',
+          'snippets',
+          'lsp',
+          'path',
+        },
+        min_keyword_length = 0,
+        providers = {
+          path = {
+            opts = {
+              get_cwd = function(_)
+                return vim.fn.getcwd()
+              end,
+            },
           },
         },
-        snippets = {
-          opts = {
-            search_paths = {
-              vim.fn.stdpath('config') .. '/snippets'
-            }
-          }
-        }
       },
-    },
-  },
+    })
+  end,
   opts_extend = {
     "sources.default",
   }
