@@ -7,7 +7,7 @@ return {
       run = "make install_jsregexp",
     },
   },
-  build = 'cargo build --release',
+  version = '1.*',
   config = function()
     require('plugins.completion.snippets').setup()
 
