@@ -1,9 +1,10 @@
 local utils = require('utils.ruby')
 local ls = require('luasnip')
-local s = ls.snippet
-local i = ls.insert_node
-local t = ls.text_node
+local c = ls.choice_node
 local f = ls.function_node
+local i = ls.insert_node
+local s = ls.snippet
+local t = ls.text_node
 
 return {
   setup = function()
@@ -19,6 +20,25 @@ return {
       s('prep', { f(function()
         return utils.file_namespace() .. '.prepend_mod'
       end) }),
+      s('feature_category_values', {
+        c(1, {
+          t('team_planning'),
+          t('shared'),
+          t('portfolio_management'),
+          t('pages'),
+          t('wiki')
+        }),
+      }),
+      s('feature_category', {
+        t('feature_category: '),
+        c(1, {
+          t('team_planning'),
+          t('shared'),
+          t('portfolio_management'),
+          t('pages'),
+          t('wiki')
+        }),
+      }),
     })
   end
 }

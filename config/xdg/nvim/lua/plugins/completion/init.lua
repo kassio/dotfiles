@@ -49,6 +49,13 @@ return {
           'hide_signature',
           'fallback',
         },
+        ['<tab>'] = {
+          function(cmp)
+            if require('luasnip').choice_active() then
+              require('luasnip').change_choice(1)
+            end
+          end
+        },
       },
       signature = {
         enabled = true,
