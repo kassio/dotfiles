@@ -7,6 +7,7 @@ return {
       run = "make install_jsregexp",
     },
   },
+  build = 'cargo build --release',
   config = function()
     require('plugins.completion.snippets').setup()
 
@@ -15,7 +16,7 @@ return {
         nerd_font_variant = 'mono'
       },
       fuzzy = {
-        implementation = "prefer_rust_with_warning",
+        implementation = "prefer_rust",
       },
       completion = {
         documentation = {
