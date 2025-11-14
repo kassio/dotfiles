@@ -71,13 +71,15 @@ local M = {
   stage_hunk = gitsigns.stage_hunk,
 }
 
-function M.prev_hunk()
-  gitsigns.prev_hunk()
+function M.prev_hunk(opts)
+  opts = vim.tbl_extend('keep', opts or {}, { target = 'all' })
+  gitsigns.nav_hunk('prev', opts)
   vim.cmd.normal('zz')
 end
 
-function M.next_hunk()
-  gitsigns.next_hunk()
+function M.next_hunk(opts)
+  opts = vim.tbl_extend('keep', opts or {}, { target = 'all' })
+  gitsigns.nav_hunk('next', opts)
   vim.cmd.normal('zz')
 end
 
