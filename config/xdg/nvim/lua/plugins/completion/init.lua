@@ -30,7 +30,7 @@ return {
         ['<C-space>'] = {
           function(cmp)
             cmp.show({
-              providers = { 'snippets' },
+              providers = { 'lsp' },
             })
           end,
         },
