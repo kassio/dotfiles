@@ -19,6 +19,7 @@ return {
         implementation = "prefer_rust",
       },
       completion = {
+        trigger = { show_in_snippet = false },
         documentation = {
           auto_show = true,
         },
@@ -49,12 +50,17 @@ return {
           'hide_signature',
           'fallback',
         },
-        ['<tab>'] = {
-          function(cmp)
-            if require('luasnip').choice_active() then
-              require('luasnip').change_choice(1)
-            end
-          end
+        ['<enter>'] = {
+          'select_and_accept',
+          'fallback',
+        },
+        ['<Tab>'] = {
+          'snippet_forward',
+          'fallback',
+        },
+        ['<S-Tab>'] = {
+          'snippet_backward',
+          'fallback',
         },
       },
       signature = {

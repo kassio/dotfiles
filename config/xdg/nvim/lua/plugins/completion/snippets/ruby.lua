@@ -5,15 +5,6 @@ local i = ls.insert_node
 local s = ls.snippet
 local t = ls.text_node
 
-local function block(...)
-  return {
-    ...,
-    t({'', ''}),
-    i(0),
-    t({'', 'end'})
-  }
-end
-
 return {
   setup = function()
     ls.add_snippets('ruby', {
@@ -21,21 +12,39 @@ return {
       s('aa', { t('attr_accessor ') }),
       s('ar', { t('attr_reader ') }),
       s('aw', { t('attr_writer ') }),
-      s('begin', block(t('begin'))),
-      s('def', block(t('def'))),
-      s('do', block(t('do'))),
       s('pry', { t('binding.pry') }),
       s('prys', { t('binding.pry_shell') }),
-      s('class', block(
-        f(function()
-          return utils.file_namespace('class')
-        end)
-      )),
-      s('module', block(
-        f(function()
-          return utils.file_namespace('module')
-        end)
-      )),
+      --
+      s('begin', {
+        t({'begin do', ''}),
+        i(0),
+        t({'', 'end'})
+      }),
+      s('def', {
+        t('def '), i(1), t({'', ''}),
+        i(0),
+        t({'', 'end'})
+      }),
+      s('do', {
+        t({'do', ''}),
+        i(0),
+        t({'', 'end'})
+      }),
+      s('dop', {
+        t('do |'), i(1), t({'|', ''}),
+        i(0),
+        t({'', 'end'})
+      }),
+      s('class', {
+        f(function() return utils.file_namespace('class') end), i(1), t({'', ''}),
+        i(0),
+        t({'', 'end'})
+      }),
+      s('module', {
+        f(function() return utils.file_namespace('module') end), i(1), t({'', ''}),
+        i(0),
+        t({'', 'end'})
+      }),
     })
   end
 }
