@@ -14,7 +14,7 @@ grt() {
 }
 
 gdm() {
-  git diff "$(git branch-main)" "$@"
+  git diff "$(git branch-main)..." "$@"
 }
 
 gdfm() {
