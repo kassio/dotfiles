@@ -34,6 +34,12 @@ function M.expand(fmt, default)
   end
 end
 
+function M.selected_text()
+  return require('luasnip').function_node(function(_, p)
+    return p.env.TM_SELECTED_TEXT
+  end)
+end
+
 setmetatable(M, {
   __index = function(utils, key)
     local ok, module = pcall(require, 'plugins.completion.snippets.utils.' .. key)

@@ -1,13 +1,9 @@
+local utils = require('plugins.completion.snippets.utils')
 local ls = require('luasnip')
-local f = ls.function_node
 local fmt = require("luasnip.extras.fmt").fmt
 local i = ls.insert_node
 local s = ls.snippet
 local t = ls.text_node
-
-local function selected_text(_, p)
-  return p.env.TM_SELECTED_TEXT
-end
 
 return {
   setup = function()
@@ -20,63 +16,70 @@ return {
       --
       s('after', fmt([[
           after
-            {body}
+            {body}{cursor}
           end
         ]], {
-          body = f(selected_text)
+          body = utils.selected_text(),
+          cursor = i(0)
         })),
       --
       s('before', fmt([[
           before
-            {body}
+            {body}{cursor}
           end
         ]], {
-          body = f(selected_text)
+          body = utils.selected_text(),
+          cursor = i(0)
         })),
       --
       s('context', fmt([[
           context {desc} do
-            {body}
+            {body}{cursor}
           end
         ]], {
           desc = i(1),
-          body = f(selected_text)
+          body = utils.selected_text(),
+          cursor = i(0)
         })),
       --
       s('describe', fmt([[
           describe {desc} do
-            {body}
+            {body}{cursor}
           end
         ]], {
           desc = i(1),
-          body = f(selected_text)
+          body = utils.selected_text(),
+          cursor = i(0)
         })),
       --
       s('feature', fmt([[
           feature {desc} do
-            {body}
+            {body}{cursor}
           end
         ]], {
           desc = i(1),
-          body = f(selected_text)
+          body = utils.selected_text(),
+          cursor = i(0)
         })),
       --
       s('scenario', fmt([[
           scenario {desc} do
-            {body}
+            {body}{cursor}
           end
         ]], {
           desc = i(1),
-          body = f(selected_text)
+          body = utils.selected_text(),
+          cursor = i(0)
         })),
       --
       s('it', fmt([[
           it {desc} do
-            {body}
+            {body}{cursor}
           end
         ]], {
           desc = i(1),
-          body = f(selected_text)
+          body = utils.selected_text(),
+          cursor = i(0)
         })),
       --
       s('parameterized', fmt([[
@@ -92,7 +95,7 @@ return {
         ]], {
           fields = i(1),
           values = i(2),
-          tests = i(3),
+          tests = i(0),
         })),
     })
   end

@@ -1,14 +1,9 @@
 local utils = require('plugins.completion.snippets.utils')
 local ls = require('luasnip')
-local f = ls.function_node
 local fmt = require("luasnip.extras.fmt").fmt
 local i = ls.insert_node
 local s = ls.snippet
 local t = ls.text_node
-
-local function selected_text(_, p)
-  return p.env.TM_SELECTED_TEXT
-end
 
 return {
   setup = function()
@@ -22,45 +17,49 @@ return {
       --
       s('begin', fmt([[
           begin do
-            {body}
+            {body}{cursor}
           end
         ]], {
-          body = f(selected_text)
+          body = utils.selected_text(),
+          cursor = i(0)
         })),
       --
       s('def', fmt([[
           def {name}
-            {body}
+            {body}{cursor}
           end
         ]], {
           name = i(1),
-          body = f(selected_text)
+          body = utils.selected_text(),
+          cursor = i(0)
         })),
       --
       s('do', fmt([[
           do
-            {body}
+            {body}{cursor}
           end
         ]], {
-          body = f(selected_text)
+          body = utils.selected_text(),
+          cursor = i(0)
         })),
       --
       s('dop', fmt([[
           do |{args}|
-            {body}
+            {body}{cursor}
           end
         ]], {
           args = i(1),
-          body = f(selected_text)
+          body = utils.selected_text(),
+          cursor = i(0)
         })),
-      s('class', fmt(utils.ruby.type_block('class'), {
-        inheritance = i(1),
-        body = f(selected_text)
+      s('class', fmt(utils.ruby.type_block('class', '{body}{cursor}'), {
+        body = utils.selected_text(),
+        cursor = i(0)
       })),
       --
-      s('module', fmt(utils.ruby.type_block('module'), {
-        inheritance = i(1),
-        body = f(selected_text)
+      s('module', fmt(utils.ruby.type_block('module', '{body}{cursor}'), {
+        body = utils.selected_text(),
+        cursor = i(0)
       })),
       --
     })

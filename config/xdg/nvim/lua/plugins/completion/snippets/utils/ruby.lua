@@ -35,21 +35,21 @@ function M.type_inline()
   return '::' .. table.concat(file_structure(), '::')
 end
 
-function M.type_block(kind)
+function M.type_block(kind, body)
   local dirs = file_structure()
 
   -- Adds the {body} after the full type
-  table.insert(dirs, '{body}')
+  table.insert(dirs, body)
 
   local headers = vim
     .iter(ipairs(dirs))
     :map(function(i, dir)
       local indent = string.rep(' ', (i - 1) * 2)
 
-      if i == 1 and #dirs ~= 1 then -- namespace
+      if i == 1 and #dirs ~= 2 then -- namespace
         return string.format('module %s', dir)
       elseif i == #dirs - 1 then -- current type
-        return string.format('%s%s %s {inheritance}', indent, kind, dir)
+        return string.format('%s%s %s', indent, kind, dir)
       elseif i == #dirs then -- body
         return string.format('%s%s', indent, dir)
       else -- namespace
