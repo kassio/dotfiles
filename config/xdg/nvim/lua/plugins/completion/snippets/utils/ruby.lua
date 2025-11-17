@@ -2,7 +2,7 @@ local utils = require('utils')
 
 local M = {}
 
-function M.file_namespace(kind)
+local function file_structure()
   local prestart = false
   local start = false
   local base = vim.fn.expand('%:p:r')
@@ -24,67 +24,58 @@ function M.file_namespace(kind)
 
   if #dirs == 0 then
     local namespace, _ = utils.string.camelcase(vim.fn.expand('%:t:r'))
-    return string.format('%s %s', kind, namespace)
+
+    table.insert(dirs, namespace)
   end
+
+  return dirs
+end
+
+function M.type_inline()
+  return '::' .. table.concat(file_structure(), '::')
+end
+
+function M.type_block(kind)
+  local dirs = file_structure()
+
+  -- Adds the {body} after the full type
+  table.insert(dirs, '{body}')
 
   local headers = vim
     .iter(ipairs(dirs))
     :map(function(i, dir)
       local indent = string.rep(' ', (i - 1) * 2)
-      if i == 1 and #dirs ~= 1 then
+
+      if i == 1 and #dirs ~= 1 then -- namespace
         return string.format('module %s', dir)
-      elseif i == #dirs then
-        return string.format('%s%s %s', indent, kind, dir)
-      else
+      elseif i == #dirs - 1 then -- current type
+        return string.format('%s%s %s {inheritance}', indent, kind, dir)
+      elseif i == #dirs then -- body
+        return string.format('%s%s', indent, dir)
+      else -- namespace
         return string.format('%smodule %s', indent, dir)
       end
     end)
     :totable()
 
+  -- remove the extra "end" added with the "{body}"
+  table.remove(dirs)
+
   local tails = vim
-    .iter(ipairs(headers))
+    .iter(ipairs(dirs))
     :map(function(i, _)
       local indent = string.rep(' ', (i - 1) * 2)
       return string.format('%send', indent)
     end)
     :totable()
 
-  return string.format(
-    '%s\n\n%s',
+
+  return string.format(vim.trim([[
+      %s
+      %s
+    ]]),
     table.concat(headers, '\n'),
-    table.concat(vim.fn.reverse(tails), '\n')
-  )
-end
-
-function M.treesitter_namespace()
-  if vim.bo.filetype ~= 'ruby' then
-    return ''
-  end
-
-  return require('plugins.treesitter.fetcher').fetch()
-end
-
-local function get_rubocop_codes(lnum)
-  return vim
-    .iter(vim.diagnostic.get(0, { lnum = lnum }))
-    :filter(function(diagnostic)
-      return string.lower(diagnostic.source) == 'rubocop'
-    end)
-    :map(function(diagnostic)
-      return diagnostic.code
-    end)
-end
-
-function M.rubocop_code()
-  return '# rubocop: disable ' .. get_rubocop_codes(vim.fn.line('.') - 1):pop()
-end
-
-function M.rubocop_codes()
-  return get_rubocop_codes(vim.fn.line('.'))
-    :map(function(code)
-      return '# rubocop: disable ' .. code
-    end)
-    :join('\n')
+    table.concat(vim.fn.reverse(tails), '\n'))
 end
 
 return M

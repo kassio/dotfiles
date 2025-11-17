@@ -1,4 +1,4 @@
-local utils = require('utils.snippets')
+local utils = require('plugins.completion.snippets.utils')
 local ls = require('luasnip')
 local c = ls.choice_node
 local f = ls.function_node

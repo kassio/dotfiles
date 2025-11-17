@@ -1,4 +1,4 @@
-local utils = require('utils.ruby')
+local utils = require('plugins.completion.snippets.utils')
 local ls = require('luasnip')
 local f = ls.function_node
 local fmt = require("luasnip.extras.fmt").fmt
@@ -53,24 +53,16 @@ return {
           args = i(1),
           body = f(selected_text)
         })),
-      s('class', fmt([[
-          class {name} {inheritance}
-            {body}
-          end
-        ]], {
-          name = f(function() return utils.file_namespace('class') end),
-          inheritance = i(1),
-          body = f(selected_text)
-        })),
+      s('class', fmt(utils.ruby.type_block('class'), {
+        inheritance = i(1),
+        body = f(selected_text)
+      })),
       --
-      s('module', fmt([[
-          module {name}
-            {body}
-          end
-        ]], {
-          name = f(function() return utils.file_namespace('module') end),
-          body = f(selected_text)
-        })),
+      s('module', fmt(utils.ruby.type_block('module'), {
+        inheritance = i(1),
+        body = f(selected_text)
+      })),
+      --
     })
   end
 }

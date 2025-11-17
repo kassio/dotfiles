@@ -1,4 +1,4 @@
-local utils = require('utils.ruby')
+local utils = require('plugins.completion.snippets.utils')
 local ls = require('luasnip')
 local c = ls.choice_node
 local f = ls.function_node
@@ -19,7 +19,7 @@ return {
       s('redis_rate_limit', { t(':clean_gitlab_redis_rate_limiting') }),
       s('prep', {
         f(function()
-          return utils.file_namespace() .. '.prepend_mod'
+          return utils.ruby.type_inline() .. '.prepend_mod'
         end)
       }),
       s('feature_category_values', {

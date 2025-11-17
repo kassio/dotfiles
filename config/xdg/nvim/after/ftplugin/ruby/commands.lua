@@ -71,7 +71,7 @@ local commands = {
   {
     name = 'CopyNamespace',
     callback = function(opts)
-      local namespace = utils.ruby.treesitter_namespace()
+      local namespace = require('plugins.treesitter.fetcher').fetch()
       if namespace ~= '' then
         utils.to_clipboard(namespace, opts.bang)
       else
