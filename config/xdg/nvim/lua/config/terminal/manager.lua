@@ -34,6 +34,10 @@ function M.set_prefix(str)
   vim.g.terminal_command_prefix = str
 end
 
+function M.set_suffix(str)
+  vim.g.terminal_command_suffix = str
+end
+
 ---Send command to the terminal
 ---@param str string string/command to send, can be a vim.keycode
 ---@param breakline boolean|nil [default=true] send a breakline at the end of the given string
@@ -43,7 +47,13 @@ function M.send(str, breakline)
   end
 
   local command_prefix = vim.g.terminal_command_prefix or ''
-  local command = vim.trim(command_prefix .. ' ' .. str)
+  local command_suffix = vim.g.terminal_command_suffix or ''
+  local command = vim.trim(string.format(
+    '%s %s %s',
+    command_prefix,
+    str,
+    command_suffix
+  ))
 
   M.with_terminal({
     fn = 'send',

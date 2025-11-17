@@ -26,17 +26,17 @@ return {
 
       wezterm.start(pane_id)
     end, {
-      nargs = 1,
-      desc = 'define which wezterm pane use as terminal target',
-      complete = function()
-        return vim
-          .iter(wezterm.list_panes())
-          :map(function(item)
-            return string.format('%s - %s', item.pane_id, item.title)
-          end)
-          :totable()
-      end,
-    })
+        nargs = 1,
+        desc = 'define which wezterm pane use as terminal target',
+        complete = function()
+          return vim
+            .iter(wezterm.list_panes())
+            :map(function(item)
+              return string.format('%s - %s', item.pane_id, item.title)
+            end)
+            :totable()
+        end,
+      })
 
     command('TerminalWeztermDisconnect', wezterm.disconnect, {
       desc = 'desconnect from wezterm as a terminal target',
@@ -60,12 +60,21 @@ return {
       manager.send(manager.mapped_command)
     end, { nargs = '+', desc = 'map the given command to be executed with <leader>tm' })
 
-    command('Tprefix', function(opts)
+    command('TerminalPrefix', function(opts)
       manager.set_prefix(opts.args or '')
     end, {
-      nargs = '?',
-      desc = 'give a global prefix to all commands send to terminal, like ENV_VAR=1',
-    })
+        nargs = '?',
+        desc = 'give a global prefix to all commands send to terminal, like ENV_VAR=1',
+      })
+    vim.cmd.cabbrev('Tprefix', 'TerminalPrefix')
+
+    command('TerminalSuffix', function(opts)
+      manager.set_suffix(opts.args or '')
+    end, {
+        nargs = '?',
+        desc = 'give a global suffix to all commands send to terminal, like ENV_VAR=1',
+      })
+    vim.cmd.cabbrev('Tsuffix', 'TerminalSuffix')
 
     command('Tmapexec', function()
       if manager.mapped_command ~= nil then
