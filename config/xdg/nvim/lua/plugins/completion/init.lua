@@ -3,8 +3,8 @@ return {
   dependencies = {
     'rafamadriz/friendly-snippets',
     {
-      "L3MON4D3/LuaSnip",
-      run = "make install_jsregexp",
+      'L3MON4D3/LuaSnip',
+      run = 'make install_jsregexp',
     },
   },
   version = '1.*',
@@ -16,7 +16,7 @@ return {
         nerd_font_variant = 'mono'
       },
       fuzzy = {
-        implementation = "prefer_rust",
+        implementation = 'prefer_rust',
       },
       completion = {
         trigger = { show_in_snippet = false },
@@ -87,6 +87,6 @@ return {
     })
   end,
   opts_extend = {
-    "sources.default",
+    'sources.default',
   }
 }

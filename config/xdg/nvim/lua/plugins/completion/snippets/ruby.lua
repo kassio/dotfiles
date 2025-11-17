@@ -14,6 +14,8 @@ return {
       s('aw', { t('attr_writer ') }),
       s('pry', { t('binding.pry') }),
       s('prys', { t('binding.pry_shell') }),
+      s('class', utils.ruby.type_block('class')),
+      s('module', utils.ruby.type_block('module')),
       --
       s('begin', fmt([[
           begin do
@@ -52,16 +54,6 @@ return {
           body = utils.selected_text(),
           cursor = i(0)
         })),
-      s('class', fmt(utils.ruby.type_block('class', '{body}{cursor}'), {
-        body = utils.selected_text(),
-        cursor = i(0)
-      })),
-      --
-      s('module', fmt(utils.ruby.type_block('module', '{body}{cursor}'), {
-        body = utils.selected_text(),
-        cursor = i(0)
-      })),
-      --
     })
   end
 }

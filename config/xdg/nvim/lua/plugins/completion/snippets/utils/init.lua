@@ -1,9 +1,11 @@
+local ls = require('luasnip')
+
 local camelcase = require('utils.string').camelcase
 
 local M = {}
 
 ---Returns the current buffer file name
----@param opts table
+---@param opts? table
 ---  - remove: regex to remove patters from the filename
 ---  - case: if "camelcase" is passed, the filename is converted to PascalCase
 ---@return string
@@ -21,7 +23,9 @@ function M.filename(opts)
     filename = camelcase(filename)
   end
 
-  return filename
+  return ls.f(function()
+    return filename
+  end)
 end
 
 function M.expand(fmt, default)
@@ -35,7 +39,7 @@ function M.expand(fmt, default)
 end
 
 function M.selected_text()
-  return require('luasnip').function_node(function(_, p)
+  return ls.function_node(function(_, p)
     return p.env.TM_SELECTED_TEXT
   end)
 end

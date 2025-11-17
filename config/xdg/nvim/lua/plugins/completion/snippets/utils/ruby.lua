@@ -1,4 +1,7 @@
+local ls = require('luasnip')
+local fmt = require("luasnip.extras.fmt").fmt
 local utils = require('utils')
+local snippet_utils = require('plugins.completion.snippets.utils')
 
 local M = {}
 
@@ -31,35 +34,33 @@ local function file_structure()
   return dirs
 end
 
-function M.type_inline()
-  return '::' .. table.concat(file_structure(), '::')
+function M.type_inline(prefix, suffix)
+  prefix = prefix or ''
+  suffix = suffix or ''
+
+  return ls.f(function()
+    return prefix .. table.concat(file_structure(), '::') .. suffix
+  end)
 end
 
-function M.type_block(kind, body)
+function M.type_block(kind)
   local dirs = file_structure()
-
-  -- Adds the {body} after the full type
-  table.insert(dirs, body)
+  local max_indent = ''
 
   local headers = vim
     .iter(ipairs(dirs))
     :map(function(i, dir)
-      local indent = string.rep(' ', (i - 1) * 2)
+      max_indent = string.rep(' ', (i - 1) * 2)
 
-      if i == 1 and #dirs ~= 2 then -- namespace
+      if i == 1 and #dirs ~= 1 then -- namespace
         return string.format('module %s', dir)
-      elseif i == #dirs - 1 then -- current type
-        return string.format('%s%s %s', indent, kind, dir)
-      elseif i == #dirs then -- body
-        return string.format('%s%s', indent, dir)
+      elseif i == #dirs then -- current type
+        return string.format('%s%s %s', max_indent, kind, dir)
       else -- namespace
-        return string.format('%smodule %s', indent, dir)
+        return string.format('%smodule %s', max_indent, dir)
       end
     end)
     :totable()
-
-  -- remove the extra "end" added with the "{body}"
-  table.remove(dirs)
 
   local tails = vim
     .iter(ipairs(dirs))
@@ -69,13 +70,18 @@ function M.type_block(kind, body)
     end)
     :totable()
 
-
-  return string.format(vim.trim([[
-      %s
-      %s
-    ]]),
+  local text = table.concat({
     table.concat(headers, '\n'),
-    table.concat(vim.fn.reverse(tails), '\n'))
+    '\n',
+    max_indent .. '  {body}{cursor}',
+    '\n',
+    table.concat(vim.fn.reverse(tails), '\n')
+  })
+
+  return fmt(text, {
+    body = snippet_utils.selected_text(),
+    cursor = ls.insert_node(0)
+  })
 end
 
 return M

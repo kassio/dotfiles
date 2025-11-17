@@ -1,7 +1,6 @@
 local utils = require('plugins.completion.snippets.utils')
 local ls = require('luasnip')
 local c = ls.choice_node
-local f = ls.function_node
 local s = ls.snippet
 local t = ls.text_node
 
@@ -20,19 +19,13 @@ return {
         t('--------------------------------------------------------------------------------'),
       }),
       s('fname', {
-        f(function()
-          return utils.filename()
-        end)
+        utils.filename(),
       }),
       s('fname:camelcase', {
-        f(function()
-          return utils.filename({case = 'camelcase'})
-        end)
+        utils.filename({case = 'camelcase'}),
       }),
       s('fname:camelcase:noprefixnumbers', {
-        f(function()
-          return utils.filename({remove = '^%d*_', case = 'camelcase'})
-        end)
+        utils.filename({remove = '^%d*_', case = 'camelcase'})
       }),
     })
   end
