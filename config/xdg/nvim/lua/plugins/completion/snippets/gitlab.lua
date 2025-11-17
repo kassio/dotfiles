@@ -17,9 +17,11 @@ return {
       s('redis_shared_state', { t(':clean_gitlab_redis_shared_state') }),
       s('redis_cache', { t(':clean_gitlab_redis_cache') }),
       s('redis_rate_limit', { t(':clean_gitlab_redis_rate_limiting') }),
-      s('prep', { f(function()
-        return utils.file_namespace() .. '.prepend_mod'
-      end) }),
+      s('prep', {
+        f(function()
+          return utils.file_namespace() .. '.prepend_mod'
+        end)
+      }),
       s('feature_category_values', {
         c(1, {
           t('team_planning'),

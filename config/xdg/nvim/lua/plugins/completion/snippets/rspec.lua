@@ -1,7 +1,13 @@
 local ls = require('luasnip')
+local f = ls.function_node
+local fmt = require("luasnip.extras.fmt").fmt
 local i = ls.insert_node
 local s = ls.snippet
 local t = ls.text_node
+
+local function selected_text(_, p)
+  return p.env.TM_SELECTED_TEXT
+end
 
 return {
   setup = function()
@@ -12,50 +18,82 @@ return {
       s('ssopen', { t('screenshot_and_open_image') }),
       s('sssave', { t('screenshot_and_save_page') }),
       --
-      s('after', {
-        t({'after do', ''}),
-        i(0),
-        t({'', 'end'})
-      }),
-      s('before', {
-        t({'before do', ''}),
-        i(0),
-        t({'', 'end'})
-      }),
-      s('context', {
-        t('context '), i(1), t({' do', ''}),
-        i(0),
-        t({'', 'end'})
-      }),
-      s('describe', {
-        t('describe '), i(1), t({' do', ''}),
-        i(0),
-        t({'', 'end'})
-      }),
-      s('feature', {
-        t('feature '), i(1), t({' do', ''}),
-        i(0),
-        t({'', 'end'})
-      }),
-      s('scenario', {
-        t('scenario '), i(1), t({' do', ''}),
-        i(0),
-        t({'', 'end'})
-      }),
-      s('it', {
-        t('it '), i(1), t({' do', ''}),
-        i(0),
-        t({'', 'end'})
-      }),
-      s('parameterized', { t({
-        'using RSpec::Parameterized::TableSyntax',
-        '',
-        'where() do',
-        'end',
-        '',
-        'with_them do',
-        'end'
-      })}),
+      s('after', fmt([[
+          after
+            {body}
+          end
+        ]], {
+          body = f(selected_text)
+        })),
+      --
+      s('before', fmt([[
+          before
+            {body}
+          end
+        ]], {
+          body = f(selected_text)
+        })),
+      --
+      s('context', fmt([[
+          context {desc} do
+            {body}
+          end
+        ]], {
+          desc = i(1),
+          body = f(selected_text)
+        })),
+      --
+      s('describe', fmt([[
+          describe {desc} do
+            {body}
+          end
+        ]], {
+          desc = i(1),
+          body = f(selected_text)
+        })),
+      --
+      s('feature', fmt([[
+          feature {desc} do
+            {body}
+          end
+        ]], {
+          desc = i(1),
+          body = f(selected_text)
+        })),
+      --
+      s('scenario', fmt([[
+          scenario {desc} do
+            {body}
+          end
+        ]], {
+          desc = i(1),
+          body = f(selected_text)
+        })),
+      --
+      s('it', fmt([[
+          it {desc} do
+            {body}
+          end
+        ]], {
+          desc = i(1),
+          body = f(selected_text)
+        })),
+      --
+      s('parameterized', fmt([[
+          using RSpec::Parameterized::TableSyntax
+
+          where({fields}) do
+            {values}
+          end
+
+          with_them do
+            {tests}
+          end
+        ]], {
+          fields = i(1),
+          values = i(2),
+          tests = i(3),
+        })),
     })
   end
 }
