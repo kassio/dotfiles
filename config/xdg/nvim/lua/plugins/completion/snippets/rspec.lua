@@ -15,7 +15,7 @@ return {
       s('sssave', { t('screenshot_and_save_page') }),
       --
       s('after', fmt([[
-          after
+          after do
             {body}{cursor}
           end
         ]], {
@@ -24,7 +24,7 @@ return {
         })),
       --
       s('before', fmt([[
-          before
+          before do
             {body}{cursor}
           end
         ]], {
