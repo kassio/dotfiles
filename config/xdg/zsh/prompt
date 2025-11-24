@@ -1,0 +1,20 @@
+# vim:ft=zsh:
+
+GIT_PS1_OMITSPARSESTATE=true
+GIT_PS1_SHOWCOLORHINTS=true
+GIT_PS1_SHOWCONFLICTSTATE=yes
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWSTASHSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWUPSTREAM=verbose
+GIT_PS1_STATESEPARATOR=" "
+
+# Current time on the right
+export RPS1="%F{32}$(date +"%H:%m:%S")%f"
+
+# Current directory and Git Status on the left
+precmd () {
+  local chevron="$(printc -b -c 32 "⟩")"
+
+  __git_ps1 "%F{32}%~%f" "${chevron} " " (%s)\n"
+}

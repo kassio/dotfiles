@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
 
+source "${HOMEBREW_PREFIX}/etc/bash_completion.d/git-prompt.sh"
 export GIT_EDITOR="$EDITOR"
 export GIT_COMPLETION_CHECKOUT_NO_GUESS=1

@@ -23,10 +23,7 @@ PATH=".userbin:${PATH}"
 typeset -U PATH
 export PATH
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+export PS1=""
 
 
 set zle_bracketed_paste  # Explicitly restore this zsh default
@@ -119,17 +116,17 @@ source "${XDG_CONFIG_HOME}/ruby/env"
 source "${ZSH_CONFIG_HOME}/alias"
 source "${ZSH_CONFIG_HOME}/autosuggest"
 source "${ZSH_CONFIG_HOME}/bindkeys"
-source "${ZSH_CONFIG_HOME}/completions"
+source "${ZSH_CONFIG_HOME}/compdef"
 source "${ZSH_CONFIG_HOME}/fzf"
 source "${ZSH_CONFIG_HOME}/jq"
 source "${ZSH_CONFIG_HOME}/lua"
 source "${ZSH_CONFIG_HOME}/man"
 source "${ZSH_CONFIG_HOME}/title"
 source "${ZSH_CONFIG_HOME}/ulimit"
+source "${ZSH_CONFIG_HOME}/prompt"
 
 source "${ZSH_CONFIG_HOME}/plugins/init"
 
-source "${ZSH_CONFIG_HOME}/p10k.zsh" 2>/dev/null # zsh prompt
 source "${HOME}/.env" 2>/dev/null # Ephemeral stuff
 source "${HOME}/.dotfiles.private/env" 2>/dev/null # Private stuff
 source "${HOME}/.gitlab-extensions/env" 2>/dev/null # GitLab stuff
