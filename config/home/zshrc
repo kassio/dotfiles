@@ -24,7 +24,10 @@ typeset -U PATH
 export PATH
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-source "${ZSH_CONFIG_HOME}/p10k.cache.zsh" 2>/dev/null # zsh prompt cache
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 
 set zle_bracketed_paste  # Explicitly restore this zsh default
 autoload -Uz bracketed-paste-magic
