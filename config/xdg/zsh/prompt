@@ -1,20 +1,80 @@
 # vim:ft=zsh:
 
-GIT_PS1_OMITSPARSESTATE=true
-GIT_PS1_SHOWCOLORHINTS=true
-GIT_PS1_SHOWCONFLICTSTATE=yes
-GIT_PS1_SHOWDIRTYSTATE=true
-GIT_PS1_SHOWSTASHSTATE=true
-GIT_PS1_SHOWUNTRACKEDFILES=true
-GIT_PS1_SHOWUPSTREAM=verbose
-GIT_PS1_STATESEPARATOR=" "
-
 # Current time on the right
-export RPS1="%F{32}$(date +"%H:%m:%S")%f"
+RPROMPT="%F{32}$(date +"%H:%m:%S")%f"
 
-# Current directory and Git Status on the left
-precmd () {
-  local chevron="$(printc -b -c 32 "⟩")"
+# Colors
+# BLUE="32"
+# GRAY="245"
+# GREEN="34"
+# RED="160"
+# YELLOW="220"
 
-  __git_ps1 "%F{32}%~%f" "${chevron} " " (%s)\n"
+autoload -Uz vcs_info
+setopt PROMPT_SUBST
+
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:git:*' formats ' %F{220}(%F{34}%b%f%m%F{220})%f'
+zstyle ':vcs_info:git:*' actionformats ' %F{220}(%F{34}%b%F{220}|%F{red}%a%f%m%F{220})%f'
+
+# Enable hooks
+zstyle ':vcs_info:git*+set-message:*' hooks git-status
+
+# Combined hook to show all git status info
++vi-git-status() {
+  local status_info=""
+
+  # Check for unstaged changes (modified files)
+  if ! git diff --quiet 2>/dev/null; then
+    status_info+='%F{red}*%f'
+  fi
+
+  # Check for staged changes
+  if ! git diff --cached --quiet 2>/dev/null; then
+    status_info+='%F{34}+%f'
+  fi
+
+  # Check for untracked files
+  if git status --porcelain 2>/dev/null | grep -q '^?? '; then
+    status_info+='%F{red}%%%f'
+  fi
+
+  # Check for stash
+  local stashes="$(git stash list 2>/dev/null | wc -l | tr -d ' ')"
+  if [[ "${stashes}" -gt 0 ]]; then
+    status_info+="%F{32}$%f"
+  fi
+
+  # Check ahead/behind - try multiple methods
+  local ahead=0
+  local behind=0
+  local upstream="$(git rev-parse --abbrev-ref --symbolic-full-name @{upstream} 2>/dev/null)"
+
+  if [[ -n "${upstream}" ]]; then
+    # Method 1: Using rev-list with upstream
+    ahead="$(git rev-list --count ${upstream}..HEAD 2>/dev/null)"
+    behind="$(git rev-list --count HEAD..${upstream} 2>/dev/null)"
+  fi
+
+  if [[ "${ahead}" -gt 0 ]]; then
+    status_info+="%F{245}+${ahead}%f"
+  fi
+
+  if [[ "${behind}" -gt 0 ]]; then
+    status_info+="%F{245}-${behind}%f"
+  fi
+
+  # Add status info with space if there's anything to show
+  if [[ -n "${status_info}" ]]; then
+    hook_com[misc]=" ${status_info}"
+  fi
 }
+
+precmd() {
+  vcs_info
+}
+
+PROMPT='
+%F{32}%~%f${vcs_info_msg_0_}
+%F{34}⟩%f '
