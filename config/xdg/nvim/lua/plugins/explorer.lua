@@ -85,7 +85,6 @@ return {
             ['e/'] = 'fuzzy_finder',
             ['a'] = { 'add', config = { show_path = 'relative' } },
             ['c'] = { 'copy', config = { show_path = 'relative' } },
-            ['d'] = 'delete',
             ['p'] = 'paste_from_clipboard',
             ['r'] = { 'move', config = { show_path = 'relative' } },
             ['x'] = 'cut_to_clipboard',
@@ -97,6 +96,39 @@ return {
             ['<C-b>'] = { 'scroll_preview', config = { direction = 10 } },
             ['<C-f>'] = { 'scroll_preview', config = { direction = -10 } },
             ['<esc>'] = 'revert_preview',
+            ['d'] = {
+              function(state)
+                local node = state.tree:get_node()
+                local bufnr = vim.fn.bufnr(node.path)
+                local winid = vim.fn.bufwinid(bufnr)
+
+                local confirm = vim.fn.confirm(string.format('Delete "%s"?', node.path), '&Yes\n&No')
+                if confirm ~= 1 then
+                  return
+                end
+
+                local listed_buffers = vim.tbl_filter(function(buf)
+                  return vim.api.nvim_buf_is_loaded(buf) and
+                    vim.bo[buf].buflisted and
+                    vim.bo[bufnr].buftype ~= 'nofile'
+                end, vim.api.nvim_list_bufs())
+
+                if #listed_buffers <= 1 then
+                  vim.api.nvim_win_call(winid, function()
+                    vim.cmd('new')
+                  end)
+                end
+
+                vim.api.nvim_buf_delete(bufnr, { force = true })
+                vim.fn.delete(node.path, 'rf')
+
+                require('neo-tree.command').execute({
+                  action = 'focus',
+                  toggle = false,
+                  reveal_force_cwd = false,
+                })
+              end
+            },
             ['Y'] = {
               function(state)
                 local node = state.tree:get_node()
