@@ -39,15 +39,31 @@ function M.set_suffix(str)
 end
 
 ---Send command to the terminal
----@param str string string/command to send, can be a vim.keycode
----@param breakline boolean|nil [default=true] send a breakline at the end of the given string
-function M.send(str, breakline)
-  if breakline == nil then
-    breakline = true
+--- @param str string string/command to send, can be a vim.keycode
+--- @param opts table Options with the following fields
+---  - breakline (boolean): send a breakline at the end of the given string (default true)
+---  - include_prefix (boolean): if the global prefix is included (default true)
+---  - include_suffix (boolean): if the global suffix is included (default true)
+function M.send(str, opts)
+  opts = vim.tbl_extend('keep', opts or {}, {
+    breakline = true,
+    include_prefix = true,
+    include_suffix = true,
+  })
+
+  if opts.breakline == nil then
+    opts.breakline = true
   end
 
-  local command_prefix = vim.g.terminal_command_prefix or ''
-  local command_suffix = vim.g.terminal_command_suffix or ''
+  local command_prefix = ''
+  local command_suffix = ''
+  if opts.include_prefix then
+    command_prefix = vim.g.terminal_command_prefix or ''
+  end
+  if opts.include_suffix then
+    command_suffix = vim.g.terminal_command_suffix or ''
+  end
+
   local command = vim.trim(string.format(
     '%s %s %s',
     command_prefix,
@@ -59,7 +75,7 @@ function M.send(str, breakline)
     fn = 'send',
     opts = {
       string = command,
-      breakline = breakline,
+      breakline = opts.breakline,
     },
   })
 end
