@@ -77,4 +77,4 @@ precmd() {
 
 PROMPT='
 %F{32}%~%f${vcs_info_msg_0_}
-%F{34}⟩%f '
+%(?.%F{green}.%F{red})❯%f '
