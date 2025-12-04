@@ -1,6 +1,7 @@
 return {
   setup = function(ffinder)
     vim.keymap.set('n', '<leader>fn', ffinder.blines, { desc = 'find:buffer' })
+    vim.keymap.set('n', '<leader>ft', ffinder.treesitter, { desc = 'find:buffer' })
     vim.keymap.set({ 'n', 'x' }, '<leader>fN', function ()
       local word = require('utils').cword()
 
