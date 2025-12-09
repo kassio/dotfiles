@@ -25,55 +25,51 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-status
 +vi-git-status() {
   local status_info=""
 
-  # Check for unstaged changes (modified files)
+  # unstaged changes (modified files)
   if ! git diff --quiet 2>/dev/null; then
-    status_info+='%F{red}*%f'
+    status_info+="%F{red}*%f"
   fi
 
-  # Check for staged changes
+  # staged changes
   if ! git diff --cached --quiet 2>/dev/null; then
-    status_info+='%F{34}+%f'
+    status_info+="%F{34}+%f"
   fi
 
-  # Check for untracked files
+  # untracked files
   if git status --porcelain 2>/dev/null | grep -q '^?? '; then
-    status_info+='%F{red}%%%f'
+    status_info+="%F{red}%%%f"
   fi
 
-  # Check for stash
+  # stash
   local stashes="$(git stash list 2>/dev/null | wc -l | tr -d ' ')"
   if [[ "${stashes}" -gt 0 ]]; then
     status_info+="%F{32}$%f"
   fi
 
-  # Check ahead/behind - try multiple methods
-  local ahead=0
-  local behind=0
   local upstream="$(git rev-parse --abbrev-ref --symbolic-full-name @{upstream} 2>/dev/null)"
 
-  if [[ -n "${upstream}" ]]; then
-    # Method 1: Using rev-list with upstream
-    ahead="$(git rev-list --count ${upstream}..HEAD 2>/dev/null)"
-    behind="$(git rev-list --count HEAD..${upstream} 2>/dev/null)"
-  fi
+  if [[ "${upstream}" ]]; then
+    local ahead="$(git rev-list --count ${upstream}..HEAD 2>/dev/null)"
+    local behind="$(git rev-list --count HEAD..${upstream} 2>/dev/null)"
 
-  if [[ "${ahead}" -gt 0 ]]; then
-    status_info+="%F{245}+${ahead}%f"
-  fi
-
-  if [[ "${behind}" -gt 0 ]]; then
-    status_info+="%F{245}-${behind}%f"
+    if [[ "${ahead}" -eq 0 ]] && [[ "" -eq 0 ]]; then
+      status_info+=" %F{245}u=%f"
+    else
+      status_info+=" %F{245}u"
+      [[ "${ahead}" -gt 0 ]] && status_info+="+${ahead}"
+      [[ "${behind}" -gt 0 ]] && status_info+="-${behind}"
+      status_info+="%f"
+    fi
   fi
 
   # Add status info with space if there's anything to show
   if [[ -n "${status_info}" ]]; then
-    hook_com[misc]=" ${status_info}"
+    # Trim left
+    hook_com[misc]=" ${status_info#"${status_info%%[![:space:]]*}"}"
   fi
 }
 
-precmd() {
-  vcs_info
-}
+precmd() { vcs_info; }
 
 PROMPT='
 %F{32}%~%f${vcs_info_msg_0_}
