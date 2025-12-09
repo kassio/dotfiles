@@ -1,17 +1,10 @@
 # vim:ft=zsh:
 
-# Current time on the right
-RPROMPT="%F{32}$(date +"%H:%m:%S")%f"
-
-# Colors
-# BLUE="32"
-# GRAY="245"
-# GREEN="34"
-# RED="160"
-# YELLOW="220"
-
 autoload -Uz vcs_info
 setopt PROMPT_SUBST
+
+# Current time on the right
+RPROMPT="%F{32}$(date +"%H:%m:%S")%f"
 
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
