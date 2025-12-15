@@ -6,6 +6,12 @@ return {
     local actions = require("fzf-lua.actions")
 
     ffinder.setup({
+      { "fzf-native", "hide" },
+      keymap = {
+        builtin = {
+          ["<c-l>"] = "toggle-preview",
+        }
+      },
       actions = {
         files = {
           ["default"] = actions.file_edit,
