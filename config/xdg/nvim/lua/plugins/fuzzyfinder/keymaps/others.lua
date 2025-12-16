@@ -8,7 +8,7 @@ return {
       ffinder.helptags({ query = word })
     end, { desc = 'find:help' })
 
-    vim.keymap.set('n', '<leader>fk', ffinder.keymaps, { desc = 'find:keymaps' })
+    vim.keymap.set('n', '<leader>fm', ffinder.keymaps, { desc = 'find:keymaps' })
     vim.keymap.set('n', '<leader>fp', ffinder.resume, { desc = 'find:resume' })
   end
 }
