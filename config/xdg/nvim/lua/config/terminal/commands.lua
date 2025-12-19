@@ -43,8 +43,21 @@ return {
     })
 
     command('T', function(opts)
-      manager.send(vim.fn.expandcmd(opts.args))
-    end, { nargs = '+', desc = 'send the argument as a terminal command' })
+      local include_extras = not opts.bang
+      manager.send(
+        vim.fn.expandcmd(opts.args),
+        {
+          include_prefix = include_extras,
+          include_suffix = include_extras,
+        }
+      )
+    end,
+      {
+        nargs = '+',
+        bang = true,
+        desc = 'send the argument as a terminal command (Use :T! to ignore prefix/suffix)',
+      }
+    )
 
     -- run nvim command
     command('Tnvim', function(opts)
