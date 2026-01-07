@@ -64,12 +64,7 @@ function M.send(str, opts)
     command_suffix = vim.g.terminal_command_suffix or ''
   end
 
-  local command = vim.trim(string.format(
-    '%s %s %s',
-    command_prefix,
-    str,
-    command_suffix
-  ))
+  local command = vim.trim(string.format('%s %s %s', command_prefix, str, command_suffix))
 
   M.with_terminal({
     fn = 'send',

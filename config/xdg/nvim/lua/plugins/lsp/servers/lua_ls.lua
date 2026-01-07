@@ -7,7 +7,14 @@ return {
     Lua = {
       telemetry = { enable = false },
       hint = { enable = true },
-      format = { enable = true },
+      format = {
+        enable = true,
+        defaultConfig = {
+          quote_style = 'single',
+          indent_style = 'space',
+          indent_size = '2',
+        },
+      },
       diagnostics = {
         globals = {
           'vim',

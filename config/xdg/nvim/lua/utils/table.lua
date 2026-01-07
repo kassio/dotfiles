@@ -11,7 +11,7 @@ if not M.pack then
 end
 
 function M.keys_except(tbl, ...)
-  local except = {...}
+  local except = { ... }
   local result = {}
 
   for key, _ in pairs(tbl) do

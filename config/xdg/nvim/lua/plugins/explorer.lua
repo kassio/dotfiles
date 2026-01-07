@@ -102,15 +102,16 @@ return {
                 local bufnr = vim.fn.bufnr(node.path)
                 local winid = vim.fn.bufwinid(bufnr)
 
-                local confirm = vim.fn.confirm(string.format('Delete "%s"?', node.path), '&Yes\n&No')
+                local confirm =
+                  vim.fn.confirm(string.format('Delete "%s"?', node.path), '&Yes\n&No')
                 if confirm ~= 1 then
                   return
                 end
 
                 local listed_buffers = vim.tbl_filter(function(buf)
-                  return vim.api.nvim_buf_is_loaded(buf) and
-                    vim.bo[buf].buflisted and
-                    vim.bo[bufnr].buftype ~= 'nofile'
+                  return vim.api.nvim_buf_is_loaded(buf)
+                    and vim.bo[buf].buflisted
+                    and vim.bo[bufnr].buftype ~= 'nofile'
                 end, vim.api.nvim_list_bufs())
 
                 if #listed_buffers <= 1 then
@@ -127,7 +128,7 @@ return {
                   toggle = false,
                   reveal_force_cwd = false,
                 })
-              end
+              end,
             },
             ['Y'] = {
               function(state)

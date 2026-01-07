@@ -1,6 +1,6 @@
 local utils = require('plugins.completion.snippets.utils')
 local ls = require('luasnip')
-local fmt = require("luasnip.extras.fmt").fmt
+local fmt = require('luasnip.extras.fmt').fmt
 local c = ls.choice_node
 local i = ls.insert_node
 local s = ls.snippet
@@ -12,7 +12,7 @@ local function category_options()
     t(':shared'),
     t(':portfolio_management'),
     t(':pages'),
-    t(':wiki')
+    t(':wiki'),
   })
 end
 
@@ -26,12 +26,15 @@ return {
       s('redis_shared_state', { t(':clean_gitlab_redis_shared_state') }),
       s('redis_cache', { t(':clean_gitlab_redis_cache') }),
       s('redis_rate_limit', { t(':clean_gitlab_redis_rate_limiting') }),
-      s('stub_feature_flags', fmt('stub_feature_flags({cursor}){after}', {
-        cursor = i(1),
-        after = i(0),
-      })),
+      s(
+        'stub_feature_flags',
+        fmt('stub_feature_flags({cursor}){after}', {
+          cursor = i(1),
+          after = i(0),
+        })
+      ),
       s('prep', {
-        utils.ruby.type_inline('::', '.prepend_mod')
+        utils.ruby.type_inline('::', '.prepend_mod'),
       }),
       s('feature_category_values', {
         category_options(),
@@ -41,5 +44,5 @@ return {
         category_options(),
       }),
     })
-  end
+  end,
 }

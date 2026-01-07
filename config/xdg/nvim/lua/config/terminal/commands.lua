@@ -26,17 +26,17 @@ return {
 
       wezterm.start(pane_id)
     end, {
-        nargs = 1,
-        desc = 'define which wezterm pane use as terminal target',
-        complete = function()
-          return vim
-            .iter(wezterm.list_panes())
-            :map(function(item)
-              return string.format('%s - %s', item.pane_id, item.title)
-            end)
-            :totable()
-        end,
-      })
+      nargs = 1,
+      desc = 'define which wezterm pane use as terminal target',
+      complete = function()
+        return vim
+          .iter(wezterm.list_panes())
+          :map(function(item)
+            return string.format('%s - %s', item.pane_id, item.title)
+          end)
+          :totable()
+      end,
+    })
 
     command('TerminalWeztermDisconnect', wezterm.disconnect, {
       desc = 'desconnect from wezterm as a terminal target',
@@ -44,20 +44,15 @@ return {
 
     command('T', function(opts)
       local include_extras = not opts.bang
-      manager.send(
-        vim.fn.expandcmd(opts.args),
-        {
-          include_prefix = include_extras,
-          include_suffix = include_extras,
-        }
-      )
-    end,
-      {
-        nargs = '+',
-        bang = true,
-        desc = 'send the argument as a terminal command (Use :T! to ignore prefix/suffix)',
-      }
-    )
+      manager.send(vim.fn.expandcmd(opts.args), {
+        include_prefix = include_extras,
+        include_suffix = include_extras,
+      })
+    end, {
+      nargs = '+',
+      bang = true,
+      desc = 'send the argument as a terminal command (Use :T! to ignore prefix/suffix)',
+    })
 
     -- run nvim command
     command('Tnvim', function(opts)
@@ -76,17 +71,17 @@ return {
     command('TerminalPrefix', function(opts)
       manager.set_prefix(opts.args or '')
     end, {
-        nargs = '?',
-        desc = 'give a global prefix to all commands send to terminal, like ENV_VAR=1',
-      })
+      nargs = '?',
+      desc = 'give a global prefix to all commands send to terminal, like ENV_VAR=1',
+    })
     vim.cmd.cabbrev('Tprefix', 'TerminalPrefix')
 
     command('TerminalSuffix', function(opts)
       manager.set_suffix(opts.args or '')
     end, {
-        nargs = '?',
-        desc = 'give a global suffix to all commands send to terminal, like ENV_VAR=1',
-      })
+      nargs = '?',
+      desc = 'give a global suffix to all commands send to terminal, like ENV_VAR=1',
+    })
     vim.cmd.cabbrev('Tsuffix', 'TerminalSuffix')
 
     command('Tmapexec', function()

@@ -13,7 +13,7 @@ return {
 
     require('blink.cmp').setup({
       appearance = {
-        nerd_font_variant = 'mono'
+        nerd_font_variant = 'mono',
       },
       fuzzy = {
         implementation = 'prefer_rust',
@@ -88,5 +88,5 @@ return {
   end,
   opts_extend = {
     'sources.default',
-  }
+  },
 }

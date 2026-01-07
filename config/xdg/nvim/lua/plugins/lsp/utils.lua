@@ -3,13 +3,11 @@ local lsp_methods = vim.lsp.protocol.Methods
 local formattable_servers = require('plugins.lsp.servers').formattable
 
 local function can_format(client, bufnr)
-  return
-    vim.bo[bufnr].modifiable
+  return vim.bo[bufnr].modifiable
     and client
     and vim.tbl_contains(formattable_servers, client.name)
     and client:supports_method(lsp_methods.textDocument_formatting)
 end
-
 
 local function format_with(client, bufnr)
   require('utils.buffers').preserve(function()

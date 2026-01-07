@@ -26,13 +26,13 @@ return {
         callback = function(opts)
           require('plugins.lsp.keymaps').setup(opts.buf)
 
-          vim.bo[opts.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-        end
+          vim.bo[opts.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+        end,
       })
 
       vim.api.nvim_create_user_command('LspFormat', function()
         lsp_utils.format()
-      end, { desc = 'lsp: format current buffer'})
+      end, { desc = 'lsp: format current buffer' })
 
       vim.api.nvim_create_autocmd('BufWritePre', {
         callback = function(opts)

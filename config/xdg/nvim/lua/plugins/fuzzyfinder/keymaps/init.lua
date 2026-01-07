@@ -6,5 +6,5 @@ return {
     require('plugins.fuzzyfinder.keymaps.git').setup(ffinder)
     require('plugins.fuzzyfinder.keymaps.rails').setup(ffinder)
     require('plugins.fuzzyfinder.keymaps.others').setup(ffinder)
-  end
+  end,
 }

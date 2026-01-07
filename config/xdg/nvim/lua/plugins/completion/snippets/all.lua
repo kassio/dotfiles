@@ -13,7 +13,7 @@ return {
           t('zsh'),
           t('ruby'),
           t('sh'),
-        })
+        }),
       }),
       s('hri', {
         t('--------------------------------------------------------------------------------'),
@@ -22,11 +22,11 @@ return {
         utils.filename(),
       }),
       s('fname:camelcase', {
-        utils.filename({case = 'camelcase'}),
+        utils.filename({ case = 'camelcase' }),
       }),
       s('fname:camelcase:noprefixnumbers', {
-        utils.filename({remove = '^%d*_', case = 'camelcase'})
+        utils.filename({ remove = '^%d*_', case = 'camelcase' }),
       }),
     })
-  end
+  end,
 }

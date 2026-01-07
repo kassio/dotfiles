@@ -1,6 +1,6 @@
 local utils = require('plugins.completion.snippets.utils')
 local ls = require('luasnip')
-local fmt = require("luasnip.extras.fmt").fmt
+local fmt = require('luasnip.extras.fmt').fmt
 local i = ls.insert_node
 local s = ls.snippet
 local t = ls.text_node
@@ -14,75 +14,120 @@ return {
       s('ssopen', { t('screenshot_and_open_image') }),
       s('sssave', { t('screenshot_and_save_page') }),
       --
-      s('after', fmt([[
+      s(
+        'after',
+        fmt(
+          [[
           after do
             {body}{cursor}
           end
-        ]], {
-          body = utils.selected_text(),
-          cursor = i(0)
-        })),
+        ]],
+          {
+            body = utils.selected_text(),
+            cursor = i(0),
+          }
+        )
+      ),
       --
-      s('before', fmt([[
+      s(
+        'before',
+        fmt(
+          [[
           before do
             {body}{cursor}
           end
-        ]], {
-          body = utils.selected_text(),
-          cursor = i(0)
-        })),
+        ]],
+          {
+            body = utils.selected_text(),
+            cursor = i(0),
+          }
+        )
+      ),
       --
-      s('context', fmt([[
+      s(
+        'context',
+        fmt(
+          [[
           context {desc} do
             {body}{cursor}
           end
-        ]], {
-          desc = i(1),
-          body = utils.selected_text(),
-          cursor = i(0)
-        })),
+        ]],
+          {
+            desc = i(1),
+            body = utils.selected_text(),
+            cursor = i(0),
+          }
+        )
+      ),
       --
-      s('describe', fmt([[
+      s(
+        'describe',
+        fmt(
+          [[
           describe {desc} do
             {body}{cursor}
           end
-        ]], {
-          desc = i(1),
-          body = utils.selected_text(),
-          cursor = i(0)
-        })),
+        ]],
+          {
+            desc = i(1),
+            body = utils.selected_text(),
+            cursor = i(0),
+          }
+        )
+      ),
       --
-      s('feature', fmt([[
+      s(
+        'feature',
+        fmt(
+          [[
           feature {desc} do
             {body}{cursor}
           end
-        ]], {
-          desc = i(1),
-          body = utils.selected_text(),
-          cursor = i(0)
-        })),
+        ]],
+          {
+            desc = i(1),
+            body = utils.selected_text(),
+            cursor = i(0),
+          }
+        )
+      ),
       --
-      s('scenario', fmt([[
+      s(
+        'scenario',
+        fmt(
+          [[
           scenario {desc} do
             {body}{cursor}
           end
-        ]], {
-          desc = i(1),
-          body = utils.selected_text(),
-          cursor = i(0)
-        })),
+        ]],
+          {
+            desc = i(1),
+            body = utils.selected_text(),
+            cursor = i(0),
+          }
+        )
+      ),
       --
-      s('it', fmt([[
+      s(
+        'it',
+        fmt(
+          [[
           it {desc} do
             {body}{cursor}
           end
-        ]], {
-          desc = i(1),
-          body = utils.selected_text(),
-          cursor = i(0)
-        })),
+        ]],
+          {
+            desc = i(1),
+            body = utils.selected_text(),
+            cursor = i(0),
+          }
+        )
+      ),
       --
-      s('parameterized', fmt([[
+      s(
+        'parameterized',
+        fmt(
+          [[
           using RSpec::Parameterized::TableSyntax
 
           where({fields}) do
@@ -92,11 +137,14 @@ return {
           with_them do
             {tests}
           end
-        ]], {
-          fields = i(1),
-          values = i(2),
-          tests = i(0),
-        })),
+        ]],
+          {
+            fields = i(1),
+            values = i(2),
+            tests = i(0),
+          }
+        )
+      ),
     })
-  end
+  end,
 }

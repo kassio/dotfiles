@@ -15,5 +15,5 @@ return {
       s('active_record_logger', { t('ActiveRecord::Base.logger = Logger.new($stdout)') }),
       s('extend_concern', { t('extend ActiveSupport::Concern') }),
     })
-  end
+  end,
 }

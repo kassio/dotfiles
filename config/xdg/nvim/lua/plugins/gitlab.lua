@@ -14,7 +14,7 @@ return {
     cond = function()
       return require('utils').is_present(vim.env.GITLAB_TOKEN)
     end,
-    config = function ()
+    config = function()
       require('gitlab').setup({
         minimal_message_level = vim.lsp.log_levels.ERROR,
         statusline = {
@@ -33,6 +33,6 @@ return {
           clear_suggestions = '<C-k>',
         },
       })
-    end
+    end,
   },
 }

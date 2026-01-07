@@ -1,5 +1,5 @@
 local ls = require('luasnip')
-local fmt = require("luasnip.extras.fmt").fmt
+local fmt = require('luasnip.extras.fmt').fmt
 local utils = require('utils')
 local snippet_utils = require('plugins.completion.snippets.utils')
 
@@ -75,12 +75,12 @@ function M.type_block(kind)
     '\n',
     max_indent .. '  {body}{cursor}',
     '\n',
-    table.concat(vim.fn.reverse(tails), '\n')
+    table.concat(vim.fn.reverse(tails), '\n'),
   })
 
   return fmt(text, {
     body = snippet_utils.selected_text(),
-    cursor = ls.insert_node(0)
+    cursor = ls.insert_node(0),
   })
 end
 

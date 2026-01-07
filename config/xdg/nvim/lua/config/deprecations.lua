@@ -1,5 +1,5 @@
 local ignored = {
-  "vim.tbl_flatten"
+  'vim.tbl_flatten',
 }
 
 local original_deprecate = vim.deprecate
