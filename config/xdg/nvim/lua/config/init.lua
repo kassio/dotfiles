@@ -1,4 +1,5 @@
 -- my own set of configs and helpers (plugin independent)
+require('config.deprecations')
 require('config.options')
 require('config.filetype')
 require('config.keymaps')
