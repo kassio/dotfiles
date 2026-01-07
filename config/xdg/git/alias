@@ -89,9 +89,16 @@ gsw() {
   fi
 }
 
+ga() {
+  if [ $# -eq 0 ]; then
+    git add -A
+  else
+    git add "$@"
+  fi
+}
+
 alias gL="gla --no-patch -L"
 alias gLp="g log -L"
-alias ga="g add -A"
 alias gb="g branch"
 alias gbl="git branch-list"
 alias gbm="gb --merged"
