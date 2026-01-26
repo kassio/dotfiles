@@ -1,7 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "plugin": [
-    "@gitlab/opencode-gitlab-plugin",
-    "@mohak34/opencode-notifier@latest"
+    "@gitlab/opencode-gitlab-plugin"
   ]
 }
