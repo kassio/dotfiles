@@ -1,3 +1,6 @@
+tap "anomalyco/tap"
+tap "mike-engel/jwt-cli"
+brew "anomalyco/tap/opencode"
 brew "bash"
 brew "bash-completion"
 brew "bat"
@@ -34,10 +37,14 @@ brew "libffi"
 brew "libiconv"
 brew "libyaml"
 brew "lsd"
-brew "luajit", args: ["HEAD"]
+brew "lua-language-server"
+brew "luajit"
 brew "mas"
 brew "mike-engel/jwt-cli/jwt-cli"
 brew "mise"
+brew "ninja"
+brew "openssl@3"
+brew "pkgconf"
 brew "pstree"
 brew "re2"
 brew "readline"
@@ -78,14 +85,14 @@ cask "tableplus"
 cask "telegram"
 cask "the-unarchiver"
 cask "visual-studio-code"
+cask "vlc"
 cask "wezterm@nightly"
 cask "zed"
+go "cmd/go"
+go "cmd/gofmt"
 mas "1Password for Safari", id: 1569813296
 mas "Amphetamine", id: 937984704
 mas "Broadcasts", id: 1469995354
-mas "GarageBand", id: 682658836
-mas "Okta Extension App", id: 1439967473
-mas "Okta Verify", id: 490179405
 mas "Paste", id: 967805235
 mas "Peek", id: 1554235898
 mas "Super Agent", id: 1568262835

@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+curl -fsSL https://ocx.kdco.dev/install.sh | sh
+
+ocx init --global
+ocx profile add work

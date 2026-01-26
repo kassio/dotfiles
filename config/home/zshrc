@@ -2,9 +2,9 @@
 
 # global
 export DOTFILES="${HOME}/.dotfiles"
-export XDG_BIN_HOME="${DOTFILES}/bin"
 export XDG_CACHE_HOME="${HOME}/.cache"
 export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_BIN_HOME="${HOME}/.local/bin"
 export XDG_DATA_HOME="${HOME}/.local/share"
 export XDG_STATE_HOME="${HOME}/.local/state"
 export ZSH_CONFIG_HOME="${XDG_CONFIG_HOME}/zsh"
@@ -15,10 +15,11 @@ export GPG_TTY=$(tty)
 export HOMEBREW_PREFIX="/opt/homebrew"
 
 PATH="/usr/bin:/bin:/usr/sbin:/sbin" # system base PATH
+PATH="${DOTFILES}/bin:${PATH}" # personal bins
+PATH="${XDG_CONFIG_HOME}/git/bin:${PATH}" # git helpers
 PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
 PATH="${HOMEBREW_PREFIX}/opt/python@3.9/bin:${PATH}"
 PATH="${XDG_BIN_HOME}:${PATH}"
-PATH="${XDG_CONFIG_HOME}/git/bin:${PATH}" # git helpers
 PATH=".userbin:${PATH}"
 typeset -U PATH
 export PATH

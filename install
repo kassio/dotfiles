@@ -17,4 +17,5 @@ mkdir -p "${HOME}/src"
 "${DOTFILES}/installers/nvim-nightly" &&
 "${DOTFILES}/installers/repos_sync" &&
 "${DOTFILES}/installers/others" &&
+"${DOTFILES}/installers/opencode" &&
 "${DOTFILES}/bin/upgrade"
