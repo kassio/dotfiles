@@ -23,9 +23,7 @@ function M.filename(opts)
     filename = camelcase(filename)
   end
 
-  return ls.f(function()
-    return filename
-  end)
+  return filename
 end
 
 function M.expand(fmt, default)

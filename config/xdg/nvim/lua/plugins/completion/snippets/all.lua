@@ -3,6 +3,7 @@ local ls = require('luasnip')
 local c = ls.choice_node
 local s = ls.snippet
 local t = ls.text_node
+local f = ls.function_node
 
 return {
   setup = function()
@@ -18,15 +19,21 @@ return {
       s('hri', {
         t('--------------------------------------------------------------------------------'),
       }),
-      s('fname', {
-        utils.filename(),
-      }),
-      s('fname:camelcase', {
-        utils.filename({ case = 'camelcase' }),
-      }),
-      s('fname:camelcase:noprefixnumbers', {
-        utils.filename({ remove = '^%d*_', case = 'camelcase' }),
-      }),
+       s('fname', {
+         f(function()
+           return utils.filename()
+         end),
+       }),
+       s('fname:camelcase', {
+         f(function()
+           return utils.filename({ case = 'camelcase' })
+         end),
+       }),
+       s('fname:camelcase:noprefixnumbers', {
+         f(function()
+           return utils.filename({ remove = '^%d*_', case = 'camelcase' })
+         end),
+       }),
     })
   end,
 }
