@@ -60,9 +60,10 @@ return {
     local opencode = require('opencode')
 
     vim.api.nvim_create_user_command('OCode', opencode.toggle, { desc = 'opencode: toggle' })
+    vim.api.nvim_create_user_command('OCodeAsk', opencode.ask, { desc = 'opencode: ask' })
+    vim.api.nvim_create_user_command('OCodeSelect', opencode.select, { desc = 'opencode: select' })
     vim.api.nvim_create_user_command('OCodeThis', function()
       return opencode.ask('@this: ', { submit = true })
-    end, { desc = 'opencode: ask abou this' })
-    vim.api.nvim_create_user_command('OCodeSelect', opencode.select, { desc = 'opencode: select' })
+    end, { desc = 'opencode: ask about @this' })
   end,
 }
