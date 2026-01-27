@@ -1,7 +1,14 @@
 return {
   'NickvanDyke/opencode.nvim',
   dependencies = {
-    { 'folke/snacks.nvim', opts = { input = {}, picker = {}, terminal = {} } },
+    {
+      'folke/snacks.nvim',
+      opts = {
+        input = {},
+        picker = {},
+        terminal = {},
+      },
+    },
   },
   keys = {
     {
@@ -40,7 +47,11 @@ return {
   },
   config = function()
     vim.g.opencode_opts = {
-      provider = { enabled = 'terminal' },
+      provider = {
+        enabled = 'wezterm',
+        direction = 'right',
+        percent = 40,
+      },
     }
 
     -- Required for `opts.events.reload`.
