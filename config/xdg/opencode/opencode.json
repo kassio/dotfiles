@@ -1,5 +1,10 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "share": "disabled",
+  "small_model": "gitlab/duo-chat-haiku-4-5",
+  "enabled_providers": [
+    "gitlab"
+  ],
   "plugin": [
     "@gitlab/opencode-gitlab-plugin"
   ]
