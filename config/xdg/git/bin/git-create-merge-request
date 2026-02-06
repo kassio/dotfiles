@@ -10,6 +10,7 @@ function show_help() {
   -h                        Print this message
   -t --title                Define the Merge Request title.
                             Fallback to the last commit message first line
+  -T --target               Select the target branch
   -l --label                Can be used multiple times to add labels to the Merge Request
   -m --milestone            Add the Merge Request milestone
   -d --draft                Set the Merge Request as Draft and skip the CI
@@ -70,6 +71,15 @@ function parse_args() {
       shift 1
 
       title="${1}"
+
+      shift 1
+
+      parse_args "$@"
+      ;;
+    -T|--target)
+      shift 1
+
+      git_options="${git_options} -o merge_request.target=\"${1}\""
 
       shift 1
 
