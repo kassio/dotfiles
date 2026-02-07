@@ -42,3 +42,7 @@ dump.rdb
 
 # golang
 .GOPATH
+
+# opencode AI
+opencode.json
+opencode.jsonc

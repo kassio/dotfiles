@@ -40,3 +40,7 @@ vendor/ruby
 
 # git
 .git-worktree
+
+# opencode AI
+opencode.json
+opencode.jsonc
