@@ -1,3 +1,5 @@
+Include /Users/kassioborges/.config/colima/ssh_config
+
 ## START GITPOD INTEGRATION
 ## This section is managed by Gitpod. Any manual changes will be lost.
 Include "code_gitpod.d/config"
