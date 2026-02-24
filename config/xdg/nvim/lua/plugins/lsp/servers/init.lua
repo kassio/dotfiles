@@ -1,5 +1,5 @@
 local global_config = { single_file_support = true }
-local packages = require('plugins.lsp.servers.packages')
+local packages = require('plugins.tools.packages')
 local servers = vim
   .iter(packages)
   :map(function(package)
