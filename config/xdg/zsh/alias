@@ -39,6 +39,9 @@ alias RS="RAILS_ENV=staging"
 alias RP="RAILS_ENV=production"
 alias DS="DISABLE_SPRING=1"
 
+# Elixir
+alias iexm="iex -S mix"
+
 alias tailf="tail -f"
 retail() { echo > "$1"; tail -f "$1"; }
 retailf() { retail "$@"; }

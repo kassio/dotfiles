@@ -1,4 +1,5 @@
 return {
+  -- Manual installation
   { lspconfig_name = 'gitlab_duo' },
   { lspconfig_name = 'gitlab_lsp' },
   -- From ToolsInstalled
@@ -65,5 +66,9 @@ return {
   {
     lspconfig_name = 'gitlab_ci_ls',
     package_name = 'gitlab-ci-ls',
+  },
+  {
+    lspconfig_name = 'elixirls',
+    package_name = 'elixir-ls',
   },
 }
