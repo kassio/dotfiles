@@ -30,6 +30,11 @@ vendor/ruby
 .solargraph.yml
 .console.local.rb
 
+# elixir
+deps/
+_build/
+.elixir_ls
+
 # go
 *.rdb
 .GOPATH
