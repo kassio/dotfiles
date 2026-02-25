@@ -99,28 +99,27 @@ return {
             ['d'] = {
               function(state)
                 local node = state.tree:get_node()
-                local bufnr = vim.fn.bufnr(node.path)
-                local winid = vim.fn.bufwinid(bufnr)
-
                 local confirm =
                   vim.fn.confirm(string.format('Delete "%s"?', node.path), '&Yes\n&No')
                 if confirm ~= 1 then
                   return
                 end
 
-                local listed_buffers = vim.tbl_filter(function(buf)
-                  return vim.api.nvim_buf_is_loaded(buf)
-                    and vim.bo[buf].buflisted
-                    and vim.bo[bufnr].buftype ~= 'nofile'
-                end, vim.api.nvim_list_bufs())
+                local bufnr = vim.fn.bufnr(node.path)
+                local winid = vim.fn.bufwinid(bufnr)
 
-                if #listed_buffers <= 1 then
-                  vim.api.nvim_win_call(winid, function()
-                    vim.cmd('new')
-                  end)
+                -- If the file is open
+                if bufnr > 0 then
+                  -- if it's the last window open
+                  if #vim.api.nvim_list_wins() <= 2 then
+                    vim.api.nvim_win_call(winid, function()
+                      vim.cmd('new')
+                    end)
+                  end
+
+                  vim.api.nvim_buf_delete(bufnr, { force = true })
                 end
 
-                vim.api.nvim_buf_delete(bufnr, { force = true })
                 vim.fn.delete(node.path, 'rf')
 
                 require('neo-tree.command').execute({
