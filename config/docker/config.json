@@ -1,6 +1,5 @@
 {
 	"auths": {},
 	"detachKeys": "ctrl-q,ctrl-q",
-	"credsStore": "osxkeychain",
 	"currentContext": "colima"
 }
