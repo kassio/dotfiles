@@ -2,7 +2,7 @@
 
 mkdir -p "${HOME}/src"
 
-git clone https://gitlab.com/kassio/repos_syncer.git "${HOME}/src/repos_syncer"
+git clone https://github.com/kassio/repos_sync.git "${HOME}/src/repos_syncer"
 
 cd ${HOME}/src/repos_syncer;
 

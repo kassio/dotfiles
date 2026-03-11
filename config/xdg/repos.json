@@ -10,21 +10,17 @@
       "local": "$HOME/.dotfiles.private",
       "afterSync": "git switch main"
     },
-    "gitlab-extensions": {
-      "remote": "https://gitlab.com/kassio/gitlab-extensions.git",
-      "local": "$HOME/.gitlab-extensions"
-    },
     "data backup": {
       "remote": "https://github.com/kassio/sync",
       "local": "$HOME/src/sync"
     },
     "repos_syncer": {
-      "remote": "https://gitlab.com/kassio/repos_syncer.git",
+      "remote": "https://github.com/kassio/repos_syncer.git",
       "local": "$HOME/src/repos_syncer",
       "afterSync": "bundle install"
     },
     "blog": {
-      "remote": "https://gitlab.com/kassio/kassio",
+      "remote": "https://github.com/kassio/blog",
       "local": "$HOME/src/blog"
     }
   }

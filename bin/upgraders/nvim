@@ -27,7 +27,3 @@ _nvim --headless "+TSUpdateSync" +qa
 echo ""
 subtitle "update lsp/lint/formatter/debugger tools"
 _nvim --headless "+ToolsUpdate" +qa
-
-echo ""
-subtitle "ensure Gitlab.vim is installed"
-_nvim --headless "+setf ruby" "+GitLabCodeSuggestionsInstallLanguageServer" +qa

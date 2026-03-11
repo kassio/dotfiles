@@ -1,11 +1,18 @@
 #!/usr/bin/env zsh
 
+exit
 title "[repos_sync] updating repositories"
 if [ "${1}" = "-h" ] || [ "${1}" = "--help" ]; then
   exit
 fi
 
-cd ${HOME}/src/repos_syncer
+repos_syncer="${HOME}/src/repos_syncer"
+
+if [[ ! -d "${repos_syncer}" ]]; then
+  git clone https://github.com/kassio/repos_sync.git "${repos_syncer}"
+fi
+
+cd "${repos_syncer}"
 
 mise exec ruby@latest -- bundle &&
   mise exec ruby@latest -- ./bin/repos_sync
