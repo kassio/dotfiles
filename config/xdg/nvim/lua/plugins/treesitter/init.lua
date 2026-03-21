@@ -4,9 +4,7 @@ return {
     build = ':TSUpdate',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-context',
-      'nvim-treesitter/nvim-treesitter-refactor',
       'nvim-treesitter/nvim-treesitter-textobjects',
-      'nvim-treesitter/playground',
 
       'theHamsta/nvim-treesitter-pairs',
 
@@ -17,6 +15,7 @@ return {
       -- vim-matchup plugin, uses treesitter
       -- Do not show the not visible matching context on statusline
       vim.g.matchup_matchparen_offscreen = {}
+      vim.g.no_plugin_maps = true
 
       require('treesitter-context').setup({
         min_window_height = 30,
