@@ -5,24 +5,14 @@ return {
     dependencies = {
       'nvim-treesitter/nvim-treesitter-context',
       'nvim-treesitter/nvim-treesitter-textobjects',
-
-      'theHamsta/nvim-treesitter-pairs',
-
-      -- Better pairs matching
-      'andymass/vim-matchup',
     },
     config = function()
-      -- vim-matchup plugin, uses treesitter
-      -- Do not show the not visible matching context on statusline
-      vim.g.matchup_matchparen_offscreen = {}
-      vim.g.no_plugin_maps = true
-
       require('treesitter-context').setup({
         min_window_height = 30,
         max_lines = 3,
         separator = '―',
       })
-      require('plugins.treesitter.config').setup()
+      require('plugins.treesitter.textobjects').setup()
     end,
   },
 

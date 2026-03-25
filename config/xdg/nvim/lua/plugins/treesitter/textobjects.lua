@@ -1,34 +1,37 @@
 return {
   setup = function()
-    local swapper = require('nvim-treesitter-textobjects.swap')
+    local textobjects = {
+      swap = require('nvim-treesitter-textobjects.swap'),
+      select = require('nvim-treesitter-textobjects.select'),
+      move = require('nvim-treesitter-textobjects.move'),
+    }
+
     vim.keymap.set('n', '<leader>a', function()
-      swapper.swap_next '@parameter.inner'
+      textobjects.swap.swap_next '@parameter.inner'
     end)
     vim.keymap.set('n', '<leader>A', function()
-      swapper.swap_next '@parameter.outer'
+      textobjects.swap.swap_next '@parameter.outer'
     end)
 
-    local selector = require('nvim-treesitter-textobjects.select')
     vim.keymap.set({ 'x', 'o' }, 'af', function()
-      selector.select_textobject('@function.outer', 'textobjects')
+      textobjects.select.select_textobject('@function.outer', 'textobjects')
     end)
     vim.keymap.set({ 'x', 'o' }, 'if', function()
-      selector.select_textobject('@function.inner', 'textobjects')
+      textobjects.select.select_textobject('@function.inner', 'textobjects')
     end)
     vim.keymap.set({ 'x', 'o' }, 'ac', function()
-      selector.select_textobject('@class.outer', 'textobjects')
+      textobjects.select.select_textobject('@class.outer', 'textobjects')
     end)
     vim.keymap.set({ 'x', 'o' }, 'ic', function()
-      selector.select_textobject('@class.inner', 'textobjects')
+      textobjects.select.select_textobject('@class.inner', 'textobjects')
     end)
     -- You can also use captures from other query groups like `locals.scm`
     vim.keymap.set({ 'x', 'o' }, 'as', function()
-      selector.select_textobject('@local.scope', 'locals')
+      textobjects.select.select_textobject('@local.scope', 'locals')
     end)
 
-    local mover = require('nvim-treesitter-textobjects.move')
     vim.keymap.set({ 'n', 'x', 'o' }, '[[', function()
-      mover.goto_previous_start({
+      textobjects.move.goto_previous_start({
         '@function.outer',
         '@class.outer',
         '@conditional.outer',
@@ -36,13 +39,13 @@ return {
       }, 'textobjects')
     end)
     vim.keymap.set({ 'n', 'x', 'o' }, '[f', function()
-      mover.goto_previous_start('@function.outer', 'textobjects')
+      textobjects.move.goto_previous_start('@function.outer', 'textobjects')
     end)
     vim.keymap.set({ 'n', 'x', 'o' }, '[c', function()
-      mover.goto_previous_start('@class.outer', 'textobjects')
+      textobjects.move.goto_previous_start('@class.outer', 'textobjects')
     end)
     vim.keymap.set({ 'n', 'x', 'o' }, ']]', function()
-      mover.goto_next_start({
+      textobjects.move.goto_next_start({
         '@function.outer',
         '@class.outer',
         '@conditional.outer',
@@ -50,10 +53,10 @@ return {
       }, 'textobjects')
     end)
     vim.keymap.set({ 'n', 'x', 'o' }, ']f', function()
-      mover.goto_next_start('@function.outer', 'textobjects')
+      textobjects.move.goto_next_start('@function.outer', 'textobjects')
     end)
     vim.keymap.set({ 'n', 'x', 'o' }, ']c', function()
-      mover.goto_next_start('@class.outer', 'textobjects')
+      textobjects.move.goto_next_start('@class.outer', 'textobjects')
     end)
   end,
 }
