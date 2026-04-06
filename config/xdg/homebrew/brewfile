@@ -83,7 +83,6 @@ cask "wezterm@nightly"
 mas "1Password for Safari", id: 1569813296
 mas "Amphetamine", id: 937984704
 mas "Broadcasts", id: 1469995354
-mas "Paste", id: 967805235
 mas "Peek", id: 1554235898
 mas "Super Agent", id: 1568262835
 mas "Userscripts", id: 1463298887
